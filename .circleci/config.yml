@@ -28,7 +28,8 @@ jobs:
           command: now -t ${NOW_TOKEN}
 
 workflows:
-  Gulp Sites:
+  version: 2
+  build_and_tests:
     jobs:
       - runs
       - deploy
