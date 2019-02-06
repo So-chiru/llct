@@ -1,0 +1,40 @@
+html
+  head
+    title 로딩 중...
+    meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color', content='#e039e0')
+    link(rel='stylesheet', href='./css/yosoro.min.css')
+    link(rel='shortcut icon', href='//cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://unpkg.com/wavesurfer.js')
+    script(src='https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.min.js')
+    script(src='https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.min.js')
+    script(src='./js/global.min.js')
+    script(src='./js/lib/chillout.min.js')
+    script(src='./js/logger.min.js')
+    script(src='./js/karaoke.min.js')
+    script(src='./js/viewer.min.js')
+  body
+    img#bg_img.bg_img
+    .bg_img_overlay
+    .page_container.bm_font
+      h1#title_text ...
+      p
+        | 블레이드 색상 추천: 
+        span#blade_color
+      .music_player
+        audio#kara_audio.aud_pl(controls='')
+      #karaoke.karaoke.kr 렌더링 된 결과가 여기에 표시됩니다.
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+      dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-111995531-2');

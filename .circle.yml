@@ -1,0 +1,20 @@
+machine:
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  override:
+    - node_modules/.bin/yarn
+  pre:
+    - yarn global add now
+
+test:
+  override:
+    - ./node_modules/.bin/gulp testing
+
+deployment:
+  development:
+    branch: master
+    commands:
+      - now -t ${NOW_TOKEN}
+      - now -t ${NOW_TOKEN} alias llct_sites

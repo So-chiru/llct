@@ -1,0 +1,33 @@
+.karaoke {
+  display: block;
+  width: 100%;
+}
+
+.lyrics {
+  display: flex;
+  margin: 0;
+  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  color: #b8b8b8;
+  will-change: color text-shadow;
+}
+
+.p_line {
+  display: flex;
+  min-height: 10px;
+}
+
+.line_num {
+  margin: 0;
+  margin-top: auto;
+}
+
+.currentSync {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 0px 5px rgb(82, 177, 255);
+  font-weight: 500;
+}
+
+.black .currentSync {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 0px 5px rgba(82, 220, 255, 1);
+}
