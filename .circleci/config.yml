@@ -1,20 +1,43 @@
+version: 2.1
 machine:
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-
 dependencies:
   override:
     - node_modules/.bin/yarn
   pre:
     - yarn global add now
 
-test:
-  override:
-    - ./node_modules/.bin/gulp testing
+jobs:
+  build:
+    steps:
+      - run:
+          name: Building
+          command: "yarn build"
+  test:
+    steps:
+      - run:
+          name: "Testing"
+          command: "yarn test"
+  deploy:
+    environment:
+      NOW_TOKEN:
+    steps:
+      - run:
+          name: Deploying to now.sh
+          command: |
+            cd ./dist/
+            now -t ${NOW_TOKEN}
 
-deployment:
-  development:
-    branch: master
-    commands:
-      - now -t ${NOW_TOKEN}
-      - now -t ${NOW_TOKEN} alias llct_sites
+workflows:
+  version: 2.1
+  deploy:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
+      - deploy

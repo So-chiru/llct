@@ -7,6 +7,10 @@
   "author": "So-chiru <unleash9224@gmail.com>",
   "license": "MIT",
   "webSVPort": 20417,
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp test"
+  },
   "srcs": {
     "sass": "./src/sass/",
     "js": "./src/js/",

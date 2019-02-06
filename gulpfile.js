@@ -97,3 +97,14 @@ gulp.task(
   'default',
   gulp.series('sass', 'sass:min', 'js', 'js:min', 'pug', 'images', 'watch')
 )
+
+gulp.task(
+  'build',
+  gulp.series('sass', 'sass:min', 'js', 'js:min', 'pug', 'images')
+)
+
+const fs = require('fs')
+
+gulp.task('test', async () => {
+  throw new Error('PUG Files are not finished.')
+})
