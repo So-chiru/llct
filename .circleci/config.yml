@@ -22,7 +22,7 @@ jobs:
             git config --global user.name $GIT_NAME
       - add_ssh_keys:
           fingerprints:
-            - "c6:30:16:76:cb:86:3e:ff:bb:60:37:b7:4a:7e:28:08"
+            - "50:ff:23:2d:9f:a5:df:01:0d:6b:67:d5:37:e5:50:20"
       - run:
           name: Deploying to Github PAges
           command: yarn deploy
