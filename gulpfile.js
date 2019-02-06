@@ -82,7 +82,16 @@ gulp.task('images', () => {
         use: []
       })
     )
-    .pipe(gulp.dest('/assets'))
+    .pipe(gulp.dest('./dist/data'))
+})
+
+gulp.task('assets', () => {
+  return gulp
+    .src([
+      pkgs.srcs.datas + '**/*.*',
+      `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg}`
+    ])
+    .pipe(gulp.dest('./dist/data'))
 })
 
 gulp.task('watch', () => {
@@ -95,12 +104,21 @@ gulp.task('watch', () => {
 
 gulp.task(
   'default',
-  gulp.series('sass', 'sass:min', 'js', 'js:min', 'pug', 'images', 'watch')
+  gulp.series(
+    'sass',
+    'sass:min',
+    'js',
+    'js:min',
+    'pug',
+    'images',
+    'assets',
+    'watch'
+  )
 )
 
 gulp.task(
   'build',
-  gulp.series('sass', 'sass:min', 'js', 'js:min', 'pug', 'images')
+  gulp.series('sass', 'sass:min', 'js', 'js:min', 'pug', 'images', 'assets')
 )
 
 const fs = require('fs')
