@@ -16,9 +16,6 @@ jobs:
           name: Gulp Building
           command: yarn build
       - run:
-          name: Gulp Testing
-          command: yarn test
-      - run:
           name: Deploying to now.sh
           command: now -t ${NOW_TOKEN}
 
@@ -27,4 +24,3 @@ workflows:
   build_and_tests:
     jobs:
       - runs
-      - deploy
