@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Download now
-          command: sudo npm install now -g
+          command: sudo npm install now --unsafe-perm -g
       - run:
           name: Download Dependencies
           command: yarn
@@ -17,7 +17,9 @@ jobs:
           command: yarn build
       - run:
           name: Deploying to now.sh
-          command: now --token ${NOW_TOKEN} --local-config ./now.json
+          command: |
+            cd ~/llct_circleci/dist
+            now --token ${NOW_TOKEN} --local-config ./now.json
 
 workflows:
   version: 2
