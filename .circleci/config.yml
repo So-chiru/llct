@@ -18,11 +18,6 @@ jobs:
       - run:
           name: Gulp Testing
           command: yarn test
-  deploy:
-    docker:
-      - image: circleci/node:11
-    working_directory: ~/llct_circleci/dist
-    steps:
       - run:
           name: Deploying to now.sh
           command: now -t ${NOW_TOKEN}
