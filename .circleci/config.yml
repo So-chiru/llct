@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Download now
-          command: npm install now -g
+          command: sudo npm install now -g
       - run:
           name: Download Dependencies
           command: yarn
