@@ -31,4 +31,6 @@ var urlQueryParams = function (name) {
     : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
-if (cookieYosoro.get('tatenshi') === 'true') $(document.body).addClass('dark')
+$(document).ready(() => {
+  if (cookieYosoro.get('tatenshi') === 'true') $(document.body).addClass('dark')
+})
