@@ -49,7 +49,7 @@
     display: flex;
     width: 90%;
     background-color: #ff9900;
-    padding: 2% 5%;
+    padding: 1% 5%;
     border-radius: 5px;
     color: white;
     justify-content: center;
@@ -59,12 +59,12 @@
   a {
     text-decoration: none;
     transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-    color: #917291;
+    color: #4391d6;
     &:hover {
-      color: #924799;
+      color: #12a2db;
     }
     &:active {
-      color: #c737c7;
+      color: #2468e7;
     }
   }
 
@@ -94,8 +94,13 @@
     outline: none;
   }
 
+  .dark input[type="text"] {
+    color: white;
+  }
+
   input[type="text"] {
     padding: 10px;
+    background-color: transparent;
     border-bottom: 1px solid;
     &:focus {
       color: rgb(0, 153, 255);
@@ -103,18 +108,18 @@
   }
 
   button {
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 10px;
-    background-color: rgba(255, 32, 236, 0.5);
+    background-color: rgba(35, 172, 255, 0.8);
     color: #fff;
     &:focus {
-      background-color: rgba(255, 32, 236, 0.6);
+      background-color: rgba(46, 196, 255, 0.6);
     }
     &:hover {
-      background-color: rgba(255, 32, 236, 0.7);
+      background-color: rgba(89, 193, 255, 0.8);
     }
     &:active {
-      background-color: rgba(255, 32, 236, 0.9);
+      background-color: rgba(22, 157, 255, 0.8);
     }
   }
 

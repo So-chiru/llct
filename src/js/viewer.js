@@ -75,7 +75,7 @@ $(document).ready(() => {
       window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
 
       $('#title_text').html(karaokeData.metadata.title || '무제')
-      $('#blade_color').html(karaokeData.metadata.bladeColorMember)
+      $('#blade_color').html(karaokeData.metadata.bladeColorMember || '자유')
       document.title = karaokeData.metadata.title || '무제'
 
       var _hx = karaokeData.metadata.bladeColorHEX
