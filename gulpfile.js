@@ -94,12 +94,21 @@ gulp.task('assets', () => {
     .pipe(gulp.dest('./dist/data'))
 })
 
+gulp.task('root_assets', () => {
+  return gulp.src(pkgs.srcs.rdatas + '**/*').pipe(gulp.dest('./dist'))
+})
+
 gulp.task('watch', () => {
   plugins.livereload.listen()
   gulp.watch(pkgs.srcs.sass + '**/*.scss', gulp.series(['sass', 'sass:min']))
   gulp.watch(pkgs.srcs.js + '**/*.js', gulp.series(['js', 'js:min']))
   gulp.watch(pkgs.srcs.pug + '**/*.pug', gulp.series('pug'))
   gulp.watch(pkgs.srcs.datas + '**/*.{png,jpg,jpeg,svg}', gulp.series('images'))
+  gulp.watch(
+    [pkgs.srcs.datas + '**/*.*', `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg}`],
+    gulp.series('assets')
+  )
+  gulp.watch([pkgs.srcs.rdatas + '**/*.*'], gulp.series('root_assets'))
 })
 
 gulp.task(
@@ -112,11 +121,21 @@ gulp.task(
     'pug',
     'images',
     'assets',
+    'root_assets',
     'watch'
   )
 )
 
 gulp.task(
   'build',
-  gulp.series('sass', 'sass:min', 'js', 'js:min', 'pug', 'images', 'assets')
+  gulp.series(
+    'sass',
+    'sass:min',
+    'js',
+    'js:min',
+    'pug',
+    'images',
+    'assets',
+    'root_assets'
+  )
 )

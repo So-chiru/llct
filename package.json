@@ -9,14 +9,14 @@
   "webSVPort": 20417,
   "scripts": {
     "build": "gulp build",
-    "test": "gulp test",
     "deploy": "gh-pages -r 'git@github.com:So-chiru/LLCTSites.git' -d dist -b master"
   },
   "srcs": {
     "sass": "./src/sass/",
     "js": "./src/js/",
     "pug": "./src/pug/",
-    "datas": "./src/assets/"
+    "datas": "./src/assets/",
+    "rdatas": "./src/root_assets/"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
