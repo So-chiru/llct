@@ -1,4 +1,8 @@
 .viewer {
+  html,
+  body {
+    overflow-x: hidden;
+  }
   .page_container {
     position: relative;
     width: 80%;
