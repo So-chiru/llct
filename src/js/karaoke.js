@@ -9,9 +9,8 @@
  *        correction_time: Time code, // 보정 시간
  *        lastedit: Time code (audio.currentTime() * 100), // 마지막으로 수정 한 타임 코드 (에디터 사용)
  *    },
- *    timeline: Array (JSON) -> [
+ *    timeline: Array -> [
  *        [Object] (가사 한 줄) -> {
- *            render_with: [Array][ 'Number' ] or null, // 같이 렌더링 할 [가사 한 줄 Object Number]
  *            start_time: Time code (audio.currentTime() * 100), // 렌더링 시작 시간
  *            end_time: Time code (audio.currentTime() * 100), // 렌더링 끝나는 시간
  *            collection: [Array] (가사 음 Collection) -> [
