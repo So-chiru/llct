@@ -28,11 +28,15 @@ html.index
       .options
         label.ckbox
           | 번역된 제목으로 보기
-          input#showAs_translated(type='checkbox', checked='none', onclick='changedTranslateOption()')
+          input#showAs_translated(type='checkbox', checked='none', onclick='changedOption(0)')
           span.checkmark
         label.ckbox
           | 배경 이미지 숨기기
-          input#hideBGImage(type='checkbox', checked='none', onclick='changedImageOption()')
+          input#hideBGImage(type='checkbox', checked='none', onclick='changedOption(1)')
+          span.checkmark
+        label.ckbox
+          | 다크모드 활성화
+          input#enable_darkMode(type='checkbox', checked='none', onclick='changedOption(2)')
           span.checkmark
       hr
       .popup

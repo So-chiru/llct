@@ -177,15 +177,35 @@ var searchRefresh = function (obj) {
 
 callTableCaching()
 
-var changedTranslateOption = function () {
-  cookieYosoro.set('mikan', $('#showAs_translated').is(':checked'))
-  searchFiltering(urlQueryParams('f'), true)
+var optionObjects = [
+  {
+    e: '#showAs_translated',
+    cn: 'mikan',
+    rf: true
+  },
+  {
+    e: '#hideBGImage',
+    cn: 'sakana',
+    rf: true
+  },
+  {
+    element: '#enable_darkMode',
+    cn: 'tatenshi',
+    rf: false,
+    cb: value => {
+      $(document.body)[value ? 'addClass' : 'removeClass']('dark')
+    }
+  }
+]
+const changedOption = id => {
+  cookieYosoro.set(optionObjects[id].cn, $(optionObjects[id].e).is(':checked'))
+  if (optionObjects[id].rf) searchFiltering(urlQueryParams('f'), true)
+  if (typeof optionObjects[id].cb === 'function') {
+    optionObjects[id].cb(cookieYosoro.get(optionObjects[id].cn))
+  }
 }
 
-var changedImageOption = function () {
-  cookieYosoro.set('sakana', $('#hideBGImage').is(':checked'))
-  searchFiltering(urlQueryParams('f'), true)
-}
+var enable_darkMode = function () {}
 
 var urlQueryParams = function (name) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
@@ -205,8 +225,9 @@ $(document).ready(function () {
     cookieYosoro.set('sakana', false)
   }
 
-  $('#showAs_translated').prop('checked', cookieYosoro.get('mikan') === 'true')
-  $('#hideBGImage').prop('checked', cookieYosoro.get('sakana') === 'true')
+  optionObjects.forEach(obj => {
+    $(obj.e).prop('checked', obj.cn === 'true')
+  })
 
   if (urlQueryParams('f') !== '') {
     searchFiltering(urlQueryParams('f'), true)
