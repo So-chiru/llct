@@ -19,7 +19,7 @@ jobs:
           name: Deploying to now.sh
           command: |
             cd ~/llct_circleci/dist
-            now --token ${NOW_TOKEN} --force projects rm LLCT && now --token ${NOW_TOKEN} --local-config ../now.json && now --token ${NOW_TOKEN} alias -A ../now.json
+            now projects rm LLCT --token ${NOW_TOKEN} --force && now --token ${NOW_TOKEN} --local-config ../now.json && now --token ${NOW_TOKEN} alias -A ../now.json
 
 workflows:
   version: 2
