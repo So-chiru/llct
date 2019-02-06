@@ -201,7 +201,7 @@ const changedOption = id => {
   cookieYosoro.set(optionObjects[id].cn, $(optionObjects[id].e).is(':checked'))
   if (optionObjects[id].rf) searchFiltering(urlQueryParams('f'), true)
   if (typeof optionObjects[id].cb === 'function') {
-    optionObjects[id].cb($(optionObjects[id].e).is(':checked'))
+    optionObjects[id].cb(cookieYosoro.get(optionObjects[id].cn))
   }
 }
 
