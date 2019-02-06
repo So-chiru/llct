@@ -1,43 +1,40 @@
 version: 2.1
-machine:
-  environment:
-    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-dependencies:
-  override:
-    - node_modules/.bin/yarn
-  pre:
-    - yarn global add now
 
 jobs:
-  build:
+  install-deps:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/llct_circleci
+    steps:
+      - checkout
+      - run:
+          name: Download now
+          command: npm install now -g
+      - run:
+          name: Download Dependencies
+          command: yarn
+  build_test:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/llct_circleci
     steps:
       - run:
-          name: Building
-          command: "yarn build"
-  test:
-    steps:
+          name: Gulp Building
+          command: yarn build
       - run:
-          name: "Testing"
-          command: "yarn test"
+          name: Gulp Testing
+          command: yarn test
   deploy:
-    environment:
-      NOW_TOKEN:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/llct_circleci/dist
     steps:
       - run:
           name: Deploying to now.sh
-          command: |
-            cd ./dist/
-            now -t ${NOW_TOKEN}
 
 workflows:
-  version: 2.1
-  deploy:
+  gulp_buildsites:
     jobs:
-      - build
-      - test:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
+      - install-deps
+      - build_test
       - deploy
