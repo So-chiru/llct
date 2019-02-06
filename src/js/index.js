@@ -189,7 +189,7 @@ var optionObjects = [
     rf: true
   },
   {
-    element: '#enable_darkMode',
+    e: '#enable_darkMode',
     cn: 'tatenshi',
     rf: false,
     cb: value => {
