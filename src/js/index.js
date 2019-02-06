@@ -193,7 +193,7 @@ var optionObjects = [
     cn: 'tatenshi',
     rf: false,
     cb: value => {
-      $(document.body)[value ? 'addClass' : 'removeClass']('dark')
+      $(document.body)[value === 'true' ? 'addClass' : 'removeClass']('dark')
     }
   }
 ]
@@ -205,8 +205,6 @@ const changedOption = id => {
   }
 }
 
-var enable_darkMode = function () {}
-
 var urlQueryParams = function (name) {
   name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
@@ -217,15 +215,10 @@ var urlQueryParams = function (name) {
 }
 
 $(document).ready(function () {
-  if (typeof cookieYosoro.get('mikan') === 'undefined') {
-    cookieYosoro.set('mikan', false)
-  }
-
-  if (typeof cookieYosoro.get('sakana') === 'undefined') {
-    cookieYosoro.set('sakana', false)
-  }
-
   optionObjects.forEach(obj => {
+    if (typeof cookieYosoro.get(obj.cn) === 'undefined') {
+      cookieYosoro.set(obj.cn, false)
+    }
     $(obj.e).prop('checked', obj.cn === 'true')
   })
 
