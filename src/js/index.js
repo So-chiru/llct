@@ -105,7 +105,8 @@ var showDetailsW = function (id, isKaraoke) {
     index: 0,
     showHideOpacity: true,
     history: false,
-    closeOnScroll: false
+    closeOnScroll: false,
+    passive: false
   }
 
   var gallery = new PhotoSwipe(
