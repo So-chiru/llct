@@ -201,7 +201,7 @@ const changedOption = id => {
   cookieYosoro.set(optionObjects[id].cn, $(optionObjects[id].e).is(':checked'))
   if (optionObjects[id].rf) searchFiltering(urlQueryParams('f'), true)
   if (typeof optionObjects[id].cb === 'function') {
-    optionObjects[id].cb($(optionObjects[id].e).is(':checked'))
+    optionObjects[id].cb(cookieYosoro.get(optionObjects[id].cn))
   }
 }
 
@@ -219,7 +219,7 @@ $(document).ready(function () {
     if (typeof cookieYosoro.get(obj.cn) === 'undefined') {
       cookieYosoro.set(obj.cn, false)
     }
-    $(obj.e).prop('checked', obj.cn === 'true')
+    $(obj.e).prop('checked', cookieYosoro.get(obj.cn) === 'true')
   })
 
   if (urlQueryParams('f') !== '') {
