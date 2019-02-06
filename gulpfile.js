@@ -111,20 +111,18 @@ gulp.task('watch', () => {
   gulp.watch([pkgs.srcs.rdatas + '**/*.*'], gulp.series('root_assets'))
 })
 
-gulp.task(
-  'default',
-  gulp.series(
-    'sass',
-    'sass:min',
-    'js',
-    'js:min',
-    'pug',
-    'images',
-    'assets',
-    'root_assets',
-    'watch'
+gulp.task('web_sv', () => {
+  return gulp.src('./dist').pipe(
+    plugins.webserver({
+      livereload: true,
+      port: pkgs.webSVPort,
+      directoryListing: false,
+      open: false
+    })
   )
-)
+})
+
+gulp.task('default', gulp.series('web_sv', 'watch'))
 
 gulp.task(
   'build',
@@ -137,5 +135,21 @@ gulp.task(
     'images',
     'assets',
     'root_assets'
+  )
+)
+
+gulp.task(
+  'init_run',
+  gulp.series(
+    'sass',
+    'sass:min',
+    'js',
+    'js:min',
+    'pug',
+    'images',
+    'assets',
+    'root_assets',
+    'watch',
+    'web_sv'
   )
 )
