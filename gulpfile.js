@@ -109,9 +109,7 @@ gulp.task('watch', () => {
     gulp.series('assets')
   )
   gulp.watch([pkgs.srcs.rdatas + '**/*.*'], gulp.series('root_assets'))
-})
 
-gulp.task('web_sv', () => {
   return gulp.src('./dist').pipe(
     plugins.webserver({
       livereload: true,
@@ -122,7 +120,7 @@ gulp.task('web_sv', () => {
   )
 })
 
-gulp.task('default', gulp.series('web_sv', 'watch'))
+gulp.task('default', gulp.series('watch'))
 
 gulp.task(
   'build',
@@ -149,7 +147,6 @@ gulp.task(
     'images',
     'assets',
     'root_assets',
-    'watch',
-    'web_sv'
+    'watch'
   )
 )
