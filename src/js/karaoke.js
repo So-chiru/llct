@@ -102,9 +102,6 @@ var Karaoke = {
       }
 
       var lineObj = {
-        title: '무제',
-        bladeColorHEX: null,
-        bladeColorMember: null,
         start_time: 0,
         end_time: 0,
         collection: []

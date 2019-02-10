@@ -57,6 +57,13 @@ gulp.task('js:min', () => {
     .pipe(gulp.dest('./dist/js'))
 })
 
+gulp.task('json:min', () => {
+  return gulp
+    .src([pkgs.srcs.datas + '**/*.json'])
+    .pipe(plugins.jsonminify())
+    .pipe(gulp.dest('./dist/data'))
+})
+
 gulp.task('pug', () => {
   return gulp
     .src([pkgs.srcs.pug + '**/*.pug'])
@@ -89,7 +96,7 @@ gulp.task('assets', () => {
   return gulp
     .src([
       pkgs.srcs.datas + '**/*.*',
-      `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg}`
+      `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg,json}`
     ])
     .pipe(gulp.dest('./dist/data'))
 })
@@ -104,8 +111,12 @@ gulp.task('watch', () => {
   gulp.watch(pkgs.srcs.js + '**/*.js', gulp.series(['js', 'js:min']))
   gulp.watch(pkgs.srcs.pug + '**/*.pug', gulp.series('pug'))
   gulp.watch(pkgs.srcs.datas + '**/*.{png,jpg,jpeg,svg}', gulp.series('images'))
+  gulp.watch(pkgs.srcs.datas + '**/*.json', gulp.series('json:min'))
   gulp.watch(
-    [pkgs.srcs.datas + '**/*.*', `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg}`],
+    [
+      pkgs.srcs.datas + '**/*.*',
+      `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg, json}`
+    ],
     gulp.series('assets')
   )
   gulp.watch([pkgs.srcs.rdatas + '**/*.*'], gulp.series('root_assets'))
@@ -129,6 +140,7 @@ gulp.task(
     'sass:min',
     'js',
     'js:min',
+    'json:min',
     'pug',
     'images',
     'assets',
@@ -143,6 +155,7 @@ gulp.task(
     'sass:min',
     'js',
     'js:min',
+    'json:min',
     'pug',
     'images',
     'assets',
