@@ -242,17 +242,19 @@ var Karaoke = {
       }
 
       chillout.forEach(karaLine.collection, (karaWord, karaWordNum) => {
+        if (karaWord.start_time === 0 || karaWord.start_time === '0') return 0
+        karaWord.start_time = Number(karaWord.start_time)
+        karaWord.end_time = Number(karaWord.end_time)
+
         var kards = document.getElementById(
           'kara_' + karaLineNum + '_' + karaWordNum
         )
-        if (
-          timeCode > karaWord.start_time &&
-          kards.className.indexOf('currentSync') === -1
-        ) {
-          kards.classList.toggle('currentSync', true)
+
+        if (kards.className.indexOf('currentSync') === -1) {
+          kards.classList.toggle('currentSync', timeCode > karaWord.start_time)
         }
 
-        if (timeCode > Number(karaWord.end_time)) {
+        if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
           kards.className = kards.className.replace(' currentSync', '')
         }
       })
