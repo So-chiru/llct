@@ -42,7 +42,11 @@ $(document).ready(() => {
   var prv = false
   $(document).keydown(e => {
     logger(1, 's', 'KeyDown event : ' + e.which, 'i')
-    if ($('input').is(':focus')) return 0
+    var onceUpdated = false
+    $('input[type="text"], input[type="number"], textarea').each((i, v) => {
+      if (!onceUpdated) onceUpdated = $(v).is(':focus')
+    })
+    if (onceUpdated) return 0
     prv = false
 
     switch (e.which) {
