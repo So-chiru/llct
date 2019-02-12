@@ -31,6 +31,7 @@
  */
 
 var SleepCounts = 0
+
 var Karaoke = {
   CallSoundElement: null,
   Read: function (lines) {
@@ -53,6 +54,7 @@ var Karaoke = {
   SetData: function (data) {
     window.karaokeData = data
     Karaoke.RenderDOM()
+    Karaoke.startEndOpti()
   },
 
   SetMetaData: function (data) {
@@ -62,12 +64,39 @@ var Karaoke = {
   SetTimelineData: function (data) {
     window.karaokeData.timeline = data
     Karaoke.RenderDOM()
+    Karaoke.startEndOpti()
   },
 
   SelectWord: function (posX, posY, element) {
     window.dispatchEvent(
       new CustomEvent('KaraokeSelection', { detail: { posX, posY, element } })
     )
+  },
+
+  CompareArray: (a, b) => {
+    if (
+      typeof a === 'undefined' ||
+      typeof b === 'undefined' ||
+      typeof a !== typeof b
+    ) {
+      return false
+    }
+
+    // if (a.start_time !== b.start_time) return false
+    // if (a.end_time !== b.end_time) return false
+    if (a.collection.length !== b.collection.length) return false
+
+    var diff = false
+    a.collection.forEach((v, i) => {
+      diff =
+        v.text !== b.collection[i].text ||
+        v.type !== b.collection[i].type ||
+        v.start_time !== b.collection[i].start_time ||
+        v.end_time !== b.collection[i].end_time ||
+        v.pronunciation_time !== b.collection[i].pronunciation_time
+    })
+
+    return !diff
   },
 
   MergeRender: function (prevArray, newArray) {
@@ -79,27 +108,25 @@ var Karaoke = {
         return 0
       }
 
-      if (
-        newArray[newLineInt] !== prevArray[newLineInt] &&
-        (newArray.length - prevArray.length === 1 ||
-          newArray.length - prevArray.length === -1) &&
-        newArray[newLineInt].collection.join('') ===
-          (prevArray[newLineInt - 1] || { collection: [] }).collection.join('')
-      ) {
-        mergedArray.push(prevArray[newLineInt - 1])
-        return 0
-      }
+      var comparedDone = false
+      ;[prevArray[newLineInt - 1], prevArray[newLineInt + 1]].forEach(
+        (comparePrevLine, index) => {
+          var sames = Karaoke.CompareArray(newLines, comparePrevLine)
+          if (index === 0) {
+            console.log(
+              index,
+              sames,
+              newLines.collection,
+              (comparePrevLine || { collection: {} }).collection
+            )
+          }
+          if (!sames) return 0
 
-      if (
-        newArray[newLineInt] !== prevArray[newLineInt] &&
-        (newArray.length - prevArray.length === 1 ||
-          newArray.length - prevArray.length === -1) &&
-        newArray[newLineInt].collection.join('') ===
-          (prevArray[newLineInt + 1] || { collection: [] }).collection.join('')
-      ) {
-        mergedArray.push(prevArray[newLineInt + 1])
-        return 0
-      }
+          mergedArray.push(comparePrevLine)
+          comparedDone = true
+        }
+      )
+      if (comparedDone) return 0
 
       var lineObj = {
         start_time: 0,
