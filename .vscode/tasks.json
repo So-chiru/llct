@@ -1,0 +1,31 @@
+{
+// tasks.json 형식에 대한 설명서는 
+    // https://go.microsoft.com/fwlink/?LinkId=733558 의 내용을 참조하세요.
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Gulp 빌드",
+            "command": "gulp",
+            "args": [
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Gulp 실행",
+            "command": "gulp",
+            "args": [
+                "default"
+            ],
+            "group": {
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gulp-tsc"
+            ]
+        }
+    ]
+}
