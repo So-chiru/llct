@@ -268,10 +268,28 @@ var Karaoke = {
 
         if (kards.className.indexOf('currentSync') === -1) {
           kards.classList.toggle('currentSync', timeCode > karaWord.start_time)
+          var karaokeDuration =
+            typeof karaWord.pronunciation_time === 'undefined' ||
+            karaWord.pronunciation_time === 0
+              ? (((typeof karaLine.collection[karaWordNum + 1] !== 'undefined'
+                ? karaLine.collection[karaWordNum + 1].start_time
+                : karaWord.end_time) || 70) -
+                  karaWord.start_time) /
+                2
+              : karaWord.pronunciation_time
+          if (karaokeDuration < 30) karaokeDuration += 20
+
+          kards.style.transition =
+            'text-shadow ' +
+            karaokeDuration / 300 +
+            's ease 0s, color ' +
+            karaokeDuration / 300 +
+            's ease 0s'
         }
 
         if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
           kards.className = kards.className.replace(' currentSync', '')
+          kards.style.transition = ''
         }
       })
     })
