@@ -4,7 +4,7 @@
 }
 
 .jua {
-  font-family: "BMJUA";
+  font-family: "Jua";
 }
 
 .kr {
@@ -13,13 +13,4 @@
 
 .ja {
   font-family: "Noto Sans JP", sans-serif;
-}
-
-@font-face {
-  font-family: "BMJUA";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/BMJUA.woff2") format("woff2"),
-    url("/fonts/BMJUA.woff") format("woff"),
-    url("/fonts/BMJUA.otf") format("otf");
 }

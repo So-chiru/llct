@@ -21,8 +21,12 @@
   .line_num {
     display: none;
   }
+  .lyrics {
+    display: contents;
+  }
+
   .p_line {
-    justify-content: center;
+    text-align: center;
   }
 
   #title_text {

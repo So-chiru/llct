@@ -4,7 +4,7 @@
 }
 
 .lyrics {
-  display: flex;
+  display: block;
   margin: 0;
   transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   color: #b8b8b8;
@@ -12,7 +12,7 @@
 }
 
 .p_line {
-  display: flex;
+  display: block;
   min-height: 10px;
 }
 

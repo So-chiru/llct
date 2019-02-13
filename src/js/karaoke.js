@@ -277,7 +277,7 @@ var Karaoke = {
                   karaWord.start_time) /
                 2
               : karaWord.pronunciation_time
-          if (karaokeDuration < 30) karaokeDuration += 20
+          if (karaokeDuration < 300) karaokeDuration += 30
 
           kards.style.transition =
             'text-shadow ' +
