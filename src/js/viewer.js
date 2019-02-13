@@ -21,7 +21,7 @@ $(document).ready(() => {
   window.audioSyncRefresh = setInterval(function () {
     if (audioPlayer.paused) return 0
     Karaoke.AudioSync(Math.floor(audioPlayer.currentTime * 100), false)
-  }, 10)
+  }, 5)
 
   audioPlayer.addEventListener('seeking', e => {
     Karaoke.clearSync(function () {
