@@ -25,12 +25,21 @@ $(document).ready(() => {
     wavesurfer.zoom(20)
   })
 
-  var wavTime, flrsd
+  var wavTime
+  var flrsd
+  var audioSyncSleep = 0
   wavesurfer.on('audioprocess', () => {
     wavTime = wavesurfer.getCurrentTime()
     flrsd = Math.floor(wavTime * 100)
     $('#current_time').html(convertTime(wavTime))
     $('#frame_tick').html(flrsd)
+
+    // CPU 사용량 제한
+    if (audioSyncSleep < 7) {
+      audioSyncSleep++
+      return
+    }
+    audioSyncSleep = 0
 
     Karaoke.AudioSync(flrsd, true)
   })

@@ -249,14 +249,6 @@ var Karaoke = {
   },
 
   AudioSync: function (timeCode, fullRender) {
-    // 리소스 갈굼 방지 Sleep
-    if (SleepCounts < 11) {
-      SleepCounts++
-      return 0
-    }
-
-    SleepCounts = 0
-
     chillout.forEach(karaokeData.timeline, (karaLine, karaLineNum) => {
       if (
         (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
