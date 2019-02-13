@@ -35,7 +35,7 @@ $(document).ready(() => {
     $('#frame_tick').html(flrsd)
 
     // CPU 사용량 제한
-    if (audioSyncSleep < 7) {
+    if (audioSyncSleep < 14) {
       audioSyncSleep++
       return
     }

@@ -19,7 +19,7 @@
  *                    start_time: Time code (audio.currentTime() * 100), // 시작 시간
  *                    end_time: Time code (audio.currentTime() * 100), // 끝나는 시간
  *                    pronunciation_time: Time code (ms / 10), // 발음 시간
- *                    type: Number (1~3) // 1: 가사, 2: 콜, 3: comment
+ *                    type: Number (1~3) // 1: 가사, 2: 콜, 3: comment, 4: 콜 + 가사
  *                } ...
  *            ]
  *        } ...
@@ -33,6 +33,7 @@
 var SleepCounts = 0
 
 var Karaoke = {
+  TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
   CallSoundElement: null,
   Read: function (lines) {
     if (typeof lines !== 'object') throw Error('Not valid Karaoke JSON type.')
@@ -213,7 +214,9 @@ var Karaoke = {
       var spaceEle = ''
       v.collection.forEach((word, wordI) => {
         spaceEle +=
-          '<p class="lyrics" id="kara_' +
+          '<p class="lyrics ' +
+          Karaoke.TypeLists[word.type] +
+          '" id="kara_' +
           lineI +
           '_' +
           wordI +
@@ -264,6 +267,10 @@ var Karaoke = {
 
         var kards = document.getElementById(
           'kara_' + karaLineNum + '_' + karaWordNum
+        )
+        kards.classList.toggle(
+          'josenPassing',
+          timeCode > karaWord.start_time && timeCode > karaWord.end_time
         )
 
         if (kards.className.indexOf('currentSync') === -1) {
