@@ -1,4 +1,7 @@
-/* global WaveSurfer, $, Blob, location, FileReader, lastSaved, CustomEvent, EditorselectedWords, wavesurfer, logger, karaokeData, Karaoke, songID */
+/* global WaveSurfer, $, Blob, location, FileReader, lastSaved, CustomEvent, selectWords, wavesurfer, logger, karaokeData, Karaoke, songID */
+var wavTime
+var flrsd
+var audioSyncSleep = 0
 
 var convertTime = function (input, separator) {
   var pad = function (input) {
@@ -11,6 +14,7 @@ var convertTime = function (input, separator) {
   ].join(typeof separator !== 'undefined' ? separator : ':')
 }
 
+// 전부다 document.ready 이후 일어나야 할 일인가?
 $(document).ready(() => {
   logger(1, 'r', 'event : document.ready', 'i')
   window.wavesurfer = WaveSurfer.create({
@@ -25,15 +29,13 @@ $(document).ready(() => {
     wavesurfer.zoom(20)
   })
 
-  var wavTime
-  var flrsd
-  var audioSyncSleep = 0
   wavesurfer.on('audioprocess', () => {
     wavTime = wavesurfer.getCurrentTime()
     flrsd = Math.floor(wavTime * 100)
     $('#current_time').html(convertTime(wavTime))
     $('#frame_tick').html(flrsd)
 
+    // TODO : 더 좋은 방식은 없을까?
     // CPU 사용량 제한
     if (audioSyncSleep < 14) {
       audioSyncSleep++
@@ -58,6 +60,7 @@ $(document).ready(() => {
     if (onceUpdated) return 0
     prv = false
 
+    // TODO : Switch 리펙토링 (이: 구조가 마음에 안듬)
     switch (e.which) {
       case 32:
         prv = true
@@ -72,7 +75,8 @@ $(document).ready(() => {
           'end_time',
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             karaokeData.metadata.correction_time,
-          e.altKey
+          e.altKey,
+          e.shiftKey
         )
         break
       case 80:
@@ -80,7 +84,8 @@ $(document).ready(() => {
           'pronunciation_time',
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             karaokeData.metadata.correction_time,
-          e.altKey
+          e.altKey,
+          e.shiftKey
         )
         break
       case 83:
@@ -88,7 +93,8 @@ $(document).ready(() => {
           'start_time',
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             karaokeData.metadata.correction_time,
-          e.altKey
+          e.altKey,
+          e.shiftKey
         )
         break
       case 77:
@@ -166,14 +172,13 @@ $(document).ready(() => {
 
   window.karaokeData = { metadata: { correction_time: -10 }, timeline: [] }
   window.lastSaved = JSON.stringify(karaokeData.timeline)
-  var EditorselectedWords = []
-  var ___a = ['#start_time_val', '#end_time_val', '#pron_time_val', '#type_val']
-
-  var __b = {
+  var _selectWords = []
+  var valElementObject = {
     '#start_time_val': 'start_time',
     '#end_time_val': 'end_time',
     '#pron_time_val': 'pronunciation_time',
-    '#type_val': 'type'
+    '#type_val': 'type',
+    '#ruby_text_val': 'ruby_text'
   }
 
   window.addEventListener('KaraokeLoaded', e => {
@@ -184,30 +189,34 @@ $(document).ready(() => {
 
   window.addEventListener('KaraokeSelection', e => {
     var alreadyExists = false
-    EditorselectedWords.forEach((v, i) => {
+    _selectWords.forEach((v, i) => {
       if (JSON.stringify(v) === JSON.stringify(e.detail)) {
         alreadyExists = true
-        EditorselectedWords.splice(i, 1)
+        _selectWords.splice(i, 1)
       }
     })
 
     if (!alreadyExists) {
-      EditorselectedWords.push(e.detail)
+      _selectWords.push(e.detail)
     }
 
-    if (EditorselectedWords.length > 0) {
-      ___a.forEach(_ =>
+    if (_selectWords.length > 0) {
+      Object.keys(valElementObject).forEach(_ =>
         $(_).val(
-          karaokeData.timeline[e.detail.posX].collection[e.detail.posY][__b[_]]
+          karaokeData.timeline[e.detail.posX].collection[e.detail.posY][
+            valElementObject[_]
+          ]
         )
       )
     }
 
     $(e.detail.element).toggleClass('WordSelected', !alreadyExists)
 
-    ___a.forEach(_ => $(_).attr('disabled', EditorselectedWords.length < 1))
+    Object.keys(valElementObject).forEach(_ =>
+      $(_).attr('disabled', _selectWords.length < 1)
+    )
   })
-  window.EditorselectedWords = EditorselectedWords
+  window.selectWords = _selectWords
 })
 
 $(window).bind('beforeunload', () => {
@@ -229,23 +238,32 @@ var _c = {
   start_time: '#start_time_val',
   end_time: '#end_time_val',
   pronunciation_time: '#pron_time_val',
-  type: '#type_val'
+  type: '#type_val',
+  ruby_text: '#ruby_text_val'
 }
 
 const KaraokeEditor = {
-  EditVal: (key, value, altMode) => {
+  EditVal: (key, value, altMode, shiftMode) => {
     $(_c[key]).val(value)
-    window.EditorselectedWords.forEach((details, index) => {
+    window.selectWords.forEach((details, index) => {
       var selectedObject =
         karaokeData.timeline[details.posX].collection[details.posY]
 
       selectedObject[key] = value
 
-      if (index === EditorselectedWords.length - 1 && altMode) {
-        $(EditorselectedWords[0].element).toggleClass('WordSelected')
-        EditorselectedWords.splice(0, 1)
+      if (!shiftMode && (index === selectWords.length - 1 && altMode)) {
+        $(selectWords[0].element).toggleClass('WordSelected')
+        selectWords.splice(0, 1)
       }
     })
+
+    KaraokeEditor.clearSelection()
+    Karaoke.RenderDOM()
+  },
+  clearSelection: () => {
+    for (var i = 0; i < selectWords.length; i++) {
+      $(selectWords[i].element).toggleClass('WordSelected')
+    }
   },
   Import: () => {
     if (

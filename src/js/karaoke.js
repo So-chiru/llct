@@ -225,7 +225,13 @@ var Karaoke = {
           ', ' +
           wordI +
           ', this)">' +
-          word.text.replace(/\s/g, '&nbsp') +
+          (typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
+            ? '<ruby>' +
+              word.text.replace(/\s/g, '&nbsp') +
+              '<rt>' +
+              word.ruby_text +
+              '</rt></ruby>'
+            : word.text.replace(/\s/g, '&nbsp')) +
           '</p>'
       })
       inserts +=
