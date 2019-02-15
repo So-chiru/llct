@@ -76,7 +76,8 @@ $(document).ready(() => {
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             karaokeData.metadata.correction_time,
           e.altKey,
-          e.shiftKey
+          e.shiftKey,
+          true
         )
         break
       case 80:
@@ -85,7 +86,8 @@ $(document).ready(() => {
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             karaokeData.metadata.correction_time,
           e.altKey,
-          e.shiftKey
+          e.shiftKey,
+          true
         )
         break
       case 83:
@@ -94,7 +96,8 @@ $(document).ready(() => {
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             karaokeData.metadata.correction_time,
           e.altKey,
-          e.shiftKey
+          e.shiftKey,
+          true
         )
         break
       case 77:
@@ -242,7 +245,7 @@ var _c = {
 }
 
 const KaraokeEditor = {
-  EditVal: (key, value, altMode, shiftMode) => {
+  EditVal: (key, value, altMode, shiftMode, NonwipingMode) => {
     $(_c[key]).val(value)
     selectWords.forEach((details, index) => {
       var selectedObject =
@@ -250,18 +253,21 @@ const KaraokeEditor = {
 
       selectedObject[key] = value
 
-      if (!shiftMode && (index === selectWords.length - 1 && altMode)) {
+      if (!shiftMode && altMode && index === selectWords.length - 1) {
         $(selectWords[0].element).toggleClass('WordSelected')
         selectWords.splice(0, 1)
       }
     })
 
-    if (shiftMode) KaraokeEditor.clearSelection()
-    Karaoke.RenderDOM()
+    if (shiftMode && !altMode) KaraokeEditor.clearSelection()
+    if (!NonwipingMode) {
+      Karaoke.RenderDOM()
+      KaraokeEditor.clearSelection()
+    }
   },
   clearSelection: () => {
     selectWords.forEach(v => {
-      $(v.element).toggleClass('WordSelected')
+      $(v.element).toggleClass('WordSelected', false)
     })
 
     selectWords = []

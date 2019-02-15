@@ -97,19 +97,19 @@ html.editor
           p 선택된 단어들의
           p
             | 루비 텍스트 (없을 경우 공란)
-            input#ruby_text_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'ruby_text', this.value)")
+            input#ruby_text_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'ruby_text', this.value, false, false, false)")
           p
             | 시작 시간
-            input#start_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'start_time', this.value)")
+            input#start_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'start_time', this.value, false, false, true)")
           p
             | 종료 시간
-            input#end_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'end_time', this.value)")
+            input#end_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'end_time', this.value, false, false, true)")
           p
             | 발음 시간
-            input#pron_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'pronunciation_time', this.value)")
+            input#pron_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'pronunciation_time', this.value, false, false, true)")
           p
             | 종류
-            input#type_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'type', this.value)")
+            input#type_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'type', this.value, false, false, false)")
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
