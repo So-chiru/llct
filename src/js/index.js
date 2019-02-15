@@ -129,6 +129,10 @@ var searchRefresh = function (obj) {
 
   $('#search_rest').html('')
 
+  if (keys.length < 1) {
+    $('#search_rest').html('<h3>검색 결과가 없습니다.</h3>')
+  }
+
   keys.forEach(function (dataTitle, i) {
     var datobj = obj[dataTitle]
     var baseElement = $(
@@ -157,18 +161,13 @@ var searchRefresh = function (obj) {
         : dataTitle
     )
     cardContent.append(title)
-
     baseElement.append(cardContent)
     $('#search_rest').append(baseElement)
 
-    setTimeout(function () {
+    setTimeout(() => {
       baseElement.css('opacity', '1')
-    }, 35 * i)
+    }, i * 25)
   })
-
-  if (keys.length < 1) {
-    $('#search_rest').html('<h3>검색 결과가 없습니다.</h3>')
-  }
 
   window.imgLazyLoad = new LazyLoad({
     elements_selector: '.lazy'
@@ -215,18 +214,17 @@ var urlQueryParams = function (name) {
 }
 
 $(document).ready(function () {
-  optionObjects.forEach(obj => {
-    if (typeof cookieYosoro.get(obj.cn) === 'undefined') {
-      cookieYosoro.set(obj.cn, false)
+  for (var i = 0; i < optionObjects.length; i++) {
+    if (typeof cookieYosoro.get(optionObjects[i].cn) === 'undefined') {
+      cookieYosoro.set(optionObjects[i].cn, false)
     }
-    $(obj.e).prop('checked', cookieYosoro.get(obj.cn) === 'true')
-  })
+    $(optionObjects[i].e).prop(
+      'checked',
+      cookieYosoro.get(optionObjects[i].cn) === 'true'
+    )
+  }
 
   if (urlQueryParams('f') !== '') {
     searchFiltering(urlQueryParams('f'), true)
   }
-
-  window.imgLazyLoad = new LazyLoad({
-    elements_selector: '.lazy'
-  })
 })
