@@ -113,14 +113,6 @@ var Karaoke = {
       ;[prevArray[newLineInt - 1], prevArray[newLineInt + 1]].forEach(
         (comparePrevLine, index) => {
           var sames = Karaoke.CompareArray(newLines, comparePrevLine)
-          if (index === 0) {
-            console.log(
-              index,
-              sames,
-              newLines.collection,
-              (comparePrevLine || { collection: {} }).collection
-            )
-          }
           if (!sames) return 0
 
           mergedArray.push(comparePrevLine)
@@ -200,6 +192,16 @@ var Karaoke = {
     return renderedData
   },
 
+  selectLine: num => {
+    karaokeData.timeline[num].collection.forEach((v, i) => {
+      Karaoke.SelectWord(
+        num,
+        i,
+        document.getElementById('kara_' + num + '_' + i)
+      )
+    })
+  },
+
   startEndOpti: function () {
     karaokeData.timeline.forEach((value, index) => {
       value.start_time = Number(value.collection[0].start_time) - 100
@@ -237,7 +239,9 @@ var Karaoke = {
       inserts +=
         '<div class="p_line" id="kara_' +
         lineI +
-        '"><p class="line_num">' +
+        '"><p class="line_num" onclick="Karaoke.selectLine(' +
+        lineI +
+        ')">' +
         lineI +
         '.</p> ' +
         spaceEle +

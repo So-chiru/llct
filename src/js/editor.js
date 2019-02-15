@@ -172,7 +172,7 @@ $(document).ready(() => {
 
   window.karaokeData = { metadata: { correction_time: -10 }, timeline: [] }
   window.lastSaved = JSON.stringify(karaokeData.timeline)
-  var _selectWords = []
+  window.selectWords = []
   var valElementObject = {
     '#start_time_val': 'start_time',
     '#end_time_val': 'end_time',
@@ -189,18 +189,18 @@ $(document).ready(() => {
 
   window.addEventListener('KaraokeSelection', e => {
     var alreadyExists = false
-    _selectWords.forEach((v, i) => {
+    selectWords.forEach((v, i) => {
       if (JSON.stringify(v) === JSON.stringify(e.detail)) {
         alreadyExists = true
-        _selectWords.splice(i, 1)
+        selectWords.splice(i, 1)
       }
     })
 
     if (!alreadyExists) {
-      _selectWords.push(e.detail)
+      selectWords.push(e.detail)
     }
 
-    if (_selectWords.length > 0) {
+    if (selectWords.length > 0) {
       Object.keys(valElementObject).forEach(_ =>
         $(_).val(
           karaokeData.timeline[e.detail.posX].collection[e.detail.posY][
@@ -213,10 +213,9 @@ $(document).ready(() => {
     $(e.detail.element).toggleClass('WordSelected', !alreadyExists)
 
     Object.keys(valElementObject).forEach(_ =>
-      $(_).attr('disabled', _selectWords.length < 1)
+      $(_).attr('disabled', selectWords.length < 1)
     )
   })
-  window.selectWords = _selectWords
 })
 
 $(window).bind('beforeunload', () => {
@@ -245,7 +244,7 @@ var _c = {
 const KaraokeEditor = {
   EditVal: (key, value, altMode, shiftMode) => {
     $(_c[key]).val(value)
-    window.selectWords.forEach((details, index) => {
+    selectWords.forEach((details, index) => {
       var selectedObject =
         karaokeData.timeline[details.posX].collection[details.posY]
 
@@ -257,13 +256,15 @@ const KaraokeEditor = {
       }
     })
 
-    KaraokeEditor.clearSelection()
+    if (shiftMode) KaraokeEditor.clearSelection()
     Karaoke.RenderDOM()
   },
   clearSelection: () => {
-    for (var i = 0; i < selectWords.length; i++) {
-      $(selectWords[i].element).toggleClass('WordSelected')
-    }
+    selectWords.forEach(v => {
+      $(v.element).toggleClass('WordSelected')
+    })
+
+    selectWords = []
   },
   Import: () => {
     if (
