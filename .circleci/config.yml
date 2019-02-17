@@ -27,8 +27,8 @@ jobs:
 workflows:
   version: 2
   build_and_tests:
-    jobs:
-      branches:
-        only:
+    branches:
+      only:
         - master
+    jobs:
       - runs
