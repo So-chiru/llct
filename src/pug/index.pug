@@ -3,69 +3,50 @@ html.index
     title LoveLive! Call Table
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name="description" content="러브라이브! 선샤인!! 콜표 모음집")
-    meta(name="keywords" content="러브라이브,선샤인,물장판,콜표,뷰잉")
     meta(name='theme-color', content='#e039e0')
+    meta(meta name="apple-mobile-web-app-capable" content="yes")
+    meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
+    meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
+    meta(meta name="application-name" content="러브라이브! 콜표")
+    link(rel="apple-touch-icon" href="/data/favicon/logo.png")
     link(rel='stylesheet', href='./yosoro.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.css')
     link(rel='shortcut icon', href='//cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-    script(async src='https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.19.0/dist/lazyload.min.js')
-    script(async src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js')
-    script(async src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.js')
+    script(src='./js/new_index.min.js')
     script(src='./js/global.min.js')
-    script(async src='./js/index.min.js')
+    script(async src='./js/lib/chillout.min.js')
+    script(async src='./js/karaoke.min.js')
+    script(async src='./js/viewer.min.js')
   body
-    .pg_content
-      h1.kr.title(onclick="clearSearch()")
-        span.ll_brand LoveLive!
-        |  Call Table
-      input#search_box.kr(type='text', name='search', onkeyup='searchFiltering(this.value)', aria-label='악곡 제목 필터링' placeholder='악곡 제목 or 약자')
-      button.btn_gap(onclick="searchFiltering(document.getElementById('search_box').value)") 검색
-      br
-      br
-      .options
-        label.ckbox
-          | 번역된 제목으로 보기
-          input#showAs_translated(type='checkbox', checked='none', onclick='changedOption(0)')
-          span.checkmark
-        label.ckbox
-          | 배경 이미지 숨기기
-          input#hideBGImage(type='checkbox', checked='none', onclick='changedOption(1)')
-          span.checkmark
-        label.ckbox
-          | 다크모드 활성화
-          input#enable_darkMode(type='checkbox', checked='none', onclick='changedOption(2)')
-          span.checkmark
-      br
-      #search_rest.search_results
-        h1.kr.ooki 검색 결과가 없습니다.
-    p.centerize
-      a(href='https://gall.dcinside.com/sunshine/')  Love Live! Call Table by 러브라이브! 선샤인!! 마이너 갤러리
-      |          ・ 
-      a(href='https://github.com/So-chiru/LLCT') Github
-    .pswp(tabindex='-1', role='dialog', aria-hidden='true')
-      .pswp__bg
-      .pswp__scroll-wrap
-        .pswp__container
-          .pswp__item
-          .pswp__item
-          .pswp__item
-        .pswp__ui.pswp__ui--hidden
-          .pswp__top-bar
-            .pswp__counter
-            button.pswp__button.pswp__button--close(title='닫기 (Esc)')
-            button.pswp__button.pswp__button--fs(title='전체 화면')
-            button.pswp__button.pswp__button--zoom(title='확대')
-            .pswp__preloader
-              .pswp__preloader__icn
-                .pswp__preloader__cut
-                  .pswp__preloader__donut
-          .pswp__caption
-            .pswp__caption__center
+    .fullpage#fg_element
+        .section.main
+            .main_contents
+                h1 LLCT
+                svg.line_svg(data-type="Line")
+                    path.line_svg_class#__3(d="M 0 0 L 323 0")
+                h3 LoveLive! Call Table Guide
+        .section.lists
+            .full_page_ct
+                span 2019년 2월 17일
+                h1 노래 목록
+    .player.hide
+        .info
+            img#album_meta.c.cover(src="/data/10082/bg.png")
+            p#title_meta.c.title Over The Next Rainbow
+            .c.diver
+            p#artist_meta.c.artist Saint Aqours Snow
+        .timeline
+            p#played_time.c 0 : 00
+            input#ctrl_time.hareru.c(type="range", name="")
+            p#left_time.c - 4 : 59
+        .ctrls
+
+        audio#kara_audio
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
@@ -75,3 +56,21 @@ html.index
       }
       gtag('js', new Date());
       gtag('config', 'UA-111995531-2');
+    script.
+        $(document).ready(function() {
+            $('#fg_element').pagepiling({
+                menu: null,
+                direction: 'vertical',
+                scrollingSpeed: 400,
+                easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
+                navigation: {
+                    'textColor': '#323232',
+                    'bulletsColor': '#323232',
+                    'position': 'right',
+                    'tooltips': ['메인', '노래 목록']
+                },
+                anchors: ['main', 'lists'],
+                sectionsColor: ['#3b3b3b', (cookieYosoro.get('tatenshi') === 'true') ? '#3b3b3b' : '#fff'],
+                onLeave: (o,t,r) => { pagePlayerAnimation(o,t,r) }
+            });
+        });
