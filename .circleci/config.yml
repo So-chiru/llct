@@ -28,7 +28,7 @@ workflows:
   version: 2
   build_and_tests:
     jobs:
-      - filters:
-          - branches:
-              only: master
-      - runs
+      - runs:
+          filters:
+            branches:
+              only: develop
