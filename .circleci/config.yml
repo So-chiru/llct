@@ -21,7 +21,7 @@ jobs:
             git config --global user.email $GIT_EMAILS
             git config --global user.name $GIT_NAME
       - run:
-          name: Deploying to Github PAges
+          name: Deploying to Github Pages
           command: yarn deploy
 
 workflows:
@@ -29,6 +29,6 @@ workflows:
   build_and_tests:
     jobs:
       - filters:
-          branches:
-            only: master
+          - branches:
+              only: master
       - runs
