@@ -29,7 +29,6 @@ workflows:
   build_and_tests:
     filters:
       branches:
-        only:
-          - master
+        only: master
     jobs:
       - runs
