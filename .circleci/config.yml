@@ -1,6 +1,9 @@
 version: 2
 jobs:
   runs:
+    branches:
+      only:
+        - master
     docker:
       - image: circleci/node:11
     working_directory: ~/llct_circleci
@@ -27,8 +30,5 @@ jobs:
 workflows:
   version: 2
   build_and_tests:
-    branches:
-      only:
-        - master
     jobs:
       - runs
