@@ -2,7 +2,7 @@
   font-family: "Noto Sans KR", sans-serif;
 
   .main {
-    background-image: url("background.png");
+    background-image: url("/data/background.png");
     background-attachment: fixed;
     background-position: center;
     height: 100%;
@@ -51,9 +51,43 @@
 
   .lists {
     .full_page_ct {
-      width: 95%;
+      width: 92%;
       height: 90%;
       margin: auto;
+
+      .header {
+        margin-left: 1.5%;
+        display: flex;
+
+        .titles {
+          h1 {
+            margin: 0;
+            margin-top: -5px;
+            font-weight: 900;
+            font-size: 35px;
+          }
+        }
+
+        .tabs {
+          margin-left: 40px;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+
+          span {
+            font-size: 24px;
+            color: #707070;
+            font-weight: 100;
+            margin: auto;
+            margin-right: 20px;
+          }
+
+          .active {
+            color: #000;
+            font-weight: 700;
+          }
+        }
+      }
     }
   }
 
@@ -83,7 +117,7 @@
 
     .info,
     .timeline,
-    .ctrl {
+    .ctrls {
       display: flex;
       font-weight: 100;
       margin: 0;
@@ -104,10 +138,101 @@
       }
     }
 
+    .ctrls {
+      margin-right: 2.5%;
+
+      .material-icons {
+        font-size: 45px;
+        color: #737373;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+
+    .info_txts {
+      display: flex;
+    }
+
     .diver {
       height: 26px;
       width: 1px;
       background-color: #e6e6e6;
+    }
+
+    .after_div {
+      display: none;
+    }
+
+    .cover {
+      width: 50px;
+      height: 50px;
+      border-radius: 23px;
+      margin-right: 30px;
+    }
+
+    p,
+    div {
+      margin-right: 21.5px;
+    }
+
+    @media screen and (max-width: 1500px) {
+      .artist {
+        display: none;
+      }
+
+      .info {
+        width: 80%;
+      }
+
+      .timeline input {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      .diver {
+        display: none;
+      }
+
+      .title,
+      .artist {
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .info {
+        width: 60%;
+        margin-left: 5%;
+      }
+
+      .title {
+        font-size: 14px;
+      }
+
+      .artist {
+        font-size: 12px;
+        color: #a7a7a7;
+      }
+
+      .info_txts {
+        display: block;
+        height: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      .after_div {
+        display: block;
+      }
+
+      .cover {
+        margin-right: 20px;
+      }
+
+      p,
+      div {
+        margin-right: 5px;
+      }
     }
 
     .title,
@@ -121,29 +246,31 @@
       line-height: 1.2em;
       height: 1.2em;
       -webkit-box-orient: vertical;
+      margin-right: 21.5px;
     }
 
     .title {
       font-weight: 100;
+      font-size: 10;
       color: #2d2d2d;
     }
 
     .artist {
       font-weight: 100;
+      font-size: 8;
       color: #a7a7a7;
     }
 
     .c {
       margin-top: auto;
       margin-bottom: auto;
-      margin-right: 21.5px;
     }
+  }
 
-    .cover {
-      width: 50px;
-      height: 50px;
-      border-radius: 23px;
-      margin-right: 30px;
+  @media screen and (max-width: 800px) {
+    .player {
+      left: 0;
+      width: 100%;
     }
   }
 }
