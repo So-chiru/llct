@@ -44,6 +44,11 @@ var i = [
   {
     n: 'KaraokeEditor',
     c: 'color: #3565d6'
+  },
+
+  {
+    n: 'Main',
+    c: 'color: #3eddcb'
   }
 ]
 

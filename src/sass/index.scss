@@ -55,6 +55,18 @@
       height: 90%;
       margin: auto;
 
+      .loader {
+        display: flex;
+        justify-content: center;
+        height: 0%;
+        top: 20%;
+        margin: auto;
+      }
+
+      .loader.done {
+        display: none;
+      }
+
       .header {
         margin-left: 1.5%;
         display: flex;

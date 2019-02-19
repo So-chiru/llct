@@ -12,17 +12,19 @@ const timeString = sec => {
   )
 }
 
+let callLists = []
 let frameWorks
 let audioVolumeFrame = null
 let audioVolumeFunction = () => {}
+const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
 
-let yohane = {
+let yohaneNoDOM = {
   shokan: () => {
     $('.player').css('transition', 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)')
     $('.player').removeClass('hide')
     $('.player').addClass('show')
-    yohane.play()
   },
+
   giran: () => {
     $('.player').css(
       'transition',
@@ -30,10 +32,38 @@ let yohane = {
     )
     $('.player').removeClass('show')
     $('.player').addClass('hide')
+  },
+
+  initialize: id => {
+    var meta = getFromLists(id)
+
+    document.getElementById('album_meta').src =
+      (urlQueryParams('local') !== null ? './' : 'https://cdn.lovelivec.kr/') +
+      '/data/' +
+      id +
+      '/bg.png'
+
+    document.getElementById('title_meta').innerText = meta[0]
+    document.getElementById('artist_meta').innerText =
+      artistLists[typeof meta[1].artist !== 'undefined' ? meta[1].artist : 0]
+    yohaneNoDOM.shokan()
+  }
+}
+
+let yohane = {
+  shokan: () => {
+    if (!yohane.loaded) return 0
+    yohaneNoDOM.shokan()
+    yohane.play()
+  },
+  giran: () => {
+    if (!yohane.loaded) return 0
+    yohaneNoDOM.giran()
     yohane.pause()
   },
 
-  volumeStore: 0.5,
+  volumeStore: null,
+  loaded: false,
 
   setVolume: v => {
     yohane.volumeStore = v
@@ -65,21 +95,36 @@ let yohane = {
     audioVolumeFunction()
   },
 
-  play: () => {
-    yohane.player().play()
-    yohane.fade(0, yohane.volumeStore, 1000, performance.now(), () => {})
+  toggle: () => yohane[yohane.player().paused ? 'play' : 'pause'](),
+  stop: () => yohane.pause(true),
+  playing: () => !yohane.player().paused,
+
+  seekTo: zto => {
+    if (yohane.playing()) yohane.pause(false, true)
+    yohane.player().currentTime = yohane.player().duration * (zto / 100)
+    yohane.play(true)
   },
 
-  pause: () => {
-    yohane.fade(yohane.player().volume, 0, 1000, performance.now(), () => {
-      yohane.player().pause()
+  play: force => {
+    document.getElementById('pp_btn').innerHTML = 'pause'
+    yohane.player().play()
+
+    if (force) return 0
+    yohane.fade(0, yohane.volumeStore, 600, performance.now(), () => {})
+  },
+
+  pause: (returnZero, force) => {
+    document.getElementById('pp_btn').innerHTML = 'play_arrow'
+    if (force) return yohane.player()[returnZero ? 'stop' : 'pause']()
+    yohane.fade(yohane.player().volume, 0, 600, performance.now(), () => {
+      yohane.player()[returnZero ? 'stop' : 'pause']()
     })
   },
 
   tick: () => {
     frameWorks = requestAnimationFrame(yohane.tick)
     if (typeof yohane.tickVal === 'undefined') yohane.tickVal = 0
-    if (yohane.tickVal > 50) {
+    if (yohane.tickVal > 20) {
       yohane.tickVal = 0
       yohane.deferTick()
     }
@@ -102,39 +147,44 @@ let yohane = {
   },
 
   initialize: id => {
-    let audpl = yohane.player()
+    try {
+      yohane.player().src =
+        (urlQueryParams('local') !== null
+          ? './'
+          : 'https://cdn.lovelivec.kr/') +
+        'data/' +
+        id +
+        '/audio.mp3'
+      yohane.setVolume(yohane.volumeStore !== null ? yohane.volumeStore : 0.5)
+    } catch (e) {
+      yohane.loaded = false
+      return logger(2, 'r', e.message, 'e')
+    }
 
-    audpl.src =
-      (urlQueryParams('local') !== null ? './' : 'https://cdn.lovelivec.kr/') +
-      'data/' +
-      id +
-      '/audio.mp3'
-    audpl.volume = 0.5
+    yohane.loaded = true
+    yohaneNoDOM.initialize(id)
+  },
 
-    document.getElementById('album_meta').src =
-      (urlQueryParams('local') !== null ? './' : 'https://cdn.lovelivec.kr/') +
-      '/data/' +
-      id +
-      '/bg.png'
+  loadPlay: id => {
+    yohane.initialize(id)
+    yohane.play()
   }
 }
 
-$(document).ready(() => {
-  yohane.initialize(10083)
+let getFromLists = id => {
+  var v = Object.keys(callLists)
+  var sb = id.toString().substring(3, 4)
 
-  yohane.player().onplay = () => {
-    requestAnimationFrame(yohane.tick)
-  }
+  return [v[sb], callLists[v[sb]]]
+}
 
-  yohane.player().onpause = () => {
-    cancelAnimationFrame(yohane.tick)
-  }
-
+const loadLyrics = id => {
+  // urlQueryParams('id')
   $.ajax({
     url:
       (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
       'data/' +
-      urlQueryParams('id') +
+      id +
       '/karaoke.json',
     success: function (data) {
       window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
@@ -161,5 +211,34 @@ $(document).ready(() => {
       karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
         100 -
       0.03
+  })
+}
+
+$(document).ready(() => {
+  yohane.player().onplay = () => {
+    requestAnimationFrame(yohane.tick)
+  }
+
+  yohane.player().onpause = () => {
+    cancelAnimationFrame(yohane.tick)
+  }
+
+  $.ajax({
+    url:
+      (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
+      'data/lists.json',
+    success: d => {
+      try {
+        if (typeof d === 'string') callLists = d
+      } catch (e) {
+        logger(2, 'r', e.message, 'e')
+      }
+
+      callLists = d
+      $('#loading_spin_ctlst').addClass('done')
+    },
+    error: function (err) {
+      console.error(err)
+    }
   })
 })

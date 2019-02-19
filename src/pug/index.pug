@@ -41,6 +41,12 @@ html.index
                         span.active 전체
                         span 라이브
                         span 추천
+                .lds-ellipsis.loader#loading_spin_ctlst
+                    div
+                    div
+                    div
+                    div
+                button(onclick="yohane.loadPlay(10001)") Thank you, FRIENDS!!
     .player.hide
         .info
             img#album_meta.c.cover(src="/data/10082/bg.png")
@@ -51,11 +57,11 @@ html.index
             .c.diver.after_div
         .timeline
             p#played_time.c 0 : 00
-            input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="")
+            input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
             p#left_time.c - 4 : 59
         .ctrls
-            span#pp_btn.material-icons pause
-            span#stop_btn.material-icons stop
+            span#pp_btn.material-icons(onclick="yohane.toggle()") pause
+            span#stop_btn.material-icons(onclick="yohane.stop()") stop
         audio#kara_audio
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
