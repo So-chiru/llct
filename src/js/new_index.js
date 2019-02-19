@@ -34,6 +34,16 @@ let yohaneNoDOM = {
     $('.player').addClass('hide')
   },
 
+  dekekuni: () => {
+    $('.player_bg').addClass('show')
+    $('.player').addClass('dekai')
+  },
+
+  chiisakuni: () => {
+    $('.player_bg').removeClass('show')
+    $('.player').removeClass('dekai')
+  },
+
   initialize: id => {
     var meta = getFromLists(id)
 
@@ -105,6 +115,25 @@ let yohane = {
     yohane.play(true)
   },
 
+  seekPrev: s =>
+    (yohane.player().currentTime =
+      yohane.player().currentTime - s < 0
+        ? 0
+        : yohane.player().currentTime - s),
+  seekNext: s =>
+    (yohane.player().currentTime =
+      yohane.player().currentTime + s > yohane.player().duration
+        ? (yohane.player().duration - yohane.player().currentTime) / 2
+        : yohane.player().currentTime + s),
+  volumeDown: s =>
+    yohane.setVolume(
+      yohane.player().volume - s < 0 ? 0 : yohane.player().volume - s
+    ),
+  volumeUp: s =>
+    yohane.setVolume(
+      yohane.player().volume + s > 1 ? 1 : yohane.player().volume + s
+    ),
+
   play: force => {
     document.getElementById('pp_btn').innerHTML = 'pause'
     yohane.player().play()
@@ -168,12 +197,13 @@ let yohane = {
   loadPlay: id => {
     yohane.initialize(id)
     yohane.play()
+    yohaneNoDOM.dekekuni()
   }
 }
 
 let getFromLists = id => {
   var v = Object.keys(callLists)
-  var sb = id.toString().substring(3, 4)
+  var sb = Number(id.toString().substring(3, 5)) - 1
 
   return [v[sb], callLists[v[sb]]]
 }
@@ -202,7 +232,7 @@ const loadLyrics = id => {
       Karaoke.RenderDOM()
     },
     error: function (err) {
-      console.error(err)
+      return logger(2, 'r', err.message, 'e')
     }
   })
 
@@ -214,7 +244,149 @@ const loadLyrics = id => {
   })
 }
 
+let pageAdjust = {
+  lists: [],
+  onePageItems: 12,
+  currentPage: 0,
+  remove: () => {},
+
+  add: item => {
+    if (pageAdjust.lists.length === 0) {
+      pageAdjust.lists[0] = item
+      return
+    }
+
+    for (var i = 0; i < pageAdjust.lists.length; i++) {
+      if (typeof pageAdjust.lists[i] === 'undefined') {
+        pageAdjust.lists[i] = []
+        continue
+      }
+      if (pageAdjust.lists[i].length >= pageAdjust.onePageItems) {
+        if (typeof pageAdjust.lists[i + 1] === 'undefined') {
+          pageAdjust.lists[i + 1] = []
+        }
+
+        continue
+      }
+
+      pageAdjust.lists[i].push(item[0])
+    }
+  },
+
+  render: pg => {
+    $('#call_lists').html('')
+    if (!pg) pg = 0
+    for (var i = 0; i <= pageAdjust.lists[pg].length; i++) {
+      $('#call_lists').append(pageAdjust.lists[pg][i])
+    }
+  }
+}
+const addElementToPage = () => {}
+
+const ListsLoadDone = () => {
+  var objKeys = Object.keys(callLists)
+  pageAdjust.lists = []
+
+  for (var i = 0; i < objKeys.length; i++) {
+    var curObj = callLists[objKeys[i]]
+    var baseElement = $(
+      '<div class="card" onclick="yohane.loadPlay(' + curObj.id + ')"></div>'
+    )
+
+    baseElement.append(
+      $(
+        '<img id="' +
+          curObj.id +
+          '_bgimg" src="' +
+          (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
+          'data/' +
+          curObj.id +
+          '/bg.png"></img>'
+      )
+    )
+
+    baseElement.append(
+      $(
+        '<h3 class="txt">' +
+          (cookieYosoro.get('mikan') === 'true'
+            ? curObj.translated || objKeys[i]
+            : objKeys[i]) +
+          '</h3>'
+      )
+    )
+
+    pageAdjust.add(baseElement)
+  }
+
+  pageAdjust.render()
+}
+
+const resizeItemsCheck = () => {
+  if (window.matchMedia('(min-width: 1501px)').matches) return 12
+  if (window.matchMedia('(max-width: 1500px) and (min-width: 801px)').matches) {
+    return 8
+  }
+  if (window.matchMedia('(max-width: 800px)').matches) return 4
+
+  return 4
+}
+
+const keys = {
+  32: [
+    e => {
+      yohane.toggle()
+    },
+    true
+  ],
+  37: [
+    e => {
+      yohane.seekPrev(5)
+    },
+    true
+  ],
+  38: [
+    e => {
+      yohane.volumeUp(0.05)
+    },
+    true
+  ],
+  39: [
+    e => {
+      yohane.seekNext(5)
+    },
+    true
+  ],
+  40: [
+    e => {
+      yohane.volumeDown(0.05)
+    },
+    true
+  ]
+}
+
+const connectLiveActions = () => {
+  var audio = document.getElementById('kara_audio')
+  var context = new AudioContext()
+  reverbjs.extend(context)
+
+  var source = context.createMediaElementSource(audio)
+
+  var reverbUrl = '/dome_SportsCentreUniversityOfYork.m4a'
+  var reverbNode = context.createReverbFromUrl(reverbUrl, function () {
+    reverbNode.connect(context.destination)
+  })
+
+  source.connect(reverbNode)
+  audio.play()
+}
+
 $(document).ready(() => {
+  // 인터넷 익스플로더 좀 쓰지 맙시다
+  if (/* @cc_on!@ */ false || !!document.documentMode) {
+    document.getElementById('PLEASE_STOP_USE_INTERNET_EXPLORER').style.display =
+      'block'
+  }
+
   yohane.player().onplay = () => {
     requestAnimationFrame(yohane.tick)
   }
@@ -222,6 +394,13 @@ $(document).ready(() => {
   yohane.player().onpause = () => {
     cancelAnimationFrame(yohane.tick)
   }
+
+  window.addEventListener('keydown', ev => {
+    logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
+    if (typeof keys[ev.keyCode] === 'undefined') return 0
+    keys[ev.keyCode][0](ev)
+    if (keys[ev.keyCode][1]) ev.preventDefault()
+  })
 
   $.ajax({
     url:
@@ -236,9 +415,27 @@ $(document).ready(() => {
 
       callLists = d
       $('#loading_spin_ctlst').addClass('done')
+      ListsLoadDone()
     },
     error: function (err) {
-      console.error(err)
+      logger(2, 'r', err.message, 'e')
     }
   })
+
+  $('#genki_year').html(new Date().getFullYear())
+  $('#genki_month').html(new Date().getMonth())
+  $('#day_day').html(new Date().getDate())
+  $('#day').html(
+    ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()]
+  )
+
+  $(window).resize(() => {
+    var reszCk = resizeItemsCheck()
+    if (pageAdjust.onePageItems !== reszCk) {
+      pageAdjust.onePageItems = reszCk
+      ListsLoadDone()
+    }
+    pageAdjust.onePageItems = reszCk
+  })
+  pageAdjust.onePageItems = resizeItemsCheck()
 })

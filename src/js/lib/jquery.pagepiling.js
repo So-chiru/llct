@@ -21,7 +21,7 @@
         //Defines the delay to take place before being able to scroll to the next section
         //BE CAREFUL! Not recommened to change it under 400 for a good behavior in laptops and
         //Apple devices (laptops, mouses...)
-        var scrollDelay = 600;
+        var scrollDelay = 500;
 
         // Create some defaults, extending them with any options that were provided
         var options = $.extend(true, {
@@ -817,7 +817,9 @@
                     touchEndX = touchEvents.x;
 
                   //$('body').append('<span style="position:fixed; top: 250px; left: 20px; z-index:88; font-size: 25px; color: #000;">touchEndY: ' + touchEndY  + '</div>');
+                    console.log(e.target)
 
+                    // if (document.getElementsByClassName('full_page_ct').contains($(e.target))) return 0
                     //X movement bigger than Y movement?
                     if (options.direction === 'horizontal' && Math.abs(touchStartX - touchEndX) > (Math.abs(touchStartY - touchEndY))) {
                         //is the movement greater than the minimum resistance to scroll?

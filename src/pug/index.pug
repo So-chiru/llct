@@ -18,6 +18,8 @@ html.index
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.4/Pizzicato.min.js')
+    script(src='./js/lib/reverb.min.js')
     script(src='./js/lib/jquery.pagepiling.min.js')
     script(src='./js/new_index.min.js')
     script(src='./js/global.min.js')
@@ -35,7 +37,7 @@ html.index
             .full_page_ct
                 .header
                     .titles
-                        span 2019년 2월 17일
+                        span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
                         h1 노래 목록
                     .tabs
                         span.active 전체
@@ -46,24 +48,44 @@ html.index
                     div
                     div
                     div
-                button(onclick="yohane.loadPlay(10001)") Thank you, FRIENDS!!
+                .call_lists#call_lists
+    .player_bg(onclick="yohaneNoDOM.chiisakuni()")
     .player.hide
-        .info
-            img#album_meta.c.cover(src="/data/10082/bg.png")
-            .info_txts
-                p#title_meta.c.title Over The Next Rainbow
-                .c.diver
-                p#artist_meta.c.artist Saint Aqours Snow
-            .c.diver.after_div
-        .timeline
-            p#played_time.c 0 : 00
-            input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
-            p#left_time.c - 4 : 59
-        .ctrls
-            span#pp_btn.material-icons(onclick="yohane.toggle()") pause
-            span#stop_btn.material-icons(onclick="yohane.stop()") stop
+        .visible_dash
+            .info
+                img#album_meta.c.cover(src="/data/10082/bg.png")
+                .info_txts
+                    p#title_meta.c.title Over The Next Rainbow
+                    .c.diver
+                    p#artist_meta.c.artist Saint Aqours Snow
+                .c.diver.after_div
+            .timeline
+                p#played_time.c 0 : 00
+                input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
+                p#left_time.c - 4 : 59
+            .ctrls
+                span#pp_btn.material-icons(onclick="yohane.toggle()") pause
+                span#stop_btn.material-icons(onclick="yohane.stop()") stop
+        .karaoke
         audio#kara_audio
+    #PLEASE_STOP_USE_INTERNET_EXPLORER
+        h1 웹 개발자 혐오를 멈춰주세요
+        hr
+        h3 
+        | 인터넷 익스플로러 사용을 멈춰주세요.<br>
+        | 현재 익스플로러를 쓰고 계십니다. 뭔지 모르신다고요? 그러면 아래 버튼 중 아무거나 눌러서 인터넷 하실때 그걸로 쓰시는 것을 부탁드립니다.
+        | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
+        | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
+        | <br><br>
+        | 인터넷 익스플로러의 사용률은 2019년 1월 기준 7.94% 입니다. 그리고 점점 내려갈 예정이지요.<br>
+        | 인터넷 익스플로러가 좋지 않은 이유는 한정된 기능, 웹 표준을 벗어난 독자 규격, 마이크로소프트의 지원 중단등 여러가지가 있습니다.<br>
+        | 굳이 부드러운 엣지나 크롬, 파이어폭스를 나두고 인터넷 익스플로러를 쓸 이유가 있을까요?<br>
+        | 부탁드립니다. 웹 개발자 혐오를 멈춰주세요.
     // Global site tag (gtag.js) - Google Analytics
+    script.
+        /*
+         이 글을 보고 계신다면 Github (https://github.com/So-chiru/LLCT) 에서 기여를 고려 해주세요! 모든 종류의 수정을 환영합니다!
+        */
     script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
       window.dataLayer = window.dataLayer || [];
@@ -78,6 +100,8 @@ html.index
                 menu: null,
                 direction: 'vertical',
                 scrollingSpeed: 400,
+                keyboardScrolling: false,
+                loopTop: true,
                 easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
                 navigation: {
                     'textColor': '#323232',
@@ -87,6 +111,6 @@ html.index
                 },
                 anchors: ['main', 'lists'],
                 sectionsColor: ['#3b3b3b', (cookieYosoro.get('tatenshi') === 'true') ? '#3b3b3b' : '#fff'],
-                onLeave: (o,t,r) => { pagePlayerAnimation(o,t,r) }
+                onLeave: function(o,t,r) { pagePlayerAnimation(o,t,r) }
             });
         });
