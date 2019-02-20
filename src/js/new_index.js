@@ -1,7 +1,3 @@
-const pagePlayerAnimation = (index, nextIndex, direction) => {
-  yohane[nextIndex === 2 ? 'shokan' : 'giran']()
-}
-
 const timeString = sec => {
   sec = Math.floor(sec)
   return (
@@ -15,6 +11,7 @@ const timeString = sec => {
 let callLists = []
 let frameWorks
 let audioVolumeFrame = null
+let callReqAnimation
 let audioVolumeFunction = () => {}
 const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
 
@@ -44,6 +41,14 @@ let yohaneNoDOM = {
     $('.player').removeClass('dekai')
   },
 
+  enableLiveEffects: () => {
+    $('#live_btn').removeClass('in_active')
+  },
+
+  disableLiveEffects: () => {
+    $('#live_btn').addClass('in_active')
+  },
+
   initialize: id => {
     var meta = getFromLists(id)
 
@@ -71,8 +76,15 @@ let yohane = {
     yohaneNoDOM.giran()
     yohane.pause()
   },
-
+  audio_context:
+    window.AudioContext || window.webkitAudioContext
+      ? window.webkitAudioContext
+        ? new webkitAudioContext()
+        : new AudioContext()
+      : null,
   volumeStore: null,
+  liveEffectCry: false,
+  liveEffectStore: false,
   loaded: false,
 
   setVolume: v => {
@@ -86,8 +98,14 @@ let yohane = {
 
   fade: (from, to, duration, start, cb) => {
     if (audioVolumeFrame !== null) cancelAnimationFrame(audioVolumeFrame)
-    audioVolumeFunction = () => {
-      if (start + duration <= performance.now()) {
+
+    var oncdPrevVolume = yohane.player().volume / 2
+    audioVolumeFunction = force_stop => {
+      if (
+        start + duration <= performance.now() ||
+        force_stop === true ||
+        oncdPrevVolume === yohane.player().volume
+      ) {
         cancelAnimationFrame(audioVolumeFrame)
         if (typeof cb === 'function') cb()
         return
@@ -133,6 +151,104 @@ let yohane = {
     yohane.setVolume(
       yohane.player().volume + s > 1 ? 1 : yohane.player().volume + s
     ),
+
+  audioSource: null,
+  analyser: null,
+  buffers: null,
+  effectsArray: [],
+
+  liveEffects: () => {
+    if (yohane.audio_context === null) {
+      return logger(2, 's', 'yohane.audio_context is not defined. TATEN', 'e')
+    }
+    if (yohane.liveEffectStore) {
+      for (var i = 0; i < yohane.effectsArray.length; i++) {
+        yohane.effectsArray[i].disconnect()
+      }
+
+      if (yohane.audioSource) {
+        yohane.audioSource.connect(yohane.audio_context.destination)
+      }
+
+      yohane.liveEffectStore = false
+      yohaneNoDOM.disableLiveEffects()
+      return
+    }
+
+    if (!yohane.audioSource) {
+      yohane.audioSource = yohane.audio_context.createMediaElementSource(
+        yohane.player()
+      )
+    }
+
+    if (!yohane.effectsArray[0]) {
+      var highFilter = yohane.audio_context.createBiquadFilter()
+      highFilter.type = 'highshelf'
+      highFilter.frequency.value = 6000
+      highFilter.gain.value = 5
+      yohane.effectsArray.push(highFilter)
+    }
+
+    if (!yohane.effectsArray[1]) {
+      reverbjs.extend(yohane.audio_context)
+      var reverbNode = yohane.audio_context.createReverbFromUrl(
+        '/dome_SportsCentreUniversityOfYork.m4a',
+        () => {
+          reverbNode.connect(yohane.effectsArray[0])
+        }
+      )
+
+      yohane.effectsArray.push(reverbNode)
+    }
+
+    if (!yohane.buffers) {
+      yohane.analyser = yohane.audio_context.createAnalyser()
+      yohane.analyser.fftSize = 2048
+      yohane.buffers = new Float32Array(yohane.analyser.fftSize)
+    }
+
+    yohane.audioSource.connect(yohane.effectsArray[1])
+    yohane.effectsArray[1].connect(yohane.analyser)
+    yohane.analyser.connect(yohane.audio_context.destination)
+
+    yohane.liveEffectStore = true
+    yohaneNoDOM.enableLiveEffects()
+    yohane.callEmitter()
+  },
+
+  volumeAvr: 1,
+  waBall: 0,
+  callEmitter: () => {
+    if (!yohane.liveEffectStore || yohane.player().paused) {
+      if (callReqAnimation) cancelAnimationFrame(yohane.callEmitter)
+      return
+    }
+
+    callReqAnimation = requestAnimationFrame(yohane.callEmitter)
+    yohane.analyser.getFloatTimeDomainData(yohane.buffers)
+
+    let sumOfSquares = 0
+    for (let i = 0; i < yohane.buffers.length; i++) {
+      sumOfSquares += yohane.buffers[i] ** 2
+    }
+    var avgPowerDecibels = Math.log10(sumOfSquares / yohane.buffers.length) * 10
+
+    yohane.volumeAvr =
+      (yohane.volumeAvr + (sumOfSquares / yohane.buffers.length) * 10) / 2
+
+    if (yohane.volumeAvr < 0.01 && yohane.waBall < 80 && yohane.liveEffectCry) {
+      yohane.waBall++
+    }
+
+    if (yohane.waBall >= 80 && yohane.liveEffectCry) {
+      const source = yohane.audio_context.createBufferSource()
+      source.buffer = yohane.liveEffectCry
+      source.connect(yohane.audio_context.destination)
+      source.start()
+
+      yohane.waBall = 0
+    }
+  },
 
   play: force => {
     document.getElementById('pp_btn').innerHTML = 'pause'
@@ -190,6 +306,25 @@ let yohane = {
       return logger(2, 'r', e.message, 'e')
     }
 
+    if (yohane.audio_context === null) {
+      logger(
+        2,
+        'r',
+        "AudioContext API isn't supported on this browser, disabling Live performance feature.",
+        'w'
+      )
+    }
+
+    if (!yohane.liveEffectCry) {
+      window
+        .fetch('/test.mp3')
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => yohane.audio_context.decodeAudioData(arrayBuffer))
+        .then(audioBuffer => {
+          yohane.liveEffectCry = audioBuffer
+        })
+    }
+
     yohane.loaded = true
     yohaneNoDOM.initialize(id)
   },
@@ -199,6 +334,11 @@ let yohane = {
     yohane.play()
     yohaneNoDOM.dekekuni()
   }
+}
+
+const pagePlayerAnimation = (index, nextIndex, direction) => {
+  console.log(yohane)
+  yohane[nextIndex === 2 ? 'shokan' : 'giran']()
 }
 
 let getFromLists = id => {
@@ -279,6 +419,10 @@ let pageAdjust = {
     for (var i = 0; i <= pageAdjust.lists[pg].length; i++) {
       $('#call_lists').append(pageAdjust.lists[pg][i])
     }
+
+    window.lazyloadObj = new LazyLoad({
+      elements_selector: '.lazy'
+    })
   }
 }
 const addElementToPage = () => {}
@@ -297,7 +441,7 @@ const ListsLoadDone = () => {
       $(
         '<img id="' +
           curObj.id +
-          '_bgimg" src="' +
+          '_bgimg" class="lazy" data-src="' +
           (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
           'data/' +
           curObj.id +
@@ -364,22 +508,6 @@ const keys = {
   ]
 }
 
-const connectLiveActions = () => {
-  var audio = document.getElementById('kara_audio')
-  var context = new AudioContext()
-  reverbjs.extend(context)
-
-  var source = context.createMediaElementSource(audio)
-
-  var reverbUrl = '/dome_SportsCentreUniversityOfYork.m4a'
-  var reverbNode = context.createReverbFromUrl(reverbUrl, function () {
-    reverbNode.connect(context.destination)
-  })
-
-  source.connect(reverbNode)
-  audio.play()
-}
-
 $(document).ready(() => {
   // 인터넷 익스플로더 좀 쓰지 맙시다
   if (/* @cc_on!@ */ false || !!document.documentMode) {
@@ -428,6 +556,12 @@ $(document).ready(() => {
   $('#day').html(
     ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()]
   )
+
+  window.addEventListener('blur', () => {
+    if (audioVolumeFunction !== null && audioVolumeFrame !== null) {
+      audioVolumeFunction(true)
+    }
+  })
 
   $(window).resize(() => {
     var reszCk = resizeItemsCheck()

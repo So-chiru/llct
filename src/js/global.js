@@ -81,3 +81,10 @@ const kIntvlogger = (e, rs, msg, t) => {
 }
 
 window.logger = kIntvlogger
+
+window.dataLayer = window.dataLayer || []
+function gtag () {
+  dataLayer.push(arguments)
+}
+gtag('js', new Date())
+gtag('config', 'UA-111995531-2')

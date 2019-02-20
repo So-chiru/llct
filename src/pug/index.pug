@@ -17,14 +17,15 @@ html.index
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
+    script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.4/Pizzicato.min.js')
-    script(src='./js/lib/reverb.min.js')
-    script(src='./js/lib/jquery.pagepiling.min.js')
-    script(src='./js/new_index.min.js')
     script(src='./js/global.min.js')
+    script(async src='./js/lib/reverb.min.js')
     script(async src='./js/lib/chillout.min.js')
     script(async src='./js/karaoke.min.js')
+    script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
+    script(src='./js/lib/jquery.pagepiling.min.js')
+    script(src='./js/new_index.min.js')
   body
     .fullpage#fg_element
         .section.main
@@ -66,8 +67,10 @@ html.index
             .ctrls
                 span#pp_btn.material-icons(onclick="yohane.toggle()") pause
                 span#stop_btn.material-icons(onclick="yohane.stop()") stop
+                span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
         .karaoke
         audio#kara_audio
+    .offline_indicator
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 웹 개발자 혐오를 멈춰주세요
         hr
@@ -81,21 +84,13 @@ html.index
         | 인터넷 익스플로러가 좋지 않은 이유는 한정된 기능, 웹 표준을 벗어난 독자 규격, 마이크로소프트의 지원 중단등 여러가지가 있습니다.<br>
         | 굳이 부드러운 엣지나 크롬, 파이어폭스를 나두고 인터넷 익스플로러를 쓸 이유가 있을까요?<br>
         | 부탁드립니다. 웹 개발자 혐오를 멈춰주세요.
-    // Global site tag (gtag.js) - Google Analytics
     script.
         /*
          이 글을 보고 계신다면 Github (https://github.com/So-chiru/LLCT) 에서 기여를 고려 해주세요! 모든 종류의 수정을 환영합니다!
         */
-    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
-    script.
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-      dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'UA-111995531-2');
     script.
         $(document).ready(function() {
+            if (!navigator.onLine) $('.offline_indicator').addClass('show')
             $('#fg_element').pagepiling({
                 menu: null,
                 direction: 'vertical',
@@ -114,3 +109,12 @@ html.index
                 onLeave: function(o,t,r) { pagePlayerAnimation(o,t,r) }
             });
         });
+
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('/sw.js', { scope: '/' })
+                .then(() => {
+                    logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
+                })
+                .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
+        }
