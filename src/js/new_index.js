@@ -462,7 +462,7 @@ const ListsLoadDone = () => {
     pageAdjust.add(baseElement)
   }
 
-  pageAdjust.render()
+  pageAdjust.render(pageAdjust.lists.length - 1)
 }
 
 const resizeItemsCheck = () => {

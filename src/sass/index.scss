@@ -215,6 +215,7 @@ $medium: 1500px;
           grid-template-columns: repeat(1, 1fr);
 
           .card {
+            width: 95%;
             padding: 4% 2.5%;
           }
         }
@@ -292,7 +293,7 @@ $medium: 1500px;
     }
 
     .timeline {
-      width: 40%;
+      width: 50%;
       margin-left: 2%;
 
       .hareru {
@@ -360,6 +361,11 @@ $medium: 1500px;
         display: none;
       }
 
+      .visible_dash {
+        display: block;
+        text-align: center;
+      }
+
       .title,
       .artist {
         margin: 0 auto;
@@ -367,12 +373,18 @@ $medium: 1500px;
       }
 
       .info {
-        width: 60%;
-        margin-left: 5%;
+        width: 90%;
+        margin: auto;
+        margin-top: 2%;
+
+        img {
+          width: 70px;
+          height: 70px;
+        }
       }
 
       .title {
-        font-size: 14px;
+        font-size: 18px;
       }
 
       .artist {
