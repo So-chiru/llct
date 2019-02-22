@@ -1,23 +1,27 @@
-html.index
+html.index(amp)
   head
-    title LoveLive! Call Table
+    title LLCT
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='theme-color', content='#e039e0')
+    meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
+    meta(name="tags" )
     meta(meta name="apple-mobile-web-app-capable" content="yes")
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
     meta(meta name="application-name" content="러브라이브! 콜표")
+    
     link(rel="apple-touch-icon" href="/data/favicon/logo.png")
     link(rel="apple-touch-startup-image" href="https://cdn.lovelivec.kr/data/splash.png")
-    link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.css')
+    link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='shortcut icon', href='https://cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua')
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
+    script(async src="https://cdn.ampproject.org/v0.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
     script(async src='./js/lib/reverb.min.js')
@@ -50,11 +54,14 @@ html.index
                     div
                     div
                 .call_lists#call_lists
+                .navigator
+                    span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
+                    span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
     .player.hide
         .visible_dash
             .info
-                img#album_meta.c.cover(src="/data/10082/bg.png")
+                img#album_meta.c.cover
                 .info_txts
                     p#title_meta.c.title Over The Next Rainbow
                     .c.diver
@@ -68,7 +75,14 @@ html.index
                 span#pp_btn.material-icons(onclick="yohane.toggle()") pause
                 span#stop_btn.material-icons(onclick="yohane.stop()") stop
                 span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-        .karaoke
+                span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
+                
+        .lyrics_wrapper
+            p
+              | 블레이드 색상 :
+              span#blade_color 자유
+            .karaoke#karaoke
+
         audio#kara_audio
     .offline_indicator
     #PLEASE_STOP_USE_INTERNET_EXPLORER
@@ -80,10 +94,7 @@ html.index
         | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
         | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
         | <br><br>
-        | 인터넷 익스플로러의 사용률은 2019년 1월 기준 7.94% 입니다. 그리고 점점 내려갈 예정이지요.<br>
-        | 인터넷 익스플로러가 좋지 않은 이유는 한정된 기능, 웹 표준을 벗어난 독자 규격, 마이크로소프트의 지원 중단등 여러가지가 있습니다.<br>
-        | 굳이 부드러운 엣지나 크롬, 파이어폭스를 나두고 인터넷 익스플로러를 쓸 이유가 있을까요?<br>
-        | 부탁드립니다. 웹 개발자 혐오를 멈춰주세요.
+        | 절.대 크.롬.해
     script.
         /*
          이 글을 보고 계신다면 Github (https://github.com/So-chiru/LLCT) 에서 기여를 고려 해주세요! 모든 종류의 수정을 환영합니다!
@@ -106,7 +117,9 @@ html.index
                 },
                 anchors: ['main', 'lists'],
                 sectionsColor: ['#3b3b3b', (cookieYosoro.get('tatenshi') === 'true') ? '#3b3b3b' : '#fff'],
-                onLeave: function(o,t,r) { pagePlayerAnimation(o,t,r) }
+                onLeave: function(o,t,r) {
+                    pagePlayerAnimation(o,t,r)
+                }
             });
         });
 

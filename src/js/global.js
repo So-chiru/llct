@@ -31,6 +31,74 @@ var urlQueryParams = function (name) {
     : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
+let Sakurauchi = {
+  __sot: {},
+  add: (k, fn) => {
+    if (!Sakurauchi.__sot[k]) {
+      Sakurauchi.__sot[k] = []
+    }
+
+    if (typeof fn !== 'function') throw 'Second parameter is not a function.'
+
+    Sakurauchi.__sot[k].push(fn)
+
+    return Sakurauchi.__sot[k].length - 1
+  },
+
+  remove: (k, fi) => {
+    if (typeof fi !== 'undefined') {
+      return Sakurauchi.__sot[k].splice(fi, 1)
+    }
+
+    for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
+      Sakurauchi.__sot[k].splice(_i, 1)
+    }
+  },
+
+  listen: (k, fn, pr) => {
+    if (typeof pr === 'undefined') pr = window
+
+    if (k.constructor === Array) {
+      for (var i = 0; i < k.length; i++) {
+        Sakurauchi.listen(k[i], fn, pr)
+      }
+      return
+    }
+
+    pr.addEventListener(k, () => Sakurauchi.run(k))
+    return Sakurauchi.add(k, fn)
+  },
+
+  delisten: (k, fi, pr) => {
+    if (typeof pr === 'undefined') pr = window
+
+    if (k.constructor === Array) {
+      for (var i = 0; i < k.length; i++) {
+        Sakurauchi.delisten(k[i], fi, pr)
+      }
+      return
+    }
+
+    pr.removeEventListener(k)
+    return Sakurauchi.remove(k, fi)
+  },
+
+  run: (k, ...datas) => {
+    logger(2, 's', 'Sakurauchi.run called : ' + k)
+    for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
+      try {
+        Sakurauchi.__sot[k][_i](datas)
+      } catch (e) {
+        logger(
+          2,
+          's',
+          '[' + k + '] Error occured while running task #' + _i + ' : ' + e.msg
+        )
+      }
+    }
+  }
+}
+
 $(document).ready(() => {
   if (cookieYosoro.get('tatenshi') === 'true') $(document.body).addClass('dark')
 })

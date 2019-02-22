@@ -38,6 +38,7 @@
     "gulp-uglifycss": "^1.1.0",
     "gulp-util": "^3.0.8",
     "gulp-webserver": "^0.9.1",
+    "jpegtran-bin": "^4.0.0",
     "node-sass": "^4.11.0"
   }
 }
