@@ -993,7 +993,7 @@
     },
     {
       "start_time": 5306,
-      "end_time": 100,
+      "end_time": 5895,
       "collection": [
         {
           "text": "아",
@@ -1794,7 +1794,7 @@
     },
     {
       "start_time": 8793,
-      "end_time": 100,
+      "end_time": 9435,
       "collection": [
         {
           "text": "제",
@@ -2127,7 +2127,7 @@
     },
     {
       "start_time": 10496,
-      "end_time": 100,
+      "end_time": 11007,
       "collection": [
         {
           "text": "ZE",
@@ -2333,8 +2333,8 @@
       ]
     },
     {
-      "start_time": -100,
-      "end_time": 100,
+      "start_time": 11200,
+      "end_time": 12678,
       "collection": [
         {
           "text": "<간주 ",
@@ -3197,7 +3197,7 @@
     },
     {
       "start_time": 15477,
-      "end_time": 100,
+      "end_time": 16271,
       "collection": [
         {
           "text": "우",
@@ -3425,7 +3425,7 @@
     },
     {
       "start_time": 16623,
-      "end_time": 100,
+      "end_time": 17256,
       "collection": [
         {
           "text": "제",
@@ -5240,8 +5240,8 @@
       ]
     },
     {
-      "start_time": -100,
-      "end_time": 100,
+      "start_time": 0,
+      "end_time": 0,
       "collection": [
         {
           "text": "",
@@ -5253,29 +5253,29 @@
       ]
     },
     {
-      "start_time": -100,
-      "end_time": 100,
+      "start_time": 26056,
+      "end_time": 28009,
       "collection": [
         {
           "text": "<간주 ",
           "start_time": 0,
           "end_time": 0,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 3
         },
         {
           "text": "부분 ",
           "start_time": 0,
           "end_time": 0,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 3
         },
         {
           "text": ": ",
           "start_time": 0,
           "end_time": 0,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 3
         },
         {
           "text": "하이 ",
@@ -5324,7 +5324,7 @@
           "start_time": 0,
           "end_time": 0,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 3
         }
       ]
     }
