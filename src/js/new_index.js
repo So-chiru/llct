@@ -58,7 +58,8 @@ const loadLyrics = (id, obj) => {
     }
   })
 
-  window.addEventListener('KaraokeSelection', function (e) {
+  Sakurauchi.remove('KaraokeSelection')
+  Sakurauchi.add('KaraokeSelection', e => {
     document.getElementById('kara_audio').currentTime =
       karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
         100 -
@@ -266,7 +267,7 @@ let yohane = {
     if (!yohane.effectsArray[1]) {
       reverbjs.extend(yohane.audio_context)
       var reverbNode = yohane.audio_context.createReverbFromUrl(
-        '/LadyChapelStAlbansCathedral.m4a',
+        '/Sochiru.wav',
         () => {
           reverbNode.connect(yohane.effectsArray[0])
         }
@@ -293,7 +294,11 @@ let yohane = {
   volumeAvr: 1,
   waBall: 0,
   callEmitter: () => {
-    if (!yohane.liveEffectStore || yohane.player().paused) {
+    if (
+      !yohane.liveEffectStore ||
+      yohane.player().paused ||
+      typeof yohane.analyser['getFloatTimeDomainData'] === 'undefined'
+    ) {
       if (callReqAnimation) cancelAnimationFrame(yohane.callEmitter)
       return
     }
@@ -420,7 +425,6 @@ let yohane = {
 }
 
 const pagePlayerAnimation = (index, nextIndex, direction) => {
-  console.log(yohane)
   yohane[nextIndex === 2 ? 'shokan' : 'giran']()
 }
 
@@ -473,10 +477,7 @@ let pageAdjust = {
   },
 
   setPage: s => {
-    if (
-      pageAdjust.currentPage + s > pageAdjust.lists.length ||
-      pageAdjust.current + s < 0
-    ) {
+    if (s >= pageAdjust.lists.length || s <= 0) {
       return 0
     }
 

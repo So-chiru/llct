@@ -118,14 +118,15 @@ $medium: 1500px;
 
         @media screen and (max-width: $small) {
           .titles {
+            margin-left: 5%;
             grid-template-columns: auto;
 
             span {
-              font-size: 10px;
+              font-size: 12px;
             }
 
             h1 {
-              font-size: 25px;
+              font-size: 28px;
             }
           }
 
@@ -376,6 +377,10 @@ $medium: 1500px;
         display: none;
       }
 
+      .diver {
+        display: none;
+      }
+
       .visible_dash {
         display: block;
         text-align: center;
@@ -398,12 +403,12 @@ $medium: 1500px;
         }
       }
 
-      .title {
-        font-size: 14px;
+      .timeline {
+        display: none;
       }
 
-      .title.dekakuni {
-        font-size: 18px;
+      .title {
+        font-size: 14px;
       }
 
       .artist {
@@ -415,13 +420,26 @@ $medium: 1500px;
         font-size: 12px;
       }
 
-      .dekakuni {
+      .dekai {
         .info {
           img {
             width: 70px;
             height: 70px;
           }
         }
+
+        .title {
+          font-size: 18px;
+        }
+
+        .timeline {
+          display: block;
+        }
+      }
+
+      .karaoke {
+        position: absolute;
+        margin-bottom: 10%;
       }
 
       .info_txts {
@@ -481,7 +499,7 @@ $medium: 1500px;
       overflow: auto;
       top: 90px;
       height: 80%;
-      width: 98%;
+      width: 100%;
       margin: 0;
     }
 
@@ -621,7 +639,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 }
 
 .lyrics {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 100;
   font-family: "Jua";
 }

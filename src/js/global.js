@@ -50,6 +50,12 @@ let Sakurauchi = {
       return Sakurauchi.__sot[k].splice(fi, 1)
     }
 
+    if (
+      typeof Sakurauchi.__sot[k] === 'undefined' ||
+      Sakurauchi.__sot[k] === null
+    ) {
+      return 0
+    }
     for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
       Sakurauchi.__sot[k].splice(_i, 1)
     }
@@ -87,12 +93,18 @@ let Sakurauchi = {
     logger(2, 's', 'Sakurauchi.run called : ' + k)
     for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
       try {
-        Sakurauchi.__sot[k][_i](datas)
+        Sakurauchi.__sot[k][_i](...datas)
       } catch (e) {
         logger(
           2,
           's',
-          '[' + k + '] Error occured while running task #' + _i + ' : ' + e.msg
+          '[' +
+            k +
+            '] Error occured while running task #' +
+            _i +
+            ' : ' +
+            e.message,
+          'e'
         )
       }
     }

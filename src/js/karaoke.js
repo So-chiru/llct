@@ -35,10 +35,6 @@ var SleepCounts = 0
 var Karaoke = {
   TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
   CallSoundElement: null,
-  Read: function (lines) {
-    if (typeof lines !== 'object') throw Error('Not valid Karaoke JSON type.')
-    lines.forEach(element => {})
-  },
 
   SpaParsing: function (spa, c, spacing) {
     var wordObject = {
@@ -52,16 +48,6 @@ var Karaoke = {
     c.push(wordObject)
   },
 
-  SetData: function (data) {
-    window.karaokeData = data
-    Karaoke.RenderDOM()
-    Karaoke.startEndOpti()
-  },
-
-  SetMetaData: function (data) {
-    window.karaokeData.metadata = data
-  },
-
   SetTimelineData: function (data) {
     window.karaokeData.timeline = data
     Karaoke.RenderDOM()
@@ -69,9 +55,7 @@ var Karaoke = {
   },
 
   SelectWord: function (posX, posY, element) {
-    window.dispatchEvent(
-      new CustomEvent('KaraokeSelection', { detail: { posX, posY, element } })
-    )
+    Sakurauchi.run('KaraokeSelection', { detail: { posX, posY, element } })
   },
 
   CompareArray: (a, b) => {
@@ -248,13 +232,18 @@ var Karaoke = {
         '</div>'
     })
 
-    $('#karaoke').html(inserts)
+    document.getElementById('karaoke').innerHTML = inserts
   },
 
   clearSync: function (aftFunc) {
-    $('.lyrics').each(function (index, value) {
-      value.className = value.className.replace('currentSync', '')
-    })
+    var lyricsElement = document.getElementsByClassName('.lyrics')
+
+    for (var dk = 0; dk < lyricsElement.length; dk++) {
+      lyricsElement[dk].className = lyricsElement[dk].className.replace(
+        /\scurrentSync/g,
+        ''
+      )
+    }
 
     if (typeof aftFunc === 'function') {
       aftFunc()
@@ -278,13 +267,16 @@ var Karaoke = {
         var kards = document.getElementById(
           'kara_' + karaLineNum + '_' + karaWordNum
         )
-        kards.classList.toggle(
-          'josenPassing',
+        kards.classList[
           timeCode > karaWord.start_time && timeCode > karaWord.end_time
-        )
+            ? 'add'
+            : 'remove'
+        ]('josenPassing')
 
-        if (kards.className.indexOf('currentSync') === -1) {
-          kards.classList.toggle('currentSync', timeCode > karaWord.start_time)
+        if (!/currentSync/g.test(kards.className)) {
+          kards.classList[timeCode > karaWord.start_time ? 'add' : 'remove'](
+            'currentSync'
+          )
           var karaokeDuration =
             typeof karaWord.pronunciation_time === 'undefined' ||
             karaWord.pronunciation_time === 0
@@ -305,19 +297,12 @@ var Karaoke = {
         }
 
         if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
-          kards.className = kards.className.replace(' currentSync', '')
+          kards.className = kards.className.replace(/\scurrentSync/g, '')
           kards.style.transition = ''
         }
       })
     })
   }
 }
-
-$(document).ready(function () {
-  Karaoke._cse = document.createElement('audio')
-
-  // Karaoke._cse.src = '//cdn.lovelivec.kr/assets/tick.mp3'
-  Karaoke._cse.load()
-})
 
 window.Karaoke = Karaoke
