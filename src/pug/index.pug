@@ -46,8 +46,8 @@ html.index(amp)
                         h1 노래 목록
                     .tabs
                         span.active 전체
-                        span 라이브
-                        span 추천
+                        span(onclick="alert('현재 개발 중입니다.');") 라이브
+                        span(onclick="alert('현재 개발 중입니다.');") 추천
                 .lds-ellipsis.loader#loading_spin_ctlst
                     div
                     div
@@ -56,6 +56,7 @@ html.index(amp)
                 .call_lists#call_lists
                 .navigator
                     span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
+                    span.pg_ind <span id="currentPage">1</span> / <span id="nextPage">6</span>
                     span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
     .player.hide
@@ -93,33 +94,26 @@ html.index(amp)
         | 현재 익스플로러를 쓰고 계십니다. 뭔지 모르신다고요? 그러면 아래 버튼 중 아무거나 눌러서 인터넷 하실때 그걸로 쓰시는 것을 부탁드립니다.
         | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
         | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
-        | <br><br>
-        | 절.대 크.롬.해
-    script.
-        /*
-         이 글을 보고 계신다면 Github (https://github.com/So-chiru/LLCT) 에서 기여를 고려 해주세요! 모든 종류의 수정을 환영합니다!
-        */
     script.
         $(document).ready(function() {
             if (!navigator.onLine) $('.offline_indicator').addClass('show')
-            $('#fg_element').pagepiling({
+             $('#fg_element').pagepiling({
                 menu: null,
                 direction: 'vertical',
                 scrollingSpeed: 400,
+                css3: true,
                 keyboardScrolling: false,
                 loopTop: true,
                 easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
-                navigation: {
-                    'textColor': '#323232',
-                    'bulletsColor': '#323232',
-                    'position': 'right',
-                    'tooltips': ['메인', '노래 목록']
-                },
+                navigation: false,
+                normalScrollElements: ['.call_lists', ''],
+                touchSensitivity: 30,
                 anchors: ['main', 'lists'],
+                normalScrollElementTouchThreshold: 5,
                 sectionsColor: ['#3b3b3b', (cookieYosoro.get('tatenshi') === 'true') ? '#3b3b3b' : '#fff'],
                 onLeave: function(o,t,r) {
                     pagePlayerAnimation(o,t,r)
-                }
+                },
             });
         });
 

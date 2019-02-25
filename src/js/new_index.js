@@ -543,6 +543,12 @@ const resizeItemsCheck = () => {
 }
 
 const keys = {
+  27: [
+    e => {
+      yohaneNoDOM.chiisakuni()
+    },
+    true
+  ],
   32: [
     e => {
       yohane.toggle()

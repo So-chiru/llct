@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'desuwa_a0004',
+  version: 'desuwa_a0009',
   urls: [
     '/',
     '/index.html',
