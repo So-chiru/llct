@@ -25,6 +25,7 @@ html.index(amp)
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
     script(async src='./js/lib/reverb.min.js')
+    script(async src='./js/lib/hammer.min.js')
     script(async src='./js/lib/chillout.min.js')
     script(async src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
@@ -46,8 +47,8 @@ html.index(amp)
                         h1 노래 목록
                     .tabs
                         span.active 전체
-                        span(onclick="alert('현재 개발 중입니다.');") 라이브
-                        span(onclick="alert('현재 개발 중입니다.');") 추천
+                        span(onclick="alert('이미 선택된 좌석입니다.');") 라이브
+                        span(onclick="alert('이미 선택된 좌석입니다.');") 추천
                 .lds-ellipsis.loader#loading_spin_ctlst
                     div
                     div
@@ -56,10 +57,10 @@ html.index(amp)
                 .call_lists#call_lists
                 .navigator
                     span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
-                    span.pg_ind <span id="currentPage">1</span> / <span id="nextPage">6</span>
+                    span.pg_ind <span id="currentPage">1</span> / <span id="totalPage">6</span>
                     span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
-    .player.hide
+    #kara_player.player.hide
         .visible_dash
             .info
                 img#album_meta.c.cover
@@ -74,7 +75,6 @@ html.index(amp)
                 p#left_time.c - 4 : 59
             .ctrls
                 span#pp_btn.material-icons(onclick="yohane.toggle()") pause
-                span#stop_btn.material-icons(onclick="yohane.stop()") stop
                 span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
                 span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
                 

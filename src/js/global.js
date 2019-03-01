@@ -62,7 +62,7 @@ let Sakurauchi = {
   },
 
   listen: (k, fn, pr) => {
-    if (typeof pr === 'undefined') pr = window
+    if (typeof pr === 'undefined' || pr == null) pr = window
 
     if (k.constructor === Array) {
       for (var i = 0; i < k.length; i++) {
@@ -71,12 +71,12 @@ let Sakurauchi = {
       return
     }
 
-    pr.addEventListener(k, () => Sakurauchi.run(k))
+    pr.addEventListener(k, (...evs) => Sakurauchi.run(k, ...evs))
     return Sakurauchi.add(k, fn)
   },
 
   delisten: (k, fi, pr) => {
-    if (typeof pr === 'undefined') pr = window
+    if (typeof pr === 'undefined' || pr == null) pr = window
 
     if (k.constructor === Array) {
       for (var i = 0; i < k.length; i++) {

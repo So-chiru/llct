@@ -440,10 +440,11 @@ let pageAdjust = {
   onePageItems: 12,
   currentPage: 0,
   remove: () => {},
+  cListsElement: null,
 
   add: item => {
     if (pageAdjust.lists.length === 0) {
-      pageAdjust.lists[0] = item
+      pageAdjust.lists[0] = [item]
       return
     }
 
@@ -460,29 +461,82 @@ let pageAdjust = {
         continue
       }
 
-      pageAdjust.lists[i].push(item[0])
+      pageAdjust.lists[i].push(item)
     }
   },
 
   render: pg => {
-    $('#call_lists').html('')
-    if (!pg) pg = 0
-    for (var i = 0; i <= pageAdjust.lists[pg].length; i++) {
-      $('#call_lists').append(pageAdjust.lists[pg][i])
+    if (pageAdjust.cListsElement === null) {
+      pageAdjust.cListsElement = document.getElementById('call_lists')
     }
+    pageAdjust.cListsElement.innerHTML = ''
+
+    if (!pg) pg = 0
+
+    var docFrag = document.createDocumentFragment()
+    var ls = pageAdjust.lists[pg].length
+    for (var i = 0; i <= ls; i++) {
+      if (typeof pageAdjust.lists[pg][i] !== 'undefined') {
+        docFrag.appendChild(pageAdjust.lists[pg][i])
+      }
+    }
+    pageAdjust.cListsElement.appendChild(docFrag)
 
     window.lazyloadObj = new LazyLoad({
       elements_selector: '.lazy'
     })
+    document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
+  },
+
+  buildPage: () => {
+    var objKeys = Object.keys(callLists)
+    pageAdjust.lists = []
+
+    for (var i = 0; i < objKeys.length; i++) {
+      var curObj = callLists[objKeys[i]]
+      var baseElement = document.createElement('div')
+      baseElement.className = 'card'
+      baseElement.setAttribute('onclick', 'yohane.loadPlay(' + curObj.id + ')')
+
+      var c = document.createDocumentFragment()
+
+      var artImage = document.createElement('img')
+      artImage.id = curObj.id + '_bgimg'
+      artImage.className = 'lazy'
+      artImage.dataset.src =
+        (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+        'data/' +
+        curObj.id +
+        '/bg.png'
+
+      c.appendChild(artImage)
+
+      var titleText = document.createElement('h3')
+      titleText.className = 'txt'
+      titleText.innerText =
+        cookieYosoro.get('mikan') === 'true'
+          ? curObj.translated || objKeys[i]
+          : objKeys[i]
+
+      c.appendChild(titleText)
+      baseElement.appendChild(c)
+
+      pageAdjust.add(baseElement)
+    }
+
+    pageAdjust.setPage(0)
   },
 
   setPage: s => {
-    if (s >= pageAdjust.lists.length || s <= 0) {
+    if (s >= pageAdjust.lists.length || s < 0) {
       return 0
     }
 
     pageAdjust.currentPage = s
     pageAdjust.render(pageAdjust.currentPage)
+
+    document.getElementById('currentPage').innerHTML =
+      pageAdjust.currentPage + 1
   },
 
   nextPage: () => {
@@ -492,44 +546,6 @@ let pageAdjust = {
   prevPage: () => {
     return pageAdjust.setPage(pageAdjust.currentPage - 1)
   }
-}
-
-const ListsLoadDone = () => {
-  var objKeys = Object.keys(callLists)
-  pageAdjust.lists = []
-
-  for (var i = 0; i < objKeys.length; i++) {
-    var curObj = callLists[objKeys[i]]
-    var baseElement = $(
-      '<div class="card" onclick="yohane.loadPlay(' + curObj.id + ')"></div>'
-    )
-
-    baseElement.append(
-      $(
-        '<img id="' +
-          curObj.id +
-          '_bgimg" class="lazy" data-src="' +
-          (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
-          'data/' +
-          curObj.id +
-          '/bg.png"></img>'
-      )
-    )
-
-    baseElement.append(
-      $(
-        '<h3 class="txt">' +
-          (cookieYosoro.get('mikan') === 'true'
-            ? curObj.translated || objKeys[i]
-            : objKeys[i]) +
-          '</h3>'
-      )
-    )
-
-    pageAdjust.add(baseElement)
-  }
-
-  pageAdjust.render(0)
 }
 
 const resizeItemsCheck = () => {
@@ -547,7 +563,7 @@ const keys = {
     e => {
       yohaneNoDOM.chiisakuni()
     },
-    true
+    false
   ],
   32: [
     e => {
@@ -616,11 +632,21 @@ $(document).ready(() => {
     yohane.player()
   )
 
-  window.addEventListener('keydown', ev => {
+  Sakurauchi.listen('keydown', ev => {
     logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
     if (typeof keys[ev.keyCode] === 'undefined') return 0
     keys[ev.keyCode][0](ev)
     if (keys[ev.keyCode][1]) ev.preventDefault()
+  })
+
+  window.hammer = new Hammer(document.getElementById('kara_player'), {})
+  hammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+  hammer.on('swipe', ev => {
+    if (ev.direction === 16) {
+      yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohane.giran()
+    } else if (ev.direction === 8) {
+      yohaneNoDOM.dekakuni()
+    }
   })
 
   $.ajax({
@@ -636,7 +662,7 @@ $(document).ready(() => {
 
       callLists = d
       $('#loading_spin_ctlst').addClass('done')
-      ListsLoadDone()
+      pageAdjust.buildPage()
     },
     error: function (err) {
       logger(2, 'r', err.message, 'e')
@@ -644,7 +670,7 @@ $(document).ready(() => {
   })
 
   $('#genki_year').html(new Date().getFullYear())
-  $('#genki_month').html(new Date().getMonth())
+  $('#zenkai_month').html(new Date().getMonth())
   $('#day_day').html(new Date().getDate())
   $('#day').html(
     ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()]
@@ -662,12 +688,11 @@ $(document).ready(() => {
       audioVolumeFunction(true)
     }
   })
-
   $(window).resize(() => {
     var reszCk = resizeItemsCheck()
     if (pageAdjust.onePageItems !== reszCk) {
       pageAdjust.onePageItems = reszCk
-      ListsLoadDone()
+      pageAdjust.buildPage()
     }
     pageAdjust.onePageItems = reszCk
   })
