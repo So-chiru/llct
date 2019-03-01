@@ -117,11 +117,15 @@ html.index(amp)
             });
         });
 
-        if('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('/sw.js', { scope: '/' })
-                .then(() => {
-                    logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
-                })
-                .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
-        }
+        // TODO : Fix service worker.
+
+        /*
+            if('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('/sw.js', { scope: '/' })
+                    .then(() => {
+                        logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
+                    })
+                    .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
+            }
+        */
