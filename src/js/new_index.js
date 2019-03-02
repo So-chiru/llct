@@ -18,7 +18,12 @@ const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
 const loadCallImage = id => {
   window.karaokeData = null
   $('#karaoke').html(
-    '<div></div><h3>싱크 없음</h3><p>해당 악곡은 아직 싱크가 완성되지 않았습니다.</p>'
+    '<img class="call_img" src="' +
+      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+      'data/' +
+      id +
+      '/call.jpg' +
+      '"></img>'
   )
 
   /* <img class="call_img" src="' +
@@ -697,4 +702,5 @@ $(document).ready(() => {
     pageAdjust.onePageItems = reszCk
   })
   pageAdjust.onePageItems = resizeItemsCheck()
+  $('#curt').addClass('hide_curtain')
 })

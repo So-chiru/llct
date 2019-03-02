@@ -1,4 +1,4 @@
-html.index(amp)
+html.index
   head
     title LLCT
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
@@ -10,69 +10,66 @@ html.index(amp)
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
     meta(meta name="application-name" content="러브라이브! 콜표")
-    
     link(rel="apple-touch-icon" href="/data/favicon/logo.png")
     link(rel="apple-touch-startup-image" href="https://cdn.lovelivec.kr/data/splash.png")
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.css')
     link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='shortcut icon', href='https://cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
-    script(async src="https://cdn.ampproject.org/v0.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
+    script(src='./js/new_index.min.js')
+    script(src='./js/lib/hammer.min.js')
     script(async src='./js/lib/reverb.min.js')
-    script(async src='./js/lib/hammer.min.js')
     script(async src='./js/lib/chillout.min.js')
     script(async src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
-    script(src='./js/lib/jquery.pagepiling.min.js')
-    script(src='./js/new_index.min.js')
+    style.
+        .hide_curtain {opacity:0;visibility: none;pointer-events: none;}
   body
-    .fullpage#fg_element
-        .section.main
-            .main_contents
-                h1 LLCT
-                svg.line_svg(data-type="Line")
-                    path.line_svg_class#__3(d="M 0 0 L 323 0")
-                h3 LoveLive! Call Table Guide
-        .section.lists
-            .full_page_ct
-                .header
-                    .titles
-                        span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
-                        h1 노래 목록
-                    .tabs
-                        span.active 전체
-                        span(onclick="alert('이미 선택된 좌석입니다.');") 라이브
-                        span(onclick="alert('이미 선택된 좌석입니다.');") 추천
-                .lds-ellipsis.loader#loading_spin_ctlst
-                    div
-                    div
-                    div
-                    div
-                .call_lists#call_lists
-                .navigator
-                    span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
-                    span.pg_ind <span id="currentPage">1</span> / <span id="totalPage">6</span>
-                    span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
+    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:100;transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);")
+        .inr
+            h1 LLCT
+            svg.line_svg(data-type="Line")
+                path.line_svg_class#__3(d="M 0 0 L 323 0")
+            h3 LoveLive! Call Table Guide
+    .contents_collection
+        .full_page_ct
+            .header
+                .titles
+                    span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
+                    h1 노래 목록
+                .tabs
+                    span.active 전체
+                    span(onclick="alert('이미 선택된 좌석입니다.');") 라이브
+                    span(onclick="alert('이미 선택된 좌석입니다.');") 추천
+            .lds-ellipsis.loader#loading_spin_ctlst
+                div
+                div
+                div
+                div
+            .call_lists#call_lists
+            .navigator
+                span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
+                span.pg_ind <span id="currentPage">1</span> <span>/</span> <span id="totalPage">6</span>
+                span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
     #kara_player.player.hide
         .visible_dash
             .info
                 img#album_meta.c.cover
                 .info_txts
-                    p#title_meta.c.title Over The Next Rainbow
+                    p#title_meta.c.title 브로콜리
                     .c.diver
-                    p#artist_meta.c.artist Saint Aqours Snow
+                    p#artist_meta.c.artist 세이라
                 .c.diver.after_div
             .timeline
-                p#played_time.c 0 : 00
+                p#played_time.c.mga 0 : 00
                 input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
-                p#left_time.c - 4 : 59
+                p#left_time.c.mga - 4 : 59
             .ctrls
                 span#pp_btn.material-icons(onclick="yohane.toggle()") pause
                 span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
@@ -85,47 +82,20 @@ html.index(amp)
             .karaoke#karaoke
 
         audio#kara_audio
-    .offline_indicator
     #PLEASE_STOP_USE_INTERNET_EXPLORER
-        h1 웹 개발자 혐오를 멈춰주세요
+        h1 깨진 레이아웃이 보이죠?
         hr
         h3 
         | 인터넷 익스플로러 사용을 멈춰주세요.<br>
-        | 현재 익스플로러를 쓰고 계십니다. 뭔지 모르신다고요? 그러면 아래 버튼 중 아무거나 눌러서 인터넷 하실때 그걸로 쓰시는 것을 부탁드립니다.
+        | 현재 익스플로러를 쓰고 계십니다. 크롬을 쓰기만 해도 얼마나 빨리지는지 아시는가요
         | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
         | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
-    script.
-        $(document).ready(function() {
-            if (!navigator.onLine) $('.offline_indicator').addClass('show')
-             $('#fg_element').pagepiling({
-                menu: null,
-                direction: 'vertical',
-                scrollingSpeed: 400,
-                css3: true,
-                keyboardScrolling: false,
-                loopTop: true,
-                easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
-                navigation: false,
-                normalScrollElements: ['.call_lists', ''],
-                touchSensitivity: 30,
-                anchors: ['main', 'lists'],
-                normalScrollElementTouchThreshold: 5,
-                sectionsColor: ['#3b3b3b', (cookieYosoro.get('tatenshi') === 'true') ? '#3b3b3b' : '#fff'],
-                onLeave: function(o,t,r) {
-                    pagePlayerAnimation(o,t,r)
-                },
-            });
-        });
-
-        // TODO : Fix service worker.
-
-        /*
-            if('serviceWorker' in navigator) {
-                navigator.serviceWorker
-                    .register('/sw.js', { scope: '/' })
-                    .then(() => {
-                        logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
-                    })
-                    .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
-            }
-        */
+    // TODO : Fix service worker.
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('/sw.js', { scope: '/' })
+                .then(() => {
+                    logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
+                })
+                .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
+        }

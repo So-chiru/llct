@@ -2,20 +2,21 @@ $small: 800px;
 $medium: 1500px;
 
 body {
+  margin: 0;
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.main {
+.loader_curtain {
   background-image: url("/data/background.png");
   background-attachment: fixed;
   background-position: center;
-  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.main_contents {
-  z-index: 10;
+.inr {
+  margin: auto;
+  position: relative;
   text-align: center;
 
   h1 {
@@ -32,7 +33,7 @@ body {
     margin: 0;
     margin-top: 23px;
     letter-spacing: 3px;
-    color: rgb(245, 245, 245);
+    color: white;
   }
 }
 
@@ -53,10 +54,18 @@ body {
   shape-rendering: auto;
 }
 
+.contents_collection {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
 .full_page_ct {
+  position: relative;
   width: 92%;
   height: 90%;
   margin: auto;
+  margin-top: 2.5%;
 
   @media screen and (max-width: $medium) {
     width: 95%;
@@ -122,7 +131,7 @@ body {
 
 @media screen and (max-width: $small) {
   .titles {
-    margin-left: 5%;
+    margin-left: 2.5%;
     grid-template-columns: auto;
 
     span {
@@ -262,7 +271,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(50, 50, 50, 0.5);
-  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .player {
@@ -276,7 +285,7 @@ body {
   z-index: 100;
   box-shadow: 0px -4px 12px rgba(207, 207, 207, 0.16);
   font-size: 16px;
-  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: color 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .visible_dash {
@@ -400,9 +409,13 @@ body {
   height: 80%;
   width: 100%;
   margin: 0;
-}
 
-.karaoke {
+  .dekai {
+    @media screen and (max-width: $small) {
+      top: 30%;
+      height: 60%;
+    }
+  }
 }
 
 .line_num {
@@ -483,6 +496,8 @@ body {
 
   .dekai {
     .info {
+      width: 100%;
+
       img {
         width: 70px;
         height: 70px;
@@ -494,7 +509,7 @@ body {
     }
 
     .timeline {
-      display: block;
+      display: flex;
     }
   }
 
@@ -541,7 +556,7 @@ body {
 
 input[type="range"].hareru {
   -webkit-appearance: none;
-  width: 100%;
+  width: 80%;
   margin: 7px 0;
 }
 input[type="range"].hareru:focus {
@@ -648,9 +663,11 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   margin-top: 25px;
   justify-content: center;
   vertical-align: middle;
+  user-select: none;
 
   .arrow_btn {
     font-size: 50px;
+    margin-top: 10px;
   }
 }
 
@@ -660,7 +677,13 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   font-family: "Jua";
 }
 
-.pg_ind > span {
+.pg_ind {
   display: flex;
-  width: 50px;
+  width: 50%;
+  max-width: 150px;
+}
+
+.pg_ind > span,
+.mga {
+  margin: auto;
 }
