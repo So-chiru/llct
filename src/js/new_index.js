@@ -644,14 +644,25 @@ $(document).ready(() => {
     if (keys[ev.keyCode][1]) ev.preventDefault()
   })
 
-  window.hammer = new Hammer(document.getElementById('kara_player'), {})
-  hammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
-  hammer.on('swipe', ev => {
+  window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
+  selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
+  selectorHammer.on('swipe', ev => {
+    pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
+  })
+
+  window.playerHammer = new Hammer(document.getElementById('kara_player'))
+  playerHammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+  playerHammer.get('pinch').set({ enable: true })
+  playerHammer.on('swipe', ev => {
     if (ev.direction === 16) {
       yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohane.giran()
     } else if (ev.direction === 8) {
       yohaneNoDOM.dekakuni()
     }
+  })
+
+  playerHammer.on('pan', ev => {
+    console.log(ev)
   })
 
   $.ajax({

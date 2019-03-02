@@ -56,7 +56,7 @@ body {
 
 .contents_collection {
   width: 100%;
-  height: 100%;
+  overflow: auto;
   position: fixed;
 }
 
@@ -158,6 +158,7 @@ body {
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   margin-top: 30px;
+  margin-bottom: 10%;
 
   $card_border: 5px;
 
@@ -404,17 +405,22 @@ body {
 
 .lyrics_wrapper {
   position: relative;
+  display: none;
   overflow: auto;
   top: 90px;
   height: 80%;
   width: 100%;
   margin: 0;
 
-  .dekai {
-    @media screen and (max-width: $small) {
-      top: 30%;
-      height: 60%;
-    }
+  @media screen and (max-width: $small) {
+    top: 30%;
+    height: 70%;
+  }
+}
+
+.dekai {
+  .lyrics_wrapper {
+    display: flex;
   }
 }
 
@@ -426,7 +432,7 @@ body {
   display: contents;
 }
 
-@media screen and (max-width: $medium) {
+@media screen and (max-width: $medium) and (min-width: calc($small + 1)) {
   .artist {
     display: none;
   }
@@ -445,10 +451,6 @@ body {
 }
 
 @media screen and (max-width: $small) {
-  .diver {
-    display: none;
-  }
-
   .diver {
     display: none;
   }
@@ -477,6 +479,7 @@ body {
   }
 
   .ctrls {
+    flex: 1;
     width: 30%;
     order: -1;
   }
@@ -495,13 +498,21 @@ body {
   }
 
   .dekai {
-    .info {
-      width: 100%;
+    .info,
+    .timeline,
+    .ctrls {
+      width: 90%;
+    }
 
+    .info {
       img {
         width: 70px;
         height: 70px;
       }
+    }
+
+    .after_div {
+      display: none;
     }
 
     .title {
@@ -510,6 +521,10 @@ body {
 
     .timeline {
       display: flex;
+    }
+
+    .hareru {
+      max-width: 70%;
     }
   }
 
@@ -545,13 +560,6 @@ body {
     width: 100%;
     height: 60px;
   }
-}
-
-.offline_indicator {
-  position: fixed;
-  display: flex;
-  width: 100%;
-  height: 100%;
 }
 
 input[type="range"].hareru {
