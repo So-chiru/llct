@@ -34,7 +34,7 @@ html.index
             h1 LLCT
             h3 LoveLive! Call Table Guide
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
-    #kara_player.player.hide(onclick="if (!yohaneNoDOM.kaizu) yohaneNoDOM.dekakuni()")
+    #kara_player.player.hide(onclick="yohaneNoDOM.dekakuOnce(this.target)")
         .dash_wrapper
             .visible_dash
                 .info

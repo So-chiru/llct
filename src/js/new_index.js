@@ -87,6 +87,12 @@ let yohaneNoDOM = {
     document.title = 'LLCT'
   },
 
+  dekakuOnce: event => {
+    if (!yohaneNoDOM.kaizu && window.matchMedia('(max-width: 800px)').matches) {
+      yohaneNoDOM.dekakuni()
+    }
+  },
+
   dekakuni: () => {
     $('.player_bg').addClass('show')
     $('.player').addClass('dekai')
