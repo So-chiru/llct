@@ -2,8 +2,8 @@ html.index
   head
     title LLCT
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='theme-color', content='#e039e0')
+    meta(name='viewport', content='width=device-width, initial-scale=0.8, user-scalable=no')
+    meta(name='theme-color', content='#16aaf9')
     meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
     meta(name="tags" )
     meta(meta name="apple-mobile-web-app-capable" content="yes")
@@ -11,13 +11,12 @@ html.index
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
     meta(meta name="application-name" content="러브라이브! 콜표")
     link(rel="apple-touch-icon" href="/data/favicon/logo.png")
-    link(rel="apple-touch-startup-image" href="https://cdn.lovelivec.kr/data/splash.png")
     link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='shortcut icon', href='https://cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="this.media='all';")
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
@@ -28,14 +27,39 @@ html.index
     script(async src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     style.
-        .hide_curtain {opacity:0;visibility: none;pointer-events: none;}
+        .hide_curtain {opacity:0;visibility: none;pointer-events: none;z-index: -1;}
   body
-    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:100;transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);")
-        .inr
+    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:100;transition: 1s cubic-bezier(0.19, 1, 0.22, 1);background-color:#16aaf9;")
+        .inr(style="margin: auto;position: relative;text-align: center;")
             h1 LLCT
-            svg.line_svg(data-type="Line")
-                path.line_svg_class#__3(d="M 0 0 L 323 0")
             h3 LoveLive! Call Table Guide
+    .player_bg(onclick="yohaneNoDOM.chiisakuni()")
+    #kara_player.player.hide(onclick="if (!yohaneNoDOM.kaizu) yohaneNoDOM.dekakuni()")
+        .dash_wrapper
+            .visible_dash
+                .info
+                    img#album_meta.c.cover
+                    .info_txts
+                        p#title_meta.c.title 브로콜리
+                        .c.diver.spaRight
+                        p#artist_meta.c.artist 세이라
+                    .c.diver.after_div
+                .timeline
+                    p#played_time.c.mga 0 : 00
+                    input#ctrl_time.touch-action.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
+                    p#left_time.c.mga - 4 : 59
+                .ctrls
+                    span#pp_btn.material-icons(onclick="yohane.toggle()") pause
+                    span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
+                    span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
+        .lyrics_wrapper.touch-action
+            p.blade_c
+              | 블레이드 추천 색상 : 
+              span#blade_color 자유
+            p.is_singalong#sing_tg 이 곡은 떼창 곡이 아닙니다.
+            .karaoke#karaoke
+
+        audio#kara_audio
     .contents_collection
         .full_page_ct#fp_ct
             .header
@@ -45,7 +69,7 @@ html.index
                 .tabs
                     span.active 전체
                     span(onclick="alert('이미 선택된 좌석입니다.');") 라이브
-                    span(onclick="alert('이미 선택된 좌석입니다.');") 추천
+                    span(onclick="yohaneNoDOM.showSetting()") 설정
             .lds-ellipsis.loader#loading_spin_ctlst
                 div
                 div
@@ -56,32 +80,13 @@ html.index
                 span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
                 span.pg_ind <span id="currentPage">1</span> <span>/</span> <span id="totalPage">6</span>
                 span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
-    .player_bg(onclick="yohaneNoDOM.chiisakuni()")
-    #kara_player.player.hide
-        .visible_dash
-            .info
-                img#album_meta.c.cover
-                .info_txts
-                    p#title_meta.c.title 브로콜리
-                    .c.diver
-                    p#artist_meta.c.artist 세이라
-                .c.diver.after_div
-            .timeline
-                p#played_time.c.mga 0 : 00
-                input#ctrl_time.touch-action.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
-                p#left_time.c.mga - 4 : 59
-            .ctrls
-                span#pp_btn.material-icons(onclick="yohane.toggle()") pause
-                span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-                span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
-                
-        .lyrics_wrapper.touch-action
-            p
-              | 블레이드 색상 :
-              span#blade_color 자유
-            .karaoke#karaoke
-
-        audio#kara_audio
+    .setting_layer.hide
+        .close_btn(onclick="yohaneNoDOM.hideSetting()")
+            p <i class="material-icons">close</i>
+        .setting_sc
+            h1 설정
+            br
+            label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0)"><span class="checkmark"></span>
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 깨진 레이아웃이 보이죠?
         hr

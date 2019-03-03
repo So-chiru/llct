@@ -17,14 +17,13 @@ const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
 
 const loadCallImage = id => {
   window.karaokeData = null
-  $('#karaoke').html(
+  document.getElementById('karaoke').innerHTML =
     '<img class="call_img" src="' +
-      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
-      'data/' +
-      id +
-      '/call.jpg' +
-      '"></img>'
-  )
+    (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+    'data/' +
+    id +
+    '/call.jpg' +
+    '"></img>'
 
   /* <img class="call_img" src="' +
       (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
@@ -44,18 +43,6 @@ const loadLyrics = (id, obj) => {
       '/karaoke.json',
     success: function (data) {
       window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
-
-      $('#title_text').html(karaokeData.metadata.title || obj[0] || '무제')
-      $('#blade_color').html(karaokeData.metadata.bladeColorMember || '자유')
-      document.title =
-        'LLCT > ' + (karaokeData.metadata.title || obj[0] || '무제')
-
-      var _hx = karaokeData.metadata.bladeColorHEX
-
-      if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
-        document.getElementById('blade_color').style.color = _hx
-      }
-
       Karaoke.RenderDOM()
     },
     error: function (err) {
@@ -96,6 +83,8 @@ let yohaneNoDOM = {
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.chiisakuni()
     }
+
+    document.title = 'LLCT'
   },
 
   dekakuni: () => {
@@ -120,7 +109,23 @@ let yohaneNoDOM = {
     $('#live_btn').addClass('in_active')
   },
 
+  play: () => {},
+
+  pause: () => {},
+
+  showSetting: () => {
+    $('.setting_layer').removeClass('hide')
+    $('.setting_layer').addClass('show')
+  },
+
+  hideSetting: () => {
+    $('.setting_layer').removeClass('show')
+    $('.setting_layer').addClass('hide')
+  },
+
   initialize: id => {
+    document.getElementById('karaoke').innerHTML = ''
+    yohaneNoDOM.shokan()
     var meta = getFromLists(id)
 
     document.getElementById('album_meta').src =
@@ -134,7 +139,20 @@ let yohaneNoDOM = {
     document.getElementById('title_meta').innerText = meta[0]
     document.getElementById('artist_meta').innerText =
       artistLists[meta[1].artist != null ? meta[1].artist : 0]
-    yohaneNoDOM.shokan()
+
+    document.getElementById('blade_color').innerText =
+      meta[1].blade_color || '자유'
+
+    var _hx = meta[1].blade_color
+
+    if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
+      document.getElementById('blade_color').style.color = _hx
+    }
+
+    document.getElementById('sing_tg').innerText = meta[1].sa
+      ? '이 곡은 따라 부르는 곡입니다.'
+      : ''
+    document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
     if (meta[1].karaoke) {
       loadLyrics(id, meta)
@@ -385,6 +403,7 @@ let yohane = {
   },
 
   initialize: id => {
+    yohaneNoDOM.initialize(id)
     try {
       yohane.player().src =
         (urlQueryParams('local') !== 'true'
@@ -418,8 +437,11 @@ let yohane = {
         })
     }
 
+    yohane.player().onpause = () => {
+      yohaneNoDOM.pause()
+    }
+
     yohane.loaded = true
-    yohaneNoDOM.initialize(id)
   },
 
   loadPlay: id => {
@@ -479,13 +501,21 @@ let pageAdjust = {
     if (!pg) pg = 0
 
     var docFrag = document.createDocumentFragment()
-    var ls = pageAdjust.lists[pg].length
-    for (var i = 0; i <= ls; i++) {
+    for (var i = 0, ls = pageAdjust.lists[pg].length; i <= ls; i++) {
       if (typeof pageAdjust.lists[pg][i] !== 'undefined') {
         docFrag.appendChild(pageAdjust.lists[pg][i])
+        pageAdjust.lists[pg][i].className = pageAdjust.lists[pg][
+          i
+        ].className.replace(/\sshokan/g, '')
       }
     }
     pageAdjust.cListsElement.appendChild(docFrag)
+
+    document.querySelectorAll('.card').forEach((v, i) => {
+      setTimeout(() => {
+        v.className += ' shokan'
+      }, 25 * i)
+    })
 
     window.lazyloadObj = new LazyLoad({
       elements_selector: '.lazy'
@@ -661,10 +691,6 @@ $(document).ready(() => {
     }
   })
 
-  playerHammer.on('pan', ev => {
-    console.log(ev)
-  })
-
   $.ajax({
     url:
       (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
@@ -685,12 +711,18 @@ $(document).ready(() => {
     }
   })
 
-  $('#genki_year').html(new Date().getFullYear())
-  $('#zenkai_month').html(new Date().getMonth())
-  $('#day_day').html(new Date().getDate())
-  $('#day').html(
-    ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()]
-  )
+  document.getElementById('genki_year').innerText = new Date().getFullYear()
+  document.getElementById('zenkai_month').innerText = new Date().getMonth()
+  document.getElementById('day_day').innerText = new Date().getDate()
+  document.getElementById('day').innerText = [
+    '일',
+    '월',
+    '화',
+    '수',
+    '목',
+    '금',
+    '토'
+  ][new Date().getDay()]
 
   Sakurauchi.listen('focus', () => {
     if (!yohane.playing()) return 0

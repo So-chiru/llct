@@ -6,19 +6,7 @@ body {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.loader_curtain {
-  background-image: url("/data/background.png");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .inr {
-  margin: auto;
-  position: relative;
-  text-align: center;
-
   h1 {
     font-size: 6em;
     font-weight: 400;
@@ -35,23 +23,6 @@ body {
     letter-spacing: 3px;
     color: white;
   }
-}
-
-.line_svg {
-  height: 1px;
-}
-
-.line_svg_class {
-  width: 20%;
-  opacity: 0.25;
-  filter: blur(25px);
-  fill: transparent;
-  stroke: rgb(255, 255, 255);
-  stroke-width: 2px;
-  stroke-linejoin: miter;
-  stroke-linecap: butt;
-  stroke-miterlimit: 4;
-  shape-rendering: auto;
 }
 
 .contents_collection {
@@ -168,10 +139,12 @@ body {
     width: auto;
     height: auto;
     padding: 7% 2.5%;
+    cursor: pointer;
     border-radius: $card_border;
     color: white;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
     transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 0;
 
     .txt {
       margin: auto;
@@ -198,7 +171,13 @@ body {
     }
   }
 
+  .card.shokan {
+    opacity: 1;
+  }
+
   .card:hover {
+    cursor: pointer;
+
     img {
       transform: scale(0.95);
       opacity: 0.9;
@@ -240,14 +219,14 @@ body {
 .player.show {
   background-color: white;
   opacity: 1;
-  bottom: -5px;
+  transform: translateY(0px);
   visibility: visible;
 }
 
 .player.hide {
   background-color: transparent;
   opacity: 0;
-  bottom: -90px;
+  transform: translateY(90px);
   visibility: hidden;
 }
 
@@ -281,6 +260,7 @@ body {
   width: 95%;
   pointer-events: visibleFill;
   left: 2.5%;
+  bottom: -5px;
   border-radius: 5px;
   height: 80px;
   z-index: 100;
@@ -289,13 +269,32 @@ body {
   transition: color 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.visible_dash {
+.dash_wrapper {
   position: absolute;
   width: 100%;
+  height: 75px;
+}
+
+.visible_dash {
+  width: 90%;
+  height: auto;
   display: flex;
   font-weight: 100;
-  margin: 0;
-  height: 75px;
+  margin: auto;
+  margin-top: 10px;
+
+  @media screen and (max-width: $medium) {
+    width: 95%;
+  }
+
+  @media screen and (max-width: $small) {
+    width: 100%;
+
+    .dekai {
+      margin-top: 5px;
+      height: unset;
+    }
+  }
 }
 
 .info,
@@ -303,16 +302,12 @@ body {
 .ctrls {
   margin: 0;
   display: flex;
-}
-
-.info {
-  width: 28%;
-  margin-left: 2.5%;
+  flex: 0 0 auto;
 }
 
 .timeline {
   width: 50%;
-  margin-left: 2%;
+  flex: 1;
 
   .hareru {
     width: 80%;
@@ -320,13 +315,14 @@ body {
 }
 
 .ctrls {
-  margin-right: 2.5%;
+  margin-left: auto;
 
   .material-icons {
     font-size: 45px;
     color: #737373;
     margin-top: auto;
     margin-bottom: auto;
+    cursor: pointer;
   }
 
   .in_active {
@@ -348,11 +344,10 @@ body {
 
 .info_txts {
   display: flex;
+}
 
-  p,
-  div {
-    margin-right: 21.5px;
-  }
+.spaRight {
+  margin-right: 25px;
 }
 
 .diver {
@@ -404,7 +399,7 @@ body {
 }
 
 .lyrics_wrapper {
-  position: relative;
+  position: absolute;
   display: none;
   overflow: auto;
   top: 90px;
@@ -413,23 +408,27 @@ body {
   margin: 0;
 
   @media screen and (max-width: $small) {
-    top: 30%;
-    height: 70%;
+    top: 20%;
+    height: 80%;
   }
+
+  .lyrics {
+    display: contents;
+  }
+}
+
+.blade_c {
+  text-align: center;
 }
 
 .dekai {
   .lyrics_wrapper {
-    display: flex;
+    display: block;
   }
 }
 
 .line_num {
   display: none;
-}
-
-.lyrics {
-  display: contents;
 }
 
 @media screen and (max-width: $medium) and (min-width: calc($small + 1)) {
@@ -467,7 +466,7 @@ body {
   }
 
   .info {
-    width: 60%;
+    width: fit-content;
     margin: auto;
     margin-top: 1%;
     margin-bottom: 1%;
@@ -498,17 +497,26 @@ body {
   }
 
   .dekai {
-    .info,
+    .timeline {
+      display: flex;
+      width: 90%;
+    }
+
     .timeline,
     .ctrls {
-      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .info {
       img {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
       }
+    }
+
+    .info_txts p {
+      margin: 0;
     }
 
     .after_div {
@@ -517,10 +525,6 @@ body {
 
     .title {
       font-size: 18px;
-    }
-
-    .timeline {
-      display: flex;
     }
 
     .hareru {
@@ -540,10 +544,6 @@ body {
     margin-bottom: auto;
   }
 
-  .after_div {
-    display: block;
-  }
-
   .cover {
     margin-right: 20px;
   }
@@ -558,7 +558,12 @@ body {
   .player {
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 65px;
+    touch-action: pan-y;
+
+    &:hover {
+      background-color: #d1d1d1;
+    }
   }
 }
 
@@ -671,11 +676,11 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   margin-top: 25px;
   justify-content: center;
   vertical-align: middle;
-  user-select: none;
 
   .arrow_btn {
     font-size: 50px;
     margin-top: 10px;
+    cursor: pointer;
   }
 }
 
@@ -694,4 +699,46 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 .pg_ind > span,
 .mga {
   margin: auto;
+}
+
+.setting_layer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #323232;
+  z-index: 101;
+  transition: background 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  color: white;
+
+  .close_btn {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    z-index: 102;
+    cursor: pointer;
+    font-size: 24px;
+  }
+}
+
+.setting_sc {
+  width: 90%;
+  position: relative;
+  margin: auto;
+  margin-top: 5%;
+
+  h1 {
+    font-weight: 700;
+    font-size: 42px;
+    margin: 0;
+  }
+}
+
+.setting_layer.hide {
+  display: none;
+  pointer-events: none;
+}
+
+.setting_layer.show {
+  display: block;
+  pointer-events: all;
 }
