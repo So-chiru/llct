@@ -184,13 +184,13 @@ $(document).ready(() => {
     '#ruby_text_val': 'ruby_text'
   }
 
-  window.addEventListener('KaraokeLoaded', e => {
+  Sakurauchi.add('KaraokeLoaded', () => {
     if (typeof karaokeData.metadata.correction_time === 'undefined') {
       karaokeData.metadata.correction_time = -10
     }
   })
 
-  window.addEventListener('KaraokeSelection', e => {
+  Sakurauchi.add('KaraokeSelection', e => {
     var alreadyExists = false
     selectWords.forEach((v, i) => {
       if (JSON.stringify(v) === JSON.stringify(e.detail)) {
@@ -302,9 +302,7 @@ const KaraokeEditor = {
 
       window.lastSaved = JSON.stringify(karaokeData.timeline)
       Karaoke.RenderDOM()
-
-      window.dispatchEvent(new CustomEvent('KaraokeLoaded'))
-
+      Sakurauchi.run('KaraokeLoaded')
       logger(0, 'r', 'Karaoke Data Loaded.', 'i')
     }
   },

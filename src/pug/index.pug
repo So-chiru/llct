@@ -1,115 +1,101 @@
 html.index
   head
-    title LoveLive! Call Table
+    title LLCT
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='theme-color', content='#e039e0')
+    meta(name='viewport', content='width=device-width, initial-scale=0.8, user-scalable=no')
+    meta(name='theme-color', content='#16aaf9')
+    meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
+    meta(name="tags" )
     meta(meta name="apple-mobile-web-app-capable" content="yes")
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
     meta(meta name="application-name" content="러브라이브! 콜표")
     link(rel="apple-touch-icon" href="/data/favicon/logo.png")
-    link(rel="apple-touch-startup-image" href="https://cdn.lovelivec.kr/data/splash.png")
     link(rel='stylesheet', href='./yosoro.min.css')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.css')
     link(rel='shortcut icon', href='https://cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="this.media='all';")
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
+    script(src='./js/new_index.min.js')
+    script(src='./js/lib/hammer.min.js')
     script(async src='./js/lib/reverb.min.js')
     script(async src='./js/lib/chillout.min.js')
     script(async src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
-    script(src='./js/lib/jquery.pagepiling.min.js')
-    script(src='./js/new_index.min.js')
+    style.
+        .hide_curtain {opacity:0;visibility: none;pointer-events: none;z-index: -1;}
   body
-    .fullpage#fg_element
-        .section.main
-            .main_contents
-                h1 LLCT
-                svg.line_svg(data-type="Line")
-                    path.line_svg_class#__3(d="M 0 0 L 323 0")
-                h3 LoveLive! Call Table Guide
-        .section.lists
-            .full_page_ct
-                .header
-                    .titles
-                        span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
-                        h1 노래 목록
-                    .tabs
-                        span.active 전체
-                        span 라이브
-                        span 추천
-                .lds-ellipsis.loader#loading_spin_ctlst
-                    div
-                    div
-                    div
-                    div
-                .call_lists#call_lists
+    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:100;transition: 1s cubic-bezier(0.19, 1, 0.22, 1);background-color:#16aaf9;")
+        .inr(style="margin: auto;position: relative;text-align: center;")
+            h1 LLCT
+            h3 LoveLive! Call Table Guide
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
-    .player.hide
-        .visible_dash
-            .info
-                img#album_meta.c.cover(src="/data/10082/bg.png")
-                .info_txts
-                    p#title_meta.c.title Over The Next Rainbow
-                    .c.diver
-                    p#artist_meta.c.artist Saint Aqours Snow
-                .c.diver.after_div
-            .timeline
-                p#played_time.c 0 : 00
-                input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
-                p#left_time.c - 4 : 59
-            .ctrls
-                span#pp_btn.material-icons(onclick="yohane.toggle()") pause
-                span#stop_btn.material-icons(onclick="yohane.stop()") stop
-                span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-        .karaoke
+    #kara_player.player.hide(onclick="yohaneNoDOM.dekakuOnce(this.target)")
+        .dash_wrapper
+            .visible_dash
+                .info
+                    img#album_meta.c.cover
+                    .info_txts
+                        p#title_meta.c.title 브로콜리
+                        .c.diver.spaRight
+                        p#artist_meta.c.artist 세이라
+                    .c.diver.after_div
+                .timeline
+                    p#played_time.c.mga 0 : 00
+                    input#ctrl_time.touch-action.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
+                    p#left_time.c.mga - 4 : 59
+                .ctrls
+                    span#pp_btn.material-icons(onclick="yohane.toggle()") pause
+                    span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
+                    span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
+        .lyrics_wrapper.touch-action
+            p.blade_c
+              | 블레이드 추천 색상 : 
+              span#blade_color 자유
+            p.is_singalong#sing_tg 이 곡은 떼창 곡이 아닙니다.
+            .karaoke#karaoke
+
         audio#kara_audio
-    .offline_indicator
+    .contents_collection
+        .full_page_ct#fp_ct
+            .header
+                .titles
+                    span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
+                    h1 노래 목록
+                .tabs
+                    span.active 전체
+                    span(onclick="alert('이미 선택된 좌석입니다.');") 라이브
+                    span(onclick="yohaneNoDOM.showSetting()") 설정
+            .lds-ellipsis.loader#loading_spin_ctlst
+                div
+                div
+                div
+                div
+            .call_lists#call_lists
+            .navigator
+                span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn">keyboard_arrow_left</i>
+                span.pg_ind <span id="currentPage">1</span> <span>/</span> <span id="totalPage">6</span>
+                span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn">keyboard_arrow_right</i>
+    .setting_layer.hide
+        .close_btn(onclick="yohaneNoDOM.hideSetting()")
+            p <i class="material-icons">close</i>
+        .setting_sc
+            h1 설정
+            br
+            label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0)"><span class="checkmark"></span>
     #PLEASE_STOP_USE_INTERNET_EXPLORER
-        h1 웹 개발자 혐오를 멈춰주세요
+        h1 깨진 레이아웃이 보이죠?
         hr
         h3 
         | 인터넷 익스플로러 사용을 멈춰주세요.<br>
-        | 현재 익스플로러를 쓰고 계십니다. 뭔지 모르신다고요? 그러면 아래 버튼 중 아무거나 눌러서 인터넷 하실때 그걸로 쓰시는 것을 부탁드립니다.
+        | 현재 익스플로러를 쓰고 계십니다. 크롬을 쓰기만 해도 얼마나 빨리지는지 아시는가요
         | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
         | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
-        | <br><br>
-        | 인터넷 익스플로러의 사용률은 2019년 1월 기준 7.94% 입니다. 그리고 점점 내려갈 예정이지요.<br>
-        | 인터넷 익스플로러가 좋지 않은 이유는 한정된 기능, 웹 표준을 벗어난 독자 규격, 마이크로소프트의 지원 중단등 여러가지가 있습니다.<br>
-        | 굳이 부드러운 엣지나 크롬, 파이어폭스를 나두고 인터넷 익스플로러를 쓸 이유가 있을까요?<br>
-        | 부탁드립니다. 웹 개발자 혐오를 멈춰주세요.
-    script.
-        /*
-         이 글을 보고 계신다면 Github (https://github.com/So-chiru/LLCT) 에서 기여를 고려 해주세요! 모든 종류의 수정을 환영합니다!
-        */
-    script.
-        $(document).ready(function() {
-            if (!navigator.onLine) $('.offline_indicator').addClass('show')
-            $('#fg_element').pagepiling({
-                menu: null,
-                direction: 'vertical',
-                scrollingSpeed: 400,
-                keyboardScrolling: false,
-                loopTop: true,
-                easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
-                navigation: {
-                    'textColor': '#323232',
-                    'bulletsColor': '#323232',
-                    'position': 'right',
-                    'tooltips': ['메인', '노래 목록']
-                },
-                anchors: ['main', 'lists'],
-                sectionsColor: ['#3b3b3b', (cookieYosoro.get('tatenshi') === 'true') ? '#3b3b3b' : '#fff'],
-                onLeave: function(o,t,r) { pagePlayerAnimation(o,t,r) }
-            });
-        });
-
+    // TODO : Fix service worker.
         if('serviceWorker' in navigator) {
             navigator.serviceWorker
                 .register('/sw.js', { scope: '/' })

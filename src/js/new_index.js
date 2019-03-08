@@ -15,11 +15,60 @@ let callReqAnimation
 let audioVolumeFunction = () => {}
 const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
 
+const loadCallImage = id => {
+  window.karaokeData = null
+  document.getElementById('karaoke').innerHTML =
+    '<img class="call_img" src="' +
+    (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+    'data/' +
+    id +
+    '/call.jpg' +
+    '"></img>'
+
+  /* <img class="call_img" src="' +
+      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+      'data/' +
+      id +
+      '/call.jpg' +
+      '"></img> */
+}
+
+const loadLyrics = (id, obj) => {
+  // urlQueryParams('id')
+  $.ajax({
+    url:
+      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+      'data/' +
+      id +
+      '/karaoke.json',
+    success: function (data) {
+      window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
+      Karaoke.RenderDOM()
+    },
+    error: function (err) {
+      return logger(2, 'r', err.message, 'e')
+    }
+  })
+
+  Sakurauchi.remove('KaraokeSelection')
+  Sakurauchi.add('KaraokeSelection', e => {
+    document.getElementById('kara_audio').currentTime =
+      karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
+        100 -
+      0.03
+  })
+}
+
 let yohaneNoDOM = {
+  kaizu: false,
   shokan: () => {
     $('.player').css('transition', 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)')
     $('.player').removeClass('hide')
     $('.player').addClass('show')
+
+    if (yohaneNoDOM.kaizu) {
+      yohaneNoDOM.dekakuni()
+    }
   },
 
   giran: () => {
@@ -28,17 +77,34 @@ let yohaneNoDOM = {
       'all 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035)'
     )
     $('.player').removeClass('show')
+    $('.player_bg').removeClass('show')
     $('.player').addClass('hide')
+
+    if (yohaneNoDOM.kaizu) {
+      yohaneNoDOM.chiisakuni()
+    }
+
+    document.title = 'LLCT'
   },
 
-  dekekuni: () => {
+  dekakuOnce: event => {
+    if (!yohaneNoDOM.kaizu && window.matchMedia('(max-width: 800px)').matches) {
+      yohaneNoDOM.dekakuni()
+    }
+  },
+
+  dekakuni: () => {
     $('.player_bg').addClass('show')
     $('.player').addClass('dekai')
+    $('#dekaku_btn').removeClass('in_active')
+    yohaneNoDOM.kaizu = true
   },
 
   chiisakuni: () => {
     $('.player_bg').removeClass('show')
     $('.player').removeClass('dekai')
+    $('#dekaku_btn').addClass('in_active')
+    yohaneNoDOM.kaizu = false
   },
 
   enableLiveEffects: () => {
@@ -49,19 +115,56 @@ let yohaneNoDOM = {
     $('#live_btn').addClass('in_active')
   },
 
+  play: () => {},
+
+  pause: () => {},
+
+  showSetting: () => {
+    $('.setting_layer').removeClass('hide')
+    $('.setting_layer').addClass('show')
+  },
+
+  hideSetting: () => {
+    $('.setting_layer').removeClass('show')
+    $('.setting_layer').addClass('hide')
+  },
+
   initialize: id => {
+    document.getElementById('karaoke').innerHTML = ''
+    yohaneNoDOM.shokan()
     var meta = getFromLists(id)
 
     document.getElementById('album_meta').src =
-      (urlQueryParams('local') !== null ? './' : 'https://cdn.lovelivec.kr/') +
+      (urlQueryParams('local') !== 'true'
+        ? './'
+        : 'https://cdn.lovelivec.kr/') +
       '/data/' +
       id +
       '/bg.png'
 
     document.getElementById('title_meta').innerText = meta[0]
     document.getElementById('artist_meta').innerText =
-      artistLists[typeof meta[1].artist !== 'undefined' ? meta[1].artist : 0]
-    yohaneNoDOM.shokan()
+      artistLists[meta[1].artist != null ? meta[1].artist : 0]
+
+    document.getElementById('blade_color').innerText =
+      meta[1].blade_color || '자유'
+
+    var _hx = meta[1].blade_color
+
+    if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
+      document.getElementById('blade_color').style.color = _hx
+    }
+
+    document.getElementById('sing_tg').innerText = meta[1].sa
+      ? '이 곡은 따라 부르는 곡입니다.'
+      : ''
+    document.title = meta[1].kr || meta[0] || '제목 미 지정'
+
+    if (meta[1].karaoke) {
+      loadLyrics(id, meta)
+    } else {
+      loadCallImage(id)
+    }
   }
 }
 
@@ -126,6 +229,7 @@ let yohane = {
   toggle: () => yohane[yohane.player().paused ? 'play' : 'pause'](),
   stop: () => yohane.pause(true),
   playing: () => !yohane.player().paused,
+  timecode: () => yohane.player().currentTime * 100,
 
   seekTo: zto => {
     if (yohane.playing()) yohane.pause(false, true)
@@ -192,7 +296,7 @@ let yohane = {
     if (!yohane.effectsArray[1]) {
       reverbjs.extend(yohane.audio_context)
       var reverbNode = yohane.audio_context.createReverbFromUrl(
-        '/dome_SportsCentreUniversityOfYork.m4a',
+        '/Sochiru.wav',
         () => {
           reverbNode.connect(yohane.effectsArray[0])
         }
@@ -219,7 +323,11 @@ let yohane = {
   volumeAvr: 1,
   waBall: 0,
   callEmitter: () => {
-    if (!yohane.liveEffectStore || yohane.player().paused) {
+    if (
+      !yohane.liveEffectStore ||
+      yohane.player().paused ||
+      typeof yohane.analyser['getFloatTimeDomainData'] === 'undefined'
+    ) {
       if (callReqAnimation) cancelAnimationFrame(yohane.callEmitter)
       return
     }
@@ -231,7 +339,7 @@ let yohane = {
     for (let i = 0; i < yohane.buffers.length; i++) {
       sumOfSquares += yohane.buffers[i] ** 2
     }
-    var avgPowerDecibels = Math.log10(sumOfSquares / yohane.buffers.length) * 10
+    // var avgPowerDecibels = Math.log10(sumOfSquares / yohane.buffers.length) * 10
 
     yohane.volumeAvr =
       (yohane.volumeAvr + (sumOfSquares / yohane.buffers.length) * 10) / 2
@@ -268,12 +376,21 @@ let yohane = {
 
   tick: () => {
     frameWorks = requestAnimationFrame(yohane.tick)
-    if (typeof yohane.tickVal === 'undefined') yohane.tickVal = 0
+    if (yohane.tickVal == null) yohane.tickVal = 0
     if (yohane.tickVal > 20) {
       yohane.tickVal = 0
       yohane.deferTick()
     }
     yohane.tickVal++
+
+    if (
+      yohaneNoDOM.kaizu &&
+      typeof karaokeData !== 'undefined' &&
+      karaokeData !== null &&
+      karaokeData.timeline
+    ) {
+      Karaoke.AudioSync(yohane.timecode())
+    }
 
     if (yohane.player().paused) {
       cancelAnimationFrame(frameWorks)
@@ -292,9 +409,10 @@ let yohane = {
   },
 
   initialize: id => {
+    yohaneNoDOM.initialize(id)
     try {
       yohane.player().src =
-        (urlQueryParams('local') !== null
+        (urlQueryParams('local') !== 'true'
           ? './'
           : 'https://cdn.lovelivec.kr/') +
         'data/' +
@@ -325,19 +443,21 @@ let yohane = {
         })
     }
 
+    yohane.player().onpause = () => {
+      yohaneNoDOM.pause()
+    }
+
     yohane.loaded = true
-    yohaneNoDOM.initialize(id)
   },
 
   loadPlay: id => {
     yohane.initialize(id)
     yohane.play()
-    yohaneNoDOM.dekekuni()
+    yohaneNoDOM.dekakuni()
   }
 }
 
 const pagePlayerAnimation = (index, nextIndex, direction) => {
-  console.log(yohane)
   yohane[nextIndex === 2 ? 'shokan' : 'giran']()
 }
 
@@ -348,51 +468,16 @@ let getFromLists = id => {
   return [v[sb], callLists[v[sb]]]
 }
 
-const loadLyrics = id => {
-  // urlQueryParams('id')
-  $.ajax({
-    url:
-      (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
-      'data/' +
-      id +
-      '/karaoke.json',
-    success: function (data) {
-      window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
-
-      $('#title_text').html(karaokeData.metadata.title || '무제')
-      $('#blade_color').html(karaokeData.metadata.bladeColorMember || '자유')
-      document.title = karaokeData.metadata.title || '무제'
-
-      var _hx = karaokeData.metadata.bladeColorHEX
-
-      if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
-        document.getElementById('blade_color').style.color = _hx
-      }
-
-      Karaoke.RenderDOM()
-    },
-    error: function (err) {
-      return logger(2, 'r', err.message, 'e')
-    }
-  })
-
-  window.addEventListener('KaraokeSelection', function (e) {
-    document.getElementById('kara_audio').currentTime =
-      karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
-        100 -
-      0.03
-  })
-}
-
 let pageAdjust = {
   lists: [],
   onePageItems: 12,
   currentPage: 0,
   remove: () => {},
+  cListsElement: null,
 
   add: item => {
     if (pageAdjust.lists.length === 0) {
-      pageAdjust.lists[0] = item
+      pageAdjust.lists[0] = [item]
       return
     }
 
@@ -409,60 +494,99 @@ let pageAdjust = {
         continue
       }
 
-      pageAdjust.lists[i].push(item[0])
+      pageAdjust.lists[i].push(item)
     }
   },
 
   render: pg => {
-    $('#call_lists').html('')
-    if (!pg) pg = 0
-    for (var i = 0; i <= pageAdjust.lists[pg].length; i++) {
-      $('#call_lists').append(pageAdjust.lists[pg][i])
+    if (pageAdjust.cListsElement === null) {
+      pageAdjust.cListsElement = document.getElementById('call_lists')
     }
+    pageAdjust.cListsElement.innerHTML = ''
+
+    if (!pg) pg = 0
+
+    var docFrag = document.createDocumentFragment()
+    for (var i = 0, ls = pageAdjust.lists[pg].length; i <= ls; i++) {
+      if (typeof pageAdjust.lists[pg][i] !== 'undefined') {
+        docFrag.appendChild(pageAdjust.lists[pg][i])
+        pageAdjust.lists[pg][i].className = pageAdjust.lists[pg][
+          i
+        ].className.replace(/\sshokan/g, '')
+      }
+    }
+    pageAdjust.cListsElement.appendChild(docFrag)
+
+    document.querySelectorAll('.card').forEach((v, i) => {
+      setTimeout(() => {
+        v.className += ' shokan'
+      }, 25 * i)
+    })
 
     window.lazyloadObj = new LazyLoad({
       elements_selector: '.lazy'
     })
+    document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
+  },
+
+  buildPage: () => {
+    var objKeys = Object.keys(callLists)
+    pageAdjust.lists = []
+
+    for (var i = 0; i < objKeys.length; i++) {
+      var curObj = callLists[objKeys[i]]
+      var baseElement = document.createElement('div')
+      baseElement.className = 'card'
+      baseElement.setAttribute('onclick', 'yohane.loadPlay(' + curObj.id + ')')
+
+      var c = document.createDocumentFragment()
+
+      var artImage = document.createElement('img')
+      artImage.id = curObj.id + '_bgimg'
+      artImage.className = 'lazy'
+      artImage.dataset.src =
+        (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
+        'data/' +
+        curObj.id +
+        '/bg.png'
+
+      c.appendChild(artImage)
+
+      var titleText = document.createElement('h3')
+      titleText.className = 'txt'
+      titleText.innerText =
+        cookieYosoro.get('mikan') === 'true'
+          ? curObj.translated || objKeys[i]
+          : objKeys[i]
+
+      c.appendChild(titleText)
+      baseElement.appendChild(c)
+
+      pageAdjust.add(baseElement)
+    }
+
+    pageAdjust.setPage(0)
+  },
+
+  setPage: s => {
+    if (s >= pageAdjust.lists.length || s < 0) {
+      return 0
+    }
+
+    pageAdjust.currentPage = s
+    pageAdjust.render(pageAdjust.currentPage)
+
+    document.getElementById('currentPage').innerHTML =
+      pageAdjust.currentPage + 1
+  },
+
+  nextPage: () => {
+    return pageAdjust.setPage(pageAdjust.currentPage + 1)
+  },
+
+  prevPage: () => {
+    return pageAdjust.setPage(pageAdjust.currentPage - 1)
   }
-}
-const addElementToPage = () => {}
-
-const ListsLoadDone = () => {
-  var objKeys = Object.keys(callLists)
-  pageAdjust.lists = []
-
-  for (var i = 0; i < objKeys.length; i++) {
-    var curObj = callLists[objKeys[i]]
-    var baseElement = $(
-      '<div class="card" onclick="yohane.loadPlay(' + curObj.id + ')"></div>'
-    )
-
-    baseElement.append(
-      $(
-        '<img id="' +
-          curObj.id +
-          '_bgimg" class="lazy" data-src="' +
-          (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
-          'data/' +
-          curObj.id +
-          '/bg.png"></img>'
-      )
-    )
-
-    baseElement.append(
-      $(
-        '<h3 class="txt">' +
-          (cookieYosoro.get('mikan') === 'true'
-            ? curObj.translated || objKeys[i]
-            : objKeys[i]) +
-          '</h3>'
-      )
-    )
-
-    pageAdjust.add(baseElement)
-  }
-
-  pageAdjust.render(pageAdjust.lists.length - 1)
 }
 
 const resizeItemsCheck = () => {
@@ -476,6 +600,12 @@ const resizeItemsCheck = () => {
 }
 
 const keys = {
+  27: [
+    e => {
+      yohaneNoDOM.chiisakuni()
+    },
+    false
+  ],
   32: [
     e => {
       yohane.toggle()
@@ -523,16 +653,53 @@ $(document).ready(() => {
     cancelAnimationFrame(yohane.tick)
   }
 
-  window.addEventListener('keydown', ev => {
+  Sakurauchi.listen(
+    'onplay',
+    () => requestAnimationFrame(yohane.tick),
+    yohane.player()
+  )
+  Sakurauchi.listen(
+    'onpause',
+    () => cancelAnimationFrame(yohane.tick),
+    yohane.player()
+  )
+  Sakurauchi.listen(
+    ['seeking', 'seeked'],
+    () => {
+      Karaoke.clearSync(() => {
+        Karaoke.AudioSync(Math.floor(yohane.timecode()), true)
+      })
+    },
+    yohane.player()
+  )
+
+  Sakurauchi.listen('keydown', ev => {
     logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
     if (typeof keys[ev.keyCode] === 'undefined') return 0
     keys[ev.keyCode][0](ev)
     if (keys[ev.keyCode][1]) ev.preventDefault()
   })
 
+  window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
+  selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
+  selectorHammer.on('swipe', ev => {
+    pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
+  })
+
+  window.playerHammer = new Hammer(document.getElementById('kara_player'))
+  playerHammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+  playerHammer.get('pinch').set({ enable: true })
+  playerHammer.on('swipe', ev => {
+    if (ev.direction === 16) {
+      yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohane.giran()
+    } else if (ev.direction === 8) {
+      yohaneNoDOM.dekakuni()
+    }
+  })
+
   $.ajax({
     url:
-      (urlQueryParams('local') !== null ? './' : '//cdn.lovelivec.kr/') +
+      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
       'data/lists.json',
     success: d => {
       try {
@@ -543,33 +710,46 @@ $(document).ready(() => {
 
       callLists = d
       $('#loading_spin_ctlst').addClass('done')
-      ListsLoadDone()
+      pageAdjust.buildPage()
     },
     error: function (err) {
       logger(2, 'r', err.message, 'e')
     }
   })
 
-  $('#genki_year').html(new Date().getFullYear())
-  $('#genki_month').html(new Date().getMonth())
-  $('#day_day').html(new Date().getDate())
-  $('#day').html(
-    ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()]
-  )
+  document.getElementById('genki_year').innerText = new Date().getFullYear()
+  document.getElementById('zenkai_month').innerText = new Date().getMonth()
+  document.getElementById('day_day').innerText = new Date().getDate()
+  document.getElementById('day').innerText = [
+    '일',
+    '월',
+    '화',
+    '수',
+    '목',
+    '금',
+    '토'
+  ][new Date().getDay()]
 
-  window.addEventListener('blur', () => {
+  Sakurauchi.listen('focus', () => {
+    if (!yohane.playing()) return 0
+
+    Karaoke.clearSync()
+    Karaoke.AudioSync(yohane.timecode(), true)
+  })
+
+  Sakurauchi.listen('blur', () => {
     if (audioVolumeFunction !== null && audioVolumeFrame !== null) {
       audioVolumeFunction(true)
     }
   })
-
   $(window).resize(() => {
     var reszCk = resizeItemsCheck()
     if (pageAdjust.onePageItems !== reszCk) {
       pageAdjust.onePageItems = reszCk
-      ListsLoadDone()
+      pageAdjust.buildPage()
     }
     pageAdjust.onePageItems = reszCk
   })
   pageAdjust.onePageItems = resizeItemsCheck()
+  $('#curt').addClass('hide_curtain')
 })

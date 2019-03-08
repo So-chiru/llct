@@ -119,7 +119,7 @@ var showDetailsW = function (id, isKaraoke) {
 }
 
 window.addEventListener('popstate', function () {
-  if (typeof history.state.data !== 'undefined') {
+  if (history.state.data == null) {
     searchFiltering(history.state.data, true)
   }
 })
@@ -215,7 +215,7 @@ var urlQueryParams = function (name) {
 
 $(document).ready(function () {
   for (var i = 0; i < optionObjects.length; i++) {
-    if (typeof cookieYosoro.get(optionObjects[i].cn) === 'undefined') {
+    if (cookieYosoro.get(optionObjects[i].cn) == null) {
       cookieYosoro.set(optionObjects[i].cn, false)
     }
     $(optionObjects[i].e).prop(

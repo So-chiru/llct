@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'desuwa_a0001',
+  version: 'desuwa_a0009',
   urls: [
     '/',
     '/index.html',
@@ -10,8 +10,7 @@ const cachingOffline = {
     '/js/new_index.min.js',
     '/js/karaoke.min.js',
     '/js/lib/chillout.min.js',
-    '/dome_SportsCentreUniversityOfYork.m4a',
-    '/small_TyndallBruceMonument.m4a'
+    '/dome_SportsCentreUniversityOfYork.m4a'
   ]
 }
 
