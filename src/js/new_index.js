@@ -555,7 +555,7 @@ let pageAdjust = {
       var titleText = document.createElement('h3')
       titleText.className = 'txt'
       titleText.innerText =
-        cookieYosoro.get('mikan') === 'true'
+        dataYosoro.get('mikan') === 'true'
           ? curObj.translated || objKeys[i]
           : objKeys[i]
 

@@ -2,7 +2,7 @@
 
 var callObject = {}
 
-var cookieYosoro = {
+var dataYosoro = {
   get: function (key) {
     var cookies = document.cookie.split(';')
     var i
@@ -141,7 +141,7 @@ var searchRefresh = function (obj) {
         "', " +
         (datobj.karaoke || false) +
         ')"> ' +
-        (cookieYosoro.get('sakana') === 'false'
+        (dataYosoro.get('sakana') === 'false'
           ? '<img class="card_bg lazy" data-src="https://cdn.lovelivec.kr/data/' +
             datobj.id +
             '/bg.png" onerror="this.style.display = \'none\'"></img>'
@@ -156,7 +156,7 @@ var searchRefresh = function (obj) {
         ' scTitle"></h1>'
     )
     title.html(
-      cookieYosoro.get('mikan') === 'true'
+      dataYosoro.get('mikan') === 'true'
         ? datobj.translated || dataTitle
         : dataTitle
     )
@@ -197,10 +197,10 @@ var optionObjects = [
   }
 ]
 const changedOption = id => {
-  cookieYosoro.set(optionObjects[id].cn, $(optionObjects[id].e).is(':checked'))
+  dataYosoro.set(optionObjects[id].cn, $(optionObjects[id].e).is(':checked'))
   if (optionObjects[id].rf) searchFiltering(urlQueryParams('f'), true)
   if (typeof optionObjects[id].cb === 'function') {
-    optionObjects[id].cb(cookieYosoro.get(optionObjects[id].cn))
+    optionObjects[id].cb(dataYosoro.get(optionObjects[id].cn))
   }
 }
 
@@ -215,12 +215,12 @@ var urlQueryParams = function (name) {
 
 $(document).ready(function () {
   for (var i = 0; i < optionObjects.length; i++) {
-    if (cookieYosoro.get(optionObjects[i].cn) == null) {
-      cookieYosoro.set(optionObjects[i].cn, false)
+    if (dataYosoro.get(optionObjects[i].cn) == null) {
+      dataYosoro.set(optionObjects[i].cn, false)
     }
     $(optionObjects[i].e).prop(
       'checked',
-      cookieYosoro.get(optionObjects[i].cn) === 'true'
+      dataYosoro.get(optionObjects[i].cn) === 'true'
     )
   }
 

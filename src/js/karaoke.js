@@ -30,150 +30,150 @@
  * 가사 음 마다 : NONE;
  */
 
-var SleepCounts = 0
+var SleepCounts = 0;
 
 var Karaoke = {
-  TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
+  TypeLists: [null, "__s", "call", "cmt", "_cs"],
   CallSoundElement: null,
 
-  SpaParsing: function (spa, c, spacing) {
+  SpaParsing: function(spa, c, spacing) {
     var wordObject = {
-      text: spa + (spacing ? ' ' : ''),
+      text: spa + (spacing ? " " : ""),
       start_time: 0,
       end_time: 0,
       pronunciation_time: 0,
-      type: 1
-    }
+      type: 1,
+    };
 
-    c.push(wordObject)
+    c.push(wordObject);
   },
 
-  SetTimelineData: function (data) {
-    window.karaokeData.timeline = data
-    Karaoke.RenderDOM()
-    Karaoke.startEndOpti()
+  SetTimelineData: function(data) {
+    window.karaokeData.timeline = data;
+    Karaoke.RenderDOM();
+    Karaoke.startEndOpti();
   },
 
-  SelectWord: function (posX, posY, element) {
-    Sakurauchi.run('KaraokeSelection', { detail: { posX, posY, element } })
+  SelectWord: function(posX, posY, element) {
+    Sakurauchi.run("KaraokeSelection", { detail: { posX, posY, element } });
   },
 
   CompareArray: (a, b) => {
     if (
-      typeof a === 'undefined' ||
-      typeof b === 'undefined' ||
+      typeof a === "undefined" ||
+      typeof b === "undefined" ||
       typeof a !== typeof b
     ) {
-      return false
+      return false;
     }
 
     // if (a.start_time !== b.start_time) return false
     // if (a.end_time !== b.end_time) return false
-    if (a.collection.length !== b.collection.length) return false
+    if (a.collection.length !== b.collection.length) return false;
 
-    var diff = false
+    var diff = false;
     a.collection.forEach((v, i) => {
       diff =
         v.text !== b.collection[i].text ||
         v.type !== b.collection[i].type ||
         v.start_time !== b.collection[i].start_time ||
         v.end_time !== b.collection[i].end_time ||
-        v.pronunciation_time !== b.collection[i].pronunciation_time
-    })
+        v.pronunciation_time !== b.collection[i].pronunciation_time;
+    });
 
-    return !diff
+    return !diff;
   },
 
-  MergeRender: function (prevArray, newArray) {
-    var mergedArray = []
+  MergeRender: function(prevArray, newArray) {
+    var mergedArray = [];
 
     newArray.forEach((newLines, newLineInt) => {
-      if (typeof prevArray[newLineInt] === 'undefined') {
-        mergedArray.push(newLines)
-        return 0
+      if (typeof prevArray[newLineInt] === "undefined") {
+        mergedArray.push(newLines);
+        return 0;
       }
 
-      var comparedDone = false
-      ;[prevArray[newLineInt - 1], prevArray[newLineInt + 1]].forEach(
+      var comparedDone = false;
+      [prevArray[newLineInt - 1], prevArray[newLineInt + 1]].forEach(
         (comparePrevLine, index) => {
-          var sames = Karaoke.CompareArray(newLines, comparePrevLine)
-          if (!sames) return 0
+          var sames = Karaoke.CompareArray(newLines, comparePrevLine);
+          if (!sames) return 0;
 
-          mergedArray.push(comparePrevLine)
-          comparedDone = true
+          mergedArray.push(comparePrevLine);
+          comparedDone = true;
         }
-      )
-      if (comparedDone) return 0
+      );
+      if (comparedDone) return 0;
 
       var lineObj = {
         start_time: 0,
         end_time: 0,
-        collection: []
-      }
+        collection: [],
+      };
 
       newLines.collection.forEach((newWords, newWordsInt) => {
         if (
           typeof prevArray[newLineInt].collection[newWordsInt] ===
-            'undefined' ||
+            "undefined" ||
           newWords.text !== prevArray[newLineInt].collection[newWordsInt].text
         ) {
-          lineObj.collection.push(newWords)
-          return 0
+          lineObj.collection.push(newWords);
+          return 0;
         }
 
-        lineObj.collection.push(prevArray[newLineInt].collection[newWordsInt])
-      })
+        lineObj.collection.push(prevArray[newLineInt].collection[newWordsInt]);
+      });
 
-      mergedArray.push(lineObj)
-    })
+      mergedArray.push(lineObj);
+    });
 
-    return mergedArray
+    return mergedArray;
   },
 
-  Render: function (text) {
-    var renderedData = []
+  Render: function(text) {
+    var renderedData = [];
     text = decodeURI(
       encodeURI(text)
-        .replace(/(%0A)/gm, '^L_F')
-        .replace(/%20%20/gm, '^S_P')
-        .replace(/%20/gm, '^xF')
-    )
+        .replace(/(%0A)/gm, "^L_F")
+        .replace(/%20%20/gm, "^S_P")
+        .replace(/%20/gm, "^xF")
+    );
 
-    var splitLF = text.split('^L_F')
+    var splitLF = text.split("^L_F");
     splitLF.forEach((line, lineIndex) => {
       var perLineSpacing = {
         start_time: 0,
         end_time: 0,
-        collection: []
-      }
+        collection: [],
+      };
 
-      line.split('^xF').forEach((spa, index) => {
+      line.split("^xF").forEach((spa, index) => {
         if (/\^S_P/g.test(spa)) {
-          var spaSplt = spa.split(/\^S_P/g)
+          var spaSplt = spa.split(/\^S_P/g);
           spaSplt.forEach((spBr, i) => {
             Karaoke.SpaParsing(
               spBr,
               perLineSpacing.collection,
               spaSplt.length - 1 > i
-            )
-          })
+            );
+          });
         } else {
-          Karaoke.SpaParsing(spa, perLineSpacing.collection, false)
+          Karaoke.SpaParsing(spa, perLineSpacing.collection, false);
         }
-      })
+      });
 
       perLineSpacing.start_time =
-        Number(perLineSpacing.collection[0].start_time) / 2
+        Number(perLineSpacing.collection[0].start_time) / 2;
       perLineSpacing.end_time =
         Number(
           perLineSpacing.collection[perLineSpacing.collection.length - 1]
             .end_time
-        ) + 100
+        ) + 100;
 
-      renderedData.push(perLineSpacing)
-    })
+      renderedData.push(perLineSpacing);
+    });
 
-    return renderedData
+    return renderedData;
   },
 
   selectLine: num => {
@@ -181,45 +181,45 @@ var Karaoke = {
       Karaoke.SelectWord(
         num,
         i,
-        document.getElementById('kara_' + num + '_' + i)
-      )
-    })
+        document.getElementById("kara_" + num + "_" + i)
+      );
+    });
   },
 
-  startEndOpti: function () {
+  startEndOpti: function() {
     karaokeData.timeline.forEach((value, index) => {
-      value.start_time = Number(value.collection[0].start_time) - 100
+      value.start_time = Number(value.collection[0].start_time) - 100;
       value.end_time =
-        Number(value.collection[value.collection.length - 1].end_time) + 100
-    })
+        Number(value.collection[value.collection.length - 1].end_time) + 100;
+    });
   },
 
-  RenderDOM: function () {
-    var inserts = ''
+  RenderDOM: function() {
+    var inserts = "";
     karaokeData.timeline.forEach((v, lineI) => {
-      var spaceEle = ''
+      var spaceEle = "";
       v.collection.forEach((word, wordI) => {
         spaceEle +=
           '<p class="lyrics ' +
           Karaoke.TypeLists[word.type] +
           '" id="kara_' +
           lineI +
-          '_' +
+          "_" +
           wordI +
           '" onclick="Karaoke.SelectWord(' +
           lineI +
-          ', ' +
+          ", " +
           wordI +
           ', this)">' +
-          (typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
-            ? '<ruby>' +
-              word.text.replace(/\s/g, '&nbsp') +
-              '<rt>' +
+          (typeof word.ruby_text !== "undefined" && word.ruby_text !== ""
+            ? "<ruby>" +
+              word.text.replace(/\s/g, "&nbsp") +
+              "<rt>" +
               word.ruby_text +
-              '</rt></ruby>'
-            : word.text.replace(/\s/g, '&nbsp')) +
-          '</p>'
-      })
+              "</rt></ruby>"
+            : word.text.replace(/\s/g, "&nbsp")) +
+          "</p>";
+      });
       inserts +=
         '<div class="p_line" id="kara_' +
         lineI +
@@ -227,82 +227,82 @@ var Karaoke = {
         lineI +
         ')">' +
         lineI +
-        '.</p> ' +
+        ".</p> " +
         spaceEle +
-        '</div>'
-    })
+        "</div>";
+    });
 
-    document.getElementById('karaoke').innerHTML = inserts
+    document.getElementById("karaoke").innerHTML = inserts;
   },
 
-  clearSync: function (aftFunc) {
-    var lyricsElement = document.getElementsByClassName('.lyrics')
+  clearSync: function(aftFunc) {
+    var lyricsElement = document.getElementsByClassName(".lyrics");
 
     for (var dk = 0; dk < lyricsElement.length; dk++) {
       lyricsElement[dk].className = lyricsElement[dk].className.replace(
         /\scurrentSync/g,
-        ''
-      )
+        ""
+      );
     }
 
-    if (typeof aftFunc === 'function') {
-      aftFunc()
+    if (typeof aftFunc === "function") {
+      aftFunc();
     }
   },
 
-  AudioSync: function (timeCode, fullRender) {
+  AudioSync: function(timeCode, fullRender) {
     chillout.forEach(karaokeData.timeline, (karaLine, karaLineNum) => {
       if (
         (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
         !fullRender
       ) {
-        return 0
+        return 0;
       }
 
       chillout.forEach(karaLine.collection, (karaWord, karaWordNum) => {
-        if (karaWord.start_time === 0 || karaWord.start_time === '0') return 0
-        karaWord.start_time = Number(karaWord.start_time)
-        karaWord.end_time = Number(karaWord.end_time)
+        if (karaWord.start_time === 0 || karaWord.start_time === "0") return 0;
+        karaWord.start_time = Number(karaWord.start_time);
+        karaWord.end_time = Number(karaWord.end_time);
 
         var kards = document.getElementById(
-          'kara_' + karaLineNum + '_' + karaWordNum
-        )
+          "kara_" + karaLineNum + "_" + karaWordNum
+        );
         kards.classList[
           timeCode > karaWord.start_time && timeCode > karaWord.end_time
-            ? 'add'
-            : 'remove'
-        ]('josenPassing')
+            ? "add"
+            : "remove"
+        ]("josenPassing");
 
         if (!/currentSync/g.test(kards.className)) {
-          kards.classList[timeCode > karaWord.start_time ? 'add' : 'remove'](
-            'currentSync'
-          )
+          kards.classList[timeCode > karaWord.start_time ? "add" : "remove"](
+            "currentSync"
+          );
           var karaokeDuration =
-            typeof karaWord.pronunciation_time === 'undefined' ||
+            typeof karaWord.pronunciation_time === "undefined" ||
             karaWord.pronunciation_time === 0
-              ? (((typeof karaLine.collection[karaWordNum + 1] !== 'undefined'
-                ? karaLine.collection[karaWordNum + 1].start_time
-                : karaWord.end_time) || 70) -
+              ? (((typeof karaLine.collection[karaWordNum + 1] !== "undefined"
+                  ? karaLine.collection[karaWordNum + 1].start_time
+                  : karaWord.end_time) || 70) -
                   karaWord.start_time) /
                 2
-              : karaWord.pronunciation_time
-          if (karaokeDuration < 300) karaokeDuration += 30
+              : karaWord.pronunciation_time;
+          if (karaokeDuration < 300) karaokeDuration += 30;
 
           kards.style.transition =
-            'text-shadow ' +
+            "text-shadow " +
             karaokeDuration / 300 +
-            's ease 0s, color ' +
+            "s ease 0s, color " +
             karaokeDuration / 300 +
-            's ease 0s'
+            "s ease 0s";
         }
 
         if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
-          kards.className = kards.className.replace(/\scurrentSync/g, '')
-          kards.style.transition = ''
+          kards.className = kards.className.replace(/\scurrentSync/g, "");
+          kards.style.transition = "";
         }
-      })
-    })
-  }
-}
+      });
+    });
+  },
+};
 
-window.Karaoke = Karaoke
+window.Karaoke = Karaoke;
