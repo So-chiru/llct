@@ -682,7 +682,7 @@
       "end_time": 3739,
       "collection": [
         {
-          "text": "*(세-",
+          "text": "* (세-",
           "start_time": 3355,
           "end_time": 3639,
           "pronunciation_time": 0,
@@ -3019,7 +3019,7 @@
           "type": 1
         },
         {
-          "text": "ture",
+          "text": "ture ",
           "start_time": 13490,
           "end_time": 13636,
           "pronunciation_time": 0,
@@ -4014,7 +4014,7 @@
           "type": 1
         },
         {
-          "text": "ging",
+          "text": "ging ",
           "start_time": 19430,
           "end_time": 19542,
           "pronunciation_time": 0,
