@@ -2374,7 +2374,7 @@
     },
     {
       "start_time": 11155,
-      "end_time": 100,
+      "end_time": 11693,
       "collection": [
         {
           "text": "보",
@@ -2468,12 +2468,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 11516,
           "end_time": 0,
           "pronunciation_time": 0,
-          "type": 1,
-          "ruby_text": "*"
+          "type": 1
         },
         {
           "text": "토",
@@ -3827,8 +3826,8 @@
       ]
     },
     {
-      "start_time": -100,
-      "end_time": 100,
+      "start_time": 17192,
+      "end_time": 19019,
       "collection": [
         {
           "text": "< ",
@@ -5340,8 +5339,8 @@
       ]
     },
     {
-      "start_time": -100,
-      "end_time": 100,
+      "start_time": 26380,
+      "end_time": 26912,
       "collection": [
         {
           "text": "맛",
