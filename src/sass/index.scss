@@ -402,7 +402,9 @@ body {
 .lyrics_wrapper {
   position: absolute;
   display: none;
-  overflow: auto;
+  overflow: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch !important;
   top: 90px;
   height: 80%;
   width: 100%;
@@ -560,7 +562,6 @@ body {
     left: 0;
     width: 100%;
     height: 65px;
-    touch-action: pan-y;
 
     &:hover:not(.dekai) {
       background-color: #e9e9e9;
