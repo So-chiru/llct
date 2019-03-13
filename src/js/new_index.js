@@ -1,29 +1,29 @@
 const timeString = sec => {
-  sec = Math.floor(sec)
+  sec = Math.floor(sec);
   return (
-    (sec >= 60 ? Math.floor(sec / 60) : '0') +
-    ' : ' +
-    (sec % 60 < 10 ? '0' : '') +
+    (sec >= 60 ? Math.floor(sec / 60) : "0") +
+    " : " +
+    (sec % 60 < 10 ? "0" : "") +
     (sec % 60)
-  )
-}
+  );
+};
 
-let callLists = []
-let frameWorks
-let audioVolumeFrame = null
-let callReqAnimation
-let audioVolumeFunction = () => {}
-const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
+let callLists = [];
+let frameWorks;
+let audioVolumeFrame = null;
+let callReqAnimation;
+let audioVolumeFunction = () => {};
+const artistLists = ["Aqours", "Saint Snow", "Saint Aqours Snow"];
 
 const loadCallImage = id => {
-  window.karaokeData = null
-  document.getElementById('karaoke').innerHTML =
+  window.karaokeData = null;
+  document.getElementById("karaoke").innerHTML =
     '<img class="call_img" src="' +
-    (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
-    'data/' +
+    (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
+    "data/" +
     id +
-    '/call.jpg' +
-    '"></img>'
+    "/call.jpg" +
+    '"></img>';
 
   /* <img class="call_img" src="' +
       (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
@@ -31,88 +31,88 @@ const loadCallImage = id => {
       id +
       '/call.jpg' +
       '"></img> */
-}
+};
 
 const loadLyrics = (id, obj) => {
   // urlQueryParams('id')
   $.ajax({
     url:
-      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
-      'data/' +
+      (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
+      "data/" +
       id +
-      '/karaoke.json',
-    success: function (data) {
-      window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
-      Karaoke.RenderDOM()
+      "/karaoke.json",
+    success: function(data) {
+      window.karaokeData = typeof data === "object" ? data : JSON.parse(data);
+      Karaoke.RenderDOM();
     },
-    error: function (err) {
-      return logger(2, 'r', err.message, 'e')
-    }
-  })
+    error: function(err) {
+      return logger(2, "r", err.message, "e");
+    },
+  });
 
-  Sakurauchi.remove('KaraokeSelection')
-  Sakurauchi.add('KaraokeSelection', e => {
-    document.getElementById('kara_audio').currentTime =
+  Sakurauchi.remove("KaraokeSelection");
+  Sakurauchi.add("KaraokeSelection", e => {
+    document.getElementById("kara_audio").currentTime =
       karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
         100 -
-      0.03
-  })
-}
+      0.03;
+  });
+};
 
 let yohaneNoDOM = {
   kaizu: false,
   shokan: () => {
-    $('.player').css('transition', 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)')
-    $('.player').removeClass('hide')
-    $('.player').addClass('show')
+    $(".player").css("transition", "all 0.7s cubic-bezier(0.19, 1, 0.22, 1)");
+    $(".player").removeClass("hide");
+    $(".player").addClass("show");
 
     if (yohaneNoDOM.kaizu) {
-      yohaneNoDOM.dekakuni()
+      yohaneNoDOM.dekakuni();
     }
   },
 
   giran: () => {
-    $('.player').css(
-      'transition',
-      'all 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035)'
-    )
-    $('.player').removeClass('show')
-    $('.player_bg').removeClass('show')
-    $('.player').addClass('hide')
+    $(".player").css(
+      "transition",
+      "all 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035)"
+    );
+    $(".player").removeClass("show");
+    $(".player_bg").removeClass("show");
+    $(".player").addClass("hide");
 
     if (yohaneNoDOM.kaizu) {
-      yohaneNoDOM.chiisakuni()
+      yohaneNoDOM.chiisakuni();
     }
 
-    document.title = 'LLCT'
+    document.title = "LLCT";
   },
 
   dekakuOnce: event => {
-    if (!yohaneNoDOM.kaizu && window.matchMedia('(max-width: 800px)').matches) {
-      yohaneNoDOM.dekakuni()
+    if (!yohaneNoDOM.kaizu && window.matchMedia("(max-width: 800px)").matches) {
+      yohaneNoDOM.dekakuni();
     }
   },
 
   dekakuni: () => {
-    $('.player_bg').addClass('show')
-    $('.player').addClass('dekai')
-    $('#dekaku_btn').removeClass('in_active')
-    yohaneNoDOM.kaizu = true
+    $(".player_bg").addClass("show");
+    $(".player").addClass("dekai");
+    $("#dekaku_btn").removeClass("in_active");
+    yohaneNoDOM.kaizu = true;
   },
 
   chiisakuni: () => {
-    $('.player_bg').removeClass('show')
-    $('.player').removeClass('dekai')
-    $('#dekaku_btn').addClass('in_active')
-    yohaneNoDOM.kaizu = false
+    $(".player_bg").removeClass("show");
+    $(".player").removeClass("dekai");
+    $("#dekaku_btn").addClass("in_active");
+    yohaneNoDOM.kaizu = false;
   },
 
   enableLiveEffects: () => {
-    $('#live_btn').removeClass('in_active')
+    $("#live_btn").removeClass("in_active");
   },
 
   disableLiveEffects: () => {
-    $('#live_btn').addClass('in_active')
+    $("#live_btn").addClass("in_active");
   },
 
   play: () => {},
@@ -120,64 +120,64 @@ let yohaneNoDOM = {
   pause: () => {},
 
   showSetting: () => {
-    $('.setting_layer').removeClass('hide')
-    $('.setting_layer').addClass('show')
+    $(".setting_layer").removeClass("hide");
+    $(".setting_layer").addClass("show");
   },
 
   hideSetting: () => {
-    $('.setting_layer').removeClass('show')
-    $('.setting_layer').addClass('hide')
+    $(".setting_layer").removeClass("show");
+    $(".setting_layer").addClass("hide");
   },
 
   initialize: id => {
-    document.getElementById('karaoke').innerHTML = ''
-    yohaneNoDOM.shokan()
-    var meta = getFromLists(id)
+    document.getElementById("karaoke").innerHTML = "";
+    yohaneNoDOM.shokan();
+    var meta = getFromLists(id);
 
-    document.getElementById('album_meta').src =
-      (urlQueryParams('local') !== 'true'
-        ? './'
-        : 'https://cdn.lovelivec.kr/') +
-      '/data/' +
+    document.getElementById("album_meta").src =
+      (urlQueryParams("local") !== "true"
+        ? "./"
+        : "https://cdn.lovelivec.kr/") +
+      "/data/" +
       id +
-      '/bg.png'
+      "/bg.png";
 
-    document.getElementById('title_meta').innerText = meta[0]
-    document.getElementById('artist_meta').innerText =
-      artistLists[meta[1].artist != null ? meta[1].artist : 0]
+    document.getElementById("title_meta").innerText = meta[0];
+    document.getElementById("artist_meta").innerText =
+      artistLists[meta[1].artist != null ? meta[1].artist : 0];
 
-    document.getElementById('blade_color').innerText =
-      meta[1].blade_color || '자유'
+    document.getElementById("blade_color").innerText =
+      meta[1].blade_color || "자유";
 
-    var _hx = meta[1].blade_color
+    var _hx = meta[1].blade_color;
 
-    if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
-      document.getElementById('blade_color').style.color = _hx
+    if (_hx !== null && _hx !== "null" && _hx !== "#000000" && _hx !== "") {
+      document.getElementById("blade_color").style.color = _hx;
     }
 
-    document.getElementById('sing_tg').innerText = meta[1].sa
-      ? '이 곡은 따라 부르는 곡입니다.'
-      : ''
-    document.title = meta[1].kr || meta[0] || '제목 미 지정'
+    document.getElementById("sing_tg").innerText = meta[1].sa
+      ? "이 곡은 따라 부르는 곡입니다."
+      : "";
+    document.title = meta[1].kr || meta[0] || "제목 미 지정";
 
     if (meta[1].karaoke) {
-      loadLyrics(id, meta)
+      loadLyrics(id, meta);
     } else {
-      loadCallImage(id)
+      loadCallImage(id);
     }
-  }
-}
+  },
+};
 
 let yohane = {
   shokan: () => {
-    if (!yohane.loaded) return 0
-    yohaneNoDOM.shokan()
-    yohane.play()
+    if (!yohane.loaded) return 0;
+    yohaneNoDOM.shokan();
+    yohane.play();
   },
   giran: () => {
-    if (!yohane.loaded) return 0
-    yohaneNoDOM.giran()
-    yohane.pause()
+    if (!yohane.loaded) return 0;
+    yohaneNoDOM.giran();
+    yohane.pause();
   },
   audio_context:
     window.AudioContext || window.webkitAudioContext
@@ -191,50 +191,50 @@ let yohane = {
   loaded: false,
 
   setVolume: v => {
-    yohane.volumeStore = v
-    yohane.player().volume = v
+    yohane.volumeStore = v;
+    yohane.player().volume = v;
   },
 
   player: () => {
-    return document.getElementById('kara_audio')
+    return document.getElementById("kara_audio");
   },
 
   fade: (from, to, duration, start, cb) => {
-    if (audioVolumeFrame !== null) cancelAnimationFrame(audioVolumeFrame)
+    if (audioVolumeFrame !== null) cancelAnimationFrame(audioVolumeFrame);
 
-    var oncdPrevVolume = yohane.player().volume / 2
+    var oncdPrevVolume = yohane.player().volume / 2;
     audioVolumeFunction = force_stop => {
       if (
         start + duration <= performance.now() ||
         force_stop === true ||
         oncdPrevVolume === yohane.player().volume
       ) {
-        cancelAnimationFrame(audioVolumeFrame)
-        if (typeof cb === 'function') cb()
-        return
+        cancelAnimationFrame(audioVolumeFrame);
+        if (typeof cb === "function") cb();
+        return;
       }
-      audioVolumeFrame = requestAnimationFrame(audioVolumeFunction)
+      audioVolumeFrame = requestAnimationFrame(audioVolumeFunction);
 
-      var t = (start + duration - performance.now()) / duration
+      var t = (start + duration - performance.now()) / duration;
 
       if (from > to) {
-        yohane.player().volume = from * t
+        yohane.player().volume = from * t;
       } else {
-        yohane.player().volume = to * (1 - t)
+        yohane.player().volume = to * (1 - t);
       }
-    }
-    audioVolumeFunction()
+    };
+    audioVolumeFunction();
   },
 
-  toggle: () => yohane[yohane.player().paused ? 'play' : 'pause'](),
+  toggle: () => yohane[yohane.player().paused ? "play" : "pause"](),
   stop: () => yohane.pause(true),
   playing: () => !yohane.player().paused,
   timecode: () => yohane.player().currentTime * 100,
 
   seekTo: zto => {
-    if (yohane.playing()) yohane.pause(false, true)
-    yohane.player().currentTime = yohane.player().duration * (zto / 100)
-    yohane.play(true)
+    if (yohane.playing()) yohane.pause(false, true);
+    yohane.player().currentTime = yohane.player().duration * (zto / 100);
+    yohane.play(true);
   },
 
   seekPrev: s =>
@@ -263,61 +263,61 @@ let yohane = {
 
   liveEffects: () => {
     if (yohane.audio_context === null) {
-      return logger(2, 's', 'yohane.audio_context is not defined. TATEN', 'e')
+      return logger(2, "s", "yohane.audio_context is not defined. TATEN", "e");
     }
     if (yohane.liveEffectStore) {
       for (var i = 0; i < yohane.effectsArray.length; i++) {
-        yohane.effectsArray[i].disconnect()
+        yohane.effectsArray[i].disconnect();
       }
 
       if (yohane.audioSource) {
-        yohane.audioSource.connect(yohane.audio_context.destination)
+        yohane.audioSource.connect(yohane.audio_context.destination);
       }
 
-      yohane.liveEffectStore = false
-      yohaneNoDOM.disableLiveEffects()
-      return
+      yohane.liveEffectStore = false;
+      yohaneNoDOM.disableLiveEffects();
+      return;
     }
 
     if (!yohane.audioSource) {
       yohane.audioSource = yohane.audio_context.createMediaElementSource(
         yohane.player()
-      )
+      );
     }
 
     if (!yohane.effectsArray[0]) {
-      var highFilter = yohane.audio_context.createBiquadFilter()
-      highFilter.type = 'highshelf'
-      highFilter.frequency.value = 6000
-      highFilter.gain.value = 5
-      yohane.effectsArray.push(highFilter)
+      var highFilter = yohane.audio_context.createBiquadFilter();
+      highFilter.type = "highshelf";
+      highFilter.frequency.value = 6000;
+      highFilter.gain.value = 5;
+      yohane.effectsArray.push(highFilter);
     }
 
     if (!yohane.effectsArray[1]) {
-      reverbjs.extend(yohane.audio_context)
+      reverbjs.extend(yohane.audio_context);
       var reverbNode = yohane.audio_context.createReverbFromUrl(
-        '/Sochiru.wav',
+        "/SportsOfYorkPYorkMinster.wav",
         () => {
-          reverbNode.connect(yohane.effectsArray[0])
+          reverbNode.connect(yohane.effectsArray[0]);
         }
-      )
+      );
 
-      yohane.effectsArray.push(reverbNode)
+      yohane.effectsArray.push(reverbNode);
     }
 
     if (!yohane.buffers) {
-      yohane.analyser = yohane.audio_context.createAnalyser()
-      yohane.analyser.fftSize = 2048
-      yohane.buffers = new Float32Array(yohane.analyser.fftSize)
+      yohane.analyser = yohane.audio_context.createAnalyser();
+      yohane.analyser.fftSize = 2048;
+      yohane.buffers = new Float32Array(yohane.analyser.fftSize);
     }
 
-    yohane.audioSource.connect(yohane.effectsArray[1])
-    yohane.effectsArray[1].connect(yohane.analyser)
-    yohane.analyser.connect(yohane.audio_context.destination)
+    yohane.audioSource.connect(yohane.effectsArray[1]);
+    yohane.effectsArray[1].connect(yohane.analyser);
+    yohane.analyser.connect(yohane.audio_context.destination);
 
-    yohane.liveEffectStore = true
-    yohaneNoDOM.enableLiveEffects()
-    yohane.callEmitter()
+    yohane.liveEffectStore = true;
+    yohaneNoDOM.enableLiveEffects();
+    yohane.callEmitter();
   },
 
   volumeAvr: 1,
@@ -326,147 +326,147 @@ let yohane = {
     if (
       !yohane.liveEffectStore ||
       yohane.player().paused ||
-      typeof yohane.analyser['getFloatTimeDomainData'] === 'undefined'
+      typeof yohane.analyser["getFloatTimeDomainData"] === "undefined"
     ) {
-      if (callReqAnimation) cancelAnimationFrame(yohane.callEmitter)
-      return
+      if (callReqAnimation) cancelAnimationFrame(yohane.callEmitter);
+      return;
     }
 
-    callReqAnimation = requestAnimationFrame(yohane.callEmitter)
-    yohane.analyser.getFloatTimeDomainData(yohane.buffers)
+    callReqAnimation = requestAnimationFrame(yohane.callEmitter);
+    yohane.analyser.getFloatTimeDomainData(yohane.buffers);
 
-    let sumOfSquares = 0
+    let sumOfSquares = 0;
     for (let i = 0; i < yohane.buffers.length; i++) {
-      sumOfSquares += yohane.buffers[i] ** 2
+      sumOfSquares += yohane.buffers[i] ** 2;
     }
     // var avgPowerDecibels = Math.log10(sumOfSquares / yohane.buffers.length) * 10
 
     yohane.volumeAvr =
-      (yohane.volumeAvr + (sumOfSquares / yohane.buffers.length) * 10) / 2
+      (yohane.volumeAvr + (sumOfSquares / yohane.buffers.length) * 10) / 2;
 
     if (yohane.volumeAvr < 0.01 && yohane.waBall < 80 && yohane.liveEffectCry) {
-      yohane.waBall++
+      yohane.waBall++;
     }
 
     if (yohane.waBall >= 80 && yohane.liveEffectCry) {
-      const source = yohane.audio_context.createBufferSource()
-      source.buffer = yohane.liveEffectCry
-      source.connect(yohane.audio_context.destination)
-      source.start()
+      const source = yohane.audio_context.createBufferSource();
+      source.buffer = yohane.liveEffectCry;
+      source.connect(yohane.audio_context.destination);
+      source.start();
 
-      yohane.waBall = 0
+      yohane.waBall = 0;
     }
   },
 
   play: force => {
-    document.getElementById('pp_btn').innerHTML = 'pause'
-    yohane.player().play()
+    document.getElementById("pp_btn").innerHTML = "pause";
+    yohane.player().play();
 
-    if (force) return 0
-    yohane.fade(0, yohane.volumeStore, 600, performance.now(), () => {})
+    if (force) return 0;
+    yohane.fade(0, yohane.volumeStore, 600, performance.now(), () => {});
   },
 
   pause: (returnZero, force) => {
-    document.getElementById('pp_btn').innerHTML = 'play_arrow'
-    if (force) return yohane.player()[returnZero ? 'stop' : 'pause']()
+    document.getElementById("pp_btn").innerHTML = "play_arrow";
+    if (force) return yohane.player()[returnZero ? "stop" : "pause"]();
     yohane.fade(yohane.player().volume, 0, 600, performance.now(), () => {
-      yohane.player()[returnZero ? 'stop' : 'pause']()
-    })
+      yohane.player()[returnZero ? "stop" : "pause"]();
+    });
   },
 
   tick: () => {
-    frameWorks = requestAnimationFrame(yohane.tick)
-    if (yohane.tickVal == null) yohane.tickVal = 0
+    frameWorks = requestAnimationFrame(yohane.tick);
+    if (yohane.tickVal == null) yohane.tickVal = 0;
     if (yohane.tickVal > 20) {
-      yohane.tickVal = 0
-      yohane.deferTick()
+      yohane.tickVal = 0;
+      yohane.deferTick();
     }
-    yohane.tickVal++
+    yohane.tickVal++;
 
     if (
       yohaneNoDOM.kaizu &&
-      typeof karaokeData !== 'undefined' &&
+      typeof karaokeData !== "undefined" &&
       karaokeData !== null &&
       karaokeData.timeline
     ) {
-      Karaoke.AudioSync(yohane.timecode())
+      Karaoke.AudioSync(yohane.timecode());
     }
 
     if (yohane.player().paused) {
-      cancelAnimationFrame(frameWorks)
+      cancelAnimationFrame(frameWorks);
     }
   },
 
   deferTick: () => {
-    document.getElementById('played_time').innerHTML = timeString(
+    document.getElementById("played_time").innerHTML = timeString(
       yohane.player().currentTime
-    )
-    document.getElementById('left_time').innerHTML =
-      '-' + timeString(yohane.player().duration - yohane.player().currentTime)
+    );
+    document.getElementById("left_time").innerHTML =
+      "-" + timeString(yohane.player().duration - yohane.player().currentTime);
 
-    document.getElementById('ctrl_time').value =
-      (yohane.player().currentTime / yohane.player().duration) * 100
+    document.getElementById("ctrl_time").value =
+      (yohane.player().currentTime / yohane.player().duration) * 100;
   },
 
   initialize: id => {
-    yohaneNoDOM.initialize(id)
+    yohaneNoDOM.initialize(id);
     try {
       yohane.player().src =
-        (urlQueryParams('local') !== 'true'
-          ? './'
-          : 'https://cdn.lovelivec.kr/') +
-        'data/' +
+        (urlQueryParams("local") !== "true"
+          ? "./"
+          : "https://cdn.lovelivec.kr/") +
+        "data/" +
         id +
-        '/audio.mp3'
-      yohane.setVolume(yohane.volumeStore !== null ? yohane.volumeStore : 0.5)
+        "/audio.mp3";
+      yohane.setVolume(yohane.volumeStore !== null ? yohane.volumeStore : 0.5);
     } catch (e) {
-      yohane.loaded = false
-      return logger(2, 'r', e.message, 'e')
+      yohane.loaded = false;
+      return logger(2, "r", e.message, "e");
     }
 
     if (yohane.audio_context === null) {
       logger(
         2,
-        'r',
+        "r",
         "AudioContext API isn't supported on this browser, disabling Live performance feature.",
-        'w'
-      )
+        "w"
+      );
     }
 
     if (!yohane.liveEffectCry) {
       window
-        .fetch('/test.mp3')
+        .fetch("/test.mp3")
         .then(response => response.arrayBuffer())
         .then(arrayBuffer => yohane.audio_context.decodeAudioData(arrayBuffer))
         .then(audioBuffer => {
-          yohane.liveEffectCry = audioBuffer
-        })
+          yohane.liveEffectCry = audioBuffer;
+        });
     }
 
     yohane.player().onpause = () => {
-      yohaneNoDOM.pause()
-    }
+      yohaneNoDOM.pause();
+    };
 
-    yohane.loaded = true
+    yohane.loaded = true;
   },
 
   loadPlay: id => {
-    yohane.initialize(id)
-    yohane.play()
-    yohaneNoDOM.dekakuni()
-  }
-}
+    yohane.initialize(id);
+    yohane.play();
+    yohaneNoDOM.dekakuni();
+  },
+};
 
 const pagePlayerAnimation = (index, nextIndex, direction) => {
-  yohane[nextIndex === 2 ? 'shokan' : 'giran']()
-}
+  yohane[nextIndex === 2 ? "shokan" : "giran"]();
+};
 
 let getFromLists = id => {
-  var v = Object.keys(callLists)
-  var sb = Number(id.toString().substring(3, 5)) - 1
+  var v = Object.keys(callLists);
+  var sb = Number(id.toString().substring(3, 5)) - 1;
 
-  return [v[sb], callLists[v[sb]]]
-}
+  return [v[sb], callLists[v[sb]]];
+};
 
 let pageAdjust = {
   lists: [],
@@ -477,279 +477,279 @@ let pageAdjust = {
 
   add: item => {
     if (pageAdjust.lists.length === 0) {
-      pageAdjust.lists[0] = [item]
-      return
+      pageAdjust.lists[0] = [item];
+      return;
     }
 
     for (var i = 0; i < pageAdjust.lists.length; i++) {
-      if (typeof pageAdjust.lists[i] === 'undefined') {
-        pageAdjust.lists[i] = []
-        continue
+      if (typeof pageAdjust.lists[i] === "undefined") {
+        pageAdjust.lists[i] = [];
+        continue;
       }
       if (pageAdjust.lists[i].length >= pageAdjust.onePageItems) {
-        if (typeof pageAdjust.lists[i + 1] === 'undefined') {
-          pageAdjust.lists[i + 1] = []
+        if (typeof pageAdjust.lists[i + 1] === "undefined") {
+          pageAdjust.lists[i + 1] = [];
         }
 
-        continue
+        continue;
       }
 
-      pageAdjust.lists[i].push(item)
+      pageAdjust.lists[i].push(item);
     }
   },
 
   render: pg => {
     if (pageAdjust.cListsElement === null) {
-      pageAdjust.cListsElement = document.getElementById('call_lists')
+      pageAdjust.cListsElement = document.getElementById("call_lists");
     }
-    pageAdjust.cListsElement.innerHTML = ''
+    pageAdjust.cListsElement.innerHTML = "";
 
-    if (!pg) pg = 0
+    if (!pg) pg = 0;
 
-    var docFrag = document.createDocumentFragment()
+    var docFrag = document.createDocumentFragment();
     for (var i = 0, ls = pageAdjust.lists[pg].length; i <= ls; i++) {
-      if (typeof pageAdjust.lists[pg][i] !== 'undefined') {
-        docFrag.appendChild(pageAdjust.lists[pg][i])
+      if (typeof pageAdjust.lists[pg][i] !== "undefined") {
+        docFrag.appendChild(pageAdjust.lists[pg][i]);
         pageAdjust.lists[pg][i].className = pageAdjust.lists[pg][
           i
-        ].className.replace(/\sshokan/g, '')
+        ].className.replace(/\sshokan/g, "");
       }
     }
-    pageAdjust.cListsElement.appendChild(docFrag)
+    pageAdjust.cListsElement.appendChild(docFrag);
 
-    document.querySelectorAll('.card').forEach((v, i) => {
+    document.querySelectorAll(".card").forEach((v, i) => {
       setTimeout(() => {
-        v.className += ' shokan'
-      }, 25 * i)
-    })
+        v.className += " shokan";
+      }, 25 * i);
+    });
 
     window.lazyloadObj = new LazyLoad({
-      elements_selector: '.lazy'
-    })
-    document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
+      elements_selector: ".lazy",
+    });
+    document.getElementById("totalPage").innerHTML = pageAdjust.lists.length;
   },
 
   buildPage: () => {
-    var objKeys = Object.keys(callLists)
-    pageAdjust.lists = []
+    var objKeys = Object.keys(callLists);
+    pageAdjust.lists = [];
 
     for (var i = 0; i < objKeys.length; i++) {
-      var curObj = callLists[objKeys[i]]
-      var baseElement = document.createElement('div')
-      baseElement.className = 'card'
-      baseElement.setAttribute('onclick', 'yohane.loadPlay(' + curObj.id + ')')
+      var curObj = callLists[objKeys[i]];
+      var baseElement = document.createElement("div");
+      baseElement.className = "card";
+      baseElement.setAttribute("onclick", "yohane.loadPlay(" + curObj.id + ")");
 
-      var c = document.createDocumentFragment()
+      var c = document.createDocumentFragment();
 
-      var artImage = document.createElement('img')
-      artImage.id = curObj.id + '_bgimg'
-      artImage.className = 'lazy'
+      var artImage = document.createElement("img");
+      artImage.id = curObj.id + "_bgimg";
+      artImage.className = "lazy";
       artImage.dataset.src =
-        (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
-        'data/' +
+        (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
+        "data/" +
         curObj.id +
-        '/bg.png'
+        "/bg.png";
 
-      c.appendChild(artImage)
+      c.appendChild(artImage);
 
-      var titleText = document.createElement('h3')
-      titleText.className = 'txt'
+      var titleText = document.createElement("h3");
+      titleText.className = "txt";
       titleText.innerText =
-        dataYosoro.get('mikan') === 'true'
+        dataYosoro.get("mikan") === "true"
           ? curObj.translated || objKeys[i]
-          : objKeys[i]
+          : objKeys[i];
 
-      c.appendChild(titleText)
-      baseElement.appendChild(c)
+      c.appendChild(titleText);
+      baseElement.appendChild(c);
 
-      pageAdjust.add(baseElement)
+      pageAdjust.add(baseElement);
     }
 
-    pageAdjust.setPage(0)
+    pageAdjust.setPage(0);
   },
 
   setPage: s => {
     if (s >= pageAdjust.lists.length || s < 0) {
-      return 0
+      return 0;
     }
 
-    pageAdjust.currentPage = s
-    pageAdjust.render(pageAdjust.currentPage)
+    pageAdjust.currentPage = s;
+    pageAdjust.render(pageAdjust.currentPage);
 
-    document.getElementById('currentPage').innerHTML =
-      pageAdjust.currentPage + 1
+    document.getElementById("currentPage").innerHTML =
+      pageAdjust.currentPage + 1;
   },
 
   nextPage: () => {
-    return pageAdjust.setPage(pageAdjust.currentPage + 1)
+    return pageAdjust.setPage(pageAdjust.currentPage + 1);
   },
 
   prevPage: () => {
-    return pageAdjust.setPage(pageAdjust.currentPage - 1)
-  }
-}
+    return pageAdjust.setPage(pageAdjust.currentPage - 1);
+  },
+};
 
 const resizeItemsCheck = () => {
-  if (window.matchMedia('(min-width: 1501px)').matches) return 12
-  if (window.matchMedia('(max-width: 1500px) and (min-width: 801px)').matches) {
-    return 8
+  if (window.matchMedia("(min-width: 1501px)").matches) return 12;
+  if (window.matchMedia("(max-width: 1500px) and (min-width: 801px)").matches) {
+    return 8;
   }
-  if (window.matchMedia('(max-width: 800px)').matches) return 4
+  if (window.matchMedia("(max-width: 800px)").matches) return 4;
 
-  return 4
-}
+  return 4;
+};
 
 const keys = {
   27: [
     e => {
-      yohaneNoDOM.chiisakuni()
+      yohaneNoDOM.chiisakuni();
     },
-    false
+    false,
   ],
   32: [
     e => {
-      yohane.toggle()
+      yohane.toggle();
     },
-    true
+    true,
   ],
   37: [
     e => {
-      yohane.seekPrev(5)
+      yohane.seekPrev(5);
     },
-    true
+    true,
   ],
   38: [
     e => {
-      yohane.volumeUp(0.05)
+      yohane.volumeUp(0.05);
     },
-    true
+    true,
   ],
   39: [
     e => {
-      yohane.seekNext(5)
+      yohane.seekNext(5);
     },
-    true
+    true,
   ],
   40: [
     e => {
-      yohane.volumeDown(0.05)
+      yohane.volumeDown(0.05);
     },
-    true
-  ]
-}
+    true,
+  ],
+};
 
 $(document).ready(() => {
   // 인터넷 익스플로더 좀 쓰지 맙시다
   if (/* @cc_on!@ */ false || !!document.documentMode) {
-    document.getElementById('PLEASE_STOP_USE_INTERNET_EXPLORER').style.display =
-      'block'
+    document.getElementById("PLEASE_STOP_USE_INTERNET_EXPLORER").style.display =
+      "block";
   }
 
   yohane.player().onplay = () => {
-    requestAnimationFrame(yohane.tick)
-  }
+    requestAnimationFrame(yohane.tick);
+  };
 
   yohane.player().onpause = () => {
-    cancelAnimationFrame(yohane.tick)
-  }
+    cancelAnimationFrame(yohane.tick);
+  };
 
   Sakurauchi.listen(
-    'onplay',
+    "onplay",
     () => requestAnimationFrame(yohane.tick),
     yohane.player()
-  )
+  );
   Sakurauchi.listen(
-    'onpause',
+    "onpause",
     () => cancelAnimationFrame(yohane.tick),
     yohane.player()
-  )
+  );
   Sakurauchi.listen(
-    ['seeking', 'seeked'],
+    ["seeking", "seeked"],
     () => {
       Karaoke.clearSync(() => {
-        Karaoke.AudioSync(Math.floor(yohane.timecode()), true)
-      })
+        Karaoke.AudioSync(Math.floor(yohane.timecode()), true);
+      });
     },
     yohane.player()
-  )
+  );
 
-  Sakurauchi.listen('keydown', ev => {
-    logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
-    if (typeof keys[ev.keyCode] === 'undefined') return 0
-    keys[ev.keyCode][0](ev)
-    if (keys[ev.keyCode][1]) ev.preventDefault()
-  })
+  Sakurauchi.listen("keydown", ev => {
+    logger(2, "s", ev.key + " / " + ev.keyCode, "info");
+    if (typeof keys[ev.keyCode] === "undefined") return 0;
+    keys[ev.keyCode][0](ev);
+    if (keys[ev.keyCode][1]) ev.preventDefault();
+  });
 
-  window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
-  selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
-  selectorHammer.on('swipe', ev => {
-    pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
-  })
+  window.selectorHammer = new Hammer(document.getElementById("fp_ct"));
+  selectorHammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+  selectorHammer.on("swipe", ev => {
+    pageAdjust[ev.direction === 2 ? "nextPage" : "prevPage"]();
+  });
 
-  window.playerHammer = new Hammer(document.getElementById('kara_player'))
-  playerHammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
-  playerHammer.get('pinch').set({ enable: true })
-  playerHammer.on('swipe', ev => {
+  window.playerHammer = new Hammer(document.getElementById("kara_player"));
+  playerHammer.get("swipe").set({ direction: Hammer.DIRECTION_VERTICAL });
+  playerHammer.get("pinch").set({ enable: true });
+  playerHammer.on("swipe", ev => {
     if (ev.direction === 16) {
-      yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohane.giran()
+      yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohane.giran();
     } else if (ev.direction === 8) {
-      yohaneNoDOM.dekakuni()
+      yohaneNoDOM.dekakuni();
     }
-  })
+  });
 
   $.ajax({
     url:
-      (urlQueryParams('local') !== 'true' ? './' : '//cdn.lovelivec.kr/') +
-      'data/lists.json',
+      (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
+      "data/lists.json",
     success: d => {
       try {
-        if (typeof d === 'string') callLists = d
+        if (typeof d === "string") callLists = d;
       } catch (e) {
-        logger(2, 'r', e.message, 'e')
+        logger(2, "r", e.message, "e");
       }
 
-      callLists = d
-      $('#loading_spin_ctlst').addClass('done')
-      pageAdjust.buildPage()
+      callLists = d;
+      $("#loading_spin_ctlst").addClass("done");
+      pageAdjust.buildPage();
     },
-    error: function (err) {
-      logger(2, 'r', err.message, 'e')
-    }
-  })
+    error: function(err) {
+      logger(2, "r", err.message, "e");
+    },
+  });
 
-  document.getElementById('genki_year').innerText = new Date().getFullYear()
-  document.getElementById('zenkai_month').innerText = new Date().getMonth()
-  document.getElementById('day_day').innerText = new Date().getDate()
-  document.getElementById('day').innerText = [
-    '일',
-    '월',
-    '화',
-    '수',
-    '목',
-    '금',
-    '토'
-  ][new Date().getDay()]
+  document.getElementById("genki_year").innerText = new Date().getFullYear();
+  document.getElementById("zenkai_month").innerText = new Date().getMonth();
+  document.getElementById("day_day").innerText = new Date().getDate();
+  document.getElementById("day").innerText = [
+    "일",
+    "월",
+    "화",
+    "수",
+    "목",
+    "금",
+    "토",
+  ][new Date().getDay()];
 
-  Sakurauchi.listen('focus', () => {
-    if (!yohane.playing()) return 0
+  Sakurauchi.listen("focus", () => {
+    if (!yohane.playing()) return 0;
 
-    Karaoke.clearSync()
-    Karaoke.AudioSync(yohane.timecode(), true)
-  })
+    Karaoke.clearSync();
+    Karaoke.AudioSync(yohane.timecode(), true);
+  });
 
-  Sakurauchi.listen('blur', () => {
+  Sakurauchi.listen("blur", () => {
     if (audioVolumeFunction !== null && audioVolumeFrame !== null) {
-      audioVolumeFunction(true)
+      audioVolumeFunction(true);
     }
-  })
+  });
   $(window).resize(() => {
-    var reszCk = resizeItemsCheck()
+    var reszCk = resizeItemsCheck();
     if (pageAdjust.onePageItems !== reszCk) {
-      pageAdjust.onePageItems = reszCk
-      pageAdjust.buildPage()
+      pageAdjust.onePageItems = reszCk;
+      pageAdjust.buildPage();
     }
-    pageAdjust.onePageItems = reszCk
-  })
-  pageAdjust.onePageItems = resizeItemsCheck()
-  $('#curt').addClass('hide_curtain')
-})
+    pageAdjust.onePageItems = reszCk;
+  });
+  pageAdjust.onePageItems = resizeItemsCheck();
+  $("#curt").addClass("hide_curtain");
+});

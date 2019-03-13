@@ -251,7 +251,7 @@ var Karaoke = {
   },
 
   AudioSync: function(timeCode, fullRender) {
-    chillout.forEach(karaokeData.timeline, (karaLine, karaLineNum) => {
+    karaokeData.timeline.forEach((karaLine, karaLineNum) => {
       if (
         (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
         !fullRender
@@ -259,7 +259,7 @@ var Karaoke = {
         return 0;
       }
 
-      chillout.forEach(karaLine.collection, (karaWord, karaWordNum) => {
+      karaLine.collection.forEach((karaWord, karaWordNum) => {
         if (karaWord.start_time === 0 || karaWord.start_time === "0") return 0;
         karaWord.start_time = Number(karaWord.start_time);
         karaWord.end_time = Number(karaWord.end_time);
