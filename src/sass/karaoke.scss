@@ -8,7 +8,7 @@
   margin: 0;
   transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   color: #a0a0a0;
-  will-change: color text-shadow;
+  will-change: color, text-shadow;
 }
 
 .p_line {

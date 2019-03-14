@@ -140,7 +140,7 @@ gulp.task("watch", () => {
 
   return gulp.src("./dist").pipe(
     plugins.webserver({
-      livereload: true,
+      livereload: false,
       host: "0.0.0.0",
       port: pkgs.webSVPort,
       directoryListing: false,

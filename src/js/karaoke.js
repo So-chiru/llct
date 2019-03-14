@@ -250,6 +250,8 @@ var Karaoke = {
     }
   },
 
+  cachedDom: {},
+
   AudioSync: function(timeCode, fullRender) {
     for (
       var karaLineNum = 0;
@@ -274,14 +276,25 @@ var Karaoke = {
         karaWord.start_time = Number(karaWord.start_time);
         karaWord.end_time = Number(karaWord.end_time);
 
-        var kards = document.getElementById(
-          "kara_" + karaLineNum + "_" + karaWordNum
-        );
-        kards.classList[
-          timeCode > karaWord.start_time && timeCode > karaWord.end_time
-            ? "add"
-            : "remove"
-        ]("josenPassing");
+        if (
+          typeof Karaoke.cachedDom[karaLineNum + "." + karaWordNum] ===
+          "undefined"
+        ) {
+          Karaoke.cachedDom[
+            karaLineNum + "." + karaWordNum
+          ] = document.getElementById(
+            "kara_" + karaLineNum + "_" + karaWordNum
+          );
+        }
+        var kards = Karaoke.cachedDom[karaLineNum + "." + karaWordNum];
+
+        if (!/josenPassing/g.test(kards.className)) {
+          kards.classList[
+            timeCode > karaWord.start_time && timeCode > karaWord.end_time
+              ? "add"
+              : "remove"
+          ]("josenPassing");
+        }
 
         if (!/currentSync/g.test(kards.className)) {
           kards.classList[timeCode > karaWord.start_time ? "add" : "remove"](
@@ -306,64 +319,15 @@ var Karaoke = {
             "s ease 0s";
         }
 
-        if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
+        if (
+          (/\scurrentSync/g.test(kards.className) &&
+            timeCode < karaWord.start_time) ||
+          timeCode > karaWord.end_time
+        ) {
           kards.className = kards.className.replace(/\scurrentSync/g, "");
           kards.style.transition = "";
         }
       }
-
-      /*
-        karaokeData.timeline.forEach((karaLine, karaLineNum) => {
-          if (
-            (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
-            !fullRender
-          ) {
-            return 0;
-          }
-
-          karaLine.collection.forEach((karaWord, karaWordNum) => {
-            if (karaWord.start_time === 0 || karaWord.start_time === "0") return 0;
-            karaWord.start_time = Number(karaWord.start_time);
-            karaWord.end_time = Number(karaWord.end_time);
-
-            var kards = document.getElementById(
-              "kara_" + karaLineNum + "_" + karaWordNum
-            );
-            kards.classList[
-              timeCode > karaWord.start_time && timeCode > karaWord.end_time
-                ? "add"
-                : "remove"
-            ]("josenPassing");
-
-            if (!/currentSync/g.test(kards.className)) {
-              kards.classList[timeCode > karaWord.start_time ? "add" : "remove"](
-                "currentSync"
-              );
-              var karaokeDuration =
-                typeof karaWord.pronunciation_time === "undefined" ||
-                karaWord.pronunciation_time === 0
-                  ? (((typeof karaLine.collection[karaWordNum + 1] !== "undefined"
-                      ? karaLine.collection[karaWordNum + 1].start_time
-                      : karaWord.end_time) || 70) -
-                      karaWord.start_time) /
-                    2
-                  : karaWord.pronunciation_time;
-              if (karaokeDuration < 300) karaokeDuration += 30;
-
-              kards.style.transition =
-                "text-shadow " +
-                karaokeDuration / 300 +
-                "s ease 0s, color " +
-                karaokeDuration / 300 +
-                "s ease 0s";
-            }
-
-            if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
-              kards.className = kards.className.replace(/\scurrentSync/g, "");
-              kards.style.transition = "";
-            }
-          });
-      */
     }
   },
 };

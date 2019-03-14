@@ -374,7 +374,7 @@ let yohane = {
     });
   },
 
-  tick: () => {
+  tick: notAnimation => {
     frameWorks = requestAnimationFrame(yohane.tick);
     if (yohane.tickVal == null) yohane.tickVal = 0;
     if (yohane.tickVal > 20) {
@@ -541,26 +541,28 @@ let pageAdjust = {
 
       var c = document.createDocumentFragment();
 
-      var artImage = document.createElement("img");
-      artImage.style = "background-color: #323232;";
-      artImage.id = curObj.id + "_bgimg";
-      artImage.className = "lazy";
-      /* artImage.dataset.src =
-        (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
-        "data/" +
-        curObj.id +
-        "/bg.png"; */
+      if (dataYosoro.get("sakana") === "true") {
+        var artImage = document.createElement("img");
+        artImage.style = "background-color: #323232;";
+        artImage.id = curObj.id + "_bgimg";
+        artImage.className = "lazy";
+        artImage.dataset.src =
+          (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
+          "data/" +
+          curObj.id +
+          "/bg.png";
 
-      c.appendChild(artImage);
+        c.appendChild(artImage);
+      } else {
+        baseElement.style.backgroundColor = "#323232";
+      }
 
       var titleText = document.createElement("h3");
       titleText.className = "txt";
-      titleText.innerText = curObj.id;
-      /*
+      titleText.innerText =
         dataYosoro.get("mikan") === "true"
           ? curObj.translated || objKeys[i]
           : objKeys[i];
-      */
 
       c.appendChild(titleText);
       baseElement.appendChild(c);
@@ -657,16 +659,6 @@ $(document).ready(() => {
   };
 
   Sakurauchi.listen(
-    "onplay",
-    () => requestAnimationFrame(yohane.tick),
-    yohane.player()
-  );
-  Sakurauchi.listen(
-    "onpause",
-    () => cancelAnimationFrame(yohane.tick),
-    yohane.player()
-  );
-  Sakurauchi.listen(
     ["seeking", "seeked"],
     () => {
       Karaoke.clearSync(() => {
@@ -689,7 +681,7 @@ $(document).ready(() => {
     pageAdjust[ev.direction === 2 ? "nextPage" : "prevPage"]();
   });
 
-  window.playerHammer = new Hammer(document.getElementById("kara_player"));
+  window.playerHammer = new Hammer(document.getElementById("dash_wrp_ham"));
   playerHammer.get("swipe").set({ direction: Hammer.DIRECTION_VERTICAL });
   playerHammer.get("pinch").set({ enable: true });
   playerHammer.on("swipe", ev => {
