@@ -251,16 +251,26 @@ var Karaoke = {
   },
 
   AudioSync: function(timeCode, fullRender) {
-    karaokeData.timeline.forEach((karaLine, karaLineNum) => {
+    for (
+      var karaLineNum = 0;
+      karaLineNum < karaokeData.timeline.length;
+      karaLineNum++
+    ) {
+      var karaLine = karaokeData.timeline[karaLineNum];
       if (
         (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
         !fullRender
       ) {
-        return 0;
+        continue;
       }
 
-      karaLine.collection.forEach((karaWord, karaWordNum) => {
-        if (karaWord.start_time === 0 || karaWord.start_time === "0") return 0;
+      for (
+        var karaWordNum = 0;
+        karaWordNum < karaLine.collection.length;
+        karaWordNum++
+      ) {
+        var karaWord = karaLine.collection[karaWordNum];
+        if (karaWord.start_time === 0 || karaWord.start_time === "0") break;
         karaWord.start_time = Number(karaWord.start_time);
         karaWord.end_time = Number(karaWord.end_time);
 
@@ -300,8 +310,61 @@ var Karaoke = {
           kards.className = kards.className.replace(/\scurrentSync/g, "");
           kards.style.transition = "";
         }
-      });
-    });
+      }
+
+      /*
+        karaokeData.timeline.forEach((karaLine, karaLineNum) => {
+          if (
+            (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
+            !fullRender
+          ) {
+            return 0;
+          }
+
+          karaLine.collection.forEach((karaWord, karaWordNum) => {
+            if (karaWord.start_time === 0 || karaWord.start_time === "0") return 0;
+            karaWord.start_time = Number(karaWord.start_time);
+            karaWord.end_time = Number(karaWord.end_time);
+
+            var kards = document.getElementById(
+              "kara_" + karaLineNum + "_" + karaWordNum
+            );
+            kards.classList[
+              timeCode > karaWord.start_time && timeCode > karaWord.end_time
+                ? "add"
+                : "remove"
+            ]("josenPassing");
+
+            if (!/currentSync/g.test(kards.className)) {
+              kards.classList[timeCode > karaWord.start_time ? "add" : "remove"](
+                "currentSync"
+              );
+              var karaokeDuration =
+                typeof karaWord.pronunciation_time === "undefined" ||
+                karaWord.pronunciation_time === 0
+                  ? (((typeof karaLine.collection[karaWordNum + 1] !== "undefined"
+                      ? karaLine.collection[karaWordNum + 1].start_time
+                      : karaWord.end_time) || 70) -
+                      karaWord.start_time) /
+                    2
+                  : karaWord.pronunciation_time;
+              if (karaokeDuration < 300) karaokeDuration += 30;
+
+              kards.style.transition =
+                "text-shadow " +
+                karaokeDuration / 300 +
+                "s ease 0s, color " +
+                karaokeDuration / 300 +
+                "s ease 0s";
+            }
+
+            if (timeCode < karaWord.start_time || timeCode > karaWord.end_time) {
+              kards.className = kards.className.replace(/\scurrentSync/g, "");
+              kards.style.transition = "";
+            }
+          });
+      */
+    }
   },
 };
 

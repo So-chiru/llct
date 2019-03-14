@@ -542,22 +542,25 @@ let pageAdjust = {
       var c = document.createDocumentFragment();
 
       var artImage = document.createElement("img");
+      artImage.style = "background-color: #323232;";
       artImage.id = curObj.id + "_bgimg";
       artImage.className = "lazy";
-      artImage.dataset.src =
+      /* artImage.dataset.src =
         (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
         "data/" +
         curObj.id +
-        "/bg.png";
+        "/bg.png"; */
 
       c.appendChild(artImage);
 
       var titleText = document.createElement("h3");
       titleText.className = "txt";
-      titleText.innerText =
+      titleText.innerText = curObj.id;
+      /*
         dataYosoro.get("mikan") === "true"
           ? curObj.translated || objKeys[i]
           : objKeys[i];
+      */
 
       c.appendChild(titleText);
       baseElement.appendChild(c);
@@ -729,6 +732,24 @@ $(document).ready(() => {
     "금",
     "토",
   ][new Date().getDay()];
+
+  /*
+    Sakurauchi.listen(
+      "touchstart",
+      () => {
+        document.getElementById("kara_player").className += " hover";
+      },
+      document.getElementById("kara_player")
+    );
+
+    Sakurauchi.listen(
+      "touchend",
+      () => {
+        document.getElementById("kara_player").classList.remove("hover");
+      },
+      document.getElementById("kara_player")
+    );
+  */
 
   Sakurauchi.listen("focus", () => {
     if (!yohane.playing()) return 0;
