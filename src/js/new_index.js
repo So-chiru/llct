@@ -72,6 +72,20 @@ const changes = [
     fn: v => {
       $('body')[v == 'true' || v == true ? 'addClass' : 'removeClass']('dark')
     }
+  },
+  {
+    id: 'useInteractiveCall',
+    data_key: 'interactiveCall',
+    checkbox: true,
+    default: true,
+    fn: _v => {}
+  },
+  {
+    id: 'doNotUseMusicPlayer',
+    data_key: 'notUsingMP',
+    checkbox: true,
+    default: false,
+    fn: _v => {}
   }
 ]
 
@@ -163,6 +177,12 @@ let yohaneNoDOM = {
   },
 
   initialize: id => {
+    if (
+      dataYosoro.get('notUsingMP') == 'true' ||
+      dataYosoro.get('notUsingMP') == true
+    ) {
+      return 0
+    }
     if (popsHeart.get('p_id') !== id.toString()) {
       popsHeart.set('pid', id)
     }
@@ -201,7 +221,11 @@ let yohaneNoDOM = {
       : ''
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
-    if (meta[1].karaoke) {
+    if (
+      meta[1].karaoke &&
+      (dataYosoro.get('interactiveCall') !== 'false' &&
+        dataYosoro.get('interactiveCall') != false)
+    ) {
       loadLyrics(id, meta)
     } else {
       loadCallImage(id)
@@ -450,6 +474,15 @@ let yohane = {
   },
 
   initialize: id => {
+    if (
+      dataYosoro.get('notUsingMP') == 'true' ||
+      dataYosoro.get('notUsingMP') == true
+    ) {
+      // TODO : PhotoSwipe 콜표 표시
+
+      return false
+    }
+
     yohaneNoDOM.initialize(id)
     try {
       yohane.player().src =
@@ -489,12 +522,15 @@ let yohane = {
     }
 
     yohane.loaded = true
+
+    return true
   },
 
   loadPlay: id => {
-    yohane.initialize(id)
-    yohane.play()
-    yohaneNoDOM.dekakuni()
+    if (yohane.initialize(id)) {
+      yohane.play()
+      yohaneNoDOM.dekakuni()
+    }
   }
 }
 
@@ -694,6 +730,7 @@ $(document).ready(() => {
 
     if (typeof val === 'undefined' || val == null) {
       dataYosoro.set(changes[i].data_key, changes[i].default)
+      val = changes[i].default
     }
 
     document.getElementById(changes[i].id)[

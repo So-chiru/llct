@@ -86,8 +86,14 @@ html.index
         .setting_sc
             h1 설정
             br
-            label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0, this.checked)"><span class="checkmark"></span>
-            label.ckbox 다크 모드 <input id="darkMode" type="checkbox" checked="none" onclick="changedOption(1, this.checked)"><span class="checkmark"></span>
+            p
+                label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0, this.checked)"><span class="checkmark"></span>
+            p
+                label.ckbox 다크 모드 <input id="darkMode" type="checkbox" checked="none" onclick="changedOption(1, this.checked)"><span class="checkmark"></span>
+            p
+                label.ckbox 가능한대로 인터렉티브 콜표 사용 (미사용시 콜표 이미지 표시) <input id="useInteractiveCall" type="checkbox" checked="none" onclick="changedOption(2, this.checked)"><span class="checkmark"></span>
+            p
+                label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" type="checkbox" checked="none" onclick="changedOption(3, this.checked)"><span class="checkmark"></span>
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 깨진 레이아웃이 보이죠?
         hr
