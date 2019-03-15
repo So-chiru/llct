@@ -2,7 +2,7 @@ html.index
   head
     title LLCT
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=0.8, user-scalable=no')
+    meta(name='viewport', content='width=device-width, initial-scale=0.8')
     meta(name='theme-color', content='#16aaf9')
     meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
     meta(name="tags" )
@@ -20,8 +20,6 @@ html.index
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
-    script(src='./lib/ss/smooth-scrollbar.js')
-    script(src='./lib/ss/plugins/overscroll.js')
     script(src='./js/new_index.min.js')
     script(src='./js/lib/hammer.min.js')
     script(async src='./js/lib/reverb.min.js')
@@ -37,7 +35,7 @@ html.index
             h3 LoveLive! Call Table Guide
     .player_bg(onclick="yohaneNoDOM.chiisakuni()")
     #kara_player.player.hide(onclick="yohaneNoDOM.dekakuOnce(this.target)")
-        .dash_wrapper#dash_wrp_ham
+        .dash_wrapper#dash_wrp_ham(data-scrollbar)
             .visible_dash
                 .info
                     img#album_meta.c.cover
@@ -53,13 +51,14 @@ html.index
                 .ctrls
                     span#pp_btn.material-icons(onclick="yohane.toggle()") play_arrow
                     span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-                    span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
-        .lyrics_wrapper(data-scrollbar)
+                    span#dekaku_btn.material-icons(onclick="(function(){yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()})()") keyboard_arrow_down
+        .lyrics_wrapper
             p.blade_c
-            | 블레이드 추천 색상 : 
-            span#blade_color 자유
+                | 블레이드 추천 색상 : 
+                span#blade_color 자유
             p.is_singalong#sing_tg 이 곡은 떼창 곡이 아닙니다.
             .karaoke#karaoke
+            p.bottom_margin
         audio#kara_audio
     .contents_collection
         .full_page_ct#fp_ct
@@ -87,7 +86,8 @@ html.index
         .setting_sc
             h1 설정
             br
-            label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0)"><span class="checkmark"></span>
+            label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0, this.checked)"><span class="checkmark"></span>
+            label.ckbox 다크 모드 <input id="darkMode" type="checkbox" checked="none" onclick="changedOption(1, this.checked)"><span class="checkmark"></span>
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 깨진 레이아웃이 보이죠?
         hr
