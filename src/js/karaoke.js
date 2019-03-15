@@ -288,13 +288,11 @@ var Karaoke = {
         }
         var kards = Karaoke.cachedDom[karaLineNum + "." + karaWordNum];
 
-        if (!/josenPassing/g.test(kards.className)) {
-          kards.classList[
-            timeCode > karaWord.start_time && timeCode > karaWord.end_time
-              ? "add"
-              : "remove"
-          ]("josenPassing");
-        }
+        kards.classList[
+          timeCode > karaWord.start_time && timeCode > karaWord.end_time
+            ? "add"
+            : "remove"
+        ]("josenPassing");
 
         if (!/currentSync/g.test(kards.className)) {
           kards.classList[timeCode > karaWord.start_time ? "add" : "remove"](

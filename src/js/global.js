@@ -1,4 +1,16 @@
-/* global $, location */
+var popsHeart = {
+  __sp: () => typeof window.history.pushState !== "undefined",
+  set: function(key, value, title) {
+    if (!popsHeart.__sp) throw "This browser doesn't support pushState API.";
+    var nsObj = {};
+    nsObj[key] = value;
+    window.history.pushState(nsObj, title, "/?" + key + "=" + value);
+  },
+
+  get: function(key) {
+    return urlQueryParams(key);
+  },
+};
 
 var dataYosoro = {
   isStorageSupport: window.localStorage != null,
@@ -102,17 +114,17 @@ let Sakurauchi = {
     }
   },
 
-  listen: (k, fn, pr) => {
-    if (typeof pr === "undefined" || pr == null) pr = window;
+  listen: (k, fn, parent) => {
+    if (typeof parent === "undefined" || parent == null) parent = window;
 
     if (k.constructor === Array) {
       for (var i = 0; i < k.length; i++) {
-        Sakurauchi.listen(k[i], fn, pr);
+        Sakurauchi.listen(k[i], fn, parent);
       }
       return;
     }
 
-    pr.addEventListener(k, (...evs) => Sakurauchi.run(k, ...evs));
+    parent.addEventListener(k, (...evs) => Sakurauchi.run(k, ...evs));
     return Sakurauchi.add(k, fn);
   },
 
@@ -151,6 +163,10 @@ let Sakurauchi = {
     }
   },
 };
+
+Sakurauchi.listen("onpopstate", ev => {
+  console.log(ev);
+});
 
 $(document).ready(() => {
   if (dataYosoro.get("tatenshi") === "true") $(document.body).addClass("dark");

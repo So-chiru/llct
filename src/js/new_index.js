@@ -84,6 +84,8 @@ let yohaneNoDOM = {
       yohaneNoDOM.chiisakuni();
     }
 
+    popsHeart.set("pid", "");
+
     document.title = "LLCT";
   },
 
@@ -130,6 +132,16 @@ let yohaneNoDOM = {
   },
 
   initialize: id => {
+    if (popsHeart.get("p_id") !== id.toString()) {
+      popsHeart.set("pid", id);
+    }
+
+    Scrollbar.use(window.OverscrollPlugin);
+    Scrollbar.initAll({
+      plugins: {
+        overscroll: {} | false,
+      },
+    });
     document.getElementById("karaoke").innerHTML = "";
     yohaneNoDOM.shokan();
     var meta = getFromLists(id);
@@ -559,10 +571,11 @@ let pageAdjust = {
 
       var titleText = document.createElement("h3");
       titleText.className = "txt";
-      titleText.innerText =
-        dataYosoro.get("mikan") === "true"
-          ? curObj.translated || objKeys[i]
-          : objKeys[i];
+      titleText.innerText = true
+        ? curObj.id
+        : dataYosoro.get("mikan") === "true"
+        ? curObj.translated || objKeys[i]
+        : objKeys[i];
 
       c.appendChild(titleText);
       baseElement.appendChild(c);
@@ -599,7 +612,7 @@ const resizeItemsCheck = () => {
   if (window.matchMedia("(max-width: 1500px) and (min-width: 801px)").matches) {
     return 8;
   }
-  if (window.matchMedia("(max-width: 800px)").matches) return 4;
+  if (window.matchMedia("(max-width: 800px)").matches) return 6;
 
   return 4;
 };
@@ -693,9 +706,7 @@ $(document).ready(() => {
   });
 
   $.ajax({
-    url:
-      (urlQueryParams("local") !== "true" ? "./" : "//cdn.lovelivec.kr/") +
-      "data/lists.json",
+    url: "./data/lists.json",
     success: d => {
       try {
         if (typeof d === "string") callLists = d;
@@ -706,6 +717,11 @@ $(document).ready(() => {
       callLists = d;
       $("#loading_spin_ctlst").addClass("done");
       pageAdjust.buildPage();
+
+      if (popsHeart.get("pid") !== null && !isNaN(popsHeart.get("pid"))) {
+        yohane.initialize(popsHeart.get("pid"));
+        yohaneNoDOM.dekakuni();
+      }
     },
     error: function(err) {
       logger(2, "r", err.message, "e");
@@ -725,23 +741,21 @@ $(document).ready(() => {
     "토",
   ][new Date().getDay()];
 
-  /*
-    Sakurauchi.listen(
-      "touchstart",
-      () => {
-        document.getElementById("kara_player").className += " hover";
-      },
-      document.getElementById("kara_player")
-    );
+  Sakurauchi.listen(
+    "touchstart",
+    () => {
+      document.getElementById("kara_player").className += " hover";
+    },
+    document.getElementById("kara_player")
+  );
 
-    Sakurauchi.listen(
-      "touchend",
-      () => {
-        document.getElementById("kara_player").classList.remove("hover");
-      },
-      document.getElementById("kara_player")
-    );
-  */
+  Sakurauchi.listen(
+    "touchend",
+    () => {
+      document.getElementById("kara_player").classList.remove("hover");
+    },
+    document.getElementById("kara_player")
+  );
 
   Sakurauchi.listen("focus", () => {
     if (!yohane.playing()) return 0;

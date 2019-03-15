@@ -20,6 +20,8 @@ html.index
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
+    script(src='./lib/ss/smooth-scrollbar.js')
+    script(src='./lib/ss/plugins/overscroll.js')
     script(src='./js/new_index.min.js')
     script(src='./js/lib/hammer.min.js')
     script(async src='./js/lib/reverb.min.js')
@@ -49,16 +51,15 @@ html.index
                     input#ctrl_time.hareru.c(type="range", min="0" max="100" step="0.1" value="0" name="" oninput="yohane.seekTo( this.value )")
                     p#left_time.c.mga - 4 : 59
                 .ctrls
-                    span#pp_btn.material-icons(onclick="yohane.toggle()") pause
+                    span#pp_btn.material-icons(onclick="yohane.toggle()") play_arrow
                     span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
                     span#dekaku_btn.material-icons(onclick="yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()") keyboard_arrow_down
-        .lyrics_wrapper
+        .lyrics_wrapper(data-scrollbar)
             p.blade_c
-              | 블레이드 추천 색상 : 
-              span#blade_color 자유
+            | 블레이드 추천 색상 : 
+            span#blade_color 자유
             p.is_singalong#sing_tg 이 곡은 떼창 곡이 아닙니다.
             .karaoke#karaoke
-
         audio#kara_audio
     .contents_collection
         .full_page_ct#fp_ct
