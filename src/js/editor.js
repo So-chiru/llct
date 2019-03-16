@@ -165,7 +165,7 @@ $(document).ready(() => {
     window.songID = urlQueryParams('id')
 
     wavesurfer.load(
-      (urlQueryParams('local') !== null ? './' : 'https://cdn.lovelivec.kr/') +
+      (urlQueryParams('local') === 'true' ? './' : 'https://cdn.lovelivec.kr/') +
         'data/' +
         songID +
         '/audio.mp3'

@@ -21,7 +21,7 @@ const loadCallImage = id => {
     '<img class="call_img" onclick="openCallImage(' +
     id +
     ')" src="' +
-    (urlQueryParams('local') !== 'true' ? './' : 'https://cdn.lovelivec.kr/') +
+    (urlQueryParams('local') === 'true' ? './' : 'https://cdn.lovelivec.kr/') +
     'data/' +
     id +
     '/call.jpg' +
@@ -34,7 +34,7 @@ const openCallImage = id => {
   var items = [
     {
       src:
-        (urlQueryParams('local') !== 'true'
+        (urlQueryParams('local') === 'true'
           ? './'
           : 'https://cdn.lovelivec.kr/') +
         'data/' +
@@ -58,10 +58,7 @@ const loadLyrics = (id, obj) => {
   // urlQueryParams('id')
   $.ajax({
     url:
-      (urlQueryParams('local') !== 'true'
-        ? './'
-        : 'https://cdn.lovelivec.kr/') +
-      'data/' +
+      './data/' +
       id +
       '/karaoke.json',
     success: function (data) {
@@ -257,7 +254,7 @@ let yohaneNoDOM = {
 
     if (dataYosoro.get('sakana') === 'true') {
       document.getElementById('album_meta').src =
-        (urlQueryParams('local') !== 'true'
+        (urlQueryParams('local') === 'true'
           ? './'
           : 'https://cdn.lovelivec.kr/') +
         '/data/' +
@@ -573,7 +570,7 @@ let yohane = {
 
     try {
       yohane.player().src =
-        (urlQueryParams('local') !== 'true'
+        (urlQueryParams('local') === 'true'
           ? './'
           : 'https://cdn.lovelivec.kr/') +
         'data/' +
@@ -712,7 +709,7 @@ let pageAdjust = {
         artImage.id = curObj.id + '_bgimg'
         artImage.className = 'lazy'
         artImage.dataset.src =
-          (urlQueryParams('local') !== 'true'
+          (urlQueryParams('local') === 'true'
             ? './'
             : 'https://cdn.lovelivec.kr/') +
           'data/' +
