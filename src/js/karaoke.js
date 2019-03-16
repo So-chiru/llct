@@ -32,6 +32,20 @@
 
 var SleepCounts = 0
 
+const getLMInArray = (a, t, lh) => {
+  var _mx = lh === 0 ? 999999999 : 0
+  for (var i = 0; i < a.length; i++) {
+    if (lh === 0) {
+      _mx = Number(a[i][t]) < _mx ? a[i][t] : _mx
+      continue
+    }
+
+    _mx = Number(a[i][t]) > _mx ? a[i][t] : _mx
+  }
+
+  return _mx
+}
+
 var Karaoke = {
   TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
   CallSoundElement: null,
@@ -163,12 +177,9 @@ var Karaoke = {
       })
 
       perLineSpacing.start_time =
-        Number(perLineSpacing.collection[0].start_time) / 2
+        Number(getLMInArray(perLineSpacing.collection, 'start_time', 0)) / 2
       perLineSpacing.end_time =
-        Number(
-          perLineSpacing.collection[perLineSpacing.collection.length - 1]
-            .end_time
-        ) + 100
+        Number(getLMInArray(perLineSpacing.collection, 'end_time', 1)) + 100
 
       renderedData.push(perLineSpacing)
     })
@@ -188,9 +199,10 @@ var Karaoke = {
 
   startEndOpti: function () {
     karaokeData.timeline.forEach((value, index) => {
-      value.start_time = Number(value.collection[0].start_time) - 100
+      value.start_time =
+        Number(getLMInArray(value.collection, 'start_time', 0)) - 100
       value.end_time =
-        Number(value.collection[value.collection.length - 1].end_time) + 100
+        Number(getLMInArray(value.collection, 'end_time', 1)) + 100
     })
   },
 
