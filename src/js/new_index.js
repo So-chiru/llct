@@ -57,10 +57,7 @@ const openCallImage = id => {
 const loadLyrics = (id, obj) => {
   // urlQueryParams('id')
   $.ajax({
-    url:
-      './data/' +
-      id +
-      '/karaoke.json',
+    url: './data/' + id + '/karaoke.json',
     success: function (data) {
       window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
       Karaoke.RenderDOM()
@@ -707,7 +704,7 @@ let pageAdjust = {
         var artImage = document.createElement('img')
         artImage.style = 'background-color: #323232;'
         artImage.id = curObj.id + '_bgimg'
-        artImage.className = 'lazy'
+        artImage.className = 'lazy card_bg'
         artImage.dataset.src =
           (urlQueryParams('local') === 'true'
             ? './'

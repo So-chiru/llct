@@ -238,6 +238,10 @@ body {
   }
 }
 
+.card_bg {
+  opacity: 0.7;
+}
+
 @media screen and (max-width: $medium) {
   .call_lists {
     grid-template-columns: repeat(2, 1fr);
