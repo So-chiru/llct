@@ -116,6 +116,7 @@ body {
 
   input[type="text"] {
     height: 30px;
+    background-color: transparent;
     margin: auto;
     border: 0;
   }
@@ -190,7 +191,9 @@ body {
       margin: auto;
       font-size: 30px;
       font-weight: 100;
-      text-shadow: 0px 0px 18px #000;
+      font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased;
+      text-shadow: 0px 0px 13px #000;
       z-index: 5;
       white-space: nowrap;
     }
@@ -880,4 +883,14 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
   }
+}
+
+.thin {
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+}
+
+.black {
+  font-weight: 800;
+  -webkit-font-smoothing: antialiased;
 }
