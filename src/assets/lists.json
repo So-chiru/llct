@@ -1064,6 +1064,7 @@
       "성설"
     ],
     "center": "",
+    "artist": 1,
     "short_kr": "절제"
   },
   "CRASH MIND": {
@@ -1082,6 +1083,7 @@
       "성설"
     ],
     "center": "",
+    "artist": 1,
     "short_kr": "크래시"
   },
   "DROPOUT!?": {
@@ -1101,6 +1103,7 @@
       "성설"
     ],
     "center": "",
+    "artist": 1,
     "short_kr": "드롭아웃"
   },
   "One More Sunshine Story": {
