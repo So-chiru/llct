@@ -106,6 +106,37 @@ body {
     color: #000;
     font-weight: 700;
   }
+
+  .search_wrp {
+    display: flex;
+
+    border: 0;
+    border-bottom: 1px solid #323232;
+  }
+
+  input[type="text"] {
+    height: 30px;
+    margin: auto;
+    border: 0;
+  }
+
+  .min_ti {
+    width: 50px;
+  }
+
+  .ti {
+    margin: auto;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .material-icons {
+    transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .material-icons:hover {
+    transform: rotateZ(20deg);
+  }
 }
 
 @media screen and (max-width: $small) {
@@ -789,6 +820,11 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     z-index: 102;
     cursor: pointer;
     font-size: 24px;
+    transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .close_btn:hover {
+    transform: rotateZ(360deg);
   }
 }
 

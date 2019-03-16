@@ -17,6 +17,10 @@ html.index
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="this.media='all';")
     link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="this.media='all';")
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Jua' media="none" onload="this.media='all';")
+    link(rel="stylesheet" href="/lib/ps/photoswipe.css" media="none" onload="this.media='all';")
+    link(rel="stylesheet" href="/lib/ps/default-skin/default-skin.css" media="none" onload="this.media='all';")
+    script(defer src="/lib/ps/photoswipe.min.js")
+    script(defer src="/lib/ps/photoswipe-ui-default.min.js")
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
@@ -67,9 +71,12 @@ html.index
                     span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
                     h1 노래 목록
                 .tabs
-                    span.active 전체
-                    span(onclick="alert('이미 선택된 좌석입니다.');") 라이브
-                    span(onclick="yohaneNoDOM.showSetting()") 설정
+                    // span.active 전체
+                    span.ti.min_ti(onclick="yohaneNoDOM.showSetting()") <span class="material-icons ti">settings</span>
+                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
+                    .search_wrp.ti(onclick="$('#search_val').focus()")
+                        input#search_val(type="text", name="")
+                        span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
             .lds-ellipsis.loader#loading_spin_ctlst
                 div
                 div
@@ -94,6 +101,44 @@ html.index
                 label.ckbox 가능한대로 인터렉티브 콜표 사용 (미사용시 콜표 이미지 표시) <input id="useInteractiveCall" type="checkbox" checked="none" onclick="changedOption(2, this.checked)"><span class="checkmark"></span>
             p
                 label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" type="checkbox" checked="none" onclick="changedOption(3, this.checked)"><span class="checkmark"></span>
+            p
+                label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" type="checkbox" checked="none" onclick="changedOption(4, this.checked)"><span class="checkmark"></span>
+
+    <div id="ps_wp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 깨진 레이아웃이 보이죠?
         hr

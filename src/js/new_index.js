@@ -18,13 +18,37 @@ const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
 const loadCallImage = id => {
   window.karaokeData = null
   document.getElementById('karaoke').innerHTML =
-    '<img class="call_img" src="' +
+    '<img class="call_img" onclick="openCallImage(' +
+    id +
+    ')" src="' +
     (urlQueryParams('local') !== 'true' ? './' : 'https://cdn.lovelivec.kr/') +
     'data/' +
     id +
     '/call.jpg' +
     '"></img>'
   yohaneNoDOM.shokan()
+}
+
+const openCallImage = id => {
+  var pElement = document.getElementById('ps_wp')
+  var items = [
+    {
+      src:
+        (urlQueryParams('local') !== 'true'
+          ? './'
+          : 'https://cdn.lovelivec.kr/') +
+        'data/' +
+        id +
+        '/call.jpg',
+      w: 3505,
+      h: 2480
+    }
+  ]
+
+  window.DCGall = new PhotoSwipe(pElement, PhotoSwipeUI_Default, items, {
+    index: 0
+  })
+  window.DCGall.init()
 }
 
 const loadLyrics = (id, obj) => {
@@ -62,7 +86,11 @@ const changes = [
     data_key: 'mikan',
     checkbox: true,
     default: false,
-    fn: _v => {}
+    fn: _v => {
+      setTimeout(() => {
+        pageAdjust.buildPage()
+      }, 100)
+    }
   },
   {
     id: 'darkMode',
@@ -85,7 +113,22 @@ const changes = [
     data_key: 'notUsingMP',
     checkbox: true,
     default: false,
-    fn: _v => {}
+    fn: v => {
+      if (v === 'true' || v == true) {
+        yohane.giran()
+      }
+    }
+  },
+  {
+    id: 'useAlbumImage',
+    data_key: 'sakana',
+    checkbox: true,
+    default: true,
+    fn: v => {
+      setTimeout(() => {
+        pageAdjust.buildPage()
+      }, 100)
+    }
   }
 ]
 
@@ -159,11 +202,8 @@ let yohaneNoDOM = {
   },
 
   play: () => {},
-
   pause: () => {},
-
   load: () => {},
-
   loadDone: () => {},
 
   showSetting: () => {
@@ -195,13 +235,18 @@ let yohaneNoDOM = {
     document.getElementById('karaoke').innerHTML = ''
     var meta = getFromLists(id)
 
-    document.getElementById('album_meta').src =
-      (urlQueryParams('local') !== 'true'
-        ? './'
-        : 'https://cdn.lovelivec.kr/') +
-      '/data/' +
-      id +
-      '/bg.png'
+    if (dataYosoro.get('sakana') === 'true') {
+      document.getElementById('album_meta').src =
+        (urlQueryParams('local') !== 'true'
+          ? './'
+          : 'https://cdn.lovelivec.kr/') +
+        '/data/' +
+        id +
+        '/bg.png'
+    } else {
+      document.getElementById('album_meta').src = '/live_assets/1px.png'
+      document.getElementById('album_meta').style.backgroundColor = '#323232'
+    }
 
     document.getElementById('title_meta').innerText = meta[0]
     document.getElementById('artist_meta').innerText =
@@ -254,6 +299,11 @@ let yohane = {
   liveEffectCry: false,
   liveEffectStore: false,
   loaded: false,
+
+  shuffle: () => {
+    var objK = Object.keys(callLists)
+    yohane.loadPlay(callLists[objK[(Math.random() * objK.length) << 0]].id)
+  },
 
   setVolume: v => {
     yohane.volumeStore = v
@@ -478,8 +528,7 @@ let yohane = {
       dataYosoro.get('notUsingMP') == 'true' ||
       dataYosoro.get('notUsingMP') == true
     ) {
-      // TODO : PhotoSwipe 콜표 표시
-
+      openCallImage(id)
       return false
     }
 
