@@ -1,5 +1,6 @@
 const pkgs = require('./package.json')
 const gulp = require('gulp')
+const fileCache = require('gulp-file-cache')
 let uglify = require('gulp-uglify-es').default
 
 const plugins = require('gulp-load-plugins')({
@@ -10,6 +11,7 @@ const plugins = require('gulp-load-plugins')({
   }
 })
 
+let filecaches = new fileCache()
 plugins.sass.compiler = require('node-sass')
 
 gulp.task('sass', function () {
@@ -25,18 +27,22 @@ gulp.task('sass', function () {
 gulp.task('sass:min', function () {
   return gulp
     .src(pkgs.srcs.sass + '**/*.scss')
+    .pipe(filecaches.filter())
     .pipe(plugins.concat('yosoro.min.css'))
     .pipe(plugins.sass().on('error', plugins.sass.logError))
     .pipe(plugins.uglifycss({ maxLineLen: 1000, expandVars: true }))
+    .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist'))
 })
 
 gulp.task('js', () => {
   return gulp
     .src([pkgs.srcs.js + '**/*.js'])
+    .pipe(filecaches.filter())
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.babel({ presets: ['@babel/env'] }))
     .pipe(plugins.sourcemaps.write())
+    .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/js'))
 })
 
@@ -48,19 +54,23 @@ gulp.task('js:min', () => {
         p.extname = '.min.js'
       })
     )
+    .pipe(filecaches.filter())
     .pipe(plugins.babel({ presets: ['@babel/env'] }))
     .pipe(
       plugins.uglify.default({
         mangle: true
       })
     )
+    .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/js'))
 })
 
 gulp.task('json:min', () => {
   return gulp
     .src([pkgs.srcs.datas + '**/*.json'])
+    .pipe(filecaches.filter())
     .pipe(plugins.jsonminify())
+    .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/data'))
 })
 
@@ -79,6 +89,7 @@ gulp.task('pug', () => {
 gulp.task('images', () => {
   return gulp
     .src(pkgs.srcs.datas + '**/*.{png,jpg,jpeg,svg}')
+    .pipe(filecaches.filter())
     .pipe(
       plugins.imagemin({
         progressive: true,
@@ -89,6 +100,7 @@ gulp.task('images', () => {
         use: []
       })
     )
+    .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/data'))
 })
 
@@ -98,6 +110,8 @@ gulp.task('assets', () => {
       pkgs.srcs.datas + '**/*.*',
       `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg,json}`
     ])
+    .pipe(filecaches.filter())
+    .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/data'))
 })
 
@@ -124,6 +138,7 @@ gulp.task('watch', () => {
   return gulp.src('./dist').pipe(
     plugins.webserver({
       livereload: true,
+      host: '0.0.0.0',
       port: pkgs.webSVPort,
       directoryListing: false,
       open: false

@@ -25,6 +25,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-copy": "^4.0.1",
+    "gulp-file-cache": "^0.0.1",
     "gulp-imagemin": "^5.0.3",
     "gulp-jsonminify": "^1.1.0",
     "gulp-livereload": "^4.0.1",
@@ -37,6 +38,7 @@
     "gulp-uglifycss": "^1.1.0",
     "gulp-util": "^3.0.8",
     "gulp-webserver": "^0.9.1",
+    "jpegtran-bin": "^4.0.0",
     "node-sass": "^4.11.0"
   }
 }

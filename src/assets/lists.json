@@ -1250,6 +1250,7 @@
       "sakana"
     ],
     "center": "마츠우라 카난",
+    "artist": 0,
     "short_kr": ""
   },
   "僕らの走ってきた道は・・・": {
@@ -1265,6 +1266,7 @@
       "삽입곡"
     ],
     "center": "",
+    "artist": 0,
     "short_kr": "보쿠미치, 보쿠하시"
   },
   "Next SPARKLING!!": {
@@ -1281,6 +1283,7 @@
       "삽입곡"
     ],
     "center": null,
+    "artist": 0,
     "short_kr": "넥스파"
   },
   "Brightest Melody": {
@@ -1296,6 +1299,41 @@
       "삽입곡"
     ],
     "center": null,
+    "artist": 0,
     "short_kr": "브라멜로"
+  },
+  "Over The Next Rainbow": {
+    "id": "10083",
+    "translated": "Over The Next Rainbow",
+    "tag": [
+      "오버니지",
+      "오버레보",
+      "오버더넥스트레인보우",
+      "overthenextrrainbow",
+      "극장판",
+      "삽입곡"
+    ],
+    "center": null,
+    "artist": 2,
+    "short_kr": "오버니지"
+  },
+  "Believe Again": {
+    "id": "10084",
+    "translated": "Believe Again",
+    "tag": [
+      "빌립어겐",
+      "빌리브어게인",
+      "비긴어게인",
+      "believeagain",
+      "성설",
+      "단스나우",
+      "아소비쟈나이",
+      "Saint Snow",
+      "극장판",
+      "삽입곡"
+    ],
+    "center": null,
+    "artist": 1,
+    "short_kr": "빌립어겐"
   }
 }
