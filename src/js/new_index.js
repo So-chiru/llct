@@ -49,6 +49,9 @@ const openCallImage = id => {
     index: 0
   })
   window.DCGall.init()
+  window.DCGall.listen('destroy', () => {
+    popsHeart.set('pid', '')
+  })
 }
 
 const loadLyrics = (id, obj) => {
@@ -129,6 +132,17 @@ const changes = [
         pageAdjust.buildPage()
       }, 100)
     }
+  },
+  {
+    id: 'useSetIntervalInstead',
+    data_key: 'funeTiming',
+    checkbox: true,
+    default: false,
+    fn: v => {
+      frameWorks = null
+      yohane.reInitTimingFunction()
+      yohane.tick()
+    }
   }
 ]
 
@@ -205,6 +219,11 @@ let yohaneNoDOM = {
   pause: () => {},
   load: () => {},
   loadDone: () => {},
+  loopToggle: () => {
+    $('#repeat_btn')[yohane.__isRepeat ? 'removeClass' : 'addClass'](
+      'in_active'
+    )
+  },
 
   showSetting: () => {
     $('.setting_layer').removeClass('hide')
@@ -217,14 +236,15 @@ let yohaneNoDOM = {
   },
 
   initialize: id => {
+    if (popsHeart.get('pid') !== id.toString()) {
+      popsHeart.set('pid', id)
+    }
+
     if (
       dataYosoro.get('notUsingMP') == 'true' ||
       dataYosoro.get('notUsingMP') == true
     ) {
       return 0
-    }
-    if (popsHeart.get('p_id') !== id.toString()) {
-      popsHeart.set('pid', id)
     }
 
     if (yohaneNoDOM.kaizu) {
@@ -312,6 +332,12 @@ let yohane = {
 
   player: () => {
     return document.getElementById('kara_audio')
+  },
+
+  __isRepeat: false,
+  repeatToggle: () => {
+    yohane.__isRepeat = !yohane.__isRepeat
+    yohaneNoDOM.loopToggle()
   },
 
   fade: (from, to, duration, start, cb) => {
@@ -489,8 +515,20 @@ let yohane = {
     })
   },
 
+  __useSetInterval: false,
+  reInitTimingFunction: () => {
+    yohane.__useSetInterval = dataYosoro.get('funeTiming') === 'true'
+  },
   tick: notAnimation => {
-    frameWorks = requestAnimationFrame(yohane.tick)
+    if (!yohane.__useSetInterval) {
+      frameWorks = requestAnimationFrame(yohane.tick)
+    }
+
+    if (yohane.__useSetInterval && frameWorks === null) {
+      frameWorks = setInterval(() => {
+        yohane.tick()
+      }, 10)
+    }
     if (yohane.tickVal == null) yohane.tickVal = 0
     if (yohane.tickVal > 20) {
       yohane.tickVal = 0
@@ -507,7 +545,7 @@ let yohane = {
       Karaoke.AudioSync(yohane.timecode())
     }
 
-    if (yohane.player().paused) {
+    if (yohane.player().paused && !yohane.__useSetInterval) {
       cancelAnimationFrame(frameWorks)
     }
   },
@@ -524,6 +562,7 @@ let yohane = {
   },
 
   initialize: id => {
+    yohaneNoDOM.initialize(id)
     if (
       dataYosoro.get('notUsingMP') == 'true' ||
       dataYosoro.get('notUsingMP') == true
@@ -532,7 +571,6 @@ let yohane = {
       return false
     }
 
-    yohaneNoDOM.initialize(id)
     try {
       yohane.player().src =
         (urlQueryParams('local') !== 'true'
@@ -578,7 +616,12 @@ let yohane = {
   loadPlay: id => {
     if (yohane.initialize(id)) {
       yohane.play()
-      yohaneNoDOM.dekakuni()
+      if (
+        dataYosoro.get('doNotUseMusicPlayer') !== 'true' &&
+        dataYosoro.get('doNotUseMusicPlayer') !== true
+      ) {
+        yohaneNoDOM.dekakuni()
+      }
     }
   }
 }
@@ -789,15 +832,36 @@ $(document).ready(() => {
   }
 
   yohane.player().onplay = () => {
-    requestAnimationFrame(yohane.tick)
+    if (!yohane.__useSetInterval) {
+      requestAnimationFrame(yohane.tick)
+
+      return
+    }
+
+    frameWorks = setInterval(() => {
+      yohane.tick()
+    }, 10)
   }
 
   yohane.player().onended = () => {
+    if (yohane.__isRepeat) {
+      yohane.seekTo(0)
+      yohane.play()
+
+      return
+    }
+
     yohaneNoDOM.end()
   }
 
   yohane.player().onpause = () => {
-    cancelAnimationFrame(yohane.tick)
+    if (!yohane.__useSetInterval) {
+      cancelAnimationFrame(yohane.tick)
+
+      return
+    }
+
+    if (frameWorks) clearInterval(frameWorks)
   }
 
   Sakurauchi.listen(
@@ -853,7 +917,13 @@ $(document).ready(() => {
         !isNaN(popsHeart.get('pid'))
       ) {
         yohane.initialize(popsHeart.get('pid'))
-        yohaneNoDOM.dekakuni()
+
+        if (
+          dataYosoro.get('doNotUseMusicPlayer') !== 'true' &&
+          dataYosoro.get('doNotUseMusicPlayer') !== true
+        ) {
+          yohaneNoDOM.dekakuni()
+        }
       }
     },
     error: function (err) {
@@ -862,7 +932,7 @@ $(document).ready(() => {
   })
 
   document.getElementById('genki_year').innerText = new Date().getFullYear()
-  document.getElementById('zenkai_month').innerText = new Date().getMonth()
+  document.getElementById('zenkai_month').innerText = new Date().getMonth() + 1
   document.getElementById('day_day').innerText = new Date().getDate()
   document.getElementById('day').innerText = [
     '일',

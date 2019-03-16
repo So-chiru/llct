@@ -152,9 +152,12 @@ let Sakurauchi = {
 
     parent.addEventListener(
       k,
-      (...evs) => Sakurauchi.run(k, ...evs),
+      (...evs) => {
+        Sakurauchi.run(k, ...evs)
+      },
       options || null
     )
+
     return Sakurauchi.add(k, fn)
   },
 

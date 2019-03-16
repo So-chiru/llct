@@ -55,6 +55,7 @@ html.index
                 .ctrls
                     span#pp_btn.material-icons(onclick="yohane.toggle()") play_arrow
                     span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
+                    span#repeat_btn.material-icons.in_active(onclick="yohane.repeatToggle()") repeat
                     span#dekaku_btn.material-icons(onclick="(function(){yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()})()") keyboard_arrow_down
         .lyrics_wrapper
             p.blade_c
@@ -72,9 +73,9 @@ html.index
                     h1 노래 목록
                 .tabs
                     // span.active 전체
-                    span.ti.min_ti(onclick="yohaneNoDOM.showSetting()") <span class="material-icons ti">settings</span>
                     span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
-                    .search_wrp.ti(onclick="$('#search_val').focus()")
+                    span.ti.min_ti(onclick="yohaneNoDOM.showSetting()") <span class="material-icons ti">settings</span>
+                    //- .search_wrp.ti(onclick="$('#search_val').focus()")
                         input#search_val(type="text", name="")
                         span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
             .lds-ellipsis.loader#loading_spin_ctlst
@@ -93,16 +94,18 @@ html.index
         .setting_sc
             h1 설정
             br
-            p
-                label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" type="checkbox" checked="none" onclick="changedOption(0, this.checked)"><span class="checkmark"></span>
-            p
-                label.ckbox 다크 모드 <input id="darkMode" type="checkbox" checked="none" onclick="changedOption(1, this.checked)"><span class="checkmark"></span>
-            p
-                label.ckbox 가능한대로 인터렉티브 콜표 사용 (미사용시 콜표 이미지 표시) <input id="useInteractiveCall" type="checkbox" checked="none" onclick="changedOption(2, this.checked)"><span class="checkmark"></span>
-            p
-                label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" type="checkbox" checked="none" onclick="changedOption(3, this.checked)"><span class="checkmark"></span>
-            p
-                label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" type="checkbox" checked="none" onclick="changedOption(4, this.checked)"><span class="checkmark"></span>
+            .toggle_collection
+                label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(0, this.checked)"> <label for="showAs_translated" class="toggle_btn"><span></span></label>   
+            .toggle_collection
+                label.ckbox 다크 모드 <input id="darkMode" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(1, this.checked)"><label for="darkMode" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 사용 가능한 경우 인터렉티브 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(2, this.checked)"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(3, this.checked)"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(4, this.checked)"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(5, this.checked)"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
 
     <div id="ps_wp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>

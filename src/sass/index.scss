@@ -211,9 +211,7 @@ body {
       left: 0;
       border-radius: $card_border;
       object-fit: cover;
-      @media not screen and (prefers-reduced-motion: reduce) {
-        transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-      }
+      transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
 
@@ -308,10 +306,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(50, 50, 50, 0.5);
-
-  @media not screen and (prefers-reduced-motion: reduce) {
-    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-  }
+  transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
@@ -420,13 +415,15 @@ body {
   }
 
   #live_btn {
-    font-size: 40px;
+    font-size: 30px;
+  }
+
+  #repeat_btn {
+    font-size: 28px;
   }
 
   #dekaku_btn {
-    @media not screen and (prefers-reduced-motion: reduce) {
-      transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-    }
+    transition: 0.7s rotate cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   #dekaku_btn.in_active {
@@ -811,9 +808,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   height: 100%;
   background-color: #323232;
   z-index: 101;
-  @media not screen and (prefers-reduced-motion: reduce) {
-    transition: background 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-  }
+  transition: background 0.7s cubic-bezier(0.19, 1, 0.22, 1);
   color: white;
 
   .close_btn {
@@ -893,4 +888,63 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 .black {
   font-weight: 800;
   -webkit-font-smoothing: antialiased;
+}
+
+.ckbox {
+  display: flex;
+}
+
+.toggle_btn {
+  position: relative;
+  display: block;
+  width: 42px;
+  height: 24px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+  margin-left: 5px;
+
+  &:before {
+    content: "";
+    position: relative;
+    top: 1px;
+    left: 1px;
+    width: 40px;
+    height: 22px;
+    display: block;
+    background: #c8ccd4;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    display: block;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(#9a9999, 0.75);
+    transition: all 0.2s ease;
+  }
+}
+
+.toggle_input:checked + .toggle_btn {
+  &:before {
+    background: #52d66b;
+  }
+  span {
+    transform: translateX(18px);
+  }
+}
+
+.toggle_collection {
+  display: flex;
+  margin-bottom: 10px;
+
+  input {
+    display: none;
+  }
 }
