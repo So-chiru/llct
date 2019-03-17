@@ -3,14 +3,6 @@ var wavTime
 var flrsd
 var audioSyncSleep = 0
 
-const __replAll = (a, r, t) => {
-  for (var x = 0; x < a.length; x++) {
-    a[x] = a[x].replace(r, t)
-  }
-
-  return a
-}
-
 var convertTime = function (input, separator) {
   var pad = function (input) {
     return input < 10 ? '0' + input : input
@@ -367,6 +359,8 @@ const KaraokeEditor = {
     if (typeof window.karaokeData === 'undefined') {
       throw Error('karaokeData is not defined. is the page loaded correctly?')
     }
+
+    Karaoke.startEndOpti()
     var aDownload = document.createElement('a')
     $('body').append(aDownload)
 

@@ -4,7 +4,6 @@
  *
  *  Object (JSON) -> {
  *    metadata: Object (메타데이터) -> {
- *        writter: String, // 작성자
  *        lyrics: String, // 가사 전문
  *        correction_time: Time code, // 보정 시간
  *        lastedit: Time code (audio.currentTime() * 100), // 마지막으로 수정 한 타임 코드 (에디터 사용)
@@ -264,7 +263,6 @@ var Karaoke = {
   },
 
   cachedDom: {},
-
   AudioSync: function (timeCode, fullRender) {
     if (karaokeData === 'undefined' || karaokeData === null) return 0
     for (
@@ -286,7 +284,7 @@ var Karaoke = {
         karaWordNum++
       ) {
         var karaWord = karaLine.collection[karaWordNum]
-        if (karaWord.start_time === 0 || karaWord.start_time === '0') break
+        if (karaWord.start_time === 0 || karaWord.start_time === '0') continue
         karaWord.start_time = Number(karaWord.start_time)
         karaWord.end_time = Number(karaWord.end_time)
 
