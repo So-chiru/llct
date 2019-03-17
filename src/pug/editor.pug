@@ -81,10 +81,8 @@ html.editor
           textarea#kashi_type.blackArea.kr(rows='15', onchange='Karaoke.SetTimelineData(Karaoke.MergeRender( karaokeData.timeline, Karaoke.Render(this.value)));KaraokeEditor.setLyrics(this.value);')
           br
           .editor_btncollec
-            button.nav_btn(onclick="$('#kashi_type').val(decodeURI(encodeURI($('#kashi_type').val()).replace(/%20/gm, '%20%20')))")
-              | 단일 공란 -> 2중 공란
-            button.nav_btn(onclick="$('#kashi_type').val(decodeURI(encodeURI($('#kashi_type').val()).replace(/%20%20/gm, '%20')))")
-              | 2중 공란 -> 단일 공란
+            button.nav_btn(onclick="KaraokeEditor.asReplacing()")
+              | 각 칸마다 띄우기
             button.nav_btn(onclick="$('#kashi_type').attr('disabled', !$('#kashi_type').attr('disabled') )")
               i.material-icons lock
               |  편집 잠금

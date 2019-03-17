@@ -3,6 +3,14 @@ var wavTime
 var flrsd
 var audioSyncSleep = 0
 
+const __replAll = (a, r, t) => {
+  for (var x = 0; x < a.length; x++) {
+    a[x] = a[x].replace(r, t)
+  }
+
+  return a
+}
+
 var convertTime = function (input, separator) {
   var pad = function (input) {
     return input < 10 ? '0' + input : input
@@ -165,7 +173,9 @@ $(document).ready(() => {
     window.songID = urlQueryParams('id')
 
     wavesurfer.load(
-      (urlQueryParams('local') === 'true' ? './' : 'https://cdn.lovelivec.kr/') +
+      (urlQueryParams('local') === 'true'
+        ? './'
+        : 'https://cdn.lovelivec.kr/') +
         'data/' +
         songID +
         '/audio.mp3'
@@ -264,6 +274,50 @@ const KaraokeEditor = {
       Karaoke.RenderDOM()
       KaraokeEditor.clearSelection()
     }
+  },
+  autoSpacing: spacing => {
+    spacing = decodeURI(encodeURI(spacing).replace(/(%0A)/gm, '^L_F'))
+
+    var lineData = []
+    var splitLF = spacing.split('^L_F')
+    for (var lineIndex = 0; lineIndex < splitLF.length; lineIndex++) {
+      var line = splitLF[lineIndex]
+      var spltTxt = line
+        .split('')
+        .join(' ')
+        .replace(/\s\s\s/g, '  ')
+
+      var spacingSplt = spltTxt.split(' ')
+      var aw = false
+      var fnalDt = []
+      for (var d = 0; d < spacingSplt.length; d++) {
+        if (
+          typeof spacingSplt[d + 1] !== 'undefined' &&
+          /(!|ー|！|\?|\.|？|,|、|-)/g.test(spacingSplt[d + 1]) &&
+          !aw
+        ) {
+          fnalDt.push(spacingSplt[d] + spacingSplt[d + 1])
+          aw = true
+          continue
+        }
+
+        if (aw) {
+          aw = false
+          continue
+        }
+
+        fnalDt.push(spacingSplt[d])
+      }
+
+      lineData.push(fnalDt.join(' '))
+    }
+
+    return lineData.join('\n')
+  },
+  asReplacing: () => {
+    $('#kashi_type').val(KaraokeEditor.autoSpacing($('#kashi_type').val()))
+    Karaoke.SetTimelineData(Karaoke.Render($('#kashi_type').val()))
+    KaraokeEditor.setLyrics($('#kashi_type').val())
   },
   clearSelection: () => {
     selectWords.forEach(v => {
