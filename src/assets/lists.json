@@ -575,7 +575,7 @@
       "삽입곡"
     ],
     "center": "",
-    "short_kr": "워터블루"
+    "short_kr": "WBNW"
   },
   "WONDERFUL STORIES": {
     "id": "10039",
@@ -590,7 +590,8 @@
       "삽입곡"
     ],
     "center": "",
-    "short_kr": "원더스토리"
+    "karaoke": true,
+    "short_kr": "WS"
   },
   "キセキヒカル": {
     "id": "10040",
