@@ -246,6 +246,8 @@ var _c = {
   ruby_text: '#ruby_text_val'
 }
 
+var __prevKCount = ['_', 0]
+
 const KaraokeEditor = {
   EditVal: (key, value, altMode, shiftMode, NonwipingMode) => {
     $(_c[key]).val(value)
@@ -261,11 +263,26 @@ const KaraokeEditor = {
       }
     })
 
-    if (shiftMode && !altMode) KaraokeEditor.clearSelection()
+    if (__prevKCount[0] !== key) {
+      __prevKCount = ['_', 0]
+    }
+
     if (!NonwipingMode) {
       Karaoke.RenderDOM()
       KaraokeEditor.clearSelection()
     }
+
+    if (__prevKCount[0] === key && __prevKCount[1] >= 1) {
+      KaraokeEditor.clearSelection()
+      __prevKCount = ['_', 0]
+
+      return
+    }
+
+    if (shiftMode && !altMode) KaraokeEditor.clearSelection()
+
+    __prevKCount[0] = key
+    __prevKCount[1]++
   },
   autoSpacing: spacing => {
     spacing = decodeURI(encodeURI(spacing).replace(/(%0A)/gm, '^L_F'))
