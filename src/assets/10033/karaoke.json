@@ -3420,7 +3420,7 @@
       ]
     },
     {
-      "start_time": 20629,
+      "start_time": 20602,
       "end_time": 27843,
       "collection": [
         {
@@ -3469,341 +3469,387 @@
     },
     {
       "start_time": 20631,
-      "end_time": 21366,
+      "end_time": 22311,
       "collection": [
         {
           "text": "코",
           "start_time": 20731,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ae40ff"
         },
         {
           "text": "코",
           "start_time": 20766,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ae40ff"
         },
         {
           "text": "로",
           "start_time": 20783,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ae40ff"
         },
         {
           "text": "가 ",
           "start_time": 20818,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ae40ff"
         },
         {
           "text": "모",
           "start_time": 20852,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#00fda5"
         },
         {
           "text": "토",
           "start_time": 20904,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#00fda5"
         },
         {
           "text": "메",
           "start_time": 20940,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#00fda5"
         },
         {
           "text": "루 ",
           "start_time": 20988,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#00fda5"
         },
         {
           "text": "호",
           "start_time": 21018,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff2e28"
         },
         {
           "text": "코",
           "start_time": 21049,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff2e28"
         },
         {
           "text": "라",
           "start_time": 21067,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff2e28"
         },
         {
           "text": "시",
           "start_time": 21103,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff2e28"
         },
         {
           "text": "사",
           "start_time": 21147,
-          "end_time": 21266,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#dddddd"
         }
       ]
     },
     {
       "start_time": 21145,
-      "end_time": 21696,
+      "end_time": 22311,
       "collection": [
         {
           "text": "하",
           "start_time": 21245,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#dddddd"
         },
         {
           "text": "시",
           "start_time": 21269,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#dddddd"
         },
         {
           "text": "리",
           "start_time": 21285,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#dddddd"
         },
         {
           "text": "츠",
           "start_time": 21303,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#f80396"
         },
         {
           "text": "즈",
           "start_time": 21319,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#f80396"
         },
         {
           "text": "케",
           "start_time": 21337,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#f80396"
         },
         {
           "text": "테 ",
           "start_time": 21355,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#f80396"
         },
         {
           "text": "츠",
           "start_time": 21394,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#f80396"
         },
         {
           "text": "카",
           "start_time": 21413,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#f80396"
         },
         {
           "text": "메",
           "start_time": 21424,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ece709"
         },
         {
           "text": "루 ",
           "start_time": 21442,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ece709"
         },
         {
           "text": "미",
           "start_time": 21462,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ece709"
         },
         {
           "text": "라",
           "start_time": 21480,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ece709"
         },
         {
           "text": "이",
           "start_time": 21497,
-          "end_time": 21596,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ece709"
         }
       ]
     },
     {
       "start_time": 21466,
-      "end_time": 22279,
+      "end_time": 22311,
       "collection": [
         {
           "text": "유",
           "start_time": 21566,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff9de7"
         },
         {
           "text": "메",
           "start_time": 21585,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff9de7"
         },
         {
           "text": "가 ",
           "start_time": 21594,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff9de7"
         },
         {
           "text": "(타",
           "start_time": 21638,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff9de7"
         },
         {
           "text": "쿠",
           "start_time": 21652,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff9de7"
         },
         {
           "text": "상) ",
           "start_time": 21661,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ff9de7"
         },
         {
           "text": "유",
           "start_time": 21713,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#32bcfe"
         },
         {
           "text": "메",
           "start_time": 21725,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#32bcfe"
         },
         {
           "text": "가 ",
           "start_time": 21738,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#32bcfe"
         },
         {
           "text": "(타",
           "start_time": 21792,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#32bcfe"
         },
         {
           "text": "쿠",
           "start_time": 21797,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#32bcfe"
         },
         {
           "text": "상) ",
           "start_time": 21806,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#32bcfe"
         },
         {
           "text": "키",
           "start_time": 21853,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         },
         {
           "text": "에",
           "start_time": 21860,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         },
         {
           "text": "나",
           "start_time": 21878,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": "2",
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         },
         {
           "text": "이 ",
           "start_time": 21905,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": "",
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         },
         {
           "text": "(유",
           "start_time": 21925,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         },
         {
           "text": "메",
           "start_time": 21941,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         },
         {
           "text": "가...)",
           "start_time": 21958,
-          "end_time": 22179,
+          "end_time": 22211,
           "pronunciation_time": "2",
-          "type": 1
+          "type": 1,
+          "text_color": "#fe9d32"
         }
       ]
     },

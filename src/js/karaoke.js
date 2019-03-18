@@ -218,7 +218,11 @@ var Karaoke = {
           lineI +
           '_' +
           wordI +
-          '" onclick="Karaoke.SelectWord(' +
+          '" style="text-shadow: ' +
+          (word.text_color !== null && word.text_color !== ''
+            ? '0 0 5px ' + word.text_color
+            : '') +
+          ';" onclick="Karaoke.SelectWord(' +
           lineI +
           ', ' +
           wordI +

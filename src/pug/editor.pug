@@ -102,6 +102,9 @@ html.editor
           p
             | 종류
             input#type_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'type', this.value, false, false, false)")
+          p
+            | 선택 : 현재 텍스트 색상
+            input#text_color_val.blackInput(type='color', value='#000', onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
