@@ -266,13 +266,6 @@ var Karaoke = {
     }
   },
 
-  __needRepaint:
-    navigator.vendor &&
-    navigator.vendor.indexOf('Apple') > -1 &&
-    navigator.userAgent &&
-    navigator.userAgent.indexOf('CriOS') == -1 &&
-    navigator.userAgent.indexOf('FxiOS') == -1,
-
   cachedDom: {},
   AudioSync: function (timeCode, fullRender) {
     if (karaokeData === 'undefined' || karaokeData === null) return 0
@@ -347,10 +340,8 @@ var Karaoke = {
           kards.style.transition = ''
         }
 
-        if (Karaoke.__needRepaint) {
-          kards.style.textDecoration = 'none'
-          kards.style.textDecoration = 'blink'
-        }
+        kards.style.textDecoration = 'none'
+        kards.style.textDecoration = 'blink'
       }
     }
   }
