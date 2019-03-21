@@ -170,7 +170,7 @@ body {
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   margin-top: 30px;
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 
   $card_border: 5px;
 
@@ -777,6 +777,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   width: 30%;
   margin: auto;
   margin-top: 25px;
+  margin-bottom: 10%;
   justify-content: center;
   vertical-align: middle;
 
@@ -860,6 +861,8 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 }
 
 .bottom_margin {
+  position: relative;
+  display: block;
   height: 100px;
 }
 
