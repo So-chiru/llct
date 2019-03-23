@@ -14,6 +14,7 @@ html.editor
     script(src='https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.min.js')
     script(src='./js/global.min.js')
     script(async src='./js/lib/chillout.min.js')
+    script(src='./js/lib/context.min.js')
     script(src='./js/editor.min.js')
     script(src='./js/karaoke.min.js')
   body
@@ -57,6 +58,10 @@ html.editor
           p
             | 보정값
             input#correcttime.blackInput(type='number', value='-10', onchange='window.karaokeData.metadata.correction_time = Number(this.value)')
+          p
+            | 키를 누번 눌러 선택 해제 사용
+            input.blackInput(type='checkbox', checked='dataYosoro.get("useDouble") === true || dataYosoro.get("useDouble") === "true"', onchange='dataYosoro.set("useDouble", this.checked)')
+
           br
         .title_settings
           h1.kr 파일
@@ -77,9 +82,9 @@ html.editor
           .editor_btncollec
             button.nav_btn(onclick="KaraokeEditor.asReplacing()")
               | 각 칸마다 띄우기
-            button.nav_btn(onclick="$('#kashi_type').attr('disabled', !$('#kashi_type').attr('disabled') )")
+            button.nav_btn(onclick="window.karaokeData.metadata.writeDone = true;$('.lyrics_write').addClass('__edit_hidden_tabs')")
               i.material-icons lock
-              |  편집 잠금
+              |  작성 완료
         .lyrics_render
           h1.kr 렌더링
           #karaoke.karaoke.kr
@@ -87,6 +92,9 @@ html.editor
         .lyrics_property
           h1.kr 속성
           p 선택된 단어들의
+          p
+            | 텍스트
+            input#text_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'text', this.value, false, false, false)")
           p
             | 루비 텍스트 (없을 경우 공란)
             input#ruby_text_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'ruby_text', this.value, false, false, false)")
@@ -105,6 +113,23 @@ html.editor
           p
             | 선택 : 현재 텍스트 색상
             input#text_color_val.blackInput(type='color', value='#000', onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
+          button.nav_btn(onclick="KaraokeEditor.toggleTextEditor()")
+            | 텍스트 편집기 보기
+    #__context_bg.__context_bg(onclick="editorLyricsContext.closeContext()")
+    #__context_frame.__context_frame
+      .__context_frame_item(onclick="")
+        p 선택 :&nbsp; <span id="kara_liner">0</span>번째 줄&nbsp; <span id="kara_number">1</span>번
+      .__context_frame_div
+      .__context_frame_item(onclick="editorLyricsContext.act('deleteWord')")
+        p <span class="material-icons">delete</span> <span>이 단어 삭제</span>
+      .__context_frame_item(onclick="editorLyricsContext.act('editWord')")
+        p <span class="material-icons">edit</span> <span>이 단어 수정</span>
+      .__context_frame_item(onclick="editorLyricsContext.act('addNewWord', false)")
+        p <span class="material-icons">border_left</span> <span>이 단어 앞에 단어 추가</span>
+      .__context_frame_item(onclick="editorLyricsContext.act('addNewWord', true)")
+        p <span class="material-icons">border_right</span> <span>이 단어 뒤에 단어 추가</span>
+      .__context_frame_item(onclick="editorLyricsContext.act('addNewLine', true)")
+        p <span class="material-icons">border_bottom</span> <span>이 라인 뒤에 라인 추가</span>
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.

@@ -41,9 +41,15 @@ var popsHeart = {
 var dataYosoro = {
   isStorageSupport: window.localStorage != null,
   get: function (...args) {
-    return dataYosoro[dataYosoro.isStorageSupport ? '__storageG' : '__cookieG'](
-      ...args
-    )
+    var rtnedData = dataYosoro[
+      dataYosoro.isStorageSupport ? '__storageG' : '__cookieG'
+    ](...args)
+
+    if (rtnedData === 'true') return true
+    if (rtnedData === 'false') return false
+    if (typeof rtnedData === 'undefined' || rtnedData === null) return null
+
+    return rtnedData
   },
 
   __cookieG: key => {
@@ -197,9 +203,11 @@ let Sakurauchi = {
   }
 }
 
-$(document).ready(() => {
-  if (dataYosoro.get('tatenshi') === 'true') $(document.body).addClass('dark')
-})
+if (typeof $ !== 'undefined') {
+  $(document).ready(() => {
+    if (dataYosoro.get('tatenshi')) $(document.body).addClass('dark')
+  })
+}
 
 var i = [
   {

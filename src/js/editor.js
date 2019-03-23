@@ -134,6 +134,13 @@ $(document).ready(() => {
     if (prv) e.preventDefault()
   })
 
+  if (
+    dataYosoro.get('useDouble') == 'undefined' ||
+    dataYosoro.get('useDouble') == null
+  ) {
+    dataYosoro.set('useDouble', true)
+  }
+
   wavesurfer.on('play', () => {
     logger(1, 'r', 'event : wavesurfer_play', 'i')
     $('#playpause_audio').html('<i class="material-icons ds">pause_arrow</i>')
@@ -177,18 +184,109 @@ $(document).ready(() => {
 
   window.karaokeData = { metadata: { correction_time: -10 }, timeline: [] }
   window.lastSaved = JSON.stringify(karaokeData.timeline)
+
+  $.ajax({
+    url: './data/' + window.songID + '/karaoke.json',
+    success: d => {
+      if (typeof d !== 'object') {
+        return logger(
+          0,
+          'r',
+          'Received karaoke json data is not valid object.',
+          'e'
+        )
+      }
+      try {
+        window.karaokeData = d
+        window.lastSaved = JSON.stringify(karaokeData.timeline)
+
+        Sakurauchi.run('KaraokeLoaded')
+        logger(0, 'r', 'Karaoke Data Loaded: Server Auto Load', 'i')
+      } catch (e) {
+        logger(0, 'r', 'Failed to load karaoke data.', 'e')
+      }
+    }
+  })
   window.selectWords = []
   var valElementObject = {
     '#start_time_val': 'start_time',
     '#end_time_val': 'end_time',
     '#pron_time_val': 'pronunciation_time',
     '#type_val': 'type',
-    '#ruby_text_val': 'ruby_text'
+    '#ruby_text_val': 'ruby_text',
+    '#text_val': 'text'
   }
 
+  window.editorLyricsContext = new HugContext(
+    document.getElementById('karaoke')
+  )
+
+  editorLyricsContext.addAction('deleteWord', ev => {
+    karaokeData.timeline[editorLyricsContext.targetX].collection.splice(
+      editorLyricsContext.targetY,
+      1
+    )
+
+    if (
+      karaokeData.timeline[editorLyricsContext.targetX].collection.length === 0
+    ) {
+      karaokeData.timeline.splice(editorLyricsContext.targetX, 1)
+    }
+
+    Karaoke.RenderDOM()
+  })
+
+  editorLyricsContext.addAction('editWord', ev => {
+    var _blk_edited = prompt(
+      '수정할 단어를 입력해 주세요.',
+      karaokeData.timeline[editorLyricsContext.targetX].collection[
+        editorLyricsContext.targetY
+      ].text
+    )
+
+    karaokeData.timeline[editorLyricsContext.targetX].collection[
+      editorLyricsContext.targetY
+    ].text = _blk_edited
+    Karaoke.RenderDOM()
+  })
+
+  editorLyricsContext.addAction('addNewWord', addRight => {
+    karaokeData.timeline[editorLyricsContext.targetX].collection.splice(
+      editorLyricsContext.targetY + (addRight ? 1 : 0),
+      0,
+      Karaoke.SpaParsing('', false)
+    )
+
+    Karaoke.RenderDOM()
+  })
+
+  editorLyricsContext.addAction('addNewLine', addBottom => {
+    karaokeData.timeline.splice(
+      editorLyricsContext.targetX + (addBottom ? 1 : 0),
+      0,
+      {
+        start_time: 0,
+        end_time: 0,
+        collection: [Karaoke.SpaParsing('', false)]
+      }
+    )
+
+    Karaoke.RenderDOM()
+  })
+
   Sakurauchi.add('KaraokeLoaded', () => {
+    Karaoke.RenderDOM()
+
     if (typeof karaokeData.metadata.correction_time === 'undefined') {
       karaokeData.metadata.correction_time = -10
+    }
+
+    if (typeof karaokeData.metadata.writeDone === 'undefined') {
+      karaokeData.metadata.writeDone = false
+    }
+
+    if (karaokeData.metadata.writeDone) {
+      $('.lyrics_write').addClass('__edit_hidden_tabs')
     }
   })
 
@@ -229,21 +327,13 @@ $(window).bind('beforeunload', () => {
   }
 })
 
-var urlQueryParams = function (name) {
-  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
-  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
-  var results = regex.exec(location.search)
-  return results === null
-    ? ''
-    : decodeURIComponent(results[1].replace(/\+/g, ' '))
-}
-
 var _c = {
   start_time: '#start_time_val',
   end_time: '#end_time_val',
   pronunciation_time: '#pron_time_val',
   type: '#type_val',
-  ruby_text: '#ruby_text_val'
+  ruby_text: '#ruby_text_val',
+  text: '#text_val'
 }
 
 var __prevKCount = ['_', 0]
@@ -263,7 +353,9 @@ const KaraokeEditor = {
       }
     })
 
-    if (__prevKCount[0] !== key) {
+    var UseselectionDouble = dataYosoro.get('useDouble') === true
+
+    if (__prevKCount[0] !== key && UseselectionDouble) {
       __prevKCount = ['_', 0]
     }
 
@@ -272,7 +364,7 @@ const KaraokeEditor = {
       KaraokeEditor.clearSelection()
     }
 
-    if (__prevKCount[0] === key && __prevKCount[1] >= 1) {
+    if (__prevKCount[0] === key && __prevKCount[1] >= 1 && UseselectionDouble) {
       KaraokeEditor.clearSelection()
       __prevKCount = ['_', 0]
 
@@ -281,8 +373,15 @@ const KaraokeEditor = {
 
     if (shiftMode && !altMode) KaraokeEditor.clearSelection()
 
+    if (!UseselectionDouble) return 0
     __prevKCount[0] = key
     __prevKCount[1]++
+  },
+
+  toggleTextEditor: () => {
+    $('.lyrics_write').toggle('__edit_hidden_tabs')
+
+    karaokeData.metadata.writeDone = !karaokeData.metadata.writeDone
   },
   autoSpacing: spacing => {
     spacing = decodeURI(encodeURI(spacing).replace(/(%0A)/gm, '^L_F'))
@@ -359,12 +458,10 @@ const KaraokeEditor = {
 
       window.karaokeData = readJSON
       $('#kashi_type').val(karaokeData.metadata.lyrics)
-      $('#writter_meta').val(karaokeData.metadata.writter)
       $('#blade_hex_meta').val(karaokeData.metadata.bladeColorHEX)
       $('#blade_name_meta').val(karaokeData.metadata.bladeColorMember)
 
       window.lastSaved = JSON.stringify(karaokeData.timeline)
-      Karaoke.RenderDOM()
       Sakurauchi.run('KaraokeLoaded')
       logger(0, 'r', 'Karaoke Data Loaded.', 'i')
     }

@@ -234,10 +234,7 @@ let yohaneNoDOM = {
       popsHeart.set('pid', id)
     }
 
-    if (
-      dataYosoro.get('notUsingMP') == 'true' ||
-      dataYosoro.get('notUsingMP') == true
-    ) {
+    if (dataYosoro.get('notUsingMP') == true) {
       return 0
     }
 
@@ -249,7 +246,7 @@ let yohaneNoDOM = {
     document.getElementById('karaoke').innerHTML = ''
     var meta = getFromLists(id)
 
-    if (dataYosoro.get('sakana') === 'true') {
+    if (dataYosoro.get('sakana') === true) {
       document.getElementById('album_meta').src =
         (urlQueryParams('local') === 'true'
           ? './'
@@ -280,11 +277,7 @@ let yohaneNoDOM = {
       : ''
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
-    if (
-      meta[1].karaoke &&
-      (dataYosoro.get('interactiveCall') !== 'false' &&
-        dataYosoro.get('interactiveCall') != false)
-    ) {
+    if (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) {
       loadLyrics(id, meta)
     } else {
       loadCallImage(id)
@@ -511,7 +504,7 @@ let yohane = {
 
   __useSetInterval: false,
   reInitTimingFunction: () => {
-    yohane.__useSetInterval = dataYosoro.get('funeTiming') === 'true'
+    yohane.__useSetInterval = dataYosoro.get('funeTiming') == true
   },
   tick: notAnimation => {
     if (!yohane.__useSetInterval) {
@@ -557,10 +550,7 @@ let yohane = {
 
   initialize: id => {
     yohaneNoDOM.initialize(id)
-    if (
-      dataYosoro.get('notUsingMP') == 'true' ||
-      dataYosoro.get('notUsingMP') == true
-    ) {
+    if (dataYosoro.get('notUsingMP') == true) {
       openCallImage(id)
       return false
     }
@@ -610,10 +600,7 @@ let yohane = {
   loadPlay: id => {
     if (yohane.initialize(id)) {
       yohane.play()
-      if (
-        dataYosoro.get('doNotUseMusicPlayer') !== 'true' &&
-        dataYosoro.get('doNotUseMusicPlayer') !== true
-      ) {
+      if (dataYosoro.get('doNotUseMusicPlayer') !== true) {
         yohaneNoDOM.dekakuni()
       }
     }
@@ -700,7 +687,7 @@ let pageAdjust = {
 
       var c = document.createDocumentFragment()
 
-      if (dataYosoro.get('sakana') === 'true') {
+      if (dataYosoro.get('sakana') === true) {
         var artImage = document.createElement('img')
         artImage.style = 'background-color: #323232;'
         artImage.id = curObj.id + '_bgimg'
@@ -721,7 +708,7 @@ let pageAdjust = {
       var titleText = document.createElement('h3')
       titleText.className = 'txt'
       titleText.innerText =
-        dataYosoro.get('mikan') === 'true'
+        dataYosoro.get('mikan') === true
           ? curObj.translated || objKeys[i]
           : objKeys[i]
 
@@ -912,10 +899,7 @@ $(document).ready(() => {
       ) {
         yohane.initialize(popsHeart.get('pid'))
 
-        if (
-          dataYosoro.get('doNotUseMusicPlayer') !== 'true' &&
-          dataYosoro.get('doNotUseMusicPlayer') !== true
-        ) {
+        if (!dataYosoro.get('doNotUseMusicPlayer')) {
           yohaneNoDOM.dekakuni()
         }
       }

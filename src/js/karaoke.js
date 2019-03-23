@@ -49,7 +49,7 @@ var Karaoke = {
   TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
   CallSoundElement: null,
 
-  SpaParsing: function (spa, c, spacing) {
+  SpaParsing: function (spa, spacing) {
     var wordObject = {
       text: spa + (spacing ? ' ' : ''),
       start_time: 0,
@@ -58,7 +58,7 @@ var Karaoke = {
       type: 1
     }
 
-    c.push(wordObject)
+    return wordObject
   },
 
   SetTimelineData: function (data) {
@@ -164,14 +164,12 @@ var Karaoke = {
         if (/\^S_P/g.test(spa)) {
           var spaSplt = spa.split(/\^S_P/g)
           spaSplt.forEach((spBr, i) => {
-            Karaoke.SpaParsing(
-              spBr,
-              perLineSpacing.collection,
-              spaSplt.length - 1 > i
+            perLineSpacing.collection.push(
+              Karaoke.SpaParsing(spBr, spaSplt.length - 1 > i)
             )
           })
         } else {
-          Karaoke.SpaParsing(spa, perLineSpacing.collection, false)
+          perLineSpacing.collection.push(Karaoke.SpaParsing(spa, false))
         }
       })
 
