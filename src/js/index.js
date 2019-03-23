@@ -74,6 +74,7 @@ const loadLyrics = (id, obj) => {
       karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
         100 -
       0.03
+    yohaneNoDOM.timeLeapDisableAnimation()
   })
 }
 
@@ -179,6 +180,16 @@ let yohaneNoDOM = {
 
   end: () => {
     document.getElementById('pp_btn').innerHTML = 'play_arrow'
+  },
+
+  timeLeapDisableAnimation: () => {
+    $('.thumb').addClass('disable_animation')
+    $('.passed_bar').addClass('disable_animation')
+
+    setTimeout(() => {
+      $('.thumb').removeClass('disable_animation')
+      $('.passed_bar').removeClass('disable_animation')
+    }, 200)
   },
 
   dekakuOnce: event => {
@@ -373,18 +384,21 @@ let yohane = {
     if (yohane.playing()) yohane.pause(false, true)
     yohane.player().currentTime = yohane.player().duration * (zto / 100)
     yohane.play(true)
+    yohaneNoDOM.timeLeapDisableAnimation()
   },
 
-  seekPrev: s =>
-    (yohane.player().currentTime =
-      yohane.player().currentTime - s < 0
-        ? 0
-        : yohane.player().currentTime - s),
-  seekNext: s =>
-    (yohane.player().currentTime =
+  seekPrev: s => {
+    yohane.player().currentTime =
+      yohane.player().currentTime - s < 0 ? 0 : yohane.player().currentTime - s
+    yohaneNoDOM.timeLeapDisableAnimation()
+  },
+  seekNext: s => {
+    yohane.player().currentTime =
       yohane.player().currentTime + s > yohane.player().duration
         ? (yohane.player().duration - yohane.player().currentTime) / 2
-        : yohane.player().currentTime + s),
+        : yohane.player().currentTime + s
+    yohaneNoDOM.timeLeapDisableAnimation()
+  },
   volumeDown: s =>
     yohane.setVolume(
       yohane.player().volume - s < 0 ? 0 : yohane.player().volume - s

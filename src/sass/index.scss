@@ -975,7 +975,6 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     border-radius: 3px;
     touch-action: none;
     pointer-events: none;
-    transition: 0.3s width cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .passed_bar {
@@ -983,6 +982,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     z-index: 16;
     background-color: #428eff;
     pointer-events: none;
+    transition: 1s width cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .thumb {
@@ -994,8 +994,12 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     z-index: 17;
     border-radius: 50px;
     background-color: #fff;
-    transition: 0.3s transform cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 1s transform cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+  }
+
+  .disable_animation {
+    transition: none;
   }
 
   .max_bar {
