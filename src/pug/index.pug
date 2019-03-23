@@ -53,14 +53,14 @@ html.index
                     p#played_time.c.mga 0 : 00
                     #ctrl_times.c.__progress
                         .passed_bar#psd_times
-                        .max_bar
+                        .max_bar#bar_eventListen
                         .thumb#__current_thumb
                     p#left_time.c.mga - 4 : 59
                 .ctrls
                     span#pp_btn.material-icons(onclick="yohane.toggle()") play_arrow
                     span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
                     span#repeat_btn.material-icons.in_active(onclick="yohane.repeatToggle()") repeat
-                    span#dekaku_btn.material-icons(onclick="(function(){yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()})()") keyboard_arrow_down
+                    span#dekaku_btn.material-icons keyboard_arrow_down
         .lyrics_wrapper
             p.blade_c
                 | 블레이드 추천 색상 : 

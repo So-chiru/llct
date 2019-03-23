@@ -187,6 +187,10 @@ let yohaneNoDOM = {
     }
   },
 
+  toggleKaizu: () => {
+    yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()
+  },
+
   dekakuni: () => {
     $('.player_bg').addClass('show')
     $('.player').addClass('dekai')
@@ -523,7 +527,7 @@ let yohane = {
       }, 10)
     }
     if (yohane.tickVal == null) yohane.tickVal = 0
-    if (yohane.tickVal > 20) {
+    if (yohane.tickVal > 15) {
       yohane.tickVal = 0
       yohane.deferTick()
     }
@@ -932,6 +936,26 @@ $(document).ready(() => {
     '금',
     '토'
   ][new Date().getDay()]
+
+  Sakurauchi.listen(
+    'click',
+    () => {
+      yohaneNoDOM.toggleKaizu()
+    },
+    document.getElementById('dekaku_btn')
+  )
+
+  Sakurauchi.listen(
+    'click',
+    ev => {
+      var vp = document
+        .getElementById('bar_eventListen')
+        .getBoundingClientRect()
+
+      yohane.seekTo(((ev.clientX - vp.left) / vp.width) * 100)
+    },
+    document.getElementById('bar_eventListen')
+  )
 
   Sakurauchi.listen(
     'touchstart',

@@ -156,15 +156,17 @@ let Sakurauchi = {
       return
     }
 
+    var specializedID = typeof parent.id !== 'undefined' ? parent.id : ''
+
     parent.addEventListener(
       k,
       (...evs) => {
-        Sakurauchi.run(k, ...evs)
+        Sakurauchi.run(k + specializedID, ...evs)
       },
       options || null
     )
 
-    return Sakurauchi.add(k, fn)
+    return Sakurauchi.add(k + specializedID, fn)
   },
 
   delisten: (k, fi, pr) => {
@@ -177,8 +179,9 @@ let Sakurauchi = {
       return
     }
 
+    var specializedID = typeof pr.id !== 'undefined' ? pr.id : ''
     pr.removeEventListener(k)
-    return Sakurauchi.remove(k, fi)
+    return Sakurauchi.remove(k + specializedID, fi)
   },
 
   run: (k, ...datas) => {

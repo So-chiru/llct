@@ -979,6 +979,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     width: 0px;
     z-index: 16;
     background-color: #428eff;
+    pointer-events: none;
   }
 
   .thumb {
