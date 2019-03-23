@@ -60,7 +60,7 @@ html.editor
             input#correcttime.blackInput(type='number', value='-10', onchange='window.karaokeData.metadata.correction_time = Number(this.value)')
           p
             | 키를 누번 눌러 선택 해제 사용
-            input.blackInput(type='checkbox', checked='dataYosoro.get("useDouble") === true || dataYosoro.get("useDouble") === "true"', onchange='dataYosoro.set("useDouble", this.checked)')
+            input#key_pressed_twice.blackInput(type='checkbox', onchange='dataYosoro.set("useDouble", this.checked)')
 
           br
         .title_settings

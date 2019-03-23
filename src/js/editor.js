@@ -141,6 +141,10 @@ $(document).ready(() => {
     dataYosoro.set('useDouble', true)
   }
 
+  document.getElementById('key_pressed_twice').checked = dataYosoro.get(
+    'useDouble'
+  )
+
   wavesurfer.on('play', () => {
     logger(1, 'r', 'event : wavesurfer_play', 'i')
     $('#playpause_audio').html('<i class="material-icons ds">pause_arrow</i>')
