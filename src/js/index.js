@@ -175,6 +175,8 @@ let yohaneNoDOM = {
     document.title = 'LLCT'
   },
 
+  __cachedElement: {},
+
   end: () => {
     document.getElementById('pp_btn').innerHTML = 'play_arrow'
   },
@@ -237,6 +239,10 @@ let yohaneNoDOM = {
     if (dataYosoro.get('notUsingMP') == true) {
       return 0
     }
+
+    ;['played_time', 'left_time', 'psd_times', '__current_thumb'].forEach(v => {
+      yohaneNoDOM.__cachedElement[v] = document.getElementById(v)
+    })
 
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.chiisakuni()
@@ -538,14 +544,19 @@ let yohane = {
   },
 
   deferTick: () => {
-    document.getElementById('played_time').innerHTML = timeString(
+    yohaneNoDOM.__cachedElement['played_time'].innerHTML = timeString(
       yohane.player().currentTime
     )
-    document.getElementById('left_time').innerHTML =
+    yohaneNoDOM.__cachedElement['left_time'].innerHTML =
       '-' + timeString(yohane.player().duration - yohane.player().currentTime)
 
-    document.getElementById('ctrl_time').value =
-      (yohane.player().currentTime / yohane.player().duration) * 100
+    yohaneNoDOM.__cachedElement['psd_times'].style.width =
+      (yohane.player().currentTime / yohane.player().duration) * 100 + '%'
+
+    yohaneNoDOM.__cachedElement['__current_thumb'].style.transform =
+      'translateX(' +
+      yohaneNoDOM.__cachedElement['psd_times'].clientWidth +
+      'px)'
   },
 
   initialize: id => {
