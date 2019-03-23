@@ -963,15 +963,18 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 
 .__progress {
   width: 80%;
-  height: 15px;
+  height: 30px;
+  display: flex;
   position: relative;
 
   .passed_bar,
   .max_bar {
     position: absolute;
-    margin-top: 7.5px;
+    margin-top: 15px;
     height: 3px;
     border-radius: 3px;
+    touch-action: none;
+    pointer-events: none;
     transition: 0.3s width cubic-bezier(0.19, 1, 0.22, 1);
   }
 
@@ -985,7 +988,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   .thumb {
     position: absolute;
     display: flex;
-    margin-top: 2px;
+    margin-top: 9px;
     width: 15px;
     height: 15px;
     z-index: 17;

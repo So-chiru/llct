@@ -954,7 +954,7 @@ $(document).ready(() => {
 
       yohane.seekTo(((ev.clientX - vp.left) / vp.width) * 100)
     },
-    document.getElementById('bar_eventListen')
+    document.getElementById('ctrl_times')
   )
 
   Sakurauchi.listen(
