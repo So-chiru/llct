@@ -1,9 +1,10 @@
 {
   "metadata": {
-    "correction_time": -9,
+    "correction_time": -8,
     "lyrics": "Wow!\nYaa!  Yaa!\n\n야  야  야  쥰 비 와  데 키 타 요\n나 마 에  나 마 에  난 닷 케\n와 스 레 타  후 리 와  야 다!  (Yaa!)  야 다!  (Yaa!)\nA qou rs  PUN CH\n야  야  야  소 오 단 가  아 루 나 라  (아 루 나 라)\n스 구 니  스 구 니  요 비 나 요!  (욘 데 요!)\n젯 토 데  맛 하 데  솟 치 니  이 쿠 카 라\n모-  (Yaa!)  쵸 이  (Yaa!)  맛 테 테\n\n무 테 키 닷 테  신 지 타 쿠  낫 테\n이 키 오 이 데  We  are  HE RO ES\n오 카 시 이 나  히 로 인 데 쇼? 테\n츳 콘 데  츳 콘 데  츳 콘 데 네  (Wao!)\n\n나 야 미 모  붓 토 바 스  요 오 나  (후 후!)\n이 메- 지  v  못 테  타 타 카 이 마 쇼 오\n(세- 노  후 와  후 와  후 와  후 와)\n난 토 나 쿠  난 토 나 쿠\n츠 요 쿠  나 룻 테  키 가  시 테 루  (Yeah!)\n마 요 이 모  붓 토 바 스  요 오 나  (후 후!)\n이 메- 지  v  못 테  타 타 카 이 마 쇼 오\n(세- 노  후 와  후 와  후 와  후 와)\n난 토 나 쿠  난 토 나 쿠\n츠 요 쿠  나 루  손 나  와 타 시 타 치…  다 요 다 요!\n\n헤 이  헤 이  헤 이  헤 이  헤 이  헤 이  헤- 이!\n\n사 아  사 아  사 아  겐 키 오  다 시 테 요\n키 미 와  키 미 와  다 레 닷 케?\n혼 토 오 와  싯 테 루 요  데 모  (Yaa!)  데 모  (Yaa!)\nA qou rs  FLA SH!\n히 미 츠 난 닷\n\n사 아  사 아  사 아  몬 다 이 와  난 다 로  (난 다 로)\n스 구 니  스 구 니  요 비 나 요!  (욘 데 요!)\n숏 쿠 데  다 운 데  나 키 소 오 나  토 키 와\n모-  (Yaa!)  쵸 이  (Yaa!)  훈 밧 테 네\n\n타 메 이 키 니  나 가 사 레 나 이 데\n(츠 카 맛 테 요  와 타 시 노  테 니)\n코 레 카 라 다 요  츠 이 테 오 이 데 요\n못 토  마 에 니  (So!)  굿 토 마 에 니  (So!)  오 이 데  오 이 데 요\n(하 야 쿠)  오 이 데 요  Yes!\n\n네 가 이 와  잇 테  미 타 쿠  나 루  (후 후!)\n스 테- 지  v  놋 테  타 타 카 이 마 쇼 오\n(세- 노  후 와  후 와  후 와  후 와)\n카 나 에 타 이  카 나 에 타 이\n유 메 니  나 룻 테  키 가  시 테 루  (Yeah!)\n오 모 이 와  잇 테  미 타 쿠  나 루  (후 후!)\n스 테- 지  v  놋 테  타 타 카 이 마 쇼 오\n(세- 노  후 와  후 와  후 와  후 와)\n카 나 에 타 이  카 나 에 타 이  유 메 니  나 루\n킷 토  민 나 데  얏 챠 우 하 즈 다 요\n\nWao!  헤 이!  헤 이!\n\n얏 챠 에 바  얏 챠 이 타 이  얏 챠 에 바  얏 챠 우 카\n다 카 라  오 이 데 요\nWao!\n\n나 야 미 모  붓 토 바 스  요 오 나  (후 후!)\n이 메- 지  v  못 테  타 타 카 이 마 쇼 오\n(세- 노  후 와  후 와  후 와  후 와)\n난 토 나 쿠  난 토 나 쿠\n츠 요 쿠  나 룻 테  키 가  시 테 루  (Yeah!)\n마 요 이 모  붓 토 바 스  요 오 나  (후 후!)\n이 메- 지  v  못 테  타 타 카 이 마 쇼 오\n(세- 노  후 와  후 와  후 와  후 와)\n난 토 나 쿠  난 토 나 쿠\n츠 요 쿠  나 루  (Yaa!)  나 리 소 오 나  (Yaa!)\nA qou rs  HE RO ES  손 나  와 타 시 타 치…  다 요 다 요!\n\nYaa!  Yaa!\n후 후 후  후 후 후  후!  후 후!",
     "title": "Aqours☆HEROES",
-    "bladeColorMember": "자유"
+    "bladeColorMember": "자유",
+    "writeDone": false
   },
   "timeline": [
     {
@@ -36,6 +37,40 @@
           "end_time": 1386,
           "pronunciation_time": 0,
           "type": "4"
+        }
+      ]
+    },
+    {
+      "start_time": 1796,
+      "end_time": 2132,
+      "collection": [
+        {
+          "text": "(후 ",
+          "start_time": 1896,
+          "end_time": 2032,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 1923,
+          "end_time": 2032,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 1953,
+          "end_time": 2032,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후)",
+          "start_time": 1980,
+          "end_time": 2032,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
