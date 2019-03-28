@@ -3,9 +3,9 @@
     "correction_time": -10,
     "lyrics": "오 모 이 요  히 토 츠 니 나 레\n(오 모 이 가 히 토 츠 니  나 루  토 키)\n코 노  토 키 오 맛 테 이 타\n\n후 토  키 즈 쿠 토 카 사 나 리  아 우 요\n이 치 즈 니  미 라 이 오 요 부  코 코 로\n후 루 에 테 루  테 오 니 깃 테  이 쿤 다 요\n* (세- 노  하이!  하이!  하이! 하이! 하이! 하이!)\n스 레 치 갓 타  아 토 데 도 우 지 니  후 리 무 이 타\n(우-  하이!  우-  하이!  우-  하이!  우-  하이!)\n호 라 네  혼 토 와\n잇 쇼 닷 타 요 키 모 치 와 네\n\n나 니 카 오  츠 카 무 코 토 데\n(유 메 니 모 이 로 이 로  아 루 카 라)\n나 니 카 오 아 키 라 메 나 이  (소 우  데 쇼?)\n*  (후 후!  후 후!)\n오 모 이 요  히 토 츠 니 나 레\n도 코 니  이 테 모 오 나 지  아 시 타 오\n신 지 테 루\n\nWow  Wow  이 츠 닷 테  코 코 로 노  마 마\nWow  Wow  이 츠 닷 테  히 토 츠 니  나 레\n\n치 카 즈 이 타 리 하 나 레 타 리 닷 타 네\n우 마 쿠  이 카 나 쿠 테 즛 토\n츠 타 에 라 레 나 이 코 토 가  앗 타 요\n*  (세- 노  하이!  하이!  하이! 하이! 하이! 하이!)\n마 지 메 나  카 오 시 테\n*  (우-  하이!  우-  하이!  우-  하이!  우-  하이!)\n도 우 지 니  와 라 이 다 스\n얏 파 리  키 미 토\n츠 나 갓 테 루 우 레 시 이 요\n\n다 이 지 나  유 메  오 우 토 키\n다 이 지 나  히 토 가  와 카 루\n오 모 이 와 히 토 츠 다 요 토\n치 가 우  바 쇼 에 무 카 우 토  시 테 모\n신 지 테 루\n\n카 케 가 에 노  나 이 히 비 오\n스 고 시 테 탄 다\n이 마 사 라  와 캇 타\n히 토 리 쟈 나 이\n카 케 가 에 노  나 이 히 비 오  (코 코 데)\n츠 미 카 사 네 테  (히 토 츠  히 토 츠)\n이 마 사 라  와 캇 타  (잇 쇼 다 요 네)\n히 토 리 쟈 나 이\n\n나 니 카 오  츠 카 무 코 토 데\n(유 메 니 모 이 로 이 로  아 루 카 라)\n나 니 카 오 아 키 라 메 나 이  (소 우 데 쇼?)\n*  (후 후!  후 후!)\n오 모 이 요  히 토 츠 니 나 레\n도 코 니  이 테 모 오 나 지  아 시 타 오\n신 지 테 루\n\n다 이 지 나  유 메  오 우  토 키\n다 이 지 나  히 토 가  와 카 루  (와 카 루)\n오 모 이 와 히 토 츠 다 요 토\n(와 카 룬 다 오 모 이 와  히 토 츠)\n치 가 우  바 쇼 에 무 카 우 토  시 테 모\n(신 지 테 루 카 , 카 라)\n신 지 테 루",
     "title": "마음이여 하나가 되어라",
-    "writter": "Sochiru",
     "bladeColorHEX": "#f56bda",
-    "bladeColorMember": "사쿠라우치 리코"
+    "bladeColorMember": "사쿠라우치 리코",
+    "writeDone": false
   },
   "timeline": [
     {
@@ -240,6 +240,101 @@
           "end_time": 1370,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 1704,
+      "end_time": 2942,
+      "collection": [
+        {
+          "text": "<간주 부분 : ",
+          "start_time": 1804,
+          "end_time": 2842,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 1923,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 1995,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2076,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2151,
+          "end_time": 2508,
+          "pronunciation_time": "0.3",
+          "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 1704,
+      "end_time": 2942,
+      "collection": [
+        {
+          "text": "하이 ",
+          "start_time": 2213,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2300,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2371,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2439,
+          "end_time": 2508,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": ">",
+          "start_time": 1804,
+          "end_time": 2842,
+          "pronunciation_time": "0.3",
+          "type": "3"
         }
       ]
     },
@@ -1221,7 +1316,7 @@
       ]
     },
     {
-      "start_time": 7061,
+      "start_time": 7060,
       "end_time": 7407,
       "collection": [
         {
@@ -3145,7 +3240,7 @@
       ]
     },
     {
-      "start_time": 20050,
+      "start_time": 20046,
       "end_time": 20865,
       "collection": [
         {
@@ -4264,7 +4359,7 @@
       ]
     },
     {
-      "start_time": 25486,
+      "start_time": -100,
       "end_time": 26287,
       "collection": [
         {
