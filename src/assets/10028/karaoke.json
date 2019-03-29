@@ -4,7 +4,8 @@
     "lyrics": "<  전주  부분  :  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  >\n\n히 라 이 타  하 나 노  카 오 리 카 라\n우 케 톳 타 요  츠 기 노  유 메 오\n사 아  도 코 에  유 코 오 카 나?\n하 네 루 요 오 니  유 코 오 카 나?\n하 지 마 리 토  (사 요 나 라 오)\n쿠 리 카 에 시 테\n\n아 이 타 이 노 와  아 타 라 시 이  토 키 메 키\n우 마 레 타 테  네 가 이 노  아 츠 사\n다 키 시 메 테  유 키 타 이 네\n카 로 야 카 니  유 키 타 이 네\n오 모 이 데 와  포 켓 토 노  *  나 카\n*(세- 노  하이!  하이!  하이! 하이! 하이! 하이!)\n\n스 테 키 나  타 비 니  데 요 오  진 세 잇 테 사…\n(우-  하이!  우-  하이!  우-  하이!  우-  하이!)\n타 쿠 상 노  바 쇼 에  츠 즈 이 테 루？\n와 쿠 와 쿠 다 라 케 사!  (후 후 후!)\n\n오 모 이 오  노 세 테  HA PPY  HA PPY  TRAIN  to  go!\n아 시 타 가  욘 데 루  보 쿠 타 치 오\n키 타 이 데  카 가 야 쿠  히 토 미 나 라  미 에 루 요\n토 오 이  에 키 데  킷 토  나 니 카 가  맛 테 루 네\n\n<  간주  부분  :  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  >\n\n시 리 타 이 노 와  스 바 라 시 이  요 아 케 토\n세 츠 나 사 오  야 도 스  유 우 야 케\n다 카 라 모 오  이 카 나 쿠 챠\n히 토 리 데 모  이 카 나 쿠 챠\n오 모 이 데 오  쿠 치 즈 산 데\n\n키 니 시 나 * 이  치 이 사 나  코 토 와\n*(우-  하이!  우-  하이!  우-  하이!  우-  하이!)\n이 츠 데 모  에 가 오 데  이 타 이 카 라\n오 와 라 나 이  타 비 오  시 요 오  진 세 잇 테 바…\n타 메 이 키 모  타 마 니  데 챠 우 요\n하  라 하 라 시 호 다 이!  (후 후 후!)\n\n마 요 와 즈  놋 타 라  PAR TY  PAR TY  TRAIN  to  go!\n이 가 이 나  히 토 가  소 바 니  이 타?\n레- 루 와  도 코 마 데  츠 나 가 루 카\n마 다 마 다  와 카 라 나 이 네\n즛 토  하 싯 테 타 이  PAR TY  T RAIN\n\n(  간주  부분  :  블레이드  내리기  →  카난레일부분 )\n오 모 이 오  노 세 테  HA PPY  HA PPY  TRAIN  to  go!\n아 시 타 가  욘 데 루  보 쿠 타 치 오\n마 요 와 즈  놋 타 라  PAR TY  PAR TY  TRAIN  to  go!\n이 가 이 나  히 토 가  소 바 니  이 타?\n키 타 이 니  카 가 야 쿠  히 토 미 나 라  미 에 루 요\n토 오 이  에 키 데  킷 토  나 니 카 가  맛 테 루 노\n아!  도 코 마 데 모 네…  HA PPY  T RAIN\n\n아 아  아-\n아 아  아-  아-\n아-  아-\n<  후주  부분  :  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  >",
     "title": "HAPPY PARTY TRAIN",
     "bladeColorMember": "마츠우라 카난",
-    "bladeColorHEX": "#13e8ae"
+    "bladeColorHEX": "#13e8ae",
+    "writeDone": true
   },
   "timeline": [
     {
@@ -84,8 +85,8 @@
       ]
     },
     {
-      "start_time": 1549,
-      "end_time": 2386,
+      "start_time": -50,
+      "end_time": 2461,
       "collection": [
         {
           "text": "하이 ",
@@ -126,6 +127,27 @@
           "text": "하이 ",
           "start_time": 2003,
           "end_time": 2035,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 2108,
+          "end_time": 2361,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 2142,
+          "end_time": 2361,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!",
+          "start_time": 2176,
+          "end_time": 2361,
           "pronunciation_time": 0,
           "type": "2"
         },
@@ -621,7 +643,7 @@
       ]
     },
     {
-      "start_time": 445118450,
+      "start_time": 4451,
       "end_time": 5161,
       "collection": [
         {
@@ -1949,7 +1971,7 @@
     },
     {
       "start_time": 10244,
-      "end_time": 11334,
+      "end_time": 11568,
       "collection": [
         {
           "text": "< ",
@@ -2024,8 +2046,8 @@
       ]
     },
     {
-      "start_time": 10729,
-      "end_time": 11568,
+      "start_time": 10244,
+      "end_time": 11610,
       "collection": [
         {
           "text": "하이 ",
@@ -2066,6 +2088,27 @@
           "text": "하이 ",
           "start_time": 11182,
           "end_time": 11234,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 11290,
+          "end_time": 11510,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 11317,
+          "end_time": 11510,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!",
+          "start_time": 11354,
+          "end_time": 11510,
           "pronunciation_time": 0,
           "type": "2"
         },
@@ -3551,7 +3594,7 @@
     },
     {
       "start_time": 18350,
-      "end_time": 21100,
+      "end_time": 22228,
       "collection": [
         {
           "text": "( ",
@@ -4428,7 +4471,7 @@
     },
     {
       "start_time": 24954,
-      "end_time": 26001,
+      "end_time": 27338,
       "collection": [
         {
           "text": "< ",
@@ -4503,7 +4546,7 @@
       ]
     },
     {
-      "start_time": 25415,
+      "start_time": 24954,
       "end_time": 27338,
       "collection": [
         {

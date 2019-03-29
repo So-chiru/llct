@@ -1,9 +1,10 @@
-﻿{
+{
   "metadata": {
     "correction_time": -9,
     "lyrics": "<  전주  부분  :  사아  이쿠요!\n이치!  니!  산!  욘!  고!  로쿠!  나나!  하치!  큐!\n쥬!\n\n이마  젠료쿠니  카가야코\n제로카라  이치에!\n아쿠아!  선- 샤인!  >\n\n히 카 리 니  나 로\n미 라 이 오  테 라 시 타 이\n카 가 야 키 와  코 코 로 카 라  (후  후 후!)\n아 후 레 다 스 요\n\n<  간주  부분  :  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  >\n\n유 메 가  우 마 레  유 메 노  타 메 니  나 이 타  토 키 데 모\n아 키 라 메 나 이  코 토 데  츠 나 갓 타\n민 나  민 나  나 야 미  나 가 라  코 코 에  타 도 리  츠 이 타 네\n코 레 카 라 다 요  이 마 와  모 오  마 요 와  나 이\n\n아 코 가 레  다 키 시 메 테  츠 기 에  스 스 문 다\n보 쿠 타 치 다 케 노  신 세 카 이 가  (킷 토  아 루)\nWe  say  요-  소 로-\n\n후 네 가  유 쿠 요  미 라 이 에  타 비 다 토 오\n아 오 이  소 라  와 랏 테 루\n(나 니 가  시 타 이?)\n히 카 리 니  나 로  미 라 이 오  테 라 시 타 이\n카 가 야 키 와  코 코 로 카 라\n아 후 레  다 시 테  못 토\n사 키 노  케 시 키  노 조 문 다\n\nYeah!\n\n(민나!  잇쇼니!  카가야코!)\n\n히 카 리 니  나 로  미 라 이 오  테 라 시 타 이\n이 마 와  모 오  마 요 와 나 이\n\n후 네 가  유 쿠 요  미 라 이 에  타 비 다 토 오\n아 오 이  소 라  와 랏 테 루\n(나 니 가  시 타 이?)\n히 카 리 니  나 로  미 라 이 오  테 라 시 타 이\n카 가 야 키 와  코 코 로 카 라\n아 후 레  다 시 테  못 토\n사 키 노  케 시 키  노 조 문 다\n아 아  얏 토  테 니  시 타\n미 라 이  치 켓 토  카 자 시 테\n\n( 블레이드 파란색으로 )\n\n라  라  라 라-  라 라-\n라  라  라 라-  라 라-\n라  라  라 라-  라 라-\n라  라  라  라-",
     "bladeColorHEX": "#49b9f9",
-    "bladeColorMember": "자유"
+    "bladeColorMember": "자유",
+    "writeDone": true
   },
   "timeline": [
     {
@@ -561,42 +562,42 @@
         {
           "text": "하이 ",
           "start_time": 5025,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5096,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5168,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5239,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5311,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이",
           "start_time": 5382,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         }
@@ -609,42 +610,42 @@
         {
           "text": "하이 ",
           "start_time": 5454,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5525,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5597,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5668,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5739,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
           "start_time": 5811,
-          "end_time": 0,
+          "end_time": 6040,
           "pronunciation_time": 0,
           "type": "2"
         },
@@ -1421,7 +1422,7 @@
     },
     {
       "start_time": 9480,
-      "end_time": 9978,
+      "end_time": 10029,
       "collection": [
         {
           "text": "We ",
@@ -1457,6 +1458,27 @@
           "end_time": 9878,
           "pronunciation_time": 0,
           "type": "4"
+        },
+        {
+          "text": "(후 ",
+          "start_time": 9853,
+          "end_time": 9929,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 9879,
+          "end_time": 9929,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!)",
+          "start_time": 9898,
+          "end_time": 9929,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -2048,7 +2070,7 @@
           "start_time": 13310,
           "end_time": 13560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
