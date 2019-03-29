@@ -337,6 +337,8 @@
     ],
     "center": "",
     "karaoke": true,
+    "bladeColor": "파란색",
+    "bladeColorHEX": "#54acff",
     "short_kr": "미라티케"
   },
   "ジングルベルがとまらない": {
@@ -397,6 +399,8 @@
       "요시코"
     ],
     "center": "츠시마 요시코",
+    "bladeColor": "흰색",
+    "bladeColorHEX": "#fff",
     "short_kr": "데이드림"
   },
   "G線上のシンデレラ": {

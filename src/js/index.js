@@ -285,9 +285,9 @@ let yohaneNoDOM = {
       artistLists[meta[1].artist != null ? meta[1].artist : 0]
 
     document.getElementById('blade_color').innerText =
-      meta[1].blade_color || '자유'
+      meta[1].bladeColor || '자유'
 
-    var _hx = meta[1].blade_color
+    var _hx = meta[1].bladeColorHEX
 
     if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
       document.getElementById('blade_color').style.color = _hx
