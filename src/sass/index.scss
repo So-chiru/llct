@@ -162,7 +162,7 @@ body {
   }
 }
 
-.call_lists {
+._card_lists {
   display: -ms-grid;
   display: -moz-grid;
   display: grid;
@@ -244,7 +244,7 @@ body {
 }
 
 @media screen and (max-width: $medium) {
-  .call_lists {
+  ._card_lists {
     grid-template-columns: repeat(2, 1fr);
 
     .card {
@@ -254,7 +254,7 @@ body {
 }
 
 @media screen and (max-width: $small) {
-  .call_lists {
+  ._card_lists {
     grid-template-columns: repeat(1, 1fr);
 
     .card {
@@ -425,6 +425,10 @@ body {
   }
 
   #repeat_btn {
+    font-size: 28px;
+  }
+
+  #playnext_btn {
     font-size: 28px;
   }
 

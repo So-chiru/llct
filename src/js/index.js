@@ -8,7 +8,6 @@ const timeString = sec => {
   )
 }
 
-let callLists = []
 let frameWorks
 let audioVolumeFrame = null
 let callReqAnimation
@@ -146,6 +145,42 @@ let changedOption = (i, v) => {
   dataYosoro.set(changes[i].data_key, v)
 }
 
+let LLCT = {
+  __pkg_callLists: [],
+  __cur_filterLists: [],
+  showSetting: () => {
+    $('.setting_layer').removeClass('hide')
+    $('.setting_layer').addClass('show')
+  },
+
+  hideSetting: () => {
+    $('.setting_layer').removeClass('show')
+    $('.setting_layer').addClass('hide')
+  },
+
+  setTitleTo: t => {
+    document.getElementById('p_title').innerHTML = t
+  },
+
+  currentPage: 0,
+
+  viewPlayLists: () => {
+    LLCT.currentPage = 1
+    LLCT.setTitleTo('재생 목록')
+    document.getElementById('pl_ms_switcher').innerHTML =
+      '<span class="material-icons ti">library_music</span>'
+  },
+
+  viewMusicLists: () => {
+    LLCT.currentPage = 0
+    LLCT.setTitleTo('노래 목록')
+    document.getElementById('pl_ms_switcher').innerHTML =
+      '<span class="material-icons ti">queue_music</span>'
+  },
+
+  openPlayList: id => {}
+}
+
 let yohaneNoDOM = {
   kaizu: false,
   shokan: () => {
@@ -248,14 +283,10 @@ let yohaneNoDOM = {
     )
   },
 
-  showSetting: () => {
-    $('.setting_layer').removeClass('hide')
-    $('.setting_layer').addClass('show')
-  },
-
-  hideSetting: () => {
-    $('.setting_layer').removeClass('show')
-    $('.setting_layer').addClass('hide')
+  playingNextToggle: () => {
+    $('#playnext_btn')[yohane.__PlayingNext ? 'removeClass' : 'addClass'](
+      'in_active'
+    )
   },
 
   initialize: id => {
@@ -280,9 +311,6 @@ let yohaneNoDOM = {
     yohaneNoDOM.__cachedElement['psd_times'].style.width = '0px'
     yohaneNoDOM.__cachedElement['__current_thumb'].style.transform = 0
 
-    if (yohaneNoDOM.kaizu) {
-      yohaneNoDOM.chiisakuni()
-    }
     yohaneNoDOM.load()
     yohaneNoDOM.registerBufferBar()
 
@@ -350,9 +378,12 @@ let yohane = {
   liveEffectStore: false,
   loaded: false,
 
-  shuffle: () => {
-    var objK = Object.keys(callLists)
-    yohane.loadPlay(callLists[objK[(Math.random() * objK.length) << 0]].id)
+  shuffle: skipDekaku => {
+    var objK = Object.keys(LLCT.__cur_filterLists)
+    yohane.loadPlay(
+      LLCT.__cur_filterLists[objK[(Math.random() * objK.length) << 0]].id,
+      skipDekaku
+    )
   },
 
   setVolume: v => {
@@ -365,9 +396,15 @@ let yohane = {
   },
 
   __isRepeat: false,
+  __PlayingNext: false,
   repeatToggle: () => {
     yohane.__isRepeat = !yohane.__isRepeat
     yohaneNoDOM.loopToggle()
+  },
+
+  playNextToggle: () => {
+    yohane.__PlayingNext = !yohane.__PlayingNext
+    yohaneNoDOM.playingNextToggle()
   },
 
   fade: (from, to, duration, start, cb) => {
@@ -458,6 +495,8 @@ let yohane = {
         yohane.player()
       )
     }
+
+    yohane.audioSource.crossOrigin = 'anonymous'
 
     if (!yohane.effectsArray[0]) {
       var highFilter = yohane.audio_context.createBiquadFilter()
@@ -652,10 +691,11 @@ let yohane = {
     return true
   },
 
-  loadPlay: id => {
+  loadPlay: (id, skipDekaku) => {
     if (yohane.initialize(id)) {
       yohane.play()
-      if (dataYosoro.get('doNotUseMusicPlayer') !== true) {
+
+      if (dataYosoro.get('doNotUseMusicPlayer') !== true && !skipDekaku) {
         yohaneNoDOM.dekakuni()
       }
     }
@@ -663,10 +703,10 @@ let yohane = {
 }
 
 let getFromLists = id => {
-  var v = Object.keys(callLists)
+  var v = Object.keys(LLCT.__pkg_callLists)
   var sb = Number(id.toString().substring(3, 5)) - 1
 
-  return [v[sb], callLists[v[sb]]]
+  return [v[sb], LLCT.__pkg_callLists[v[sb]]]
 }
 
 let pageAdjust = {
@@ -701,7 +741,7 @@ let pageAdjust = {
 
   render: pg => {
     if (pageAdjust.cListsElement === null) {
-      pageAdjust.cListsElement = document.getElementById('call_lists')
+      pageAdjust.cListsElement = document.getElementById('_card_lists')
     }
     pageAdjust.cListsElement.innerHTML = ''
 
@@ -731,11 +771,11 @@ let pageAdjust = {
   },
 
   buildPage: () => {
-    var objKeys = Object.keys(callLists)
+    var objKeys = Object.keys(LLCT.__cur_filterLists)
     pageAdjust.lists = []
 
     for (var i = 0; i < objKeys.length; i++) {
-      var curObj = callLists[objKeys[i]]
+      var curObj = LLCT.__cur_filterLists[objKeys[i]]
       var baseElement = document.createElement('div')
       baseElement.className = 'card'
       baseElement.setAttribute('onclick', 'yohane.loadPlay(' + curObj.id + ')')
@@ -888,6 +928,10 @@ $(document).ready(() => {
     }
 
     yohaneNoDOM.end()
+
+    if (yohane.__PlayingNext) {
+      yohane.shuffle(!yohane.kaizu)
+    }
   }
 
   yohane.player().onpause = () => {
@@ -937,13 +981,9 @@ $(document).ready(() => {
   $.ajax({
     url: './data/lists.json',
     success: d => {
-      try {
-        if (typeof d === 'string') callLists = d
-      } catch (e) {
-        logger(2, 'r', e.message, 'e')
-      }
+      LLCT.__pkg_callLists = d
+      LLCT.__cur_filterLists = d
 
-      callLists = d
       $('#loading_spin_ctlst').addClass('done')
       pageAdjust.buildPage()
 

@@ -46,8 +46,9 @@ html.index
                     p#left_time.c.mga - 4 : 59
                 .ctrls
                     span#pp_btn.material-icons(onclick="yohane.toggle()") play_arrow
-                    span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-                    span#repeat_btn.material-icons.in_active(onclick="yohane.repeatToggle()") repeat
+                    // span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
+                    span#playnext_btn.material-icons.in_active(onclick="yohane.playNextToggle()") shuffle
+                    span#repeat_btn.material-icons.in_active(onclick="yohane.repeatToggle()") loop
                     span#dekaku_btn.material-icons keyboard_arrow_down
         .lyrics_wrapper
             p.blade_c
@@ -62,11 +63,12 @@ html.index
             .header
                 .titles
                     span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
-                    h1 노래 목록
+                    h1#p_title 노래 목록
                 .tabs
                     // span.active 전체
+                    span#pl_ms_switcher.ti.min_ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
                     span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
-                    span.ti.min_ti(onclick="yohaneNoDOM.showSetting()") <span class="material-icons ti">settings</span>
+                    span.ti.min_ti(onclick="LLCT.showSetting()") <span class="material-icons ti">settings</span>
                     //- .search_wrp.ti(onclick="$('#search_val').focus()")
                         input#search_val(type="text", name="")
                         span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
@@ -75,13 +77,13 @@ html.index
                 div
                 div
                 div
-            .call_lists#call_lists
+            ._card_lists#_card_lists
             .navigator
                 span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin">keyboard_arrow_left</i>
                 span.pg_ind <span class="thin" id="currentPage" class="thin">1</span> <span>/</span> <span class="black" id="totalPage">7</span>
                 span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin">keyboard_arrow_right</i>
     .setting_layer.hide
-        .close_btn(onclick="yohaneNoDOM.hideSetting()")
+        .close_btn(onclick="LLCT.hideSetting()")
             p <i class="material-icons">close</i>
         .setting_sc
             h1 설정
@@ -157,6 +159,7 @@ html.index
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='./js/global.min.js')
     script(src='./js/index.min.js')
+    script(src='./js/playlists.min.js')
     script(src='./js/lib/hammer.min.js')
     script(async src='./js/lib/reverb.min.js')
     script(defer src='./js/karaoke.min.js')
