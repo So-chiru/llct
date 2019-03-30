@@ -278,15 +278,27 @@ let yohaneNoDOM = {
   load: () => {},
   loadDone: () => {},
   loopToggle: () => {
-    $('#repeat_btn')[yohane.__isRepeat ? 'removeClass' : 'addClass'](
-      'in_active'
-    )
+    if (yohane.__isRepeat) {
+      document.getElementById('pl_loop').innerHTML = 'loop'
+    }
+
+    $('#pl_loop')[
+      yohane.__isShuffle || yohane.__isRepeat ? 'removeClass' : 'addClass'
+    ]('in_active')
   },
 
   playingNextToggle: () => {
-    $('#playnext_btn')[yohane.__PlayingNext ? 'removeClass' : 'addClass'](
-      'in_active'
-    )
+    if (yohane.__isShuffle) {
+      document.getElementById('pl_loop').innerHTML = 'shuffle'
+    }
+    $('#pl_loop')[
+      yohane.__isShuffle || yohane.__isRepeat ? 'removeClass' : 'addClass'
+    ]('in_active')
+  },
+
+  noLoopIcon: () => {
+    document.getElementById('pl_loop').innerHTML = 'loop'
+    $('#pl_loop').addClass('in_active')
   },
 
   initialize: id => {
@@ -396,15 +408,33 @@ let yohane = {
   },
 
   __isRepeat: false,
-  __PlayingNext: false,
+  __isShuffle: false,
   repeatToggle: () => {
     yohane.__isRepeat = !yohane.__isRepeat
     yohaneNoDOM.loopToggle()
   },
 
   playNextToggle: () => {
-    yohane.__PlayingNext = !yohane.__PlayingNext
+    yohane.__isShuffle = !yohane.__isShuffle
     yohaneNoDOM.playingNextToggle()
+  },
+
+  toggleLoops: () => {
+    if (!yohane.__isRepeat && !yohane.__isShuffle) {
+      yohane.repeatToggle()
+      return
+    }
+
+    if (yohane.__isRepeat && !yohane.__isShuffle) {
+      yohane.repeatToggle()
+      yohane.playNextToggle()
+      return
+    }
+
+    if (!yohane.__isRepeat && yohane.__isShuffle) {
+      yohane.playNextToggle()
+      yohaneNoDOM.noLoopIcon()
+    }
   },
 
   fade: (from, to, duration, start, cb) => {
@@ -416,7 +446,7 @@ let yohane = {
         start + duration <= performance.now() ||
         force_stop === true ||
         oncdPrevVolume === yohane.player().volume ||
-        document.hidden 
+        document.hidden
       ) {
         cancelAnimationFrame(audioVolumeFrame)
         if (typeof cb === 'function') cb()
@@ -930,7 +960,7 @@ $(document).ready(() => {
 
     yohaneNoDOM.end()
 
-    if (yohane.__PlayingNext) {
+    if (yohane.__isShuffle) {
       yohane.shuffle(!yohane.kaizu)
     }
   }
