@@ -415,7 +415,8 @@ let yohane = {
       if (
         start + duration <= performance.now() ||
         force_stop === true ||
-        oncdPrevVolume === yohane.player().volume
+        oncdPrevVolume === yohane.player().volume ||
+        document.hidden 
       ) {
         cancelAnimationFrame(audioVolumeFrame)
         if (typeof cb === 'function') cb()
