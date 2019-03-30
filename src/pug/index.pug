@@ -17,20 +17,8 @@ html.index
     link(rel='shortcut icon', href='https://cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="this.media='all';")
     link(rel="preload" href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900" as="fetch" crossorigin="anonymous" media="none" onload="this.media='all';")
-    script.
-        !function(e,n,t){"use strict";var o="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900",r="__3perf_googleFontsStylesheet";function c(e){(n.head||n.body).appendChild(e)}function a(){var e=n.createElement("link");e.href=o,e.rel="stylesheet",c(e)}function f(e){if(!n.getElementById(r)){var t=n.createElement("style");t.id=r,c(t)}n.getElementById(r).innerHTML=e}e.FontFace&&e.FontFace.prototype.hasOwnProperty("display")?(t[r]&&f(t[r]),fetch(o).then(function(e){return e.text()}).then(function(e){return e.replace(/@font-face {/g,"@font-face{font-display:swap;")}).then(function(e){return t[r]=e}).then(f).catch(a)):a()}(window,document,localStorage);
     link(rel="stylesheet" href="/lib/ps/photoswipe.css" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/default-skin/default-skin.css" media="none" onload="this.media='all';")
-    script(defer src="/lib/ps/photoswipe.min.js")
-    script(defer src="/lib/ps/photoswipe-ui-default.min.js")
-    script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-    script(src='./js/global.min.js')
-    script(src='./js/index.min.js')
-    script(src='./js/lib/hammer.min.js')
-    script(async src='./js/lib/reverb.min.js')
-    script(async src='./js/karaoke.min.js')
-    script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     style.
         .hide_curtain {opacity:0;visibility: none;pointer-events: none;z-index: -1;}
   body
@@ -53,7 +41,7 @@ html.index
                     p#played_time.c.mga 0 : 00
                     #ctrl_times.c.__progress
                         .passed_bar#psd_times
-                        .max_bar#bar_eventListen
+                        .max_bar.__buf#bar_eventListen
                         .thumb#__current_thumb
                     p#left_time.c.mga - 4 : 59
                 .ctrls
@@ -163,3 +151,15 @@ html.index
                 })
                 .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
         }
+        script(defer src="/lib/ps/photoswipe.min.js")
+    script(defer src="/lib/ps/photoswipe-ui-default.min.js")
+    script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='./js/global.min.js')
+    script(src='./js/index.min.js')
+    script(src='./js/lib/hammer.min.js')
+    script(async src='./js/lib/reverb.min.js')
+    script(defer src='./js/karaoke.min.js')
+    script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
+    script.
+        !function(e,n,t){"use strict";var o="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900",r="__3perf_googleFontsStylesheet";function c(e){(n.head||n.body).appendChild(e)}function a(){var e=n.createElement("link");e.href=o,e.rel="stylesheet",c(e)}function f(e){if(!n.getElementById(r)){var t=n.createElement("style");t.id=r,c(t)}n.getElementById(r).innerHTML=e}e.FontFace&&e.FontFace.prototype.hasOwnProperty("display")?(t[r]&&f(t[r]),fetch(o).then(function(e){return e.text()}).then(function(e){return e.replace(/@font-face {/g,"@font-face{font-display:swap;")}).then(function(e){return t[r]=e}).then(f).catch(a)):a()}(window,document,localStorage);

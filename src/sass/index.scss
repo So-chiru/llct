@@ -955,6 +955,18 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   }
 }
 
+@keyframes __bufPosAnime {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .toggle_collection {
   display: -webkit-flex;
   display: flex;
@@ -983,12 +995,23 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     pointer-events: none;
   }
 
+  .__buf {
+    background: linear-gradient(-45deg, #e9f7f9, #7cb7de, #eff8f3, #46a46c);
+    background-size: 400% 400%;
+    animation: __bufPosAnime 9s ease-in-out infinite;
+  }
+
   .passed_bar {
-    width: 0px;
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    left: 0;
     z-index: 16;
     background-color: #428eff;
     pointer-events: none;
-    transition: 1s width cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 1s transform cubic-bezier(0.19, 1, 0.22, 1);
+
+    background: linear-gradient(25deg, #479ad1, #23d5ab);
   }
 
   .thumb {

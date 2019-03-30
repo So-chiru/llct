@@ -182,6 +182,18 @@ let yohaneNoDOM = {
     document.getElementById('pp_btn').innerHTML = 'play_arrow'
   },
 
+  registerBufferBar: () => {
+    yohaneNoDOM.__cachedElement['bar_eventListen'].classList.add('__buf')
+
+    Sakurauchi.listen(
+      'canplaythrough',
+      () => {
+        yohaneNoDOM.__cachedElement['bar_eventListen'].classList.remove('__buf')
+      },
+      yohane.player()
+    )
+  },
+
   timeLeapDisableAnimation: () => {
     $('.thumb').addClass('disable_animation')
     $('.passed_bar').addClass('disable_animation')
@@ -255,14 +267,24 @@ let yohaneNoDOM = {
       return 0
     }
 
-    ;['played_time', 'left_time', 'psd_times', '__current_thumb'].forEach(v => {
+    ;[
+      'played_time',
+      'left_time',
+      'bar_eventListen',
+      'psd_times',
+      '__current_thumb'
+    ].forEach(v => {
       yohaneNoDOM.__cachedElement[v] = document.getElementById(v)
     })
+
+    yohaneNoDOM.__cachedElement['psd_times'].style.width = '0px'
+    yohaneNoDOM.__cachedElement['__current_thumb'].style.transform = 0
 
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.chiisakuni()
     }
     yohaneNoDOM.load()
+    yohaneNoDOM.registerBufferBar()
 
     document.getElementById('karaoke').innerHTML = ''
     var meta = getFromLists(id)
@@ -562,14 +584,14 @@ let yohane = {
   },
 
   deferTick: () => {
+    var calc_t = yohane.player().currentTime / yohane.player().duration
     yohaneNoDOM.__cachedElement['played_time'].innerHTML = timeString(
       yohane.player().currentTime
     )
     yohaneNoDOM.__cachedElement['left_time'].innerHTML =
       '-' + timeString(yohane.player().duration - yohane.player().currentTime)
 
-    yohaneNoDOM.__cachedElement['psd_times'].style.width =
-      (yohane.player().currentTime / yohane.player().duration) * 100 + '%'
+    yohaneNoDOM.__cachedElement['psd_times'].style.width = calc_t * 100 + '%'
 
     yohaneNoDOM.__cachedElement['__current_thumb'].style.transform =
       'translateX(' +
@@ -615,6 +637,10 @@ let yohane = {
         .then(audioBuffer => {
           yohane.liveEffectCry = audioBuffer
         })
+    }
+
+    yohane.player().onpause = () => {
+      yohaneNoDOM.pause()
     }
 
     yohane.player().onpause = () => {
