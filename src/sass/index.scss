@@ -1008,10 +1008,18 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   }
 
   .__buf {
-    background: linear-gradient(-45deg, #2667ff, #7cb7de, #2667ff);
-    background-size: 200% 200%;
-    -webkit-animation: __bufPosAnime 9s ease-in-out infinite;
-    animation: __bufPosAnime 9s ease-in-out infinite;
+    background: linear-gradient(
+      38deg,
+      #0d3d51,
+      #0d3d51,
+      #45a7d1,
+      #78c0e0,
+      #045577,
+      #045577
+    );
+    background-size: 300% 300%;
+    -webkit-animation: __bufPosAnime 6s ease infinite;
+    animation: __bufPosAnime 6s ease infinite;
   }
 
   .passed_bar {
