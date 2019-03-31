@@ -29,8 +29,6 @@
  * 가사 음 마다 : NONE;
  */
 
-var SleepCounts = 0
-
 const getLMInArray = (a, t, lh) => {
   var _mx = lh === 0 ? 999999999 : 0
   for (var i = 0; i < a.length; i++) {
@@ -47,8 +45,6 @@ const getLMInArray = (a, t, lh) => {
 
 var Karaoke = {
   TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
-  CallSoundElement: null,
-
   SpaParsing: function (spa, spacing) {
     var wordObject = {
       text: spa + (spacing ? ' ' : ''),
