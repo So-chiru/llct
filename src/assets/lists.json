@@ -15,6 +15,7 @@
     ],
     "center": null,
     "karaoke": true,
+    "singAlong": true,
     "short_kr": "땡프"
   },
   "未来の僕らは知ってるよ": {
@@ -478,6 +479,8 @@
     "translated": "Landing action Yeah!!",
     "tag": ["랜딩액션", "랜딩액션예", "landingactionyeah", "랜딩"],
     "center": "",
+    "karaoke": true,
+    "singAlong": true,
     "short_kr": "랜딩액션"
   },
   "君の瞳を巡る冒険": {
@@ -513,6 +516,7 @@
     ],
     "center": "",
     "karaoke": true,
+    "singAlong": true,
     "short_kr": "유우키미"
   },
   "“MY LIST” to you!": {
@@ -620,6 +624,7 @@
     "tag": ["홉", "홒", "스텝", "스텦", "와이", "・", "!", "2017 클럽"],
     "center": "",
     "karaoke": true,
+    "singAlong": true,
     "short_kr": "홉스텝"
   },
   "No.10": {
@@ -638,6 +643,7 @@
       "흑우"
     ],
     "center": "",
+    "singAlong": true,
     "short_kr": "넘버텐"
   },
   "ハジマリロード": {
