@@ -745,21 +745,21 @@
           "start_time": 4182,
           "end_time": 4401,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "1"
         },
         {
           "text": "in ",
           "start_time": 4214,
           "end_time": 4401,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "1"
         },
         {
           "text": "Hand)",
           "start_time": 4248,
           "end_time": 4401,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "1"
         }
       ]
     },
@@ -2297,7 +2297,7 @@
           "type": 1
         },
         {
-          "text": "루",
+          "text": "룬",
           "start_time": 12367,
           "end_time": 12514,
           "pronunciation_time": 0,
@@ -3177,234 +3177,6 @@
       ]
     },
     {
-      "start_time": 16958,
-      "end_time": 18859,
-      "collection": [
-        {
-          "text": "< ",
-          "start_time": 17058,
-          "end_time": 18759,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "간주 ",
-          "start_time": 17058,
-          "end_time": 18759,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "부분 ",
-          "start_time": 17058,
-          "end_time": 18759,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ": ",
-          "start_time": 17058,
-          "end_time": 18759,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17089,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17151.86,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17214.72,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17277.58,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17340.44,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17403.3,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17466.16,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17529.02,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17591.88,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17654.74,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17717.6,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이",
-          "start_time": 17780.46,
-          "end_time": 17812,
-          "pronunciation_time": 0,
-          "type": 1
-        }
-      ]
-    },
-    {
-      "start_time": 16958,
-      "end_time": 18859,
-      "collection": [
-        {
-          "text": "하이 ",
-          "start_time": 17843.32,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17906.18,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 17969.04,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18031.9,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18094.76,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18157.62,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18220.48,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18283.34,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18346.2,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18409.06,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18471.92,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "하이 ",
-          "start_time": 18534.78,
-          "end_time": 18566,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ">",
-          "start_time": 17058,
-          "end_time": 18759,
-          "pronunciation_time": 0,
-          "type": 1
-        }
-      ]
-    },
-    {
-      "start_time": -100,
-      "end_time": 100,
-      "collection": [
-        {
-          "text": "",
-          "start_time": 0,
-          "end_time": 0,
-          "pronunciation_time": 0,
-          "type": 1
-        }
-      ]
-    },
-    {
       "start_time": 18659,
       "end_time": 19326,
       "collection": [
@@ -3413,42 +3185,42 @@
           "start_time": 18759,
           "end_time": 19226,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "in ",
           "start_time": 18790,
           "end_time": 19226,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "Hand ",
           "start_time": 18822,
           "end_time": 19226,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo",
           "start_time": 19010,
           "end_time": 19226,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "w ",
           "start_time": 19041,
           "end_time": 19226,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo!",
           "start_time": 19073,
           "end_time": 19226,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -3634,21 +3406,21 @@
           "start_time": 20266,
           "end_time": 20460,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "w ",
           "start_time": 20266,
           "end_time": 20460,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo!)",
           "start_time": 20331,
           "end_time": 20460,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -4665,42 +4437,42 @@
           "start_time": 24286,
           "end_time": 24749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "in ",
           "start_time": 24319,
           "end_time": 24749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "Hand ",
           "start_time": 24351,
           "end_time": 24749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo",
           "start_time": 24539,
           "end_time": 24749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "w ",
           "start_time": 24570,
           "end_time": 24749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo!",
           "start_time": 24602,
           "end_time": 24749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -4713,42 +4485,42 @@
           "start_time": 24790,
           "end_time": 25222,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "in ",
           "start_time": 24820,
           "end_time": 25222,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "Hand ",
           "start_time": 24852,
           "end_time": 25222,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo",
           "start_time": 25041,
           "end_time": 25222,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "w ",
           "start_time": 25074,
           "end_time": 25222,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "wo!",
           "start_time": 25104,
           "end_time": 25222,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     }
