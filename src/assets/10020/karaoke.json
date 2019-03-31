@@ -598,7 +598,7 @@
           "text": "하이",
           "start_time": 5382,
           "end_time": 6040,
-          "pronunciation_time": 0,
+          "pronunciation_time": "0.33",
           "type": "2"
         }
       ]
@@ -1453,7 +1453,7 @@
           "type": "4"
         },
         {
-          "text": "로-",
+          "text": "로- ",
           "start_time": 9687,
           "end_time": 9878,
           "pronunciation_time": 0,
@@ -1461,21 +1461,21 @@
         },
         {
           "text": "(후 ",
-          "start_time": 9853,
+          "start_time": 9833,
           "end_time": 9929,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 9879,
+          "start_time": 9873,
           "end_time": 9929,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
-          "start_time": 9898,
+          "start_time": 9897,
           "end_time": 9929,
           "pronunciation_time": 0,
           "type": "2"

@@ -199,21 +199,21 @@
         },
         {
           "text": "(후 ",
-          "start_time": 1265,
+          "start_time": 1281,
           "end_time": 1357,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 1300,
+          "start_time": 1314,
           "end_time": 1357,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!) ",
-          "start_time": 1317,
+          "start_time": 1333,
           "end_time": 1357,
           "pronunciation_time": 0,
           "type": "2"
@@ -283,40 +283,40 @@
       ]
     },
     {
-      "start_time": 1330,
+      "start_time": 1364,
       "end_time": 2545,
       "collection": [
         {
           "text": "(하이 ",
-          "start_time": 1430,
+          "start_time": 1464,
           "end_time": 2445,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 1487,
+          "start_time": 1536,
           "end_time": 2445,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 1572,
+          "start_time": 1600,
           "end_time": 2445,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 1639,
+          "start_time": 1663,
           "end_time": 2445,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이",
-          "start_time": 1706,
+          "start_time": 1727,
           "end_time": 2445,
           "pronunciation_time": "0.33",
           "type": "2"
@@ -359,7 +359,7 @@
           "text": "하이",
           "start_time": 2056,
           "end_time": 2445,
-          "pronunciation_time": 0,
+          "pronunciation_time": "0.33",
           "type": "2"
         }
       ]
@@ -767,7 +767,7 @@
     },
     {
       "start_time": 3887,
-      "end_time": 4592,
+      "end_time": 4684,
       "collection": [
         {
           "text": "카",
@@ -830,7 +830,15 @@
           "start_time": 4237,
           "end_time": 4492,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": ""
+        },
+        {
+          "text": "* ",
+          "start_time": 4260,
+          "end_time": 4584,
+          "pronunciation_time": 0,
+          "type": "3"
         },
         {
           "text": "시",
@@ -870,26 +878,26 @@
       ]
     },
     {
-      "start_time": 4160,
+      "start_time": 4165,
       "end_time": 4684,
       "collection": [
         {
           "text": "(세-",
-          "start_time": 4260,
+          "start_time": 4265,
           "end_time": 4584,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "노 ",
-          "start_time": 4290,
+          "start_time": 4299,
           "end_time": 4584,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이- ",
-          "start_time": 4320,
+          "start_time": 4332,
           "end_time": 4584,
           "pronunciation_time": 0,
           "type": "2"
@@ -1110,7 +1118,7 @@
         },
         {
           "text": "하이! ",
-          "start_time": 4947,
+          "start_time": 4939,
           "end_time": 5102,
           "pronunciation_time": 0,
           "type": "2"
@@ -1358,7 +1366,7 @@
         },
         {
           "text": "후",
-          "start_time": 5795,
+          "start_time": 5790,
           "end_time": 5844,
           "pronunciation_time": 0,
           "type": "2"
@@ -4090,7 +4098,7 @@
           "start_time": 20926,
           "end_time": 21128,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "3"
         },
         {
           "text": "토 ",
@@ -4499,7 +4507,7 @@
           "start_time": 23040,
           "end_time": 23245,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "3"
         },
         {
           "text": "토 ",
