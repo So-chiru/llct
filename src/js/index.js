@@ -355,9 +355,9 @@ let yohaneNoDOM = {
       document.getElementById('blade_color').style.color = _hx
     }
 
-    document.getElementById('sing_tg').innerText = meta[1].sa
-      ? '이 곡은 따라 부르는 곡입니다.'
-      : ''
+    document.getElementById('sing_tg').style.display = meta[1].singAlong
+      ? 'block'
+      : 'none'
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
     if (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) {
@@ -978,6 +978,7 @@ $(document).ready(() => {
   Sakurauchi.listen(
     ['seeking', 'seeked'],
     () => {
+      Karaoke.tickSoundsCache = {}
       Karaoke.clearSync(() => {
         Karaoke.AudioSync(Math.floor(yohane.timecode()), true)
       })
@@ -1055,6 +1056,27 @@ $(document).ready(() => {
     },
     document.getElementById('dekaku_btn')
   )
+
+  Sakurauchi.add('tickSounds', () => {
+    document.getElementById('tick_sounds').currentTime = 0
+    document.getElementById('tick_sounds').play()
+  })
+
+  Sakurauchi.add('tickSoundChanged', v => {
+    document
+      .getElementById('tick_btn')
+      .classList[v ? 'remove' : 'add']('in_active')
+
+    dataYosoro.set('biTick', v)
+  })
+
+  Karaoke.tickSoundEnable =
+    dataYosoro.get('biTick') == null ||
+    typeof dataYosoro.get('biTick') === 'undefined'
+      ? true
+      : !!dataYosoro.get('biTick')
+
+  Sakurauchi.run('tickSoundChanged', Karaoke.tickSoundEnable)
 
   Sakurauchi.listen(
     'click',

@@ -425,7 +425,8 @@ body {
   }
 
   #pl_loop,
-  #volume_btn {
+  #volume_btn,
+  #tick_btn {
     font-size: 28px;
   }
 
@@ -527,7 +528,8 @@ body {
   }
 }
 
-.blade_c {
+.blade_c,
+.is_singalong {
   text-align: center;
 }
 

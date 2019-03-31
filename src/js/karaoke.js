@@ -264,6 +264,12 @@ var Karaoke = {
     }
   },
 
+  tickSoundEnable: true,
+  tickSoundsCache: {},
+  toggleTickSounds: function () {
+    Karaoke.tickSoundEnable = !Karaoke.tickSoundEnable
+    Sakurauchi.run('tickSoundChanged', Karaoke.tickSoundEnable)
+  },
   cachedDom: {},
   AudioSync: function (timeCode, fullRender) {
     if (karaokeData === 'undefined' || karaokeData === null) return 0
@@ -310,6 +316,19 @@ var Karaoke = {
           kards.classList[timeCode > karaWord.start_time ? 'add' : 'remove'](
             'currentSync'
           )
+
+          if (
+            Karaoke.tickSoundEnable &&
+            timeCode > karaWord.start_time - 5 &&
+            timeCode < karaWord.end_time &&
+            !Karaoke.tickSoundsCache[karaWord.start_time] &&
+            karaWord.type == 2
+          ) {
+            Sakurauchi.run('tickSounds')
+
+            Karaoke.tickSoundsCache[karaWord.start_time] = true
+          }
+
           var karaokeDuration =
             typeof karaWord.pronunciation_time === 'undefined' ||
             karaWord.pronunciation_time === 0

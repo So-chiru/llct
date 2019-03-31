@@ -45,18 +45,20 @@ html.index
                         .thumb#__current_thumb
                     p#left_time.c.mga - 4 : 59
                 .ctrls
-                    span#pp_btn.material-icons(onclick="yohane.toggle()") play_arrow
+                    span#pp_btn.material-icons(onclick="yohane.toggle()" title="노래 재생") play_arrow
                     // span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-                    span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()") loop
-                    span#dekaku_btn.material-icons keyboard_arrow_down
+                    span#tick_btn.material-icons.in_active(onclick="Karaoke.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
+                    span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
+                    span#dekaku_btn.material-icons(title="플레이어 크게 / 작게") keyboard_arrow_down
         .lyrics_wrapper
             p.blade_c
                 | 블레이드 추천 색상 : 
                 span#blade_color 자유
-            p.is_singalong#sing_tg 이 곡은 떼창 곡이 아닙니다.
+            p.is_singalong#sing_tg 이 곡은 떼창 곡 입니다. 지시에 맞게 따라 불러주세요.
             .karaoke#karaoke
             p.bottom_margin
         audio#kara_audio
+        audio#tick_sounds(src="/live_assets/key-press-2.mp3")
     .contents_collection
         .full_page_ct#fp_ct
             .header
