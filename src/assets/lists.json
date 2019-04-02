@@ -207,7 +207,7 @@
     ],
     "center": "2학년",
     "karaoke": true,
-    "artist": 4,
+    "artist": 3,
     "short_kr": "키메핸인"
   },
   "ダイスキだったらダイジョウブ！": {
@@ -225,7 +225,7 @@
     ],
     "center": "",
     "karaoke": true,
-    "artist": 4,
+    "artist": 3,
     "short_kr": "다이닷타"
   },
   "サンシャインぴっかぴか音頭": {
@@ -304,6 +304,7 @@
     ],
     "center": "",
     "karaoke": true,
+    "artist": 3,
     "short_kr": "소라하레"
   },
   "想いよひとつになれ": {
@@ -322,6 +323,8 @@
     ],
     "center": "",
     "karaoke": true,
+    "bladeColor": "벛꽃색",
+    "bladeColorHEX": "(연분홍색)",
     "short_kr": "오모히토"
   },
   "MIRAI TICKET": {
@@ -455,6 +458,8 @@
     "tag": ["해파트", "기초", "해피파티트레인", "카난레일", "3집", "가난"],
     "center": "마츠우라 카난",
     "karaoke": true,
+    "bladeColor": "카난 색 (초록-청록 계열)",
+    "bladeColorHEX": "#3debb9",
     "short_kr": "해파트"
   },
   "SKY JOURNEY": {
@@ -541,7 +546,9 @@
       "2기",
       "삽입곡"
     ],
-    "center": "",
+    "center": "쿠로사와 다이아",
+    "bladeColor": "다이아 색 (빨간색)",
+    "bladeColorHEX": "#eb3d3d",
     "short_kr": "마이마이"
   },
   "MIRACLE WAVE": {
@@ -556,7 +563,7 @@
       "2기",
       "삽입곡"
     ],
-    "center": "",
+    "center": "타카미 치카",
     "short_kr": "미라웨이"
   },
   "Awaken the power": {
@@ -663,6 +670,7 @@
       "1학년"
     ],
     "center": "",
+    "artist": 4,
     "short_kr": "하지마리"
   },
   "Marine Border Parasol": {
@@ -678,6 +686,7 @@
       "극장판"
     ],
     "center": "",
+    "artist": 3,
     "short_kr": "마보파"
   },
   "予測不可能Driving!": {
@@ -694,6 +703,7 @@
       "극장판"
     ],
     "center": "",
+    "artist": 5,
     "short_kr": "예측불가"
   },
   "元気全開DAY! DAY! DAY!": {
@@ -710,6 +720,7 @@
       "genkizenkaidaydayday"
     ],
     "center": "",
+    "artist": 6,
     "short_kr": "겐키젠카"
   },
   "夜空はなんでも知ってるの？": {
@@ -724,6 +735,7 @@
       "샤론"
     ],
     "center": "",
+    "artist": 6,
     "short_kr": "요조시테"
   },
   "P.S.の向こう側": {
@@ -738,6 +750,7 @@
       "3학년"
     ],
     "center": "",
+    "artist": 6,
     "short_kr": "PS"
   },
   "近未来ハッピーエンド": {
@@ -758,6 +771,7 @@
       "샤론"
     ],
     "center": "",
+    "artist": 6,
     "short_kr": "근미래"
   },
   "海岸通りで待ってるよ": {
@@ -772,6 +786,7 @@
       "샤론"
     ],
     "center": "",
+    "artist": 6,
     "short_kr": "카간토리"
   },
   "サクラバイバイ": {
@@ -788,6 +803,7 @@
       "바이바이"
     ],
     "center": "",
+    "artist": 6,
     "short_kr": "사쿠바이"
   },
   "トリコリコPLEASE!!": {
@@ -804,6 +820,7 @@
       "토리코리코리코"
     ],
     "center": "",
+    "artist": 7,
     "short_kr": "토리코리"
   },
   "ときめき分類学": {
@@ -819,6 +836,7 @@
       "tokimekibunruigaku"
     ],
     "center": "",
+    "artist": 7,
     "short_kr": "토키메키"
   },
   "LONELY TUNING": {
@@ -826,6 +844,7 @@
     "translated": "LONELY TUNING",
     "tag": ["론리튜닝", "lonely", "tuning", "터닝", "AZALEA", "아제리아"],
     "center": "",
+    "artist": 7,
     "short_kr": "론리튜닝"
   },
   "GALAXY HidE and SeeK": {
@@ -844,6 +863,7 @@
       "아제리아"
     ],
     "center": "",
+    "artist": 7,
     "short_kr": "갤하싴"
   },
   "INNOCENT BIRD": {
@@ -861,6 +881,7 @@
       "아제리아"
     ],
     "center": "",
+    "artist": 7,
     "short_kr": "이노버드"
   },
   "卒業ですね": {
@@ -876,6 +897,7 @@
       "아제리아"
     ],
     "center": "",
+    "artist": 7,
     "short_kr": "소츠교"
   },
   "Strawberry Trapper": {
@@ -896,6 +918,7 @@
       "gilty"
     ],
     "center": "",
+    "artist": 8,
     "short_kr": "딸기지뢰"
   },
   "Guilty Night, Gulity Kiss!": {
@@ -914,6 +937,7 @@
       "gilty"
     ],
     "center": "",
+    "artist": 8,
     "short_kr": ""
   },
   "Guilty Eyes Fever": {
@@ -935,6 +959,7 @@
       "gilty"
     ],
     "center": "",
+    "artist": 8,
     "short_kr": "길티아이"
   },
   "コワレヤスキ": {
@@ -959,6 +984,7 @@
       "gilty"
     ],
     "center": "",
+    "artist": 8,
     "short_kr": "코와숰"
   },
   "Shadow gate to love": {
@@ -978,6 +1004,7 @@
       "gilty"
     ],
     "center": "",
+    "artist": 8,
     "short_kr": "쉐도게이트"
   },
   "Guilty!? Farewell party": {
@@ -1001,6 +1028,7 @@
       "gilty"
     ],
     "center": "",
+    "artist": 8,
     "short_kr": "페어웰"
   },
   "夏への扉 Never end ver.": {
@@ -1031,6 +1059,7 @@
       "여름"
     ],
     "center": "",
+    "artist": 11,
     "short_kr": "만츠다레"
   },
   "地元愛♡満タン☆サマーライフ": {
@@ -1049,7 +1078,8 @@
       "yoshiko",
       "yohane"
     ],
-    "center": "요시코, 요하네, 요우",
+    "center": "요시코, 요우",
+    "artist": 9,
     "short_kr": "지모아이"
   },
   "夏の終わりの雨音が": {
@@ -1064,6 +1094,7 @@
       "kanan"
     ],
     "center": "",
+    "artist": 10,
     "short_kr": "나츠오와"
   },
   "SELF CONTROL!!": {
@@ -1136,6 +1167,7 @@
       "뮤지컬"
     ],
     "center": "타카미 치카",
+    "artist": 12,
     "short_kr": "원모어선샤인"
   },
   "おやすみなさん！": {
@@ -1153,6 +1185,7 @@
       "안녕히"
     ],
     "center": "쿠니키다 하나마루",
+    "artist": 16,
     "short_kr": "오야스미"
   },
   "in this unstable world": {
@@ -1171,6 +1204,7 @@
       "요시코"
     ],
     "center": "츠시마 요시코",
+    "artist": 17,
     "short_kr": ""
   },
   "Pianoforte Monologue": {
@@ -1186,6 +1220,7 @@
       "벽쾅"
     ],
     "center": "사쿠라우치 리코",
+    "artist": 14,
     "short_kr": ""
   },
   "Beginner's Sailing": {
@@ -1199,6 +1234,7 @@
       "beginnersailing"
     ],
     "center": "와타나베 요우",
+    "artist": 13,
     "short_kr": ""
   },
   "RED GEM WINK": {
@@ -1215,6 +1251,7 @@
       "간바루비"
     ],
     "center": "쿠로사와 루비",
+    "artist": 15,
     "short_kr": ""
   },
   "WHITE FIRST LOVE": {
@@ -1233,6 +1270,7 @@
       "다이아쨩"
     ],
     "center": "쿠로사와 다이아",
+    "artist": 18,
     "short_kr": ""
   },
   "New winding road": {
@@ -1251,6 +1289,7 @@
       "냐냐"
     ],
     "center": "오하라 마리",
+    "artist": 20,
     "short_kr": ""
   },
   "さかなかなんだか？": {
@@ -1270,7 +1309,7 @@
       "sakana"
     ],
     "center": "마츠우라 카난",
-    "artist": 0,
+    "artist": 19,
     "short_kr": ""
   },
   "僕らの走ってきた道は・・・": {
