@@ -33,7 +33,7 @@ const artistLists = [
   '츠시마 요시코 (CV. 코바야시 아이카)',
   '쿠로사와 다이아 (CV. 코미야 아리사)',
   '마츠우라 카난 (CV. 스와 나나카)',
-  '오하라 마리 (CV. 스즈키 아이나)',
+  '오하라 마리 (CV. 스즈키 아이나)'
 ]
 
 const loadCallImage = id => {
@@ -364,7 +364,8 @@ let yohaneNoDOM = {
       document.getElementById('album_meta').style.backgroundColor = '#323232'
     }
 
-    document.getElementById('title_meta').innerText = meta[0]
+    document.getElementById('title_meta').innerText =
+      dataYosoro.get('mikan') === true ? meta[1].translated || meta[0] : meta[0]
     document.getElementById('artist_meta').innerText =
       artistLists[meta[1].artist != null ? meta[1].artist : 0]
 
@@ -644,7 +645,7 @@ let yohane = {
   reInitTimingFunction: () => {
     yohane.__useSetInterval = dataYosoro.get('funeTiming') == true
   },
-  tick: notAnimation => {
+  tick: _ => {
     if (!yohane.__useSetInterval) {
       frameWorks = requestAnimationFrame(yohane.tick)
     }
