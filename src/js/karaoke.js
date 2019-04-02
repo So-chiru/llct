@@ -334,16 +334,27 @@ var Karaoke = {
                   karaWord.start_time) /
                 2
               : karaWord.pronunciation_time
+
           if (karaokeDuration < 300) karaokeDuration += 30
 
-          kards.style.transition =
-            'text-shadow ' +
-            karaokeDuration / 300 +
-            's ease 0s, color ' +
-            karaokeDuration / 300 +
-            's ease 0s'
+          if (
+            typeof karaLine.collection[karaWordNum - 1] !== 'undefined' &&
+            karaLine.collection[karaWordNum - 1].start_time ===
+              karaLine.collection[karaWordNum].start_time
+          ) {
+            kards.style.transition =
+              Karaoke.cachedDom[
+                karaLineNum + '.' + (karaWordNum - 1)
+              ].style.transition
+          } else {
+            kards.style.transition =
+              'text-shadow ' +
+              karaokeDuration / 300 +
+              's ease 0s, color ' +
+              karaokeDuration / 300 +
+              's ease 0s'
+          }
         }
-
         if (
           (/\scurrentSync/g.test(kards.className) &&
             timeCode < karaWord.start_time) ||
