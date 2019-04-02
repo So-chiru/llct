@@ -12,7 +12,23 @@ let frameWorks
 let audioVolumeFrame = null
 let callReqAnimation
 let audioVolumeFunction = () => {}
-const artistLists = ['Aqours', 'Saint Snow', 'Saint Aqours Snow']
+const artistLists = [
+  'Aqours',
+  'Saint Snow',
+  'Saint Aqours Snow',
+  '1학년 - 타카미 치카, 와타나베 요우, 사쿠라우치 리코',
+  '2학년 - 쿠로사와 루비, 쿠니키다 하나마루, 츠시마 요시코',
+  '3학년 - 쿠로사와 다이아, 마츠우라 카난, 오하라 마리',
+  '타카미 치카 (CV. 이나미 안쥬)',
+  '와타나베 요우 (CV. 사이토 슈카)',
+  '사쿠라우치 리코 (CV. 아이다 리카코)',
+  '쿠로사와 루비 (CV. 후리하타 아이)',
+  '쿠니키다 하나마루 (CV. 타카츠키 카나코)',
+  '츠시마 요시코 (CV. 코바야시 아이카)',
+  '쿠로사와 다이아 (CV. 코미야 아리사)',
+  '마츠우라 카난 (CV. 스와 나나카)',
+  '오하라 마리 (CV. 스즈키 아이나)'
+]
 
 const loadCallImage = id => {
   window.karaokeData = null

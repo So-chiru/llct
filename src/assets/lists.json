@@ -207,6 +207,7 @@
     ],
     "center": "2학년",
     "karaoke": true,
+    "artist": 4,
     "short_kr": "키메핸인"
   },
   "ダイスキだったらダイジョウブ！": {
@@ -224,6 +225,7 @@
     ],
     "center": "",
     "karaoke": true,
+    "artist": 4,
     "short_kr": "다이닷타"
   },
   "サンシャインぴっかぴか音頭": {

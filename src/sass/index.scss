@@ -501,6 +501,11 @@ body {
   font-weight: 100;
   font-size: 8;
   color: #a7a7a7;
+  max-width: 150px;
+
+  @media screen and (max-width: $small) {
+    max-width: unset;
+  }
 }
 
 .c {
@@ -620,6 +625,7 @@ body {
     .ctrls {
       margin-left: auto;
       margin-right: auto;
+      justify-content: center;
     }
 
     .info {
