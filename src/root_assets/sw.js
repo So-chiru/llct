@@ -1,20 +1,29 @@
 const cachingOffline = {
-  version: 'desuwa_a0009',
+  version: 'deathwar_a0014',
   urls: [
     '/',
     '/index.html',
     '/yosoro.min.css',
+    '/data/lists.json',
     '/js/lib/reverb.min.js',
-    '/js/lib/jquery.pagepiling.min.js',
+    '/lib/jquery.min.js',
+    '/lib/ps/photoswipe.min.js',
+    '/lib/ps/photoswipe-ui-default.js',
+    '/js/lib/hammer.min.js',
     '/js/global.min.js',
+    '/js/playlists.min.js',
     '/js/new_index.min.js',
+    '/js/index.min.js',
     '/js/karaoke.min.js',
-    '/js/lib/chillout.min.js',
-    '/dome_SportsCentreUniversityOfYork.m4a'
+    '/live_assets/crying_15.mp3',
+    '/live_assets/key-press-2.mp3',
+    '/live_assets/HamiltonMausoleum.m4a'
   ]
 }
 
 self.addEventListener('install', e => {
+  self.skipWaiting()
+
   e.waitUntil(
     caches.open(cachingOffline.version).then(cache => {
       return cache.addAll(cachingOffline.urls)
@@ -22,34 +31,38 @@ self.addEventListener('install', e => {
   )
 })
 
-let checkNeedCaching = url => {
-  if (url.indexOf('data/') !== -1) return true
-  if (url.indexOf('.html') !== -1) return true
-
-  return false
+let ndt_cache = url => {
+  return (
+    (/\/\/?(.+)(lovelivec\.kr|localhost)/.test(url) &&
+      /fonts.(googleapis|gstatic).com/.test(url)) ||
+    (url.indexOf('data/') !== -1 ||
+      url.indexOf('.html') !== -1 ||
+      url.indexOf('.ico') !== -1 ||
+      url.indexOf('?pid=') !== -1)
+  )
 }
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => {
+    caches.match(e.request).then(async chx => {
       return (
-        r ||
-        fetch(e.request).then(fRq => {
-          if (!checkNeedCaching(e.request.url)) return fRq
+        chx ||
+        fetch(e.request).then(async res => {
+          if (!ndt_cache(e.request.url)) return res
 
-          return caches.open(cachingOffline.version).then(cache => {
-            cache.put(e.request, fRq.clone())
-            return fRq
-          })
+          var x = await caches.open(cachingOffline.version)
+          x.put(e.request, res.clone())
+
+          return res
         })
       )
     })
   )
 })
 
-self.addEventListener('activate', e => {
+self.addEventListener('activate', async e => {
   e.waitUntil(
-    caches.keys().then(cnObjects => {
+    caches.keys().then(async cnObjects => {
       return Promise.all(
         cnObjects
           .filter(cn => {
@@ -63,8 +76,12 @@ self.addEventListener('activate', e => {
   )
 })
 
-const clearCaches = () => {
-  caches.keys().then(cnObjects => {
+self.addEventListener('message', e => {
+  if (e.data._cmd === 'sk_W') self.skipWaiting()
+})
+
+const clearCaches = async () => {
+  caches.keys().then(async cnObjects => {
     return Promise.all(
       cnObjects
         .filter(cn => {

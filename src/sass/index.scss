@@ -192,7 +192,6 @@ body {
       margin: auto;
       font-size: 30px;
       font-weight: 100;
-      font-smoothing: antialiased;
       -webkit-font-smoothing: antialiased;
       text-shadow: 0px 0px 13px #000;
       z-index: 5;
@@ -206,7 +205,7 @@ body {
       width: 100%;
       -webkit-user-drag: none;
       -moz-user-drag: none;
-      user-drag: none;
+      user-select: none;
       height: 100%;
       top: 0;
       left: 0;
@@ -314,7 +313,9 @@ body {
   transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .dark .player {

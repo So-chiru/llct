@@ -117,7 +117,9 @@ const changes = [
     checkbox: true,
     default: false,
     fn: v => {
-      $('body')[v == 'true' || v == true ? 'addClass' : 'removeClass']('dark')
+      document
+        .getElementsByTagName('body')[0]
+        .classList[v == 'true' || v == true ? 'add' : 'remove']('dark')
     }
   },
   {
@@ -150,6 +152,61 @@ const changes = [
     }
   },
   {
+    id: 'useOfflineSaving',
+    data_key: 'offlineShip',
+    checkbox: true,
+    default: false,
+    fn: v => {
+      if ('serviceWorker' in navigator) {
+        if (!v) {
+          navigator.serviceWorker
+            .getRegistrations()
+            .then(r => {
+              for (let _rs of r) {
+                _rs.unregister()
+              }
+            })
+            .catch(e =>
+              logger(2, 's', 'Failed to get ServiceWorker. ' + e.message, 'e')
+            )
+
+          return
+        }
+
+        navigator.serviceWorker
+          .register('/sw.js', { scope: '/' })
+          .then(_regi => {
+            logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
+
+            _regi.addEventListener('updatefound', () => {
+              var nw_ins = _regi.installing
+
+              nw_ins.addEventListener('statechange', () => {
+                if (nw_ins.state !== 'installed') return 0
+                if (navigator.serviceWorker.controller) {
+                  _glb_ShowPopup()
+                  document.getElementById('__off_txt').className = 'hide'
+                  document.getElementById('__new_ver').className = 'show'
+                }
+              })
+            })
+          })
+          .catch(e =>
+            logger(
+              2,
+              's',
+              'Failed to register ServiceWorker. ' + e.message,
+              'e'
+            )
+          )
+
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          location.reload()
+        })
+      }
+    }
+  },
+  {
     id: 'useSetIntervalInstead',
     data_key: 'funeTiming',
     checkbox: true,
@@ -171,13 +228,26 @@ let LLCT = {
   __pkg_callLists: [],
   __cur_filterLists: [],
   showSetting: () => {
-    $('.setting_layer').removeClass('hide')
-    $('.setting_layer').addClass('show')
+    document.getElementsByClassName('setting_layer')[0].classList.remove('hide')
+    document.getElementsByClassName('setting_layer')[0].classList.add('show')
   },
 
   hideSetting: () => {
-    $('.setting_layer').removeClass('show')
-    $('.setting_layer').addClass('hide')
+    document.getElementsByClassName('setting_layer')[0].classList.remove('show')
+    document.getElementsByClassName('setting_layer')[0].classList.add('hide')
+  },
+
+  jumpToPageDialog: () => {
+    var __askd_result = prompt(
+      '이동 할 페이지를 입력 해 주세요. ( ' +
+        (pageAdjust.currentPage + 1) +
+        ' / ' +
+        pageAdjust.lists.length +
+        ' )',
+      pageAdjust.currentPage
+    )
+    if (typeof __askd_result === 'undefined' || isNaN(__askd_result)) return 0
+    pageAdjust.setPage(Number(__askd_result) - 1)
   },
 
   setTitleTo: t => {
@@ -206,9 +276,10 @@ let LLCT = {
 let yohaneNoDOM = {
   kaizu: false,
   shokan: () => {
-    $('.player').css('transition', 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)')
-    $('.player').removeClass('hide')
-    $('.player').addClass('show')
+    var playerElement = document.getElementsByClassName('player')[0]
+    playerElement.style.transition = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
+    playerElement.classList.remove('hide')
+    playerElement.classList.add('show')
 
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.dekakuni()
@@ -216,13 +287,12 @@ let yohaneNoDOM = {
   },
 
   giran: () => {
-    $('.player').css(
-      'transition',
+    var playerElement = document.getElementsByClassName('player')[0]
+    playerElement.style.transition =
       'all 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035)'
-    )
-    $('.player').removeClass('show')
-    $('.player_bg').removeClass('show')
-    $('.player').addClass('hide')
+    playerElement.classList.remove('show')
+    document.getElementsByClassName('player')[0].classList.remove('show')
+    playerElement.classList.add('hide')
 
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.chiisakuni()
@@ -252,12 +322,20 @@ let yohaneNoDOM = {
   },
 
   timeLeapDisableAnimation: () => {
-    $('.thumb').addClass('disable_animation')
-    $('.passed_bar').addClass('disable_animation')
+    document
+      .getElementsByClassName('thumb')[0]
+      .classList.add('disable_animation')
+    document
+      .getElementsByClassName('passed_bar')[0]
+      .classList.add('disable_animation')
 
     setTimeout(() => {
-      $('.thumb').removeClass('disable_animation')
-      $('.passed_bar').removeClass('disable_animation')
+      document
+        .getElementsByClassName('thumb')[0]
+        .classList.remove('disable_animation')
+      document
+        .getElementsByClassName('passed_bar')[0]
+        .classList.remove('disable_animation')
     }, 200)
   },
 
@@ -272,27 +350,27 @@ let yohaneNoDOM = {
   },
 
   dekakuni: () => {
-    $('.player_bg').addClass('show')
-    $('.player').addClass('dekai')
-    $('#dekaku_btn').removeClass('in_active')
+    document.getElementsByClassName('player_bg')[0].classList.add('show')
+    document.getElementsByClassName('player')[0].classList.add('dekai')
+    document.getElementById('dekaku_btn').classList.remove('in_active')
     yohaneNoDOM.kaizu = true
-    $('body').css('overflow', 'hidden')
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden'
   },
 
   chiisakuni: () => {
-    $('.player_bg').removeClass('show')
-    $('.player').removeClass('dekai')
-    $('#dekaku_btn').addClass('in_active')
+    document.getElementsByClassName('player_bg')[0].classList.remove('show')
+    document.getElementsByClassName('player')[0].classList.remove('dekai')
+    document.getElementById('dekaku_btn').classList.add('in_active')
     yohaneNoDOM.kaizu = false
-    $('body').css('overflow', 'auto')
+    document.getElementsByTagName('body')[0].style.overflow = 'auto'
   },
 
   enableLiveEffects: () => {
-    $('#live_btn').removeClass('in_active')
+    document.getElementById('in_active').classList.remove('in_active')
   },
 
   disableLiveEffects: () => {
-    $('#live_btn').addClass('in_active')
+    document.getElementById('in_active').classList.add('in_active')
   },
 
   play: () => {},
@@ -304,23 +382,27 @@ let yohaneNoDOM = {
       document.getElementById('pl_loop').innerHTML = 'loop'
     }
 
-    $('#pl_loop')[
-      yohane.__isShuffle || yohane.__isRepeat ? 'removeClass' : 'addClass'
-    ]('in_active')
+    document
+      .getElementById('pl_loop')
+      .classList[yohane.__isShuffle || yohane.__isRepeat ? 'remove' : 'add'](
+        'in_active'
+      )
   },
 
   playingNextToggle: () => {
     if (yohane.__isShuffle) {
       document.getElementById('pl_loop').innerHTML = 'shuffle'
     }
-    $('#pl_loop')[
-      yohane.__isShuffle || yohane.__isRepeat ? 'removeClass' : 'addClass'
-    ]('in_active')
+    document
+      .getElementById('pl_loop')
+      .classList[yohane.__isShuffle || yohane.__isRepeat ? 'remove' : 'add'](
+        'in_active'
+      )
   },
 
   noLoopIcon: () => {
     document.getElementById('pl_loop').innerHTML = 'loop'
-    $('#pl_loop').addClass('in_active')
+    document.getElementById('pl_loop').classList.add('in_active')
   },
 
   initialize: id => {
@@ -840,6 +922,7 @@ let pageAdjust = {
         var artImage = document.createElement('img')
         artImage.style = 'background-color: #323232;'
         artImage.id = curObj.id + '_bgimg'
+        artImage.alt = objKeys[i]
         artImage.className = 'lazy card_bg'
         artImage.dataset.src =
           (urlQueryParams('local') === 'true'
@@ -940,7 +1023,7 @@ const keys = {
   ]
 }
 
-$(document).ready(() => {
+let pageLoadedFunctions = () => {
   // 인터넷 익스플로더 좀 쓰지 맙시다
   if (/* @cc_on!@ */ false || !!document.documentMode) {
     document.getElementById('PLEASE_STOP_USE_INTERNET_EXPLORER').style.display =
@@ -1033,31 +1116,41 @@ $(document).ready(() => {
     }
   })
 
-  $.ajax({
-    url: './data/lists.json',
-    success: d => {
-      LLCT.__pkg_callLists = d
-      LLCT.__cur_filterLists = d
+  var __lcal_loadedAjax = d => {
+    LLCT.__pkg_callLists = d
+    LLCT.__cur_filterLists = d
 
-      $('#loading_spin_ctlst').addClass('done')
-      pageAdjust.buildPage()
+    document.getElementById('loading_spin_ctlst').classList.add('done')
+    pageAdjust.buildPage()
 
-      if (
-        popsHeart.get('pid') !== null &&
-        popsHeart.get('pid') !== '' &&
-        !isNaN(popsHeart.get('pid'))
-      ) {
-        yohane.initialize(popsHeart.get('pid'))
+    if (
+      popsHeart.get('pid') !== null &&
+      popsHeart.get('pid') !== '' &&
+      !isNaN(popsHeart.get('pid'))
+    ) {
+      yohane.initialize(popsHeart.get('pid'))
 
-        if (!dataYosoro.get('doNotUseMusicPlayer')) {
-          yohaneNoDOM.dekakuni()
-        }
+      if (!dataYosoro.get('doNotUseMusicPlayer')) {
+        yohaneNoDOM.dekakuni()
       }
-    },
-    error: function (err) {
-      logger(2, 'r', err.message, 'e')
     }
-  })
+  }
+
+  if (typeof $ !== 'undefined') {
+    $.ajax({
+      url: './data/lists.json',
+      success: __lcal_loadedAjax,
+      error: function (err) {
+        logger(2, 'r', err.message, 'e')
+      }
+    })
+  } else {
+    fetch('./data/lists.json').then(res => {
+      __lcal_loadedAjax(res.json())
+    })
+  }
+
+  if (!window.navigator.onLine) _glb_ShowPopup()
 
   document.getElementById('genki_year').innerText = new Date().getFullYear()
   document.getElementById('zenkai_month').innerText = new Date().getMonth() + 1
@@ -1142,14 +1235,28 @@ $(document).ready(() => {
       audioVolumeFunction(true)
     }
   })
-  $(window).resize(() => {
-    var reszCk = resizeItemsCheck()
-    if (pageAdjust.onePageItems !== reszCk) {
-      pageAdjust.onePageItems = reszCk
-      pageAdjust.buildPage()
-    }
-    pageAdjust.onePageItems = reszCk
-  })
+
+  if (typeof $ !== 'undefined') {
+    $(window).resize(resizeFunctions)
+  } else {
+    Sakurauchi.listen('onresize', resizeFunctions)
+  }
+
   pageAdjust.onePageItems = resizeItemsCheck()
-  $('#curt').addClass('hide_curtain')
-})
+  document.getElementById('curt').classList.add('hide_curtain')
+}
+
+if (typeof $ !== 'undefined') {
+  $(document).ready(pageLoadedFunctions)
+} else {
+  Sakurauchi.listen('DOMContentLoaded', pageLoadedFunctions)
+}
+
+let resizeFunctions = () => {
+  var reszCk = resizeItemsCheck()
+  if (pageAdjust.onePageItems !== reszCk) {
+    pageAdjust.onePageItems = reszCk
+    pageAdjust.buildPage()
+  }
+  pageAdjust.onePageItems = reszCk
+}

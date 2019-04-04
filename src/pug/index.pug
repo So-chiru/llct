@@ -1,17 +1,20 @@
-html.index
+html(lang="kr").index
   head
     title LLCT
     meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=0.8')
     meta(name='theme-color', content='#16aaf9')
     meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
-    meta(name="tags" )
+    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,Aqours")
     meta(meta name="apple-mobile-web-app-capable" content="yes")
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
     meta(meta name="application-name" content="러브라이브! 콜표")
+    link(rel="manifest" href="/manifest.json")
     link(rel="apple-touch-icon" href="/data/favicon/logo.png")
+    link(rel="dns-prefetch" href="https://cdn.lovelivec.kr")
     link(rel="dns-prefetch" href="https://fonts.gstatic.com")
+    link(rel="preconnect" href="https://cdn.lovelivec.kr")
     link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous")
     link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='shortcut icon', href='https://cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
@@ -22,7 +25,7 @@ html.index
     style.
         .hide_curtain {opacity:0;visibility: none;pointer-events: none;z-index: -1;}
   body
-    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:100;transition: 1s cubic-bezier(0.19, 1, 0.22, 1);background-color:#16aaf9;")
+    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:1000;transition: 1s cubic-bezier(0.19, 1, 0.22, 1);background-color:#16aaf9;")
         .inr(style="margin: auto;position: relative;text-align: center;")
             h1 LLCT
             h3 LoveLive! Call Table Guide
@@ -68,8 +71,8 @@ html.index
                 .tabs
                     // span.active 전체
                     //- span#pl_ms_switcher.ti.min_ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
-                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
-                    span.ti.min_ti(onclick="LLCT.showSetting()") <span class="material-icons ti">settings</span>
+                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti" alt="/>">shuffle</span>
+                    span.ti.min_ti(onclick="LLCT.showSetting()") <span class="material-icons ti" alt="설정">settings</span>
                     //- .search_wrp.ti(onclick="$('#search_val').focus()")
                         input#search_val(type="text", name="")
                         span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
@@ -80,9 +83,9 @@ html.index
                 div
             ._card_lists#_card_lists
             .navigator
-                span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin">keyboard_arrow_left</i>
-                span.pg_ind <span class="thin" id="currentPage" class="thin">1</span> <span>/</span> <span class="black" id="totalPage">7</span>
-                span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin">keyboard_arrow_right</i>
+                span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin" alt="<">keyboard_arrow_left</i>
+                span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">7</span>
+                span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin" alt=">">keyboard_arrow_right</i>
     .setting_layer.hide
         .close_btn(onclick="LLCT.hideSetting()")
             p <i class="material-icons">close</i>
@@ -100,7 +103,10 @@ html.index
             .toggle_collection
                 label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(4, this.checked)"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
             .toggle_collection
-                label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(5, this.checked)"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
+                label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(5, this.checked)"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
+
+            .toggle_collection
+                label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(6, this.checked)"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
 
     <div id="ps_wp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>
@@ -137,6 +143,10 @@ html.index
             </div>
         </div>
     </div>
+    .offline_popup
+        span.material-icons offline_bolt
+        p#__off_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
+        p#__new_ver.hide 이 페이지의 새로운 버전을 받았습니다. 페이지를 새로 고칩니다.
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 깨진 레이아웃이 보이죠?
         hr
@@ -145,19 +155,10 @@ html.index
         | 현재 익스플로러를 쓰고 계십니다. 크롬을 쓰기만 해도 얼마나 빨리지는지 아시는가요
         | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
         | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
-    // TODO : Fix service worker.
-        if('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('/sw.js', { scope: '/' })
-                .then(() => {
-                    logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
-                })
-                .catch(e => logger(2, 's', 'Failed to register ServiceWorker. ' + e.message, 'e'))
-        }
     script(defer src="/lib/ps/photoswipe.min.js")
     script(defer src="/lib/ps/photoswipe-ui-default.min.js")
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='./lib/jquery.min.js')
     script(src='./js/global.min.js')
     script(src='./js/index.min.js')
     script(src='./js/playlists.min.js')

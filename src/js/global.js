@@ -208,7 +208,7 @@ let Sakurauchi = {
 
 if (typeof $ !== 'undefined') {
   $(document).ready(() => {
-    if (dataYosoro.get('tatenshi')) $(document.body).addClass('dark')
+    if (dataYosoro.get('tatenshi')) document.body.classList.add('dark')
   })
 }
 
@@ -258,6 +258,16 @@ const kIntvlogger = (e, rs, msg, t) => {
 }
 
 window.logger = kIntvlogger
+
+var _glb_ShowPopup = () => {
+  document.getElementsByClassName('offline_popup')[0].style.opacity = 1
+  document.getElementsByClassName('offline_popup')[0].style.display = 'flex'
+
+  setTimeout(() => {
+    document.getElementsByClassName('offline_popup')[0].style.opacity = 0
+    document.getElementsByClassName('offline_popup')[0].style.display = 'none'
+  }, 4800)
+}
 
 window.dataLayer = window.dataLayer || []
 function gtag () {
