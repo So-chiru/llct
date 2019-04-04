@@ -12,7 +12,6 @@ const cachingOffline = {
     '/js/lib/hammer.min.js',
     '/js/global.min.js',
     '/js/playlists.min.js',
-    '/js/new_index.min.js',
     '/js/index.min.js',
     '/js/karaoke.min.js',
     '/live_assets/crying_15.mp3',
@@ -48,7 +47,12 @@ self.addEventListener('fetch', e => {
       return (
         chx ||
         fetch(e.request).then(async res => {
-          if (!ndt_cache(e.request.url)) return res
+          if (
+            !res ||
+            res.status >= 400 ||
+            response.type !== 'basic' ||
+            !ndt_cache(e.request.url)
+          ) { return res }
 
           var x = await caches.open(cachingOffline.version)
           x.put(e.request, res.clone())
