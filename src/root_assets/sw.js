@@ -47,12 +47,9 @@ self.addEventListener('fetch', e => {
       return (
         chx ||
         fetch(e.request).then(async res => {
-          if (
-            !res ||
-            res.status >= 400 ||
-            response.type !== 'basic' ||
-            !ndt_cache(e.request.url)
-          ) { return res }
+          if (!res || !ndt_cache(e.request.url)) {
+            return res
+          }
 
           var x = await caches.open(cachingOffline.version)
           x.put(e.request, res.clone())

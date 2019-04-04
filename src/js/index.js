@@ -315,6 +315,18 @@ let yohaneNoDOM = {
     Sakurauchi.listen(
       'canplaythrough',
       () => {
+        if (typeof ga !== 'undefined' && window.performance) {
+          ga(
+            'send',
+            'timing',
+            'Audio Load Speed',
+            'load',
+            Math.round(
+              (window.performance ? performance.now() : Date.now()) -
+                LLCT.audioLoadStarted
+            )
+          )
+        }
         yohaneNoDOM.__cachedElement['bar_eventListen'].classList.remove('__buf')
       },
       yohane.player()
@@ -408,6 +420,11 @@ let yohaneNoDOM = {
   initialize: id => {
     if (popsHeart.get('pid') !== id.toString()) {
       popsHeart.set('pid', id)
+    }
+
+    LLCT.audioLoadStarted = window.performance ? performance.now() : Date.now()
+    if (typeof ga !== 'undefined') {
+      ga('send', 'event', 'Audio', 'play', id + ' initialize')
     }
 
     if (dataYosoro.get('notUsingMP') == true) {
