@@ -14,7 +14,6 @@ const cachingOffline = {
     '/js/playlists.min.js',
     '/js/index.min.js',
     '/js/karaoke.min.js',
-    '/live_assets/crying_15.mp3',
     '/live_assets/key-press-2.mp3',
     '/live_assets/HamiltonMausoleum.m4a'
   ]
@@ -47,7 +46,12 @@ self.addEventListener('fetch', e => {
       return (
         chx ||
         fetch(e.request).then(async res => {
-          if (!res || !ndt_cache(e.request.url)) {
+          if (
+            !res ||
+            res.status >= 400 ||
+            res.type !== 'basic' ||
+            !ndt_cache(e.request.url)
+          ) {
             return res
           }
 
