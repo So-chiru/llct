@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0014',
+  version: 'deathwar_a0017',
   urls: [
     '/',
     '/index.html',
@@ -29,6 +29,10 @@ self.addEventListener('install', e => {
   )
 })
 
+let is_gtag = ur => {
+  return /(www\.)?(google\-analytics)\.com/.test(ur)
+}
+
 let ndt_cache = url => {
   return (
     (/\/\/?(.+)(lovelivec\.kr|localhost)/.test(url) &&
@@ -50,6 +54,7 @@ self.addEventListener('fetch', e => {
             !res ||
             res.status >= 400 ||
             res.type !== 'basic' ||
+            is_gtag(e.request.url) ||
             !ndt_cache(e.request.url)
           ) {
             return res

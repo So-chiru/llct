@@ -315,17 +315,15 @@ let yohaneNoDOM = {
     Sakurauchi.listen(
       'canplaythrough',
       () => {
-        if (typeof ga !== 'undefined' && window.performance) {
-          ga(
-            'send',
-            'timing',
-            'Audio Load Speed',
-            'load',
-            Math.round(
+        if (typeof gtag !== 'undefined' && window.performance) {
+          gtag('event', 'timing_complete', {
+            name: 'Audio load time',
+            value: Math.round(
               (window.performance ? performance.now() : Date.now()) -
                 LLCT.audioLoadStarted
-            )
-          )
+            ),
+            event_category: 'Audio'
+          })
         }
         yohaneNoDOM.__cachedElement['bar_eventListen'].classList.remove('__buf')
       },
@@ -423,8 +421,11 @@ let yohaneNoDOM = {
     }
 
     LLCT.audioLoadStarted = window.performance ? performance.now() : Date.now()
-    if (typeof ga !== 'undefined') {
-      ga('send', 'event', 'Audio', 'play', id + ' initialize')
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'play', {
+        event_category: 'Audio',
+        event_label: 'music id ' + id
+      })
     }
 
     if (dataYosoro.get('notUsingMP') == true) {
