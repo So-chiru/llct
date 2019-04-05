@@ -35,10 +35,6 @@ self.addEventListener('install', e => {
   )
 })
 
-let is_gtag = ur => {
-  return /(www\.)?(google\-analytics)\.com/.test(ur)
-}
-
 let ndt_cache = url => {
   return (
     (/\/\/?(.+)(lovelivec\.kr|localhost|127\.0\.0\.1)/.test(url) ||
@@ -55,17 +51,10 @@ self.addEventListener('fetch', e => {
 
   e.respondWith(
     caches.match(reqCacFet).then(async chx => {
-      console.log(needReplaceCDNData, reqCacFet, chx)
-
       return (
         chx ||
         fetch(e.request).then(async res => {
-          if (
-            !res ||
-            res.status >= 400 ||
-            is_gtag(e.request.url) ||
-            !ndt_cache(e.request.url)
-          ) {
+          if (!res || res.status >= 400 || !ndt_cache(e.request.url)) {
             return res
           }
 
@@ -152,15 +141,18 @@ self.addEventListener('message', e => {
 })
 
 const clearCaches = async () => {
+  caches.open(cachingOffline.version).then(cache => {
+    return cache.addAll(cachingOffline.urls)
+  })
+
   caches.keys().then(async cnObjects => {
-    return Promise.all(
-      cnObjects
-        .filter(cn => {
-          true
+    cnObjects.forEach(async v => {
+      await caches.open(v).then(async cache => {
+        var _keys = await cache.keys()
+        _keys.forEach(_k => {
+          return cache.delete(_k)
         })
-        .map(cn => {
-          return caches.delete(cn)
-        })
-    )
+      })
+    })
   })
 }
