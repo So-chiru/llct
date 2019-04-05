@@ -38,6 +38,18 @@ var popsHeart = {
   }
 }
 
+var formatBytes = (a, b) => {
+  if (a == 0) return '0 Bytes'
+  var c = 1024
+
+  var d = b || 2
+
+  var e = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+  var f = Math.floor(Math.log(a) / Math.log(c))
+  return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f]
+}
+
 var dataYosoro = {
   isStorageSupport: window.localStorage != null,
   get: function (...args) {
@@ -270,14 +282,6 @@ var _glb_ShowPopup = (icon, msg) => {
     document.getElementsByClassName('offline_popup')[0].style.display = 'none'
   }, 4800)
 }
-
-window.addEventListener('message', obj_inf => {
-  if (typeof obj_inf !== 'object') return 0
-
-  if (obj_inf.cmd_t === 'popup') {
-    _glb_ShowPopup(obj_inf.data.icon, obj_inf.data.msg)
-  }
-})
 
 window.dataLayer = window.dataLayer || []
 function gtag () {

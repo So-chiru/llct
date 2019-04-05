@@ -198,9 +198,21 @@ const changes = [
             )
           )
 
+        navigator.serviceWorker.addEventListener('message', obj_inf => {
+          if (typeof obj_inf !== 'object') return 0
+
+          if (obj_inf.data.cmd_t === 'popup') {
+            _glb_ShowPopup(obj_inf.data.data.icon, obj_inf.data.data.text)
+            return 
+          }
+        
+          Sakurauchi.run(obj_inf.data.cmd_t, obj_inf.data.data)
+        })
+
         navigator.serviceWorker.addEventListener('controllerchange', () => {
           location.reload()
         })
+        
       }
     }
   },
@@ -222,7 +234,10 @@ const changes = [
     filt: _v => {
       return !dataYosoro.get('offlineShip')
     },
-    fn: _ => LLCT.clearCache()
+    fn: _ => {
+      LLCT.clearCache()
+      navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
+    }
   }
 ]
 
@@ -235,6 +250,10 @@ let LLCT = {
   __pkg_callLists: [],
   __cur_filterLists: [],
   showSetting: () => {
+    if ('serviceWorker' in navigator && typeof navigator.serviceWorker.controller !== 'undefined') {
+      navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
+    }
+
     document.getElementsByClassName('setting_layer')[0].classList.remove('hide')
     document.getElementsByClassName('setting_layer')[0].classList.add('show')
   },
@@ -245,7 +264,7 @@ let LLCT = {
   },
 
   clearCache: () => {
-    ServWorkerInst.postMessage({ cmd: '_clrs'})
+    navigator.serviceWorker.controller.postMessage({ cmd: '_clrs'})
   },
 
   jumpToPageDialog: () => {
@@ -468,7 +487,7 @@ let yohaneNoDOM = {
         (urlQueryParams('local') === 'true'
           ? './'
           : 'https://cdn.lovelivec.kr/') +
-        '/data/' +
+        'data/' +
         id +
         '/bg.png'
     } else {
@@ -1073,10 +1092,12 @@ let pageLoadedFunctions = () => {
     if (changes[i].button) {
       var _e = document.getElementById(changes[i].id)
 
-      _e.disabled = changes[i].filt ? changes[i].filt() : false
+      var c = changes[i]
+      _e.disabled = (c.filt) ? c.filt() : false
+
       _e.onclick = () => {
-        _e.disabled = changes[i].filt ? changes[i].filt() : false
-        changes[i].fn()
+        c.fn()
+        _e.disabled = c.filt ? c.filt() : false
       }
     } else if (changes[i].checkbox) {
       document.getElementById(changes[i].id)[
@@ -1286,6 +1307,14 @@ let pageLoadedFunctions = () => {
 
   pageAdjust.onePageItems = resizeItemsCheck()
   document.getElementById('curt').classList.add('hide_curtain')
+
+  Sakurauchi.add('cacheSize', (d) => {
+    document.getElementById('offlineCacheClearBtn').innerHTML = '오프라인 캐시 비우기 (' + formatBytes(d.size) + ')'
+  })
+
+  if (navigator.serviceWorker.controller != null) {
+    navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
+  }
 }
 
 if (typeof $ !== 'undefined') {

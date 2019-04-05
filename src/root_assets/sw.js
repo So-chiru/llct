@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0018',
+  version: 'deathwar_a0019_b',
   urls: [
     '/',
     '/index.html',
@@ -20,12 +20,13 @@ const cachingOffline = {
 }
 
 self.addEventListener('install', e => {
-  self.skipWaiting()
-
   e.waitUntil(
-    caches.open(cachingOffline.version).then(cache => {
-      return cache.addAll(cachingOffline.urls)
-    })
+    (() => {
+      caches.open(cachingOffline.version).then(cache => {
+        return cache.addAll(cachingOffline.urls)
+      })
+      self.skipWaiting()
+    })()
   )
 })
 
@@ -72,19 +73,43 @@ self.addEventListener('fetch', e => {
 
 self.addEventListener('activate', async e => {
   e.waitUntil(
-    caches.keys().then(async cnObjects => {
-      return Promise.all(
-        cnObjects
-          .filter(cn => {
-            return cachingOffline.version !== cn
-          })
-          .map(cn => {
-            return caches.delete(cn)
-          })
-      )
-    })
+    (() => {
+      caches.keys().then(async cnObjects => {
+        return Promise.all(
+          cnObjects
+            .filter(cn => {
+              return cachingOffline.version !== cn
+            })
+            .map(cn => {
+              return caches.delete(cn)
+            })
+        )
+      })
+      clients.claim()
+    })()
   )
 })
+
+var sendMsgtoClient = async obj => {
+  await self.clients.matchAll().then(cs => {
+    cs.forEach(c => c.postMessage(JSON.parse(JSON.stringify(obj))))
+  })
+}
+
+var getCacheSizes = async () => {
+  const _c = await caches.open(cachingOffline.version)
+  const _k = await _c.keys()
+  let _s = 0
+
+  await Promise.all(
+    _k.map(async k => {
+      const _mtch = await _c.match(k)
+      _s += (await _mtch.blob()).size
+    })
+  )
+
+  return _s
+}
 
 var _md_fns = {
   sk_W: () => {
@@ -94,7 +119,7 @@ var _md_fns = {
   _clrs: async () => {
     await clearCaches()
 
-    window.postMessage({
+    sendMsgtoClient({
       cmd_t: 'popup',
       data: {
         icon: 'offline_bolt',
@@ -103,13 +128,19 @@ var _md_fns = {
     })
   },
 
+  _cacheSize: async () =>
+    sendMsgtoClient({
+      cmd_t: 'cacheSize',
+      data: {
+        size: await getCacheSizes()
+      }
+    }),
+
   default: () => {}
 }
 
-// d
-
 self.addEventListener('message', e => {
-  _md_fns[_md_fns[e.data._cmd] || 'default']()
+  _md_fns[_md_fns[e.data.cmd] ? e.data.cmd : 'default']()
 })
 
 const clearCaches = async () => {
