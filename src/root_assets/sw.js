@@ -1,14 +1,19 @@
 const cachingOffline = {
-  version: 'deathwar_a0019_b',
+  version: 'deathwar_a0020',
   urls: [
     '/',
+    '/manifest.json',
+    '/live_assets/crying_15.mp3',
+    '/?pid=',
     '/index.html',
     '/yosoro.min.css',
     '/data/lists.json',
     '/js/lib/reverb.min.js',
     '/lib/jquery.min.js',
     '/lib/ps/photoswipe.min.js',
-    '/lib/ps/photoswipe-ui-default.js',
+    '/lib/ps/photoswipe.css',
+    '/lib/ps/photoswipe-ui-default.min.js',
+    '/lib/ps/default-skin/default-skin.css',
     '/js/lib/hammer.min.js',
     '/js/global.min.js',
     '/js/playlists.min.js',
@@ -36,25 +41,28 @@ let is_gtag = ur => {
 
 let ndt_cache = url => {
   return (
-    (/\/\/?(.+)(lovelivec\.kr|localhost)/.test(url) &&
-      /fonts.(googleapis|gstatic).com/.test(url)) ||
-    (url.indexOf('data/') !== -1 ||
-      url.indexOf('.html') !== -1 ||
-      url.indexOf('.ico') !== -1 ||
-      url.indexOf('?pid=') !== -1)
+    (/\/\/?(.+)(lovelivec\.kr|localhost|127\.0\.0\.1)/.test(url) ||
+      /fonts.(googleapis|gstatic).com/.test(url)) &&
+    /data\//.test(url)
   )
 }
 
 self.addEventListener('fetch', e => {
+  var needReplaceCDNData = /\/\/cdn\.lovelivec\.kr\/data\//.test(e.request.url)
+  var reqCacFet = needReplaceCDNData
+    ? new Request(e.request.url.replace(/cdn\./, ''))
+    : e.request
+
   e.respondWith(
-    caches.match(e.request).then(async chx => {
+    caches.match(reqCacFet).then(async chx => {
+      console.log(needReplaceCDNData, reqCacFet, chx)
+
       return (
         chx ||
         fetch(e.request).then(async res => {
           if (
             !res ||
             res.status >= 400 ||
-            res.type !== 'basic' ||
             is_gtag(e.request.url) ||
             !ndt_cache(e.request.url)
           ) {
@@ -62,7 +70,7 @@ self.addEventListener('fetch', e => {
           }
 
           var x = await caches.open(cachingOffline.version)
-          x.put(e.request, res.clone())
+          x.put(reqCacFet, res.clone())
 
           return res
         })

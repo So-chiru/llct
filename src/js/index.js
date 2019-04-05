@@ -250,12 +250,12 @@ let LLCT = {
   __pkg_callLists: [],
   __cur_filterLists: [],
   showSetting: () => {
-    if ('serviceWorker' in navigator && typeof navigator.serviceWorker.controller !== 'undefined') {
-      navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
-    }
-
     document.getElementsByClassName('setting_layer')[0].classList.remove('hide')
     document.getElementsByClassName('setting_layer')[0].classList.add('show')
+
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller != null) {
+      navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
+    }
   },
 
   hideSetting: () => {
