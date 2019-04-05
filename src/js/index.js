@@ -179,14 +179,12 @@ const changes = [
             logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
 
             _regi.addEventListener('updatefound', () => {
-              var nw_ins = _regi.installing
+              window.ServWorkerInst = _regi.installing
 
-              nw_ins.addEventListener('statechange', () => {
-                if (nw_ins.state !== 'installed') return 0
+              ServWorkerInst.addEventListener('statechange', () => {
+                if (ServWorkerInst.state !== 'installed') return 0
                 if (navigator.serviceWorker.controller) {
-                  _glb_ShowPopup()
-                  document.getElementById('__off_txt').className = 'hide'
-                  document.getElementById('__new_ver').className = 'show'
+                  if (!window.navigator.onLine) _glb_ShowPopup('offline_bolt', '페이지의 새로운 버전을 받았습니다. 페이지를 새로 고칩니다.')
                 }
               })
             })
@@ -216,6 +214,15 @@ const changes = [
       yohane.reInitTimingFunction()
       yohane.tick()
     }
+  },
+  {
+    id: 'offlineCacheClearBtn', 
+    data_key: 'offCacheClear',
+    button: true,
+    filt: _v => {
+      return !dataYosoro.get('offlineShip')
+    },
+    fn: _ => LLCT.clearCache()
   }
 ]
 
@@ -235,6 +242,10 @@ let LLCT = {
   hideSetting: () => {
     document.getElementsByClassName('setting_layer')[0].classList.remove('show')
     document.getElementsByClassName('setting_layer')[0].classList.add('hide')
+  },
+
+  clearCache: () => {
+    ServWorkerInst.postMessage({ cmd: '_clrs'})
   },
 
   jumpToPageDialog: () => {
@@ -428,10 +439,11 @@ let yohaneNoDOM = {
       })
     }
 
-    if (dataYosoro.get('notUsingMP') == true) {
-      return 0
-    }
+    document.getElementById('_of_ric').style.display = window.navigator.onLine
+      ? 'none'
+      : 'block'
 
+    if (dataYosoro.get('notUsingMP')) return 0
     ;[
       'played_time',
       'left_time',
@@ -461,7 +473,9 @@ let yohaneNoDOM = {
         '/bg.png'
     } else {
       document.getElementById('album_meta').src = '/live_assets/1px.png'
-      document.getElementById('album_meta').style.backgroundColor = '#323232'
+      document.getElementById(
+        'album_meta'
+      ).style.backgroundColor = dataYosoro.get('yohane') ? '#323232' : '#D0D0D0'
     }
 
     document.getElementById('title_meta').innerText =
@@ -1056,10 +1070,20 @@ let pageLoadedFunctions = () => {
       val = changes[i].default
     }
 
-    document.getElementById(changes[i].id)[
-      changes[i].checkbox ? 'checked' : 'value'
-    ] = changes[i].checkbox ? val == 'true' || val == true : val
-    changes[i].fn(val)
+    if (changes[i].button) {
+      var _e = document.getElementById(changes[i].id)
+
+      _e.disabled = changes[i].filt ? changes[i].filt() : false
+      _e.onclick = () => {
+        _e.disabled = changes[i].filt ? changes[i].filt() : false
+        changes[i].fn()
+      }
+    } else if (changes[i].checkbox) {
+      document.getElementById(changes[i].id)[
+        changes[i].checkbox ? 'checked' : 'value'
+      ] = changes[i].checkbox ? val == 'true' || val == true : val
+      changes[i].fn(val)
+    }
   }
 
   yohane.player().onplay = () => {
@@ -1168,7 +1192,7 @@ let pageLoadedFunctions = () => {
     })
   }
 
-  if (!window.navigator.onLine) _glb_ShowPopup()
+  if (!window.navigator.onLine) _glb_ShowPopup('offline_bolt', '오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.')
 
   document.getElementById('genki_year').innerText = new Date().getFullYear()
   document.getElementById('zenkai_month').innerText = new Date().getMonth() + 1

@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0017',
+  version: 'deathwar_a0018',
   urls: [
     '/',
     '/index.html',
@@ -86,8 +86,30 @@ self.addEventListener('activate', async e => {
   )
 })
 
+var _md_fns = {
+  sk_W: () => {
+    self.skipWaiting()
+  },
+
+  _clrs: async () => {
+    await clearCaches()
+
+    window.postMessage({
+      cmd_t: 'popup',
+      data: {
+        icon: 'offline_bolt',
+        text: '저장된 캐시를 비웠습니다.'
+      }
+    })
+  },
+
+  default: () => {}
+}
+
+// d
+
 self.addEventListener('message', e => {
-  if (e.data._cmd === 'sk_W') self.skipWaiting()
+  _md_fns[_md_fns[e.data._cmd] || 'default']()
 })
 
 const clearCaches = async () => {

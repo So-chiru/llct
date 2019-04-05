@@ -259,7 +259,9 @@ const kIntvlogger = (e, rs, msg, t) => {
 
 window.logger = kIntvlogger
 
-var _glb_ShowPopup = () => {
+var _glb_ShowPopup = (icon, msg) => {
+  document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
+  document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
   document.getElementsByClassName('offline_popup')[0].style.opacity = 1
   document.getElementsByClassName('offline_popup')[0].style.display = 'flex'
 
@@ -268,6 +270,14 @@ var _glb_ShowPopup = () => {
     document.getElementsByClassName('offline_popup')[0].style.display = 'none'
   }, 4800)
 }
+
+window.addEventListener('message', obj_inf => {
+  if (typeof obj_inf !== 'object') return 0
+
+  if (obj_inf.cmd_t === 'popup') {
+    _glb_ShowPopup(obj_inf.data.icon, obj_inf.data.msg)
+  }
+})
 
 window.dataLayer = window.dataLayer || []
 function gtag () {

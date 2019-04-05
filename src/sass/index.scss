@@ -1059,3 +1059,31 @@ input[type="range"].hareru:focus::-ms-fill-upper {
     background-color: #949494;
   }
 }
+
+.offline_replacer {
+  display: none;
+  text-align: center;
+}
+
+.offline_replacer .material-icons {
+  color: #323232;
+  font-size: 82px;
+}
+
+.dark .offline_replacer .material-icons {
+  color: #a8a8a8;
+}
+
+.offline_replacer .mute,
+.offline_replacer .anon {
+  margin: 0;
+}
+
+.offline_replacer .mute {
+  color: #323232;
+  font-size: 12px;
+}
+
+.dark .offline_replacer .mute {
+  color: #797979;
+}

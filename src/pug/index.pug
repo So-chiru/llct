@@ -10,6 +10,7 @@ html(lang="kr").index
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
     meta(meta name="application-name" content="러브라이브! 콜표")
+    link(rel="canonical" href="https://lovelivec.kr/")
     link(rel="manifest" href="/manifest.json")
     link(rel="apple-touch-icon" href="/data/favicon/logo.png")
     link(rel="dns-prefetch" href="https://cdn.lovelivec.kr")
@@ -54,6 +55,11 @@ html(lang="kr").index
                     span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
                     span#dekaku_btn.material-icons(title="플레이어 크게 / 작게") keyboard_arrow_down
         .lyrics_wrapper
+            .offline_replacer#_of_ric
+                span.material-icons offline_bolt
+                p.anon 인터넷에 연결 할 수 없습니다. 이전에 저장된 데이터를 사용하여 콜표를 표시합니다.
+                span.mute (저장 된 데이터가 없으면 빈칸으로 표시됩니다.)
+                br
             p.blade_c
                 | 블레이드 추천 색상 : 
                 span#blade_color 자유
@@ -104,7 +110,8 @@ html(lang="kr").index
                 label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(4, this.checked)"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
             .toggle_collection
                 label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(5, this.checked)"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
-
+            br
+            button._btn_class_fl#offlineCacheClearBtn 오프라인 캐시 비우기 (0 byte)
             .toggle_collection
                 label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(6, this.checked)"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
 
@@ -144,9 +151,8 @@ html(lang="kr").index
         </div>
     </div>
     .offline_popup
-        span.material-icons offline_bolt
-        p#__off_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
-        p#__new_ver.hide 이 페이지의 새로운 버전을 받았습니다. 페이지를 새로 고칩니다.
+        span#__popup_icon.material-icons offline_bolt
+        p#__popup_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
     #PLEASE_STOP_USE_INTERNET_EXPLORER
         h1 깨진 레이아웃이 보이죠?
         hr
