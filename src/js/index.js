@@ -155,7 +155,7 @@ const changes = [
     id: 'useOfflineSaving',
     data_key: 'offlineShip',
     checkbox: true,
-    default: false,
+    default: window.navigator.standalone === true,
     fn: v => {
       if ('serviceWorker' in navigator) {
         if (!v) {
@@ -184,7 +184,12 @@ const changes = [
               ServWorkerInst.addEventListener('statechange', () => {
                 if (ServWorkerInst.state !== 'installed') return 0
                 if (navigator.serviceWorker.controller) {
-                  if (!window.navigator.onLine) _glb_ShowPopup('offline_bolt', '페이지의 새로운 버전을 받았습니다. 페이지를 새로 고칩니다.')
+                  if (!window.navigator.onLine) {
+                    _glb_ShowPopup(
+                      'offline_bolt',
+                      '페이지의 새로운 버전을 받았습니다. 페이지를 새로 고칩니다.'
+                    )
+                  }
                 }
               })
             })
@@ -203,16 +208,15 @@ const changes = [
 
           if (obj_inf.data.cmd_t === 'popup') {
             _glb_ShowPopup(obj_inf.data.data.icon, obj_inf.data.data.text)
-            return 
+            return
           }
-        
+
           Sakurauchi.run(obj_inf.data.cmd_t, obj_inf.data.data)
         })
 
         navigator.serviceWorker.addEventListener('controllerchange', () => {
           location.reload()
         })
-        
       }
     }
   },
@@ -228,7 +232,7 @@ const changes = [
     }
   },
   {
-    id: 'offlineCacheClearBtn', 
+    id: 'offlineCacheClearBtn',
     data_key: 'offCacheClear',
     button: true,
     filt: _v => {
@@ -236,7 +240,6 @@ const changes = [
     },
     fn: _ => {
       LLCT.clearCache()
-      navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
     }
   }
 ]
@@ -252,10 +255,6 @@ let LLCT = {
   showSetting: () => {
     document.getElementsByClassName('setting_layer')[0].classList.remove('hide')
     document.getElementsByClassName('setting_layer')[0].classList.add('show')
-
-    if ('serviceWorker' in navigator && navigator.serviceWorker.controller != null) {
-      navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
-    }
   },
 
   hideSetting: () => {
@@ -264,7 +263,7 @@ let LLCT = {
   },
 
   clearCache: () => {
-    navigator.serviceWorker.controller.postMessage({ cmd: '_clrs'})
+    navigator.serviceWorker.controller.postMessage({ cmd: '_clrs' })
   },
 
   jumpToPageDialog: () => {
@@ -497,16 +496,16 @@ let yohaneNoDOM = {
       ).style.backgroundColor = dataYosoro.get('yohane') ? '#323232' : '#D0D0D0'
     }
 
+    var artistText = artistLists[meta[1].artist != null ? meta[1].artist : 0]
     document.getElementById('title_meta').innerText =
       dataYosoro.get('mikan') === true ? meta[1].translated || meta[0] : meta[0]
-    document.getElementById('artist_meta').innerText =
-      artistLists[meta[1].artist != null ? meta[1].artist : 0]
+    document.getElementById('artist_meta').innerText = artistText
+    document.getElementById('artist_meta').title = artistText
 
     document.getElementById('blade_color').innerText =
       meta[1].bladeColor || '자유'
 
     var _hx = meta[1].bladeColorHEX
-
     if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
       document.getElementById('blade_color').style.color = _hx
     }
@@ -1093,7 +1092,7 @@ let pageLoadedFunctions = () => {
       var _e = document.getElementById(changes[i].id)
 
       var c = changes[i]
-      _e.disabled = (c.filt) ? c.filt() : false
+      _e.disabled = c.filt ? c.filt() : false
 
       _e.onclick = () => {
         c.fn()
@@ -1213,7 +1212,12 @@ let pageLoadedFunctions = () => {
     })
   }
 
-  if (!window.navigator.onLine) _glb_ShowPopup('offline_bolt', '오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.')
+  if (!window.navigator.onLine) {
+    _glb_ShowPopup(
+      'offline_bolt',
+      '오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.'
+    )
+  }
 
   document.getElementById('genki_year').innerText = new Date().getFullYear()
   document.getElementById('zenkai_month').innerText = new Date().getMonth() + 1
@@ -1304,17 +1308,9 @@ let pageLoadedFunctions = () => {
   } else {
     Sakurauchi.listen('onresize', resizeFunctions)
   }
-
   pageAdjust.onePageItems = resizeItemsCheck()
+
   document.getElementById('curt').classList.add('hide_curtain')
-
-  Sakurauchi.add('cacheSize', (d) => {
-    document.getElementById('offlineCacheClearBtn').innerHTML = '오프라인 캐시 비우기 (' + formatBytes(d.size) + ')'
-  })
-
-  if (navigator.serviceWorker.controller != null) {
-    navigator.serviceWorker.controller.postMessage({cmd: '_cacheSize'})
-  }
 }
 
 if (typeof $ !== 'undefined') {

@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0020',
+  version: 'deathwar_a0021_a',
   urls: [
     '/',
     '/manifest.json',
@@ -44,10 +44,13 @@ let ndt_cache = url => {
 }
 
 self.addEventListener('fetch', e => {
-  var needReplaceCDNData = /\/\/cdn\.lovelivec\.kr\/data\//.test(e.request.url)
-  var reqCacFet = needReplaceCDNData
-    ? new Request(e.request.url.replace(/cdn\./, ''))
+  var reqCacFet = /\/\/cdn\.lovelivec\.kr\/data\//g.test(e.request.url)
+    ? new Request(e.request.url.replace(/cdn\./g, ''))
     : e.request
+
+  reqCacFet = /lovelivec\.kr\/\?(.+)/.test(reqCacFet.url)
+    ? new Request(reqCacFet.url.replace(/\?(.+)/g, ''))
+    : reqCacFet
 
   e.respondWith(
     caches.match(reqCacFet).then(async chx => {
@@ -93,21 +96,6 @@ var sendMsgtoClient = async obj => {
   })
 }
 
-var getCacheSizes = async () => {
-  const _c = await caches.open(cachingOffline.version)
-  const _k = await _c.keys()
-  let _s = 0
-
-  await Promise.all(
-    _k.map(async k => {
-      const _mtch = await _c.match(k)
-      _s += (await _mtch.blob()).size
-    })
-  )
-
-  return _s
-}
-
 var _md_fns = {
   sk_W: () => {
     self.skipWaiting()
@@ -124,14 +112,6 @@ var _md_fns = {
       }
     })
   },
-
-  _cacheSize: async () =>
-    sendMsgtoClient({
-      cmd_t: 'cacheSize',
-      data: {
-        size: await getCacheSizes()
-      }
-    }),
 
   default: () => {}
 }
