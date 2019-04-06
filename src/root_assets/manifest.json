@@ -3,6 +3,21 @@
   "name": "러브라이브! 콜표",
   "icons": [
     {
+      "src": "/data/favicon/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/data/favicon/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/data/favicon/logo-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
       "src": "/data/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
@@ -10,5 +25,6 @@
   ],
   "start_url": "/?utm_source=homescreen",
   "display": "standalone",
-  "theme_color": "#16aaf9"
+  "theme_color": "#16aaf9",
+  "background_color": "#16aaf9"
 }
