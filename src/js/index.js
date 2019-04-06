@@ -183,14 +183,13 @@ const changes = [
 
               ServWorkerInst.addEventListener('statechange', () => {
                 if (ServWorkerInst.state !== 'installed') return 0
-                if (navigator.serviceWorker.controller) {
-                  if (!window.navigator.onLine) {
-                    _glb_ShowPopup(
-                      'offline_bolt',
-                      '페이지의 새로운 버전을 받았습니다. 페이지를 새로 고칩니다.'
-                    )
+                _glb_ShowPopup(
+                  'offline_bolt',
+                  '새로운 업데이트가 있습니다. 이곳을 눌러 새로 고칠 수 있습니다.',
+                  () => {
+                    location.reload()
                   }
-                }
+                )
               })
             })
           })
@@ -212,10 +211,6 @@ const changes = [
           }
 
           Sakurauchi.run(obj_inf.data.cmd_t, obj_inf.data.data)
-        })
-
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          location.reload()
         })
       }
     }

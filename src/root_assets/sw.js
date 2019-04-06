@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0021_b',
+  version: 'deathwar_a0022_b',
   urls: [
     '/',
     '/manifest.json',

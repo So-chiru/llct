@@ -271,16 +271,26 @@ const kIntvlogger = (e, rs, msg, t) => {
 
 window.logger = kIntvlogger
 
-var _glb_ShowPopup = (icon, msg) => {
+var _glb_popupTimeout
+var _glb_ShowPopup = (icon, msg, fn) => {
+  if (_glb_popupTimeout) clearTimeout(_glb_popupTimeout)
   document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
   document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
   document.getElementsByClassName('offline_popup')[0].style.opacity = 1
   document.getElementsByClassName('offline_popup')[0].style.display = 'flex'
 
-  setTimeout(() => {
-    document.getElementsByClassName('offline_popup')[0].style.opacity = 0
-    document.getElementsByClassName('offline_popup')[0].style.display = 'none'
-  }, 4800)
+  document.getElementsByClassName('offline_popup')[0].onclick = () => {
+    if (typeof fn === 'function') fn()
+    _glb_closePopup()
+  }
+
+  _glb_popupTimeout = setTimeout(_glb_closePopup, 4800)
+}
+
+var _glb_closePopup = () => {
+  document.getElementsByClassName('offline_popup')[0].style.opacity = 0
+  document.getElementsByClassName('offline_popup')[0].style.display = 'none'
+  if (_glb_popupTimeout) clearTimeout(_glb_popupTimeout)
 }
 
 window.dataLayer = window.dataLayer || []
