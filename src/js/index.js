@@ -329,9 +329,7 @@ let yohaneNoDOM = {
 
   __cachedElement: {},
 
-  end: () => {
-    document.getElementById('pp_btn').innerHTML = 'play_arrow'
-  },
+  end: () => yohaneNoDOM.pause(),
 
   registerBufferBar: () => {
     yohaneNoDOM.__cachedElement['bar_eventListen'].classList.add('__buf')
@@ -407,8 +405,90 @@ let yohaneNoDOM = {
     document.getElementById('in_active').classList.add('in_active')
   },
 
-  play: () => {},
-  pause: () => {},
+  play: () => {
+    anime({
+      targets: '#pp_btn',
+      rotate: 60,
+      opacity: 0,
+      delay: 0,
+      duration: 300,
+      easing: 'easeInExpo',
+      begin: a => {},
+      complete: a => {
+        document.getElementById('pp_btn').innerHTML = 'pause'
+        yohaneNoDOM.play_seqT()
+      }
+    })
+  },
+  play_seqT: () => {
+    anime({
+      targets: '#pp_btn',
+      rotate: 360,
+      opacity: 1,
+      delay: 0,
+      duration: 400,
+      easing: 'easeOutExpo',
+      begin: a => {
+        a.seek(0.3)
+      },
+      complete: a => {
+        document.getElementById('pp_btn').style.transform = 'rotate(0deg);'
+      }
+    })
+  },
+  __pzAnime: null,
+  pause: () => {
+    if (yohaneNoDOM.__pzAnime != null) return 0
+    yohaneNoDOM.__pzAnime = anime({
+      targets: '#pp_btn',
+      rotate: -60,
+      opacity: 0,
+      delay: 0,
+      duration: 300,
+      easing: 'easeInExpo',
+      begin: a => {},
+      complete: a => {
+        document.getElementById('pp_btn').innerHTML = 'play_arrow'
+        yohaneNoDOM.pause_seqT()
+      }
+    })
+  },
+  pause_seqT: () => {
+    yohaneNoDOM.__pzAnime = anime({
+      targets: '#pp_btn',
+      rotate: 360,
+      opacity: 1,
+      delay: 0,
+      duration: 400,
+      easing: 'easeOutExpo',
+      begin: a => {
+        a.seek(0.3)
+      },
+      complete: a => {
+        yohaneNoDOM.__pzAnime = null
+        document.getElementById('pp_btn').style.transform = 'rotate(0deg);'
+      }
+    })
+  },
+  tickIcon: v => {
+    var is_dark = /dark/.test(
+      document.getElementsByTagName('body')[0].className
+    )
+    anime({
+      targets: '#tick_btn',
+      keyframes: [
+        { translateX: 2, rotate: '-10deg' },
+        { translateX: -2, rotate: '10deg' },
+        { translateX: 2, rotate: '-10deg' },
+        { translateX: -2, rotate: '10deg' },
+        { translateX: 0, rotate: '0deg' }
+      ],
+      color: v ? '#737373' : is_dark ? '#6b6b6b' : '#c4c4c4',
+      delay: 0,
+      duration: 300,
+      easing: 'easeOutExpo'
+    })
+  },
   load: () => {},
   loadDone: () => {},
   loopToggle: () => {
@@ -571,6 +651,17 @@ let yohane = {
 
   toggleLoops: () => {
     if (!yohane.__isRepeat && !yohane.__isShuffle) {
+      anime({
+        targets: '#pl_loop',
+        rotate: '-360deg',
+        delay: 0,
+        duration: 600,
+        easing: 'easeOutExpo',
+        complete: a => {
+          document.getElementById('pl_loop').style.transform = ''
+        }
+      })
+
       yohane.repeatToggle()
       return
     }
@@ -578,12 +669,31 @@ let yohane = {
     if (yohane.__isRepeat && !yohane.__isShuffle) {
       yohane.repeatToggle()
       yohane.playNextToggle()
+
+      anime({
+        targets: '#pl_loop',
+        rotate: '360deg',
+        delay: 0,
+        duration: 600,
+        easing: 'easeOutExpo',
+        complete: a => {
+          document.getElementById('pl_loop').style.transform = ''
+        }
+      })
       return
     }
 
     if (!yohane.__isRepeat && yohane.__isShuffle) {
       yohane.playNextToggle()
       yohaneNoDOM.noLoopIcon()
+
+      anime({
+        targets: '#pl_loop',
+        rotate: '0deg',
+        delay: 0,
+        duration: 600,
+        easing: 'easeOutExpo'
+      })
     }
   },
 
@@ -615,7 +725,9 @@ let yohane = {
     audioVolumeFunction()
   },
 
-  toggle: () => yohane[yohane.player().paused ? 'play' : 'pause'](),
+  toggle: () => {
+    yohane[yohane.player().paused ? 'play' : 'pause']()
+  },
   stop: () => yohane.pause(true),
   playing: () => !yohane.player().paused,
   timecode: () => yohane.player().currentTime * 100,
@@ -753,7 +865,6 @@ let yohane = {
   },
 
   play: force => {
-    document.getElementById('pp_btn').innerHTML = 'pause'
     yohane.player().play()
 
     if (force) return 0
@@ -761,7 +872,8 @@ let yohane = {
   },
 
   pause: (returnZero, force) => {
-    document.getElementById('pp_btn').innerHTML = 'play_arrow'
+    yohaneNoDOM.pause()
+
     if (force) return yohane.player()[returnZero ? 'stop' : 'pause']()
     yohane.fade(yohane.player().volume, 0, 600, performance.now(), () => {
       yohane.player()[returnZero ? 'stop' : 'pause']()
@@ -859,16 +971,7 @@ let yohane = {
         })
     }
 
-    yohane.player().onpause = () => {
-      yohaneNoDOM.pause()
-    }
-
-    yohane.player().onpause = () => {
-      yohaneNoDOM.pause()
-    }
-
     yohane.loaded = true
-
     return true
   },
 
@@ -1102,6 +1205,8 @@ let pageLoadedFunctions = () => {
   }
 
   yohane.player().onplay = () => {
+    yohaneNoDOM.play()
+
     if (!yohane.__useSetInterval) {
       requestAnimationFrame(yohane.tick)
 
@@ -1129,6 +1234,8 @@ let pageLoadedFunctions = () => {
   }
 
   yohane.player().onpause = () => {
+    yohaneNoDOM.pause(true)
+
     if (!yohane.__useSetInterval) {
       cancelAnimationFrame(yohane.tick)
 
@@ -1241,6 +1348,7 @@ let pageLoadedFunctions = () => {
   })
 
   Sakurauchi.add('tickSoundChanged', v => {
+    yohaneNoDOM.tickIcon(v)
     document
       .getElementById('tick_btn')
       .classList[v ? 'remove' : 'add']('in_active')
