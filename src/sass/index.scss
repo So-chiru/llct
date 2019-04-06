@@ -221,8 +221,23 @@ body {
     transition: 1s opacity cubic-bezier(0.19, 1, 0.22, 1);
   }
 
+  ._card_info {
+    position: absolute;
+    display: -webkit-flex;
+    display: flex;
+    top: 15px;
+    left: 15px;
+    opacity: 0.5;
+    transition: 0.3s all cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
   .card:hover {
     cursor: pointer;
+
+    ._card_info {
+      opacity: 0.9;
+      transform: translateX(15px);
+    }
 
     img {
       transform: scale(0.95);
@@ -231,6 +246,11 @@ body {
   }
 
   .card:active {
+    ._card_info {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+
     img {
       transform: scale(0.9);
       opacity: 0.7;

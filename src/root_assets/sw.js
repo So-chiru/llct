@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0022_b',
+  version: 'deathwar_a0024_a',
   urls: [
     '/',
     '/manifest.json',
@@ -8,7 +8,6 @@ const cachingOffline = {
     '/index.html',
     '/yosoro.min.css',
     '/data/lists.json',
-    '/js/lib/reverb.min.js',
     '/lib/jquery.min.js',
     '/lib/ps/photoswipe.min.js',
     '/lib/ps/photoswipe.css',
@@ -16,6 +15,7 @@ const cachingOffline = {
     '/lib/ps/default-skin/default-skin.css',
     '/js/lib/hammer.min.js',
     '/js/global.min.js',
+    '/js/options.min.js',
     '/js/playlists.min.js',
     '/js/index.min.js',
     '/js/karaoke.min.js',
@@ -48,9 +48,13 @@ self.addEventListener('fetch', e => {
     ? new Request(e.request.url.replace(/cdn\./g, ''))
     : e.request
 
-  reqCacFet = /lovelivec\.kr\/\?(.+)/.test(reqCacFet.url)
-    ? new Request(reqCacFet.url.replace(/\?(.+)/g, ''))
-    : reqCacFet
+  if (/\/\/lovelivec\.kr\/\?pid\=/g.test(e.request.url)) {
+    reqCacFet = new Request(e.request.url.replace(/(\?pid\=)(.+)/g, ''))
+  } else {
+    reqCacFet = /lovelivec\.kr\/\?(.+)/.test(reqCacFet.url)
+      ? new Request(reqCacFet.url.replace(/\?(.+)/g, ''))
+      : reqCacFet
+  }
 
   e.respondWith(
     caches.match(reqCacFet).then(async chx => {

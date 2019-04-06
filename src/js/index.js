@@ -36,214 +36,6 @@ const artistLists = [
   '오하라 마리 (CV. 스즈키 아이나)'
 ]
 
-const loadCallImage = id => {
-  window.karaokeData = null
-  document.getElementById('karaoke').innerHTML =
-    '<img class="call_img" onclick="openCallImage(' +
-    id +
-    ')" src="' +
-    (urlQueryParams('local') === 'true' ? './' : 'https://cdn.lovelivec.kr/') +
-    'data/' +
-    id +
-    '/call.jpg' +
-    '"></img>'
-  yohaneNoDOM.shokan()
-}
-
-const openCallImage = id => {
-  var pElement = document.getElementById('ps_wp')
-  var items = [
-    {
-      src:
-        (urlQueryParams('local') === 'true'
-          ? './'
-          : 'https://cdn.lovelivec.kr/') +
-        'data/' +
-        id +
-        '/call.jpg',
-      w: 3505,
-      h: 2480
-    }
-  ]
-
-  window.DCGall = new PhotoSwipe(pElement, PhotoSwipeUI_Default, items, {
-    index: 0
-  })
-  window.DCGall.init()
-  window.DCGall.listen('destroy', () => {
-    popsHeart.set('pid', '')
-  })
-}
-
-const loadLyrics = (id, obj) => {
-  // urlQueryParams('id')
-  $.ajax({
-    url: './data/' + id + '/karaoke.json',
-    success: function (data) {
-      window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
-      Karaoke.RenderDOM()
-      yohaneNoDOM.shokan()
-    },
-    error: function (err) {
-      return logger(2, 'r', err.message, 'e')
-    }
-  })
-
-  Sakurauchi.remove('KaraokeSelection')
-  Sakurauchi.add('KaraokeSelection', e => {
-    document.getElementById('kara_audio').currentTime =
-      karaokeData.timeline[e.detail.posX].collection[e.detail.posY].start_time /
-        100 -
-      0.03
-    yohaneNoDOM.timeLeapDisableAnimation()
-  })
-}
-
-const changes = [
-  {
-    id: 'showAs_translated',
-    data_key: 'mikan',
-    checkbox: true,
-    default: false,
-    fn: _v => {
-      setTimeout(() => {
-        pageAdjust.buildPage()
-      }, 100)
-    }
-  },
-  {
-    id: 'darkMode',
-    data_key: 'yohane',
-    checkbox: true,
-    default: false,
-    fn: v => {
-      document
-        .getElementsByTagName('body')[0]
-        .classList[v == 'true' || v == true ? 'add' : 'remove']('dark')
-    }
-  },
-  {
-    id: 'useInteractiveCall',
-    data_key: 'interactiveCall',
-    checkbox: true,
-    default: true,
-    fn: _v => {}
-  },
-  {
-    id: 'doNotUseMusicPlayer',
-    data_key: 'notUsingMP',
-    checkbox: true,
-    default: false,
-    fn: v => {
-      if (v === 'true' || v == true) {
-        yohane.giran()
-      }
-    }
-  },
-  {
-    id: 'useAlbumImage',
-    data_key: 'sakana',
-    checkbox: true,
-    default: true,
-    fn: v => {
-      setTimeout(() => {
-        pageAdjust.buildPage()
-      }, 100)
-    }
-  },
-  {
-    id: 'useOfflineSaving',
-    data_key: 'offlineShip',
-    checkbox: true,
-    default: window.navigator.standalone === true,
-    fn: v => {
-      if ('serviceWorker' in navigator) {
-        if (!v) {
-          navigator.serviceWorker
-            .getRegistrations()
-            .then(r => {
-              for (let _rs of r) {
-                _rs.unregister()
-              }
-            })
-            .catch(e =>
-              logger(2, 's', 'Failed to get ServiceWorker. ' + e.message, 'e')
-            )
-
-          return
-        }
-
-        navigator.serviceWorker
-          .register('/sw.js', { scope: '/' })
-          .then(_regi => {
-            logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
-
-            _regi.addEventListener('updatefound', () => {
-              window.ServWorkerInst = _regi.installing
-
-              ServWorkerInst.addEventListener('statechange', () => {
-                if (ServWorkerInst.state !== 'installed') return 0
-                _glb_ShowPopup(
-                  'offline_bolt',
-                  '새로운 업데이트가 있습니다. 이곳을 눌러 새로 고칠 수 있습니다.',
-                  () => {
-                    location.reload()
-                  }
-                )
-              })
-            })
-          })
-          .catch(e =>
-            logger(
-              2,
-              's',
-              'Failed to register ServiceWorker. ' + e.message,
-              'e'
-            )
-          )
-
-        navigator.serviceWorker.addEventListener('message', obj_inf => {
-          if (typeof obj_inf !== 'object') return 0
-
-          if (obj_inf.data.cmd_t === 'popup') {
-            _glb_ShowPopup(obj_inf.data.data.icon, obj_inf.data.data.text)
-            return
-          }
-
-          Sakurauchi.run(obj_inf.data.cmd_t, obj_inf.data.data)
-        })
-      }
-    }
-  },
-  {
-    id: 'useSetIntervalInstead',
-    data_key: 'funeTiming',
-    checkbox: true,
-    default: false,
-    fn: v => {
-      frameWorks = null
-      yohane.reInitTimingFunction()
-      yohane.tick()
-    }
-  },
-  {
-    id: 'offlineCacheClearBtn',
-    data_key: 'offCacheClear',
-    button: true,
-    filt: _v => {
-      return !dataYosoro.get('offlineShip')
-    },
-    fn: _ => {
-      LLCT.clearCache()
-    }
-  }
-]
-
-let changedOption = (i, v) => {
-  changes[i].fn(v)
-  dataYosoro.set(changes[i].data_key, v)
-}
-
 let LLCT = {
   __pkg_callLists: [],
   __cur_filterLists: [],
@@ -294,7 +86,78 @@ let LLCT = {
       '<span class="material-icons ti">queue_music</span>'
   },
 
-  openPlayList: id => {}
+  openPlayList: id => {},
+
+  openCallImage: id => {
+    var pElement = document.getElementById('ps_wp')
+    var items = [
+      {
+        src:
+          (urlQueryParams('local') === 'true'
+            ? './'
+            : 'https://cdn.lovelivec.kr/') +
+          'data/' +
+          id +
+          '/call.jpg',
+        w: 3505,
+        h: 2480
+      }
+    ]
+
+    window.DCGall = new PhotoSwipe(pElement, PhotoSwipeUI_Default, items, {
+      index: 0
+    })
+    window.DCGall.init()
+    window.DCGall.listen('destroy', () => {
+      popsHeart.set('pid', '')
+    })
+  },
+
+  loadCallImage: id => {
+    document.getElementById('karaoke').innerHTML =
+      '<img class="call_img" onclick="LLCT.openCallImage(' +
+      id +
+      ')" src="' +
+      (urlQueryParams('local') === 'true'
+        ? './'
+        : 'https://cdn.lovelivec.kr/') +
+      'data/' +
+      id +
+      '/call.jpg' +
+      '"></img>'
+    yohaneNoDOM.shokan()
+  },
+
+  loadLyrics: id => {
+    $.ajax({
+      url: './data/' + id + '/karaoke.json',
+      success: function (data) {
+        window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
+        Karaoke.RenderDOM()
+        yohaneNoDOM.shokan()
+      },
+      error: function (err) {
+        return logger(2, 'r', err.message, 'e')
+      }
+    })
+
+    Sakurauchi.remove('KaraokeSelection')
+    Sakurauchi.add('KaraokeSelection', e => {
+      document.getElementById('kara_audio').currentTime =
+        karaokeData.timeline[e.detail.posX].collection[e.detail.posY]
+          .start_time /
+          100 -
+        0.03
+      yohaneNoDOM.timeLeapDisableAnimation()
+    })
+  },
+
+  getFromLists: id => {
+    var v = Object.keys(LLCT.__pkg_callLists)
+    var sb = Number(id.toString().substring(3, 5)) - 1
+
+    return [v[sb], LLCT.__pkg_callLists[v[sb]]]
+  }
 }
 
 let yohaneNoDOM = {
@@ -483,7 +346,13 @@ let yohaneNoDOM = {
         { translateX: -2, rotate: '10deg' },
         { translateX: 0, rotate: '0deg' }
       ],
-      color: v ? '#737373' : is_dark ? '#6b6b6b' : '#c4c4c4',
+      color: v
+        ? is_dark
+          ? '#ddd'
+          : '#737373'
+        : is_dark
+          ? '#6b6b6b'
+          : '#c4c4c4',
       delay: 0,
       duration: 300,
       easing: 'easeOutExpo'
@@ -554,7 +423,7 @@ let yohaneNoDOM = {
     yohaneNoDOM.registerBufferBar()
 
     document.getElementById('karaoke').innerHTML = ''
-    var meta = getFromLists(id)
+    var meta = LLCT.getFromLists(id)
 
     if (dataYosoro.get('sakana') === true) {
       document.getElementById('album_meta').src =
@@ -590,34 +459,24 @@ let yohaneNoDOM = {
       : 'none'
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
-    if (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) {
-      loadLyrics(id, meta)
-    } else {
-      loadCallImage(id)
-    }
+    LLCT[
+      meta[1].karaoke && dataYosoro.get('interactiveCall') != false
+        ? 'loadLyrics'
+        : 'loadCallImage'
+    ](id)
   }
 }
 
 let yohane = {
   shokan: () => {
-    if (!yohane.loaded) return 0
     yohaneNoDOM.shokan()
     yohane.play()
   },
   giran: () => {
-    if (!yohane.loaded) return 0
     yohaneNoDOM.giran()
     yohane.pause()
   },
-  audio_context:
-    window.AudioContext || window.webkitAudioContext
-      ? window.webkitAudioContext
-        ? new webkitAudioContext()
-        : new AudioContext()
-      : null,
   volumeStore: null,
-  liveEffectCry: false,
-  liveEffectStore: false,
   loaded: false,
 
   shuffle: skipDekaku => {
@@ -760,110 +619,6 @@ let yohane = {
       yohane.player().volume + s > 1 ? 1 : yohane.player().volume + s
     ),
 
-  audioSource: null,
-  analyser: null,
-  buffers: null,
-  effectsArray: [],
-
-  liveEffects: () => {
-    if (yohane.audio_context === null) {
-      return logger(2, 's', 'yohane.audio_context is not defined. TATEN', 'e')
-    }
-    if (yohane.liveEffectStore) {
-      for (var i = 0; i < yohane.effectsArray.length; i++) {
-        yohane.effectsArray[i].disconnect()
-      }
-
-      if (yohane.audioSource) {
-        yohane.audioSource.connect(yohane.audio_context.destination)
-      }
-
-      yohane.liveEffectStore = false
-      yohaneNoDOM.disableLiveEffects()
-      return
-    }
-
-    if (!yohane.audioSource) {
-      yohane.audioSource = yohane.audio_context.createMediaElementSource(
-        yohane.player()
-      )
-    }
-
-    yohane.audioSource.crossOrigin = 'anonymous'
-
-    if (!yohane.effectsArray[0]) {
-      var highFilter = yohane.audio_context.createBiquadFilter()
-      highFilter.type = 'highshelf'
-      highFilter.frequency.value = 6000
-      highFilter.gain.value = 3
-      yohane.effectsArray.push(highFilter)
-    }
-
-    if (!yohane.effectsArray[1]) {
-      reverbjs.extend(yohane.audio_context)
-      var reverbNode = yohane.audio_context.createReverbFromUrl(
-        '/live_assets/HamiltonMausoleum.m4a',
-        () => {
-          reverbNode.connect(yohane.effectsArray[0])
-        }
-      )
-
-      yohane.effectsArray.push(reverbNode)
-    }
-
-    if (!yohane.buffers) {
-      yohane.analyser = yohane.audio_context.createAnalyser()
-      yohane.analyser.fftSize = 2048
-      yohane.buffers = new Float32Array(yohane.analyser.fftSize)
-    }
-
-    yohane.audioSource.connect(yohane.effectsArray[1])
-    yohane.effectsArray[1].connect(yohane.analyser)
-    yohane.analyser.connect(yohane.audio_context.destination)
-
-    yohane.liveEffectStore = true
-    yohaneNoDOM.enableLiveEffects()
-    yohane.callEmitter()
-  },
-
-  volumeAvr: 1,
-  waBall: 0,
-  callEmitter: () => {
-    if (
-      !yohane.liveEffectStore ||
-      yohane.player().paused ||
-      typeof yohane.analyser['getFloatTimeDomainData'] === 'undefined'
-    ) {
-      if (callReqAnimation) cancelAnimationFrame(yohane.callEmitter)
-      return
-    }
-
-    callReqAnimation = requestAnimationFrame(yohane.callEmitter)
-    yohane.analyser.getFloatTimeDomainData(yohane.buffers)
-
-    let sumOfSquares = 0
-    for (let i = 0; i < yohane.buffers.length; i++) {
-      sumOfSquares += yohane.buffers[i] ** 2
-    }
-    // var avgPowerDecibels = Math.log10(sumOfSquares / yohane.buffers.length) * 10
-
-    yohane.volumeAvr =
-      (yohane.volumeAvr + (sumOfSquares / yohane.buffers.length) * 10) / 2
-
-    if (yohane.volumeAvr < 0.01 && yohane.waBall < 80 && yohane.liveEffectCry) {
-      yohane.waBall++
-    }
-
-    if (yohane.waBall >= 80 && yohane.liveEffectCry) {
-      const source = yohane.audio_context.createBufferSource()
-      source.buffer = yohane.liveEffectCry
-      source.connect(yohane.audio_context.destination)
-      source.start()
-
-      yohane.waBall = 0
-    }
-  },
-
   play: force => {
     yohane.player().play()
 
@@ -932,11 +687,17 @@ let yohane = {
   },
 
   initialize: id => {
+    window.karaokeData = null
     yohaneNoDOM.initialize(id)
-    if (dataYosoro.get('notUsingMP') == true) {
+
+    if (dataYosoro.get('notUsingMP')) {
       openCallImage(id)
       return false
     }
+
+    var _play_cnts = JSON.parse(dataYosoro.get('playedTimes') || '{}')
+    _play_cnts[id] = typeof _play_cnts[id] !== 'number' ? 0 : _play_cnts[id] + 1
+    dataYosoro.set('playedTimes', JSON.stringify(_play_cnts))
 
     try {
       yohane.player().src =
@@ -948,30 +709,9 @@ let yohane = {
         '/audio.mp3'
       yohane.setVolume(yohane.volumeStore !== null ? yohane.volumeStore : 0.5)
     } catch (e) {
-      yohane.loaded = false
       return logger(2, 'r', e.message, 'e')
     }
 
-    if (yohane.audio_context === null) {
-      logger(
-        2,
-        'r',
-        "AudioContext API isn't supported on this browser, disabling Live performance feature.",
-        'w'
-      )
-    }
-
-    if (!yohane.liveEffectCry) {
-      window
-        .fetch('/live_assets/crying_15.mp3')
-        .then(response => response.arrayBuffer())
-        .then(arrayBuffer => yohane.audio_context.decodeAudioData(arrayBuffer))
-        .then(audioBuffer => {
-          yohane.liveEffectCry = audioBuffer
-        })
-    }
-
-    yohane.loaded = true
     return true
   },
 
@@ -984,13 +724,6 @@ let yohane = {
       }
     }
   }
-}
-
-let getFromLists = id => {
-  var v = Object.keys(LLCT.__pkg_callLists)
-  var sb = Number(id.toString().substring(3, 5)) - 1
-
-  return [v[sb], LLCT.__pkg_callLists[v[sb]]]
 }
 
 let pageAdjust = {
@@ -1092,7 +825,18 @@ let pageAdjust = {
           ? curObj.translated || objKeys[i]
           : objKeys[i]
 
+      var played_counts = JSON.parse(dataYosoro.get('playedTimes') || '{}')[
+        curObj.id
+      ]
+
+      var cardInfoWrap = document.createElement('div')
+      cardInfoWrap.className = '_card_info'
+      cardInfoWrap.innerHTML = played_counts
+        ? '<span class="material-icons">play_arrow</span> ' + played_counts
+        : ''
+
       c.appendChild(titleText)
+      c.appendChild(cardInfoWrap)
       baseElement.appendChild(c)
 
       pageAdjust.add(baseElement)
@@ -1178,32 +922,7 @@ let pageLoadedFunctions = () => {
       'block'
   }
 
-  for (var i = 0; i < changes.length; i++) {
-    var val = dataYosoro.get(changes[i].data_key)
-
-    if (typeof val === 'undefined' || val == null) {
-      dataYosoro.set(changes[i].data_key, changes[i].default)
-      val = changes[i].default
-    }
-
-    if (changes[i].button) {
-      var _e = document.getElementById(changes[i].id)
-
-      var c = changes[i]
-      _e.disabled = c.filt ? c.filt() : false
-
-      _e.onclick = () => {
-        c.fn()
-        _e.disabled = c.filt ? c.filt() : false
-      }
-    } else if (changes[i].checkbox) {
-      document.getElementById(changes[i].id)[
-        changes[i].checkbox ? 'checked' : 'value'
-      ] = changes[i].checkbox ? val == 'true' || val == true : val
-      changes[i].fn(val)
-    }
-  }
-
+  OptionManager.init()
   yohane.player().onplay = () => {
     yohaneNoDOM.play()
 

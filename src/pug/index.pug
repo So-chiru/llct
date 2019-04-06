@@ -100,22 +100,22 @@ html(lang="kr").index
             h1 설정
             br
             .toggle_collection
-                label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(0, this.checked)"> <label for="showAs_translated" class="toggle_btn"><span></span></label>   
+                label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" class="toggle_input" type="checkbox" checked="none"> <label for="showAs_translated" class="toggle_btn"><span></span></label>   
             .toggle_collection
-                label.ckbox 다크 모드 <input id="darkMode" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(1, this.checked)"><label for="darkMode" class="toggle_btn"><span></span></label>
+                label.ckbox 다크 모드 <input id="darkMode" class="toggle_input" type="checkbox" checked="none"><label for="darkMode" class="toggle_btn"><span></span></label>
             .toggle_collection
-                label.ckbox 사용 가능한 경우 인터렉티브 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(2, this.checked)"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
+                label.ckbox 사용 가능한 경우 인터렉티브 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
             .toggle_collection
-                label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(3, this.checked)"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
+                label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
             .toggle_collection
-                label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(4, this.checked)"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
+                label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
             .toggle_collection
-                label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(5, this.checked)"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
+                label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
             br
             button._btn_class_fl#offlineCacheClearBtn 오프라인 캐시 비우기
-            .toggle_collection
-                label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none" onclick="changedOption(6, this.checked)"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
-
+            button._btn_class_fl#resetPlayedCounts 노래 재생 횟수 초기화
     <div id="ps_wp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>
         <div class="pswp__scroll-wrap">
@@ -168,10 +168,10 @@ html(lang="kr").index
     script(src='./lib/aj/anime.min.js')
     script(src='./lib/jquery.min.js')
     script(src='./js/global.min.js')
+    script(src='./js/options.min.js')
     script(src='./js/index.min.js')
     script(src='./js/playlists.min.js')
     script(src='./js/lib/hammer.min.js')
-    script(async src='./js/lib/reverb.min.js')
     script(defer src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
