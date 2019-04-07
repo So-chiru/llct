@@ -7,153 +7,15 @@
   },
   "timeline": [
     {
-      "start_time": 661,
-      "end_time": 1181,
+      "start_time": 1180,
+      "end_time": 3076,
       "collection": [
         {
-          "text": "(워우 ",
-          "start_time": 761,
-          "end_time": 1081,
+          "text": "(더 많은 참여를 위해 처음 부분을 크게 불러주세요.)",
+          "start_time": 1280,
+          "end_time": 2976,
           "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 824,
-          "end_time": 1081,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 883,
-          "end_time": 1081,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우)",
-          "start_time": 942,
-          "end_time": 1081,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        }
-      ]
-    },
-    {
-      "start_time": 1154,
-      "end_time": 1676,
-      "collection": [
-        {
-          "text": "(워우 ",
-          "start_time": 1254,
-          "end_time": 1576,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 1317,
-          "end_time": 1576,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 1376,
-          "end_time": 1576,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우)",
-          "start_time": 1432,
-          "end_time": 1576,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        }
-      ]
-    },
-    {
-      "start_time": 1637,
-      "end_time": 2098,
-      "collection": [
-        {
-          "text": "(워우 ",
-          "start_time": 1737,
-          "end_time": 1998,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 1802,
-          "end_time": 1998,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 1862,
-          "end_time": 1998,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우)",
-          "start_time": 1921,
-          "end_time": 1998,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        }
-      ]
-    },
-    {
-      "start_time": 2132,
-      "end_time": 2691,
-      "collection": [
-        {
-          "text": "(워우 ",
-          "start_time": 2232,
-          "end_time": 2591,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 2299,
-          "end_time": 2591,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우 ",
-          "start_time": 2355,
-          "end_time": 2591,
-          "pronunciation_time": 0,
-          "type": 1,
-          "repeats": null
-        },
-        {
-          "text": "워우)",
-          "start_time": 2415,
-          "end_time": 2591,
-          "pronunciation_time": 0,
-          "type": 1,
+          "type": "3",
           "repeats": null
         }
       ]
@@ -167,8 +29,7 @@
           "start_time": 0,
           "end_time": 0,
           "pronunciation_time": 0,
-          "type": "3",
-          "repeats": null
+          "type": 1
         }
       ]
     },
