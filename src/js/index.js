@@ -693,7 +693,7 @@ let yohane = {
     yohaneNoDOM.initialize(id)
 
     if (dataYosoro.get('notUsingMP')) {
-      openCallImage(id)
+      LLCT.openCallImage(id)
       return false
     }
 
