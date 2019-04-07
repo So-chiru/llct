@@ -8,10 +8,9 @@ const timeString = sec => {
   )
 }
 
-let frameWorks
-let audioVolumeFrame = null
-let callReqAnimation
-let audioVolumeFunction = () => {}
+let requestAudioSync
+let requestAudioVolume = null
+
 const artistLists = [
   'Aqours',
   'Saint Snow',
@@ -149,8 +148,6 @@ let LLCT = {
           100 -
         0.03
       yohaneNoDOM.timeLeapDisableAnimation()
-
-      e.preventDefault()
     })
   },
 
@@ -219,6 +216,8 @@ let yohaneNoDOM = {
   },
 
   timeLeapDisableAnimation: () => {
+    Karaoke.AudioSync(Math.floor(yohane.timecode()), true)
+
     document
       .getElementsByClassName('thumb')[0]
       .classList.add('disable_animation')
@@ -558,22 +557,23 @@ let yohane = {
     }
   },
 
+  __vAnimeFunc: () => {},
   fade: (from, to, duration, start, cb) => {
-    if (audioVolumeFrame !== null) cancelAnimationFrame(audioVolumeFrame)
+    if (requestAudioVolume !== null) cancelAnimationFrame(requestAudioVolume)
 
     var oncdPrevVolume = yohane.player().volume / 2
-    audioVolumeFunction = force_stop => {
+    yohane.__vAnimeFunc = force_stop => {
       if (
         start + duration <= performance.now() ||
         force_stop === true ||
         oncdPrevVolume === yohane.player().volume ||
         document.hidden
       ) {
-        cancelAnimationFrame(audioVolumeFrame)
+        cancelAnimationFrame(requestAudioVolume)
         if (typeof cb === 'function') cb()
         return
       }
-      audioVolumeFrame = requestAnimationFrame(audioVolumeFunction)
+      requestAudioVolume = requestAnimationFrame(yohane.__vAnimeFunc)
 
       var t = (start + duration - performance.now()) / duration
 
@@ -583,7 +583,7 @@ let yohane = {
         yohane.player().volume = to * (1 - t)
       }
     }
-    audioVolumeFunction()
+    yohane.__vAnimeFunc()
   },
 
   toggle: () => {
@@ -643,11 +643,11 @@ let yohane = {
   },
   tick: _ => {
     if (!yohane.__useSetInterval) {
-      frameWorks = requestAnimationFrame(yohane.tick)
+      requestAudioSync = requestAnimationFrame(yohane.tick)
     }
 
-    if (yohane.__useSetInterval && frameWorks === null) {
-      frameWorks = setInterval(() => {
+    if (yohane.__useSetInterval && requestAudioSync === null) {
+      requestAudioSync = setInterval(() => {
         yohane.tick()
       }, 10)
     }
@@ -668,7 +668,7 @@ let yohane = {
     }
 
     if (yohane.player().paused && !yohane.__useSetInterval) {
-      cancelAnimationFrame(frameWorks)
+      cancelAnimationFrame(requestAudioSync)
     }
   },
 
@@ -931,7 +931,7 @@ let pageLoadedFunctions = () => {
       return
     }
 
-    frameWorks = setInterval(() => {
+    requestAudioSync = setInterval(() => {
       yohane.tick()
     }, 10)
   }
@@ -960,7 +960,7 @@ let pageLoadedFunctions = () => {
       return
     }
 
-    if (frameWorks) clearInterval(frameWorks)
+    if (requestAudioSync) clearInterval(requestAudioSync)
   }
 
   Sakurauchi.listen(
@@ -1119,8 +1119,8 @@ let pageLoadedFunctions = () => {
   })
 
   Sakurauchi.listen('blur', () => {
-    if (audioVolumeFunction !== null && audioVolumeFrame !== null) {
-      audioVolumeFunction(true)
+    if (yohane.__vAnimeFunc !== null && requestAudioVolume !== null) {
+      yohane.__vAnimeFunc(true)
     }
   })
 

@@ -350,7 +350,7 @@ var Karaoke = {
             Karaoke.tickSoundsCache[karaWord.start_time] = true
           }
 
-          if (!kards.style.transition) {
+          if (!kards.style.transition || fullRender) {
             var karaokeDuration =
               typeof karaWord.pronunciation_time === 'undefined' ||
               karaWord.pronunciation_time === 0
@@ -382,12 +382,18 @@ var Karaoke = {
             }
           }
         }
+
         if (
           (/\scurrentSync/g.test(kards.className) &&
             timeCode < karaWord.start_time) ||
           timeCode > karaWord.end_time
         ) {
           kards.className = kards.className.replace(/currentSync/g, '')
+
+          if (timeCode > karaWord.end_time) {
+            kards.style.transition =
+              'text-shadow 0.33s ease 0s, color 0.33s ease 0s'
+          }
         }
 
         kards.style.textDecoration = 'none'

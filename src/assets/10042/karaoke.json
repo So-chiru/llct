@@ -2845,126 +2845,126 @@
       ]
     },
     {
-      "start_time": -100,
+      "start_time": 28776,
       "end_time": 30448,
       "collection": [
         {
           "text": "쥬",
-          "start_time": 0,
+          "start_time": 28876,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "우",
-          "start_time": 0,
+          "start_time": 28910,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "닌",
-          "start_time": 0,
+          "start_time": 28948,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "메",
-          "start_time": 0,
+          "start_time": 29049,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "와 ",
-          "start_time": 0,
+          "start_time": 29083,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "키",
-          "start_time": 0,
+          "start_time": 29147,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "미",
-          "start_time": 0,
+          "start_time": 29217,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "다",
-          "start_time": 0,
+          "start_time": 29282,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "요 ",
-          "start_time": 0,
+          "start_time": 29350,
           "end_time": 30348,
-          "pronunciation_time": 0,
+          "pronunciation_time": "2",
           "type": 1
         },
         {
           "text": "키",
-          "start_time": 0,
+          "start_time": 29740,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "미",
-          "start_time": 0,
+          "start_time": 29779,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "모 ",
-          "start_time": 0,
+          "start_time": 29817,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "나",
-          "start_time": 0,
+          "start_time": 29889,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "카",
-          "start_time": 0,
+          "start_time": 29925,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "마",
-          "start_time": 0,
+          "start_time": 29956,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "다",
-          "start_time": 0,
+          "start_time": 30023,
           "end_time": 30348,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "요",
-          "start_time": 0,
+          "start_time": 30057,
           "end_time": 30348,
-          "pronunciation_time": 0,
+          "pronunciation_time": "2",
           "type": 1
         }
       ]
