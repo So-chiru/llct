@@ -120,7 +120,7 @@ const __llct_optslists = [
     checkbox: true,
     default: false,
     fn: v => {
-      frameWorks = null
+      requestAudioSync = null
       yohane.reInitTimingFunction()
       yohane.tick()
     }
