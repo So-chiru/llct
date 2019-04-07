@@ -98,8 +98,8 @@ let LLCT = {
           'data/' +
           id +
           '/call.jpg',
-        w: 3505,
-        h: 2480
+        w: id === 'krtf' ? 1652 : 3505,
+        h: id === 'krtf' ? 1680 : 2480
       }
     ]
 
@@ -114,9 +114,7 @@ let LLCT = {
 
   loadCallImage: id => {
     document.getElementById('karaoke').innerHTML =
-      '<img class="call_img" onclick="LLCT.openCallImage(' +
-      id +
-      ')" src="' +
+      `<img class="call_img" onclick="LLCT.openCallImage('${id}')" src="` +
       (urlQueryParams('local') === 'true'
         ? './'
         : 'https://cdn.lovelivec.kr/') +
@@ -153,9 +151,12 @@ let LLCT = {
 
   getFromLists: id => {
     var v = Object.keys(LLCT.__pkg_callLists)
-    var sb = Number(id.toString().substring(3, 5)) - 1
+    for (var i = 0; i < v.length; i++) {
+      var vi = v[i]
+      if (LLCT.__pkg_callLists[vi].id != id) continue
 
-    return [v[sb], LLCT.__pkg_callLists[v[sb]]]
+      return [vi, LLCT.__pkg_callLists[vi]]
+    }
   }
 }
 
@@ -792,7 +793,10 @@ let pageAdjust = {
       var curObj = LLCT.__cur_filterLists[objKeys[i]]
       var baseElement = document.createElement('div')
       baseElement.className = 'card slide-right'
-      baseElement.setAttribute('onclick', 'yohane.loadPlay(' + curObj.id + ')')
+      baseElement.setAttribute(
+        'onclick',
+        'yohane.loadPlay("' + curObj.id + '")'
+      )
 
       var c = document.createDocumentFragment()
 

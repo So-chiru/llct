@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0026_a',
+  version: 'deathwar_a0027_tf',
   urls: [
     '/',
     '/?pid=',
