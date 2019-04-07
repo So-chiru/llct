@@ -1007,11 +1007,7 @@ let pageLoadedFunctions = () => {
     document.getElementById('loading_spin_ctlst').classList.add('done')
     pageAdjust.buildPage()
 
-    if (
-      popsHeart.get('pid') !== null &&
-      popsHeart.get('pid') !== '' &&
-      !isNaN(popsHeart.get('pid'))
-    ) {
+    if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
       yohane.initialize(popsHeart.get('pid'))
 
       if (!dataYosoro.get('doNotUseMusicPlayer')) {
