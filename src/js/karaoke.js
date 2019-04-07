@@ -274,7 +274,26 @@ var Karaoke = {
       karaLineNum < karaokeData.timeline.length;
       karaLineNum++
     ) {
+      if (typeof Karaoke.cachedDom[karaLineNum] === 'undefined') {
+        Karaoke.cachedDom[karaLineNum] = document.getElementById(
+          'kara_' + karaLineNum
+        )
+      }
       var karaLine = karaokeData.timeline[karaLineNum]
+      var isNotHighlighting =
+        timeCode < karaLine.start_time || timeCode > karaLine.end_time
+
+      if (
+        isNotHighlighting &&
+        /__cur_line/g.test(Karaoke.cachedDom[karaLineNum].className)
+      ) {
+        Karaoke.cachedDom[karaLineNum].classList.remove('__cur_line')
+      }
+
+      if (!isNotHighlighting) {
+        Karaoke.cachedDom[karaLineNum].classList.add('__cur_line')
+      }
+
       if (
         (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
         !fullRender
@@ -302,16 +321,23 @@ var Karaoke = {
         }
         var kards = Karaoke.cachedDom[karaLineNum + '.' + karaWordNum]
 
-        kards.classList[
+        var isCurWord =
           timeCode > karaWord.start_time && timeCode > karaWord.end_time
-            ? 'add'
-            : 'remove'
-        ]('josenPassing')
+        var __josenExists = /josenPassing/g.test(kards.className)
+        if (!isCurWord && __josenExists) {
+          kards.className = kards.className.replace(/\sjosenPassing/, '')
+        }
+
+        if (isCurWord && !__josenExists) {
+          kards.className += ' josenPassing'
+        }
 
         if (!/currentSync/g.test(kards.className)) {
-          kards.classList[timeCode > karaWord.start_time ? 'add' : 'remove'](
-            'currentSync'
-          )
+          kards.classList[
+            timeCode > karaWord.start_time && timeCode < karaWord.end_time
+              ? 'add'
+              : 'remove'
+          ]('currentSync')
 
           if (
             Karaoke.tickSoundEnable &&
@@ -321,38 +347,39 @@ var Karaoke = {
             karaWord.type == 2
           ) {
             Sakurauchi.run('tickSounds')
-
             Karaoke.tickSoundsCache[karaWord.start_time] = true
           }
 
-          var karaokeDuration =
-            typeof karaWord.pronunciation_time === 'undefined' ||
-            karaWord.pronunciation_time === 0
-              ? (((typeof karaLine.collection[karaWordNum + 1] !== 'undefined'
-                ? karaLine.collection[karaWordNum + 1].start_time
-                : karaWord.end_time) || 70) -
-                  karaWord.start_time) /
-                2
-              : karaWord.pronunciation_time
+          if (!kards.style.transition) {
+            var karaokeDuration =
+              typeof karaWord.pronunciation_time === 'undefined' ||
+              karaWord.pronunciation_time === 0
+                ? (((typeof karaLine.collection[karaWordNum + 1] !== 'undefined'
+                  ? karaLine.collection[karaWordNum + 1].start_time
+                  : karaWord.end_time) || 70) -
+                    karaWord.start_time) /
+                  2
+                : karaWord.pronunciation_time
 
-          if (karaokeDuration < 300) karaokeDuration += 30
+            if (karaokeDuration < 300) karaokeDuration += 30
 
-          if (
-            typeof karaLine.collection[karaWordNum - 1] !== 'undefined' &&
-            karaLine.collection[karaWordNum - 1].start_time ===
-              karaLine.collection[karaWordNum].start_time
-          ) {
-            kards.style.transition =
-              Karaoke.cachedDom[
-                karaLineNum + '.' + (karaWordNum - 1)
-              ].style.transition
-          } else {
-            kards.style.transition =
-              'text-shadow ' +
-              karaokeDuration / 300 +
-              's ease 0s, color ' +
-              karaokeDuration / 300 +
-              's ease 0s'
+            if (
+              typeof karaLine.collection[karaWordNum - 1] !== 'undefined' &&
+              karaLine.collection[karaWordNum - 1].start_time ===
+                karaLine.collection[karaWordNum].start_time
+            ) {
+              kards.style.transition =
+                Karaoke.cachedDom[
+                  karaLineNum + '.' + (karaWordNum - 1)
+                ].style.transition
+            } else {
+              kards.style.transition =
+                'text-shadow ' +
+                karaokeDuration / 300 +
+                's ease 0s, color ' +
+                karaokeDuration / 300 +
+                's ease 0s'
+            }
           }
         }
         if (
@@ -360,8 +387,7 @@ var Karaoke = {
             timeCode < karaWord.start_time) ||
           timeCode > karaWord.end_time
         ) {
-          kards.className = kards.className.replace(/\scurrentSync/g, '')
-          kards.style.transition = ''
+          kards.className = kards.className.replace(/currentSync/g, '')
         }
 
         kards.style.textDecoration = 'none'

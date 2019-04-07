@@ -17,6 +17,10 @@
   min-height: 10px;
 }
 
+.__cur_line {
+  will-change: color, text-shadow;
+}
+
 .line_num {
   margin: 0;
   margin-top: auto;
