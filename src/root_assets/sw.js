@@ -1,14 +1,14 @@
 const cachingOffline = {
-  version: 'deathwar_a0024_a',
+  version: 'deathwar_a0025_c',
   urls: [
     '/',
-    '/manifest.json',
-    '/live_assets/crying_15.mp3',
     '/?pid=',
+    '/manifest.json',
     '/index.html',
     '/yosoro.min.css',
     '/data/lists.json',
     '/lib/jquery.min.js',
+    '/lib/aj/anime.min.js',
     '/lib/ps/photoswipe.min.js',
     '/lib/ps/photoswipe.css',
     '/lib/ps/photoswipe-ui-default.min.js',
@@ -19,8 +19,7 @@ const cachingOffline = {
     '/js/playlists.min.js',
     '/js/index.min.js',
     '/js/karaoke.min.js',
-    '/live_assets/key-press-2.mp3',
-    '/live_assets/HamiltonMausoleum.m4a'
+    '/live_assets/key-press-2.mp3'
   ]
 }
 
@@ -57,21 +56,30 @@ self.addEventListener('fetch', e => {
   }
 
   e.respondWith(
-    caches.match(reqCacFet).then(async chx => {
-      return (
-        chx ||
-        fetch(e.request).then(async res => {
-          if (!res || res.status >= 400 || !ndt_cache(e.request.url)) {
+    caches
+      .match(reqCacFet, {
+        ignoreSearch: /\/\/lovelivec\.kr\/\?pid\=/g.test(e.request.url)
+      })
+      .then(async chx => {
+        return (
+          chx ||
+          fetch(e.request).then(async res => {
+            if (
+              !res ||
+              res.status == 0 ||
+              res.status >= 400 ||
+              !ndt_cache(e.request.url)
+            ) {
+              return res
+            }
+
+            var x = await caches.open(cachingOffline.version)
+            x.put(reqCacFet, res.clone())
+
             return res
-          }
-
-          var x = await caches.open(cachingOffline.version)
-          x.put(reqCacFet, res.clone())
-
-          return res
-        })
-      )
-    })
+          })
+        )
+      })
   )
 })
 

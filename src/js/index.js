@@ -149,6 +149,8 @@ let LLCT = {
           100 -
         0.03
       yohaneNoDOM.timeLeapDisableAnimation()
+
+      e.preventDefault()
     })
   },
 
@@ -767,23 +769,20 @@ let pageAdjust = {
     var docFrag = document.createDocumentFragment()
     for (var i = 0, ls = pageAdjust.lists[pg].length; i <= ls; i++) {
       if (typeof pageAdjust.lists[pg][i] !== 'undefined') {
-        docFrag.appendChild(pageAdjust.lists[pg][i])
-        pageAdjust.lists[pg][i].className = pageAdjust.lists[pg][
-          i
-        ].className.replace(/\sshokan/g, '')
+        var pgI = pageAdjust.lists[pg][i]
+        docFrag.appendChild(pgI)
+
+        pgI.style.animationDelay = (i + 1) * 25 + 'ms'
       }
     }
     pageAdjust.cListsElement.appendChild(docFrag)
 
-    document.querySelectorAll('.card').forEach((v, i) => {
-      setTimeout(() => {
-        v.className += ' shokan slide-right'
-      }, 25 * i)
-    })
+    if (LazyLoad) {
+      window.lazyloadObj = new LazyLoad({
+        elements_selector: '.lazy'
+      })
+    }
 
-    window.lazyloadObj = new LazyLoad({
-      elements_selector: '.lazy'
-    })
     document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
   },
 
@@ -794,7 +793,7 @@ let pageAdjust = {
     for (var i = 0; i < objKeys.length; i++) {
       var curObj = LLCT.__cur_filterLists[objKeys[i]]
       var baseElement = document.createElement('div')
-      baseElement.className = 'card'
+      baseElement.className = 'card slide-right'
       baseElement.setAttribute('onclick', 'yohane.loadPlay(' + curObj.id + ')')
 
       var c = document.createDocumentFragment()
