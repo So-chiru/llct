@@ -216,8 +216,6 @@ let yohaneNoDOM = {
   },
 
   timeLeapDisableAnimation: () => {
-    Karaoke.AudioSync(Math.floor(yohane.timecode()), true)
-
     document
       .getElementsByClassName('thumb')[0]
       .classList.add('disable_animation')
