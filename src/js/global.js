@@ -269,6 +269,17 @@ const kIntvlogger = (e, rs, msg, t) => {
   )
 }
 
+const __llct_ts_func = sec => {
+  sec = Math.floor(sec)
+  return (
+    (sec >= 60 ? Math.floor(sec / 60) : '0') +
+    ' : ' +
+    (sec % 60 < 10 ? '0' : '') +
+    (sec % 60)
+  )
+}
+
+window.numToTS = __llct_ts_func
 window.logger = kIntvlogger
 
 var _glb_popupTimeout

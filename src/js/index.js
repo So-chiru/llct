@@ -1,13 +1,3 @@
-const timeString = sec => {
-  sec = Math.floor(sec)
-  return (
-    (sec >= 60 ? Math.floor(sec / 60) : '0') +
-    ' : ' +
-    (sec % 60 < 10 ? '0' : '') +
-    (sec % 60)
-  )
-}
-
 let requestAudioSync
 let requestAudioVolume = null
 
@@ -492,8 +482,12 @@ let yohane = {
     yohane.player().volume = v
   },
 
+  __plcache: null,
   player: () => {
-    return document.getElementById('kara_audio')
+    if (yohane.__plcache == null) {
+      yohane.__plcache = document.getElementById('kara_audio')
+    }
+    return yohane.__plcache || document.getElementById('kara_audio')
   },
 
   __isRepeat: false,
@@ -643,19 +637,11 @@ let yohane = {
   tick: _ => {
     if (!yohane.__useSetInterval) {
       requestAudioSync = requestAnimationFrame(yohane.tick)
-    }
-
-    if (yohane.__useSetInterval && requestAudioSync === null) {
+    } else if (yohane.__useSetInterval && requestAudioSync === null) {
       requestAudioSync = setInterval(() => {
         yohane.tick()
       }, 10)
     }
-    if (yohane.tickVal == null) yohane.tickVal = 0
-    if (yohane.tickVal > 15) {
-      yohane.tickVal = 0
-      yohane.deferTick()
-    }
-    yohane.tickVal++
 
     if (
       yohaneNoDOM.kaizu &&
@@ -666,25 +652,34 @@ let yohane = {
       Karaoke.AudioSync(yohane.timecode())
     }
 
+    if (yohane.tickVal == null) yohane.tickVal = 0
+    if (yohane.tickVal > 15) {
+      yohane.tickVal = 0
+      yohane.deferTick()
+    }
+    yohane.tickVal++
+
     if (yohane.player().paused && !yohane.__useSetInterval) {
       cancelAnimationFrame(requestAudioSync)
     }
   },
 
+  __tickCaching: {},
   deferTick: () => {
+    if (yohane.__tickCaching._clw == null) {
+      yohane.__tickCaching._clw =
+        yohaneNoDOM.__cachedElement.bar_eventListen.clientWidth
+    }
+
     var calc_t = yohane.player().currentTime / yohane.player().duration
-    yohaneNoDOM.__cachedElement['played_time'].innerHTML = timeString(
-      yohane.player().currentTime
-    )
+    yohaneNoDOM.__cachedElement['played_time'].innerHTML =
+      numToTS(yohane.player().currentTime) || '??'
     yohaneNoDOM.__cachedElement['left_time'].innerHTML =
-      '-' + timeString(yohane.player().duration - yohane.player().currentTime)
-
-    yohaneNoDOM.__cachedElement['psd_times'].style.width = calc_t * 100 + '%'
-
-    yohaneNoDOM.__cachedElement['__current_thumb'].style.transform =
-      'translateX(' +
-      yohaneNoDOM.__cachedElement['psd_times'].clientWidth +
-      'px)'
+      '-' +
+      (numToTS(yohane.player().duration - yohane.player().currentTime) || '??')
+    yohaneNoDOM.__cachedElement.psd_times.style.width = calc_t * 100 + '%'
+    yohaneNoDOM.__cachedElement.__current_thumb.style.transform =
+      'translateX(' + yohane.__tickCaching._clw * calc_t + 'px)'
   },
 
   initialize: id => {

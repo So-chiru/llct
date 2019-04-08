@@ -287,11 +287,13 @@ var Karaoke = {
         isNotHighlighting &&
         /__cur_line/g.test(Karaoke.cachedDom[karaLineNum].className)
       ) {
-        Karaoke.cachedDom[karaLineNum].classList.remove('__cur_line')
+        Karaoke.cachedDom[karaLineNum].className = Karaoke.cachedDom[
+          karaLineNum
+        ].className.replace(/\s__cur_line/, '')
       }
 
       if (!isNotHighlighting) {
-        Karaoke.cachedDom[karaLineNum].classList.add('__cur_line')
+        Karaoke.cachedDom[karaLineNum].classList += ' __cur_line'
       }
 
       if (
@@ -333,11 +335,10 @@ var Karaoke = {
         }
 
         if (!/currentSync/g.test(kards.className)) {
-          kards.classList[
+          kards.className =
             timeCode > karaWord.start_time && timeCode < karaWord.end_time
-              ? 'add'
-              : 'remove'
-          ]('currentSync')
+              ? kards.className + ' currentSync'
+              : kards.className.replace(/\scurrentSync/g, '')
 
           if (
             Karaoke.tickSoundEnable &&
