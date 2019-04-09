@@ -487,7 +487,8 @@ let yohane = {
     if (yohane.__plcache == null) {
       yohane.__plcache = document.getElementById('kara_audio')
     }
-    return yohane.__plcache || document.getElementById('kara_audio')
+
+    return yohane.__plcache
   },
 
   __isRepeat: false,
@@ -634,15 +635,23 @@ let yohane = {
   reInitTimingFunction: () => {
     yohane.__useSetInterval = dataYosoro.get('funeTiming') == true
   },
+
+  __tick_brk: 0,
   tick: _ => {
     if (!yohane.__useSetInterval) {
       requestAudioSync = requestAnimationFrame(yohane.tick)
+
+      if (yohane.__tick_brk < 2) {
+        yohane.__tick_brk++
+        return
+      }
+
+      yohane.__tick_brk = 0
     } else if (yohane.__useSetInterval && requestAudioSync === null) {
       requestAudioSync = setInterval(() => {
         yohane.tick()
       }, 10)
     }
-
     if (
       yohaneNoDOM.kaizu &&
       typeof karaokeData !== 'undefined' &&
@@ -671,12 +680,12 @@ let yohane = {
         yohaneNoDOM.__cachedElement.bar_eventListen.clientWidth
     }
 
-    var calc_t = yohane.player().currentTime / yohane.player().duration
-    yohaneNoDOM.__cachedElement['played_time'].innerHTML =
-      numToTS(yohane.player().currentTime) || '??'
+    var _ct = yohane.player().currentTime
+    var _dr = yohane.player().duration
+    var calc_t = _ct / _dr
+    yohaneNoDOM.__cachedElement['played_time'].innerHTML = numToTS(_ct) || '??'
     yohaneNoDOM.__cachedElement['left_time'].innerHTML =
-      '-' +
-      (numToTS(yohane.player().duration - yohane.player().currentTime) || '??')
+      '-' + (numToTS(_dr - _ct) || '??')
     yohaneNoDOM.__cachedElement.psd_times.style.width = calc_t * 100 + '%'
     yohaneNoDOM.__cachedElement.__current_thumb.style.transform =
       'translateX(' + yohane.__tickCaching._clw * calc_t + 'px)'
@@ -1140,4 +1149,5 @@ let resizeFunctions = () => {
     pageAdjust.buildPage()
   }
   pageAdjust.onePageItems = reszCk
+  yohane.__tickCaching._clw = null
 }
