@@ -342,7 +342,7 @@ var Karaoke = {
 
           if (
             Karaoke.tickSoundEnable &&
-            timeCode > karaWord.start_time - 5 &&
+            timeCode > karaWord.start_time - 25 &&
             timeCode < karaWord.end_time &&
             !Karaoke.tickSoundsCache[karaWord.start_time] &&
             karaWord.type == 2
