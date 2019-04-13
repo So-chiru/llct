@@ -99,6 +99,8 @@
       "싱글"
     ],
     "center": "와타나베 요우",
+    "bladeColor": "와타나베 요우",
+    "bladeColorHEX": "#2e9afc",
     "karaoke": true,
     "short_kr": "코이아쿠"
   },
