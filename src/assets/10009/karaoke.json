@@ -2,7 +2,7 @@
   "metadata": {
     "correction_time": -9,
     "lyrics": "우-  One,  Two,  sun shine!!!\n\n<  전주  부분  :  하이  하이  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  하이  하이  >\n\n유 메 에 가 쿳 테  돈 나  코 토?\n아 츠 쿠 낫 테  토 메 라 레 나 이\n민 나 니  싯 테  호 시 쿠 나 루\n손 나  오 모 이 카 나\n(짝 짝  짝 짝 짝  짝 짝 짝 짝 짝)\n\n소 노  타 메 니 와  나 니 오  시 요?\n히 토 리 쟈  촛 토  무 즈 카 시 이\n민 나 토 나 라  데 키 루 카 모\n야 야  마 키 콘 쟈 우\n\nOh  No  무 리 다 토  이 와 나 이 데  얏 테 미 테  오 네 가 이\nOh  No  무 리 데 모  타 메 시 테 요  치 가 우  아 시 타 가  미 타 이\nWe  can  go  a head!\n\n토 도 카 나 이  호 시 닷 테\n(Star  light,  I  hope  you)\n테 오  노 바 스  이 키 오 이  못 테\n토 도 카 나 잇 테  키 메 나 이 데\n(Star  light,  I  hope  you)\n테 오  노 바 세  소 레 카 라  나 야 메  (후  후  후!)\n\n< 간주  부분  :  하이  하이  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  하이  하이  >\n\n아 코 가 레 룻 테  스 테 키 다 요\n토 니 카 쿠  젠 부  마 네 시 타 이\n민 나 모  킷 토  와 카 루 하 즈\n사 아  사 아  오 도 로 요\n(짝 짝  짝 짝 짝  짝 짝 짝 짝 짝)\n\nOh  No  페 케 다 토  이 와 나 이 데  케 나 사 레 타 쿠 나 이\nOh  No  페 케 데 모  카 마 와 나 이  콘 나 니  키 모 치 이 이 요\nWe  can  Dance  A gain!!\n\n네 무 레 나 이  요 루 모  아 루\n(Bad  night,  I  miss  you)\n메 게 나 이 데  츠 즈 케 테 미 요 오\n네 무 레 나 잇 테  토 마 돗 타 라\n(Bad  night,  I  miss  you)\n오 키 챠 에 바  츠 키 아 우 요  호 라  (후  후  후!)\n\n<  간주  부분  :  짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝\n짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝\n짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝\n짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝\n짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝\n짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝\n짝 짝  짝 짝 짝  짝 짝 짝 짝  짝 짝  (7사이클)  >\n\n우-  One,  Two,  sun shine!!!\n\n<  간주  부분  :  하이  하이  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  하이  하이  >\n\n네 무 레 나 이  요 루 모  아 루\n와 카 라 나 이  코 노  사 키 노  코 토\n네 무 레 나 잇 테  오 못 타 라\n(Bad  night,  I  miss  you)\n오 키 챠 에 바  츠 키 아 우 요  호 라  (후  후  후!)\n토 도 카 나 이  호 시 닷 테\n(Star  light,  I  hope  you)\n테 오  노 바 스  이 키 오 이  못 테\n토 도 카 나 잇 테  키 메 나 이 데\n(Star  light,  I  hope  you)\n테 오  노 바 세  소 레 카 라  나 야 메  (후  후  후!)\n테 오  노 바 세  소 레 카 라  나 야 메  (후  후  후!)\n\n<  후주  부분  :  하이  하이  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  하이  하이\n하이  하이  하이  하이  하이  하이  후  후  후!  >",
-    "writeDone": false
+    "writeDone": true
   },
   "timeline": [
     {
@@ -868,7 +868,7 @@
           "start_time": 5675,
           "end_time": 6064,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "마",
@@ -904,6 +904,82 @@
           "end_time": 6064,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 5771,
+      "end_time": 6219,
+      "collection": [
+        {
+          "text": "(짝",
+          "start_time": 5871,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝 ",
+          "start_time": 5903,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝",
+          "start_time": 5936,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝",
+          "start_time": 5953,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝 ",
+          "start_time": 5969,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝",
+          "start_time": 5998,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝",
+          "start_time": 6015,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝",
+          "start_time": 6032,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝",
+          "start_time": 6049,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "짝)",
+          "start_time": 6064,
+          "end_time": 6119,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },

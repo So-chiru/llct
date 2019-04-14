@@ -2437,7 +2437,7 @@
       ]
     },
     {
-      "start_time": 11200,
+      "start_time": 11193,
       "end_time": 12746,
       "collection": [
         {
@@ -2463,35 +2463,35 @@
         },
         {
           "text": "하이 ",
-          "start_time": 11314,
+          "start_time": 11293,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11394,
+          "start_time": 11376,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11490,
+          "start_time": 11462,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11577,
+          "start_time": 11551,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11659,
+          "start_time": 11636,
           "end_time": 12638,
           "pronunciation_time": "0.2",
           "type": "2"
@@ -2499,40 +2499,40 @@
       ]
     },
     {
-      "start_time": 11645,
+      "start_time": 11623,
       "end_time": 12738,
       "collection": [
         {
           "text": "하이 ",
-          "start_time": 11745,
+          "start_time": 11723,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11828,
+          "start_time": 11809,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11907,
+          "start_time": 11893,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 11999,
+          "start_time": 11971,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12093,
+          "start_time": 12060,
           "end_time": 12638,
           "pronunciation_time": "0.3",
           "type": "2"
@@ -2545,28 +2545,28 @@
       "collection": [
         {
           "text": "하이 ",
-          "start_time": 12172,
+          "start_time": 12146,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12250,
+          "start_time": 12235,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12346,
+          "start_time": 12318,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12426,
+          "start_time": 12400,
           "end_time": 12638,
           "pronunciation_time": 0,
           "type": "2"
@@ -4261,14 +4261,14 @@
           "start_time": 20615,
           "end_time": 22005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "니! ",
           "start_time": 20658,
           "end_time": 22005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "이치",
@@ -4289,14 +4289,14 @@
           "start_time": 20956,
           "end_time": 22005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "니! ",
           "start_time": 20998,
           "end_time": 22005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "이치",
@@ -4317,14 +4317,14 @@
           "start_time": 21294,
           "end_time": 22005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "니! ",
           "start_time": 21337,
           "end_time": 22005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "이치",
@@ -4381,96 +4381,6 @@
           "end_time": 22005,
           "pronunciation_time": 0,
           "type": "4"
-        }
-      ]
-    },
-    {
-      "start_time": 20432,
-      "end_time": 22105,
-      "collection": [
-        {
-          "text": "이치",
-          "start_time": 20532,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "니! ",
-          "start_time": 20575,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "이치",
-          "start_time": 20702,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "니! ",
-          "start_time": 20745,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "이치",
-          "start_time": 20874,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "니! ",
-          "start_time": 20917,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "이치",
-          "start_time": 21043,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "니! ",
-          "start_time": 21086,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "이치",
-          "start_time": 21214,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "니! ",
-          "start_time": 21257,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "이치",
-          "start_time": 21381,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "니!",
-          "start_time": 21424,
-          "end_time": 22005,
-          "pronunciation_time": 0,
-          "type": "2"
         }
       ]
     },
