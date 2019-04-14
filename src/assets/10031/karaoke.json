@@ -226,6 +226,143 @@
       ]
     },
     {
+      "start_time": 1560,
+      "end_time": 3006,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": 1660,
+          "end_time": 2906,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 1694,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 1777,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 1860,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 1945,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2023,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2106,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2189,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2272,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 1560,
+      "end_time": 3006,
+      "collection": [
+        {
+          "text": "하이 ",
+          "start_time": 2353,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2439,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2523,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2604,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2683,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 2766,
+          "end_time": 2851,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "(14)>",
+          "start_time": 1660,
+          "end_time": 2906,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
       "start_time": 2812,
       "end_time": 3644,
       "collection": [
@@ -1554,6 +1691,143 @@
       ]
     },
     {
+      "start_time": 9757,
+      "end_time": 11157,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": 9857,
+          "end_time": 11057,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 9864,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 9944,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10032,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10114,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10196,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10272,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10360,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10440,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 9757,
+      "end_time": 11157,
+      "collection": [
+        {
+          "text": "하이 ",
+          "start_time": 10521,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10604,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10683,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10768,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10847,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 10929,
+          "end_time": 10993,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "(14)>",
+          "start_time": 9857,
+          "end_time": 11057,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
       "start_time": 10973,
       "end_time": 11812,
       "collection": [
@@ -1778,21 +2052,21 @@
           "start_time": 12252,
           "end_time": 12469,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "도",
           "start_time": 12301,
           "end_time": 12469,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "로",
           "start_time": 12319,
           "end_time": 12469,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -3251,6 +3525,247 @@
           "end_time": 19830,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19231,
+      "end_time": 21716,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": 19331,
+          "end_time": 21611,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19334,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19410,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19495,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19574,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19655,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19741,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19823,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19906,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 19885,
+      "end_time": 21716,
+      "collection": [
+        {
+          "text": "하이 ",
+          "start_time": 19985,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20070,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20153,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20232,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20317,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20393,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20478,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20562,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20640,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20722,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 19231,
+      "end_time": 21716,
+      "collection": [
+        {
+          "text": "하이 ",
+          "start_time": 20808,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20888,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 20967,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21048,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21134,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21213,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21294,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21377,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21458,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 21536,
+          "end_time": 21616,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "(28)>",
+          "start_time": 19331,
+          "end_time": 21611,
+          "pronunciation_time": "0.3333",
+          "type": "3"
         }
       ]
     },
