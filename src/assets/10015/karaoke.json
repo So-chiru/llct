@@ -1402,6 +1402,20 @@
       ]
     },
     {
+      "start_time": 8127,
+      "end_time": 8994,
+      "collection": [
+        {
+          "text": "(블레이드 색상 변경 → 치카, 와이퍼 동작)",
+          "start_time": 8227,
+          "end_time": 8894,
+          "pronunciation_time": 0,
+          "type": "3",
+          "text_color": "#ff8702"
+        }
+      ]
+    },
+    {
       "start_time": -100,
       "end_time": 100,
       "collection": [
