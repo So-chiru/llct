@@ -99,7 +99,7 @@
       "싱글"
     ],
     "center": "와타나베 요우",
-    "bladeColor": "요우색 (푸른색)",
+    "bladeColor": "요우 색 (푸른색 계열)",
     "bladeColorHEX": "#2e9afc",
     "karaoke": true,
     "short_kr": "코이아쿠"
@@ -350,8 +350,8 @@
     ],
     "center": "",
     "karaoke": true,
-    "bladeColor": "벛꽃색",
-    "bladeColorHEX": "(연분홍색)",
+    "bladeColor": "리코 색 (연분홍색 계열)",
+    "bladeColorHEX": "#ffdee5",
     "short_kr": "오모히토"
   },
   "MIRAI TICKET": {

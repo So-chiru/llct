@@ -2,9 +2,8 @@
   "metadata": {
     "correction_time": -10,
     "title": "사랑이 되고 싶은 AQUARIUM",
-    "writter": "Sochiru",
     "lyrics": "후 후!  후 후!  후 후!\n\n소 라 이 로  카- 텐  O pen!  우 미 이 로  게- 토  Wel come!\n아  소  비  마  쇼\n\n유 라 유 라  유 레 나 가 라  신 쥬 노  토 케 이\n키 미 토  와 타 시 오  유 메 니  사 소 이 코 무 노\n수 이 소 데  사 와 구  사 와 이 데  하 네 루\n사 카 나 타 치 노  파- 티-  요 바 레 찻 타\n\n난 데  미 즈 노  나 카 데 모  이 키 가  데 키 루 노?\n타 분  사 키  논 다  아 츠 이  오 챠 노  세 이 카 나\n마  손 나  코 토 와  키 니 시 나 이  시 나 이 데\n사 카 나 타 치 노  파- 티-  타 노 시 모 우 카\n\n톳 테 모  톳 테 모  타 노 시 소 우  (푸 카 푸 카)\n닷 타 라  잇 쇼 니  푸 카 푸 카  시 챠 에 바?\n이 츠 모 토  치 가 우  와 타 시 니  나 레\n토 이 키 가  키 코 에 루  쿄 리 마 데  치 카 즈 키 타 이 나\nI  miss  you!\n\n아 쿠 아 리 우 무 데  (Yeah!)\n후 타 리 가  데 아 우  환 타 지\n후 이 니  토 키 메 쿠 노  소 레 와  코 이 노  마 호  (Fan ta stic  love)\n아 쿠 아 리 우 무 데  (Yeah!)\n키 즈 이 테  무 네 노  오 쿠 니  히 메 테 타  (우... Yeah!)\n혼 토 노  키 모 치\n코 레 카 라  스 나 오 니  낫 테  미 요\n다 이 스 키 와  모 우  카 쿠 사 나 이!  (나~이!)\n\n후 후 후 후  후 후 후 후  후!\n닷 테  미 즈 노  나 카 다 시  미 기 모  히 다 리 모\n시 타 카 라  우 에 마 데  죠 즈 니  오 요 게 루 네  와~ 오!\n수 이 신 와  아 사 이 노?  세 이 슌 와  후 카 이 노?\n사 카 나 타 치 와  난 데 모  싯 테 루 요\n\n싯 카 리  싯 카 리  타 노 신 데  (아 와 아 와)\n사 이 고 와  잇 쇼 니  아 와 아 와 니  놋 테\n마 타  아 에 루 네  와 타 시 니  키 스\n시 챠 에 바?  시 챠 이 타 이?  시 챠 이 나 요!\n이 마 다 켓 테  키 미 다 켓 테  I  love  you!  (I  love  you!)\n\n마 린  브 루- 나 라  (Yeah!)  후 타 리 와  유 메 노  심 포 니\n킷 토  카 나 데 루 노  아 마 이  코 이 노  키 세 키  (Fan ta stic Eyes)\n마 린  브 루- 나 라  (Yeah!)\n하 지 메 테  나 노 니  코 와 쿠  나 인 다 몬 (우... Yeah!)\n혼 토 니  와 타 시\n\n츠 기 카 라  다 이 탄 니  낫 테  미 요\n다 이 스 키 요  모 우  카 쿠 사 나 이!  (나~이!)\n사 솟 챠 운 다  Wow  wo!  아 쿠 아 리 우 무 데\n사 소 챠 운 다  Wow  wo!  코 이 니  나 리 타 이\n(Fan ta stic!)  아  소  비  마  쇼\n\n<간주  부분  :  후 후!  후 후!  후 후! ,  후 후!  후 후!\n\n하이  하이  하이  하이  하이  하이  하이  후 후 후!\n하이  하이  하이  하이  하이  하이  하이  후 후 후! >\n\n푸 카 푸 카 데  아 와 아 와 데\n미 츠 메 앗 테  이 이 타 이 나  다 이 스 키  Wow  wo!\n\n(요소로드 부분)\n아 쿠 아 리 우 무 데  후 타 리 가  데 아 우  판 타 지\n후 이 니  토 키 메 쿠 노\n소 레 와  코 이 노  마 호\n\n아 쿠 아 리 우 무 데  (Yeah!)\n키 즈 이 테  무 네 노  오 쿠 니  히 메 테 타 (우... Yeah!)\n혼 토 노  키 모 치\n\n코 레 카 라  스 나 오 니  낫 테\n츠 기 카 라  다 이 탄 니  낫 테  미 요\n다 이 스 키 요  모 우  카 쿠 사 나 이!  (나~이!)\n(Fan ta stic  love  Yeah!  Yeah!  Yeah!  Yeah!)\n\n후 후 후!",
-    "writeDone": false
+    "writeDone": true
   },
   "timeline": [
     {
@@ -195,35 +194,35 @@
           "start_time": 3612,
           "end_time": 3747,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "소 ",
           "start_time": 3629,
           "end_time": 3747,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "비 ",
           "start_time": 3649,
           "end_time": 3747,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "마 ",
           "start_time": 3669,
           "end_time": 3747,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "쇼",
           "start_time": 3691,
           "end_time": 3747,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },

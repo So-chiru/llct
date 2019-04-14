@@ -692,14 +692,14 @@
         },
         {
           "text": "(후",
-          "start_time": 5148,
+          "start_time": 5139,
           "end_time": 5206,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후) ",
-          "start_time": 5165,
+          "start_time": 5158,
           "end_time": 5206,
           "pronunciation_time": 0,
           "type": "2"
@@ -792,47 +792,47 @@
       ]
     },
     {
-      "start_time": 5172,
+      "start_time": 5166,
       "end_time": 5661,
       "collection": [
         {
           "text": "(세-",
-          "start_time": 5272,
+          "start_time": 5266,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "노 ",
-          "start_time": 5315,
+          "start_time": 5305,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 5340,
+          "start_time": 5349,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와 ",
-          "start_time": 5360,
+          "start_time": 5367,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 5380,
+          "start_time": 5385,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와 ",
-          "start_time": 5400,
+          "start_time": 5403,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
@@ -846,21 +846,21 @@
         },
         {
           "text": "와 ",
-          "start_time": 5440,
+          "start_time": 5437,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 5460,
+          "start_time": 5455,
           "end_time": 5561,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와)",
-          "start_time": 5480,
+          "start_time": 5475,
           "end_time": 5561,
           "pronunciation_time": "0.3",
           "type": "2"
@@ -1095,6 +1095,20 @@
           "type": 1
         },
         {
+          "text": "(후",
+          "start_time": 6329,
+          "end_time": 6934,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후) ",
+          "start_time": 6350,
+          "end_time": 6934,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "유",
           "start_time": 6400,
           "end_time": 6934,
@@ -1120,7 +1134,8 @@
           "start_time": 6454,
           "end_time": 6934,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "타",
@@ -1198,6 +1213,82 @@
           "end_time": 6934,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 6376,
+      "end_time": 6846,
+      "collection": [
+        {
+          "text": "(세-",
+          "start_time": 6476,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "노 ",
+          "start_time": 6514,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 6550,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와 ",
+          "start_time": 6569,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 6586,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와 ",
+          "start_time": 6605,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 6625,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와 ",
+          "start_time": 6645,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 6665,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와)",
+          "start_time": 6686,
+          "end_time": 6746,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -1577,49 +1668,49 @@
           "start_time": 8844,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "ing ",
           "start_time": 8870,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 8906,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "song ",
           "start_time": 8943,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "for ",
           "start_time": 8984,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 9003,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "dream!",
           "start_time": 9020,
           "end_time": 9104,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -1632,49 +1723,49 @@
           "start_time": 9450,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "ing ",
           "start_time": 9474,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 9511,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "song ",
           "start_time": 9543,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "for ",
           "start_time": 9586,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 9607,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "dream!",
           "start_time": 9625,
           "end_time": 9705,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -2336,26 +2427,6 @@
       ]
     },
     {
-      "start_time": -100,
-      "end_time": 100,
-      "collection": [
-        {
-          "text": "",
-          "start_time": 0,
-          "end_time": 0,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": "",
-          "start_time": 0,
-          "end_time": 0,
-          "pronunciation_time": 0,
-          "type": 1
-        }
-      ]
-    },
-    {
       "start_time": 12944,
       "end_time": 13780,
       "collection": [
@@ -2437,15 +2508,15 @@
           "type": 1
         },
         {
-          "text": "(후 ",
-          "start_time": 13295,
+          "text": "(후",
+          "start_time": 13289,
           "end_time": 13354,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후) ",
-          "start_time": 13310,
+          "start_time": 13307,
           "end_time": 13354,
           "pronunciation_time": 0,
           "type": "2"
@@ -2538,75 +2609,75 @@
       ]
     },
     {
-      "start_time": 13305,
+      "start_time": 13319,
       "end_time": 13785,
       "collection": [
         {
           "text": "(세-",
-          "start_time": 13405,
+          "start_time": 13419,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "노 ",
-          "start_time": 13450,
+          "start_time": 13459,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 13500,
+          "start_time": 13498,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와 ",
-          "start_time": 13520,
+          "start_time": 13517,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 13540,
+          "start_time": 13534,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와 ",
-          "start_time": 13560,
+          "start_time": 13551,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 13580,
+          "start_time": 13570,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와 ",
-          "start_time": 13600,
+          "start_time": 13590,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 13620,
+          "start_time": 13610,
           "end_time": 13685,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "와)",
-          "start_time": 13640,
+          "start_time": 13628,
           "end_time": 13685,
           "pronunciation_time": "0.3",
           "type": "2"
@@ -2841,6 +2912,20 @@
           "type": 1
         },
         {
+          "text": "(후",
+          "start_time": 14488,
+          "end_time": 15072,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후) ",
+          "start_time": 14509,
+          "end_time": 15072,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "미",
           "start_time": 14551,
           "end_time": 15072,
@@ -2866,7 +2951,8 @@
           "start_time": 14607,
           "end_time": 15072,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "조",
@@ -2951,6 +3037,82 @@
           "end_time": 15072,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 14524,
+      "end_time": 15014,
+      "collection": [
+        {
+          "text": "(세-",
+          "start_time": 14624,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "노 ",
+          "start_time": 14664,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 14704,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와 ",
+          "start_time": 14722,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 14740,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와 ",
+          "start_time": 14758,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 14778,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와 ",
+          "start_time": 14796,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 14814,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "와)",
+          "start_time": 14832,
+          "end_time": 14914,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -4682,49 +4844,49 @@
           "start_time": 25757,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "ing ",
           "start_time": 25776,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 25811,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "song ",
           "start_time": 25851,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "for ",
           "start_time": 25888,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 25908,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "dream!",
           "start_time": 25927,
           "end_time": 26001,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
@@ -4737,62 +4899,49 @@
           "start_time": 26357,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "ing ",
           "start_time": 26378,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 26415,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "song ",
           "start_time": 26455,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "for ",
           "start_time": 26492,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 26512,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "dream!",
           "start_time": 26531,
           "end_time": 26613,
           "pronunciation_time": 0,
-          "type": 1
-        }
-      ]
-    },
-    {
-      "start_time": -100,
-      "end_time": 100,
-      "collection": [
-        {
-          "text": "",
-          "start_time": 0,
-          "end_time": 0,
-          "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     }
