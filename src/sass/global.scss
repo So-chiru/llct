@@ -204,3 +204,21 @@
   background-color: #636363;
   border: 1px solid #afafaf;
 }
+
+.tx_wlink {
+  color: rgb(0, 132, 255);
+  text-decoration: none;
+  transition: 0.3s color cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tx_wlink:visited {
+  color: rgb(101, 211, 255);
+}
+
+.tx_wlink:hover {
+  color: rgb(47, 155, 255);
+}
+
+.tx_wlink:active {
+  color: rgb(68, 165, 255);
+}
