@@ -1164,14 +1164,14 @@
           "start_time": 4790,
           "end_time": 5006,
           "pronunciation_time": 0,
-          "type": "1"
+          "type": "4"
         },
         {
           "text": "라 ",
           "start_time": 4805,
           "end_time": 5006,
           "pronunciation_time": 0,
-          "type": "1"
+          "type": "4"
         },
         {
           "text": "잇",
@@ -3108,14 +3108,14 @@
           "start_time": 12950,
           "end_time": 13163,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "라 ",
           "start_time": 12966,
           "end_time": 13163,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "잇",

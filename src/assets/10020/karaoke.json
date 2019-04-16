@@ -1395,28 +1395,28 @@
           "start_time": 9455,
           "end_time": 9577,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "토 ",
           "start_time": 9493,
           "end_time": 9577,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "아",
           "start_time": 9528,
           "end_time": 9577,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "루)",
           "start_time": 9545,
           "end_time": 9577,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         }
       ]
     },
