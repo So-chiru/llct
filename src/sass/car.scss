@@ -2,11 +2,23 @@
   position: relative;
   width: 90%;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 7vh auto;
 }
 
 .__car_headtxt {
   font-weight: 100;
   font-size: calc(3vw + 2vh);
+  margin: 25px 0px;
+}
+
+.__car_diver {
+  margin-bottom: 8vh;
+}
+
+.chika {
+  color: #ff6600;
+}
+
+.you {
+  color: #008cff;
 }

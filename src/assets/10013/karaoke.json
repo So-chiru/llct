@@ -798,20 +798,6 @@
           "type": 1
         },
         {
-          "text": "(짝",
-          "start_time": 3555,
-          "end_time": 3900,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "짝) ",
-          "start_time": 3574,
-          "end_time": 3900,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
           "text": "시",
           "start_time": 3570,
           "end_time": 3900,
@@ -873,20 +859,6 @@
           "end_time": 3900,
           "pronunciation_time": 0,
           "type": 1
-        },
-        {
-          "text": "(짝",
-          "start_time": 3829,
-          "end_time": 3900,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "짝)",
-          "start_time": 3846,
-          "end_time": 3900,
-          "pronunciation_time": 0,
-          "type": "2"
         }
       ]
     },
@@ -2685,20 +2657,6 @@
           "type": 1
         },
         {
-          "text": "(짝",
-          "start_time": 11279,
-          "end_time": 11647,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "짝) ",
-          "start_time": 11296,
-          "end_time": 11647,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
           "text": "사",
           "start_time": 11311,
           "end_time": 11647,
@@ -2774,20 +2732,6 @@
           "end_time": 11647,
           "pronunciation_time": "2",
           "type": 1
-        },
-        {
-          "text": "(짝",
-          "start_time": 11565,
-          "end_time": 11647,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "짝)",
-          "start_time": 11583,
-          "end_time": 11647,
-          "pronunciation_time": 0,
-          "type": "2"
         }
       ]
     },
