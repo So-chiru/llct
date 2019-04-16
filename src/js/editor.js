@@ -1,4 +1,3 @@
-/* global WaveSurfer, $, Blob, location, FileReader, lastSaved, CustomEvent, selectWords, wavesurfer, logger, karaokeData, Karaoke, songID */
 var wavTime
 var flrsd
 var audioSyncSleep = 0
@@ -16,6 +15,7 @@ var convertTime = function (input, separator) {
 
 // 전부다 document.ready 이후 일어나야 할 일인가?
 $(document).ready(() => {
+  window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
   logger(1, 'r', 'event : document.ready', 'i')
   window.wavesurfer = WaveSurfer.create({
     container: '#waveform',
@@ -43,11 +43,14 @@ $(document).ready(() => {
     }
     audioSyncSleep = 0
 
-    Karaoke.AudioSync(flrsd, true)
+    KaraokeInstance.AudioSync(flrsd, true)
   })
 
   wavesurfer.on('seek', () => {
-    Karaoke.AudioSync(Math.floor(wavesurfer.getCurrentTime() * 100), true)
+    KaraokeInstance.AudioSync(
+      Math.floor(wavesurfer.getCurrentTime() * 100),
+      true
+    )
   })
 
   var prv = false
@@ -74,7 +77,7 @@ $(document).ready(() => {
         KaraokeEditor.EditVal(
           'end_time',
           Math.floor(wavesurfer.getCurrentTime() * 100) +
-            karaokeData.metadata.correction_time,
+            KaraokeInstance.karaokeData.metadata.correction_time,
           e.altKey,
           e.shiftKey,
           true
@@ -84,7 +87,7 @@ $(document).ready(() => {
         KaraokeEditor.EditVal(
           'pronunciation_time',
           Math.floor(wavesurfer.getCurrentTime() * 100) +
-            karaokeData.metadata.correction_time,
+            KaraokeInstance.karaokeData.metadata.correction_time,
           e.altKey,
           e.shiftKey,
           true
@@ -94,7 +97,7 @@ $(document).ready(() => {
         KaraokeEditor.EditVal(
           'start_time',
           Math.floor(wavesurfer.getCurrentTime() * 100) +
-            karaokeData.metadata.correction_time,
+            KaraokeInstance.karaokeData.metadata.correction_time,
           e.altKey,
           e.shiftKey,
           true
@@ -121,7 +124,7 @@ $(document).ready(() => {
         break
       case 18:
         prv = true
-        Karaoke.startEndOpti()
+        KaraokeInstance.lineTimingValidate()
         break
       case 35:
         prv = true
@@ -186,8 +189,11 @@ $(document).ready(() => {
     wavesurfer.play()
   }
 
-  window.karaokeData = { metadata: { correction_time: -10 }, timeline: [] }
-  window.lastSaved = JSON.stringify(karaokeData.timeline)
+  KaraokeInstance.karaokeData = {
+    metadata: { correction_time: -10 },
+    timeline: []
+  }
+  window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData.timeline)
 
   $.ajax({
     url: './data/' + window.songID + '/karaoke.json',
@@ -201,8 +207,8 @@ $(document).ready(() => {
         )
       }
       try {
-        window.karaokeData = d
-        window.lastSaved = JSON.stringify(karaokeData.timeline)
+        KaraokeInstance.karaokeData = d
+        window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData.timeline)
 
         Sakurauchi.run('KaraokeLoaded')
         logger(0, 'r', 'Karaoke Data Loaded: Server Auto Load', 'i')
@@ -226,46 +232,50 @@ $(document).ready(() => {
   )
 
   editorLyricsContext.addAction('deleteWord', ev => {
-    karaokeData.timeline[editorLyricsContext.targetX].collection.splice(
-      editorLyricsContext.targetY,
-      1
-    )
+    KaraokeInstance.karaokeData.timeline[
+      editorLyricsContext.targetX
+    ].collection.splice(editorLyricsContext.targetY, 1)
 
     if (
-      karaokeData.timeline[editorLyricsContext.targetX].collection.length === 0
+      KaraokeInstance.karaokeData.timeline[editorLyricsContext.targetX]
+        .collection.length === 0
     ) {
-      karaokeData.timeline.splice(editorLyricsContext.targetX, 1)
+      KaraokeInstance.karaokeData.timeline.splice(
+        editorLyricsContext.targetX,
+        1
+      )
     }
 
-    Karaoke.RenderDOM()
+    KaraokeInstance.RenderDOM()
   })
 
   editorLyricsContext.addAction('editWord', ev => {
     var _blk_edited = prompt(
       '수정할 단어를 입력해 주세요.',
-      karaokeData.timeline[editorLyricsContext.targetX].collection[
-        editorLyricsContext.targetY
-      ].text
+      KaraokeInstance.karaokeData.timeline[editorLyricsContext.targetX]
+        .collection[editorLyricsContext.targetY].text
     )
 
-    karaokeData.timeline[editorLyricsContext.targetX].collection[
-      editorLyricsContext.targetY
-    ].text = _blk_edited
-    Karaoke.RenderDOM()
+    KaraokeInstance.karaokeData.timeline[
+      editorLyricsContext.targetX
+    ].collection[editorLyricsContext.targetY].text = _blk_edited
+    KaraokeInstance.RenderDOM()
   })
 
   editorLyricsContext.addAction('addNewWord', addRight => {
-    karaokeData.timeline[editorLyricsContext.targetX].collection.splice(
+    KaraokeInstance.karaokeData.timeline[
+      editorLyricsContext.targetX
+    ].collection.splice(
       editorLyricsContext.targetY + (addRight ? 1 : 0),
       0,
-      Karaoke.SpaParsing('', false)
+      KaraokeInstance.SpaParsing('', false)
     )
 
-    Karaoke.RenderDOM()
+    KaraokeInstance.RenderDOM()
   })
 
   editorLyricsContext.addAction('addNewLine', addBottom => {
-    karaokeData.timeline.splice(
+    KaraokeInstance.karaokeData.timeline.splice(
       editorLyricsContext.targetX + (addBottom ? 1 : 0),
       0,
       {
@@ -275,26 +285,29 @@ $(document).ready(() => {
       }
     )
 
-    Karaoke.RenderDOM()
+    KaraokeInstance.RenderDOM()
   })
 
   Sakurauchi.add('KaraokeLoaded', () => {
-    Karaoke.RenderDOM()
+    KaraokeInstance.RenderDOM()
 
-    if (typeof karaokeData.metadata.correction_time === 'undefined') {
-      karaokeData.metadata.correction_time = -10
+    if (
+      typeof KaraokeInstance.karaokeData.metadata.correction_time ===
+      'undefined'
+    ) {
+      KaraokeInstance.karaokeData.metadata.correction_time = -10
     }
 
-    if (typeof karaokeData.metadata.writeDone === 'undefined') {
-      karaokeData.metadata.writeDone = false
+    if (typeof KaraokeInstance.karaokeData.metadata.writeDone === 'undefined') {
+      KaraokeInstance.karaokeData.metadata.writeDone = false
     }
 
-    if (karaokeData.metadata.writeDone) {
+    if (KaraokeInstance.karaokeData.metadata.writeDone) {
       $('.lyrics_write').addClass('__edit_hidden_tabs')
     }
   })
 
-  Sakurauchi.add('KaraokeSelection', e => {
+  KaraokeInstance.ListenClickEvent(function (instance, e) {
     var alreadyExists = false
     selectWords.forEach((v, i) => {
       if (JSON.stringify(v) === JSON.stringify(e.detail)) {
@@ -310,14 +323,14 @@ $(document).ready(() => {
     if (selectWords.length > 0) {
       Object.keys(valElementObject).forEach(_ =>
         $(_).val(
-          karaokeData.timeline[e.detail.posX].collection[e.detail.posY][
-            valElementObject[_]
-          ]
+          instance.karaokeData.timeline[e.detail.posX].collection[
+            e.detail.posY
+          ][valElementObject[_]]
         )
       )
     }
 
-    $(e.detail.element).toggleClass('WordSelected', !alreadyExists)
+    $(e.detail.perElem).toggleClass('WordSelected', !alreadyExists)
 
     Object.keys(valElementObject).forEach(_ =>
       $(_).attr('disabled', selectWords.length < 1)
@@ -326,7 +339,7 @@ $(document).ready(() => {
 })
 
 $(window).bind('beforeunload', () => {
-  if (lastSaved !== JSON.stringify(karaokeData.timeline)) {
+  if (lastSaved !== JSON.stringify(KaraokeInstance.karaokeData.timeline)) {
     return 'Export 하지 못한 데이터가 있습니다. 그래도 나갈까요?'
   }
 })
@@ -347,7 +360,9 @@ const KaraokeEditor = {
     $(_c[key]).val(value)
     selectWords.forEach((details, index) => {
       var selectedObject =
-        karaokeData.timeline[details.posX].collection[details.posY]
+        KaraokeInstance.karaokeData.timeline[details.posX].collection[
+          details.posY
+        ]
 
       selectedObject[key] = value
 
@@ -364,7 +379,7 @@ const KaraokeEditor = {
     }
 
     if (!NonwipingMode) {
-      Karaoke.RenderDOM()
+      KaraokeInstance.RenderDOM()
       KaraokeEditor.clearSelection()
     }
 
@@ -385,7 +400,8 @@ const KaraokeEditor = {
   toggleTextEditor: () => {
     $('.lyrics_write').toggle('__edit_hidden_tabs')
 
-    karaokeData.metadata.writeDone = !karaokeData.metadata.writeDone
+    KaraokeInstance.karaokeData.metadata.writeDone = !KaraokeInstance
+      .karaokeData.metadata.writeDone
   },
   autoSpacing: spacing => {
     spacing = decodeURI(encodeURI(spacing).replace(/(%0A)/gm, '^L_F'))
@@ -428,7 +444,9 @@ const KaraokeEditor = {
   },
   asReplacing: () => {
     $('#kashi_type').val(KaraokeEditor.autoSpacing($('#kashi_type').val()))
-    Karaoke.SetTimelineData(Karaoke.Render($('#kashi_type').val()))
+    KaraokeInstance.SetTimelineData(
+      KaraokeInstance.Render($('#kashi_type').val())
+    )
     KaraokeEditor.setLyrics($('#kashi_type').val())
   },
   clearSelection: () => {
@@ -460,12 +478,16 @@ const KaraokeEditor = {
         throw Error('Requested file type is not JSON.')
       }
 
-      window.karaokeData = readJSON
-      $('#kashi_type').val(karaokeData.metadata.lyrics)
-      $('#blade_hex_meta').val(karaokeData.metadata.bladeColorHEX)
-      $('#blade_name_meta').val(karaokeData.metadata.bladeColorMember)
+      KaraokeInstance.karaokeData = readJSON
+      $('#kashi_type').val(KaraokeInstance.karaokeData.metadata.lyrics)
+      $('#blade_hex_meta').val(
+        KaraokeInstance.karaokeData.metadata.bladeColorHEX
+      )
+      $('#blade_name_meta').val(
+        KaraokeInstance.karaokeData.metadata.bladeColorMember
+      )
 
-      window.lastSaved = JSON.stringify(karaokeData.timeline)
+      window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData.timeline)
       Sakurauchi.run('KaraokeLoaded')
       logger(0, 'r', 'Karaoke Data Loaded.', 'i')
     }
@@ -474,18 +496,20 @@ const KaraokeEditor = {
     if (typeof window.Blob === 'undefined') {
       throw Error('Blob API is not supported in this browser.')
     }
-    if (typeof window.karaokeData === 'undefined') {
+    if (typeof KaraokeInstance.karaokeData === 'undefined') {
       throw Error('karaokeData is not defined. is the page loaded correctly?')
     }
 
-    Karaoke.startEndOpti()
+    KaraokeInstance.lineTimingValidate()
     var aDownload = document.createElement('a')
     $('body').append(aDownload)
 
     var blobData = new Blob(
       [
         JSON.stringify(
-          typeof customData !== 'undefined' ? customData : window.karaokeData,
+          typeof customData !== 'undefined'
+            ? customData
+            : KaraokeInstance.karaokeData,
           null,
           2
         )
@@ -501,11 +525,11 @@ const KaraokeEditor = {
     aDownload.click()
     window.URL.revokeObjectURL(url)
 
-    window.lastSaved = JSON.stringify(karaokeData)
+    window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData)
   },
 
   setLyrics: data => {
-    window.karaokeData.metadata.lyrics = data
+    KaraokeInstance.karaokeData.metadata.lyrics = data
   }
 }
 

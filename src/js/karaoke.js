@@ -1,4 +1,3 @@
-/* global karaokeData, $, CustomEvent, chillout */
 /*
  * Karaoke Module
  *
@@ -43,9 +42,11 @@ const getLMInArray = (a, t, lh) => {
   return _mx
 }
 
-var Karaoke = {
-  TypeLists: [null, '__s', 'call', 'cmt', '_cs'],
-  SpaParsing: function (spa, spacing) {
+var __kara_typeList = [null, '__s', 'call', 'cmt', '_cs']
+var Karaoke = function (__element) {
+  this.karaoke_element = __element
+  this.karaokeData = null
+  this.SpaParsing = function (spa, spacing) {
     var wordObject = {
       text: spa + (spacing ? ' ' : ''),
       start_time: 0,
@@ -55,19 +56,13 @@ var Karaoke = {
     }
 
     return wordObject
-  },
-
-  SetTimelineData: function (data) {
-    window.karaokeData.timeline = data
-    Karaoke.RenderDOM()
-    Karaoke.startEndOpti()
-  },
-
-  SelectWord: function (posX, posY, element) {
-    Sakurauchi.run('KaraokeSelection', { detail: { posX, posY, element } })
-  },
-
-  CompareArray: (a, b) => {
+  }
+  this.SetTimelineData = function (data) {
+    this.karaokeData.timeline = data
+    this.RenderDOM()
+    this.lineTimingValidate()
+  }
+  this.CompareArray = (a, b) => {
     if (
       typeof a === 'undefined' ||
       typeof b === 'undefined' ||
@@ -91,9 +86,8 @@ var Karaoke = {
     })
 
     return !diff
-  },
-
-  MergeRender: function (prevArray, newArray) {
+  }
+  this.MergeRender = function (prevArray, newArray) {
     var mergedArray = []
 
     newArray.forEach((newLines, newLineInt) => {
@@ -105,7 +99,7 @@ var Karaoke = {
       var comparedDone = false
       ;[prevArray[newLineInt - 1], prevArray[newLineInt + 1]].forEach(
         (comparePrevLine, index) => {
-          var sames = Karaoke.CompareArray(newLines, comparePrevLine)
+          var sames = this.CompareArray(newLines, comparePrevLine)
           if (!sames) return 0
 
           mergedArray.push(comparePrevLine)
@@ -137,9 +131,8 @@ var Karaoke = {
     })
 
     return mergedArray
-  },
-
-  Render: function (text) {
+  }
+  this.Render = function (text) {
     var renderedData = []
     text = decodeURI(
       encodeURI(text)
@@ -149,7 +142,7 @@ var Karaoke = {
     )
 
     var splitLF = text.split('^L_F')
-    splitLF.forEach((line, lineIndex) => {
+    splitLF.forEach(line => {
       var perLineSpacing = {
         start_time: 0,
         end_time: 0,
@@ -161,11 +154,11 @@ var Karaoke = {
           var spaSplt = spa.split(/\^S_P/g)
           spaSplt.forEach((spBr, i) => {
             perLineSpacing.collection.push(
-              Karaoke.SpaParsing(spBr, spaSplt.length - 1 > i)
+              this.SpaParsing(spBr, spaSplt.length - 1 > i)
             )
           })
         } else {
-          perLineSpacing.collection.push(Karaoke.SpaParsing(spa, false))
+          perLineSpacing.collection.push(this.SpaParsing(spa, false))
         }
       })
 
@@ -178,49 +171,60 @@ var Karaoke = {
     })
 
     return renderedData
-  },
-
-  selectLine: num => {
-    karaokeData.timeline[num].collection.forEach((v, i) => {
-      Karaoke.SelectWord(
-        num,
-        i,
-        document.getElementById('kara_' + num + '_' + i)
-      )
+  }
+  this.selectLine = num => {
+    this.karaokeData.timeline[num].collection.forEach((v, i) => {
+      for (var o = 0; o < this.__clickFunctions.length; o++) {
+        this.__clickFunctions[o](_self, {
+          detail: {
+            posX: num,
+            posY: i,
+            _self: document.getElementById(
+              this.karaoke_element.id + '_kara_' + num + '_' + i
+            )
+          }
+        })
+      }
     })
-  },
-
-  startEndOpti: function () {
-    karaokeData.timeline.forEach((value, index) => {
-      value.start_time =
-        Number(getLMInArray(value.collection, 'start_time', 0)) - 100
-      value.end_time =
-        Number(getLMInArray(value.collection, 'end_time', 1)) + 100
+  }
+  this.__clickFunctions = []
+  this.ListenClickEvent = function (e) {
+    return this.__clickFunctions.push(e)
+  }
+  this.emitClickEvent = function (element) {
+    var posX = element.dataset.line
+    var posY = element.dataset.word
+    for (var o = 0; o < clf.length; o++) {
+      clf[o](_self, { detail: { posX, posY, perElem: element } })
+    }
+  }
+  this.lineTimingValidate = function () {
+    this.karaokeData.timeline.forEach(v => {
+      v.start_time = Number(getLMInArray(v.collection, 'start_time', 0)) - 100
+      v.end_time = Number(getLMInArray(v.collection, 'end_time', 1)) + 100
     })
-  },
-
-  RenderDOM: function () {
+  }
+  this.RenderDOM = function () {
     var inserts = ''
-    Karaoke.cachedDom = {}
-    karaokeData.timeline.forEach((v, lineI) => {
+    this.cachedDom = {}
+    this.karaokeData.timeline.forEach((v, lineI) => {
       var spaceEle = ''
       v.collection.forEach((word, wordI) => {
+        var _idx = this.karaoke_element.id + '_kara_' + lineI + '_' + wordI
         spaceEle +=
           '<p class="lyrics ' +
-          Karaoke.TypeLists[word.type] +
-          '" id="kara_' +
+          __kara_typeList[word.type] +
+          '" id="' +
+          _idx +
+          '"data-line="' +
           lineI +
-          '_' +
+          '" data-word="' +
           wordI +
           '" style="text-shadow: ' +
           (word.text_color !== null && word.text_color !== ''
             ? '0 0 5px ' + word.text_color
             : '') +
-          ';" onclick="Karaoke.SelectWord(' +
-          lineI +
-          ', ' +
-          wordI +
-          ', this)">' +
+          ';">' +
           (typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
             ? '<ruby>' +
               word.text.replace(/\s/g, '&nbsp') +
@@ -231,22 +235,68 @@ var Karaoke = {
           '</p>'
       })
       inserts +=
-        '<div class="p_line" id="kara_' +
+        '<div class="p_line" id="' +
+        this.karaoke_element.id +
+        '_kara_' +
         lineI +
-        '"><p class="line_num" onclick="Karaoke.selectLine(' +
+        '"><p class="line_num" data-line="' +
         lineI +
-        ')">' +
+        '">' +
         lineI +
         '.</p> ' +
         spaceEle +
         '</div>'
     })
 
-    document.getElementById('karaoke').innerHTML = inserts
-  },
+    this.karaoke_element.innerHTML = inserts
 
-  clearSync: function (aftFunc) {
-    var lyricsElement = document.getElementsByClassName('.lyrics')
+    var lem = document.querySelectorAll(
+      '#' + this.karaoke_element.id + ' .line_num'
+    )
+
+    for (var i = 0; i < lem.length; i++) {
+      ;((_self, clf, perElem) => {
+        perElem.addEventListener('click', function () {
+          var posX = Number(perElem.dataset.line)
+          var clcA = _self.karaokeData.timeline[posX].collection
+          for (var z = 0; z < clcA.length; z++) {
+            for (var o = 0; o < clf.length; o++) {
+              clf[o](_self, {
+                detail: {
+                  posX,
+                  posY: z,
+                  perElem: document.getElementById(
+                    _self.karaoke_element.id + '_kara_' + posX + '_' + z
+                  )
+                }
+              })
+            }
+          }
+        })
+      })(this, this.__clickFunctions, lem[i])
+    }
+
+    var dcg = document.querySelectorAll(
+      '#' + this.karaoke_element.id + ' .lyrics'
+    )
+
+    for (var i = 0; i < dcg.length; i++) {
+      ;((_self, clf, perElem) => {
+        perElem.addEventListener('click', function () {
+          var posX = Number(perElem.dataset.line)
+          var posY = Number(perElem.dataset.word)
+
+          for (var o = 0; o < clf.length; o++) {
+            clf[o](_self, { detail: { posX, posY, perElem } })
+          }
+        })
+      })(this, this.__clickFunctions, dcg[i])
+    }
+  }
+  this.clearSync = function (aftFunc) {
+    var lyricsElement = document.querySelectorAll(
+      '#' + this.karaoke_element.id + ' .lyrics'
+    )
 
     for (var dk = 0; dk < lyricsElement.length; dk++) {
       lyricsElement[dk].className = lyricsElement[dk].className.replace(
@@ -258,42 +308,46 @@ var Karaoke = {
     if (typeof aftFunc === 'function') {
       aftFunc()
     }
-  },
-
-  tickSoundEnable: true,
-  tickSoundsCache: {},
-  toggleTickSounds: function () {
-    Karaoke.tickSoundEnable = !Karaoke.tickSoundEnable
-    Sakurauchi.run('tickSoundChanged', Karaoke.tickSoundEnable)
-  },
-  cachedDom: {},
-  AudioSync: function (timeCode, fullRender) {
-    if (karaokeData === 'undefined' || karaokeData === null) return 0
+  }
+  this.tickSoundEnable = true
+  this.tickSoundsCache = {}
+  this.toggleTickSounds = function () {
+    this.tickSoundEnable = !this.tickSoundEnable
+    Sakurauchi.run('tickSoundChanged', this.tickSoundEnable)
+  }
+  this.cachedDom = {}
+  this.AudioSync = function (timeCode, fullRender) {
+    if (this.karaokeData === 'undefined' || this.karaokeData === null) {
+      return 0
+    }
     for (
       var karaLineNum = 0;
-      karaLineNum < karaokeData.timeline.length;
+      karaLineNum < this.karaokeData.timeline.length;
       karaLineNum++
     ) {
-      if (typeof Karaoke.cachedDom[karaLineNum] === 'undefined') {
-        Karaoke.cachedDom[karaLineNum] = document.getElementById(
-          'kara_' + karaLineNum
+      if (typeof this.cachedDom[karaLineNum] === 'undefined') {
+        this.cachedDom[karaLineNum] = document.getElementById(
+          this.karaoke_element.id + '_kara_' + karaLineNum
         )
       }
-      var karaLine = karaokeData.timeline[karaLineNum]
+      var karaLine = this.karaokeData.timeline[karaLineNum]
       var isNotHighlighting =
         timeCode < karaLine.start_time || timeCode > karaLine.end_time
 
       if (
         isNotHighlighting &&
-        /__cur_line/g.test(Karaoke.cachedDom[karaLineNum].className)
+        /__cur_line/g.test(this.cachedDom[karaLineNum].className)
       ) {
-        Karaoke.cachedDom[karaLineNum].className = Karaoke.cachedDom[
+        this.cachedDom[karaLineNum].className = this.cachedDom[
           karaLineNum
         ].className.replace(/\s__cur_line/, '')
       }
 
-      if (!isNotHighlighting) {
-        Karaoke.cachedDom[karaLineNum].classList += ' __cur_line'
+      if (
+        !isNotHighlighting &&
+        !/\s__cur_line/g.test(this.cachedDom[karaLineNum].classList)
+      ) {
+        this.cachedDom[karaLineNum].className += ' __cur_line'
       }
 
       if (
@@ -314,14 +368,15 @@ var Karaoke = {
         karaWord.end_time = Number(karaWord.end_time)
 
         if (
-          typeof Karaoke.cachedDom[karaLineNum + '.' + karaWordNum] ===
-          'undefined'
+          typeof this.cachedDom[karaLineNum + '.' + karaWordNum] === 'undefined'
         ) {
-          Karaoke.cachedDom[
+          this.cachedDom[
             karaLineNum + '.' + karaWordNum
-          ] = document.getElementById('kara_' + karaLineNum + '_' + karaWordNum)
+          ] = document.getElementById(
+            this.karaoke_element.id + '_kara_' + karaLineNum + '_' + karaWordNum
+          )
         }
-        var kards = Karaoke.cachedDom[karaLineNum + '.' + karaWordNum]
+        var kards = this.cachedDom[karaLineNum + '.' + karaWordNum]
 
         var isCurWord =
           timeCode > karaWord.start_time && timeCode > karaWord.end_time
@@ -341,14 +396,14 @@ var Karaoke = {
               : kards.className.replace(/\scurrentSync/g, '')
 
           if (
-            Karaoke.tickSoundEnable &&
+            this.tickSoundEnable &&
             timeCode > karaWord.start_time - 5 &&
             timeCode < karaWord.end_time &&
-            !Karaoke.tickSoundsCache[karaWord.start_time] &&
+            !this.tickSoundsCache[karaWord.start_time] &&
             karaWord.type == 2
           ) {
             Sakurauchi.run('tickSounds')
-            Karaoke.tickSoundsCache[karaWord.start_time] = true
+            this.tickSoundsCache[karaWord.start_time] = true
           }
 
           if (!kards.style.transition || fullRender) {
@@ -369,10 +424,9 @@ var Karaoke = {
               karaLine.collection[karaWordNum - 1].start_time ===
                 karaLine.collection[karaWordNum].start_time
             ) {
-              kards.style.transition =
-                Karaoke.cachedDom[
-                  karaLineNum + '.' + (karaWordNum - 1)
-                ].style.transition
+              kards.style.transition = this.cachedDom[
+                karaLineNum + '.' + (karaWordNum - 1)
+              ].style.transition
             } else {
               kards.style.transition =
                 'text-shadow ' +
@@ -403,5 +457,3 @@ var Karaoke = {
     }
   }
 }
-
-window.Karaoke = Karaoke

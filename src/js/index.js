@@ -1,5 +1,6 @@
 let requestAudioSync
 let requestAudioVolume = null
+let globalKaraokeInstance = null
 
 const artistLists = [
   'Aqours',
@@ -119,23 +120,14 @@ let LLCT = {
     $.ajax({
       url: './data/' + id + '/karaoke.json',
       success: function (data) {
-        window.karaokeData = typeof data === 'object' ? data : JSON.parse(data)
-        Karaoke.RenderDOM()
+        KaraokeInstance.karaokeData =
+          typeof data === 'object' ? data : JSON.parse(data)
+        KaraokeInstance.RenderDOM()
         yohaneNoDOM.shokan()
       },
       error: function (err) {
         return logger(2, 'r', err.message, 'e')
       }
-    })
-
-    Sakurauchi.remove('KaraokeSelection')
-    Sakurauchi.add('KaraokeSelection', e => {
-      document.getElementById('kara_audio').currentTime =
-        karaokeData.timeline[e.detail.posX].collection[e.detail.posY]
-          .start_time /
-          100 -
-        0.03
-      yohaneNoDOM.timeLeapDisableAnimation()
     })
   },
 
@@ -654,11 +646,11 @@ let yohane = {
     }
     if (
       yohaneNoDOM.kaizu &&
-      typeof karaokeData !== 'undefined' &&
-      karaokeData !== null &&
-      karaokeData.timeline
+      typeof KaraokeInstance.karaokeData !== 'undefined' &&
+      KaraokeInstance.karaokeData !== null &&
+      KaraokeInstance.karaokeData.timeline
     ) {
-      Karaoke.AudioSync(yohane.timecode())
+      KaraokeInstance.AudioSync(yohane.timecode())
     }
 
     if (yohane.tickVal == null) yohane.tickVal = 0
@@ -692,7 +684,7 @@ let yohane = {
   },
 
   initialize: id => {
-    window.karaokeData = null
+    KaraokeInstance.karaokeData = null
     yohaneNoDOM.initialize(id)
 
     if (dataYosoro.get('notUsingMP')) {
@@ -921,6 +913,7 @@ const keys = {
 }
 
 let pageLoadedFunctions = () => {
+  window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
   // 인터넷 익스플로더 좀 쓰지 맙시다
   if (/* @cc_on!@ */ false || !!document.documentMode) {
     document.getElementById('PLEASE_STOP_USE_INTERNET_EXPLORER').style.display =
@@ -969,12 +962,22 @@ let pageLoadedFunctions = () => {
     if (requestAudioSync) clearInterval(requestAudioSync)
   }
 
+  KaraokeInstance.ListenClickEvent(function (instance, e) {
+    document.getElementById('kara_audio').currentTime =
+      instance.karaokeData.timeline[e.detail.posX].collection[e.detail.posY]
+        .start_time /
+        100 -
+      0.03
+
+    yohaneNoDOM.timeLeapDisableAnimation()
+  })
+
   Sakurauchi.listen(
     ['seeking', 'seeked'],
     () => {
-      Karaoke.tickSoundsCache = {}
-      Karaoke.clearSync(() => {
-        Karaoke.AudioSync(Math.floor(yohane.timecode()), true)
+      KaraokeInstance.tickSoundsCache = {}
+      KaraokeInstance.clearSync(() => {
+        KaraokeInstance.AudioSync(Math.floor(yohane.timecode()), true)
       })
     },
     yohane.player()
@@ -1076,13 +1079,13 @@ let pageLoadedFunctions = () => {
     dataYosoro.set('biTick', v)
   })
 
-  Karaoke.tickSoundEnable =
+  KaraokeInstance.tickSoundEnable =
     dataYosoro.get('biTick') == null ||
     typeof dataYosoro.get('biTick') === 'undefined'
       ? true
       : !!dataYosoro.get('biTick')
 
-  Sakurauchi.run('tickSoundChanged', Karaoke.tickSoundEnable)
+  Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
 
   Sakurauchi.listen(
     'click',
@@ -1116,8 +1119,8 @@ let pageLoadedFunctions = () => {
   Sakurauchi.listen('focus', () => {
     if (!yohane.playing()) return 0
 
-    Karaoke.clearSync()
-    Karaoke.AudioSync(yohane.timecode(), true)
+    KaraokeInstance.clearSync()
+    KaraokeInstance.AudioSync(yohane.timecode(), true)
   })
 
   Sakurauchi.listen('blur', () => {

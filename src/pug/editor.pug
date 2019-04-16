@@ -26,7 +26,7 @@ html.editor
           i.material-icons play_arrow
         button#stop_audio.nav_btn(onclick='wavesurfer.playPause()')
           i.material-icons stop
-        button#export.nav_btn(onclick='KaraokeEditor.Export(window.karaokeData)')
+        button#export.nav_btn(onclick='KaraokeEditor.Export(KaraokeInstance.karaokeData)')
           i.material-icons cloud_download
         button#import.nav_btn(onclick="$('#fInput').click()")
           i.material-icons cloud_upload
@@ -57,7 +57,7 @@ html.editor
             input#playback_rate.blackInput(type='number', value='1', onchange='wavesurfer.setPlaybackRate(this.value)')
           p
             | 보정값
-            input#correcttime.blackInput(type='number', value='-10', onchange='window.karaokeData.metadata.correction_time = Number(this.value)')
+            input#correcttime.blackInput(type='number', value='-10', onchange='KaraokeInstance.karaokeData.metadata.correction_time = Number(this.value)')
           p
             | 키를 누번 눌러 선택 해제 사용
             input#key_pressed_twice.blackInput(type='checkbox', onchange='dataYosoro.set("useDouble", this.checked)')
@@ -68,21 +68,21 @@ html.editor
           p.kr 파일 메타데이터 설정입니다.
           p
             | 블레이드 추천 HEX 값
-            input#blade_hex_meta.blackInput(type='color', value='#000', onchange='window.karaokeData.metadata.bladeColorHEX = this.value')
+            input#blade_hex_meta.blackInput(type='color', value='#000', onchange='KaraokeInstance.karaokeData.metadata.bladeColorHEX = this.value')
           p
             | 블레이드 추천 멤버
-            input#blade_name_meta.blackInput(type='text', value='', onchange='window.karaokeData.metadata.bladeColorMember = this.value')
+            input#blade_name_meta.blackInput(type='text', value='', onchange='KaraokeInstance.karaokeData.metadata.bladeColorMember = this.value')
       #timeline_editor.center_divier.page.notCurrentpage
         .lyrics_write
           h1.kr 가사
           p.kr
             | !! 라인이 변경되면 해당 라인에 있던 속성 값이 모두 사라집니다. !!
-          textarea#kashi_type.blackArea.kr(rows='15', onchange='Karaoke.SetTimelineData(Karaoke.MergeRender( karaokeData.timeline, Karaoke.Render(this.value)));KaraokeEditor.setLyrics(this.value);')
+          textarea#kashi_type.blackArea.kr(rows='15', onchange='KaraokeInstance.SetTimelineData(KaraokeInstance.MergeRender( KaraokeInstance.karaokeData.timeline, KaraokeInstance.Render(this.value)));KaraokeEditor.setLyrics(this.value);')
           br
           .editor_btncollec
             button.nav_btn(onclick="KaraokeEditor.asReplacing()")
               | 각 칸마다 띄우기
-            button.nav_btn(onclick="window.karaokeData.metadata.writeDone = true;$('.lyrics_write').addClass('__edit_hidden_tabs')")
+            button.nav_btn(onclick="KaraokeInstance.karaokeData.metadata.writeDone = true;$('.lyrics_write').addClass('__edit_hidden_tabs')")
               i.material-icons lock
               |  작성 완료
         .lyrics_render
