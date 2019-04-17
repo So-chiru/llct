@@ -146,8 +146,6 @@ gulp.task('watch', () => {
   )
 })
 
-gulp.task('default', gulp.series('watch'))
-
 gulp.task(
   'build',
   gulp.series(
@@ -162,6 +160,8 @@ gulp.task(
     'root_assets'
   )
 )
+
+gulp.task('default', gulp.series('build', 'watch'))
 
 gulp.task(
   'init_run',

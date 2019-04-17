@@ -367,7 +367,7 @@ const KaraokeEditor = {
       selectedObject[key] = value
 
       if (!shiftMode && altMode && index === selectWords.length - 1) {
-        $(selectWords[0].element).toggleClass('WordSelected')
+        $(selectWords[0].perElem).toggleClass('WordSelected')
         selectWords.splice(0, 1)
       }
     })
@@ -451,7 +451,7 @@ const KaraokeEditor = {
   },
   clearSelection: () => {
     selectWords.forEach(v => {
-      $(v.element).toggleClass('WordSelected', false)
+      $(v.perElem).toggleClass('WordSelected', false)
     })
 
     selectWords = []

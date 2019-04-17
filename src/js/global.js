@@ -131,7 +131,7 @@ var urlQueryParams = function (name) {
 let Sakurauchi = {
   __sot: {},
   add: (k, fn) => {
-    if (!Sakurauchi.__sot[k]) {
+    if (typeof Sakurauchi.__sot[k] === 'undefined' || !Sakurauchi.__sot[k]) {
       Sakurauchi.__sot[k] = []
     }
 
@@ -198,6 +198,7 @@ let Sakurauchi = {
 
   run: (k, ...datas) => {
     logger(2, 's', 'Sakurauchi.run called : ' + k)
+    if (typeof Sakurauchi.__sot[k] === 'undefined') return
     for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
       try {
         Sakurauchi.__sot[k][_i](...datas)
