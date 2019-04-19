@@ -22,7 +22,8 @@ let HugContext = class {
     var t_id = _ev.target.id
 
     if (/kara_(\d+)_(\d+)/g.test(t_id)) {
-      this.__target = t_id.replace('kara_', '').split('_')
+      this.__target = t_id.split('_').splice(-2)
+      console.log(this.__target)
       document.getElementById('__context_bg').style.display = 'block'
       document.getElementById('__context_frame').style.display = 'block'
       document.getElementById('__context_frame').style.top =

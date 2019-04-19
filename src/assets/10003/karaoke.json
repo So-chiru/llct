@@ -2765,90 +2765,62 @@
     },
     {
       "start_time": 11606,
-      "end_time": 12583,
+      "end_time": 12371,
       "collection": [
         {
           "text": "(우-",
           "start_time": 11706,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이! ",
           "start_time": 11805,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "우-",
           "start_time": 11838,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이! ",
           "start_time": 11937,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "우-",
           "start_time": 11970,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이! ",
           "start_time": 12069,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "우-",
           "start_time": 12102,
-          "end_time": 12483,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "하이! ",
-          "start_time": 12201,
-          "end_time": 12483,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "우-",
-          "start_time": 12234,
-          "end_time": 12483,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "하이! ",
-          "start_time": 12333,
-          "end_time": 12483,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "우-",
-          "start_time": 12366,
-          "end_time": 12483,
+          "end_time": 12271,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이!)",
-          "start_time": 12465,
-          "end_time": 12483,
-          "pronunciation_time": 0,
+          "start_time": 12201,
+          "end_time": 12271,
+          "pronunciation_time": "0.3333",
           "type": "2"
         }
       ]
