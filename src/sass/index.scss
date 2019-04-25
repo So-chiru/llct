@@ -532,6 +532,52 @@ body {
   margin-bottom: auto;
 }
 
+@-webkit-keyframes grd {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes grd {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.lyrics_wrapper.hiddenCurtain {
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 94%;
+  background: linear-gradient(to left, #6b6b6b, #3a3a3a);
+  background-size: 500% 500%;
+  -webkit-animation: grd 5s ease infinite;
+  animation: grd 5s ease infinite;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lyrics_wrapper-inner.hiddenCurtain {
+  display: none;
+}
+
+.lyrics_wrapper.hiddenCurtain::before {
+  width: 100%;
+  height: 100%;
+  background-color: #323232;
+}
+
 .lyrics_wrapper {
   position: absolute;
   display: none;

@@ -104,6 +104,7 @@ let LLCT = {
   },
 
   loadCallImage: id => {
+    yohaneNoDOM.hideLyrics()
     document.getElementById('karaoke').innerHTML =
       `<img class="call_img" onclick="LLCT.openCallImage('${id}')" src="` +
       (urlQueryParams('local') === 'true'
@@ -112,18 +113,21 @@ let LLCT = {
       'data/' +
       id +
       '/call.jpg' +
-      '"></img>'
+      '" onload="yohaneNoDOM.showLyrics()"></img>'
     yohaneNoDOM.shokan()
   },
 
   loadLyrics: id => {
+    yohaneNoDOM.hideLyrics()
+    yohaneNoDOM.shokan()
+
     $.ajax({
       url: './data/' + id + '/karaoke.json',
       success: function (data) {
         KaraokeInstance.karaokeData =
           typeof data === 'object' ? data : JSON.parse(data)
         KaraokeInstance.RenderDOM()
-        yohaneNoDOM.shokan()
+        yohaneNoDOM.showLyrics()
       },
       error: function (err) {
         return logger(2, 'r', err.message, 'e')
@@ -232,6 +236,18 @@ let yohaneNoDOM = {
     document.getElementById('dekaku_btn').classList.remove('in_active')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+  },
+
+  hideLyrics: () => {
+    document.getElementById('lyrics_wrap').classList.add('hiddenCurtain')
+    document.getElementById('lyrics_wrap_inner').classList.add('hiddenCurtain')
+  },
+
+  showLyrics: () => {
+    document.getElementById('lyrics_wrap').classList.remove('hiddenCurtain')
+    document
+      .getElementById('lyrics_wrap_inner')
+      .classList.remove('hiddenCurtain')
   },
 
   chiisakuni: () => {
@@ -1012,38 +1028,50 @@ let pageLoadedFunctions = () => {
   var closeVal = 0
   var closeDir = 0
   var originCalc = null
+  var domGPLBg = document.getElementById('pl_bg')
+  var domGPLKa = document.getElementById('kara_player')
+
+  playerHammer.on('panstart', ev => {
+    domGPLBg.classList.add('show')
+    yohaneNoDOM.hideLyrics()
+  })
+
   playerHammer.on('panend', ev => {
+    yohaneNoDOM.showLyrics()
+
     if (closeVal < -250) {
-      yohaneNoDOM.dekakuni()
+      yohaneNoDOM.dekakuni(true)
     } else if (closeVal > 250 && !closeDir) {
-      yohaneNoDOM.chiisakuni()
+      yohaneNoDOM.chiisakuni(true)
     }
 
-    document.getElementById('kara_player').style.transform = null
-    document.getElementById('kara_player').style.height = null
+    domGPLKa.style.transform = 'translateY(0px)'
+    domGPLKa.style.height = null
     closeVal = 0
     closeDir = 0
     originCalc = null
+    !yohaneNoDOM.kaizu && domGPLBg.classList.remove('show')
   })
 
   playerHammer.on('pan', ev => {
     if (!originCalc) {
-      originCalc = document.getElementById('kara_player').clientHeight
+      originCalc = domGPLKa.clientHeight
     }
+
     closeVal = ev.deltaY
     closeDir = ev.additionalEvent === 'panup'
 
     if (ev.additionalEvent == 'panup' || ev.additionalEvent == 'pandown') {
       if (ev.deltaY > 0) {
-        document.getElementById('kara_player').style.transform =
-          'translateY(' + ev.deltaY + 'px)'
+        domGPLKa.style.transform = 'translateY(' + ev.deltaY + 'px)'
       }
 
-      document.getElementById('pl_bg').style.opacity = document.getElementById(
-        'kara_player'
-      ).style.height = originCalc + (ev.deltaY < 0 ? closeVal * -1 : 0) + 'px'
+      domGPLBg.style.opacity = 1 - ev.deltaY / window.innerHeight
+
+      if (ev.deltaY < 0) {
+        domGPLKa.style.height = originCalc + closeVal * -1 + 'px'
+      }
     }
-    // console.log(ev.deltaY, ev.direction, ev)
   })
 
   var __lcal_loadedAjax = d => {
