@@ -218,14 +218,6 @@ $(document).ready(() => {
     }
   })
   window.selectWords = []
-  var valElementObject = {
-    '#start_time_val': 'start_time',
-    '#end_time_val': 'end_time',
-    '#pron_time_val': 'pronunciation_time',
-    '#type_val': 'type',
-    '#ruby_text_val': 'ruby_text',
-    '#text_val': 'text'
-  }
 
   window.editorLyricsContext = new HugContext(
     document.getElementById('karaoke')
@@ -350,7 +342,18 @@ var _c = {
   pronunciation_time: '#pron_time_val',
   type: '#type_val',
   ruby_text: '#ruby_text_val',
-  text: '#text_val'
+  text: '#text_val',
+  tick_volume: '#tick_volume_val'
+}
+
+var valElementObject = {
+  '#start_time_val': 'start_time',
+  '#end_time_val': 'end_time',
+  '#pron_time_val': 'pronunciation_time',
+  '#type_val': 'type',
+  '#ruby_text_val': 'ruby_text',
+  '#text_val': 'text',
+  '#tick_volume_val': 'tick_volume'
 }
 
 var __prevKCount = ['_', 0]

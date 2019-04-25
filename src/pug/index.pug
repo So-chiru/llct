@@ -31,7 +31,7 @@ html(lang="kr").index
         .inr(style="margin: auto;position: relative;text-align: center;")
             h1 LLCT
             h3 LoveLive! Call Table Guide
-    .player_bg(onclick="yohaneNoDOM.chiisakuni()")
+    #pl_bg.player_bg(onclick="yohaneNoDOM.chiisakuni()")
     #kara_player.player.hide(onclick="yohaneNoDOM.dekakuOnce(this.target)")
         .dash_wrapper#dash_wrp_ham(data-scrollbar)
             .visible_dash
@@ -52,7 +52,7 @@ html(lang="kr").index
                 .ctrls
                     span#pp_btn.material-icons(onclick="yohane.toggle()" title="노래 재생") play_arrow
                     // span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
-                    span#tick_btn.material-icons.in_active(onclick="Karaoke.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
+                    span#tick_btn.material-icons.in_active(onclick="KaraokeInstance.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
                     span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
                     span#dekaku_btn.material-icons(title="플레이어 크게 / 작게") keyboard_arrow_down
         .lyrics_wrapper

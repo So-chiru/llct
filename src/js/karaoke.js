@@ -402,7 +402,7 @@ var Karaoke = function (__element) {
             !this.tickSoundsCache[karaWord.start_time] &&
             karaWord.type == 2
           ) {
-            Sakurauchi.run('tickSounds')
+            Sakurauchi.run('tickSounds', karaWord.tick_volume)
             this.tickSoundsCache[karaWord.start_time] = true
           }
 

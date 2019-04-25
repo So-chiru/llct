@@ -1005,6 +1005,45 @@ let pageLoadedFunctions = () => {
     } else if (ev.direction === 8) {
       yohaneNoDOM.dekakuni()
     }
+
+    document.getElementById('kara_player').style.transform = 'translateY(0px)'
+  })
+
+  var closeVal = 0
+  var closeDir = 0
+  var originCalc = null
+  playerHammer.on('panend', ev => {
+    if (closeVal < -250) {
+      yohaneNoDOM.dekakuni()
+    } else if (closeVal > 250 && !closeDir) {
+      yohaneNoDOM.chiisakuni()
+    }
+
+    document.getElementById('kara_player').style.transform = null
+    document.getElementById('kara_player').style.height = null
+    closeVal = 0
+    closeDir = 0
+    originCalc = null
+  })
+
+  playerHammer.on('pan', ev => {
+    if (!originCalc) {
+      originCalc = document.getElementById('kara_player').clientHeight
+    }
+    closeVal = ev.deltaY
+    closeDir = ev.additionalEvent === 'panup'
+
+    if (ev.additionalEvent == 'panup' || ev.additionalEvent == 'pandown') {
+      if (ev.deltaY > 0) {
+        document.getElementById('kara_player').style.transform =
+          'translateY(' + ev.deltaY + 'px)'
+      }
+
+      document.getElementById('pl_bg').style.opacity = document.getElementById(
+        'kara_player'
+      ).style.height = originCalc + (ev.deltaY < 0 ? closeVal * -1 : 0) + 'px'
+    }
+    // console.log(ev.deltaY, ev.direction, ev)
   })
 
   var __lcal_loadedAjax = d => {
@@ -1065,9 +1104,12 @@ let pageLoadedFunctions = () => {
     document.getElementById('dekaku_btn')
   )
 
-  Sakurauchi.add('tickSounds', () => {
-    document.getElementById('tick_sounds').currentTime = 0
-    document.getElementById('tick_sounds').play()
+  Sakurauchi.add('tickSounds', vol_d => {
+    var tickSound = document.getElementById('tick_sounds')
+    tickSound.currentTime = 0
+    tickSound.play()
+
+    tickSound.volume = vol_d || 1
   })
 
   Sakurauchi.add('tickSoundChanged', v => {
