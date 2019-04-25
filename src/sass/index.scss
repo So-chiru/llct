@@ -560,12 +560,16 @@ body {
   margin-left: 3%;
   margin-right: 3%;
   width: 94%;
-  background: linear-gradient(to left, #6b6b6b, #3a3a3a);
+  background: linear-gradient(to left, #e7e7e7, #d3d3d3);
   background-size: 500% 500%;
   -webkit-animation: grd 5s ease infinite;
   animation: grd 5s ease infinite;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.dark .lyrics_wrapper.lyrics_wrapper.hiddenCurtain {
+  background: linear-gradient(to left, #6b6b6b, #3a3a3a);
 }
 
 .lyrics_wrapper-inner.hiddenCurtain {
