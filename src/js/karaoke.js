@@ -397,6 +397,7 @@ var Karaoke = function (__element) {
 
           if (
             this.tickSoundEnable &&
+            karaWord.text.trim() !== '*' &&
             timeCode > karaWord.start_time - 5 &&
             timeCode < karaWord.end_time &&
             !this.tickSoundsCache[karaWord.start_time] &&
