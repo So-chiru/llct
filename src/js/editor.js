@@ -273,7 +273,7 @@ $(document).ready(() => {
       {
         start_time: 0,
         end_time: 0,
-        collection: [Karaoke.SpaParsing('', false)]
+        collection: [KaraokeInstance.SpaParsing('', false)]
       }
     )
 
