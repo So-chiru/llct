@@ -58,7 +58,12 @@ var Karaoke = function (__element) {
     return wordObject
   }
   this.SetTimelineData = function (data) {
-    this.karaokeData.timeline = data
+    this.karaokeData = {
+      metadata: (this.karaokeData || {}).metadata || {
+        correction_time: -10
+      },
+      timeline: data
+    }
     this.RenderDOM()
     this.lineTimingValidate()
   }
@@ -317,7 +322,7 @@ var Karaoke = function (__element) {
   }
   this.cachedDom = {}
   this.AudioSync = function (timeCode, fullRender) {
-    if (this.karaokeData === 'undefined' || this.karaokeData === null) {
+    if (typeof this.karaokeData === 'undefined' || this.karaokeData === null) {
       return 0
     }
     for (

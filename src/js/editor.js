@@ -280,6 +280,10 @@ $(document).ready(() => {
     KaraokeInstance.RenderDOM()
   })
 
+  editorLyricsContext.addAction('concatWords', () => {
+    console.log(window.selectWords)
+  })
+
   Sakurauchi.add('KaraokeLoaded', () => {
     KaraokeInstance.RenderDOM()
 
