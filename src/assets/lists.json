@@ -1404,6 +1404,7 @@
     ],
     "center": null,
     "artist": 1,
+    "karaoke": true,
     "short_kr": "빌립어겐"
   }
 }
