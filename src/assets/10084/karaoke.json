@@ -259,7 +259,7 @@
         },
         {
           "text": "하이 ",
-          "start_time": "1685",
+          "start_time": 1685,
           "end_time": 2110,
           "pronunciation_time": "0.3333",
           "type": "2"
@@ -286,7 +286,7 @@
         },
         {
           "text": "하이 ",
-          "start_time": "1950",
+          "start_time": 1950,
           "end_time": 2110,
           "pronunciation_time": 0,
           "type": "2"
@@ -6679,58 +6679,58 @@
         },
         {
           "text": "하이 ",
-          "start_time": "25770",
+          "start_time": 25770,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "25850",
+          "start_time": 25850,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "25940",
+          "start_time": 25940,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26022",
+          "start_time": 26022,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26107",
+          "start_time": 26107,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26191",
+          "start_time": 26191,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26275",
+          "start_time": 26275,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26362",
+          "start_time": 26362,
           "end_time": 27144,
-          "pronunciation_time": 0,
+          "pronunciation_time": "0.3333",
           "type": "2"
         }
       ]
@@ -6741,56 +6741,56 @@
       "collection": [
         {
           "text": "하이 ",
-          "start_time": "26450",
+          "start_time": 26450,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26541",
+          "start_time": 26541,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 26644,
+          "start_time": 26624,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26706",
+          "start_time": 26706,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26791",
+          "start_time": 26791,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26878",
+          "start_time": 26878,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "26966",
+          "start_time": 26966,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": "27047",
+          "start_time": 27047,
           "end_time": 27144,
           "pronunciation_time": 0,
           "type": "2"
