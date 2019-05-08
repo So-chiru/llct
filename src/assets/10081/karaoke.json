@@ -1,0 +1,4949 @@
+{
+  "metadata": {
+    "correction_time": -10,
+    "lyrics": "이치! 니! 산! 욘! 고! 로쿠!\n\n(나나! 하치! 큐!)\n키코에타?\n\n< 전주  부분  :  이치카라  코노  사키에\n민나토  토모니  소노  사키노  미라이에\n아쿠아!\n선-  샤인!  >\n\n히 토 츠  히 토 츠 노  오 모 이 데 타 치 가\n다 이 지 나 은 다  즛 토  키 레 이 나  보 쿠 라 노  타 카 라 모 노 다 요\n돈 나  토 오 쿠 에  하 나 레 테 모  킷 토  미 에 루\n이 츠 모 노 케 시 키  코 코 로 노  나 카 니  시 맛 테 아 루 카 라\n\n아 이 타 쿠  나 앗 타 라  메 오  토 지 테\n미 은 나 오  요 은 데 미 테  소 시 타 라\n키 코 에 루 요  코 노  우 타 가\n호 라  츠 기 와  도 코  이 잇 쇼 니  유 코 우!\n\n와 스 레 나 이  와 스 레 나 이  유 메 가  아 레 바\n키 미 모  보 쿠 라 모  나 레 루 은 다  나 리 타 이  지 부 은 니\n와 스 레 나 이  와 스 레 나 이  유 메 미 루  코 토\n아 시 타 와  쿄 우 요 리  유 메 니  치 카 이  하 즈 다 요\n\n< 간주  부분 >\n\n히 토 리  히 토 리 와  치 가 앗 테 이 테 모\n오 나 지 닷 타 요  이 마  코 노  토 키 오  타 이 세 츠 니  키 자 은 다 노 와\n젯 타 이  키 에 나 이  스 테 키 나  모 노 가 타 리\n미 은 나 토  다 카 라  데 키 타  코 토 다 네\n스 고 이 네,  아 리 가 토 우!\n\n아 이 타 쿠  나 루 은 다  와 카 앗 테 루\n미 은 나 오  요 비 타 이 요  이 츠 데 모\n키 코 에 루 요  코 노  우 타 가\n마 다  하 시 레 루 네  이 잇 쇼 니  유 코 우\n\n토 마 라 나 이  토 마 라 나 이  아 츠 이  코 도 우 가\n키 미 토  보 쿠 라 와  코 레 카 라 모  츠 나 가 앗 테 룬 다 요\n토 마 라 나 이  토 마 라 나 이  아 츠 쿠 나 앗 테\n아 타 라 시 이  카 가 야 키 에 토  테 오  노 바 소 우\n\n< 간주  부분 >\n\n이 마 다 앗 테  미 쥬 쿠 다 케 도\n사 키 에  스 스 마 나 쿠 챠  소 레 시 카  나 인 다 요 네\n미 라 이 에!\n\n와 스 레 나 이  와 스 레 나 이  유 메 가  아 레 바\n키 미 모  보 쿠 라 모  나 레 루 은 다  나 리 타 이  지 부 은 니\n와 스 레 나 이  와 스 레 나 이  유 메 미 루  코 토\n아 시 타 와  쿄 우 요 리  유 메 니  치 카 이  하 즈 다 요\n\n토 마 라 나 이  토 마 라 나 이  아 츠 이  코 도 우 가\n키 미 토  보 쿠 라 와  코 레 카 라 모  츠 나 가 앗 테 룬 다 요\n토 마 라 나 이  토 마 라 나 이  아 츠 쿠 나 앗 테\n아 타 라 시 이  카 가 야 키 에 토  테 오  노 바 소 우\n\n< 후주  부분 >",
+    "writeDone": true
+  },
+  "timeline": [
+    {
+      "start_time": -99.9,
+      "end_time": 100.5,
+      "collection": [
+        {
+          "text": "이치!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "니!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "산!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "욘!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "고!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "로쿠!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -99.9,
+      "end_time": 100.5,
+      "collection": [
+        {
+          "text": "(나나!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "하치!",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "큐!)",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        }
+      ]
+    },
+    {
+      "start_time": -99.9,
+      "end_time": 100.5,
+      "collection": [
+        {
+          "text": "키코에타?",
+          "start_time": 0.1,
+          "end_time": 0.5,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -99.9,
+      "end_time": 3418,
+      "collection": [
+        {
+          "text": "<",
+          "start_time": 0.1,
+          "end_time": 3318,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "전주 ",
+          "start_time": 0.1,
+          "end_time": 3318,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "부분 ",
+          "start_time": 0.1,
+          "end_time": 3318,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": ": ",
+          "start_time": 0.1,
+          "end_time": 3318,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "이치카라 ",
+          "start_time": 62,
+          "end_time": 218,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "소노 ",
+          "start_time": 142,
+          "end_time": 218,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "사키에",
+          "start_time": 165,
+          "end_time": 218,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        }
+      ]
+    },
+    {
+      "start_time": 194,
+      "end_time": 781,
+      "collection": [
+        {
+          "text": "민나토 ",
+          "start_time": 294,
+          "end_time": 681,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "토모니 ",
+          "start_time": 342,
+          "end_time": 681,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "소노 ",
+          "start_time": 509,
+          "end_time": 681,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "사키노 ",
+          "start_time": 548,
+          "end_time": 681,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "미라이에",
+          "start_time": 598,
+          "end_time": 681,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        }
+      ]
+    },
+    {
+      "start_time": 673,
+      "end_time": 990,
+      "collection": [
+        {
+          "text": "아쿠아!",
+          "start_time": 773,
+          "end_time": 890,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        }
+      ]
+    },
+    {
+      "start_time": -99.9,
+      "end_time": 3418,
+      "collection": [
+        {
+          "text": "선- ",
+          "start_time": 972,
+          "end_time": 1197,
+          "pronunciation_time": 0,
+          "type": "4"
+        },
+        {
+          "text": "샤인! ",
+          "start_time": 1250,
+          "end_time": 1496,
+          "pronunciation_time": 0,
+          "type": "4"
+        },
+        {
+          "text": ">",
+          "start_time": 0.1,
+          "end_time": 3318,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 3218,
+      "end_time": 3948,
+      "collection": [
+        {
+          "text": "히",
+          "start_time": 3318,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "토",
+          "start_time": 3342,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "츠 ",
+          "start_time": 3366,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "히",
+          "start_time": 3439,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "토",
+          "start_time": 3487,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "츠",
+          "start_time": 3510,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "노 ",
+          "start_time": 3534,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "오",
+          "start_time": 3558,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "모",
+          "start_time": 3582,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "이",
+          "start_time": 3606,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "데",
+          "start_time": 3630,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "타",
+          "start_time": 3654,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "치",
+          "start_time": 3700,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "가",
+          "start_time": 3725,
+          "end_time": 3848,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        }
+      ]
+    },
+    {
+      "start_time": 3865,
+      "end_time": 4830,
+      "collection": [
+        {
+          "text": "다",
+          "start_time": 3965,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "이",
+          "start_time": 3990,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "지",
+          "start_time": 4014,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "나",
+          "start_time": 4038,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "은",
+          "start_time": 4086,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "다 ",
+          "start_time": 4110,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "즛",
+          "start_time": 4158,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "토 ",
+          "start_time": 4206,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "키",
+          "start_time": 4230,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "레",
+          "start_time": 4254,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "이",
+          "start_time": 4278,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "나 ",
+          "start_time": 4302,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "보",
+          "start_time": 4397,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "쿠",
+          "start_time": 4422,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "라",
+          "start_time": 4446,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "노 ",
+          "start_time": 4470,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "타",
+          "start_time": 4494,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "카",
+          "start_time": 4518,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "라",
+          "start_time": 4542,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "모",
+          "start_time": 4566,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "노",
+          "start_time": 4589,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "다",
+          "start_time": 4661,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "요",
+          "start_time": 4685,
+          "end_time": 4730,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        }
+      ]
+    },
+    {
+      "start_time": 4752,
+      "end_time": 5560,
+      "collection": [
+        {
+          "text": "돈",
+          "start_time": 4852,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "나 ",
+          "start_time": 4900,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "토",
+          "start_time": 4973,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "오",
+          "start_time": 4985,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "쿠",
+          "start_time": 5021,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "에 ",
+          "start_time": 5045,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "하",
+          "start_time": 5069,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "나",
+          "start_time": 5093,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "레",
+          "start_time": 5117,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "테",
+          "start_time": 5143,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "모 ",
+          "start_time": 5167,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "킷",
+          "start_time": 5189,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "토 ",
+          "start_time": 5262,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "미",
+          "start_time": 5311,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "에",
+          "start_time": 5333.5,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "루",
+          "start_time": 5359,
+          "end_time": 5460,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        }
+      ]
+    },
+    {
+      "start_time": 5402,
+      "end_time": 6352,
+      "collection": [
+        {
+          "text": "이",
+          "start_time": 5502,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "츠",
+          "start_time": 5526,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "모",
+          "start_time": 5550,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "노",
+          "start_time": 5574,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "케",
+          "start_time": 5598,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "시",
+          "start_time": 5622,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "키 ",
+          "start_time": 5646,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "코",
+          "start_time": 5694,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "코",
+          "start_time": 5718,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "로",
+          "start_time": 5742,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "노 ",
+          "start_time": 5766,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "나",
+          "start_time": 5790,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "카",
+          "start_time": 5814,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "니 ",
+          "start_time": 5837,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "시",
+          "start_time": 5925,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "맛",
+          "start_time": 5958,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 6005,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 6029,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루",
+          "start_time": 6077,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 6101,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 6125,
+          "end_time": 6252,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 6241,
+      "end_time": 6816,
+      "collection": [
+        {
+          "text": "아",
+          "start_time": 6341,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "이",
+          "start_time": 6365,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "타",
+          "start_time": 6389,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "쿠 ",
+          "start_time": 6413,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "나",
+          "start_time": 6485,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "앗",
+          "start_time": 6510,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "타",
+          "start_time": 6533,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "라 ",
+          "start_time": 6557,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "메",
+          "start_time": 6605,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "오 ",
+          "start_time": 6629,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "토",
+          "start_time": 6653,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "지",
+          "start_time": 6677,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "테",
+          "start_time": 6701,
+          "end_time": 6716,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        }
+      ]
+    },
+    {
+      "start_time": 6626,
+      "end_time": 7189,
+      "collection": [
+        {
+          "text": "미",
+          "start_time": 6726,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "은",
+          "start_time": 6750,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "나",
+          "start_time": 6774,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "오 ",
+          "start_time": 6798,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "요",
+          "start_time": 6845,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "은",
+          "start_time": 6870,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "데",
+          "start_time": 6893,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "미",
+          "start_time": 6917,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "테 ",
+          "start_time": 6941,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "소",
+          "start_time": 6989,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "시",
+          "start_time": 7012,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "타",
+          "start_time": 7037,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "라",
+          "start_time": 7061,
+          "end_time": 7089,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        }
+      ]
+    },
+    {
+      "start_time": 7010,
+      "end_time": 7549,
+      "collection": [
+        {
+          "text": "키",
+          "start_time": 7110,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "코",
+          "start_time": 7145,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "에",
+          "start_time": 7181,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "루",
+          "start_time": 7205,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "요 ",
+          "start_time": 7241,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "코",
+          "start_time": 7278,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "노 ",
+          "start_time": 7302,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "우",
+          "start_time": 7339,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "타",
+          "start_time": 7374,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "가",
+          "start_time": 7398,
+          "end_time": 7449,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        }
+      ]
+    },
+    {
+      "start_time": 7393,
+      "end_time": 8224,
+      "collection": [
+        {
+          "text": "호",
+          "start_time": 7493,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "라 ",
+          "start_time": 7528,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "츠",
+          "start_time": 7565,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "기",
+          "start_time": 7590,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "와 ",
+          "start_time": 7625,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "도",
+          "start_time": 7663,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "코 ",
+          "start_time": 7687,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "이",
+          "start_time": 7782,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "잇",
+          "start_time": 7806,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쇼",
+          "start_time": 7831,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "니 ",
+          "start_time": 7854,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 7878,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 8021,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우!",
+          "start_time": 8068,
+          "end_time": 8124,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 8060,
+      "end_time": 9023,
+      "collection": [
+        {
+          "text": "와",
+          "start_time": 8160,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 8213,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 8261,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 8309,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 8332,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와",
+          "start_time": 8404,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 8428,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 8500,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 8524,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 8572,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 8620,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "메",
+          "start_time": 8644,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가 ",
+          "start_time": 8692,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 8715,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 8787,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "바",
+          "start_time": 8835,
+          "end_time": 8923,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 8882,
+      "end_time": 9757,
+      "collection": [
+        {
+          "text": "키",
+          "start_time": 8982,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "미",
+          "start_time": 9006,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "모 ",
+          "start_time": 9030,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "보",
+          "start_time": 9078,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿠",
+          "start_time": 9102,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 9150,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "모 ",
+          "start_time": 9174,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 9222,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 9270,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루",
+          "start_time": 9293,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "은",
+          "start_time": 9342,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다 ",
+          "start_time": 9366,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 9414,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "리",
+          "start_time": 9438,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "타",
+          "start_time": 9462,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 9486,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "지",
+          "start_time": 9510,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "부",
+          "start_time": 9533,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "은",
+          "start_time": 9583,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "니",
+          "start_time": 9607,
+          "end_time": 9657,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 9600,
+      "end_time": 10562,
+      "collection": [
+        {
+          "text": "와",
+          "start_time": 9700,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 9748,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 9796,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 9844,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 9868,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와",
+          "start_time": 9944,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 9990,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 10038,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 10061,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 10109,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 10156,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "메",
+          "start_time": 10180,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "미",
+          "start_time": 10228,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루 ",
+          "start_time": 10252,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 10324,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 10376,
+          "end_time": 10462,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 10392,
+      "end_time": 11417,
+      "collection": [
+        {
+          "text": "아",
+          "start_time": 10492,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "시",
+          "start_time": 10517,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "타",
+          "start_time": 10541,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "와 ",
+          "start_time": 10565,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "쿄",
+          "start_time": 10613,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "우",
+          "start_time": 10637,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "요",
+          "start_time": 10662,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "리 ",
+          "start_time": 10710,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "유",
+          "start_time": 10758,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "메",
+          "start_time": 10806,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "니 ",
+          "start_time": 10852,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "치",
+          "start_time": 10924,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 10949,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 10973,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "하",
+          "start_time": 10997,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "즈",
+          "start_time": 11020,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다",
+          "start_time": 11094,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "요",
+          "start_time": 11117,
+          "end_time": 11317,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 11217,
+      "end_time": 13018,
+      "collection": [
+        {
+          "text": "<",
+          "start_time": 11317,
+          "end_time": 12918,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "간주 ",
+          "start_time": 11317,
+          "end_time": 12918,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "부분",
+          "start_time": 11317,
+          "end_time": 12918,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": ">",
+          "start_time": 11317,
+          "end_time": 12918,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 12818,
+      "end_time": 13524,
+      "collection": [
+        {
+          "text": "히",
+          "start_time": 12918,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "토",
+          "start_time": 12942,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "리 ",
+          "start_time": 12966,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "히",
+          "start_time": 13038,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "토",
+          "start_time": 13084,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "리",
+          "start_time": 13108,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "와 ",
+          "start_time": 13132,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "치",
+          "start_time": 13156,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "가",
+          "start_time": 13180,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "앗",
+          "start_time": 13206,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "테",
+          "start_time": 13230,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "이",
+          "start_time": 13254,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "테",
+          "start_time": 13300,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "모",
+          "start_time": 13324,
+          "end_time": 13424,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        }
+      ]
+    },
+    {
+      "start_time": 13466,
+      "end_time": 14467,
+      "collection": [
+        {
+          "text": "오",
+          "start_time": 13566,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "나",
+          "start_time": 13590,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "지",
+          "start_time": 13614,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "닷",
+          "start_time": 13638,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "타",
+          "start_time": 13686,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "요 ",
+          "start_time": 13708,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "이",
+          "start_time": 13758,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "마 ",
+          "start_time": 13782,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "코",
+          "start_time": 13806,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "노 ",
+          "start_time": 13830,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "토",
+          "start_time": 13854,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "키",
+          "start_time": 13878,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "오 ",
+          "start_time": 13902,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "타",
+          "start_time": 13998,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "이",
+          "start_time": 14024,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "세",
+          "start_time": 14048,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "츠",
+          "start_time": 14070,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "니 ",
+          "start_time": 14094,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "키",
+          "start_time": 14118,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "자",
+          "start_time": 14142,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "은",
+          "start_time": 14166,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "다",
+          "start_time": 14190,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "노",
+          "start_time": 14262,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        },
+        {
+          "text": "와",
+          "start_time": 14285,
+          "end_time": 14367,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ae58eb"
+        }
+      ]
+    },
+    {
+      "start_time": 14353,
+      "end_time": 15160,
+      "collection": [
+        {
+          "text": "젯",
+          "start_time": 14453,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "타",
+          "start_time": 14502,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "이 ",
+          "start_time": 14526,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "키",
+          "start_time": 14572,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "에",
+          "start_time": 14621,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "나",
+          "start_time": 14645,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "이 ",
+          "start_time": 14669,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "스",
+          "start_time": 14693,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "테",
+          "start_time": 14717,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "키",
+          "start_time": 14741,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "나 ",
+          "start_time": 14765,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "모",
+          "start_time": 14790,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "노",
+          "start_time": 14862,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "가",
+          "start_time": 14910,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "타",
+          "start_time": 14934,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        },
+        {
+          "text": "리",
+          "start_time": 14958,
+          "end_time": 15060,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f23b4c"
+        }
+      ]
+    },
+    {
+      "start_time": 15001,
+      "end_time": 15581,
+      "collection": [
+        {
+          "text": "미",
+          "start_time": 15101,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "은",
+          "start_time": 15125,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "나",
+          "start_time": 15149,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "토 ",
+          "start_time": 15173,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "다",
+          "start_time": 15197,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "카",
+          "start_time": 15221,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "라 ",
+          "start_time": 15245,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "데",
+          "start_time": 15293,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "키",
+          "start_time": 15317,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "타 ",
+          "start_time": 15341,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "코",
+          "start_time": 15365,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "토",
+          "start_time": 15389,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "다",
+          "start_time": 15413,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        },
+        {
+          "text": "네",
+          "start_time": 15437,
+          "end_time": 15481,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#13e8ae"
+        }
+      ]
+    },
+    {
+      "start_time": 15434,
+      "end_time": 15975,
+      "collection": [
+        {
+          "text": "스",
+          "start_time": 15534,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "고",
+          "start_time": 15558,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이",
+          "start_time": 15582,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "네, ",
+          "start_time": 15606,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 15630,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "리",
+          "start_time": 15678,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 15702,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 15726,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우!",
+          "start_time": 15866,
+          "end_time": 15875,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 15842,
+      "end_time": 16418,
+      "collection": [
+        {
+          "text": "아",
+          "start_time": 15942,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "이",
+          "start_time": 15966,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "타",
+          "start_time": 15990,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "쿠 ",
+          "start_time": 16014,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "나",
+          "start_time": 16086,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "루",
+          "start_time": 16110,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "은",
+          "start_time": 16134,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "다 ",
+          "start_time": 16158,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#49b9f9"
+        },
+        {
+          "text": "와",
+          "start_time": 16206,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 16230,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "앗",
+          "start_time": 16254,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 16278,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루",
+          "start_time": 16302,
+          "end_time": 16318,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 16226,
+      "end_time": 16782,
+      "collection": [
+        {
+          "text": "미",
+          "start_time": 16326,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "은",
+          "start_time": 16350,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "나",
+          "start_time": 16374,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "오 ",
+          "start_time": 16398,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "요",
+          "start_time": 16446,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "비",
+          "start_time": 16470,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "타",
+          "start_time": 16494,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "이",
+          "start_time": 16518,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "요 ",
+          "start_time": 16542,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e9a9e8"
+        },
+        {
+          "text": "이",
+          "start_time": 16590,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "츠",
+          "start_time": 16614,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "데",
+          "start_time": 16638,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        },
+        {
+          "text": "모",
+          "start_time": 16661,
+          "end_time": 16682,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#fb75e4"
+        }
+      ]
+    },
+    {
+      "start_time": 16608,
+      "end_time": 17148,
+      "collection": [
+        {
+          "text": "키",
+          "start_time": 16708,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "코",
+          "start_time": 16746,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "에",
+          "start_time": 16780,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "루",
+          "start_time": 16806,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "요 ",
+          "start_time": 16842,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#e6d617"
+        },
+        {
+          "text": "코",
+          "start_time": 16877,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "노 ",
+          "start_time": 16902,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "우",
+          "start_time": 16939,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "타",
+          "start_time": 16974,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        },
+        {
+          "text": "가",
+          "start_time": 16997,
+          "end_time": 17048,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#898989"
+        }
+      ]
+    },
+    {
+      "start_time": 16993,
+      "end_time": 17821,
+      "collection": [
+        {
+          "text": "마",
+          "start_time": 17093,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다 ",
+          "start_time": 17130,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "하",
+          "start_time": 17166,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "시",
+          "start_time": 17188,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 17228,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루",
+          "start_time": 17262,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "네 ",
+          "start_time": 17286,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이",
+          "start_time": 17381,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "잇",
+          "start_time": 17406,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쇼",
+          "start_time": 17430,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "니 ",
+          "start_time": 17454,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 17477,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 17620,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우",
+          "start_time": 17670,
+          "end_time": 17721,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 17666,
+      "end_time": 18633,
+      "collection": [
+        {
+          "text": "토",
+          "start_time": 17766,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 17814,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 17862,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 17910,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 17934,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 18006,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 18030,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 18102,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 18126,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 18174,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 18222,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "츠",
+          "start_time": 18246,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 18270,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 18294,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "도",
+          "start_time": 18318,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우",
+          "start_time": 18390,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 18438,
+          "end_time": 18533,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 18480,
+      "end_time": 19357,
+      "collection": [
+        {
+          "text": "키",
+          "start_time": 18580,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "미",
+          "start_time": 18606,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토 ",
+          "start_time": 18630,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "보",
+          "start_time": 18678,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿠",
+          "start_time": 18702,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 18750,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와 ",
+          "start_time": 18774,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 18822,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 18869,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 18894,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 18941,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "모 ",
+          "start_time": 18966,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "츠",
+          "start_time": 19014,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 19037,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 19061,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "앗",
+          "start_time": 19085,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 19110,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "룬",
+          "start_time": 19134,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다",
+          "start_time": 19181,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "요",
+          "start_time": 19205,
+          "end_time": 19257,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19202,
+      "end_time": 20163,
+      "collection": [
+        {
+          "text": "토",
+          "start_time": 19302,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 19348,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 19397,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 19446,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 19469,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 19541,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 19590,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 19638,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 19662,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 19706,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 19757,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "츠",
+          "start_time": 19781,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿠",
+          "start_time": 19829,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 19853,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "앗",
+          "start_time": 19926,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 19973,
+          "end_time": 20063,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19993,
+      "end_time": 21032,
+      "collection": [
+        {
+          "text": "아",
+          "start_time": 20093,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "타",
+          "start_time": 20118,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 20142,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "시",
+          "start_time": 20165,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 20190,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 20214,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 20262,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "야",
+          "start_time": 20309,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "키",
+          "start_time": 20358,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "에",
+          "start_time": 20406,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토 ",
+          "start_time": 20454,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 20524,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "오 ",
+          "start_time": 20548,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "노",
+          "start_time": 20598,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "바",
+          "start_time": 20621,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "소",
+          "start_time": 20694,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우",
+          "start_time": 20718,
+          "end_time": 20932,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 20832,
+      "end_time": 22617,
+      "collection": [
+        {
+          "text": "<",
+          "start_time": 20932,
+          "end_time": 22517,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "간주 ",
+          "start_time": 20932,
+          "end_time": 22517,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "부분",
+          "start_time": 20932,
+          "end_time": 22517,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": ">",
+          "start_time": 20932,
+          "end_time": 22517,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 22417,
+      "end_time": 23236,
+      "collection": [
+        {
+          "text": "이",
+          "start_time": 22517,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "마",
+          "start_time": 22541,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "다",
+          "start_time": 22567,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "앗",
+          "start_time": 22614,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "테 ",
+          "start_time": 22662,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "미",
+          "start_time": 22756,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "쥬",
+          "start_time": 22805,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "쿠",
+          "start_time": 22854,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "다",
+          "start_time": 22974,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "케",
+          "start_time": 23021,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "도",
+          "start_time": 23045,
+          "end_time": 23136,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        }
+      ]
+    },
+    {
+      "start_time": 23064,
+      "end_time": 23959,
+      "collection": [
+        {
+          "text": "사",
+          "start_time": 23164,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "키",
+          "start_time": 23188,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "에 ",
+          "start_time": 23214,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "스",
+          "start_time": 23238,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "스",
+          "start_time": 23286,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "마",
+          "start_time": 23310,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "나",
+          "start_time": 23358,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "쿠",
+          "start_time": 23403,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "챠 ",
+          "start_time": 23428,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "소",
+          "start_time": 23550,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "레",
+          "start_time": 23574,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "시",
+          "start_time": 23598,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "카 ",
+          "start_time": 23621,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "나",
+          "start_time": 23669,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "인",
+          "start_time": 23693,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "다",
+          "start_time": 23741,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "요",
+          "start_time": 23790,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        },
+        {
+          "text": "네",
+          "start_time": 23814,
+          "end_time": 23859,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#f0a20b"
+        }
+      ]
+    },
+    {
+      "start_time": 23810,
+      "end_time": 24490,
+      "collection": [
+        {
+          "text": "미",
+          "start_time": 23910,
+          "end_time": 24390,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 23947,
+          "end_time": 24390,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이",
+          "start_time": 23980,
+          "end_time": 24390,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "에!",
+          "start_time": 24007,
+          "end_time": 24390,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 24385,
+      "end_time": 25350,
+      "collection": [
+        {
+          "text": "와",
+          "start_time": 24485,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 24534,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 24582,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 24630,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 24653,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와",
+          "start_time": 24726,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 24751,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 24822,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 24846,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 24890,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 24942,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "메",
+          "start_time": 24966,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가 ",
+          "start_time": 25014,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 25038,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 25110,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "바",
+          "start_time": 25158,
+          "end_time": 25250,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 25198,
+      "end_time": 26069,
+      "collection": [
+        {
+          "text": "키",
+          "start_time": 25298,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "미",
+          "start_time": 25328,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "모 ",
+          "start_time": 25349,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "보",
+          "start_time": 25398,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿠",
+          "start_time": 25422,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 25470,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "모 ",
+          "start_time": 25494,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 25541,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 25590,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루",
+          "start_time": 25613,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "은",
+          "start_time": 25662,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다 ",
+          "start_time": 25687,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 25734,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "리",
+          "start_time": 25758,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "타",
+          "start_time": 25782,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 25806,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "지",
+          "start_time": 25831,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "부",
+          "start_time": 25855,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "은",
+          "start_time": 25905,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "니",
+          "start_time": 25926,
+          "end_time": 25969,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 25922,
+      "end_time": 26878,
+      "collection": [
+        {
+          "text": "와",
+          "start_time": 26022,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 26072,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 26119,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 26166,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 26190,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와",
+          "start_time": 26262,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "스",
+          "start_time": 26310,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 26358,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 26382,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 26422,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 26476,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "메",
+          "start_time": 26500,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "미",
+          "start_time": 26550,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "루 ",
+          "start_time": 26574,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 26646,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 26694,
+          "end_time": 26778,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 26712,
+      "end_time": 27606,
+      "collection": [
+        {
+          "text": "아",
+          "start_time": 26812,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "시",
+          "start_time": 26838,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "타",
+          "start_time": 26862,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와 ",
+          "start_time": 26886,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿄",
+          "start_time": 26935,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우",
+          "start_time": 26959,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "요",
+          "start_time": 26982,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "리 ",
+          "start_time": 27030,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "유",
+          "start_time": 27077,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "메",
+          "start_time": 27125,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "니 ",
+          "start_time": 27173,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "치",
+          "start_time": 27242,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 27268,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 27292,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "하",
+          "start_time": 27316,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "즈",
+          "start_time": 27340,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다",
+          "start_time": 27413,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "요",
+          "start_time": 27439,
+          "end_time": 27506,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 27457,
+      "end_time": 28417,
+      "collection": [
+        {
+          "text": "토",
+          "start_time": 27557,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 27605,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 27654,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 27702,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 27724,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 27798,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 27822,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 27894,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 27917,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 27964,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 28014,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "츠",
+          "start_time": 28038,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 28062,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 28085,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "도",
+          "start_time": 28109,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우",
+          "start_time": 28182,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 28230,
+          "end_time": 28317,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 28269,
+      "end_time": 29150,
+      "collection": [
+        {
+          "text": "키",
+          "start_time": 28369,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "미",
+          "start_time": 28398,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토 ",
+          "start_time": 28422,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "보",
+          "start_time": 28470,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿠",
+          "start_time": 28494,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 28542,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "와 ",
+          "start_time": 28566,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "코",
+          "start_time": 28613,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "레",
+          "start_time": 28661,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 28685,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 28734,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "모 ",
+          "start_time": 28758,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "츠",
+          "start_time": 28804,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 28829,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 28854,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "앗",
+          "start_time": 28875,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 28902,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "룬",
+          "start_time": 28926,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "다",
+          "start_time": 28973,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "요",
+          "start_time": 28998,
+          "end_time": 29050,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 28994,
+      "end_time": 29958,
+      "collection": [
+        {
+          "text": "토",
+          "start_time": 29094,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 29142,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 29190,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 29237,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 29259,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토",
+          "start_time": 29334,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "마",
+          "start_time": 29382,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 29429,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 29454,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 29500,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아",
+          "start_time": 29548,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "츠",
+          "start_time": 29575,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "쿠",
+          "start_time": 29622,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "나",
+          "start_time": 29646,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "앗",
+          "start_time": 29718,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 29766,
+          "end_time": 29858,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 29786,
+      "end_time": 30831,
+      "collection": [
+        {
+          "text": "아",
+          "start_time": 29886,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "타",
+          "start_time": 29910,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "라",
+          "start_time": 29933,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "시",
+          "start_time": 29957,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "이 ",
+          "start_time": 29982,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "카",
+          "start_time": 30006,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "가",
+          "start_time": 30054,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "야",
+          "start_time": 30102,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "키",
+          "start_time": 30150,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "에",
+          "start_time": 30198,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "토 ",
+          "start_time": 30246,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "테",
+          "start_time": 30318,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "오 ",
+          "start_time": 30342,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "노",
+          "start_time": 30388,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "바",
+          "start_time": 30412,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "소",
+          "start_time": 30486,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "우",
+          "start_time": 30510,
+          "end_time": 30731,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 30631,
+      "end_time": 38371,
+      "collection": [
+        {
+          "text": "<",
+          "start_time": 30731,
+          "end_time": 38271,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "후주 ",
+          "start_time": 30731,
+          "end_time": 38271,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "부분",
+          "start_time": 30731,
+          "end_time": 38271,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": ">",
+          "start_time": 30731,
+          "end_time": 38271,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
+    }
+  ]
+}
