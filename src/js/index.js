@@ -708,10 +708,6 @@ let yohane = {
       return false
     }
 
-    var _play_cnts = JSON.parse(dataYosoro.get('playedTimes') || '{}')
-    _play_cnts[id] = typeof _play_cnts[id] !== 'number' ? 0 : _play_cnts[id] + 1
-    dataYosoro.set('playedTimes', JSON.stringify(_play_cnts))
-
     try {
       yohane.player().src =
         (urlQueryParams('local') === 'true'
@@ -839,19 +835,7 @@ let pageAdjust = {
         dataYosoro.get('mikan') === true
           ? curObj.translated || objKeys[i]
           : objKeys[i]
-
-      var played_counts = JSON.parse(dataYosoro.get('playedTimes') || '{}')[
-        curObj.id
-      ]
-
-      var cardInfoWrap = document.createElement('div')
-      cardInfoWrap.className = '_card_info'
-      cardInfoWrap.innerHTML = played_counts
-        ? '<span class="material-icons">play_arrow</span> ' + played_counts
-        : ''
-
       c.appendChild(titleText)
-      c.appendChild(cardInfoWrap)
       baseElement.appendChild(c)
 
       pageAdjust.add(baseElement)

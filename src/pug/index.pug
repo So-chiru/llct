@@ -5,7 +5,7 @@ html(lang="kr").index
     meta(name='viewport', content='width=device-width, initial-scale=0.8')
     meta(name='theme-color', content='#16aaf9')
     meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
-    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,Aqours")
+    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,μ's,Aqours,虹ヶ咲")
     meta(meta name="apple-mobile-web-app-capable" content="yes")
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
@@ -79,8 +79,9 @@ html(lang="kr").index
                 .tabs
                     // span.active 전체
                     //- span#pl_ms_switcher.ti.min_ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
-                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti" alt="/>">shuffle</span>
-                    span.ti.min_ti(onclick="LLCT.showSetting()") <span class="material-icons ti" alt="설정">settings</span>
+                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
+                    span.ti.min_ti(onclick="LLCT.switchGroup()") <span class="material-icons ti">album</span>
+                    span.ti.min_ti(onclick="LLCT.showSetting()") <span class="material-icons ti">settings</span>
                     //- .search_wrp.ti(onclick="$('#search_val').focus()")
                         input#search_val(type="text", name="")
                         span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
@@ -92,7 +93,7 @@ html(lang="kr").index
             ._card_lists#_card_lists
             .navigator
                 span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin" alt="<">keyboard_arrow_left</i>
-                span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">7</span>
+                span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">1</span>
                 span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin" alt=">">keyboard_arrow_right</i>
     .setting_layer.hide
         .close_btn(onclick="LLCT.hideSetting()")
@@ -116,7 +117,6 @@ html(lang="kr").index
                 label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
             br
             button._btn_class_fl#offlineCacheClearBtn 오프라인 캐시 비우기
-            button._btn_class_fl#resetPlayedCounts 노래 재생 횟수 초기화
             br
             a.tx_wlink(href="https://github.com/So-chiru/LLCT/blob/master/LICENSE") Open Source License Notices
     <div id="ps_wp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">

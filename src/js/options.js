@@ -134,12 +134,6 @@ const __llct_optslists = [
     fn: _ => {
       LLCT.clearCache()
     }
-  },
-  {
-    id: 'resetPlayedCounts',
-    fn: () => {
-      dataYosoro.set('playedTimes', '{}')
-    }
   }
 ]
 
