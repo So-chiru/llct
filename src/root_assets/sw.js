@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0031',
+  version: 'deathwar_a0032',
   urls: [
     '/',
     '/?pid=',
@@ -43,8 +43,8 @@ let ndt_cache = url => {
 }
 
 self.addEventListener('fetch', e => {
-  var reqCacFet = /\/\/cdn\.lovelivec\.kr\/data\//g.test(e.request.url)
-    ? new Request(e.request.url.replace(/cdn\./g, ''))
+  var reqCacFet = /\/\/cdn\-mikan\.lovelivec\.kr\/data\//g.test(e.request.url)
+    ? new Request(e.request.url.replace(/cdn\-mikan\./g, ''))
     : e.request
 
   if (/\/\/lovelivec\.kr\/\?pid\=/g.test(e.request.url)) {

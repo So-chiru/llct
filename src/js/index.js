@@ -87,7 +87,7 @@ let LLCT = {
         src:
           (urlQueryParams('local') === 'true'
             ? './'
-            : 'https://cdn.lovelivec.kr/') +
+            : 'https://cdn-mikan.lovelivec.kr/') +
           'data/' +
           id +
           '/call.jpg',
@@ -111,7 +111,7 @@ let LLCT = {
       `<img class="call_img" onclick="LLCT.openCallImage('${id}')" src="` +
       (urlQueryParams('local') === 'true'
         ? './'
-        : 'https://cdn.lovelivec.kr/') +
+        : 'https://cdn-mikan.lovelivec.kr/') +
       'data/' +
       id +
       '/call.jpg' +
@@ -429,7 +429,7 @@ let yohaneNoDOM = {
       document.getElementById('album_meta').src =
         (urlQueryParams('local') === 'true'
           ? './'
-          : 'https://cdn.lovelivec.kr/') +
+          : 'https://cdn-mikan.lovelivec.kr/') +
         'data/' +
         id +
         '/bg.png'
@@ -453,7 +453,9 @@ let yohaneNoDOM = {
     document.getElementById('blade_color').style.color =
       _hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== ''
         ? _hx
-        : dataYosoro.get('yohane') ? '#000' : '#FFF'
+        : dataYosoro.get('yohane')
+          ? '#000'
+          : '#FFF'
 
     document.getElementById('sing_tg').style.display = meta[1].singAlong
       ? 'block'
@@ -717,7 +719,7 @@ let yohane = {
       yohane.player().src =
         (urlQueryParams('local') === 'true'
           ? './'
-          : 'https://cdn.lovelivec.kr/') +
+          : 'https://cdn-mikan.lovelivec.kr/') +
         'data/' +
         id +
         '/audio.mp3'
@@ -824,7 +826,7 @@ let pageAdjust = {
         artImage.dataset.src =
           (urlQueryParams('local') === 'true'
             ? './'
-            : 'https://cdn.lovelivec.kr/') +
+            : 'https://cdn-mikan.lovelivec.kr/') +
           'data/' +
           curObj.id +
           '/bg.png'

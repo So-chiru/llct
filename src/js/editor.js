@@ -181,7 +181,7 @@ $(document).ready(() => {
     wavesurfer.load(
       (urlQueryParams('local') === 'true'
         ? './'
-        : 'https://cdn.lovelivec.kr/') +
+        : 'https://cdn-mikan.lovelivec.kr/') +
         'data/' +
         songID +
         '/audio.mp3'
