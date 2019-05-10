@@ -80,8 +80,8 @@ html(lang="kr").index
                     // span.active 전체
                     //- span#pl_ms_switcher.ti.min_ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
                     span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
-                    span.ti.min_ti(onclick="LLCT.switchGroup()") <span class="material-icons ti">album</span>
-                    span.ti.min_ti(onclick="LLCT.showSetting()") <span class="material-icons ti">settings</span>
+                    span.ti.min_ti(onclick="LLCT.showLayer(1)") <span class="material-icons ti">album</span>
+                    span.ti.min_ti(onclick="LLCT.showLayer(0)") <span class="material-icons ti">settings</span>
                     //- .search_wrp.ti(onclick="$('#search_val').focus()")
                         input#search_val(type="text", name="")
                         span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
@@ -95,8 +95,13 @@ html(lang="kr").index
                 span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin" alt="<">keyboard_arrow_left</i>
                 span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">1</span>
                 span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin" alt=">">keyboard_arrow_right</i>
+    .switch_layer.hide
+        .close_btn(onclick="LLCT.hideLayer(1)")
+            p <i class="material-icons">close</i>
+        .setting_sc
+            h1 유닛
     .setting_layer.hide
-        .close_btn(onclick="LLCT.hideSetting()")
+        .close_btn(onclick="LLCT.hideLayer(0)")
             p <i class="material-icons">close</i>
         .setting_sc
             h1 설정

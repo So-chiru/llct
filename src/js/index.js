@@ -26,17 +26,19 @@ const artistLists = [
   '오하라 마리 (CV. 스즈키 아이나)'
 ]
 
+let LLCTLayers = ['setting_layer', 'switch_layer']
+
 let LLCT = {
   __pkg_callLists: [],
   __cur_filterLists: [],
-  showSetting: () => {
-    document.getElementsByClassName('setting_layer')[0].classList.remove('hide')
-    document.getElementsByClassName('setting_layer')[0].classList.add('show')
+  hideLayer: i => {
+    document.getElementsByClassName(LLCTLayers[i])[0].classList.remove('show')
+    document.getElementsByClassName(LLCTLayers[i])[0].classList.add('hide')
   },
 
-  hideSetting: () => {
-    document.getElementsByClassName('setting_layer')[0].classList.remove('show')
-    document.getElementsByClassName('setting_layer')[0].classList.add('hide')
+  showLayer: i => {
+    document.getElementsByClassName(LLCTLayers[i])[0].classList.remove('hide')
+    document.getElementsByClassName(LLCTLayers[i])[0].classList.add('show')
   },
 
   clearCache: () => {

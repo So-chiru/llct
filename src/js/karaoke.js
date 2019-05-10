@@ -227,7 +227,7 @@ var Karaoke = function (__element) {
           wordI +
           '" style="text-shadow: ' +
           (word.text_color !== null && word.text_color !== ''
-            ? '0 0 5px ' + word.text_color
+            ? '0 0 3px ' + word.text_color
             : '') +
           ';">' +
           (typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
