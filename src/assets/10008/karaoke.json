@@ -1211,12 +1211,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 6529,
           "end_time": 6783,
           "pronunciation_time": 0,
-          "type": "3",
-          "ruby_text": "*"
+          "type": "3"
         },
         {
           "text": "못",
@@ -1288,12 +1287,11 @@
       "end_time": 6896,
       "collection": [
         {
-          "text": "(세-",
+          "text": "* (세-",
           "start_time": 6529,
           "end_time": 6796,
           "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "*"
+          "type": "2"
         },
         {
           "text": "노 ",
@@ -1501,16 +1499,14 @@
           "start_time": 7420,
           "end_time": 7455,
           "pronunciation_time": 0,
-          "type": 1,
-          "ruby_text": "*"
+          "type": 1
         },
         {
           "text": "(Yeah!)",
           "start_time": 7420,
           "end_time": 7455,
           "pronunciation_time": 0,
-          "type": "4",
-          "ruby_text": "*"
+          "type": "4"
         }
       ]
     },
@@ -1637,12 +1633,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 7883,
           "end_time": 8137,
           "pronunciation_time": 0,
-          "type": "3",
-          "ruby_text": "*"
+          "type": "3"
         },
         {
           "text": "못",
@@ -1714,12 +1709,11 @@
       "end_time": 8250,
       "collection": [
         {
-          "text": "(세-",
+          "text": "* (세-",
           "start_time": 7883,
           "end_time": 8150,
           "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "*"
+          "type": "2"
         },
         {
           "text": "노 ",
@@ -3476,12 +3470,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 15405,
           "end_time": 15659,
           "pronunciation_time": 0,
-          "type": "3",
-          "ruby_text": "*"
+          "type": "3"
         },
         {
           "text": "놋",
@@ -3553,12 +3546,11 @@
       "end_time": 15772,
       "collection": [
         {
-          "text": "(세-",
+          "text": "* (세-",
           "start_time": 15405,
           "end_time": 15672,
           "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "*"
+          "type": "2"
         },
         {
           "text": "노 ",
@@ -3780,16 +3772,14 @@
           "start_time": 16294,
           "end_time": 16339,
           "pronunciation_time": 0,
-          "type": 1,
-          "ruby_text": "*"
+          "type": 1
         },
         {
           "text": "(Yeah!)",
           "start_time": 16293,
           "end_time": 16339,
           "pronunciation_time": 0,
-          "type": "4",
-          "ruby_text": "*"
+          "type": "4"
         }
       ]
     },
@@ -3916,12 +3906,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 16757,
           "end_time": 17016,
           "pronunciation_time": 0,
-          "type": "3",
-          "ruby_text": "*"
+          "type": "3"
         },
         {
           "text": "놋",
@@ -3993,12 +3982,11 @@
       "end_time": 17124,
       "collection": [
         {
-          "text": "(세-",
+          "text": "* (세-",
           "start_time": 16757,
           "end_time": 17024,
           "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "*"
+          "type": "2"
         },
         {
           "text": "노 ",
@@ -4662,12 +4650,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 20816,
           "end_time": 21073,
           "pronunciation_time": 0,
-          "type": "3",
-          "ruby_text": "*"
+          "type": "3"
         },
         {
           "text": "못",
@@ -4739,12 +4726,11 @@
       "end_time": 21183,
       "collection": [
         {
-          "text": "(세-",
+          "text": "* (세-",
           "start_time": 20816,
           "end_time": 21083,
           "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "*"
+          "type": "2"
         },
         {
           "text": "노 ",
@@ -4952,16 +4938,14 @@
           "start_time": 21703,
           "end_time": 21739,
           "pronunciation_time": 0,
-          "type": 1,
-          "ruby_text": "."
+          "type": 1
         },
         {
           "text": "(Yeah!)",
           "start_time": 21702,
           "end_time": 21739,
           "pronunciation_time": 0,
-          "type": "4",
-          "ruby_text": "."
+          "type": "4"
         }
       ]
     },
@@ -5088,12 +5072,11 @@
           "type": 1
         },
         {
-          "text": "v ",
+          "text": "* ",
           "start_time": 22167,
           "end_time": 22416,
           "pronunciation_time": 0,
-          "type": "3",
-          "ruby_text": "*"
+          "type": "3"
         },
         {
           "text": "못",
@@ -5165,12 +5148,11 @@
       "end_time": 22534,
       "collection": [
         {
-          "text": "(세-",
+          "text": "* (세-",
           "start_time": 22167,
           "end_time": 22434,
           "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "*"
+          "type": "2"
         },
         {
           "text": "노 ",

@@ -450,9 +450,10 @@ let yohaneNoDOM = {
       meta[1].bladeColor || '자유'
 
     var _hx = meta[1].bladeColorHEX
-    if (_hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== '') {
-      document.getElementById('blade_color').style.color = _hx
-    }
+    document.getElementById('blade_color').style.color =
+      _hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== ''
+        ? _hx
+        : dataYosoro.get('yohane') ? '#000' : '#FFF'
 
     document.getElementById('sing_tg').style.display = meta[1].singAlong
       ? 'block'
@@ -600,6 +601,8 @@ let yohane = {
   seekTo: zto => {
     if (yohane.playing()) yohane.pause(false, true)
     yohane.player().currentTime = yohane.player().duration * (zto / 100)
+
+    yohane.player().volume = yohane.volumeStore
     yohane.play(true)
     yohaneNoDOM.timeLeapDisableAnimation()
   },
@@ -1151,7 +1154,6 @@ let pageLoadedFunctions = () => {
       var vp = document
         .getElementById('bar_eventListen')
         .getBoundingClientRect()
-
       yohane.seekTo(((ev.clientX - vp.left) / vp.width) * 100)
     },
     document.getElementById('ctrl_times')
