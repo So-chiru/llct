@@ -1407,5 +1407,43 @@
     "artist": 1,
     "karaoke": true,
     "short_kr": "빌립어겐"
+  },
+  "逃走迷走メビウスループ": {
+    "id": "10085",
+    "translated": "도망 황망 뫼비우스의 띠",
+    "tag": [
+      "도망황망",
+      "뫼비우스",
+      "dozoomizoo",
+      "dojumiju",
+      "mobius",
+      "Aqours",
+      "3학년",
+      "극장판",
+      "삽입곡"
+    ],
+    "center": null,
+    "artist": 0,
+    "karaoke": true,
+    "short_kr": "도주미주"
+  },
+  "Hop? Stop? Nonstop!": {
+    "id": "10086",
+    "translated": "Hop? Stop? Nonstop!",
+    "tag": [
+      "뛰어",
+      "멈춰",
+      "멈추지마",
+      "홉스탑",
+      "홉스톱",
+      "hopstopnonstop",
+      "Aqours",
+      "극장판",
+      "삽입곡"
+    ],
+    "center": null,
+    "artist": 0,
+    "karaoke": true,
+    "short_kr": "홉스논"
   }
 }
