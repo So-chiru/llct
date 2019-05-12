@@ -1424,7 +1424,6 @@
     ],
     "center": null,
     "artist": 0,
-    "karaoke": true,
     "short_kr": "도주미주"
   },
   "Hop? Stop? Nonstop!": {
@@ -1443,7 +1442,6 @@
     ],
     "center": null,
     "artist": 0,
-    "karaoke": true,
     "short_kr": "홉스논"
   }
 }
