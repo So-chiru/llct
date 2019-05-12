@@ -886,7 +886,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   z-index: 101;
   background-color: #e4e4e4;
   color: rgb(36, 36, 36);
-  transition: opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity, background 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 
   .close_btn {
     position: absolute;
