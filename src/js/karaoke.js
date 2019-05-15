@@ -325,11 +325,9 @@ var Karaoke = function (__element) {
     if (typeof this.karaokeData === 'undefined' || this.karaokeData === null) {
       return 0
     }
-    for (
-      var karaLineNum = 0;
-      karaLineNum < this.karaokeData.timeline.length;
-      karaLineNum++
-    ) {
+
+    var karaLineNum = this.karaokeData.timeline.length
+    while (karaLineNum--) {
       if (typeof this.cachedDom[karaLineNum] === 'undefined') {
         this.cachedDom[karaLineNum] = document.getElementById(
           this.karaoke_element.id + '_kara_' + karaLineNum
@@ -362,11 +360,8 @@ var Karaoke = function (__element) {
         continue
       }
 
-      for (
-        var karaWordNum = 0;
-        karaWordNum < karaLine.collection.length;
-        karaWordNum++
-      ) {
+      var karaWordNum = karaLine.collection.length
+      while (karaWordNum--) {
         var karaWord = karaLine.collection[karaWordNum]
         if (karaWord.start_time === 0 || karaWord.start_time === '0') continue
         karaWord.start_time = Number(karaWord.start_time)
@@ -428,7 +423,9 @@ var Karaoke = function (__element) {
             if (
               typeof karaLine.collection[karaWordNum - 1] !== 'undefined' &&
               karaLine.collection[karaWordNum - 1].start_time ===
-                karaLine.collection[karaWordNum].start_time
+                karaLine.collection[karaWordNum].start_time &&
+              typeof this.cachedDom[karaLineNum + '.' + (karaWordNum - 1)] !==
+                'undefined'
             ) {
               kards.style.transition = this.cachedDom[
                 karaLineNum + '.' + (karaWordNum - 1)
@@ -460,6 +457,6 @@ var Karaoke = function (__element) {
         kards.style.textDecoration = 'none'
         kards.style.textDecoration = 'blink'
       }
-    }
+    } // Karaoke Loop
   }
 }
