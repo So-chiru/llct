@@ -238,6 +238,8 @@ let yohaneNoDOM = {
     document.getElementById('dekaku_btn').classList.remove('in_active')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+
+    KaraokeInstance.clearSync()
   },
 
   hideLyrics: () => {
