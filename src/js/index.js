@@ -462,6 +462,9 @@ let yohaneNoDOM = {
     document.getElementById('sing_tg').style.display = meta[1].singAlong
       ? 'block'
       : 'none'
+    document.getElementById('performed_tg').style.display = meta[1].notPerformed
+      ? 'block'
+      : 'none'
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
     LLCT[
