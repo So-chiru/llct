@@ -28,6 +28,12 @@
  * 가사 음 마다 : NONE;
  */
 
+/**
+ * a Array에 있는 t 값들을 읽어 최소, 최대 값을 불러옵니다.
+ * @param {Array} a 최소값을 읽을 Array
+ * @param {String} t Array의 Karaoke 값
+ * @param {Number} lh 0: 최소값, 그 외 : 최대 값
+ */
 const getLMInArray = (a, t, lh) => {
   var _mx = lh === 0 ? 999999999 : 0
   for (var i = 0; i < a.length; i++) {
@@ -381,12 +387,15 @@ var Karaoke = function (__element) {
         var isCurWord =
           timeCode > karaWord.start_time && timeCode > karaWord.end_time
         var __josenExists = /josenPassing/g.test(kards.className)
-        if (!isCurWord && __josenExists) {
-          kards.className = kards.className.replace(/\sjosenPassing/, '')
-        }
 
-        if (isCurWord && !__josenExists) {
-          kards.className += ' josenPassing'
+        if (isCurWord) {
+          if (!__josenExists) {
+            kards.className += ' josenPassing'
+          }
+        } else {
+          if (__josenExists) {
+            kards.className = kards.className.replace(/\sjosenPassing/, '')
+          }
         }
 
         if (!/currentSync/g.test(kards.className)) {
@@ -446,7 +455,7 @@ var Karaoke = function (__element) {
             timeCode < karaWord.start_time) ||
           timeCode > karaWord.end_time
         ) {
-          kards.className = kards.className.replace(/currentSync/g, '')
+          kards.className = kards.className.replace(/\scurrentSync/g, '')
 
           if (timeCode > karaWord.end_time) {
             kards.style.transition =
