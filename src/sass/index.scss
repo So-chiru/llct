@@ -904,7 +904,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
   }
 }
 
-.setting_sc {
+.layer_sc {
   left: 5%;
   top: 5%;
   width: 90%;
@@ -1156,4 +1156,35 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 
 .dark .offline_replacer .mute {
   color: #797979;
+}
+
+.group_grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 100%;
+
+  @media screen and (max-width: $small) {
+    grid-template-columns: auto;
+  }
+}
+
+.group_icon {
+  position: relative;
+  width: auto;
+  height: 100px;
+  margin: auto;
+}
+
+._btn_groupSl {
+  padding: 10%;
+  display: grid;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: pointer;
+}
+
+._btn_groupSl:hover {
+  transform: scale(1.05);
+  background-color: rgba(92, 92, 92, 0.2);
+  box-shadow: 0px 0px 8px rgba(110, 110, 110, 0.3);
 }

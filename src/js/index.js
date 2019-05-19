@@ -2,30 +2,6 @@ let requestAudioSync
 let requestAudioVolume = null
 let globalKaraokeInstance = null
 
-const artistLists = [
-  'Aqours',
-  'Saint Snow',
-  'Saint Aqours Snow',
-  '2학년 - 타카미 치카, 와타나베 요우, 사쿠라우치 리코',
-  '1학년 - 쿠로사와 루비, 쿠니키다 하나마루, 츠시마 요시코',
-  '3학년 - 쿠로사와 다이아, 마츠우라 카난, 오하라 마리',
-  'CYaRon!',
-  'AZALEA',
-  'Guilty Kiss',
-  '와타나베 요우 (CV. 사이토 슈카), 츠시마 요시코 (CV. 코바야시 아이카)',
-  '타카미 치카 (CV. 이나미 안쥬), 마츠우라 카난 (CV. 스와 나나카)',
-  '쿠로사와 루비 (CV. 후리하타 아이), 쿠로사와 다이아 (CV. 코미야 아리사)',
-  '타카미 치카 (CV. 이나미 안쥬)',
-  '와타나베 요우 (CV. 사이토 슈카)',
-  '사쿠라우치 리코 (CV. 아이다 리카코)',
-  '쿠로사와 루비 (CV. 후리하타 아이)',
-  '쿠니키다 하나마루 (CV. 타카츠키 카나코)',
-  '츠시마 요시코 (CV. 코바야시 아이카)',
-  '쿠로사와 다이아 (CV. 코미야 아리사)',
-  '마츠우라 카난 (CV. 스와 나나카)',
-  '오하라 마리 (CV. 스즈키 아이나)'
-]
-
 let LLCTLayers = ['setting_layer', 'switch_layer']
 
 let LLCT = {
@@ -60,6 +36,30 @@ let LLCT = {
 
   setTitleTo: t => {
     document.getElementById('p_title').innerHTML = t
+  },
+
+  /**
+   * selectGroup: 리스트에 표시할 그룹을 표시합니다.
+   * @param {String} i 그룹의 Index. 0: 뮤즈, 1: 아쿠아, 2: 니지가사키
+   * @param {Boolean} notLayer 레이어가 아닌지에 대한 여부
+   * @param {Boolean} auto 자동으로 실행되었는지 (pid에 따른 자동 그룹 선택 방지)
+   */
+  selectGroup: (i, notLayer, auto) => {
+    LLCT.__cur_selectedGroup = Object.keys(LLCT.fullMetaData)[i]
+    LLCT.__pkg_callLists =
+      LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
+    LLCT.__cur_filterLists =
+      LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
+
+    pageAdjust.buildPage()
+
+    if (!auto) {
+      dataYosoro.set('lastGroup', i)
+    }
+
+    if (!notLayer) {
+      LLCT.hideLayer(1)
+    }
   },
 
   currentPage: 0,
@@ -442,7 +442,10 @@ let yohaneNoDOM = {
       ).style.backgroundColor = dataYosoro.get('yohane') ? '#323232' : '#D0D0D0'
     }
 
-    var artistText = artistLists[meta[1].artist != null ? meta[1].artist : 0]
+    var artistText =
+      LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[
+        meta[1].artist != null ? meta[1].artist : 0
+      ]
     document.getElementById('title_meta').innerText =
       dataYosoro.get('mikan') === true ? meta[1].translated || meta[0] : meta[0]
     document.getElementById('artist_meta').innerText = artistText
@@ -887,6 +890,7 @@ const resizeItemsCheck = () => {
   return 4
 }
 
+// 키를 누를때 동작할 함수들을 미리 지정합니다.
 const keys = {
   27: [
     e => {
@@ -924,6 +928,32 @@ const keys = {
     },
     true
   ]
+}
+
+/**
+ * 로컬 전용 : lists.json 파일이 로드가 되면 수행할 데이터 탑재 함수입니다.
+ * @param {Object} d Object 형식으로 파싱된 JSON 값입니다.
+ */
+var __lcal_loadedAjax = d => {
+  LLCT.fullMetaData = d
+  document.getElementById('loading_spin_ctlst').classList.add('done')
+
+  if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
+    LLCT.selectGroup(popsHeart.get('pid').substring(0, 1), true, true)
+    yohane.initialize(popsHeart.get('pid'))
+
+    if (!dataYosoro.get('doNotUseMusicPlayer')) {
+      yohaneNoDOM.dekakuni()
+    }
+    return
+  }
+
+  // 마지막으로 선택한 그룹이 있는지에 대한 여부입니다.
+  var NoLastGroup =
+    dataYosoro.get('lastGroup') == null ||
+    typeof dataYosoro.get('lastGroup') === 'undefined'
+
+  LLCT.selectGroup(NoLastGroup ? 1 : dataYosoro.get('lastGroup'), true)
 }
 
 let pageLoadedFunctions = () => {
@@ -1071,22 +1101,6 @@ let pageLoadedFunctions = () => {
       }
     }
   })
-
-  var __lcal_loadedAjax = d => {
-    LLCT.__pkg_callLists = d
-    LLCT.__cur_filterLists = d
-
-    document.getElementById('loading_spin_ctlst').classList.add('done')
-    pageAdjust.buildPage()
-
-    if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
-      yohane.initialize(popsHeart.get('pid'))
-
-      if (!dataYosoro.get('doNotUseMusicPlayer')) {
-        yohaneNoDOM.dekakuni()
-      }
-    }
-  }
 
   if (typeof $ !== 'undefined') {
     $.ajax({

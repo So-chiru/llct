@@ -114,6 +114,9 @@ html.editor
             | 틱 소리 볼륨
             input#tick_volume_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'tick_volume', this.value, false, false, false)")
           p
+            | 반복 딜레이 (없을 경우 0)
+            input#repeat_delay_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'repeat_delay', this.value, false, false, false)")
+          p
             | 선택 : 현재 텍스트 색상
             input#text_color_val.blackInput(type='color', value='#000', onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
           button.nav_btn(onclick="KaraokeEditor.toggleTextEditor()")

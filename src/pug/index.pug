@@ -99,12 +99,20 @@ html(lang="kr").index
     .switch_layer.hide
         .close_btn(onclick="LLCT.hideLayer(1)")
             p <i class="material-icons">close</i>
-        .setting_sc
-            h1 유닛
+        .layer_sc
+            h1 그룹
+            br
+            .group_grid
+                ._btn_groupSl(onclick="LLCT.selectGroup(0)")
+                    img.group_icon(src="/live_assets/us.png")
+                ._btn_groupSl(onclick="LLCT.selectGroup(1)")
+                    img.group_icon(src="/live_assets/aqours.png")
+                ._btn_groupSl(onclick="LLCT.selectGroup(2)")
+                    img.group_icon(src="/live_assets/niji.png")
     .setting_layer.hide
         .close_btn(onclick="LLCT.hideLayer(0)")
             p <i class="material-icons">close</i>
-        .setting_sc
+        .layer_sc
             h1 설정
             br
             .toggle_collection

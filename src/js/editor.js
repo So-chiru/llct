@@ -345,6 +345,7 @@ var _c = {
   end_time: '#end_time_val',
   pronunciation_time: '#pron_time_val',
   type: '#type_val',
+  repeat_delay: '#repeat_delay_val',
   ruby_text: '#ruby_text_val',
   text: '#text_val',
   tick_volume: '#tick_volume_val'
@@ -355,6 +356,7 @@ var valElementObject = {
   '#end_time_val': 'end_time',
   '#pron_time_val': 'pronunciation_time',
   '#type_val': 'type',
+  '#repeat_delay_val': 'repeat_delay',
   '#ruby_text_val': 'ruby_text',
   '#text_val': 'text',
   '#tick_volume_val': 'tick_volume'

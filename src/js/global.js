@@ -253,7 +253,7 @@ const kIntvlogger = (e, rs, msg, t) => {
   if (rx === '<') rx += '-'
 
   var tType = {
-    i: 'color: #000',
+    i: 'color: unset',
     w: 'background: #ffc700; color: #323232',
     e: 'background: #ff1500; color: #fff'
   }

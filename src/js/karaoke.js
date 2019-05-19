@@ -209,6 +209,19 @@ var Karaoke = function (__element) {
       clf[o](_self, { detail: { posX, posY, perElem: element } })
     }
   }
+  this.calcRepeats = function (start_time, end_time, delay) {
+    var dur = Number(end_time) - Number(start_time)
+
+    if (delay > dur) return ''
+
+    var dMd = Math.floor(dur / delay)
+    var rs = []
+    for (var i = 1; i <= dMd; i++) {
+      rs.push(start_time + i * delay)
+    }
+
+    return rs.join(',')
+  }
   this.lineTimingValidate = function () {
     this.karaokeData.timeline.forEach(v => {
       v.start_time = Number(getLMInArray(v.collection, 'start_time', 0)) - 100
@@ -221,29 +234,34 @@ var Karaoke = function (__element) {
     this.karaokeData.timeline.forEach((v, lineI) => {
       var spaceEle = ''
       v.collection.forEach((word, wordI) => {
+        var checkHasDelay =
+          (typeof word.repeat_delay === 'string' ||
+            typeof word.repeat_delay === 'number') &&
+          (word.repeat_delay != '0' || word.repeat_delay != '')
         var _idx = this.karaoke_element.id + '_kara_' + lineI + '_' + wordI
-        spaceEle +=
-          '<p class="lyrics ' +
-          __kara_typeList[word.type] +
-          '" id="' +
-          _idx +
-          '"data-line="' +
-          lineI +
-          '" data-word="' +
-          wordI +
-          '" style="text-shadow: ' +
-          (word.text_color !== null && word.text_color !== ''
+        spaceEle += `<p class="lyrics ${
+          __kara_typeList[word.type]
+        }" id="${_idx}" data-line="${lineI}" data-word="${wordI}" ${
+          checkHasDelay
+            ? `data-repeats="${this.calcRepeats(
+              word.start_time,
+              word.end_time,
+              word.repeat_delay
+            )}"`
+            : ''
+        } style="text-shadow: ${
+          word.text_color !== null && word.text_color !== ''
             ? '0 0 3px ' + word.text_color
-            : '') +
-          ';">' +
-          (typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
+            : ''
+        };">${
+          typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
             ? '<ruby>' +
               word.text.replace(/\s/g, '&nbsp') +
               '<rt>' +
               word.ruby_text +
               '</rt></ruby>'
-            : word.text.replace(/\s/g, '&nbsp')) +
-          '</p>'
+            : word.text.replace(/\s/g, '&nbsp')
+        }</p>`
       })
       inserts +=
         '<div class="p_line" id="' +
@@ -395,6 +413,46 @@ var Karaoke = function (__element) {
         } else {
           if (__josenExists) {
             kards.className = kards.className.replace(/\sjosenPassing/, '')
+          }
+        }
+
+        if (kards.dataset.repeats != null) {
+          var repeatsSplit = kards.dataset.repeats.split(',')
+
+          for (var g = 0; g < repeatsSplit.length; g++) {
+            repeatsSplit[g] = Number(repeatsSplit[g])
+
+            karaWord.repeat_delay = Number(karaWord.repeat_delay)
+            if (
+              timeCode > repeatsSplit[g] - karaWord.repeat_delay * 1.05 &&
+              timeCode < repeatsSplit[g] - karaWord.repeat_delay / 3.5 &&
+              !this.tickSoundsCache['r_' + repeatsSplit[g]]
+            ) {
+              logger(
+                0,
+                'r',
+                'runTick @ ' +
+                  timeCode +
+                  'tc expected ' +
+                  repeatsSplit[g] +
+                  'tc. ' +
+                  (repeatsSplit[g] - timeCode) +
+                  'tc diff.',
+                'i'
+              )
+              ;(function (k, kw) {
+                k.style.color = 'transparent'
+                setTimeout(function () {
+                  k.style.color = ''
+                }, kw)
+              })(kards, karaWord.repeat_delay * 2)
+
+              if (this.tickSoundEnable) {
+                Sakurauchi.run('tickSounds', karaWord.tick_volume)
+              }
+
+              this.tickSoundsCache['r_' + repeatsSplit[g]] = true
+            }
           }
         }
 
