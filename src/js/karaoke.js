@@ -17,6 +17,7 @@
  *                    start_time: Time code (audio.currentTime() * 100), // 시작 시간
  *                    end_time: Time code (audio.currentTime() * 100), // 끝나는 시간
  *                    pronunciation_time: Time code (ms / 10), // 발음 시간
+ *                    repeat_delay: Time code (ms / 10), // 반복이 있을 경우 해당 텍스트의 반복 딜레이
  *                    type: Number (1~3) // 1: 가사, 2: 콜, 3: comment, 4: 콜 + 가사
  *                } ...
  *            ]
