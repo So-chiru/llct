@@ -70,6 +70,7 @@ $(document).ready(() => {
         wavesurfer.playPause()
         break
       case 37:
+      case 9:
         prv = true
         wavesurfer.skip(-0.2)
         break
@@ -107,6 +108,7 @@ $(document).ready(() => {
         AudioMute()
         break
       case 39:
+      case 81:
         prv = true
         wavesurfer.skip(0.2)
         break
