@@ -84,6 +84,16 @@ $(document).ready(() => {
           true
         )
         break
+      case 221:
+        KaraokeEditor.EditVal(
+          'end_time',
+          Math.floor(wavesurfer.getCurrentTime() * 100) +
+            KaraokeInstance.karaokeData.metadata.correction_time,
+          true,
+          e.shiftKey,
+          true
+        )
+        break
       case 80:
         KaraokeEditor.EditVal(
           'pronunciation_time',
@@ -100,6 +110,16 @@ $(document).ready(() => {
           Math.floor(wavesurfer.getCurrentTime() * 100) +
             KaraokeInstance.karaokeData.metadata.correction_time,
           e.altKey,
+          e.shiftKey,
+          true
+        )
+        break
+      case 219:
+        KaraokeEditor.EditVal(
+          'start_time',
+          Math.floor(wavesurfer.getCurrentTime() * 100) +
+            KaraokeInstance.karaokeData.metadata.correction_time,
+          true,
           e.shiftKey,
           true
         )
