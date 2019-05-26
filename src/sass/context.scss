@@ -1,0 +1,58 @@
+.__context_frame {
+  position: fixed;
+  z-index: 100;
+  display: none;
+  min-width: 100px;
+  height: fit-content;
+  background-color: #3d3d3d;
+  border-radius: 3px;
+  box-shadow: 0px -4px 12px rgba(43, 43, 43, 0.8);
+  user-select: none;
+  color: white;
+}
+
+.__context_frame_div {
+  margin: 5% 5%;
+  height: 1px;
+  background-color: rgba(194, 194, 194, 0.3);
+}
+
+.__context_frame_div,
+.__context_frame_item {
+  position: relative;
+  display: block;
+  border-radius: 3px;
+}
+
+.__context_frame_item {
+  padding: 3px 5%;
+  transition: 0.3s background cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.__context_frame_item .material-icons {
+  margin-right: 5px;
+}
+
+.__context_frame_item:hover {
+  background-color: rgba(194, 194, 194, 0.3);
+}
+
+.__context_frame_item:active {
+  background-color: rgba(194, 194, 194, 0.5);
+}
+
+.__context_frame_item p {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.__context_bg {
+  display: none;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  position: fixed;
+  background-color: transparent;
+  z-index: 99;
+}

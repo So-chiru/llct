@@ -1,0 +1,7 @@
+node_modules
+*.lock
+dist
+*.log
+.DS_Store
+.gulp-cache
+audio.mp3

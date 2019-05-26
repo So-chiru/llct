@@ -1,0 +1,195 @@
+html(lang="kr").index
+  head
+    title LLCT
+    meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=0.8')
+    meta(name='theme-color', content='#16aaf9')
+    meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
+    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,μ's,Aqours,虹ヶ咲")
+    meta(meta name="apple-mobile-web-app-capable" content="yes")
+    meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
+    meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
+    meta(meta name="application-name" content="러브라이브! 콜표")
+    link(rel="canonical" href="https://lovelivec.kr/")
+    meta(name="google-site-verification" content="w85-Ql8huyk6kbiwYBTHhbOBtAW-awQKR--_7QI5Cgw")
+    link(rel="manifest" href="/manifest.json")
+    link(rel="apple-touch-icon" href="/data/favicon/logo.png")
+    link(rel="dns-prefetch" href="https://cdn.lovelivec.kr")
+    link(rel="dns-prefetch" href="https://fonts.gstatic.com")
+    link(rel="preconnect" href="https://cdn.lovelivec.kr")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous")
+    link(rel='stylesheet', href='./yosoro.min.css')
+    link(rel='shortcut icon', href='https://cdn-mikan.lovelivec.kr/data/favicon.ico', type='image/x-icon')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="this.media='all';")
+    link(rel="preload" href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900" as="fetch" crossorigin="anonymous" media="none" onload="this.media='all';")
+    link(rel="stylesheet" href="/lib/ps/photoswipe.css" media="none" onload="this.media='all';")
+    link(rel="stylesheet" href="/lib/ps/default-skin/default-skin.css" media="none" onload="this.media='all';")
+    style.
+        .hide_curtain {opacity:0;visibility: none;pointer-events: none;z-index: -1;}
+  body
+    div#curt(style="display:flex;position:fixed;width:100%;height:100%;z-index:1000;transition: 1s cubic-bezier(0.19, 1, 0.22, 1);background-color:#16aaf9;")
+        .inr(style="margin: auto;position: relative;text-align: center;")
+            h1 LLCT
+            h3 LoveLive! Call Table Guide
+    #pl_bg.player_bg(onclick="yohaneNoDOM.chiisakuni()")
+    #kara_player.player.hide(onclick="yohaneNoDOM.dekakuOnce(this.target)")
+        .dash_wrapper#dash_wrp_ham(data-scrollbar)
+            .visible_dash
+                .info
+                    img#album_meta.c.cover
+                    .info_txts
+                        p#title_meta.c.title 브로콜리
+                        .c.diver.spaRight
+                        p#artist_meta.c.artist 세이라
+                    .c.diver.after_div
+                .timeline
+                    p#played_time.c.mga 0 : 00
+                    #ctrl_times.c.__progress
+                        .passed_bar#psd_times
+                        .max_bar.__buf#bar_eventListen
+                        .thumb#__current_thumb
+                    p#left_time.c.mga - 4 : 59
+                .ctrls
+                    span#pp_btn.material-icons(onclick="yohane.toggle()" title="노래 재생") play_arrow
+                    // span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
+                    span#tick_btn.material-icons.in_active(onclick="KaraokeInstance.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
+                    span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
+                    span#dekaku_btn.material-icons(title="플레이어 크게 / 작게") keyboard_arrow_down
+        .lyrics_wrapper#lyrics_wrap
+            .lyrics_wrapper-inner#lyrics_wrap_inner
+                .offline_replacer#_of_ric
+                    span.material-icons offline_bolt
+                    p.anon 인터넷에 연결할 수 없습니다. 이전에 저장된 데이터를 사용하여 콜표를 표시합니다.
+                    span.mute (저장된 데이터가 없으면 빈칸으로 표시됩니다.)
+                    br
+                p.blade_c
+                    | 블레이드 추천 색상 : 
+                    span#blade_color 자유
+                p.is_singalong#sing_tg 이 곡은 떼창 곡입니다. 지시에 맞게 따라 불러주세요.
+                p.is_notPerformed#performed_tg 이 곡은 라이브 된 적이 없습니다. 콜이 틀릴 수도 있으니, 참고용으로만 봐주세요.
+                .karaoke#karaoke
+                p.bottom_margin
+        audio#kara_audio
+        audio#tick_sounds(src="/live_assets/key-press-2.mp3")
+    .contents_collection
+        .full_page_ct#fp_ct
+            .header
+                .titles
+                    span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
+                    h1#p_title 노래 목록
+                .tabs
+                    // span.active 전체
+                    //- span#pl_ms_switcher.ti.min_ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
+                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
+                    span.ti.min_ti(onclick="LLCT.showLayer(1)") <span class="material-icons ti">album</span>
+                    span.ti.min_ti(onclick="LLCT.showLayer(0)") <span class="material-icons ti">settings</span>
+                    //- .search_wrp.ti(onclick="$('#search_val').focus()")
+                        input#search_val(type="text", name="")
+                        span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
+            .lds-ellipsis.loader#loading_spin_ctlst
+                div
+                div
+                div
+                div
+            ._card_lists#_card_lists
+            .navigator
+                span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin" alt="<">keyboard_arrow_left</i>
+                span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">1</span>
+                span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin" alt=">">keyboard_arrow_right</i>
+    .switch_layer.hide
+        .close_btn(onclick="LLCT.hideLayer(1)")
+            p <i class="material-icons">close</i>
+        .layer_sc
+            h1 그룹
+            br
+            .group_grid
+                ._btn_groupSl(onclick="LLCT.selectGroup(0)")
+                    img.group_icon(src="/live_assets/us.png")
+                ._btn_groupSl(onclick="LLCT.selectGroup(1)")
+                    img.group_icon(src="/live_assets/aqours.png")
+                ._btn_groupSl(onclick="LLCT.selectGroup(2)")
+                    img.group_icon(src="/live_assets/niji.png")
+    .setting_layer.hide
+        .close_btn(onclick="LLCT.hideLayer(0)")
+            p <i class="material-icons">close</i>
+        .layer_sc
+            h1 설정
+            br
+            .toggle_collection
+                label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" class="toggle_input" type="checkbox" checked="none"> <label for="showAs_translated" class="toggle_btn"><span></span></label>   
+            .toggle_collection
+                label.ckbox 다크 모드 <input id="darkMode" class="toggle_input" type="checkbox" checked="none"><label for="darkMode" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 사용 가능한 경우 인터렉티브 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
+            .toggle_collection
+                label.ckbox 고급 : requestAnimationFrame 대신 setInterval 사용하기 <input id="useSetIntervalInstead" class="toggle_input" type="checkbox" checked="none"><label for="useSetIntervalInstead" class="toggle_btn"><span></span></label>
+            br
+            button._btn_class_fl#offlineCacheClearBtn 오프라인 캐시 비우기
+            br
+            a.tx_wlink(href="https://github.com/So-chiru/LLCT/blob/master/LICENSE") Open Source License Notices
+    <div id="ps_wp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    .offline_popup
+        span#__popup_icon.material-icons offline_bolt
+        p#__popup_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
+    #PLEASE_STOP_USE_INTERNET_EXPLORER
+        h1 깨진 레이아웃이 보이죠?
+        hr
+        h3 
+        | 인터넷 익스플로러 사용을 멈춰주세요.<br>
+        | 현재 익스플로러를 쓰고 계십니다. 익스플로러를 사용할 경우 원활한 콜표 재생이 되지 않습니다.
+        | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
+        | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
+    script(defer src="/lib/ps/photoswipe.min.js")
+    script(defer src="/lib/ps/photoswipe-ui-default.min.js")
+    script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
+    script(src='./lib/aj/anime.min.js')
+    script(src='./lib/jquery.min.js')
+    script(src='./js/global.min.js')
+    script(src='./js/options.min.js')
+    script(src='./js/index.min.js')
+    script(src='./js/playlists.min.js')
+    script(src='./js/lib/hammer.min.js')
+    script(defer src='./js/karaoke.min.js')
+    script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
+    script.
+        !function(e,n,t){"use strict";var o="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900",r="__3perf_googleFontsStylesheet";function c(e){(n.head||n.body).appendChild(e)}function a(){var e=n.createElement("link");e.href=o,e.rel="stylesheet",c(e)}function f(e){if(!n.getElementById(r)){var t=n.createElement("style");t.id=r,c(t)}n.getElementById(r).innerHTML=e}e.FontFace&&e.FontFace.prototype.hasOwnProperty("display")?(t[r]&&f(t[r]),fetch(o).then(function(e){return e.text()}).then(function(e){return e.replace(/@font-face {/g,"@font-face{font-display:swap;")}).then(function(e){return t[r]=e}).then(f).catch(a)):a()}(window,document,localStorage);

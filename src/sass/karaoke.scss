@@ -1,0 +1,83 @@
+.karaoke {
+  display: block;
+  width: 100%;
+}
+
+.lyrics {
+  display: block;
+  margin: 0;
+  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  color: #a0a0a0;
+  cursor: pointer;
+}
+
+.p_line {
+  display: flex;
+  justify-content: center;
+  min-height: 10px;
+}
+
+.__cur_line {
+  will-change: color, text-shadow;
+}
+
+.line_num {
+  margin: 0;
+  margin-top: auto;
+}
+
+.call {
+  color: #7ac74f;
+}
+
+.cmt {
+  color: #b1aeb7;
+}
+
+._cs {
+  color: #66c3ff;
+}
+
+.currentSync {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 0px 5px #7fd5f9;
+  font-weight: 500;
+
+  &.__s,
+  &.call &.cmt &.__cs {
+    color: rgb(255, 255, 255);
+  }
+
+  &.call {
+    color: #fff;
+    text-shadow: 0px 0px 5px #90e861;
+  }
+
+  &.cmt {
+    text-shadow: 0px 0px 5px #004e89;
+  }
+
+  &._cs {
+    text-shadow: 0px 0px 5px #0496ff;
+  }
+}
+
+.josenPassing {
+  text-shadow: 0px 0px 0px transparent !important;
+
+  &.call {
+    color: #e7f1eb;
+  }
+
+  &.__s {
+    color: #d3d3d3;
+  }
+
+  &.cmt {
+    color: #e7e7e7;
+  }
+
+  &._cs {
+    color: #bdbdbd;
+  }
+}
