@@ -5,7 +5,7 @@
     "title": "미래의 우리들은 알고 있어",
     "bladeColorHEX": "#000000",
     "bladeColorMember": "없음",
-    "writeDone": false
+    "writeDone": true
   },
   "timeline": [
     {
@@ -213,22 +213,15 @@
           "type": "2"
         },
         {
-          "text": "후 ",
-          "start_time": 1803,
+          "text": "하이 ",
+          "start_time": 1800,
           "end_time": 1956,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
-          "text": "후 ",
-          "start_time": 1838,
-          "end_time": 1956,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "후!",
-          "start_time": 1873,
+          "text": "하이 ",
+          "start_time": 1877,
           "end_time": 1956,
           "pronunciation_time": 0,
           "type": "2"
@@ -1880,22 +1873,15 @@
           "type": "2"
         },
         {
-          "text": "후 ",
-          "start_time": 8829,
+          "text": "하이 ",
+          "start_time": 8833,
           "end_time": 8990,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
-          "text": "후 ",
-          "start_time": 8859,
-          "end_time": 8990,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "후!",
-          "start_time": 8895,
+          "text": "하이 ",
+          "start_time": 8907,
           "end_time": 8990,
           "pronunciation_time": 0,
           "type": "2"
