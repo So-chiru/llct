@@ -196,15 +196,22 @@
           "type": "2"
         },
         {
-          "text": "하이 ",
-          "start_time": 1992.24,
+          "text": "후 ",
+          "start_time": 1956,
           "end_time": 2071.19,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
-          "text": "하이 ",
-          "start_time": 2055.4,
+          "text": "후 ",
+          "start_time": 1989,
+          "end_time": 2071.19,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!",
+          "start_time": 2023,
           "end_time": 2071.19,
           "pronunciation_time": 0,
           "type": "2"
@@ -598,6 +605,19 @@
       ]
     },
     {
+      "start_time": 3749,
+      "end_time": 4200,
+      "collection": [
+        {
+          "text": "* (\"짝\" 대신 \"후-!\" 콜도 사용합니다.)",
+          "start_time": 3849,
+          "end_time": 4100,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
+    },
+    {
       "start_time": -100,
       "end_time": 100,
       "collection": [
@@ -980,6 +1000,19 @@
           "end_time": 6119,
           "pronunciation_time": 0,
           "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 5765,
+      "end_time": 6222,
+      "collection": [
+        {
+          "text": "* (\"짝\" 대신 \"후-!\" 콜도 사용합니다.)",
+          "start_time": 5865,
+          "end_time": 6122,
+          "pronunciation_time": 0,
+          "type": "3"
         }
       ]
     },
@@ -1454,7 +1487,7 @@
     },
     {
       "start_time": 9055,
-      "end_time": 9720,
+      "end_time": 9760,
       "collection": [
         {
           "text": "테",
@@ -1527,11 +1560,32 @@
           "type": 1
         },
         {
-          "text": "테",
+          "text": "테 ",
           "start_time": 9534,
           "end_time": 9620,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": "(후 ",
+          "start_time": 9537,
+          "end_time": 9660,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 9572,
+          "end_time": 9660,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!)",
+          "start_time": 9605,
+          "end_time": 9660,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -1920,15 +1974,22 @@
           "type": "2"
         },
         {
-          "text": "하이 ",
-          "start_time": 11587.14,
+          "text": "후 ",
+          "start_time": 11557,
           "end_time": 11666.09,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
-          "text": "하이 ",
-          "start_time": 11650.3,
+          "text": "후 ",
+          "start_time": 11589,
+          "end_time": 11666.09,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 11619,
           "end_time": 11666.09,
           "pronunciation_time": 0,
           "type": "2"
@@ -2040,7 +2101,7 @@
     },
     {
       "start_time": 12085,
-      "end_time": 12768,
+      "end_time": 12804,
       "collection": [
         {
           "text": "토",
@@ -2113,11 +2174,32 @@
           "type": 1
         },
         {
-          "text": "이",
+          "text": "이 ",
           "start_time": 12565,
           "end_time": 12668,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": "(후 ",
+          "start_time": 12567,
+          "end_time": 12704,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 12601,
+          "end_time": 12704,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후)",
+          "start_time": 12633,
+          "end_time": 12704,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -2332,6 +2414,19 @@
           "end_time": 13650,
           "pronunciation_time": 0,
           "type": "2"
+        }
+      ]
+    },
+    {
+      "start_time": 13347,
+      "end_time": 13798,
+      "collection": [
+        {
+          "text": "* (\"짝\" 대신 \"후-!\" 콜도 사용합니다.)",
+          "start_time": 13447,
+          "end_time": 13698,
+          "pronunciation_time": 0,
+          "type": "3"
         }
       ]
     },
@@ -2806,7 +2901,7 @@
     },
     {
       "start_time": 16760,
-      "end_time": 17431,
+      "end_time": 17471,
       "collection": [
         {
           "text": "메",
@@ -2886,11 +2981,32 @@
           "type": 1
         },
         {
-          "text": "오",
+          "text": "오 ",
           "start_time": 17241,
           "end_time": 17331,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": "(후 ",
+          "start_time": 17244,
+          "end_time": 17371,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 17278,
+          "end_time": 17371,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!)",
+          "start_time": 17308,
+          "end_time": 17371,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -4031,20 +4147,6 @@
           "type": "2"
         },
         {
-          "text": "하이 ",
-          "start_time": 21824.52,
-          "end_time": 21903.47,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "하이 ",
-          "start_time": 21887.68,
-          "end_time": 21903.47,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
           "text": ">",
           "start_time": 20417,
           "end_time": 21912,
@@ -4572,7 +4674,7 @@
     },
     {
       "start_time": 24339,
-      "end_time": 25012,
+      "end_time": 25054,
       "collection": [
         {
           "text": "테",
@@ -4645,11 +4747,32 @@
           "type": 1
         },
         {
-          "text": "테",
+          "text": "테 ",
           "start_time": 24817,
           "end_time": 24912,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": "(후 ",
+          "start_time": 24822,
+          "end_time": 24954,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 24854,
+          "end_time": 24954,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!)",
+          "start_time": 24887,
+          "end_time": 24954,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
