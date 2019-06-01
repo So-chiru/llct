@@ -79,14 +79,14 @@
           "start_time": 2513,
           "end_time": 2768,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "돈 ",
           "start_time": 2551,
           "end_time": 2768,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "소",
@@ -204,21 +204,21 @@
           "start_time": 3115,
           "end_time": 3377,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "피",
           "start_time": 3155,
           "end_time": 3377,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "이 ",
           "start_time": 3174,
           "end_time": 3377,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "미",
@@ -1540,6 +1540,27 @@
           "type": 1
         },
         {
+          "text": "(후 ",
+          "start_time": 8098,
+          "end_time": 8214,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 8139,
+          "end_time": 8214,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!) ",
+          "start_time": 8157,
+          "end_time": 8214,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "스",
           "start_time": 8162,
           "end_time": 8813,
@@ -1661,7 +1682,7 @@
     },
     {
       "start_time": 8744,
-      "end_time": 9204,
+      "end_time": 9535,
       "collection": [
         {
           "text": "Sing",
@@ -1706,11 +1727,32 @@
           "type": "4"
         },
         {
-          "text": "dream!",
+          "text": "dream! ",
           "start_time": 9020,
           "end_time": 9104,
           "pronunciation_time": 0,
           "type": "4"
+        },
+        {
+          "text": "(후 ",
+          "start_time": 9250,
+          "end_time": 9435,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 9291,
+          "end_time": 9435,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!)",
+          "start_time": 9323,
+          "end_time": 9435,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -1854,28 +1896,28 @@
           "start_time": 10355,
           "end_time": 10626,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "이",
           "start_time": 10379,
           "end_time": 10626,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "와",
           "start_time": 10398,
           "end_time": 10626,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "이 ",
           "start_time": 10418,
           "end_time": 10626,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "민",
@@ -2007,14 +2049,14 @@
           "start_time": 10963,
           "end_time": 11225,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "토",
           "start_time": 11000,
           "end_time": 11225,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "히",
@@ -3364,6 +3406,27 @@
           "type": 1
         },
         {
+          "text": "(후 ",
+          "start_time": 16249,
+          "end_time": 16368,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 16291,
+          "end_time": 16368,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!) ",
+          "start_time": 16309,
+          "end_time": 16368,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "도",
           "start_time": 16326,
           "end_time": 16950,
@@ -3474,6 +3537,47 @@
           "end_time": 16950,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 16558,
+      "end_time": 18268,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": 16658,
+          "end_time": 18168,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "하이 x ",
+          "start_time": 17001,
+          "end_time": 18143,
+          "pronunciation_time": 0,
+          "type": "2",
+          "repeat_delay": 75
+        },
+        {
+          "text": "(14-16)>",
+          "start_time": 16658,
+          "end_time": 18168,
+          "pronunciation_time": 0,
+          "type": "3"
         }
       ]
     },
@@ -3842,60 +3946,77 @@
       "end_time": 20845,
       "collection": [
         {
-          "text": "오",
+          "text": "* < 오",
           "start_time": 19909,
           "end_time": 20157,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ffaf44"
         },
         {
           "text": "이",
           "start_time": 19936,
           "end_time": 20157,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ffaf44"
         },
         {
           "text": "데",
           "start_time": 19967,
           "end_time": 20157,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ffaf44"
         },
         {
-          "text": "요... ",
+          "text": "요... > ",
           "start_time": 19984,
           "end_time": 20157,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#ffaf44"
         },
         {
           "text": "오",
           "start_time": 20211,
           "end_time": 20745,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         },
         {
           "text": "이",
           "start_time": 20238,
           "end_time": 20745,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         },
         {
           "text": "데",
           "start_time": 20267,
           "end_time": 20745,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         },
         {
           "text": "요!",
           "start_time": 20285,
           "end_time": 20745,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
+        }
+      ]
+    },
+    {
+      "start_time": 19791,
+      "end_time": 20287,
+      "collection": [
+        {
+          "text": "* 치카 솔로 파트는 떼창하지 않습니다.",
+          "start_time": 19891,
+          "end_time": 20187,
+          "pronunciation_time": 0,
+          "type": "3"
         }
       ]
     },
@@ -4752,6 +4873,27 @@
           "type": 1
         },
         {
+          "text": "(후 ",
+          "start_time": 24244,
+          "end_time": 24351,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 24287,
+          "end_time": 24351,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!) ",
+          "start_time": 24303,
+          "end_time": 24351,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "키",
           "start_time": 24323,
           "end_time": 24976,
@@ -4928,7 +5070,7 @@
     },
     {
       "start_time": 25657,
-      "end_time": 26101,
+      "end_time": 26394,
       "collection": [
         {
           "text": "Sing",
@@ -4973,11 +5115,32 @@
           "type": "4"
         },
         {
-          "text": "dream!",
+          "text": "dream! ",
           "start_time": 25927,
           "end_time": 26001,
           "pronunciation_time": 0,
           "type": "4"
+        },
+        {
+          "text": "(후 ",
+          "start_time": 26154,
+          "end_time": 26294,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후 ",
+          "start_time": 26193,
+          "end_time": 26294,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!)",
+          "start_time": 26227,
+          "end_time": 26294,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
