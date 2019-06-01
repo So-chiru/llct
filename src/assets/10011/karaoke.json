@@ -185,6 +185,47 @@
       ]
     },
     {
+      "start_time": 1356,
+      "end_time": 2966,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": 1456,
+          "end_time": 2866,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "하이 x ",
+          "start_time": 1499,
+          "end_time": 2698,
+          "pronunciation_time": 0,
+          "type": "2",
+          "repeat_delay": 75
+        },
+        {
+          "text": "(15)>",
+          "start_time": 1456,
+          "end_time": 2866,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
       "start_time": 2767,
       "end_time": 3578,
       "collection": [
@@ -865,21 +906,21 @@
           "start_time": 6828,
           "end_time": 7411,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "토",
           "start_time": 6844,
           "end_time": 7411,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "가 ",
           "start_time": 6845,
           "end_time": 7411,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "키",
@@ -907,21 +948,21 @@
           "start_time": 7000,
           "end_time": 7411,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "토",
           "start_time": 7017,
           "end_time": 7411,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "가 ",
           "start_time": 7035,
           "end_time": 7411,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "다",
@@ -1668,14 +1709,14 @@
           "start_time": 10903,
           "end_time": 11420,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "Yeah!",
           "start_time": 10993,
           "end_time": 11420,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         }
       ]
     },
@@ -2365,21 +2406,21 @@
           "start_time": 15640,
           "end_time": 16238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "토",
           "start_time": 15657,
           "end_time": 16238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "가 ",
           "start_time": 15672,
           "end_time": 16238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "키",
@@ -2407,21 +2448,21 @@
           "start_time": 15818,
           "end_time": 16238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "토",
           "start_time": 15832,
           "end_time": 16238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "가 ",
           "start_time": 15846,
           "end_time": 16238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "다",
@@ -4535,14 +4576,14 @@
           "start_time": 28185,
           "end_time": 28901,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "Yeah!",
           "start_time": 28277,
           "end_time": 28901,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         }
       ]
     },

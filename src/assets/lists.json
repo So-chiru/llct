@@ -156,6 +156,7 @@
         ],
         "center": "타카미 치카",
         "karaoke": true,
+        "singAlong": true,
         "short_kr": "유메유메"
       },
       "Step! ZERO to ONE": {
@@ -269,6 +270,8 @@
         "center": "2학년",
         "karaoke": true,
         "artist": 3,
+        "bladeColor": "2학년 (치카, 요우, 리코 색)",
+        "bladeColorHEX": "#ffdee5",
         "short_kr": "키메핸인"
       },
       "ダイスキだったらダイジョウブ！": {
