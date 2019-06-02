@@ -741,6 +741,7 @@
         "center": "",
         "artist": 4,
         "notPerformed": true,
+        "karaoke": true,
         "short_kr": "하지마리"
       },
       "Marine Border Parasol": {
