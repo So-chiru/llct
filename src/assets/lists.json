@@ -1516,6 +1516,20 @@
         "artist": 0,
         "notPerformed": true,
         "short_kr": "홉스논"
+      },
+      "Jump up HIGH!!": {
+        "id": "10087",
+        "translated": "Jump up HIGH!!",
+        "tag": [
+          "뛰어",
+          "크게!!",
+          "클럽"
+        ],
+        "center": null,
+        "artist": 0,
+        "notPerformed": true,
+        "karaoke": true,
+        "short_kr": "점펍"
       }
     }
   },
