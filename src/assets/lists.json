@@ -630,6 +630,8 @@
           "삽입곡"
         ],
         "center": "타카미 치카",
+        "bladeColor": "치카 색 (귤색)",
+        "bladeColorHEX": "#ffb600",
         "short_kr": "미라웨이"
       },
       "Awaken the power": {
@@ -1520,11 +1522,7 @@
       "Jump up HIGH!!": {
         "id": "10087",
         "translated": "Jump up HIGH!!",
-        "tag": [
-          "뛰어",
-          "크게!!",
-          "클럽"
-        ],
+        "tag": ["뛰어", "크게!!", "클럽"],
         "center": null,
         "artist": 0,
         "notPerformed": true,
