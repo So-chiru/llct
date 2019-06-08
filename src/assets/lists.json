@@ -742,7 +742,6 @@
         ],
         "center": "",
         "artist": 4,
-        "notPerformed": true,
         "karaoke": true,
         "short_kr": "하지마리"
       },
@@ -760,7 +759,6 @@
         ],
         "center": "",
         "artist": 3,
-        "notPerformed": true,
         "short_kr": "마보파"
       },
       "予測不可能Driving!": {
@@ -778,7 +776,6 @@
         ],
         "center": "",
         "artist": 5,
-        "notPerformed": true,
         "short_kr": "예측불가"
       },
       "元気全開DAY! DAY! DAY!": {
@@ -1403,7 +1400,6 @@
         "center": "",
         "artist": 0,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "보쿠미치, 보쿠하시"
       },
       "Next SPARKLING!!": {
@@ -1422,7 +1418,6 @@
         "center": null,
         "artist": 0,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "넥스파"
       },
       "Brightest Melody": {
@@ -1440,7 +1435,6 @@
         "center": null,
         "artist": 0,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "브라멜로"
       },
       "Over The Next Rainbow": {
@@ -1457,7 +1451,6 @@
         "center": null,
         "artist": 2,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "오버니지"
       },
       "Believe Again": {
@@ -1478,7 +1471,6 @@
         "center": null,
         "artist": 1,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "빌립어겐"
       },
       "逃走迷走メビウスループ": {
@@ -1497,7 +1489,6 @@
         ],
         "center": null,
         "artist": 0,
-        "notPerformed": true,
         "short_kr": "도주미주"
       },
       "Hop? Stop? Nonstop!": {
@@ -1516,7 +1507,6 @@
         ],
         "center": null,
         "artist": 0,
-        "notPerformed": true,
         "short_kr": "홉스논"
       },
       "Jump up HIGH!!": {
