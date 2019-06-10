@@ -7,6 +7,8 @@ let LLCTLayers = ['setting_layer', 'switch_layer']
 let LLCT = {
   __pkg_callLists: [],
   __cur_filterLists: [],
+  __playPointer: null,
+
   hideLayer: i => {
     document.getElementsByClassName(LLCTLayers[i])[0].classList.remove('show')
     document.getElementsByClassName(LLCTLayers[i])[0].classList.add('hide')
@@ -48,6 +50,7 @@ let LLCT = {
     LLCT.__cur_selectedGroup = Object.keys(LLCT.fullMetaData)[i]
     LLCT.__pkg_callLists =
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
+    LLCT.__playPointer = null
     LLCT.__cur_filterLists =
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
 
@@ -470,6 +473,8 @@ let yohaneNoDOM = {
       : 'none'
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
+    Sakurauchi.run('audioLoadStart', [meta[1].kr || meta[0], artistText, meta])
+
     LLCT[
       meta[1].karaoke && dataYosoro.get('interactiveCall') != false
         ? 'loadLyrics'
@@ -490,12 +495,40 @@ let yohane = {
   volumeStore: null,
   loaded: false,
 
-  shuffle: skipDekaku => {
+  prev: skipDekaku => {
     var objK = Object.keys(LLCT.__cur_filterLists)
+    if (!LLCT.__playPointer) {
+      LLCT.__playPointer = objK.length - 1
+    }
+
+    LLCT.__playPointer = (LLCT.__playPointer - 1 + objK.length) % objK.length
+
     yohane.loadPlay(
-      LLCT.__cur_filterLists[objK[(Math.random() * objK.length) << 0]].id,
+      LLCT.__cur_filterLists[objK[LLCT.__playPointer]].id,
       skipDekaku
     )
+  },
+
+  next: skipDekaku => {
+    var objK = Object.keys(LLCT.__cur_filterLists)
+    if (!LLCT.__playPointer) {
+      LLCT.__playPointer = 0
+    }
+
+    LLCT.__playPointer = (LLCT.__playPointer + 1) % objK.length
+
+    yohane.loadPlay(
+      LLCT.__cur_filterLists[objK[LLCT.__playPointer]].id,
+      skipDekaku
+    )
+  },
+
+  shuffle: skipDekaku => {
+    var objK = Object.keys(LLCT.__cur_filterLists)
+    var id = (Math.random() * objK.length) << 0
+    LLCT.__playPointer = id
+
+    yohane.loadPlay(LLCT.__cur_filterLists[objK[id]].id, skipDekaku)
   },
 
   setVolume: v => {
@@ -507,6 +540,7 @@ let yohane = {
   player: () => {
     if (yohane.__plcache == null) {
       yohane.__plcache = document.getElementById('kara_audio')
+      Sakurauchi.run('PlayerInitialize')
     }
 
     return yohane.__plcache
@@ -639,7 +673,32 @@ let yohane = {
     ),
 
   play: force => {
-    yohane.player().play()
+    if (navigator.mediaSession) {
+      var meta = LLCT.getFromLists(popsHeart.get('pid'))
+      var artistText =
+        LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[
+          meta[1].artist != null ? meta[1].artist : 0
+        ]
+
+      yohane
+        .player()
+        .play()
+        .then(() => {
+          Sakurauchi.run('audioLoadStart', [
+            meta[1].kr || meta[0],
+            artistText,
+            meta
+          ])
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    } else {
+      yohane
+        .player()
+        .play()
+        .then()
+    }
 
     if (force) return 0
     yohane.fade(0, yohane.volumeStore, 600, performance.now(), () => {})
@@ -990,7 +1049,7 @@ let pageLoadedFunctions = () => {
     yohaneNoDOM.end()
 
     if (yohane.__isShuffle) {
-      yohane.shuffle(!yohane.kaizu)
+      yohane.next(!yohane.kaizu)
     }
   }
 
@@ -1169,6 +1228,19 @@ let pageLoadedFunctions = () => {
 
   Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
 
+  Sakurauchi.listen('audioLoadStart', data => {
+    if (!navigator.mediaSession) return 0
+
+    let meta = data[2]
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: data[0],
+      artist: data[1],
+      album: 'data[0]',
+      artwork: []
+    })
+  })
+
   Sakurauchi.listen(
     'click',
     ev => {
@@ -1234,4 +1306,30 @@ let resizeFunctions = () => {
   }
   pageAdjust.onePageItems = reszCk
   yohane.__tickCaching._clw = null
+}
+
+if (navigator.mediaSession) {
+  navigator.mediaSession.setActionHandler('play', () => {
+    yohane.play()
+  })
+
+  navigator.mediaSession.setActionHandler('pause', () => {
+    yohane.pause()
+  })
+
+  navigator.mediaSession.setActionHandler('previoustrack', () => {
+    yohane.prev()
+  })
+
+  navigator.mediaSession.setActionHandler('nexttrack', () => {
+    yohane.next()
+  })
+
+  navigator.mediaSession.setActionHandler('seekbackward', () => {
+    yohane.seekPrev(5)
+  })
+
+  navigator.mediaSession.setActionHandler('seekforward', () => {
+    yohane.seekNext(5)
+  })
 }
