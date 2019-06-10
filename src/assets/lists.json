@@ -21,6 +21,7 @@
       },
       "START : DASH!!": {
         "id": "00008",
+        "album": "No Brand Girls",
         "center": null,
         "karaoke": false,
         "short_kr": "스탓대시"
@@ -136,6 +137,7 @@
         "center": "와타나베 요우",
         "bladeColor": "요우 색 (푸른색 계열)",
         "bladeColorHEX": "#2e9afc",
+        "album": "恋になりたいAQUARIUM",
         "karaoke": true,
         "short_kr": "코이아쿠"
       },
@@ -182,6 +184,7 @@
         "tag": ["맛테테아이노우타", "맛테아이", "matteteainouta", "CW"],
         "center": "타카미 치카",
         "karaoke": true,
+        "album": "恋になりたいAQUARIUM",
         "short_kr": "맛테아이"
       },
       "Aqours☆HEROES": {
@@ -234,6 +237,7 @@
         ],
         "center": null,
         "karaoke": true,
+        "album": "青空Jumping Heart",
         "short_kr": "아오쟘"
       },
       "ハミングフレンド": {
@@ -249,6 +253,7 @@
         ],
         "center": null,
         "karaoke": true,
+        "album": "青空Jumping Heart",
         "short_kr": "하밍프렌"
       },
       "決めたよHand in Hand": {
@@ -391,6 +396,7 @@
         "karaoke": true,
         "bladeColor": "리코 색 (연분홍색 계열)",
         "bladeColorHEX": "#ffdee5",
+        "album": "MIRAI TICKET / 想いよひとつになれ",
         "short_kr": "오모히토"
       },
       "MIRAI TICKET": {
@@ -412,6 +418,7 @@
         "karaoke": true,
         "bladeColor": "파란색",
         "bladeColorHEX": "#54acff",
+        "album": "MIRAI TICKET / 想いよひとつになれ",
         "short_kr": "미라티케"
       },
       "ジングルベルがとまらない": {

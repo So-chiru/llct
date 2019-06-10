@@ -473,7 +473,11 @@ let yohaneNoDOM = {
       : 'none'
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
-    Sakurauchi.run('audioLoadStart', [meta[1].kr || meta[0], artistText, meta])
+    Sakurauchi.run('audioLoadStart', [
+      meta[1].kr || meta[0],
+      artistText,
+      meta[1]
+    ])
 
     LLCT[
       meta[1].karaoke && dataYosoro.get('interactiveCall') != false
@@ -684,7 +688,7 @@ let yohane = {
       Sakurauchi.run('audioLoadStart', [
         meta[1].kr || meta[0],
         artistText,
-        meta
+        meta[1]
       ])
 
       yohane.player().play()
@@ -1226,13 +1230,20 @@ let pageLoadedFunctions = () => {
   Sakurauchi.listen('audioLoadStart', data => {
     if (!navigator.mediaSession) return 0
 
-    let meta = data[2]
+    let titleData =
+      dataYosoro.get('mikan') === true && data[2].translated && data[2].translated != data[0]
+        ? data[2].translated + ' (' + data[0] + ')'
+        : data[0]
 
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: data[0],
+      title: titleData,
       artist: data[1],
-      album: 'data[0]',
-      artwork: []
+      album: data[2].album || 'Single',
+      artwork: [
+        {
+          src: 'https://cdn-mikan.lovelivec.kr/data/' + data[2].id + '/bg.png'
+        }
+      ]
     })
   })
 
@@ -1317,7 +1328,7 @@ if (navigator.mediaSession) {
   })
 
   navigator.mediaSession.setActionHandler('nexttrack', () => {
-    yohane.next()
+    yohane[yohane.__isShuffle ? 'shuffle' : 'next']()
   })
 
   navigator.mediaSession.setActionHandler('seekbackward', () => {
