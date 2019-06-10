@@ -188,19 +188,10 @@ let yohaneNoDOM = {
   registerBufferBar: () => {
     yohaneNoDOM.__cachedElement['bar_eventListen'].classList.add('__buf')
 
+    Sakurauchi.delisten('canplaythrough', 'a', yohane.player())
     Sakurauchi.listen(
       'canplaythrough',
       () => {
-        if (typeof gtag !== 'undefined' && window.performance) {
-          gtag('event', 'timing_complete', {
-            name: 'Audio load time',
-            value: Math.round(
-              (window.performance ? performance.now() : Date.now()) -
-                LLCT.audioLoadStarted
-            ),
-            event_category: 'Audio'
-          })
-        }
         yohaneNoDOM.__cachedElement['bar_eventListen'].classList.remove('__buf')
       },
       yohane.player()
@@ -1231,7 +1222,9 @@ let pageLoadedFunctions = () => {
     if (!navigator.mediaSession) return 0
 
     let titleData =
-      dataYosoro.get('mikan') === true && data[2].translated && data[2].translated != data[0]
+      dataYosoro.get('mikan') === true &&
+      data[2].translated &&
+      data[2].translated != data[0]
         ? data[2].translated + ' (' + data[0] + ')'
         : data[0]
 

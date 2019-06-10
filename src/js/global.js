@@ -143,16 +143,24 @@ let Sakurauchi = {
   },
 
   remove: (k, fi) => {
-    if (typeof fi !== 'undefined') {
-      return Sakurauchi.__sot[k].splice(fi, 1)
-    }
-
     if (
       typeof Sakurauchi.__sot[k] === 'undefined' ||
       Sakurauchi.__sot[k] === null
     ) {
       return 0
     }
+
+    if (typeof fi !== 'undefined') {
+      return Sakurauchi.__sot[k].splice(fi, 1)
+    }
+
+    if (fi == 'a') {
+      let z = Sakurauchi.__sot[k].length
+      while (z--) {
+        Sakurauchi.__sot[k].splice(z, 1)
+      }
+    }
+
     for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
       Sakurauchi.__sot[k].splice(_i, 1)
     }
@@ -181,7 +189,7 @@ let Sakurauchi = {
     return Sakurauchi.add(k + specializedID, fn)
   },
 
-  delisten: (k, fi, pr) => {
+  delisten: (k, fi, fn, pr) => {
     if (typeof pr === 'undefined' || pr == null) pr = window
 
     if (k.constructor === Array) {
@@ -192,7 +200,7 @@ let Sakurauchi = {
     }
 
     var specializedID = typeof pr.id !== 'undefined' ? pr.id : ''
-    pr.removeEventListener(k)
+    pr.removeEventListener(k, null, true)
     return Sakurauchi.remove(k + specializedID, fi)
   },
 
@@ -271,7 +279,7 @@ const kIntvlogger = (e, rs, msg, t) => {
 }
 
 const __llct_ts_func = sec => {
-  sec = Math.floor(sec)
+  sec = isNaN(sec) ? 0 : Math.floor(sec)
   return (
     (sec >= 60 ? Math.floor(sec / 60) : '0') +
     ' : ' +
