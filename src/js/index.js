@@ -146,7 +146,7 @@ let LLCT = {
       var vi = v[i]
       if (LLCT.__pkg_callLists[vi].id != id) continue
 
-      return [vi, LLCT.__pkg_callLists[vi]]
+      return [vi, LLCT.__pkg_callLists[vi], i]
     }
   }
 }
@@ -675,24 +675,19 @@ let yohane = {
   play: force => {
     if (navigator.mediaSession) {
       var meta = LLCT.getFromLists(popsHeart.get('pid'))
+      LLCT.__playPointer = meta[2]
       var artistText =
         LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[
           meta[1].artist != null ? meta[1].artist : 0
         ]
 
-      yohane
-        .player()
-        .play()
-        .then(() => {
-          Sakurauchi.run('audioLoadStart', [
-            meta[1].kr || meta[0],
-            artistText,
-            meta
-          ])
-        })
-        .catch(e => {
-          console.log(e)
-        })
+      Sakurauchi.run('audioLoadStart', [
+        meta[1].kr || meta[0],
+        artistText,
+        meta
+      ])
+
+      yohane.player().play()
     } else {
       yohane
         .player()

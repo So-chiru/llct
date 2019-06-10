@@ -1512,10 +1512,9 @@
       "Jump up HIGH!!": {
         "id": "10087",
         "translated": "Jump up HIGH!!",
-        "tag": ["뛰어", "크게!!", "클럽"],
+        "tag": ["뛰어", "크게!!", "클럽", "짬밥", "짬빰", "쨤밥", "쨤빱"],
         "center": null,
         "artist": 0,
-        "notPerformed": true,
         "karaoke": true,
         "short_kr": "점펍"
       }

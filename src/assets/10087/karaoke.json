@@ -144,7 +144,7 @@
           "start_time": 933,
           "end_time": 1009,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         }
       ]
     },
@@ -959,21 +959,21 @@
           "start_time": 5510,
           "end_time": 5792,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         },
         {
           "text": "마",
           "start_time": 5543,
           "end_time": 5792,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         },
         {
           "text": "다! ",
           "start_time": 5560,
           "end_time": 5792,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         },
         {
           "text": "소",
@@ -1015,21 +1015,21 @@
           "start_time": 5700,
           "end_time": 5792,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         },
         {
           "text": "코",
           "start_time": 5715,
           "end_time": 5792,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         },
         {
           "text": "에",
           "start_time": 5739,
           "end_time": 5792,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": 1
         }
       ]
     },
