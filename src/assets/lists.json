@@ -816,6 +816,8 @@
           "샤론"
         ],
         "center": "",
+        "bladeColor": "CYaRon! (치카, 요우, 루비 색)",
+        "bladeColorHEX": "#fff",
         "artist": 6,
         "short_kr": "요조시테"
       },
@@ -831,6 +833,8 @@
           "3학년"
         ],
         "center": "",
+        "bladeColor": "CYaRon! (치카, 요우, 루비 색)",
+        "bladeColorHEX": "#fff",
         "artist": 6,
         "short_kr": "PS"
       },
@@ -852,6 +856,8 @@
           "샤론"
         ],
         "center": "",
+        "bladeColor": "CYaRon! (치카, 요우, 루비 색)",
+        "bladeColorHEX": "#fff",
         "artist": 6,
         "short_kr": "근미래"
       },
@@ -867,6 +873,8 @@
           "샤론"
         ],
         "center": "",
+        "bladeColor": "CYaRon! (치카, 요우, 루비 색)",
+        "bladeColorHEX": "#fff",
         "artist": 6,
         "short_kr": "카간토리"
       },
@@ -884,6 +892,8 @@
           "바이바이"
         ],
         "center": "",
+        "bladeColor": "CYaRon! (치카, 요우, 루비 색)",
+        "bladeColorHEX": "#fff",
         "artist": 6,
         "short_kr": "사쿠바이"
       },
@@ -901,6 +911,8 @@
           "토리코리코리코"
         ],
         "center": "",
+        "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
+        "bladeColorHEX": "#fff",
         "artist": 7,
         "short_kr": "토리코리"
       },
@@ -917,6 +929,8 @@
           "tokimekibunruigaku"
         ],
         "center": "",
+        "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
+        "bladeColorHEX": "#fff",
         "artist": 7,
         "short_kr": "토키메키"
       },
@@ -925,6 +939,8 @@
         "translated": "LONELY TUNING",
         "tag": ["론리튜닝", "lonely", "tuning", "터닝", "AZALEA", "아제리아"],
         "center": "",
+        "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
+        "bladeColorHEX": "#fff",
         "artist": 7,
         "short_kr": "론리튜닝"
       },
@@ -944,6 +960,8 @@
           "아제리아"
         ],
         "center": "",
+        "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
+        "bladeColorHEX": "#fff",
         "artist": 7,
         "short_kr": "갤하싴"
       },
@@ -962,6 +980,8 @@
           "아제리아"
         ],
         "center": "",
+        "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
+        "bladeColorHEX": "#fff",
         "artist": 7,
         "short_kr": "이노버드"
       },
@@ -978,6 +998,8 @@
           "아제리아"
         ],
         "center": "",
+        "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
+        "bladeColorHEX": "#fff",
         "artist": 7,
         "short_kr": "소츠교"
       },
@@ -999,6 +1021,8 @@
           "gilty"
         ],
         "center": "",
+        "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
+        "bladeColorHEX": "#fff",
         "artist": 8,
         "short_kr": "딸기지뢰"
       },
@@ -1018,6 +1042,8 @@
           "gilty"
         ],
         "center": "",
+        "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
+        "bladeColorHEX": "#fff",
         "artist": 8,
         "short_kr": ""
       },
@@ -1040,6 +1066,8 @@
           "gilty"
         ],
         "center": "",
+        "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
+        "bladeColorHEX": "#fff",
         "artist": 8,
         "short_kr": "길티아이"
       },
@@ -1065,6 +1093,8 @@
           "gilty"
         ],
         "center": "",
+        "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
+        "bladeColorHEX": "#fff",
         "artist": 8,
         "short_kr": "코와숰"
       },
@@ -1085,6 +1115,8 @@
           "gilty"
         ],
         "center": "",
+        "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
+        "bladeColorHEX": "#fff",
         "artist": 8,
         "short_kr": "쉐도게이트"
       },
@@ -1109,6 +1141,8 @@
           "gilty"
         ],
         "center": "",
+        "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
+        "bladeColorHEX": "#fff",
         "artist": 8,
         "short_kr": "페어웰"
       },
@@ -1140,6 +1174,8 @@
           "여름"
         ],
         "center": "",
+        "bladeColor": "루비, 다이아 색 (핑크색, 빨간색 계열)",
+        "bladeColorHEX": "#ff4f92",
         "artist": 11,
         "short_kr": "만츠다레"
       },
@@ -1160,6 +1196,8 @@
           "yohane"
         ],
         "center": "요시코, 요우",
+        "bladeColor": "요시코, 요우 색 (흰색, 푸른색 계열)",
+        "bladeColorHEX": "#a8ddff",
         "artist": 9,
         "short_kr": "지모아이"
       },
@@ -1175,6 +1213,8 @@
           "kanan"
         ],
         "center": "",
+        "bladeColor": "치카, 카난 색 (귤색, 초록색 계열)",
+        "bladeColorHEX": "#cfff83",
         "artist": 10,
         "short_kr": "나츠오와"
       },
@@ -1193,6 +1233,8 @@
           "성설"
         ],
         "center": "",
+        "bladeColor": "세이라, 리아 색 (하늘색, 흰색 계열)",
+        "bladeColorHEX": "#b5fff6",
         "artist": 1,
         "karaoke": true,
         "short_kr": "절제"
@@ -1213,6 +1255,8 @@
           "성설"
         ],
         "center": "",
+        "bladeColor": "세이라, 리아 색 (하늘색, 흰색 계열)",
+        "bladeColorHEX": "#b5fff6",
         "artist": 1,
         "short_kr": "크래시"
       },
@@ -1233,6 +1277,8 @@
           "성설"
         ],
         "center": "",
+        "bladeColor": "세이라, 리아 색 (하늘색, 흰색 계열)",
+        "bladeColorHEX": "#b5fff6",
         "artist": 1,
         "short_kr": "드롭아웃"
       },
