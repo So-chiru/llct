@@ -123,12 +123,13 @@ let LLCT = {
     yohaneNoDOM.hideLyrics()
     yohaneNoDOM.shokan()
 
+    var useRomaji = dataYosoro.get('romaji')
     $.ajax({
       url: './data/' + id + '/karaoke.json',
       success: function (data) {
         KaraokeInstance.karaokeData =
           typeof data === 'object' ? data : JSON.parse(data)
-        KaraokeInstance.RenderDOM()
+        KaraokeInstance.RenderDOM(useRomaji)
         yohaneNoDOM.showLyrics()
       },
       error: function (err) {

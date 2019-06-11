@@ -229,15 +229,14 @@ var Karaoke = function (__element) {
       v.end_time = Number(getLMInArray(v.collection, 'end_time', 1)) + 100
     })
   }
-  this.RenderDOM = function () {
+  this.RenderDOM = function (checkUseRomaji) {
     var inserts = ''
     this.cachedDom = {}
 
-    var checkUseRomaji = dataYosoro.get('romaji')
     this.karaokeData.timeline.forEach((v, lineI) => {
       var spaceEle = ''
       v.collection.forEach((word, wordI) => {
-        if (checkUseRomaji && Aromanize && (Number(word.type) != 3)) word.text = word.text.romanize()
+        if (checkUseRomaji && Aromanize && Number(word.type) != 3) { word.text = word.text.romanize() }
 
         var checkHasDelay =
           (typeof word.repeat_delay === 'string' ||
