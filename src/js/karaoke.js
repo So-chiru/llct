@@ -232,9 +232,13 @@ var Karaoke = function (__element) {
   this.RenderDOM = function () {
     var inserts = ''
     this.cachedDom = {}
+
+    var checkUseRomaji = dataYosoro.get('romaji')
     this.karaokeData.timeline.forEach((v, lineI) => {
       var spaceEle = ''
       v.collection.forEach((word, wordI) => {
+        if (checkUseRomaji && Aromanize && (Number(word.type) != 3)) word.text = word.text.romanize()
+
         var checkHasDelay =
           (typeof word.repeat_delay === 'string' ||
             typeof word.repeat_delay === 'number') &&

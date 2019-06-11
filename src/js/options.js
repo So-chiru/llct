@@ -40,6 +40,13 @@ const __llct_optslists = [
     }
   },
   {
+    id: 'useRomaji',
+    data_key: 'romaji',
+    checkbox: true,
+    default: false,
+    fn: v => {}
+  },
+  {
     id: 'useAlbumImage',
     data_key: 'sakana',
     checkbox: true,

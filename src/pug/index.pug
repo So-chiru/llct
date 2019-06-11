@@ -122,6 +122,8 @@ html(lang="kr").index
             .toggle_collection
                 label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
             .toggle_collection
+                label.ckbox Use Romaji Instead of Hangul <input id="useRomaji" class="toggle_input" type="checkbox" checked="none"><label for="useRomaji" class="toggle_btn"><span></span></label>
+            .toggle_collection
                 label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
             .toggle_collection
                 label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
@@ -183,6 +185,7 @@ html(lang="kr").index
     script(defer src="/lib/ps/photoswipe-ui-default.min.js")
     script(async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.20.1/dist/lazyload.min.js")
     script(src='./lib/aj/anime.min.js')
+    script(src='./lib/kr/aromanize.js')
     script(src='./lib/jquery.min.js')
     script(src='./js/global.min.js')
     script(src='./js/options.min.js')

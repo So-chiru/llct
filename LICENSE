@@ -142,10 +142,38 @@ THE SOFTWARE.
 
 -------------------------------------------------------------
 
+aromanize-js - https://github.com/fujaru/aromanize-js [MIT License]
+Korean transliteration tool for JavaScript
+
+MIT License
+
+Copyright (c) 2017 Fajar Chandra 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------
+
 
 Call Table by 러브라이브! 선샤인!! 마이너 갤러리, PL!S
  - 유) ㅇㅇ (Git: shushushuka) : 콜표 싱크, 가사 작성
  - 유) ㅇㅇ (175.115) : 기능 제안
+ - 유) ㅇㅇ (Git: dbehd) : 콜표 검증
  - 유) ㅇㅇ (223.38) : 콜표 검증
  - 유) ㅇㅇ (223.38) : 콜표 검증
  - 유) ㅇㅇ (1.232) : 콜표 검증
