@@ -80,9 +80,6 @@ let LLCT = {
     document.getElementById('pl_ms_switcher').innerHTML =
       '<span class="material-icons ti">queue_music</span>'
   },
-
-  openPlayList: id => {},
-
   openCallImage: id => {
     var pElement = document.getElementById('ps_wp')
     var items = [
@@ -94,8 +91,8 @@ let LLCT = {
           'data/' +
           id +
           '/call.jpg',
-        w: id === 'krtf' ? 1652 : 3505,
-        h: id === 'krtf' ? 1680 : 2480
+        w: 3505,
+        h: 2480
       }
     ]
 
@@ -216,7 +213,8 @@ let yohaneNoDOM = {
     }, 200)
   },
 
-  dekakuOnce: event => {
+  dekakuOnce: target => {
+    if (/material\-icons/g.test(target.className)) return 0
     if (!yohaneNoDOM.kaizu && window.matchMedia('(max-width: 800px)').matches) {
       yohaneNoDOM.dekakuni()
     }
@@ -229,7 +227,6 @@ let yohaneNoDOM = {
   dekakuni: () => {
     document.getElementsByClassName('player_bg')[0].classList.add('show')
     document.getElementsByClassName('player')[0].classList.add('dekai')
-    document.getElementById('dekaku_btn').classList.remove('in_active')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
 
@@ -251,7 +248,6 @@ let yohaneNoDOM = {
   chiisakuni: () => {
     document.getElementsByClassName('player_bg')[0].classList.remove('show')
     document.getElementsByClassName('player')[0].classList.remove('dekai')
-    document.getElementById('dekaku_btn').classList.add('in_active')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
   },
@@ -450,11 +446,14 @@ let yohaneNoDOM = {
 
     var _hx = meta[1].bladeColorHEX
     document.getElementById('blade_color').style.color =
-      _hx !== null && _hx !== 'null' && _hx !== '#000000' && _hx !== ''
+      _hx != null && _hx != 'null' && _hx != '#000000' && _hx != ''
         ? _hx
         : dataYosoro.get('yohane')
-          ? '#000'
-          : '#FFF'
+          ? '#FFF'
+          : '#000'
+
+    document.getElementById('blade_color').style.textShadow =
+      '0px 0px 4px ' + document.getElementById('blade_color').style.color
 
     document.getElementById('sing_tg').style.display = meta[1].singAlong
       ? 'block'
@@ -1178,6 +1177,10 @@ let pageLoadedFunctions = () => {
     )
   }
 
+  document.getElementById('kara_player').onclick = ev => {
+    yohaneNoDOM.dekakuOnce(ev.target)
+  }
+
   document.getElementById('genki_year').innerText = new Date().getFullYear()
   document.getElementById('zenkai_month').innerText = new Date().getMonth() + 1
   document.getElementById('day_day').innerText = new Date().getDate()
@@ -1190,14 +1193,6 @@ let pageLoadedFunctions = () => {
     '금',
     '토'
   ][new Date().getDay()]
-
-  Sakurauchi.listen(
-    'click',
-    () => {
-      yohaneNoDOM.toggleKaizu()
-    },
-    document.getElementById('dekaku_btn')
-  )
 
   Sakurauchi.add('tickSounds', vol_d => {
     var tickSound = document.getElementById('tick_sounds')

@@ -32,7 +32,7 @@ html(lang="kr").index
             h1 LLCT
             h3 LoveLive! Call Table Guide
     #pl_bg.player_bg(onclick="yohaneNoDOM.chiisakuni()")
-    #kara_player.player.hide(onclick="yohaneNoDOM.dekakuOnce(this.target)")
+    #kara_player.player.hide
         .dash_wrapper#dash_wrp_ham(data-scrollbar)
             .visible_dash
                 .info
@@ -51,10 +51,8 @@ html(lang="kr").index
                     p#left_time.c.mga - 4 : 59
                 .ctrls
                     span#pp_btn.material-icons(onclick="yohane.toggle()" title="노래 재생") play_arrow
-                    // span#live_btn.material-icons.in_active(onclick="yohane.liveEffects()") room_service
                     span#tick_btn.material-icons.in_active(onclick="KaraokeInstance.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
                     span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
-                    span#dekaku_btn.material-icons(title="플레이어 크게 / 작게") keyboard_arrow_down
         .lyrics_wrapper#lyrics_wrap
             .lyrics_wrapper-inner#lyrics_wrap_inner
                 .offline_replacer#_of_ric
@@ -64,7 +62,7 @@ html(lang="kr").index
                     br
                 p.blade_c
                     | 블레이드 추천 색상 : 
-                    span#blade_color 자유
+                    span.blade_indic#blade_color 자유
                 p.is_singalong#sing_tg 이 곡은 떼창 곡입니다. 지시에 맞게 따라 불러주세요.
                 p.is_notPerformed#performed_tg 이 곡은 라이브 된 적이 없습니다. 콜이 틀릴 수도 있으니, 참고용으로만 봐주세요.
                 .karaoke#karaoke
@@ -189,7 +187,6 @@ html(lang="kr").index
     script(src='./js/global.min.js')
     script(src='./js/options.min.js')
     script(src='./js/index.min.js')
-    script(src='./js/playlists.min.js')
     script(src='./js/lib/hammer.min.js')
     script(defer src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')

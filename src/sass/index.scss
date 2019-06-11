@@ -338,7 +338,7 @@ body {
   @media screen and (max-width: $small) {
     left: 0;
     width: 100%;
-    height: 65px;
+    height: 70px;
   }
 }
 
@@ -419,22 +419,10 @@ body {
     color: #c4c4c4;
   }
 
-  #live_btn {
-    font-size: 30px;
-  }
-
   #pl_loop,
   #volume_btn,
   #tick_btn {
-    font-size: 28px;
-  }
-
-  #dekaku_btn {
-    transition: 0.7s rotate cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  #dekaku_btn.in_active {
-    transform: rotate(180deg);
+    font-size: 30px;
   }
 }
 
@@ -445,6 +433,14 @@ body {
 
 .spaRight {
   margin-right: 25px;
+}
+
+.blade_indic {
+  text-shadow: 0px 0px 4px #000;
+}
+
+.dark .blade_indic {
+  text-shadow: 0px 0px 4px #fff;
 }
 
 .dark .diver {
@@ -624,7 +620,7 @@ body {
   }
 
   .visible_dash {
-    display: block;
+    display: grid;
     text-align: center;
   }
 
@@ -646,14 +642,29 @@ body {
     }
   }
 
+  #tick_btn {
+    display: none;
+  }
+
   .ctrls {
     flex: 1;
     width: 30%;
     order: -1;
+    grid-column: 1/3;
+    grid-row: 1/2;
   }
 
   .title {
     font-size: 14px;
+  }
+
+  .timeline {
+    display: none;
+  }
+
+  .info {
+    grid-column: 1/2;
+    grid-row: 1/2;
   }
 
   .artist {
@@ -670,6 +681,17 @@ body {
       display: -webkit-flex;
       display: flex;
       width: 90%;
+      grid-column: 1/10;
+      grid-row: 2/3;
+    }
+
+    .ctrls {
+      grid-column: 5/10;
+      grid-row: 1/2;
+    }
+
+    #tick_btn {
+      display: inline-block;
     }
 
     .timeline,
@@ -680,6 +702,9 @@ body {
     }
 
     .info {
+      grid-column: 1/8;
+      grid-row: 1/2;
+
       img {
         width: 60px;
         height: 60px;
@@ -869,6 +894,7 @@ input[type="range"].hareru:focus::-ms-fill-upper {
 .mga {
   margin: auto;
   text-align: center;
+  white-space: nowrap;
   flex: 10;
 }
 
