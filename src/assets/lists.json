@@ -658,6 +658,8 @@
           "삽입곡"
         ],
         "center": "",
+        "bladeColor": "세이라, 리아, 루비 색 (하늘색, 흰색, 핑크색 계열)",
+        "bladeColorHEX": "#b4c3ff",
         "short_kr": "어웨파, 어윀파"
       },
       "WATER BLUE NEW WORLD": {
@@ -682,7 +684,7 @@
         "tag": [
           "원더스토리",
           "원더풀스토리즈",
-          "wondefulstories",
+          "wonderfulstories",
           "story",
           "마지막",
           "2기",
@@ -690,6 +692,7 @@
         ],
         "center": "",
         "karaoke": true,
+        "singAlong": true,
         "short_kr": "WS"
       },
       "キセキヒカル": {
