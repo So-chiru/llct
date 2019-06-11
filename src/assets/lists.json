@@ -481,7 +481,7 @@
           "요시코"
         ],
         "center": "츠시마 요시코",
-        "bladeColor": "흰색",
+        "bladeColor": "요시코 색 (흰색)",
         "bladeColorHEX": "#fff",
         "short_kr": "데이드림"
       },
@@ -622,7 +622,7 @@
           "삽입곡"
         ],
         "center": "쿠로사와 다이아",
-        "bladeColor": "다이아 색 (빨간색)",
+        "bladeColor": "다이아 색 (빨간색 계열)",
         "bladeColorHEX": "#eb3d3d",
         "short_kr": "마이마이"
       },
@@ -1249,6 +1249,8 @@
           "뮤지컬"
         ],
         "center": "타카미 치카",
+        "bladeColor": "치카 색 (귤색)",
+        "bladeColorHEX": "#ffb600",
         "artist": 12,
         "short_kr": "원모어선샤인"
       },
@@ -1267,6 +1269,8 @@
           "안녕히"
         ],
         "center": "쿠니키다 하나마루",
+        "bladeColor": "하나마루 색 (노란색)",
+        "bladeColorHEX": "#ffe944",
         "artist": 16,
         "short_kr": "오야스미"
       },
@@ -1286,6 +1290,8 @@
           "요시코"
         ],
         "center": "츠시마 요시코",
+        "bladeColor": "요시코 색 (흰색)",
+        "bladeColorHEX": "#fff",
         "artist": 17,
         "short_kr": ""
       },
@@ -1302,6 +1308,8 @@
           "벽쾅"
         ],
         "center": "사쿠라우치 리코",
+        "bladeColor": "리코 색 (연분홍색 계열)",
+        "bladeColorHEX": "#ffdee5",
         "artist": 14,
         "short_kr": ""
       },
@@ -1316,6 +1324,8 @@
           "beginnersailing"
         ],
         "center": "와타나베 요우",
+        "bladeColor": "요우 색 (푸른색 계열)",
+        "bladeColorHEX": "#2e9afc",
         "artist": 13,
         "short_kr": ""
       },
@@ -1333,6 +1343,8 @@
           "간바루비"
         ],
         "center": "쿠로사와 루비",
+        "bladeColor": "루비 색 (핑크색 계열)",
+        "bladeColorHEX": "#ff4fd0",
         "artist": 15,
         "short_kr": ""
       },
@@ -1352,6 +1364,8 @@
           "다이아쨩"
         ],
         "center": "쿠로사와 다이아",
+        "bladeColor": "다이아 색 (빨간색 계열)",
+        "bladeColorHEX": "#eb3d3d",
         "artist": 18,
         "short_kr": ""
       },
@@ -1371,6 +1385,8 @@
           "냐냐"
         ],
         "center": "오하라 마리",
+        "bladeColor": "마리 색 (보라색 계열)",
+        "bladeColorHEX": "#bc42ff",
         "artist": 20,
         "short_kr": ""
       },
@@ -1391,6 +1407,8 @@
           "sakana"
         ],
         "center": "마츠우라 카난",
+        "bladeColor": "카난 색 (초록-청록 계열)",
+        "bladeColorHEX": "#3debb9",
         "artist": 19,
         "short_kr": ""
       },
