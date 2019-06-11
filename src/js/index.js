@@ -676,6 +676,8 @@ let yohane = {
           meta[1].artist != null ? meta[1].artist : 0
         ]
 
+      navigator.mediaSession.playbackState = 'playing'
+
       Sakurauchi.run('audioLoadStart', [
         meta[1].kr || meta[0],
         artistText,
@@ -696,6 +698,10 @@ let yohane = {
 
   pause: (returnZero, force) => {
     yohaneNoDOM.pause()
+
+    if (navigator.mediaSession) {
+      navigator.mediaSession.playbackState = 'paused'
+    }
 
     if (force) return yohane.player()[returnZero ? 'stop' : 'pause']()
     yohane.fade(yohane.player().volume, 0, 600, performance.now(), () => {
@@ -734,7 +740,7 @@ let yohane = {
     }
 
     if (yohane.tickVal == null) yohane.tickVal = 0
-    if (yohane.tickVal > 15) {
+    if (yohane.tickVal > 12) {
       yohane.tickVal = 0
       yohane.deferTick()
     }
