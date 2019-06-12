@@ -5,3 +5,4 @@ dist
 .DS_Store
 .gulp-cache
 audio.mp3
+audio.bak.mp3
