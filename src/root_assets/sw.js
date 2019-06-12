@@ -9,6 +9,7 @@ const cachingOffline = {
     '/data/lists.json',
     '/lib/jquery.min.js',
     '/lib/aj/anime.min.js',
+    '/lib/kr/aromanize.js',
     '/lib/ps/photoswipe.min.js',
     '/lib/ps/photoswipe.css',
     '/lib/ps/photoswipe-ui-default.min.js',
