@@ -16,7 +16,9 @@
       "Snow halation": {
         "id": "00002",
         "center": null,
-        "karaoke": false,
+        "karaoke": true,
+        "bladeColor": "시작은 눈 (흰색)",
+        "bladeColorHEX": "#fff",
         "short_kr": "스노하레"
       },
       "START : DASH!!": {
