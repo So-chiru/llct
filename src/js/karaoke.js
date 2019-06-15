@@ -29,6 +29,18 @@
  * 가사 음 마다 : NONE;
  */
 
+const __cur_line = '__cur_line'
+const s__cur_line = ' __cur_line'
+const s__cur_line_reg = /\s__cur_line/g
+
+const __currentSync = 'currentSync'
+const s__currentSync = ' currentSync'
+const s__currentSync_reg = /\scurrentSync/g
+
+const __josenPassing = 'josenPassing'
+const s__josenPassing = ' josenPassing'
+const s__josenPassing_reg = /\sjosenPassing/g
+
 /**
  * a Array에 있는 t 값들을 읽어 최소, 최대 값을 불러옵니다.
  * @param {Array} a 최소값을 읽을 Array
@@ -236,7 +248,9 @@ var Karaoke = function (__element) {
     this.karaokeData.timeline.forEach((v, lineI) => {
       var spaceEle = ''
       v.collection.forEach((word, wordI) => {
-        if (checkUseRomaji && Aromanize && Number(word.type) != 3) { word.text = word.text.romanize() }
+        if (checkUseRomaji && Aromanize && Number(word.type) != 3) {
+          word.text = word.text.romanize()
+        }
 
         var checkHasDelay =
           (typeof word.repeat_delay === 'string' ||
@@ -367,18 +381,18 @@ var Karaoke = function (__element) {
 
       if (
         isNotHighlighting &&
-        /__cur_line/g.test(this.cachedDom[karaLineNum].className)
+        this.cachedDom[karaLineNum].className.indexOf(__cur_line) > -1
       ) {
         this.cachedDom[karaLineNum].className = this.cachedDom[
           karaLineNum
-        ].className.replace(/\s__cur_line/, '')
+        ].className.replace(s__cur_line_reg, '')
       }
 
       if (
         !isNotHighlighting &&
-        !/\s__cur_line/g.test(this.cachedDom[karaLineNum].classList)
+        !s__cur_line_reg.test(this.cachedDom[karaLineNum].classList)
       ) {
-        this.cachedDom[karaLineNum].className += ' __cur_line'
+        this.cachedDom[karaLineNum].className += s__cur_line
       }
 
       if (
@@ -391,9 +405,7 @@ var Karaoke = function (__element) {
       var karaWordNum = karaLine.collection.length
       while (karaWordNum--) {
         var karaWord = karaLine.collection[karaWordNum]
-        if (karaWord.start_time === 0 || karaWord.start_time === '0') continue
-        karaWord.start_time = Number(karaWord.start_time)
-        karaWord.end_time = Number(karaWord.end_time)
+        if (karaWord.start_time === 0) continue
 
         if (
           typeof this.cachedDom[karaLineNum + '.' + karaWordNum] === 'undefined'
@@ -408,7 +420,7 @@ var Karaoke = function (__element) {
 
         var isCurWord =
           timeCode > karaWord.start_time && timeCode > karaWord.end_time
-        var __josenExists = /josenPassing/g.test(kards.className)
+        var __josenExists = kards.className.indexOf(__josenPassing) > -1
 
         if (isCurWord) {
           if (!__josenExists) {
@@ -416,7 +428,7 @@ var Karaoke = function (__element) {
           }
         } else {
           if (__josenExists) {
-            kards.className = kards.className.replace(/\sjosenPassing/, '')
+            kards.className = kards.className.replace(s__josenPassing_reg, '')
           }
         }
 
@@ -426,7 +438,6 @@ var Karaoke = function (__element) {
           for (var g = 0; g < repeatsSplit.length; g++) {
             repeatsSplit[g] = Number(repeatsSplit[g])
 
-            karaWord.repeat_delay = Number(karaWord.repeat_delay)
             if (
               timeCode > repeatsSplit[g] - karaWord.repeat_delay * 1.05 &&
               timeCode < repeatsSplit[g] - karaWord.repeat_delay / 3.5 &&
@@ -460,11 +471,11 @@ var Karaoke = function (__element) {
           }
         }
 
-        if (!/currentSync/g.test(kards.className)) {
+        if (kards.className.indexOf(__currentSync) == -1) {
           kards.className =
             timeCode > karaWord.start_time && timeCode < karaWord.end_time
-              ? kards.className + ' currentSync'
-              : kards.className.replace(/\scurrentSync/g, '')
+              ? kards.className + s__currentSync
+              : kards.className.replace(s__currentSync_reg, '')
 
           if (
             this.tickSoundEnable &&
@@ -513,11 +524,11 @@ var Karaoke = function (__element) {
         }
 
         if (
-          (/\scurrentSync/g.test(kards.className) &&
+          (s__currentSync_reg.test(kards.className) &&
             timeCode < karaWord.start_time) ||
           timeCode > karaWord.end_time
         ) {
-          kards.className = kards.className.replace(/\scurrentSync/g, '')
+          kards.className = kards.className.replace(s__currentSync_reg, '')
 
           if (timeCode > karaWord.end_time) {
             kards.style.transition =

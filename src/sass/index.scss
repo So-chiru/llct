@@ -225,14 +225,20 @@ body {
     img {
       transform: scale(0.95);
       opacity: 0.9;
+      border-radius: 15px;
     }
+
+    border-radius: 15px;
   }
 
   .card:active {
     img {
       transform: scale(0.9);
       opacity: 0.7;
+      border-radius: 20px;
     }
+
+    border-radius: 20px;
   }
 }
 
@@ -570,7 +576,7 @@ body {
   scroll-behavior: smooth;
 
   @media screen and (max-width: $small) {
-    height: 70%;
+    height: 80%;
   }
 
   .lyrics {
@@ -702,7 +708,7 @@ body {
     }
 
     .info {
-      grid-column: 1/8;
+      grid-column: 1/7;
       grid-row: 1/2;
 
       img {
