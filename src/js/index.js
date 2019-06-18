@@ -856,12 +856,6 @@ let pageAdjust = {
     }
     pageAdjust.cListsElement.appendChild(docFrag)
 
-    if (LazyLoad) {
-      window.lazyloadObj = new LazyLoad({
-        elements_selector: '.lazy'
-      })
-    }
-
     document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
   },
 
