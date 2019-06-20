@@ -50,6 +50,7 @@ var formatBytes = (a, b) => {
   return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f]
 }
 
+var __dYs_preSpace = /^\s+|\s+$/g
 var dataYosoro = {
   isStorageSupport: window.localStorage != null,
   get: function (...args) {
@@ -72,7 +73,7 @@ var dataYosoro = {
     ) {
       var x = cookies[i].substr(0, cookies[i].indexOf('='))
       var y = cookies[i].substr(cookies[i].indexOf('=') + 1)
-      x = x.replace(/^\s+|\s+$/g, '')
+      x = x.replace(__dYs_preSpace, '')
       if (x === key) {
         return unescape(y)
       }
@@ -119,13 +120,16 @@ var dataYosoro = {
   }
 }
 
+var __url_replF = /[[]/
+var __url_replS = /[\]]/
+var __url_replPL = /\+/g
 var urlQueryParams = function (name) {
-  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
+  name = name.replace(__url_replF, '\\[').replace(__url_replS, '\\]')
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
   var results = regex.exec(location.search)
   return results === null
     ? ''
-    : decodeURIComponent(results[1].replace(/\+/g, ' '))
+    : decodeURIComponent(results[1].replace(__url_replPL, ' '))
 }
 
 let Sakurauchi = {
@@ -250,6 +254,17 @@ var i = [
   }
 ]
 
+var __kItv_tType = {
+  i: 'color: unset',
+  w: 'background: #ffc700; color: #323232',
+  e: 'background: #ff1500; color: #fff'
+}
+var __kItv_cType = {
+  i: 'log',
+  w: 'warn',
+  e: 'error'
+}
+
 const kIntvlogger = (e, rs, msg, t) => {
   var rx = ''
   if (rs.indexOf('s') !== -1) {
@@ -260,21 +275,11 @@ const kIntvlogger = (e, rs, msg, t) => {
   }
   if (rx === '<') rx += '-'
 
-  var tType = {
-    i: 'color: unset',
-    w: 'background: #ffc700; color: #323232',
-    e: 'background: #ff1500; color: #fff'
-  }
-  var consoleType = {
-    i: 'log',
-    w: 'warn',
-    e: 'error'
-  }
-  console[consoleType[t] || 'log'](
+  console[__kItv_cType[t] || 'log'](
     `[${(t || 'i').toUpperCase()}] %c${i[e].n} %c${rx} %c${msg}`,
     i[e].c,
     'color: #a0a0a0',
-    tType[t] || tType['i']
+    __kItv_tType[t] || __kItv_tType['i']
   )
 }
 

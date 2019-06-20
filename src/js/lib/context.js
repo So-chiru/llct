@@ -1,3 +1,4 @@
+var __kara_d_d_rg = /kara_(\d+)_(\d+)/g
 let HugContext = class {
   constructor (element) {
     this.__obj_curPointer = null
@@ -21,7 +22,7 @@ let HugContext = class {
   openContext = _ev => {
     var t_id = _ev.target.id
 
-    if (/kara_(\d+)_(\d+)/g.test(t_id)) {
+    if (__kara_d_d_rg.test(t_id)) {
       this.__target = t_id.split('_').splice(-2)
       document.getElementById('__context_bg').style.display = 'block'
       document.getElementById('__context_frame').style.display = 'block'

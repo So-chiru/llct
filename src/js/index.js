@@ -387,12 +387,6 @@ let yohaneNoDOM = {
     }
 
     LLCT.audioLoadStarted = window.performance ? performance.now() : Date.now()
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'play', {
-        event_category: 'Audio',
-        event_label: 'music id ' + id
-      })
-    }
 
     document.getElementById('_of_ric').style.display = window.navigator.onLine
       ? 'none'
@@ -855,6 +849,13 @@ let pageAdjust = {
       }
     }
     pageAdjust.cListsElement.appendChild(docFrag)
+
+    if (window.LazyLoad) {
+      window.nLazy = new LazyLoad({
+        elements_selector: '.lazy',
+        class_loaded: 'llct_loaded'
+      })
+    }
 
     document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
   },

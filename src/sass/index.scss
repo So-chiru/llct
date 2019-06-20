@@ -225,24 +225,29 @@ body {
     img {
       transform: scale(0.95);
       opacity: 0.9;
-      border-radius: 15px;
+      border-radius: 10px;
     }
 
-    border-radius: 15px;
+    border-radius: 10px;
   }
 
   .card:active {
     img {
       transform: scale(0.9);
       opacity: 0.7;
-      border-radius: 20px;
+      border-radius: 15px;
     }
 
-    border-radius: 20px;
+    border-radius: 15px;
   }
 }
 
 .card_bg {
+  transition: opacity 3s cubic-bezier(0.95, 0.05, 0.795, 0.035) 0.5s;
+  opacity: 0;
+}
+
+.llct_loaded {
   opacity: 0.7;
 }
 
