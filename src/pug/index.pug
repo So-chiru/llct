@@ -20,7 +20,7 @@ html(lang="kr").index
     link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous")
     link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='shortcut icon', href='https://cdn-mikan.lovelivec.kr/data/favicon.ico', type='image/x-icon')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="this.media='all';")
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     link(rel="preload" href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900" as="fetch" crossorigin="anonymous" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/photoswipe.css" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/default-skin/default-skin.css" media="none" onload="this.media='all';")
@@ -94,7 +94,7 @@ html(lang="kr").index
                 span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin" alt="<">keyboard_arrow_left</i>
                 span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">1</span>
                 span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin" alt=">">keyboard_arrow_right</i>
-    .switch_layer.hide
+    .screen_layer#switch_layer.hide
         .close_btn(onclick="LLCT.hideLayer(1)")
             p <i class="material-icons">close</i>
         .layer_sc
@@ -102,12 +102,12 @@ html(lang="kr").index
             br
             .group_grid
                 ._btn_groupSl(onclick="LLCT.selectGroup(0)")
-                    img.group_icon(src="/live_assets/us.png")
+                    img.lazy.group_icon(src="/live_assets/us.png")
                 ._btn_groupSl(onclick="LLCT.selectGroup(1)")
-                    img.group_icon(src="/live_assets/aqours.png")
+                    img.lazy.group_icon(src="/live_assets/aqours.png")
                 ._btn_groupSl(onclick="LLCT.selectGroup(2)")
-                    img.group_icon(src="/live_assets/niji.png")
-    .setting_layer.hide
+                    img.lazy.group_icon(src="/live_assets/niji.png")
+    .screen_layer#setting_layer.hide
         .close_btn(onclick="LLCT.hideLayer(0)")
             p <i class="material-icons">close</i>
         .layer_sc
@@ -183,14 +183,14 @@ html(lang="kr").index
         | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
     script(defer src="/lib/ps/photoswipe.min.js")
     script(defer src="/lib/ps/photoswipe-ui-default.min.js")
-    script(src='./lib/aj/anime.min.js')
-    script(src='./lib/kr/aromanize.js')
+    script(src='./lib/aj/anime.min.js' async)
+    script(src='./lib/kr/aromanize.js' async)
     script(src='./lib/jquery.min.js')
     script(src='./lib/one.js')
     script(src='./js/global.min.js')
     script(src='./js/options.min.js')
-    script(src='./js/index.min.js')
-    script(src='./js/lib/hammer.min.js')
+    script(async src='./js/index.min.js')
+    script(async src='./js/lib/hammer.min.js')
     script(defer src='./js/karaoke.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.

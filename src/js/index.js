@@ -10,13 +10,13 @@ let LLCT = {
   __playPointer: null,
 
   hideLayer: i => {
-    document.getElementsByClassName(LLCTLayers[i])[0].classList.remove('show')
-    document.getElementsByClassName(LLCTLayers[i])[0].classList.add('hide')
+    document.getElementById(LLCTLayers[i])[0].classList.remove('show')
+    document.getElementById(LLCTLayers[i])[0].classList.add('hide')
   },
 
   showLayer: i => {
-    document.getElementsByClassName(LLCTLayers[i])[0].classList.remove('hide')
-    document.getElementsByClassName(LLCTLayers[i])[0].classList.add('show')
+    document.getElementById(LLCTLayers[i])[0].classList.remove('hide')
+    document.getElementById(LLCTLayers[i])[0].classList.add('show')
   },
 
   clearCache: () => {
