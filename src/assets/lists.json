@@ -27,6 +27,13 @@
         "center": null,
         "karaoke": false,
         "short_kr": "스탓대시"
+      },
+      "きっと青春が聞こえる": {
+        "translated": "분명 청춘이 들려올거야",
+        "id": "00024",
+        "center": null,
+        "karaoke": true,
+        "short_kr": "세슌"
       }
     }
   },

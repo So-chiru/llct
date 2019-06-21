@@ -41,6 +41,9 @@ const __josenPassing = 'josenPassing'
 const s__josenPassing = ' josenPassing'
 const s__josenPassing_reg = /\sjosenPassing/g
 
+const c_undefined = 'undefined'
+const trs_default = 'text-shadow 0.33s ease 0s, color 0.33s ease 0s'
+
 /**
  * a Array에 있는 t 값들을 읽어 최소, 최대 값을 불러옵니다.
  * @param {Array} a 최소값을 읽을 Array
@@ -363,6 +366,7 @@ var Karaoke = function (__element) {
     Sakurauchi.run('tickSoundChanged', this.tickSoundEnable)
   }
   this.cachedDom = {}
+  this.__auSync_karaLNum = 0
   this.AudioSync = function (timeCode, fullRender) {
     if (typeof this.karaokeData === 'undefined' || this.karaokeData === null) {
       return 0
@@ -379,26 +383,19 @@ var Karaoke = function (__element) {
       var isNotHighlighting =
         timeCode < karaLine.start_time || timeCode > karaLine.end_time
 
-      if (
-        isNotHighlighting &&
-        this.cachedDom[karaLineNum].className.indexOf(__cur_line) > -1
-      ) {
-        this.cachedDom[karaLineNum].className = this.cachedDom[
-          karaLineNum
-        ].className.replace(s__cur_line_reg, '')
+      if (this.cachedDom[karaLineNum].className.indexOf(__cur_line) > -1) {
+        if (isNotHighlighting) {
+          this.cachedDom[karaLineNum].className = this.cachedDom[
+            karaLineNum
+          ].className.replace(s__cur_line_reg, '')
+        }
+      } else {
+        if (!isNotHighlighting) {
+          this.cachedDom[karaLineNum].className += s__cur_line
+        }
       }
 
-      if (
-        !isNotHighlighting &&
-        !s__cur_line_reg.test(this.cachedDom[karaLineNum].classList)
-      ) {
-        this.cachedDom[karaLineNum].className += s__cur_line
-      }
-
-      if (
-        (timeCode < karaLine.start_time || timeCode > karaLine.end_time) &&
-        !fullRender
-      ) {
+      if (isNotHighlighting && !fullRender) {
         continue
       }
 
@@ -407,24 +404,21 @@ var Karaoke = function (__element) {
         var karaWord = karaLine.collection[karaWordNum]
         if (karaWord.start_time === 0) continue
 
-        if (
-          typeof this.cachedDom[karaLineNum + '.' + karaWordNum] === 'undefined'
-        ) {
+        var preBuildID = karaLineNum + '.' + karaWordNum
+        if (typeof this.cachedDom[preBuildID] === c_undefined) {
           this.cachedDom[
             karaLineNum + '.' + karaWordNum
           ] = document.getElementById(
             this.karaoke_element.id + '_kara_' + karaLineNum + '_' + karaWordNum
           )
         }
-        var kards = this.cachedDom[karaLineNum + '.' + karaWordNum]
 
-        var isCurWord =
-          timeCode > karaWord.start_time && timeCode > karaWord.end_time
+        var kards = this.cachedDom[preBuildID]
         var __josenExists = kards.className.indexOf(__josenPassing) > -1
 
-        if (isCurWord) {
+        if (timeCode > karaWord.start_time && timeCode > karaWord.end_time) {
           if (!__josenExists) {
-            kards.className += ' josenPassing'
+            kards.className += s__josenPassing
           }
         } else {
           if (__josenExists) {
@@ -436,8 +430,6 @@ var Karaoke = function (__element) {
           var repeatsSplit = kards.dataset.repeats.split(',')
 
           for (var g = 0; g < repeatsSplit.length; g++) {
-            repeatsSplit[g] = Number(repeatsSplit[g])
-
             if (
               timeCode > repeatsSplit[g] - karaWord.repeat_delay * 1.05 &&
               timeCode < repeatsSplit[g] - karaWord.repeat_delay / 3.5 &&
@@ -491,9 +483,9 @@ var Karaoke = function (__element) {
 
           if (!kards.style.transition || fullRender) {
             var karaokeDuration =
-              typeof karaWord.pronunciation_time === 'undefined' ||
+              typeof karaWord.pronunciation_time === c_undefined ||
               karaWord.pronunciation_time === 0
-                ? (((typeof karaLine.collection[karaWordNum + 1] !== 'undefined'
+                ? (((typeof karaLine.collection[karaWordNum + 1] !== c_undefined
                   ? karaLine.collection[karaWordNum + 1].start_time
                   : karaWord.end_time) || 70) -
                     karaWord.start_time) /
@@ -503,11 +495,11 @@ var Karaoke = function (__element) {
             if (karaokeDuration < 300) karaokeDuration += 30
 
             if (
-              typeof karaLine.collection[karaWordNum - 1] !== 'undefined' &&
+              typeof karaLine.collection[karaWordNum - 1] !== c_undefined &&
               karaLine.collection[karaWordNum - 1].start_time ===
                 karaLine.collection[karaWordNum].start_time &&
               typeof this.cachedDom[karaLineNum + '.' + (karaWordNum - 1)] !==
-                'undefined'
+                c_undefined
             ) {
               kards.style.transition = this.cachedDom[
                 karaLineNum + '.' + (karaWordNum - 1)
@@ -531,8 +523,7 @@ var Karaoke = function (__element) {
           kards.className = kards.className.replace(s__currentSync_reg, '')
 
           if (timeCode > karaWord.end_time) {
-            kards.style.transition =
-              'text-shadow 0.33s ease 0s, color 0.33s ease 0s'
+            kards.style.transition = trs_default
           }
         }
 
