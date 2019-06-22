@@ -215,8 +215,13 @@ let yohaneNoDOM = {
   },
 
   dekakuOnce: target => {
-    if (/material\-icons/g.test(target.className)) return 0
-    if (!yohaneNoDOM.kaizu && window.matchMedia('(max-width: 800px)').matches) {
+    if (
+      /material\-icons/g.test(target.className) ||
+      /__progress/g.test(target.className)
+    ) {
+      return 0
+    }
+    if (!yohaneNoDOM.kaizu) {
       yohaneNoDOM.dekakuni()
     }
   },
@@ -267,7 +272,7 @@ let yohaneNoDOM = {
       rotate: 60,
       opacity: 0,
       delay: 0,
-      duration: 300,
+      duration: 150,
       easing: 'easeInExpo',
       begin: a => {},
       complete: a => {
@@ -282,7 +287,7 @@ let yohaneNoDOM = {
       rotate: 360,
       opacity: 1,
       delay: 0,
-      duration: 400,
+      duration: 200,
       easing: 'easeOutExpo',
       begin: a => {
         a.seek(0.3)
@@ -300,7 +305,7 @@ let yohaneNoDOM = {
       rotate: -60,
       opacity: 0,
       delay: 0,
-      duration: 300,
+      duration: 150,
       easing: 'easeInExpo',
       begin: a => {},
       complete: a => {
@@ -315,7 +320,7 @@ let yohaneNoDOM = {
       rotate: 360,
       opacity: 1,
       delay: 0,
-      duration: 400,
+      duration: 100,
       easing: 'easeOutExpo',
       begin: a => {
         a.seek(0.3)
@@ -687,7 +692,7 @@ let yohane = {
     }
 
     if (force) return 0
-    yohane.fade(0, yohane.volumeStore, 600, performance.now(), () => {})
+    yohane.fade(0, yohane.volumeStore, 150, performance.now(), () => {})
   },
 
   pause: (returnZero, force) => {
@@ -698,7 +703,7 @@ let yohane = {
     }
 
     if (force) return yohane.player()[returnZero ? 'stop' : 'pause']()
-    yohane.fade(yohane.player().volume, 0, 600, performance.now(), () => {
+    yohane.fade(yohane.player().volume, 0, 150, performance.now(), () => {
       yohane.player()[returnZero ? 'stop' : 'pause']()
     })
   },
