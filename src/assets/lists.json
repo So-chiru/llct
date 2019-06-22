@@ -1592,7 +1592,8 @@
         ],
         "center": null,
         "artist": 0,
-        "short_kr": "홉스논"
+        "karaoke": true,
+        "short_kr": "홉스탑"
       },
       "Jump up HIGH!!": {
         "id": "10087",
