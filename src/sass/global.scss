@@ -237,3 +237,45 @@ $active-color: rgb(0, 140, 255);
 .tx_wlink:active {
   color: rgb(37, 114, 185);
 }
+
+.dark {
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: rgba(32, 32, 32, 0.3);
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    position: absolute;
+    background-color: rgba(32, 32, 32, 0.3);
+
+    @media screen and (max-width: 800px) {
+      width: 3px;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(14, 14, 14, 0.3);
+  }
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgba(241, 241, 241, 0.7);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  position: absolute;
+  background-color: rgba(185, 185, 185, 0.3);
+
+  @media screen and (max-width: 800px) {
+    width: 3px;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(201, 201, 201, 0.3);
+}

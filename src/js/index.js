@@ -738,10 +738,19 @@ let yohane = {
       KaraokeInstance.AudioSync(yohane.timecode())
     }
 
-    if (yohane.tickVal == null) yohane.tickVal = 0
-    if (yohane.tickVal > 12) {
+    var _ct = yohane.player().currentTime
+    var _dr = yohane.player().duration
+
+    if (yohane.tickVal % 2 === 0) {
+      var calc_t = _ct / _dr
+      yohaneNoDOM.__cachedElement.psd_times.style.width = calc_t * 100 + '%'
+      yohaneNoDOM.__cachedElement.__current_thumb.style.transform =
+        'translateX(' + yohane.__tickCaching._clw * calc_t + 'px)'
+    }
+
+    if (yohane.tickVal == null || yohane.tickVal > 16) {
       yohane.tickVal = 0
-      yohane.deferTick()
+      yohane.deferTick(_ct, _dr)
     }
     yohane.tickVal++
 
@@ -751,21 +760,15 @@ let yohane = {
   },
 
   __tickCaching: {},
-  deferTick: () => {
+  deferTick: (_ct, _dr) => {
     if (yohane.__tickCaching._clw == null) {
       yohane.__tickCaching._clw =
         yohaneNoDOM.__cachedElement.bar_eventListen.clientWidth
     }
 
-    var _ct = yohane.player().currentTime
-    var _dr = yohane.player().duration
-    var calc_t = _ct / _dr
     yohaneNoDOM.__cachedElement['played_time'].innerHTML = numToTS(_ct) || '??'
     yohaneNoDOM.__cachedElement['left_time'].innerHTML =
       '-' + (numToTS(_dr - _ct) || '??')
-    yohaneNoDOM.__cachedElement.psd_times.style.width = calc_t * 100 + '%'
-    yohaneNoDOM.__cachedElement.__current_thumb.style.transform =
-      'translateX(' + yohane.__tickCaching._clw * calc_t + 'px)'
   },
 
   initialize: id => {

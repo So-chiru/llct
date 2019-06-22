@@ -328,7 +328,7 @@ body {
 }
 
 .dark .player {
-  box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px -4px 12px rgba(15, 26, 39, 0.22);
 }
 
 .player {
@@ -1039,7 +1039,6 @@ body {
     z-index: 16;
     background-color: #428eff;
     pointer-events: none;
-    transition: 1s transform cubic-bezier(0.19, 1, 0.22, 1);
     background: linear-gradient(25deg, #3590f3, #62bfed);
   }
 
@@ -1053,7 +1052,6 @@ body {
     z-index: 17;
     border-radius: 50px;
     background-color: #fff;
-    transition: 0.1s transform cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
   }
 
