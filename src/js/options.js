@@ -122,17 +122,6 @@ const __llct_optslists = [
     }
   },
   {
-    id: 'useSetIntervalInstead',
-    data_key: 'funeTiming',
-    checkbox: true,
-    default: false,
-    fn: v => {
-      requestAudioSync = null
-      yohane.reInitTimingFunction()
-      yohane.tick()
-    }
-  },
-  {
     id: 'offlineCacheClearBtn',
     button: true,
     filt: _v => {

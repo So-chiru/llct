@@ -1,6 +1,5 @@
 let requestAudioSync
 let requestAudioVolume = null
-let globalKaraokeInstance = null
 
 let LLCTLayers = ['setting_layer', 'switch_layer']
 
@@ -630,9 +629,8 @@ let yohane = {
   },
 
   toggle: () => {
-    yohane[yohane.player().paused ? 'play' : 'pause']()
+    yohane[!yohane.playing() ? 'play' : 'pause']()
   },
-  stop: () => yohane.pause(true),
   playing: () => !yohane.player().paused,
   timecode: () => yohane.player().currentTime * 100,
 
@@ -708,27 +706,14 @@ let yohane = {
     })
   },
 
-  __useSetInterval: false,
-  reInitTimingFunction: () => {
-    yohane.__useSetInterval = dataYosoro.get('funeTiming') == true
-  },
-
-  __tick_brk: 0,
   tick: _ => {
-    if (!yohane.__useSetInterval) {
-      requestAudioSync = requestAnimationFrame(yohane.tick)
-
-      if (yohane.__tick_brk < 2) {
-        yohane.__tick_brk++
-        return
-      }
-
-      yohane.__tick_brk = 0
-    } else if (yohane.__useSetInterval && requestAudioSync === null) {
-      requestAudioSync = setInterval(() => {
-        yohane.tick()
-      }, 10)
+    if (!yohane.playing()) {
+      cancelAnimationFrame(requestAudioSync)
+      return
     }
+
+    requestAudioSync = requestAnimationFrame(yohane.tick)
+
     if (
       yohaneNoDOM.kaizu &&
       typeof KaraokeInstance.karaokeData !== 'undefined' &&
@@ -753,10 +738,6 @@ let yohane = {
       yohane.deferTick(_ct, _dr)
     }
     yohane.tickVal++
-
-    if (yohane.player().paused && !yohane.__useSetInterval) {
-      cancelAnimationFrame(requestAudioSync)
-    }
   },
 
   __tickCaching: {},
@@ -1025,16 +1006,7 @@ let pageLoadedFunctions = () => {
   OptionManager.init()
   yohane.player().onplay = () => {
     yohaneNoDOM.play()
-
-    if (!yohane.__useSetInterval) {
-      requestAnimationFrame(yohane.tick)
-
-      return
-    }
-
-    requestAudioSync = setInterval(() => {
-      yohane.tick()
-    }, 10)
+    requestAnimationFrame(yohane.tick)
   }
 
   yohane.player().onended = () => {
@@ -1054,14 +1026,7 @@ let pageLoadedFunctions = () => {
 
   yohane.player().onpause = () => {
     yohaneNoDOM.pause(true)
-
-    if (!yohane.__useSetInterval) {
-      cancelAnimationFrame(yohane.tick)
-
-      return
-    }
-
-    if (requestAudioSync) clearInterval(requestAudioSync)
+    cancelAnimationFrame(yohane.tick)
   }
 
   KaraokeInstance.ListenClickEvent(function (instance, e) {
