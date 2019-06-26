@@ -3,7 +3,7 @@
   "name": "러브라이브! 콜표",
   "icons": [
     {
-      "src": "/data/favicon/logo.png",
+      "src": "/data/favicon/logo_v2.png",
       "sizes": "512x512",
       "type": "image/png"
     },
@@ -19,7 +19,7 @@
     },
     {
       "src": "/data/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "512x512 64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
   ],
