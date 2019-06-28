@@ -1257,6 +1257,13 @@ let pageLoadedFunctions = () => {
     KaraokeInstance.AudioSync(yohane.timecode(), true)
   })
 
+  document.getElementById('lyrics_wrap').addEventListener(
+    'scroll',
+    () => {
+      KaraokeInstance.updateLastScroll()
+    }, false
+  )
+
   Sakurauchi.listen('blur', () => {
     if (yohane.__vAnimeFunc !== null && requestAudioVolume !== null) {
       yohane.__vAnimeFunc(true)

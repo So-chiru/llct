@@ -312,6 +312,7 @@ var Karaoke = function (__element) {
     for (var i = 0; i < lem.length; i++) {
       ;((_self, clf, perElem) => {
         perElem.addEventListener('click', function () {
+          KaraokeInstance.updateLastScroll()
           var posX = Number(perElem.dataset.line)
           var clcA = _self.karaokeData.timeline[posX].collection
           for (var z = 0; z < clcA.length; z++) {
@@ -372,6 +373,27 @@ var Karaoke = function (__element) {
   }
   this.cachedDom = {}
   this.__auSync_karaLNum = 0
+  this.__last_scroll = 0
+  this.updateLastScroll = () => {
+    this.__last_scroll = Date.now()
+    if (this.__scroll_timeout) {
+      clearTimeout(this.__scroll_timeout)
+    }
+  }
+  this.__scroll_timeout = null
+  this.NewLineRender = new_line_element => {
+    if (this.__scroll_timeout) {
+      clearTimeout(this.__scroll_timeout)
+    }
+    var dd = document.getElementById('lyrics_wrap')
+
+    this.__scroll_timeout = setTimeout(() => {
+      if (Date.now() - this.__last_scroll < 3000) return
+      dd.scrollTop =
+        new_line_element.offsetTop -
+        (window.innerHeight - dd.getBoundingClientRect().height)
+    }, 950)
+  }
   this.AudioSync = function (timeCode, fullRender) {
     if (typeof this.karaokeData === 'undefined' || this.karaokeData === null) {
       return 0
@@ -396,6 +418,7 @@ var Karaoke = function (__element) {
         }
       } else {
         if (!isNotHighlighting) {
+          this.NewLineRender(this.cachedDom[karaLineNum])
           this.cachedDom[karaLineNum].className += s__cur_line
         }
       }
