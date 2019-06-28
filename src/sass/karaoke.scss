@@ -1,20 +1,25 @@
 .karaoke {
-  display: block;
+  display: grid;
   width: 100%;
 }
 
 .lyrics {
-  display: block;
+  display: inline-block;
   margin: 0;
-  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: 0.3s all cubic-bezier(0.19, 1, 0.22, 1);
   color: #a0a0a0;
   cursor: pointer;
 }
 
+.blank {
+  height: 8px;
+}
+
 .p_line {
-  display: flex;
-  justify-content: center;
-  min-height: 10px;
+  display: inline-block;
+  min-height: 3px;
+  text-align: center;
+  width: 100%;
 }
 
 .__cur_line {
@@ -42,6 +47,7 @@
   color: rgb(255, 255, 255);
   text-shadow: 0px 0px 5px #7fd5f9;
   font-weight: 500;
+  letter-spacing: 0.63px;
 
   &.__s,
   &.call &.cmt &.__cs {
@@ -51,6 +57,8 @@
   &.call {
     color: #fff;
     text-shadow: 0px 0px 5px #90e861;
+    display: inline-block;
+    transform: rotateX(5deg);
   }
 
   &.cmt {

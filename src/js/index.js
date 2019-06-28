@@ -230,11 +230,13 @@ let yohaneNoDOM = {
   },
 
   dekakuni: () => {
-    document.getElementsByClassName('player_bg')[0].classList.add('show')
+    var pl_bg = document.getElementById('pl_bg')
+    pl_bg.classList.add('show')
     document.getElementsByClassName('player')[0].classList.add('dekai')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
 
+    pl_bg.style.opacity = 1
     KaraokeInstance.clearSync()
   },
 
@@ -251,7 +253,10 @@ let yohaneNoDOM = {
   },
 
   chiisakuni: () => {
-    document.getElementsByClassName('player_bg')[0].classList.remove('show')
+    var pl_bg = document.getElementsByClassName('player_bg')[0]
+    pl_bg.classList.remove('show')
+    pl_bg.style.opacity = '0'
+
     document.getElementsByClassName('player')[0].classList.remove('dekai')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
@@ -1082,7 +1087,11 @@ let pageLoadedFunctions = () => {
   var domGPLBg = document.getElementById('pl_bg')
   var domGPLKa = document.getElementById('kara_player')
 
+  var __bak_style = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0s'
   playerHammer.on('panstart', ev => {
+    __bak_style = domGPLKa.style.transition
+    domGPLKa.style.transition = 'unset'
+
     domGPLBg.classList.add('show')
     yohaneNoDOM.hideLyrics()
   })
@@ -1090,6 +1099,7 @@ let pageLoadedFunctions = () => {
   playerHammer.on('panend', ev => {
     yohaneNoDOM.showLyrics()
 
+    domGPLKa.style.transition = __bak_style
     if (closeVal < -250) {
       yohaneNoDOM.dekakuni(true)
     } else if (closeVal > 250 && !closeDir) {
@@ -1117,7 +1127,9 @@ let pageLoadedFunctions = () => {
         domGPLKa.style.transform = 'translateY(' + ev.deltaY + 'px)'
       }
 
-      domGPLBg.style.opacity = 1 - ev.deltaY / window.innerHeight
+      domGPLBg.style.opacity = yohaneNoDOM.kaizu
+        ? 1 - ev.deltaY / window.innerHeight
+        : 1 - (ev.deltaY / window.innerHeight + 1)
 
       if (ev.deltaY < 0) {
         domGPLKa.style.height = originCalc + closeVal * -1 + 'px'

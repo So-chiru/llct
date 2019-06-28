@@ -42,7 +42,7 @@ const s__josenPassing = ' josenPassing'
 const s__josenPassing_reg = /\sjosenPassing/g
 
 const c_undefined = 'undefined'
-const trs_default = 'text-shadow 0.33s ease 0s, color 0.33s ease 0s'
+const trs_default = 'all 0.33s ease 0s, color 0.33s ease 0s'
 
 /**
  * a Array에 있는 t 값들을 읽어 최소, 최대 값을 불러옵니다.
@@ -248,33 +248,35 @@ var Karaoke = function (__element) {
     var inserts = ''
     this.cachedDom = {}
 
-    this.karaokeData.timeline.forEach((v, lineI) => {
+    var t_len = this.karaokeData.timeline.length
+    for (var lineI = 0; lineI < t_len; lineI++) {
+      var v = this.karaokeData.timeline[lineI].collection
       var spaceEle = ''
-      v.collection.forEach((word, wordI) => {
+
+      var v_len = v.length
+
+      for (var wordI = 0; wordI < v_len; wordI++) {
+        var word = v[wordI]
+
         if (checkUseRomaji && Aromanize && Number(word.type) != 3) {
           word.text = word.text.romanize()
         }
 
-        var checkHasDelay =
-          (typeof word.repeat_delay === 'string' ||
-            typeof word.repeat_delay === 'number') &&
-          (word.repeat_delay != '0' || word.repeat_delay != '')
         var _idx = this.karaoke_element.id + '_kara_' + lineI + '_' + wordI
         spaceEle += `<p class="lyrics ${
           __kara_typeList[word.type]
-        }" id="${_idx}" data-line="${lineI}" data-word="${wordI}" ${
-          checkHasDelay
-            ? `data-repeats="${this.calcRepeats(
-              word.start_time,
-              word.end_time,
-              word.repeat_delay
-            )}"`
-            : ''
-        } style="text-shadow: ${
-          word.text_color !== null && word.text_color !== ''
-            ? '0 0 3px ' + word.text_color
-            : ''
-        };">${
+        }" id="${_idx}" ${word.text.trim() === '' &&
+          'llct-blank'} data-line="${lineI}" data-word="${wordI}" ${(typeof word.repeat_delay ===
+          'string' ||
+          typeof word.repeat_delay === 'number') &&
+          (word.repeat_delay != '0' || word.repeat_delay != '') &&
+          `data-repeats="${this.calcRepeats(
+            word.start_time,
+            word.end_time,
+            word.repeat_delay
+          )}"`} style="text-shadow: ${word.text_color !== null &&
+          word.text_color !== '' &&
+          '0 0 3px ' + word.text_color};">${
           typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
             ? '<ruby>' +
               word.text.replace(/\s/g, '&nbsp') +
@@ -283,9 +285,12 @@ var Karaoke = function (__element) {
               '</rt></ruby>'
             : word.text.replace(/\s/g, '&nbsp')
         }</p>`
-      })
+      }
+
       inserts +=
-        '<div class="p_line" id="' +
+        '<div class="p_line ' +
+        (spaceEle.indexOf('llct-blank') > -1 ? 'blank' : '') +
+        '" id="' +
         this.karaoke_element.id +
         '_kara_' +
         lineI +
@@ -296,7 +301,7 @@ var Karaoke = function (__element) {
         '.</p> ' +
         spaceEle +
         '</div>'
-    })
+    }
 
     this.karaoke_element.innerHTML = inserts
 
@@ -506,7 +511,7 @@ var Karaoke = function (__element) {
               ].style.transition
             } else {
               kards.style.transition =
-                'text-shadow ' +
+                'all ' +
                 karaokeDuration / 300 +
                 's ease 0s, color ' +
                 karaokeDuration / 300 +
