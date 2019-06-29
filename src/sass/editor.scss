@@ -186,12 +186,13 @@
     overflow: auto;
   }
   .p_line {
-    justify-content: start;
+    text-align: start;
+    min-height: 35px;
   }
   .line_num {
     margin-right: 5px;
     margin-bottom: auto;
-    display: block;
+    display: inline-block;
   }
   .currentPage {
     width: 100%;
