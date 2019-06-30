@@ -43,7 +43,7 @@ $(document).ready(() => {
     }
     audioSyncSleep = 0
 
-    KaraokeInstance.AudioSync(flrsd, true)
+    KaraokeInstance.AudioSync(flrsd, false)
   })
 
   wavesurfer.on('seek', () => {

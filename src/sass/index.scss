@@ -86,20 +86,24 @@ body {
   color: #fff;
 }
 
-.dark .tabs span {
+.dark .tabs .material-icons-round {
   color: #9c9c9c;
 }
 
+.dark .tabs .material-icons-round:hover {
+  color: #c5c5c5;
+}
+
 .tabs {
-  margin-left: 40px;
+  margin-left: 20px;
   display: -webkit-flex;
   display: flex;
   justify-content: center;
   align-content: center;
+  flex: 10;
 
   span {
-    font-size: 24px;
-    color: #707070;
+    font-size: 32px;
     font-weight: 100;
     margin: auto;
     margin-right: 20px;
@@ -126,23 +130,107 @@ body {
     border: 0;
   }
 
-  .min_ti {
-    width: 50px;
-  }
-
   .ti {
     margin: auto;
     display: -webkit-flex;
     display: flex;
   }
 
-  .material-icons {
-    transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  .group_btn {
+    padding: 5px 20px;
+    border-radius: 7.24px;
+    font-size: 16px;
+    font-weight: 100;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    justify-content: center;
   }
 
-  .material-icons:hover {
-    transform: rotateZ(20deg);
+  .group_btn:hover {
+    letter-spacing: 2px;
   }
+
+  .material-icons-round {
+    transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    color: #707070;
+  }
+}
+
+.dark .aqours {
+  background-color: rgba(0, 140, 255, 0.4);
+}
+
+.dark .aqours:hover {
+  background-color: rgba(0, 120, 255, 0.6);
+}
+
+.dark .aqours:active {
+  background-color: rgba(0, 100, 255, 0.8);
+}
+
+.aqours {
+  background-color: rgba(0, 140, 255, 0.7);
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 6px rgba(0, 140, 255, 0.3);
+}
+
+.aqours:hover {
+  background-color: rgba(0, 120, 255, 0.8);
+}
+
+.aqours:active {
+  background-color: rgba(0, 100, 255, 0.9);
+}
+
+.dark .muse {
+  background-color: rgba(255, 0, 200, 0.4);
+}
+
+.dark .muse:hover {
+  background-color: rgba(255, 0, 220, 0.6);
+}
+
+.dark .muse:active {
+  background-color: rgba(255, 0, 240, 0.7);
+}
+
+.muse {
+  background-color: rgba(255, 0, 200, 0.5);
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 6px rgba(255, 0, 255, 0.3);
+}
+
+.muse:hover {
+  background-color: rgba(255, 0, 220, 0.7);
+}
+
+.muse:active {
+  background-color: rgba(255, 0, 240, 0.9);
+}
+
+.dark .niji {
+  background-color: rgba(255, 210, 0, 0.4);
+}
+
+.dark .niji:hover {
+  background-color: rgba(255, 220, 0, 0.7);
+}
+
+.dark .niji:active {
+  background-color: rgba(255, 230, 0, 0.8);
+}
+
+.niji {
+  background-color: rgba(255, 210, 0, 0.6);
+  color: rgb(70, 70, 70);
+  box-shadow: 0px 0px 6px rgba(255, 210, 0, 0.3);
+}
+
+.niji:hover {
+  background-color: rgba(255, 220, 0, 0.7);
+}
+
+.niji:active {
+  background-color: rgba(255, 230, 0, 0.8);
 }
 
 @media screen and (max-width: $small) {
@@ -156,12 +244,6 @@ body {
 
     h1 {
       font-size: 28px;
-    }
-  }
-
-  .tabs {
-    span {
-      font-size: 20px;
     }
   }
 }
@@ -406,7 +488,7 @@ body {
   }
 }
 
-.dark .ctrls .material-icons {
+.dark .ctrls .material-icons-round {
   color: #dddddd;
 }
 
@@ -417,7 +499,7 @@ body {
 .ctrls {
   margin-left: auto;
 
-  .material-icons {
+  .material-icons-round {
     font-size: 45px;
     color: #737373;
     margin-top: auto;
@@ -748,11 +830,6 @@ body {
   .cover {
     margin-right: 20px;
   }
-
-  p,
-  div {
-    margin-right: 5px;
-  }
 }
 
 .pp-section {
@@ -761,29 +838,35 @@ body {
 
 .call_img {
   width: 90%;
-  height: 90%;
   margin-left: 5%;
 }
 
 .navigator {
   display: -webkit-flex;
   display: flex;
-  width: 30%;
+  height: 80px;
   margin: auto;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-bottom: 10%;
   justify-content: center;
   vertical-align: middle;
 
   .arrow_btn {
     font-size: 50px;
-    margin-top: 10px;
+    margin: auto;
     cursor: pointer;
   }
 
   @media screen and (max-width: $small) {
     margin-bottom: 20%;
   }
+}
+
+.nav_arrow_wrap {
+  justify-content: center;
+  display: flex;
+  height: auto;
+  width: 60px;
 }
 
 .lyrics {
@@ -1065,12 +1148,12 @@ body {
   text-align: center;
 }
 
-.offline_replacer .material-icons {
+.offline_replacer .material-icons-round {
   color: #323232;
   font-size: 82px;
 }
 
-.dark .offline_replacer .material-icons {
+.dark .offline_replacer .material-icons-round {
   color: #a8a8a8;
 }
 
@@ -1099,6 +1182,11 @@ body {
   }
 }
 
+.spacer_more {
+  flex: 10;
+  display: flex;
+}
+
 .group_icon {
   position: relative;
   width: auto;
@@ -1117,4 +1205,42 @@ body {
   transform: scale(1.05);
   background-color: rgba(92, 92, 92, 0.2);
   box-shadow: 0px 0px 8px rgba(110, 110, 110, 0.3);
+}
+
+.index {
+  .__context_bg {
+    background-color: rgba(50, 50, 50, 0.3);
+  }
+}
+
+.vtl_ko {
+  width: 50px;
+  float: right;
+  justify-content: center;
+}
+
+.general_trans {
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.mat-icon-hover-anime:hover {
+  background-color: rgba(226, 226, 226, 0.466);
+  border-radius: 50px;
+}
+
+.pd_onhover:hover {
+  padding: 10%;
+}
+
+.mat-icon-hover-anime:active {
+  background-color: rgba(163, 163, 163, 0.466);
+  border-radius: 50px;
+}
+
+.dark .mat-icon-hover-anime:hover {
+  background-color: rgba(82, 82, 82, 0.466);
+}
+
+.dark .mat-icon-hover-anime:active {
+  background-color: rgba(107, 107, 107, 0.466);
 }

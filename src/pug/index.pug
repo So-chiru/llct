@@ -20,7 +20,7 @@ html(lang="kr").index
     link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous")
     link(rel='stylesheet', href='./yosoro.min.css')
     link(rel='shortcut icon', href='/data/favicon.ico', type='image/x-icon')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round')
     link(rel="preload" href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900" as="fetch" crossorigin="anonymous" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/photoswipe.css" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/default-skin/default-skin.css" media="none" onload="this.media='all';")
@@ -50,13 +50,13 @@ html(lang="kr").index
                         .thumb#__current_thumb
                     p#left_time.c.mga - 4 : 59
                 .ctrls
-                    span#pp_btn.material-icons(onclick="yohane.toggle()" title="노래 재생") play_arrow
-                    span#tick_btn.material-icons.in_active(onclick="KaraokeInstance.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
-                    span#pl_loop.material-icons.in_active(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
+                    span#pp_btn.material-icons-round.mat-icon-hover-anime(onclick="yohane.toggle()" title="노래 재생") play_arrow
+                    span#tick_btn.material-icons-round.in_active.mat-icon-hover-anime(onclick="KaraokeInstance.toggleTickSounds()" title="콜에 틱 소리 내기") alarm
+                    span#pl_loop.material-icons-round.in_active.mat-icon-hover-anime(onclick="yohane.toggleLoops()" title="(현재 노래 / 플레이 리스트) 반복 / 순차 재생") loop
         .lyrics_wrapper#lyrics_wrap
             .lyrics_wrapper-inner#lyrics_wrap_inner
                 .offline_replacer#_of_ric
-                    span.material-icons offline_bolt
+                    span.material-icons-round offline_bolt
                     p.anon 인터넷에 연결할 수 없습니다. 이전에 저장된 데이터를 사용하여 콜표를 표시합니다.
                     span.mute (저장된 데이터가 없으면 빈칸으로 표시됩니다.)
                     br
@@ -69,6 +69,12 @@ html(lang="kr").index
                 p.bottom_margin
         audio#kara_audio
         audio#tick_sounds(src="/live_assets/key-press-2.mp3")
+    #__context_bg.__context_bg(onclick="vertialMenusContext.closeContext()")
+    #__context_frame.__context_frame
+      .__context_frame_item(onclick="vertialMenusContext.act('shuffleMusic')")
+        p <span class="material-icons-round">shuffle</span> <span>셔플 재생</span>
+      .__context_frame_item(onclick="vertialMenusContext.act('openSettings')")
+        p <span class="material-icons-round">settings</span> <span>설정 열기</span>
     .contents_collection
         .full_page_ct#fp_ct
             .header
@@ -77,10 +83,12 @@ html(lang="kr").index
                     h1#p_title 노래 목록
                 .tabs
                     // span.active 전체
-                    //- span#pl_ms_switcher.ti.min_ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
-                    span.ti.min_ti(onclick="yohane.shuffle()") <span class="material-icons ti">shuffle</span>
-                    span.ti.min_ti(onclick="LLCT.showLayer(1)") <span class="material-icons ti">album</span>
-                    span.ti.min_ti(onclick="LLCT.showLayer(0)") <span class="material-icons ti">settings</span>
+                    //- span#pl_ms_switcher.ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
+                    span#group_selection_btn.ti.group_btn(onclick="LLCT.showLayer(1)") Aqours
+                    
+                    .spacer_more
+                        .spacer_more
+                        span#more_vertical_options.ti.vtl_ko <span class="material-icons-round mat-icon-hover-anime pd_onhover">more_vert</span>
                     //- .search_wrp.ti(onclick="$('#search_val').focus()")
                         input#search_val(type="text", name="")
                         span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
@@ -91,12 +99,12 @@ html(lang="kr").index
                 div
             ._card_lists#_card_lists
             .navigator
-                span(onclick="pageAdjust.prevPage()") <i class="material-icons arrow_btn thin" alt="<">keyboard_arrow_left</i>
+                span.nav_arrow_wrap(onclick="pageAdjust.prevPage()") <i class="material-icons-round arrow_btn thin mat-icon-hover-anime general_trans pd_onhover" alt="<">keyboard_arrow_left</i>
                 span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">1</span>
-                span(onclick="pageAdjust.nextPage()") <i class="material-icons arrow_btn thin" alt=">">keyboard_arrow_right</i>
+                span.nav_arrow_wrap(onclick="pageAdjust.nextPage()") <i class="material-icons-round arrow_btn thin mat-icon-hover-anime general_trans pd_onhover" alt=">">keyboard_arrow_right</i>
     .screen_layer#switch_layer.hide
         .close_btn(onclick="LLCT.hideLayer(1)")
-            p <i class="material-icons">close</i>
+            p <i class="material-icons-round">close</i>
         .layer_sc
             h1 그룹
             br
@@ -109,7 +117,7 @@ html(lang="kr").index
                     img.lazy.group_icon(src="/live_assets/niji.png")
     .screen_layer#setting_layer.hide
         .close_btn(onclick="LLCT.hideLayer(0)")
-            p <i class="material-icons">close</i>
+            p <i class="material-icons-round">close</i>
         .layer_sc
             h1 설정
             br
@@ -182,8 +190,10 @@ html(lang="kr").index
     script(defer src="/lib/ps/photoswipe.min.js")
     script(defer src="/lib/ps/photoswipe-ui-default.min.js")
     script(src='./lib/aj/anime.min.js' async)
+    script(src='./lib/tt/tether.min.js' async)
     script(src='./lib/kr/aromanize.js' async)
     script(src='./lib/jquery.min.js')
+    script(src='./js/lib/context.min.js')
     script(src='./lib/one.js')
     script(src='./js/global.min.js')
     script(src='./js/options.min.js')

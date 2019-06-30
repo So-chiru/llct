@@ -1,14 +1,14 @@
 .__context_frame {
   position: fixed;
   z-index: 100;
-  display: none;
-  min-width: 100px;
+  min-width: 150px;
   height: fit-content;
   background-color: #3d3d3d;
   border-radius: 3px;
   box-shadow: 0px -4px 12px rgba(43, 43, 43, 0.8);
   user-select: none;
   color: white;
+  visibility: hidden;
 }
 
 .__context_frame_div {
@@ -29,7 +29,7 @@
   transition: 0.3s background cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.__context_frame_item .material-icons {
+.__context_frame_item .material-icons-round {
   margin-right: 5px;
 }
 
@@ -44,10 +44,12 @@
 .__context_frame_item p {
   display: flex;
   display: -webkit-flex;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .__context_bg {
-  display: none;
   height: 100%;
   left: 0;
   top: 0;
@@ -55,4 +57,7 @@
   position: fixed;
   background-color: transparent;
   z-index: 99;
+  transition: opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  visibility: hidden;
+  cursor: pointer;
 }

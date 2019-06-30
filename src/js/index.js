@@ -2,6 +2,11 @@ let requestAudioSync
 let requestAudioVolume = null
 
 let LLCTLayers = ['setting_layer', 'switch_layer']
+let GroupCSSSelector = {
+  "µ's": 'muse',
+  Aqours: 'aqours',
+  虹同: 'niji'
+}
 
 let LLCT = {
   __pkg_callLists: [],
@@ -46,12 +51,24 @@ let LLCT = {
    * @param {Boolean} auto 자동으로 실행되었는지 (pid에 따른 자동 그룹 선택 방지)
    */
   selectGroup: (i, notLayer, auto) => {
+    var groupBAK = LLCT.__cur_selectedGroup
     LLCT.__cur_selectedGroup = Object.keys(LLCT.fullMetaData)[i]
     LLCT.__pkg_callLists =
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
     LLCT.__playPointer = null
     LLCT.__cur_filterLists =
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
+
+    var groupSelection = document.getElementById('group_selection_btn')
+    groupSelection.innerHTML = LLCT.__cur_selectedGroup
+    groupSelection.className += ' ' + GroupCSSSelector[LLCT.__cur_selectedGroup]
+
+    if (groupBAK && groupBAK != '') {
+      groupSelection.className = groupSelection.className.replace(
+        ' ' + GroupCSSSelector[groupBAK],
+        ''
+      )
+    }
 
     pageAdjust.buildPage()
 
@@ -66,19 +83,6 @@ let LLCT = {
 
   currentPage: 0,
 
-  viewPlayLists: () => {
-    LLCT.currentPage = 1
-    LLCT.setTitleTo('재생 목록')
-    document.getElementById('pl_ms_switcher').innerHTML =
-      '<span class="material-icons ti">library_music</span>'
-  },
-
-  viewMusicLists: () => {
-    LLCT.currentPage = 0
-    LLCT.setTitleTo('노래 목록')
-    document.getElementById('pl_ms_switcher').innerHTML =
-      '<span class="material-icons ti">queue_music</span>'
-  },
   openCallImage: id => {
     var pElement = document.getElementById('ps_wp')
     var items = [
@@ -1261,7 +1265,8 @@ let pageLoadedFunctions = () => {
     'scroll',
     () => {
       KaraokeInstance.updateLastScroll()
-    }, false
+    },
+    false
   )
 
   Sakurauchi.listen('blur', () => {
@@ -1276,6 +1281,31 @@ let pageLoadedFunctions = () => {
     Sakurauchi.listen('onresize', resizeFunctions)
   }
   pageAdjust.onePageItems = resizeItemsCheck()
+
+  new Tether({
+    element: document.getElementById('__context_frame'),
+    target: document.getElementById('more_vertical_options'),
+    attachment: 'top right',
+    targetAttachment: 'top left'
+  })
+
+  window.vertialMenusContext = new HugContext(
+    document.getElementById('more_vertical_options')
+  )
+
+  document
+    .getElementById('more_vertical_options')
+    .addEventListener('click', ev => {
+      vertialMenusContext.openContext(ev, true)
+    })
+
+  vertialMenusContext.addAction('openSettings', ev => {
+    LLCT.showLayer(0)
+  })
+
+  vertialMenusContext.addAction('shuffleMusic', ev => {
+    yohane.shuffle()
+  })
 
   document.getElementById('curt').classList.add('hide_curtain')
 }

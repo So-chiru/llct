@@ -19,36 +19,50 @@ let HugContext = class {
     return this.__target ? Number(this.__target[1]) : null
   }
 
-  openContext = _ev => {
+  openContext = (_ev, not_kara) => {
     var t_id = _ev.target.id
 
-    if (__kara_d_d_rg.test(t_id)) {
-      this.__target = t_id.split('_').splice(-2)
-      document.getElementById('__context_bg').style.display = 'block'
-      document.getElementById('__context_frame').style.display = 'block'
-      document.getElementById('__context_frame').style.top =
-        _ev.clientY -
-        2 +
-        (_ev.clientY -
-          2 +
-          document.getElementById('__context_frame').clientHeight >
-        window.innerHeight
-          ? -1 * document.getElementById('__context_frame').clientHeight
-          : 0) +
-        'px'
-      document.getElementById('__context_frame').style[
-        _ev.pageX + 110 > window.innerWidth ? 'right' : 'left'
-      ] = (_ev.pageX + 110 > window.innerWidth ? '5px' : _ev.clientX + 5) + 'px'
+    if (__kara_d_d_rg.test(t_id) || not_kara) {
+      this.__target = not_kara ? null : t_id.split('_').splice(-2)
+      document.getElementById('__context_bg').style.visibility = 'visible'
+      document.getElementById('__context_bg').style.pointerEvents = 'unset'
+      document.getElementById('__context_frame').style.visibility = 'visible'
+      document.getElementById('__context_frame').style.opacity = 1
+      document.getElementById('__context_bg').style.opacity = 1
 
-      document.getElementById('kara_liner').innerHTML = this.targetX
-      document.getElementById('kara_number').innerHTML = this.targetY
+      if (!not_kara) {
+        document.getElementById('__context_frame').style.top =
+          _ev.clientY -
+          2 +
+          (_ev.clientY -
+            2 +
+            document.getElementById('__context_frame').clientHeight >
+          window.innerHeight
+            ? -1 * document.getElementById('__context_frame').clientHeight
+            : 0) +
+          'px'
+        document.getElementById('__context_frame').style[
+          _ev.pageX + 110 > window.innerWidth ? 'right' : 'left'
+        ] =
+          (_ev.pageX + 110 > window.innerWidth ? '5px' : _ev.clientX + 5) + 'px'
+      }
+
+      if (document.getElementById('kara_liner')) {
+        document.getElementById('kara_liner').innerHTML = this.targetX
+      }
+
+      if (document.getElementById('kara_number')) {
+        document.getElementById('kara_number').innerHTML = this.targetY
+      }
 
       return _ev.preventDefault()
     }
   }
   closeContext = () => {
-    document.getElementById('__context_frame').style.display = 'none'
-    document.getElementById('__context_bg').style.display = 'none'
+    document.getElementById('__context_frame').style.visibility = 'hidden'
+    document.getElementById('__context_bg').style.pointerEvents = 'none'
+    document.getElementById('__context_frame').style.opacity = 0
+    document.getElementById('__context_bg').style.opacity = 0
   }
 
   __register_fn = parent => {

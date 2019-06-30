@@ -418,7 +418,7 @@ var Karaoke = function (__element) {
         }
       } else {
         if (!isNotHighlighting) {
-          this.NewLineRender(this.cachedDom[karaLineNum])
+          if (!fullRender) this.NewLineRender(this.cachedDom[karaLineNum])
           this.cachedDom[karaLineNum].className += s__cur_line
         }
       }
@@ -534,7 +534,7 @@ var Karaoke = function (__element) {
               ].style.transition
             } else {
               kards.style.transition =
-                'all ' +
+                'text-shadow, letter-spacing ' +
                 karaokeDuration / 300 +
                 's ease 0s, color ' +
                 karaokeDuration / 300 +
