@@ -660,6 +660,7 @@ body {
   margin: 0;
   margin-top: 10px;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 
   @media screen and (max-width: $small) {
     height: 80%;
