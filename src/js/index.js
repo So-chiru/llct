@@ -1307,6 +1307,35 @@ let pageLoadedFunctions = () => {
     yohane.shuffle()
   })
 
+  var _ctf = new ColorThief()
+  document.getElementById('album_meta').crossOrigin = 'Anonymous'
+
+  var __cf_ng = ['217deg', '127deg', '336deg']
+  document.getElementById('album_meta').addEventListener('load', () => {
+    if (dataYosoro.get('piigi') != true) return
+
+    var paletteData = _ctf.getPalette(document.getElementById('album_meta'), 4)
+
+    var fn_background = ''
+    for (var i = 0; i < 3; i++) {
+      if (paletteData == null) break
+      var c = paletteData[i]
+      fn_background +=
+        'linear-gradient(' +
+        __cf_ng[i] +
+        ',rgba(' +
+        c[0] +
+        ', ' +
+        c[1] +
+        ',' +
+        c[2] +
+        ',0.8),rgba(0,0,0,0) 70.71%)' +
+        (i < 2 ? ',' : '')
+    }
+
+    document.getElementById('cl_layer_player').style.background = fn_background
+  })
+
   document.getElementById('curt').classList.add('hide_curtain')
 }
 

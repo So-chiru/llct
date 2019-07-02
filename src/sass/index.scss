@@ -1246,3 +1246,31 @@ body {
 .dark .mat-icon-hover-anime:active {
   background-color: rgba(107, 107, 107, 0.466);
 }
+
+.color_layer,
+.grey_layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 5px;
+  opacity: 0;
+}
+
+.dekai .color_layer,
+.dekai .grey_layer {
+  opacity: 1;
+}
+
+.dark .dekai .color_layer {
+  transition: 1s background cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+}
+
+.grey_layer {
+  background: rgba(247, 247, 247, 0.9);
+}
+
+.dark .grey_layer {
+  background: rgba(50, 50, 50, 0.7);
+}

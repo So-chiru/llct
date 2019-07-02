@@ -58,6 +58,13 @@ const __llct_optslists = [
     }
   },
   {
+    id: 'useAmbientBackground',
+    data_key: 'piigi',
+    checkbox: true,
+    default: true,
+    fn: v => {}
+  },
+  {
     id: 'useOfflineSaving',
     data_key: 'offlineShip',
     checkbox: true,
