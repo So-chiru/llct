@@ -3,6 +3,13 @@
   color: white;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #242424;
+    color: white;
+  }
+}
+
 .jua {
   font-family: "Jua";
 }
