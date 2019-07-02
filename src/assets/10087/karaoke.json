@@ -1,7 +1,7 @@
 {
   "metadata": {
     "correction_time": -10,
-    "lyrics": "Jump  up!\n\n소 라  타 카 쿠  마 우  토 리 에  카 사 네 타  Heart!\n키 보 오 다 케  못 테  토 보 오 요\n\n키 레 이 나  코 토 바 쟈 나 쿠 테  지 분 카 라  데 루\n혼 토 오 노  키 모 치 노  카 케 라  못 토  미 세 테\n\nTake  a  chan ce!  마 다  마 니 아 우\nTake  a  chan ce!  스 나 오 니  나 레\nTake  a  chan ce!  소 시 테  미 라 이 오  오 이 카 케 테  이 코 오 요\n\n아 노 히  우 마 레 타  오 모 이  우 고 키 다 시 타\n이 마 다!  이 마 다!  소 오  코 에 가  키 코 에\n토 키 가  미 치 타 요\n\nJump  up  HIGH!!  카 제 와  유 우 키  아 오 이  유 우 키\n이 마 다 카 라  데 키 루  코 토  사 아  하 지 메 요 오 요  아 아\n쿠 다 라 나 쿠 나 이 요  타 노 시 이 나 라  마 루 다!\n칫 챠 이  오 오 키 이  키 니 시 나 이  Jum ping  the  high er!",
+    "lyrics": "Jump  up!\n\n소 라  타 카 쿠  마 우  토 리 에  카 사 네 타  Heart!\n키 보 오 다 케  못 테  토 보 오 요\n\n키 레 이 나  코 토 바 쟈 나 쿠 테  지 분 카 라  데 루\n혼 토 오 노  키 모 치 노  카 케 라  못 토  미 세 테\n\nTake  a  chan ce!  마 다  마 니 아 우\nTake  a  chan ce!  스 나 오 니  나 레\nTake  a  chan ce!  소 시 테  미 라 이 오  오 이 카 케 테  이 코 오 요\n\n아 노 히  우 마 레 타  오 모 이  우 고 키 다 시 타\n이 마 다!  이 마 다!  소 오  코 에 가  키 코 에\n토 키 가  미 치 타 요\n\nJump  up  HIGH!!  카 제 와  유 우 키  아 오 이  유 우 키\n이 마 다 카 라  데 키 루  코 토  사 아  하 지 메 요 오 요  아 아\n쿠 다 라 나 쿠 나 이 요  타 노 시 이 나 라  마 루 다!\n칫 챠 이  오 오 키 이  키 니 시 나 이  Jum pin'  the  high er!",
     "writeDone": true
   },
   "timeline": [
@@ -1580,14 +1580,14 @@
           "type": 1
         },
         {
-          "text": "ping ",
+          "text": "pin' ",
           "start_time": 9134,
           "end_time": 9599,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "the ",
+          "text": "up ",
           "start_time": 9162,
           "end_time": 9599,
           "pronunciation_time": 0,
@@ -1930,7 +1930,7 @@
           "type": "4"
         },
         {
-          "text": "ing! ",
+          "text": "in' ",
           "start_time": 11532,
           "end_time": 11813,
           "pronunciation_time": 0,
@@ -1992,7 +1992,7 @@
           "type": "4"
         },
         {
-          "text": "ing! ",
+          "text": "in' ",
           "start_time": 11910,
           "end_time": 12213,
           "pronunciation_time": 0,
@@ -2061,7 +2061,7 @@
           "type": "4"
         },
         {
-          "text": "ing! ",
+          "text": "in' ",
           "start_time": 12282,
           "end_time": 12975,
           "pronunciation_time": 0,
@@ -2913,14 +2913,14 @@
           "type": 1
         },
         {
-          "text": "ping ",
+          "text": "pin' ",
           "start_time": 17381,
           "end_time": 17850,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "the ",
+          "text": "up ",
           "start_time": 17413,
           "end_time": 17850,
           "pronunciation_time": 0,
@@ -2989,11 +2989,11 @@
         },
         {
           "text": "(하이?) ",
-          "start_time": 17669,
-          "end_time": 19675,
+          "start_time": 17675,
+          "end_time": 19740,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": 90
+          "repeat_delay": 93.62
         },
         {
           "text": ">",
@@ -3682,14 +3682,14 @@
           "type": 1
         },
         {
-          "text": "ping ",
+          "text": "pin' ",
           "start_time": 24313,
           "end_time": 24786,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "the ",
+          "text": "up ",
           "start_time": 24348,
           "end_time": 24786,
           "pronunciation_time": 0,
@@ -3842,14 +3842,14 @@
           "type": 1
         },
         {
-          "text": "ping ",
+          "text": "pin' ",
           "start_time": 25068,
           "end_time": 25548,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "the ",
+          "text": "up ",
           "start_time": 25102,
           "end_time": 25548,
           "pronunciation_time": 0,
@@ -3953,14 +3953,14 @@
           "type": 1
         },
         {
-          "text": "ping ",
+          "text": "pin' ",
           "start_time": 25817,
           "end_time": 26301,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "the ",
+          "text": "up ",
           "start_time": 25846,
           "end_time": 26301,
           "pronunciation_time": 0,

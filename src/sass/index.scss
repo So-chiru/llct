@@ -1,6 +1,12 @@
 $small: 800px;
 $medium: 1500px;
 
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;

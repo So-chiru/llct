@@ -233,7 +233,14 @@ let Sakurauchi = {
 
 if (typeof $ !== 'undefined') {
   $(document).ready(() => {
-    if (dataYosoro.get('tatenshi')) document.body.classList.add('dark')
+    var matchMedia = window.matchMedia(
+      'screen and (prefers-color-scheme: dark)'
+    )
+    console.log(matchMedia.matches)
+
+    if (dataYosoro.get('tatenshi') || matchMedia.matches) {
+      document.body.classList.add('dark')
+    }
   })
 }
 
