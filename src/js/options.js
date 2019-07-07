@@ -19,6 +19,25 @@ const __llct_optslists = [
       document
         .getElementsByTagName('body')[0]
         .classList[v == 'true' || v == true ? 'add' : 'remove']('dark')
+    },
+    load_check: () => {
+      var mtc = window.matchMedia('(prefers-color-scheme: dark)').matches
+      return [mtc, false]
+    }
+  },
+  {
+    id: 'reduceMotion',
+    data_key: 'zuramaru',
+    checkbox: true,
+    default: false,
+    fn: v => {
+      document
+        .getElementsByTagName('body')[0]
+        .classList[v == 'true' || v == true ? 'add' : 'remove']('no-motion')
+    },
+    load_check: () => {
+      var mtc = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      return [mtc, mtc]
     }
   },
   {
@@ -96,7 +115,7 @@ const __llct_optslists = [
 
               ServWorkerInst.addEventListener('statechange', () => {
                 if (ServWorkerInst.state !== 'installed') return 0
-                _glb_ShowPopup(
+                showPopup(
                   'offline_bolt',
                   '새로운 업데이트가 있습니다. 이곳을 눌러 새로 고칠 수 있습니다.',
                   () => {
@@ -119,7 +138,7 @@ const __llct_optslists = [
           if (typeof obj_inf !== 'object') return 0
 
           if (obj_inf.data.cmd_t === 'popup') {
-            _glb_ShowPopup(obj_inf.data.data.icon, obj_inf.data.data.text)
+            showPopup(obj_inf.data.data.icon, obj_inf.data.data.text)
             return
           }
 
@@ -180,6 +199,19 @@ const OptionManager = {
           }
         })(oi, _e)
       }
+
+      if (oi.load_check) {
+        var lc = oi.load_check()
+
+        if (oi.checkbox) {
+          _e.checked = lc[0]
+        }
+        _e.disabled = lc[1]
+      }
     }
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  OptionManager.init()
+})

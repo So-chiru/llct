@@ -34,7 +34,7 @@ let LLCT = {
         ' / ' +
         pageAdjust.lists.length +
         ' )',
-      pageAdjust.currentPage
+      pageAdjust.currentPage + 1
     )
     if (typeof __askd_result === 'undefined' || isNaN(__askd_result)) return 0
     pageAdjust.setPage(Number(__askd_result) - 1)
@@ -1012,7 +1012,6 @@ let pageLoadedFunctions = () => {
       'block'
   }
 
-  OptionManager.init()
   yohane.player().onplay = () => {
     yohaneNoDOM.play()
     requestAnimationFrame(yohane.tick)
@@ -1036,6 +1035,10 @@ let pageLoadedFunctions = () => {
   yohane.player().onpause = () => {
     yohaneNoDOM.pause(true)
     cancelAnimationFrame(yohane.tick)
+  }
+
+  document.getElementById('kara_player').onclick = ev => {
+    yohaneNoDOM.dekakuOnce(ev.target)
   }
 
   KaraokeInstance.ListenClickEvent(function (instance, e) {
@@ -1066,12 +1069,14 @@ let pageLoadedFunctions = () => {
     if (keys[ev.keyCode][1]) ev.preventDefault()
   })
 
+  // 카드 형 곡 선택 화면의 Swipe 감지
   window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
   selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
   selectorHammer.on('swipe', ev => {
     pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
   })
 
+  // 플레이어의 Swipe 감지
   window.playerHammer = new Hammer(document.getElementById('dash_wrp_ham'))
   playerHammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
   playerHammer.get('pinch').set({ enable: true })
@@ -1156,14 +1161,10 @@ let pageLoadedFunctions = () => {
   }
 
   if (!window.navigator.onLine) {
-    _glb_ShowPopup(
+    showPopup(
       'offline_bolt',
       '오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.'
     )
-  }
-
-  document.getElementById('kara_player').onclick = ev => {
-    yohaneNoDOM.dekakuOnce(ev.target)
   }
 
   document.getElementById('genki_year').innerText = new Date().getFullYear()
@@ -1307,6 +1308,7 @@ let pageLoadedFunctions = () => {
     yohane.shuffle()
   })
 
+  // 플레이어 배경 색상
   var _ctf = new ColorThief()
   document.getElementById('album_meta').crossOrigin = 'Anonymous'
 

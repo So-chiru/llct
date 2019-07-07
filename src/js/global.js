@@ -305,7 +305,7 @@ window.numToTS = __llct_ts_func
 window.logger = kIntvlogger
 
 var _glb_popupTimeout
-var _glb_ShowPopup = (icon, msg, fn) => {
+var showPopup = (icon, msg, fn) => {
   if (_glb_popupTimeout) clearTimeout(_glb_popupTimeout)
   document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
   document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'

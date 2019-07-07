@@ -7,6 +7,10 @@ $medium: 1500px;
   }
 }
 
+.no-motion * {
+  transition: none !important;
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
@@ -1053,8 +1057,15 @@ body {
   &:before {
     background: #52d66b;
   }
+
   span {
     transform: translateX(18px);
+  }
+}
+
+.toggle_input:disabled + .toggle_btn {
+  &:before {
+    background: #aad8cc;
   }
 }
 
@@ -1269,12 +1280,12 @@ body {
   opacity: 1;
 }
 
-.dark .dekai .color_layer {
-  transition: 1s background cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+.dekai .color_layer {
+  transition: 1s all cubic-bezier(0.19, 1, 0.22, 1) 0.45s;
 }
 
 .grey_layer {
-  background: rgba(247, 247, 247, 0.9);
+  background: rgba(247, 247, 247, 0.79);
 }
 
 .dark .grey_layer {
