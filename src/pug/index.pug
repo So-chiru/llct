@@ -203,10 +203,10 @@ html(lang="kr").index
     script(src='./js/lib/context.min.js')
     script(src='./lib/one.js')
     script(src='./js/global.min.js')
+    script(src='./js/options.min.js')
     script(defer src='./js/karaoke.min.js')
     script(async src='./js/index.min.js')
     script(async src='./lib/kr/aromanize.js')
-    script(async src='./js/options.min.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
         !function(e,n,t){"use strict";var o="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP:100|Noto+Sans+KR:100,900",r="__3perf_googleFontsStylesheet";function c(e){(n.head||n.body).appendChild(e)}function a(){var e=n.createElement("link");e.href=o,e.rel="stylesheet",c(e)}function f(e){if(!n.getElementById(r)){var t=n.createElement("style");t.id=r,c(t)}n.getElementById(r).innerHTML=e}e.FontFace&&e.FontFace.prototype.hasOwnProperty("display")?(t[r]&&f(t[r]),fetch(o).then(function(e){return e.text()}).then(function(e){return e.replace(/@font-face {/g,"@font-face{font-display:swap;")}).then(function(e){return t[r]=e}).then(f).catch(a)):a()}(window,document,localStorage);
