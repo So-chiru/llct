@@ -1304,6 +1304,11 @@ let pageLoadedFunctions = () => {
     LLCT.showLayer(0)
   })
 
+  vertialMenusContext.addAction('openCalendar', ev => {
+    var w = window.open('https://all.lovelivec.kr', '_blank');
+    w.focus();
+  })
+
   vertialMenusContext.addAction('shuffleMusic', ev => {
     yohane.shuffle()
   })
