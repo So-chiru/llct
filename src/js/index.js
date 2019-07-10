@@ -1305,8 +1305,7 @@ let pageLoadedFunctions = () => {
   })
 
   vertialMenusContext.addAction('openCalendar', ev => {
-    var w = window.open('https://all.lovelivec.kr', '_blank');
-    w.focus();
+    window.location.href = 'https://all.lovelivec.kr'
   })
 
   vertialMenusContext.addAction('shuffleMusic', ev => {
