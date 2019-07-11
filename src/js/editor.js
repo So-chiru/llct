@@ -270,7 +270,7 @@ $(document).ready(() => {
         .collection[editorLyricsContext.targetY].text
     )
 
-    if (!_blk_edited || typeof _blk_edited === 'undefined' || _blk_edited == null) return false
+    if (!_blk_edited) return false
 
     KaraokeInstance.karaokeData.timeline[
       editorLyricsContext.targetX
