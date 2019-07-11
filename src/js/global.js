@@ -154,15 +154,16 @@ let Sakurauchi = {
       return 0
     }
 
-    if (typeof fi !== 'undefined') {
-      return Sakurauchi.__sot[k].splice(fi, 1)
-    }
-
     if (fi == 'a') {
       let z = Sakurauchi.__sot[k].length
       while (z--) {
         Sakurauchi.__sot[k].splice(z, 1)
       }
+      return z
+    }
+
+    if (typeof fi !== 'undefined') {
+      return Sakurauchi.__sot[k].splice(fi, 1)
     }
 
     for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
