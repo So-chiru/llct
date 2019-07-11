@@ -231,19 +231,21 @@ let Sakurauchi = {
   }
 }
 
-if (typeof $ !== 'undefined') {
-  $(document).ready(() => {
-    var mtcM = window.matchMedia('screen and (prefers-color-scheme: dark)')
+Sakurauchi.listen('DOMContentLoaded', () => {
+  var mtcM = window.matchMedia('screen and (prefers-color-scheme: dark)')
 
-    mtcM.addListener(r => {
-      document.body.classList[r.matches ? 'add' : 'remove']('dark')
-    })
-
-    if (dataYosoro.get('tatenshi') || mtcM.matches) {
-      document.body.classList.add('dark')
-    }
+  mtcM.addListener(r => {
+    document.body.classList[r.matches ? 'add' : 'remove']('dark')
   })
-}
+
+  if (dataYosoro.get('tatenshi') || mtcM.matches) {
+    document.body.classList.add('dark')
+  }
+})
+
+Sakurauchi.listen('load', () => {
+  Sakurauchi.run('LLCTLoad')
+})
 
 var i = [
   {
@@ -304,26 +306,26 @@ const __llct_ts_func = sec => {
 window.numToTS = __llct_ts_func
 window.logger = kIntvlogger
 
-var _glb_popupTimeout
+var popupTimeout
 var showPopup = (icon, msg, fn) => {
-  if (_glb_popupTimeout) clearTimeout(_glb_popupTimeout)
+  if (popupTimeout) clearTimeout(popupTimeout)
   document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
   document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
-  document.getElementsByClassName('offline_popup')[0].style.opacity = 1
-  document.getElementsByClassName('offline_popup')[0].style.display = 'flex'
+  document.getElementsByClassName('llct_pop')[0].style.opacity = 1
+  document.getElementsByClassName('llct_pop')[0].style.display = 'flex'
 
-  document.getElementsByClassName('offline_popup')[0].onclick = () => {
+  document.getElementsByClassName('llct_pop')[0].onclick = () => {
     if (typeof fn === 'function') fn()
-    _glb_closePopup()
+    closePopup()
   }
 
-  _glb_popupTimeout = setTimeout(_glb_closePopup, 4800)
+  popupTimeout = setTimeout(closePopup, 4800)
 }
 
-var _glb_closePopup = () => {
-  document.getElementsByClassName('offline_popup')[0].style.opacity = 0
-  document.getElementsByClassName('offline_popup')[0].style.display = 'none'
-  if (_glb_popupTimeout) clearTimeout(_glb_popupTimeout)
+var closePopup = () => {
+  document.getElementsByClassName('llct_pop')[0].style.opacity = 0
+  document.getElementsByClassName('llct_pop')[0].style.display = 'none'
+  if (popupTimeout) clearTimeout(popupTimeout)
 }
 
 window.dataLayer = window.dataLayer || []

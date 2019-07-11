@@ -125,20 +125,26 @@ let LLCT = {
   loadLyrics: id => {
     yohaneNoDOM.hideLyrics()
     yohaneNoDOM.shokan()
-
-    var useRomaji = dataYosoro.get('romaji')
-    $.ajax({
-      url: './data/' + id + '/karaoke.json',
-      success: function (data) {
-        KaraokeInstance.karaokeData =
-          typeof data === 'object' ? data : JSON.parse(data)
-        KaraokeInstance.RenderDOM(useRomaji)
-        yohaneNoDOM.showLyrics()
-      },
-      error: function (err) {
-        return logger(2, 'r', err.message, 'e')
-      }
-    })
+    fetch('./data/' + id + '/karaoke.json')
+      .then(res => {
+        try {
+          res.json().then(v => {
+            KaraokeInstance.karaokeData = v
+            KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
+            yohaneNoDOM.showLyrics()
+          })
+        } catch (e) {
+          return logger(
+            2,
+            'r',
+            'Failed to parse karaoke json. : ' + e.stack,
+            'e'
+          )
+        }
+      })
+      .catch(e => {
+        return logger(2, 'r', 'Failed to get karaoke file. : ' + e.stack, 'e')
+      })
   },
 
   getFromLists: id => {
@@ -714,7 +720,6 @@ let yohane = {
       yohane.player()[returnZero ? 'stop' : 'pause']()
     })
   },
-
   tick: _ => {
     if (!yohane.playing()) {
       cancelAnimationFrame(requestAudioSync)
@@ -978,64 +983,17 @@ const keys = {
   ]
 }
 
-/**
- * 로컬 전용 : lists.json 파일이 로드가 되면 수행할 데이터 탑재 함수입니다.
- * @param {Object} d Object 형식으로 파싱된 JSON 값입니다.
- */
-var __lcal_loadedAjax = d => {
-  LLCT.fullMetaData = d
-  document.getElementById('loading_spin_ctlst').classList.add('done')
+// 키가 입력 되었을 때 키를 입력합니다.
+Sakurauchi.listen('keydown', ev => {
+  logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
+  if (typeof keys[ev.keyCode] === 'undefined') return 0
+  keys[ev.keyCode][0](ev)
+  if (keys[ev.keyCode][1]) ev.preventDefault()
+})
 
-  if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
-    LLCT.selectGroup(popsHeart.get('pid').substring(0, 1), true, true)
-    yohane.initialize(popsHeart.get('pid'))
-
-    if (!dataYosoro.get('doNotUseMusicPlayer')) {
-      yohaneNoDOM.dekakuni()
-    }
-    return
-  }
-
-  // 마지막으로 선택한 그룹이 있는지에 대한 여부입니다.
-  var NoLastGroup =
-    dataYosoro.get('lastGroup') == null ||
-    typeof dataYosoro.get('lastGroup') === 'undefined'
-
-  LLCT.selectGroup(NoLastGroup ? 1 : dataYosoro.get('lastGroup'), true)
-}
-
-let pageLoadedFunctions = () => {
+// Karaoke 관련 Initialize
+Sakurauchi.add('LLCTLoad', () => {
   window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
-  // 인터넷 익스플로더 좀 쓰지 맙시다
-  if (/* @cc_on!@ */ false || !!document.documentMode) {
-    document.getElementById('PLEASE_STOP_USE_INTERNET_EXPLORER').style.display =
-      'block'
-  }
-
-  yohane.player().onplay = () => {
-    yohaneNoDOM.play()
-    requestAnimationFrame(yohane.tick)
-  }
-
-  yohane.player().onended = () => {
-    if (yohane.__isRepeat) {
-      yohane.seekTo(0)
-      yohane.play()
-
-      return
-    }
-
-    yohaneNoDOM.end()
-
-    if (yohane.__isShuffle) {
-      yohane.next(!yohane.kaizu)
-    }
-  }
-
-  yohane.player().onpause = () => {
-    yohaneNoDOM.pause(true)
-    cancelAnimationFrame(yohane.tick)
-  }
 
   document.getElementById('kara_player').onclick = ev => {
     yohaneNoDOM.dekakuOnce(ev.target)
@@ -1062,21 +1020,42 @@ let pageLoadedFunctions = () => {
     yohane.player()
   )
 
-  Sakurauchi.listen('keydown', ev => {
-    logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
-    if (typeof keys[ev.keyCode] === 'undefined') return 0
-    keys[ev.keyCode][0](ev)
-    if (keys[ev.keyCode][1]) ev.preventDefault()
-  })
+  KaraokeInstance.tickSoundEnable =
+    dataYosoro.get('biTick') == null ||
+    typeof dataYosoro.get('biTick') === 'undefined'
+      ? true
+      : !!dataYosoro.get('biTick')
 
-  // 카드 형 곡 선택 화면의 Swipe 감지
-  window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
-  selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
-  selectorHammer.on('swipe', ev => {
-    pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
-  })
+  Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
 
-  // 플레이어의 Swipe 감지
+  yohane.player().onplay = () => {
+    yohaneNoDOM.play()
+    requestAnimationFrame(yohane.tick)
+  }
+
+  yohane.player().onended = () => {
+    if (yohane.__isRepeat) {
+      yohane.seekTo(0)
+      yohane.play()
+
+      return
+    }
+
+    yohaneNoDOM.end()
+
+    if (yohane.__isShuffle) {
+      yohane.next(!yohane.kaizu)
+    }
+  }
+
+  yohane.player().onpause = () => {
+    yohaneNoDOM.pause(true)
+    cancelAnimationFrame(yohane.tick)
+  }
+})
+
+// 플레이어 관련
+Sakurauchi.add('LLCTLoad', () => {
   window.playerHammer = new Hammer(document.getElementById('dash_wrp_ham'))
   playerHammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
   playerHammer.get('pinch').set({ enable: true })
@@ -1145,20 +1124,73 @@ let pageLoadedFunctions = () => {
       }
     }
   })
+})
 
-  if (typeof $ !== 'undefined') {
-    $.ajax({
-      url: './data/lists.json',
-      success: __lcal_loadedAjax,
-      error: function (err) {
-        logger(2, 'r', err.message, 'e')
+// Tether 사용
+Sakurauchi.add('LLCTLoad', () => {
+  new Tether({
+    element: document.getElementById('__context_frame'),
+    target: document.getElementById('more_vertical_options'),
+    attachment: 'top right',
+    targetAttachment: 'top left'
+  })
+})
+
+Sakurauchi.add('LLCTLoad', () => {
+  window.vertialMenusContext = new HugContext(
+    document.getElementById('more_vertical_options')
+  )
+
+  document
+    .getElementById('more_vertical_options')
+    .addEventListener('click', ev => {
+      vertialMenusContext.openContext(ev, true)
+    })
+
+  vertialMenusContext.addAction('openSettings', ev => {
+    LLCT.showLayer(0)
+  })
+
+  vertialMenusContext.addAction('openCalendar', ev => {
+    window.location.href = 'https://all.lovelivec.kr'
+  })
+
+  vertialMenusContext.addAction('shuffleMusic', ev => {
+    yohane.shuffle()
+  })
+})
+
+Sakurauchi.add('LLCTLoad', () => {
+  // 카드 형 곡 선택 화면의 Swipe 감지
+  window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
+  selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
+  selectorHammer.on('swipe', ev => {
+    pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
+  })
+
+  fetch('./data/lists.json').then(res => {
+    res.json().then(v => {
+      LLCT.fullMetaData = v
+      document.getElementById('loading_spin_ctlst').classList.add('done')
+
+      if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
+        LLCT.selectGroup(popsHeart.get('pid').substring(0, 1), true, true)
+        yohane.initialize(popsHeart.get('pid'))
+
+        if (!dataYosoro.get('doNotUseMusicPlayer')) {
+          yohaneNoDOM.dekakuni()
+        }
+        return
       }
+
+      // 마지막으로 선택한 그룹이 있는지에 대한 여부입니다.
+      var NoLastGroup =
+        dataYosoro.get('lastGroup') == null ||
+        typeof dataYosoro.get('lastGroup') === 'undefined'
+
+      LLCT.selectGroup(NoLastGroup ? 1 : dataYosoro.get('lastGroup'), true)
     })
-  } else {
-    fetch('./data/lists.json').then(res => {
-      __lcal_loadedAjax(res.json())
-    })
-  }
+  })
 
   if (!window.navigator.onLine) {
     showPopup(
@@ -1196,14 +1228,6 @@ let pageLoadedFunctions = () => {
 
     dataYosoro.set('biTick', v)
   })
-
-  KaraokeInstance.tickSoundEnable =
-    dataYosoro.get('biTick') == null ||
-    typeof dataYosoro.get('biTick') === 'undefined'
-      ? true
-      : !!dataYosoro.get('biTick')
-
-  Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
 
   Sakurauchi.listen('audioLoadStart', data => {
     if (!navigator.mediaSession) return 0
@@ -1276,51 +1300,20 @@ let pageLoadedFunctions = () => {
     }
   })
 
-  if (typeof $ !== 'undefined') {
-    $(window).resize(resizeFunctions)
-  } else {
-    Sakurauchi.listen('onresize', resizeFunctions)
-  }
+  Sakurauchi.listen('resize', resizeFunctions, window)
   pageAdjust.onePageItems = resizeItemsCheck()
-
-  new Tether({
-    element: document.getElementById('__context_frame'),
-    target: document.getElementById('more_vertical_options'),
-    attachment: 'top right',
-    targetAttachment: 'top left'
-  })
-
-  window.vertialMenusContext = new HugContext(
-    document.getElementById('more_vertical_options')
-  )
-
-  document
-    .getElementById('more_vertical_options')
-    .addEventListener('click', ev => {
-      vertialMenusContext.openContext(ev, true)
-    })
-
-  vertialMenusContext.addAction('openSettings', ev => {
-    LLCT.showLayer(0)
-  })
-
-  vertialMenusContext.addAction('openCalendar', ev => {
-    window.location.href = 'https://all.lovelivec.kr'
-  })
-
-  vertialMenusContext.addAction('shuffleMusic', ev => {
-    yohane.shuffle()
-  })
 
   // 플레이어 배경 색상
   var _ctf = new ColorThief()
-  document.getElementById('album_meta').crossOrigin = 'Anonymous'
+
+  var album_meta = document.getElementById('album_meta')
+  album_meta.crossOrigin = 'Anonymous'
 
   var __cf_ng = ['217deg', '127deg', '336deg']
-  document.getElementById('album_meta').addEventListener('load', () => {
+  album_meta.addEventListener('load', () => {
     if (dataYosoro.get('piigi') != true) return
 
-    var paletteData = _ctf.getPalette(document.getElementById('album_meta'), 4)
+    var paletteData = _ctf.getPalette(album_meta, 4)
 
     var fn_background = ''
     for (var i = 0; i < 3; i++) {
@@ -1343,13 +1336,7 @@ let pageLoadedFunctions = () => {
   })
 
   document.getElementById('curt').classList.add('hide_curtain')
-}
-
-if (typeof $ !== 'undefined') {
-  $(document).ready(pageLoadedFunctions)
-} else {
-  Sakurauchi.listen('DOMContentLoaded', pageLoadedFunctions)
-}
+})
 
 let resizeFunctions = () => {
   var reszCk = resizeItemsCheck()

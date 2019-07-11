@@ -5,7 +5,7 @@ html(lang="kr").index
     meta(name='viewport', content='width=device-width, initial-scale=0.8')
     meta(name='theme-color', content='#44caff')
     meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
-    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,μ's,Aqours,虹ヶ咲")
+    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,μ's,Aqours,虹ヶ咲,러브라이브 콜표, 러브라이브 선샤인 콜표")
     meta(meta name="apple-mobile-web-app-capable" content="yes")
     meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
     meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
@@ -86,16 +86,10 @@ html(lang="kr").index
                     span <span id="genki_year">2017</span>년 <span id="zenkai_month">11</span>월 <span id="day_day">18</span>일 <span id="day">18</span>요일
                     h1#p_title 노래 목록
                 .tabs
-                    // span.active 전체
-                    //- span#pl_ms_switcher.ti(onclick="LLCT.currentPage === 0 ? LLCT.viewPlayLists() : LLCT.viewMusicLists()") <span class="material-icons ti">queue_music</span>
                     span#group_selection_btn.ti.group_btn(onclick="LLCT.showLayer(1)") Aqours
-                    
                     .spacer_more
                         .spacer_more
                         span#more_vertical_options.ti.vtl_ko <span class="material-icons-round mat-icon-hover-anime pd_onhover">more_vert</span>
-                    //- .search_wrp.ti(onclick="$('#search_val').focus()")
-                        input#search_val(type="text", name="")
-                        span(onclick="yohaneNoDOM.search()") <span class="material-icons ti">search</span>
             .lds-ellipsis.loader#loading_spin_ctlst
                 div
                 div
@@ -114,11 +108,11 @@ html(lang="kr").index
             br
             .group_grid
                 ._btn_groupSl(onclick="LLCT.selectGroup(0)")
-                    img.lazy.group_icon(src="/live_assets/us.png")
+                    img.lazy.group_icon(data-src="/live_assets/us.png")
                 ._btn_groupSl(onclick="LLCT.selectGroup(1)")
-                    img.lazy.group_icon(src="/live_assets/aqours.png")
+                    img.lazy.group_icon(data-src="/live_assets/aqours.png")
                 ._btn_groupSl(onclick="LLCT.selectGroup(2)")
-                    img.lazy.group_icon(src="/live_assets/niji.png")
+                    img.lazy.group_icon(data-src="/live_assets/niji.png")
     .screen_layer#setting_layer.hide
         .close_btn(onclick="LLCT.hideLayer(0)")
             p <i class="material-icons-round">close</i>
@@ -184,26 +178,19 @@ html(lang="kr").index
             </div>
         </div>
     </div>
-    .offline_popup
+    .llct_pop
         span#__popup_icon.material-icons offline_bolt
         p#__popup_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
-    #PLEASE_STOP_USE_INTERNET_EXPLORER
-        h1 깨진 레이아웃이 보이죠?
-        hr
-        h3 
-        | 인터넷 익스플로러 사용을 멈춰주세요.<br>
-        | 현재 익스플로러를 쓰고 계십니다. 익스플로러를 사용할 경우 원활한 콜표 재생이 되지 않습니다.
-        | <br> <a href="https://www.google.com/chrome/">https://www.google.com/chrome/ - 구글 크롬 다운로드</a>
-        | <br> <a href="https://www.mozilla.org/ko/firefox/new/">https://www.mozilla.org/ko/firefox/new/ - 파이어폭스 다운로드</a>
     script(defer src="/lib/ps/photoswipe.min.js")
     script(defer src="/lib/ps/photoswipe-ui-default.min.js")
     script(src='./lib/aj/anime.min.js')
-    script(src='./lib/ct/color-thief.min.js')
-    script(src='./lib/tt/tether.min.js')
-    script(src='./js/lib/hammer.min.js')
-    script(src='./lib/jquery.min.js')
+    script(src='./lib/ct/color-thief.min.js' async)
+    script(src='./lib/tt/tether.min.js' async)
+    script(src='./js/lib/hammer.min.js' async)
+    script(src="./lib/one.js" async)
     script(src='./js/lib/context.min.js')
-    script(src='./lib/one.js')
+    script.
+        if (/* @cc_on!@ */ false || !!document.documentMode) window.location.href = 'https://browser-update.org/ko/'
     script(src='./js/global.min.js')
     script(src='./js/options.min.js')
     script(defer src='./js/karaoke.min.js')
