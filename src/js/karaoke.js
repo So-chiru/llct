@@ -385,14 +385,17 @@ var Karaoke = function (__element) {
     if (this.__scroll_timeout) {
       clearTimeout(this.__scroll_timeout)
     }
-    var dd = document.getElementById('lyrics_wrap')
 
-    this.__scroll_timeout = setTimeout(() => {
-      if (Date.now() - this.__last_scroll < 3000) return
-      dd.scrollTop =
-        new_line_element.offsetTop -
-        (window.innerHeight - dd.getBoundingClientRect().height)
-    }, 950)
+    var lyrics_wrap = document.getElementById('lyrics_wrap')
+
+    if (lyrics_wrap) {
+      this.__scroll_timeout = setTimeout(() => {
+        if (Date.now() - this.__last_scroll < 3000) return
+        lyrics_wrap.scrollTop =
+          new_line_element.offsetTop -
+          (window.innerHeight - lyrics_wrap.getBoundingClientRect().height)
+      }, 950)
+    }
   }
   this.AudioSync = function (timeCode, fullRender) {
     if (typeof this.karaokeData === 'undefined' || this.karaokeData === null) {

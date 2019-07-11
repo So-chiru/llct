@@ -3,16 +3,21 @@
   z-index: 100;
   min-width: 150px;
   height: fit-content;
-  background-color: #3d3d3d;
+  background-color: #fafafa;
   border-radius: 3px;
-  box-shadow: 0px -4px 12px rgba(43, 43, 43, 0.8);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   user-select: none;
-  color: white;
+  color: #666;
   visibility: hidden;
 }
 
+.dark .__context_frame {
+  background-color: #333;
+  color: #666;
+  box-shadow: 0 0 0 1px #666;
+}
+
 .__context_frame_div {
-  margin: 5% 5%;
   height: 1px;
   background-color: rgba(194, 194, 194, 0.3);
 }
@@ -26,7 +31,7 @@
 
 .__context_frame_item {
   padding: 3px 5%;
-  transition: 0.3s background cubic-bezier(0.19, 1, 0.22, 1);
+  transition: 0.3s color cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .__context_frame_item .material-icons-round {
@@ -34,11 +39,11 @@
 }
 
 .__context_frame_item:hover {
-  background-color: rgba(194, 194, 194, 0.3);
+  color: #111;
 }
 
-.__context_frame_item:active {
-  background-color: rgba(194, 194, 194, 0.5);
+.dark .__context_frame_item:hover {
+  color: #f0f0f0;
 }
 
 .__context_frame_item p {
