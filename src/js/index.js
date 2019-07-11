@@ -15,10 +15,12 @@ let LLCT = {
   hideLayer: i => {
     document.getElementById(LLCTLayers[i]).classList.remove('show')
     document.getElementById(LLCTLayers[i]).classList.add('hide')
+    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform = 'scale(1.2)'
   },
   showLayer: i => {
     document.getElementById(LLCTLayers[i]).classList.remove('hide')
     document.getElementById(LLCTLayers[i]).classList.add('show')
+    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform = 'scale(1.0)'
   },
   clearCache: () => {
     navigator.serviceWorker.controller.postMessage({ cmd: '_clrs' })
