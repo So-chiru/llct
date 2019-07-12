@@ -212,7 +212,7 @@ let yohaneNoDOM = {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
     pl_bg.style.opacity = 1
     KaraokeInstance.clearSync()
-    KaraokeInstance.removeAnime()
+    yohaneNoDOM.removeAnime()
   },
   hideLyrics: () => {
     document.getElementById('lyrics_wrap').classList.add('hiddenCurtain')
@@ -232,7 +232,7 @@ let yohaneNoDOM = {
     document.getElementsByClassName('player')[0].classList.remove('dekai')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
-    KaraokeInstance.removeAnime()    
+    yohaneNoDOM.removeAnime()    
   },
   play: () => {
     anime({
@@ -939,15 +939,7 @@ Sakurauchi.add('LLCTDOMLoad', () => {
     }
   })
 })
-// Tether 사용
-Sakurauchi.add('LLCTPGLoad', () => {
-  new Tether({
-    element: document.getElementById('__context_frame'),
-    target: document.getElementById('more_vertical_options'),
-    attachment: 'top right',
-    targetAttachment: 'top left'
-  })
-})
+
 Sakurauchi.add('LLCTDOMLoad', () => {
   window.vertialMenusContext = new HugContext(
     document.getElementById('more_vertical_options')
@@ -967,6 +959,17 @@ Sakurauchi.add('LLCTDOMLoad', () => {
     yohane.shuffle()
   })
 })
+
+// Tether 사용
+Sakurauchi.add('LLCTPGLoad', () => {
+  new Tether({
+    element: document.getElementById('__context_frame'),
+    target: document.getElementById('more_vertical_options'),
+    attachment: 'top right',
+    targetAttachment: 'top left'
+  })
+})
+
 Sakurauchi.add('LLCTPGLoad', () => {
   // 카드 형 곡 선택 화면의 Swipe 감지
   window.selectorHammer = new Hammer(document.getElementById('fp_ct'))

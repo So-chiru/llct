@@ -20,9 +20,6 @@ jobs:
           command: |
             git config --global user.email $GIT_EMAILS
             git config --global user.name $GIT_NAME
-      - run:
-          name: Deploying to Github Pages
-          command: yarn deploy
 
 workflows:
   version: 2
