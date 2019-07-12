@@ -25,7 +25,7 @@ jobs:
           command: |
             mkdir ~/llct_assets
             git clone git@github.com:So-chiru/LLCTAssets.git ~/llct_assets/data
-            rsync ~/llct_assets/data ~/llct_circleci/dist --remove-source-files
+            cp -rl ~/llct_assets/data ~/llct_circleci/dist
 
       - run:
           name: Deploying to LLCTSites
