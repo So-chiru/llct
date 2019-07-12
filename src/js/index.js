@@ -15,12 +15,14 @@ let LLCT = {
   hideLayer: i => {
     document.getElementById(LLCTLayers[i]).classList.remove('show')
     document.getElementById(LLCTLayers[i]).classList.add('hide')
-    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform = 'scale(1.2)'
+    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
+      'scale(1.2)'
   },
   showLayer: i => {
     document.getElementById(LLCTLayers[i]).classList.remove('hide')
     document.getElementById(LLCTLayers[i]).classList.add('show')
-    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform = 'scale(1.0)'
+    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
+      'scale(1.0)'
   },
   clearCache: () => {
     navigator.serviceWorker.controller.postMessage({ cmd: '_clrs' })
@@ -181,22 +183,6 @@ let yohaneNoDOM = {
       },
       yohane.player()
     )
-  },
-  timeLeapDisableAnimation: () => {
-    document
-      .getElementsByClassName('thumb')[0]
-      .classList.add('disable_animation')
-    document
-      .getElementsByClassName('passed_bar')[0]
-      .classList.add('disable_animation')
-    setTimeout(() => {
-      document
-        .getElementsByClassName('thumb')[0]
-        .classList.remove('disable_animation')
-      document
-        .getElementsByClassName('passed_bar')[0]
-        .classList.remove('disable_animation')
-    }, 200)
   },
   dekakuOnce: target => {
     if (
@@ -581,19 +567,16 @@ let yohane = {
     yohane.player().currentTime = yohane.player().duration * (zto / 100)
     yohane.player().volume = yohane.volumeStore
     yohane.play(true)
-    yohaneNoDOM.timeLeapDisableAnimation()
   },
   seekPrev: s => {
     yohane.player().currentTime =
       yohane.player().currentTime - s < 0 ? 0 : yohane.player().currentTime - s
-    yohaneNoDOM.timeLeapDisableAnimation()
   },
   seekNext: s => {
     yohane.player().currentTime =
       yohane.player().currentTime + s > yohane.player().duration
         ? (yohane.player().duration - yohane.player().currentTime) / 2
         : yohane.player().currentTime + s
-    yohaneNoDOM.timeLeapDisableAnimation()
   },
   volumeDown: s =>
     yohane.setVolume(
@@ -760,8 +743,8 @@ let pageAdjust = {
     pageAdjust.lists = []
     for (var i = 0; i < objKeys.length; i++) {
       var curObj = LLCT.__cur_filterLists[objKeys[i]]
-      var baseElement = document.createElement('div')
-      baseElement.className = 'card slide-right'
+      var baseElement = document.createElement('llct-card')
+      baseElement.className = 'slide-right'
       baseElement.setAttribute(
         'onclick',
         'yohane.loadPlay("' + curObj.id + '")'
@@ -773,23 +756,27 @@ let pageAdjust = {
         artImage.id = curObj.id + '_bgimg'
         artImage.alt = objKeys[i]
         artImage.className = 'lazy card_bg'
-        artImage.dataset.src =
-          (urlQueryParams('local') === 'true'
+        artImage.dataset.src = dataYosoro.get('devMode')
+          ? 'data/10001/bg.png'
+          : (urlQueryParams('local') === 'true'
             ? './'
             : 'https://cdn-mikan.lovelivec.kr/') +
-          'data/' +
-          curObj.id +
-          '/bg.png'
+            'data/' +
+            curObj.id +
+            '/bg.png'
         c.appendChild(artImage)
       } else {
         baseElement.style.backgroundColor = '#323232'
       }
-      var titleText = document.createElement('h3')
-      titleText.className = 'txt'
-      titleText.innerText =
-        dataYosoro.get('mikan') === true
+
+      var in_text = dataYosoro.get('devMode')
+        ? '#' + curObj.id + '_DEV'
+        : dataYosoro.get('mikan') === true
           ? curObj.translated || objKeys[i]
           : objKeys[i]
+      var titleText = document.createElement('h3')
+      titleText.className = 'txt'
+      titleText.innerText = in_text
       c.appendChild(titleText)
       baseElement.appendChild(c)
       pageAdjust.add(baseElement)
@@ -849,7 +836,6 @@ Sakurauchi.add('LLCTLoad', () => {
         .start_time /
         100 -
       0.03
-    yohaneNoDOM.timeLeapDisableAnimation()
   })
   Sakurauchi.listen(
     ['seeking', 'seeked'],
