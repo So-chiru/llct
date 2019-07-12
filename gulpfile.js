@@ -102,6 +102,18 @@ gulp.task('images', () => {
     )
     .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/data'))
+    .pipe(
+      plugins.webp({
+        lossless: false
+      })
+    )
+    .pipe(filecaches.cache())
+    .pipe(
+      plugins.rename(p => {
+        p.extname = '.webp'
+      })
+    )
+    .pipe(gulp.dest('./dist/data'))
 })
 
 gulp.task('assets', () => {
@@ -124,7 +136,10 @@ gulp.task('watch', () => {
   gulp.watch(pkgs.srcs.sass + '**/*.scss', gulp.series(['sass', 'sass:min']))
   gulp.watch(pkgs.srcs.js + '**/*.js', gulp.series(['js', 'js:min']))
   gulp.watch(pkgs.srcs.pug + '**/*.pug', gulp.series('pug'))
-  gulp.watch(pkgs.srcs.datas + '**/*.{png,jpg,jpeg,svg}', gulp.series('images'))
+  gulp.watch(
+    pkgs.srcs.datas + '**/*.{png,jpg,jpeg,svg}',
+    gulp.series(['images'])
+  )
   gulp.watch(pkgs.srcs.datas + '**/*.json', gulp.series('json:min'))
   gulp.watch(
     [

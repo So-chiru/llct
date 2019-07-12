@@ -368,16 +368,13 @@ let yohaneNoDOM = {
     ].forEach(v => {
       yohaneNoDOM.__cachedElement[v] = document.getElementById(v)
     })
-
     yohaneNoDOM.__cachedElement['psd_times'].style.width = '0px'
     yohaneNoDOM.__cachedElement['__current_thumb'].style.transform = 0
-
     yohaneNoDOM.load()
     yohaneNoDOM.registerBufferBar()
-
     document.getElementById('karaoke').innerHTML = ''
     var meta = LLCT.getFromLists(id)
-
+    var webpSp = webpSupports() ? 'webp' : 'png'
     if (dataYosoro.get('sakana') === true) {
       document.getElementById('album_meta').src =
         (urlQueryParams('local') === 'true'
@@ -385,7 +382,7 @@ let yohaneNoDOM = {
           : 'https://cdn-mikan.lovelivec.kr/') +
         'data/' +
         id +
-        '/bg.png'
+        '/bg.' + webpSp
     } else {
       document.getElementById('album_meta').src = '/live_assets/1px.png'
       document.getElementById(
@@ -749,6 +746,7 @@ let pageAdjust = {
   },
   buildPage: () => {
     var objKeys = Object.keys(LLCT.__cur_filterLists)
+    var webpI = webpSupports() ? 'webp' : 'png'
     pageAdjust.lists = []
     for (var i = 0; i < objKeys.length; i++) {
       var curObj = LLCT.__cur_filterLists[objKeys[i]]
@@ -766,13 +764,13 @@ let pageAdjust = {
         artImage.alt = objKeys[i]
         artImage.className = 'lazy card_bg'
         artImage.dataset.src = dataYosoro.get('devMode')
-          ? 'data/10001/bg.png'
+          ? 'data/10001/bg.' + webpI
           : (urlQueryParams('local') === 'true'
             ? './'
             : 'https://cdn-mikan.lovelivec.kr/') +
             'data/' +
             curObj.id +
-            '/bg.png'
+            '/bg.' + webpI
         c.appendChild(artImage)
       } else {
         baseElement.style.backgroundColor = '#323232'

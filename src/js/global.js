@@ -50,6 +50,14 @@ var formatBytes = (a, b) => {
   return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f]
 }
 
+const webpSupports = () => {
+  var e = document.createElement('canvas')
+  if (e.getContext && e.getContext('2d')) {
+    return e.toDataURL('image/webp').indexOf('data:image/webp') == 0
+  }
+  return false
+}
+
 var __dYs_preSpace = /^\s+|\s+$/g
 var dataYosoro = {
   isStorageSupport: window.localStorage != null,

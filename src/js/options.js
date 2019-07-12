@@ -6,7 +6,9 @@ const __llct_optslists = [
     default: false,
     fn: _v => {
       setTimeout(() => {
-        pageAdjust.buildPage()
+        if (pageAdjust) {
+          pageAdjust.buildPage()
+        }
       }, 100)
     }
   },
@@ -72,7 +74,9 @@ const __llct_optslists = [
     default: true,
     fn: v => {
       setTimeout(() => {
-        pageAdjust.buildPage()
+        if (pageAdjust) {
+          pageAdjust.buildPage()
+        }
       }, 100)
     }
   },
