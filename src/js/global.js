@@ -242,10 +242,12 @@ Sakurauchi.listen('DOMContentLoaded', () => {
   if (dataYosoro.get('tatenshi') || mtcM.matches) {
     document.body.classList.add('dark')
   }
+
+  Sakurauchi.run('LLCTDOMLoad')
 })
 
 Sakurauchi.listen('load', () => {
-  Sakurauchi.run('LLCTLoad')
+  Sakurauchi.run('LLCTPGLoad')
 })
 
 var i = [

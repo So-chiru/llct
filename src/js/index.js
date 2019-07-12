@@ -198,14 +198,21 @@ let yohaneNoDOM = {
   toggleKaizu: () => {
     yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()
   },
+  removeAnime: () => {
+    setTimeout(() => {
+      document.getElementsByClassName('player')[0].classList.remove('on_animation')
+    }, 1000)
+  },
   dekakuni: () => {
     var pl_bg = document.getElementById('pl_bg')
     pl_bg.classList.add('show')
+    document.getElementsByClassName('player')[0].classList.add('on_animation')
     document.getElementsByClassName('player')[0].classList.add('dekai')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
     pl_bg.style.opacity = 1
     KaraokeInstance.clearSync()
+    KaraokeInstance.removeAnime()
   },
   hideLyrics: () => {
     document.getElementById('lyrics_wrap').classList.add('hiddenCurtain')
@@ -220,10 +227,12 @@ let yohaneNoDOM = {
   chiisakuni: () => {
     var pl_bg = document.getElementsByClassName('player_bg')[0]
     pl_bg.classList.remove('show')
-    pl_bg.style.opacity = '0'
+    pl_bg.style.opacity = '0'    
+    document.getElementsByClassName('player')[0].classList.add('on_animation')
     document.getElementsByClassName('player')[0].classList.remove('dekai')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
+    KaraokeInstance.removeAnime()    
   },
   play: () => {
     anime({
@@ -825,7 +834,7 @@ Sakurauchi.listen('keydown', ev => {
   if (keys[ev.keyCode][1]) ev.preventDefault()
 })
 // Karaoke 관련 Initialize
-Sakurauchi.add('LLCTLoad', () => {
+Sakurauchi.add('LLCTDOMLoad', () => {
   window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
   document.getElementById('kara_player').onclick = ev => {
     yohaneNoDOM.dekakuOnce(ev.target)
@@ -874,7 +883,7 @@ Sakurauchi.add('LLCTLoad', () => {
   }
 })
 // 플레이어 관련
-Sakurauchi.add('LLCTLoad', () => {
+Sakurauchi.add('LLCTDOMLoad', () => {
   window.playerHammer = new Hammer(document.getElementById('dash_wrp_ham'))
   playerHammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
   playerHammer.get('pinch').set({ enable: true })
@@ -933,7 +942,7 @@ Sakurauchi.add('LLCTLoad', () => {
   })
 })
 // Tether 사용
-Sakurauchi.add('LLCTLoad', () => {
+Sakurauchi.add('LLCTPGLoad', () => {
   new Tether({
     element: document.getElementById('__context_frame'),
     target: document.getElementById('more_vertical_options'),
@@ -941,7 +950,7 @@ Sakurauchi.add('LLCTLoad', () => {
     targetAttachment: 'top left'
   })
 })
-Sakurauchi.add('LLCTLoad', () => {
+Sakurauchi.add('LLCTDOMLoad', () => {
   window.vertialMenusContext = new HugContext(
     document.getElementById('more_vertical_options')
   )
@@ -960,7 +969,7 @@ Sakurauchi.add('LLCTLoad', () => {
     yohane.shuffle()
   })
 })
-Sakurauchi.add('LLCTLoad', () => {
+Sakurauchi.add('LLCTPGLoad', () => {
   // 카드 형 곡 선택 화면의 Swipe 감지
   window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
   selectorHammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL })
@@ -1108,7 +1117,10 @@ Sakurauchi.add('LLCTLoad', () => {
     }
     document.getElementById('cl_layer_player').style.background = fn_background
   })
-  document.getElementById('curt').classList.add('hide_curtain')
+  document.getElementById('curt').style.opacity = 0
+  document.getElementById('curt').style.visibility = 'none'
+  document.getElementById('curt').style.pointerEvents = 'none'
+  document.getElementById('curt').style.zIndex = '-1'
 })
 let resizeFunctions = () => {
   var reszCk = resizeItemsCheck()
