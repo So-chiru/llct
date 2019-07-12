@@ -200,14 +200,7 @@ $(document).ready(() => {
   if (urlQueryParams('id') !== 'undefined') {
     window.songID = urlQueryParams('id')
 
-    wavesurfer.load(
-      (urlQueryParams('local') === 'true'
-        ? './'
-        : 'https://cdn-mikan.lovelivec.kr/') +
-        'data/' +
-        songID +
-        '/audio.mp3'
-    )
+    wavesurfer.load('./data/' + songID + '/audio.mp3')
     wavesurfer.play()
   }
 

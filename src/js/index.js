@@ -80,13 +80,7 @@ let LLCT = {
     var pElement = document.getElementById('ps_wp')
     var items = [
       {
-        src:
-          (urlQueryParams('local') === 'true'
-            ? './'
-            : 'https://cdn-mikan.lovelivec.kr/') +
-          'data/' +
-          id +
-          '/call.jpg',
+        src: './data/' + id + '/call.jpg',
         w: 3505,
         h: 2480
       }
@@ -103,10 +97,7 @@ let LLCT = {
     yohaneNoDOM.hideLyrics()
     document.getElementById('karaoke').innerHTML =
       `<img class="call_img" onclick="LLCT.openCallImage('${id}')" src="` +
-      (urlQueryParams('local') === 'true'
-        ? './'
-        : 'https://cdn-mikan.lovelivec.kr/') +
-      'data/' +
+      './data/' +
       id +
       '/call.jpg' +
       '" onload="yohaneNoDOM.showLyrics()"></img>'
@@ -200,7 +191,9 @@ let yohaneNoDOM = {
   },
   removeAnime: () => {
     setTimeout(() => {
-      document.getElementsByClassName('player')[0].classList.remove('on_animation')
+      document
+        .getElementsByClassName('player')[0]
+        .classList.remove('on_animation')
     }, 1000)
   },
   dekakuni: () => {
@@ -227,12 +220,12 @@ let yohaneNoDOM = {
   chiisakuni: () => {
     var pl_bg = document.getElementsByClassName('player_bg')[0]
     pl_bg.classList.remove('show')
-    pl_bg.style.opacity = '0'    
+    pl_bg.style.opacity = '0'
     document.getElementsByClassName('player')[0].classList.add('on_animation')
     document.getElementsByClassName('player')[0].classList.remove('dekai')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
-    yohaneNoDOM.removeAnime()    
+    yohaneNoDOM.removeAnime()
   },
   play: () => {
     anime({
@@ -377,12 +370,7 @@ let yohaneNoDOM = {
     var webpSp = webpSupports() ? 'webp' : 'png'
     if (dataYosoro.get('sakana') === true) {
       document.getElementById('album_meta').src =
-        (urlQueryParams('local') === 'true'
-          ? './'
-          : 'https://cdn-mikan.lovelivec.kr/') +
-        'data/' +
-        id +
-        '/bg.' + webpSp
+        './data/' + id + '/bg.' + webpSp
     } else {
       document.getElementById('album_meta').src = '/live_assets/1px.png'
       document.getElementById(
@@ -673,13 +661,7 @@ let yohane = {
       return false
     }
     try {
-      yohane.player().src =
-        (urlQueryParams('local') === 'true'
-          ? './'
-          : 'https://cdn-mikan.lovelivec.kr/') +
-        'data/' +
-        id +
-        '/audio.mp3'
+      yohane.player().src = './data/' + id + '/audio.mp3'
       yohane.setVolume(yohane.volumeStore !== null ? yohane.volumeStore : 0.5)
     } catch (e) {
       return logger(2, 'r', e.message, 'e')
@@ -765,12 +747,7 @@ let pageAdjust = {
         artImage.className = 'lazy card_bg'
         artImage.dataset.src = dataYosoro.get('devMode')
           ? 'data/10001/bg.' + webpI
-          : (urlQueryParams('local') === 'true'
-            ? './'
-            : 'https://cdn-mikan.lovelivec.kr/') +
-            'data/' +
-            curObj.id +
-            '/bg.' + webpI
+          : './data/' + curObj.id + '/bg.' + webpI
         c.appendChild(artImage)
       } else {
         baseElement.style.backgroundColor = '#323232'
@@ -1042,7 +1019,7 @@ Sakurauchi.add('LLCTPGLoad', () => {
       album: data[2].album || 'Single',
       artwork: [
         {
-          src: 'https://cdn-mikan.lovelivec.kr/data/' + data[2].id + '/bg.png'
+          src: 'https://lovelivec.kr/data/' + data[2].id + '/bg.png'
         }
       ]
     })
