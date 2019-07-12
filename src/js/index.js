@@ -961,7 +961,7 @@ Sakurauchi.add('LLCTDOMLoad', () => {
 })
 
 // Tether 사용
-Sakurauchi.add('LLCTPGLoad', () => {
+document.addEventListener('DOMContentLoaded', () => {
   new Tether({
     element: document.getElementById('__context_frame'),
     target: document.getElementById('more_vertical_options'),
@@ -969,7 +969,6 @@ Sakurauchi.add('LLCTPGLoad', () => {
     targetAttachment: 'top left'
   })
 })
-
 Sakurauchi.add('LLCTPGLoad', () => {
   // 카드 형 곡 선택 화면의 Swipe 감지
   window.selectorHammer = new Hammer(document.getElementById('fp_ct'))
