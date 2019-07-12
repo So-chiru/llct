@@ -23,7 +23,10 @@ jobs:
       - run:
           name: Clone Assets
           command: |
-            git clone git@github.com:So-chiru/LLCTAssets.git ~/llct_circleci/dist/data
+            mkdir ~/llct_assets
+            git clone git@github.com:So-chiru/LLCTAssets.git ~/llct_assets/data
+            mv ~/llct_assets/data ~/llct_circleci/dist
+
       - run:
           name: Deploying to LLCTSites
           command: yarn deploy
