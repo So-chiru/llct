@@ -1,7 +1,7 @@
 {
   "name": "LLCT-CDN",
   "version": 2,
-  "alias": "lovelivec.kr",
+  "alias": ["lovelivec.kr", "www.lovelivec.kr"],
   "regions": ["icn1", "hnd1"],
   "routes": [
     {
