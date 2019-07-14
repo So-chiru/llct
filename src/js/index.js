@@ -142,8 +142,9 @@ let LLCT = {
 
 let yohaneNoDOM = {
   kaizu: false,
-  noPLUI: false,
+  noPLUI: true,
   shokan: ui_only => {
+    yohaneNoDOM.noPLUI = false
     var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
     playerElement.classList.remove('hide')
@@ -202,6 +203,7 @@ let yohaneNoDOM = {
   dekakuni: () => {
     var pl_bg = document.getElementById('pl_bg')
     pl_bg.classList.add('show')
+    yohaneNoDOM.noPLUI = false
     document.querySelector('llct-pl').classList.add('on_animation')
     document.querySelector('llct-pl').classList.add('dekai')
     yohaneNoDOM.kaizu = true
@@ -425,14 +427,12 @@ let yohaneNoDOM = {
 
 let yohane = {
   shokan: () => {
-    yohaneNoDOM.noPLUI = false
     yohaneNoDOM.shokan(ui_only)
     if (!ui_only) {
       yohane.play()
     }
   },
   giran: ui_only => {
-    yohaneNoDOM.noPLUI = true
     yohaneNoDOM.giran(ui_only)
     if (!ui_only) {
       yohane.pause()
