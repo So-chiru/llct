@@ -17,12 +17,14 @@ let LLCT = {
     document.getElementById(LLCTLayers[i]).classList.add('hide')
     document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
       'scale(1.2)'
+    if (!yohaneNoDOM.noPLUI) yohaneNoDOM.shokan(true)
   },
   showLayer: i => {
     document.getElementById(LLCTLayers[i]).classList.remove('hide')
     document.getElementById(LLCTLayers[i]).classList.add('show')
     document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
       'scale(1.0)'
+    if (!yohaneNoDOM.noPLUI) yohaneNoDOM.giran(true)
   },
   clearCache: () => {
     navigator.serviceWorker.controller.postMessage({ cmd: '_clrs' })
@@ -140,8 +142,9 @@ let LLCT = {
 
 let yohaneNoDOM = {
   kaizu: false,
-  shokan: () => {
-    var playerElement = document.getElementsByClassName('player')[0]
+  noPLUI: false,
+  shokan: ui_only => {
+    var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
     playerElement.classList.remove('hide')
     playerElement.classList.add('show')
@@ -149,18 +152,20 @@ let yohaneNoDOM = {
       yohaneNoDOM.dekakuni()
     }
   },
-  giran: () => {
-    var playerElement = document.getElementsByClassName('player')[0]
+  giran: ui_only => {
+    var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition =
-      'all 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035)'
+      'all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
     playerElement.classList.remove('show')
-    document.getElementsByClassName('player')[0].classList.remove('show')
     playerElement.classList.add('hide')
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.chiisakuni()
     }
-    popsHeart.set('pid', '')
-    document.title = 'LLCT'
+
+    if (!ui_only) {
+      popsHeart.set('pid', '')
+      document.title = 'LLCT'
+    }
   },
   __cachedElement: {},
   end: () => yohaneNoDOM.pause(),
@@ -191,16 +196,14 @@ let yohaneNoDOM = {
   },
   removeAnime: () => {
     setTimeout(() => {
-      document
-        .getElementsByClassName('player')[0]
-        .classList.remove('on_animation')
+      document.querySelector('llct-pl').classList.remove('on_animation')
     }, 1000)
   },
   dekakuni: () => {
     var pl_bg = document.getElementById('pl_bg')
     pl_bg.classList.add('show')
-    document.getElementsByClassName('player')[0].classList.add('on_animation')
-    document.getElementsByClassName('player')[0].classList.add('dekai')
+    document.querySelector('llct-pl').classList.add('on_animation')
+    document.querySelector('llct-pl').classList.add('dekai')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
     pl_bg.style.opacity = 1
@@ -218,11 +221,11 @@ let yohaneNoDOM = {
       .classList.remove('hiddenCurtain')
   },
   chiisakuni: () => {
-    var pl_bg = document.getElementsByClassName('player_bg')[0]
+    var pl_bg = document.querySelector('llct-pl-bg')
     pl_bg.classList.remove('show')
     pl_bg.style.opacity = '0'
-    document.getElementsByClassName('player')[0].classList.add('on_animation')
-    document.getElementsByClassName('player')[0].classList.remove('dekai')
+    document.querySelector('llct-pl').classList.add('on_animation')
+    document.querySelector('llct-pl').classList.remove('dekai')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
     yohaneNoDOM.removeAnime()
@@ -391,22 +394,19 @@ let yohaneNoDOM = {
       meta[1].bladeColor || '자유'
 
     var _hx = meta[1].bladeColorHEX
-    document.getElementById('blade_color').style.color =
+    document.getElementById('blade_color').style.backgroundColor =
       _hx != null && _hx != 'null' && _hx != '#000000' && _hx != ''
-        ? _hx
+        ? _hx + '55'
         : dataYosoro.get('yohane')
-          ? '#FFF'
-          : '#000'
+          ? '#FFFFFF55'
+          : '#00000055'
 
-    document.getElementById('blade_color').style.textShadow =
-      '0px 0px 4px ' + document.getElementById('blade_color').style.color
-
-    document.getElementById('sing_tg').style.display = meta[1].singAlong
-      ? 'block'
-      : 'none'
-    document.getElementById('performed_tg').style.display = meta[1].notPerformed
-      ? 'block'
-      : 'none'
+    document
+      .getElementById('sing_tg')
+      .classList[meta[1].singAlong ? 'add' : 'remove']('llct-pl-infdp')
+    document
+      .getElementById('performed_tg')
+      .classList[meta[1].notPerformed ? 'add' : 'remove']('llct-pl-infdp')
     document.title = meta[1].kr || meta[0] || '제목 미 지정'
 
     Sakurauchi.run('audioLoadStart', [
@@ -425,12 +425,18 @@ let yohaneNoDOM = {
 
 let yohane = {
   shokan: () => {
-    yohaneNoDOM.shokan()
-    yohane.play()
+    yohaneNoDOM.noPLUI = false
+    yohaneNoDOM.shokan(ui_only)
+    if (!ui_only) {
+      yohane.play()
+    }
   },
-  giran: () => {
-    yohaneNoDOM.giran()
-    yohane.pause()
+  giran: ui_only => {
+    yohaneNoDOM.noPLUI = true
+    yohaneNoDOM.giran(ui_only)
+    if (!ui_only) {
+      yohane.pause()
+    }
   },
   volumeStore: null,
   prev: skipDekaku => {
@@ -811,7 +817,7 @@ Sakurauchi.listen('keydown', ev => {
 // Karaoke 관련 Initialize
 Sakurauchi.add('LLCTDOMLoad', () => {
   window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
-  document.getElementById('kara_player').onclick = ev => {
+  document.querySelector('llct-pl').onclick = ev => {
     yohaneNoDOM.dekakuOnce(ev.target)
   }
   KaraokeInstance.ListenClickEvent(function (instance, e) {
@@ -868,13 +874,13 @@ Sakurauchi.add('LLCTDOMLoad', () => {
     } else if (ev.direction === 8) {
       yohaneNoDOM.dekakuni()
     }
-    document.getElementById('kara_player').style.transform = 'translateY(0px)'
+    document.querySelector('llct-pl').style.transform = null
   })
   var closeVal = 0
   var closeDir = 0
   var originCalc = null
   var domGPLBg = document.getElementById('pl_bg')
-  var domGPLKa = document.getElementById('kara_player')
+  var domGPLKa = document.querySelector('llct-pl')
   var __bak_style = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0s'
   playerHammer.on('panstart', ev => {
     __bak_style = domGPLKa.style.transition
@@ -890,7 +896,7 @@ Sakurauchi.add('LLCTDOMLoad', () => {
     } else if (closeVal > 250 && !closeDir) {
       yohaneNoDOM.chiisakuni(true)
     }
-    domGPLKa.style.transform = 'translateY(0px)'
+    domGPLKa.style.transform = null
     domGPLKa.style.height = null
     closeVal = 0
     closeDir = 0
@@ -1037,17 +1043,17 @@ Sakurauchi.add('LLCTPGLoad', () => {
   Sakurauchi.listen(
     'touchstart',
     () => {
-      document.getElementById('kara_player').className += ' hover'
+      document.querySelector('llct-pl').className += ' hover'
     },
-    document.getElementById('kara_player'),
+    document.querySelector('llct-pl'),
     { passive: true }
   )
   Sakurauchi.listen(
     'touchend',
     () => {
-      document.getElementById('kara_player').classList.remove('hover')
+      document.querySelector('llct-pl').classList.remove('hover')
     },
-    document.getElementById('kara_player')
+    document.querySelector('llct-pl')
   )
   Sakurauchi.listen('focus', () => {
     if (!yohane.playing()) return 0

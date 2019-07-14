@@ -1,6 +1,6 @@
 .__context_frame {
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   min-width: 150px;
   height: fit-content;
   background-color: #fafafa;
@@ -61,7 +61,7 @@
   width: 100%;
   position: fixed;
   background-color: transparent;
-  z-index: 99;
+  z-index: 999;
   transition: opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   visibility: hidden;
   cursor: pointer;

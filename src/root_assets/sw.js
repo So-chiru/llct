@@ -1,5 +1,5 @@
 const cachingOffline = {
-  version: 'deathwar_a0035',
+  version: 'deathwar_a0036',
   urls: [
     '/',
     '/?pid=',
@@ -7,9 +7,10 @@ const cachingOffline = {
     '/index.html',
     '/yosoro.min.css',
     '/data/lists.json',
-    '/lib/jquery.min.js',
     '/lib/aj/anime.min.js',
     '/lib/kr/aromanize.js',
+    '/lib/ct/color-thief.min.js',
+    '/lib/tt/tether.min.js',
     '/lib/ps/photoswipe.min.js',
     '/lib/ps/photoswipe.css',
     '/lib/ps/photoswipe-ui-default.min.js',

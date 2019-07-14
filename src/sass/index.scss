@@ -85,6 +85,7 @@ body {
 .titles {
   span {
     white-space: nowrap;
+    margin-left: 2px;
     font-size: 14px;
   }
 
@@ -247,6 +248,15 @@ body {
   background-color: rgba(255, 230, 0, 0.8);
 }
 
+.playlist_text {
+  position: absolute;
+  margin: 0;
+  margin-left: 15px;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
 @media screen and (max-width: $small) {
   .titles {
     margin-left: 2.5%;
@@ -269,7 +279,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  margin-top: 30px;
+  margin-top: 35px;
   margin-bottom: 3%;
 }
 
@@ -374,22 +384,21 @@ llct-card:active {
   }
 }
 
-.dark .player.show {
+.dark llct-pl.show {
   background-color: #242424;
 }
 
-.player.show {
+llct-pl.show {
   background-color: white;
   opacity: 1;
-  transform: translateY(0px);
   visibility: visible;
 }
 
-.player.on_animation {
+llct-pl.on_animation {
   will-change: transform, opacity;
 }
 
-.player.hide {
+llct-pl.hide {
   background-color: transparent;
   will-change: auto;
   opacity: 0;
@@ -397,16 +406,16 @@ llct-card:active {
   visibility: hidden;
 }
 
-.player.dekai {
+llct-pl.dekai {
   height: 97%;
 }
 
-.player_bg.show {
+llct-pl-bg.show {
   pointer-events: visible;
   opacity: 1;
 }
 
-.player_bg {
+llct-pl-bg {
   top: 0;
   left: 0;
   opacity: 0;
@@ -425,11 +434,11 @@ llct-card:active {
   perspective: 1000;
 }
 
-.dark .player {
+.dark llct-pl {
   box-shadow: 0px -4px 12px rgba(15, 26, 39, 0.22);
 }
 
-.player {
+llct-pl {
   position: fixed;
   display: block;
   width: 95%;
@@ -442,7 +451,7 @@ llct-card:active {
   transform: translateX(0px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   font-size: 16px;
-  transition: color 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform, color 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 
   @media screen and (max-width: $small) {
     left: 0;
@@ -545,7 +554,14 @@ llct-card:active {
 }
 
 .blade_indic {
-  text-shadow: 0px 0px 4px #000;
+  background-color: rgba(131, 131, 131, 0.7);
+  border-radius: 5px;
+  padding: 2px 10px;
+  margin-left: 5px;
+  transition: 0.3s all cubic-bezier(0.19, 1, 0.22, 1);
+  margin-top: -1px;
+  color: #fff;
+  text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.52);
 }
 
 .dark .blade_indic {
@@ -553,13 +569,13 @@ llct-card:active {
 }
 
 .dark .diver {
-  background-color: #3a3a3a;
+  background-color: #777;
 }
 
 .diver {
   height: 26px;
   width: 1px;
-  background-color: #e6e6e6;
+  background-color: rgba(167, 167, 167, 0.45);
 }
 
 .after_div {
@@ -592,7 +608,7 @@ llct-card:active {
 }
 
 .title {
-  font-weight: 100;
+  font-weight: 500;
   font-size: 10;
   color: #2d2d2d;
 }
@@ -684,16 +700,29 @@ llct-card:active {
   }
 }
 
-.blade_c,
-.view_mot_jjin,
-.is_singalong,
-.is_notPerformed {
-  text-align: center;
+llct-pl-infotext {
+  display: none;
+  justify-content: center;
+  font-weight: 500;
+}
+
+llct-pl-infotext span {
+  font-weight: 100;
+}
+
+.llct-pl-infdp {
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 4px;
 }
 
 .dekai {
   .lyrics_wrapper {
     display: block;
+  }
+
+  .karaoke {
+    margin-top: 15px;
   }
 }
 
@@ -1231,6 +1260,8 @@ llct-card:active {
 }
 
 .index {
+  font-weight: 100;
+
   .__context_bg {
     background-color: rgba(50, 50, 50, 0.3);
   }

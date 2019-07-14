@@ -18,7 +18,7 @@ html(lang="kr").index
     link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous")
     link(rel='preload stylesheet' href='./yosoro.min.css' as='style')
     link(rel='shortcut icon', href='/data/favicon.ico', type='image/x-icon')
-    link(rel="preload" href="https://fonts.googleapis.com/css?family=Material+Icons+Round|Jua|Noto+Sans+KR:100,900" as="fetch" crossorigin="anonymous" media="none" onload="this.media='all';")
+    link(rel="preload" href="https://fonts.googleapis.com/css?family=Material+Icons+Round|Jua|Noto+Sans+KR:100,500,900" as="fetch" crossorigin="anonymous" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/photoswipe.css" media="none" onload="this.media='all';")
     link(rel="stylesheet" href="/lib/ps/default-skin/default-skin.css" media="none" onload="this.media='all';")
   body
@@ -26,8 +26,8 @@ html(lang="kr").index
         .inr(style="margin:auto;position:relative;text-align:center;")
             h1 LLCT
             h3 LoveLive! Call Table Guide
-    #pl_bg.player_bg(onclick="yohaneNoDOM.chiisakuni()")
-    #kara_player.player.hide
+    llct-pl-bg#pl_bg(onclick="yohaneNoDOM.chiisakuni()")
+    llct-pl.hide
         .color_layer#cl_layer_player
         .grey_layer
         .dash_wrapper#dash_wrp_ham(data-scrollbar)
@@ -57,11 +57,11 @@ html(lang="kr").index
                     p.anon 인터넷에 연결할 수 없습니다. 이전에 저장된 데이터를 사용하여 콜표를 표시합니다.
                     span.mute (저장된 데이터가 없으면 빈칸으로 표시됩니다.)
                     br
-                p.blade_c
+                llct-pl-infotext.llct-pl-infdp
                     | 블레이드 추천 색상 : 
                     span.blade_indic#blade_color 자유
-                p.is_singalong#sing_tg 이 곡은 떼창 곡입니다. 지시에 맞게 따라 불러주세요.
-                p.is_notPerformed#performed_tg 이 곡은 라이브 된 적이 없습니다. 콜이 틀릴 수도 있으니, 참고용으로만 봐주세요.
+                llct-pl-infotext#sing_tg 이 곡은 떼창 곡입니다. 지시에 맞게 따라 불러주세요.
+                llct-pl-infotext#performed_tg 이 곡은 라이브 된 적이 없습니다. 콜이 틀릴 수도 있으니, 참고용으로만 봐주세요.
                 .karaoke#karaoke
                 p.bottom_margin
         audio#kara_audio
@@ -91,6 +91,7 @@ html(lang="kr").index
                 div
                 div
                 div
+            //-p.playlist_text 플레이리스트 "Noto Sans"            
             ._card_lists#_card_lists
             .navigator
                 span.nav_arrow_wrap(onclick="pageAdjust.prevPage()") <i class="material-icons-round arrow_btn thin mat-icon-hover-anime general_trans pd_onhover" alt="<">keyboard_arrow_left</i>
@@ -174,8 +175,8 @@ html(lang="kr").index
             </div>
         </div>
     </div>
-    .llct_pop
-        span#__popup_icon.material-icons offline_bolt
+    llct-pop
+        span#__popup_icon.material-icons-round offline_bolt
         p#__popup_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
     script(defer src="/lib/ps/photoswipe.min.js")
     script(defer src="/lib/ps/photoswipe-ui-default.min.js")
@@ -194,4 +195,4 @@ html(lang="kr").index
     script(async src='./lib/kr/aromanize.js')
     script(async src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
-        !function(e,n,t){"use strict";var o="https://fonts.googleapis.com/css?family=Material+Icons+Round|Jua|Noto+Sans+KR:100,900",r="__3perf_googleFontsStylesheet";function c(e){(n.head||n.body).appendChild(e)}function a(){var e=n.createElement("link");e.href=o,e.rel="stylesheet",c(e)}function f(e){if(!n.getElementById(r)){var t=n.createElement("style");t.id=r,c(t)}n.getElementById(r).innerHTML=e}e.FontFace&&e.FontFace.prototype.hasOwnProperty("display")?(t[r]&&f(t[r]),fetch(o).then(function(e){return e.text()}).then(function(e){return e.replace(/@font-face {/g,"@font-face{font-display:swap;")}).then(function(e){return t[r]=e}).then(f).catch(a)):a()}(window,document,localStorage);
+        !function(e,n,t){"use strict";var o="https://fonts.googleapis.com/css?family=Material+Icons+Round|Jua|Noto+Sans+KR:100,500,900",r="__3perf_googleFontsStylesheet";function c(e){(n.head||n.body).appendChild(e)}function a(){var e=n.createElement("link");e.href=o,e.rel="stylesheet",c(e)}function f(e){if(!n.getElementById(r)){var t=n.createElement("style");t.id=r,c(t)}n.getElementById(r).innerHTML=e}e.FontFace&&e.FontFace.prototype.hasOwnProperty("display")?(t[r]&&f(t[r]),fetch(o).then(function(e){return e.text()}).then(function(e){return e.replace(/@font-face {/g,"@font-face{font-display:swap;")}).then(function(e){return t[r]=e}).then(f).catch(a)):a()}(window,document,localStorage);

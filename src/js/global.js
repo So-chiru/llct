@@ -322,10 +322,10 @@ var showPopup = (icon, msg, fn) => {
   if (popupTimeout) clearTimeout(popupTimeout)
   document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
   document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
-  document.getElementsByClassName('llct_pop')[0].style.opacity = 1
-  document.getElementsByClassName('llct_pop')[0].style.display = 'flex'
+  document.querySelector('llct-pop').style.opacity = 1
+  document.querySelector('llct-pop').style.display = 'flex'
 
-  document.getElementsByClassName('llct_pop')[0].onclick = () => {
+  document.querySelector('llct-pop').onclick = () => {
     if (typeof fn === 'function') fn()
     closePopup()
   }
@@ -334,8 +334,8 @@ var showPopup = (icon, msg, fn) => {
 }
 
 var closePopup = () => {
-  document.getElementsByClassName('llct_pop')[0].style.opacity = 0
-  document.getElementsByClassName('llct_pop')[0].style.display = 'none'
+  document.querySelector('llct-pop').style.opacity = 0
+  document.querySelector('llct-pop').style.display = 'none'
   if (popupTimeout) clearTimeout(popupTimeout)
 }
 
