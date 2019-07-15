@@ -10,7 +10,7 @@ MIT License, [여기에서 사용된 라이브러리, 전문을 읽을 수 있�
 
 ## 사이트
 
-Github Pages에서 호스팅 중인 [사이트가 있습니다!](https://lovelivec.kr)
+[Now](https://now.sh)에서 호스팅 중인 [사이트가 있습니다!](https://lovelivec.kr)
 
 ## 로컬 머신에서 돌려보기
 
