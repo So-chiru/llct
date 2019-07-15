@@ -65,9 +65,19 @@ const getLMInArray = (a, t, lh) => {
 }
 
 var __kara_typeList = [null, '__s', 'call', 'cmt', '_cs']
-var Karaoke = function (__element) {
-  this.karaoke_element = __element
+
+/**
+ * 새로운 Karaoke Class를 선언합니다.
+ * @param {HTMLElement} karaoke_elem
+ */
+var Karaoke = function (kara_elem) {
+  this.karaoke_element = kara_elem
   this.karaokeData = null
+  /**
+   * Karaoke.SpaParsing
+   * timeline.collection > (Object... 가사 음) 의 형식을 만들어 반환합니다.
+   * @return {Object}
+   */
   this.SpaParsing = function (spa, spacing) {
     var wordObject = {
       text: spa + (spacing ? ' ' : ''),
@@ -79,6 +89,11 @@ var Karaoke = function (__element) {
 
     return wordObject
   }
+  /**
+   * Karaoke.SetTimelineData
+   * 타임라인 데이터를 설정합니다.
+   * @param {Object} data Karaoke Data, JSON Parsed
+   */
   this.SetTimelineData = function (data) {
     this.karaokeData = {
       metadata: (this.karaokeData || {}).metadata || {
@@ -88,76 +103,6 @@ var Karaoke = function (__element) {
     }
     this.RenderDOM()
     this.lineTimingValidate()
-  }
-  this.CompareArray = (a, b) => {
-    if (
-      typeof a === 'undefined' ||
-      typeof b === 'undefined' ||
-      typeof a !== typeof b
-    ) {
-      return false
-    }
-
-    // if (a.start_time !== b.start_time) return false
-    // if (a.end_time !== b.end_time) return false
-    if (a.collection.length !== b.collection.length) return false
-
-    var diff = false
-    a.collection.forEach((v, i) => {
-      diff =
-        v.text !== b.collection[i].text ||
-        v.type !== b.collection[i].type ||
-        v.start_time !== b.collection[i].start_time ||
-        v.end_time !== b.collection[i].end_time ||
-        v.pronunciation_time !== b.collection[i].pronunciation_time
-    })
-
-    return !diff
-  }
-  this.MergeRender = function (prevArray, newArray) {
-    var mergedArray = []
-
-    newArray.forEach((newLines, newLineInt) => {
-      if (typeof prevArray[newLineInt] === 'undefined') {
-        mergedArray.push(newLines)
-        return 0
-      }
-
-      var comparedDone = false
-      ;[prevArray[newLineInt - 1], prevArray[newLineInt + 1]].forEach(
-        (comparePrevLine, index) => {
-          var sames = this.CompareArray(newLines, comparePrevLine)
-          if (!sames) return 0
-
-          mergedArray.push(comparePrevLine)
-          comparedDone = true
-        }
-      )
-      if (comparedDone) return 0
-
-      var lineObj = {
-        start_time: 0,
-        end_time: 0,
-        collection: []
-      }
-
-      newLines.collection.forEach((newWords, newWordsInt) => {
-        if (
-          typeof prevArray[newLineInt].collection[newWordsInt] ===
-            'undefined' ||
-          newWords.text !== prevArray[newLineInt].collection[newWordsInt].text
-        ) {
-          lineObj.collection.push(newWords)
-          return 0
-        }
-
-        lineObj.collection.push(prevArray[newLineInt].collection[newWordsInt])
-      })
-
-      mergedArray.push(lineObj)
-    })
-
-    return mergedArray
   }
   this.Render = function (text) {
     var renderedData = []
@@ -176,7 +121,7 @@ var Karaoke = function (__element) {
         collection: []
       }
 
-      line.split('^xF').forEach((spa, index) => {
+      line.split('^xF').forEach(spa => {
         if (/\^S_P/g.test(spa)) {
           var spaSplt = spa.split(/\^S_P/g)
           spaSplt.forEach((spBr, i) => {

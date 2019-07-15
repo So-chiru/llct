@@ -809,7 +809,6 @@ const keys = {
 }
 // 키가 입력 되었을 때 키를 입력합니다.
 Sakurauchi.listen('keydown', ev => {
-  logger(2, 's', ev.key + ' / ' + ev.keyCode, 'info')
   if (typeof keys[ev.keyCode] === 'undefined') return 0
   keys[ev.keyCode][0](ev)
   if (keys[ev.keyCode][1]) ev.preventDefault()

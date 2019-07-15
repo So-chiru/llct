@@ -75,8 +75,8 @@ html.editor
         .lyrics_write
           h1.kr 가사
           p.kr
-            | !! 라인이 변경되면 해당 라인에 있던 속성 값이 모두 사라집니다. !!
-          textarea#kashi_type.blackArea.kr(rows='15', onchange='KaraokeInstance.SetTimelineData(KaraokeInstance.MergeRender( KaraokeInstance.karaokeData.timeline, KaraokeInstance.Render(this.value)));KaraokeEditor.setLyrics(this.value);')
+            | !! 텍스트를 모두 작성 후 수정 해 주세요. 그 후에 텍스트를 수정하면 모든 속성 값이 사라집니다. !!
+          textarea#kashi_type.blackArea.kr(rows='15', onchange='KaraokeInstance.SetTimelineData(KaraokeInstance.Render(this.value));KaraokeEditor.setLyrics(this.value);')
           br
           .editor_btncollec
             button.nav_btn(onclick="KaraokeEditor.asReplacing()")
