@@ -3430,6 +3430,49 @@
       ]
     },
     {
+      "start_time": 15840,
+      "end_time": 16797,
+      "collection": [
+        {
+          "text": "< 블레이드 색상 변경 : ",
+          "start_time": 15940,
+          "end_time": 16697,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "푸른색 ",
+          "start_time": 15940,
+          "end_time": 16026,
+          "pronunciation_time": "0.3333",
+          "type": "3",
+          "text_color": "#0086ff"
+        },
+        {
+          "text": "→ ",
+          "start_time": 16005,
+          "end_time": 16697,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "귤색 ",
+          "start_time": 16024,
+          "end_time": 16697,
+          "pronunciation_time": "0.3333",
+          "type": "3",
+          "text_color": "#ff7d06"
+        },
+        {
+          "text": "(* 에서 변경)>",
+          "start_time": 15940,
+          "end_time": 16697,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        }
+      ]
+    },
+    {
       "start_time": 15854,
       "end_time": 16821,
       "collection": [
@@ -3452,7 +3495,8 @@
           "start_time": 16023,
           "end_time": 16316,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "루-",
@@ -3685,7 +3729,7 @@
           "type": "4"
         },
         {
-          "text": "stic",
+          "text": "stic ",
           "start_time": 17325,
           "end_time": 17513,
           "pronunciation_time": 0,
@@ -3851,7 +3895,7 @@
           "type": 1
         },
         {
-          "text": "몬",
+          "text": "몬 ",
           "start_time": 18117,
           "end_time": 18259,
           "pronunciation_time": 0,
@@ -4352,7 +4396,8 @@
           "start_time": 20098,
           "end_time": 20200,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "4",
+          "ruby_text": "*"
         },
         {
           "text": "아 ",
@@ -4388,6 +4433,49 @@
           "end_time": 20338,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19893,
+      "end_time": 20455,
+      "collection": [
+        {
+          "text": "< 블레이드 색상 변경 : ",
+          "start_time": 19993,
+          "end_time": 20355,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "귤색",
+          "start_time": 19993,
+          "end_time": 20099,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#ff7101"
+        },
+        {
+          "text": "→ ",
+          "start_time": 20088,
+          "end_time": 20355,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "보라색",
+          "start_time": 20104,
+          "end_time": 20355,
+          "pronunciation_time": 0,
+          "type": 1,
+          "text_color": "#a605ff"
+        },
+        {
+          "text": "(* 에서 변경)>",
+          "start_time": 19993,
+          "end_time": 20355,
+          "pronunciation_time": "0.3333",
+          "type": "3"
         }
       ]
     },
@@ -4761,7 +4849,7 @@
           "type": 1
         },
         {
-          "text": "데",
+          "text": "데 ",
           "start_time": 23381,
           "end_time": 23509,
           "pronunciation_time": 0,
@@ -4922,21 +5010,92 @@
       ]
     },
     {
-      "start_time": 24063,
-      "end_time": 25542,
+      "start_time": 23679,
+      "end_time": 24147,
       "collection": [
         {
-          "text": "(요소로드",
-          "start_time": 24163,
-          "end_time": 25442,
+          "text": "< 블레이드 색상 변경 : ",
+          "start_time": 23779,
+          "end_time": 24047,
+          "pronunciation_time": "0.333",
+          "type": "3"
+        },
+        {
+          "text": "보라색 ",
+          "start_time": "23779",
+          "end_time": 23909,
+          "pronunciation_time": "0.3333",
+          "type": "3",
+          "text_color": "#a106ff"
+        },
+        {
+          "text": "→ ",
+          "start_time": 23878,
+          "end_time": 24047,
+          "pronunciation_time": "0.333",
+          "type": "3"
+        },
+        {
+          "text": "푸른색 ",
+          "start_time": 23897,
+          "end_time": "24047",
+          "pronunciation_time": 0,
+          "type": "3",
+          "text_color": "#0085ff"
+        },
+        {
+          "text": "(가사가 끝날 때 변경)>",
+          "start_time": 23779,
+          "end_time": 24047,
+          "pronunciation_time": "0.333",
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": 23797,
+      "end_time": 25540,
+      "collection": [
+        {
+          "text": "< 요소로드",
+          "start_time": "24142",
+          "end_time": "25440",
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "부분 : ",
+          "start_time": "24142",
+          "end_time": "25440",
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "블레이드 내림",
+          "start_time": "23897",
+          "end_time": 24156,
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "→ ",
+          "start_time": "24135",
+          "end_time": "25440",
+          "pronunciation_time": "0.3333",
+          "type": "3"
+        },
+        {
+          "text": "파도 타기",
+          "start_time": "24142",
+          "end_time": "25440",
           "pronunciation_time": 0,
           "type": "3"
         },
         {
-          "text": "부분)",
-          "start_time": 24163,
-          "end_time": 25442,
-          "pronunciation_time": "0.2",
+          "text": ">",
+          "start_time": "24142",
+          "end_time": "25440",
+          "pronunciation_time": "0.333",
           "type": "3"
         }
       ]
@@ -4968,7 +5127,7 @@
         },
         {
           "text": "리",
-          "start_time": 24163,
+          "start_time": 24142,
           "end_time": 24827,
           "pronunciation_time": "1",
           "type": 1
@@ -5361,7 +5520,7 @@
           "type": 1
         },
         {
-          "text": "타",
+          "text": "타 ",
           "start_time": 26235,
           "end_time": 26374,
           "pronunciation_time": 0,

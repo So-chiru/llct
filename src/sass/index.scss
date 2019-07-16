@@ -916,12 +916,6 @@ llct-pl-infotext span {
   width: 60px;
 }
 
-.lyrics {
-  font-size: 16px;
-  font-weight: 100;
-  font-family: "Jua";
-}
-
 .pg_ind {
   display: -webkit-flex;
   display: flex;
@@ -1264,6 +1258,12 @@ llct-pl-infotext span {
 
   .__context_bg {
     background-color: rgba(50, 50, 50, 0.3);
+  }
+
+  .lyrics {
+    font-size: 16px;
+    font-weight: 100;
+    font-family: "Jua";
   }
 }
 
