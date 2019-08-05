@@ -10,7 +10,8 @@ jobs:
           name: Downloading Github Pages CLI
           command: |
             sudo npm install gh-pages --unsafe-perm -g
-            sudo chmod -R 775 /usr/local/lib/node_modules/gh-pages/
+            sudo chown -R $USER /usr/local/lib/node_modules
+            sudo chmod -R 775 /usr/local/lib/node_modules
       - run:
           name: Downloading Dependencies
           command: yarn
