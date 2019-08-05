@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Deploying to LLCTSites
           command: |
-            sudo gh-pages -d '/home/circleci/llct_circleci/dist/' -r 'git@github.com:So-chiru/LLCTSites.git' -b master -m 'LLCT Content Updates'
+            sudo gh-pages -d 'dist/' -r 'git@github.com:So-chiru/LLCTSites.git' -b master -m 'LLCT Content Updates'
 
 workflows:
   version: 2
