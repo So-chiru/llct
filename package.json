@@ -9,7 +9,7 @@
   "webSVPort": 20417,
   "scripts": {
     "build": "gulp build",
-    "deploy": "gh-pages -r 'git@github.com:So-chiru/LLCTSites.git' -d dist -b master"
+    "deploy": "sudo gh-pages -r 'git@github.com:So-chiru/LLCTSites.git' -d dist -b master"
   },
   "srcs": {
     "sass": "./src/sass/",
