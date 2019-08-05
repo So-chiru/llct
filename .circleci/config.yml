@@ -29,7 +29,7 @@ jobs:
 
       - run:
           name: Deploying to LLCTSites
-          command: yarn deploy
+          command: sudo yarn deploy
 
 workflows:
   version: 2
