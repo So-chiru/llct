@@ -32,8 +32,7 @@ jobs:
       - run:
           name: Deploying to LLCTSites
           command: |
-            cd ~/llct_circleci/dist/
-            yarn deploy
+            gh-pages -d '~/llct_circleci/dist/' -r 'git@github.com:So-chiru/LLCTSites.git' -b master -m 'LLCT Content Updates'
 
 workflows:
   version: 2
