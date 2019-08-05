@@ -31,7 +31,9 @@ jobs:
 
       - run:
           name: Deploying to LLCTSites
-          command: yarn deploy
+          command: |
+            cd ~/llct_circleci/dist/
+            yarn deploy
 
 workflows:
   version: 2
