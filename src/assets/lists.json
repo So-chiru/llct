@@ -1599,6 +1599,16 @@
         "karaoke": true,
         "singAlong": true,
         "short_kr": "점펍"
+      },
+      "未体験HORIZON": {
+        "id": "10090",
+        "translated": "미체험 HORIZON",
+        "tag": ["4집", "미체험", "즈라이즌"],
+        "center": null,
+        "artist": 0,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "즈라이즌"
       }
     }
   },
