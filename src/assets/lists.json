@@ -1607,6 +1607,7 @@
         "center": "쿠니키다 하나마루",
         "bladeColor": "하나마루 색 (노란색)",
         "bladeColorHEX": "#ffe944",
+        "artist": 0,
         "karaoke": true,
         "notPerformed": true,
         "short_kr": "즈라이즌"

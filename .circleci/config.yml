@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Downloading Now
           command: |
-            npm i -g now
+            sudo npm i -g now --unsafe-perm=true
       - run:
           name: Downloading Dependencies
           command: yarn
