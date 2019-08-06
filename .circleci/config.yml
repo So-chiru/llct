@@ -31,7 +31,6 @@ jobs:
       - run:
           name: Deploying to LLCTSites
           command: |
-            sudo gh-pages -d 'dist/' -r 'git@github.com:So-chiru/LLCTSites.git' -b master -m 'LLCT Content Updates'
             now --token $ZEIT_TOKEN dist --target production
 workflows:
   version: 2
