@@ -1604,8 +1604,9 @@
         "id": "10090",
         "translated": "미체험 HORIZON",
         "tag": ["4집", "미체험", "즈라이즌"],
-        "center": null,
-        "artist": 0,
+        "center": "쿠니키다 하나마루",
+        "bladeColor": "하나마루 색 (노란색)",
+        "bladeColorHEX": "#ffe944",
         "karaoke": true,
         "notPerformed": true,
         "short_kr": "즈라이즌"
