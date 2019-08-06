@@ -1125,7 +1125,7 @@
           "start_time": 6194,
           "end_time": 6729,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "카",
@@ -1466,21 +1466,21 @@
           "start_time": 8299,
           "end_time": 8421,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "루",
           "start_time": 8314,
           "end_time": 8421,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "다!",
           "start_time": 8343,
           "end_time": 8421,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         }
       ]
     },
@@ -2493,7 +2493,7 @@
           "start_time": 14442,
           "end_time": 15255,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "소",
@@ -2813,21 +2813,21 @@
           "start_time": 16549,
           "end_time": 16687,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "츠",
           "start_time": 16581,
           "end_time": 16687,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "다!",
           "start_time": 16597,
           "end_time": 16687,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         }
       ]
     },
@@ -2957,7 +2957,7 @@
     },
     {
       "start_time": 17347,
-      "end_time": 19777,
+      "end_time": 19840,
       "collection": [
         {
           "text": "< ",
@@ -2988,7 +2988,7 @@
           "type": "3"
         },
         {
-          "text": "(하이?) ",
+          "text": "(하이 x n) ",
           "start_time": 17675,
           "end_time": 19740,
           "pronunciation_time": 0,
@@ -3227,7 +3227,7 @@
           "start_time": 21370,
           "end_time": 21948,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "카",
@@ -3568,21 +3568,21 @@
           "start_time": 23492,
           "end_time": 23610,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "루",
           "start_time": 23524,
           "end_time": 23610,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "다!",
           "start_time": 23536,
           "end_time": 23610,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         }
       ]
     },
@@ -3818,21 +3818,21 @@
           "start_time": 24985,
           "end_time": 25132,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "츠",
           "start_time": 25020,
           "end_time": 25132,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "다! ",
           "start_time": 25032,
           "end_time": 25132,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "1"
         },
         {
           "text": "(Jum",
