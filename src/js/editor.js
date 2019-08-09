@@ -37,7 +37,7 @@ $(document).ready(() => {
 
     // TODO : 더 좋은 방식은 없을까?
     // CPU 사용량 제한
-    if (audioSyncSleep < 14) {
+    if (audioSyncSleep < 8) {
       audioSyncSleep++
       return
     }

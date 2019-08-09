@@ -31,18 +31,19 @@
 
 const __cur_line = '__cur_line'
 const s__cur_line = ' __cur_line'
-const s__cur_line_reg = /\s__cur_line/g
+const s__cur_line_reg = /\s__cur_line/gi
 
 const __currentSync = 'currentSync'
 const s__currentSync = ' currentSync'
-const s__currentSync_reg = /\scurrentSync/g
+const s__currentSync_reg = /\scurrentSync/gi
 
 const __josenPassing = 'josenPassing'
 const s__josenPassing = ' josenPassing'
-const s__josenPassing_reg = /\sjosenPassing/g
+const s__josenPassing_reg = /\sjosenPassing/gi
 
 const c_undefined = 'undefined'
 const trs_default = 'all 0.33s ease 0s, color 0.33s ease 0s'
+const c_nbsp = '&nbsp'
 
 /**
  * a Array에 있는 t 값들을 읽어 최소, 최대 값을 불러옵니다.
@@ -175,7 +176,7 @@ var Karaoke = function (kara_elem) {
 
     if (delay > dur) return ''
 
-    var dMd = Math.floor(dur / delay)
+    var dMd = ~~(dur / delay)
     var rs = []
     for (var i = 1; i <= dMd; i++) {
       rs.push(start_time + i * delay)
@@ -199,11 +200,14 @@ var Karaoke = function (kara_elem) {
       var spaceEle = ''
 
       var v_len = v.length
-
       for (var wordI = 0; wordI < v_len; wordI++) {
         var word = v[wordI]
 
-        if (checkUseRomaji && Aromanize && Number(word.type) != 3) {
+        if (
+          checkUseRomaji &&
+          typeof Aromanize !== 'undefined' &&
+          Number(word.type) != 3
+        ) {
           word.text = word.text.romanize()
         }
 
@@ -224,11 +228,11 @@ var Karaoke = function (kara_elem) {
           '0 0 3px ' + word.text_color};">${
           typeof word.ruby_text !== 'undefined' && word.ruby_text !== ''
             ? '<ruby>' +
-              word.text.replace(/\s/g, '&nbsp') +
+              word.text.replace(/\s/g, c_nbsp) +
               '<rt>' +
               word.ruby_text +
               '</rt></ruby>'
-            : word.text.replace(/\s/g, '&nbsp')
+            : word.text.replace(/\s/g, c_nbsp)
         }</p>`
       }
 
@@ -260,8 +264,10 @@ var Karaoke = function (kara_elem) {
           KaraokeInstance.updateLastScroll()
           var posX = Number(perElem.dataset.line)
           var clcA = _self.karaokeData.timeline[posX].collection
-          for (var z = 0; z < clcA.length; z++) {
-            for (var o = 0; o < clf.length; o++) {
+          var clcALen = clcA.length
+          var clfLen = clf.length
+          for (var z = 0; z < clcALen; z++) {
+            for (var o = 0; o < clfLen; o++) {
               clf[o](_self, {
                 detail: {
                   posX,
@@ -287,7 +293,8 @@ var Karaoke = function (kara_elem) {
           var posX = Number(perElem.dataset.line)
           var posY = Number(perElem.dataset.word)
 
-          for (var o = 0; o < clf.length; o++) {
+          var clfLen = clf.length
+          for (var o = 0; o < clfLen; o++) {
             clf[o](_self, { detail: { posX, posY, perElem } })
           }
         })
@@ -299,16 +306,15 @@ var Karaoke = function (kara_elem) {
       '#' + this.karaoke_element.id + ' .lyrics'
     )
 
-    for (var dk = 0; dk < lyricsElement.length; dk++) {
+    var lenCache = lyricsElement.length
+    for (var dk = 0; dk < lenCache; dk++) {
       lyricsElement[dk].className = lyricsElement[dk].className.replace(
         /\scurrentSync/g,
         ''
       )
     }
 
-    if (typeof aftFunc === 'function') {
-      aftFunc()
-    }
+    typeof aftFunc === 'function' && aftFunc()
   }
   this.tickSoundEnable = true
   this.tickSoundsCache = {}
@@ -321,15 +327,11 @@ var Karaoke = function (kara_elem) {
   this.__last_scroll = 0
   this.updateLastScroll = () => {
     this.__last_scroll = Date.now()
-    if (this.__scroll_timeout) {
-      clearTimeout(this.__scroll_timeout)
-    }
+    this.__scroll_timeout && clearTimeout(this.__scroll_timeout)
   }
   this.__scroll_timeout = null
   this.NewLineRender = new_line_element => {
-    if (this.__scroll_timeout) {
-      clearTimeout(this.__scroll_timeout)
-    }
+    this.__scroll_timeout && clearTimeout(this.__scroll_timeout)
 
     var lyrics_wrap = document.getElementById('lyrics_wrap')
 
@@ -343,7 +345,7 @@ var Karaoke = function (kara_elem) {
     }
   }
   this.AudioSync = function (timeCode, fullRender) {
-    if (typeof this.karaokeData === 'undefined' || this.karaokeData === null) {
+    if (typeof this.karaokeData !== 'object') {
       return 0
     }
 
@@ -371,7 +373,7 @@ var Karaoke = function (kara_elem) {
         }
       }
 
-      if (isNotHighlighting && !fullRender) {
+      if (!fullRender && isNotHighlighting) {
         continue
       }
 
@@ -380,7 +382,7 @@ var Karaoke = function (kara_elem) {
         var karaWord = karaLine.collection[karaWordNum]
         if (karaWord.start_time === 0) continue
 
-        var preBuildID = karaLineNum + '.' + karaWordNum
+        var preBuildID = `${karaLineNum}.${karaWordNum}`
         if (typeof this.cachedDom[preBuildID] === c_undefined) {
           this.cachedDom[
             karaLineNum + '.' + karaWordNum
@@ -392,7 +394,10 @@ var Karaoke = function (kara_elem) {
         var kards = this.cachedDom[preBuildID]
         var __josenExists = kards.className.indexOf(__josenPassing) > -1
 
-        if (timeCode > karaWord.start_time && timeCode > karaWord.end_time) {
+        var tcGtrstart = timeCode > karaWord.start_time
+        var tcGtrend = timeCode > karaWord.end_time
+
+        if (tcGtrstart && tcGtrend) {
           if (!__josenExists) {
             kards.className += s__josenPassing
           }
@@ -405,7 +410,8 @@ var Karaoke = function (kara_elem) {
         if (kards.dataset.repeats != null) {
           var repeatsSplit = kards.dataset.repeats.split(',')
 
-          for (var g = 0; g < repeatsSplit.length; g++) {
+          var spltLenC = repeatsSplit.length
+          for (var g = 0; g < spltLenC; g++) {
             if (
               timeCode > repeatsSplit[g] - karaWord.repeat_delay * 1.05 &&
               timeCode < repeatsSplit[g] - karaWord.repeat_delay / 3.5 &&
@@ -441,17 +447,17 @@ var Karaoke = function (kara_elem) {
 
         if (kards.className.indexOf(__currentSync) == -1) {
           kards.className =
-            timeCode > karaWord.start_time && timeCode < karaWord.end_time
+            tcGtrstart && !tcGtrend
               ? kards.className + s__currentSync
               : kards.className.replace(s__currentSync_reg, '')
 
           if (
+            karaWord.type == 2 &&
+            !tcGtrend &&
             this.tickSoundEnable &&
-            karaWord.text.trim() !== '*' &&
-            timeCode > karaWord.start_time - 5 &&
-            timeCode < karaWord.end_time &&
             !this.tickSoundsCache[karaWord.start_time] &&
-            karaWord.type == 2
+            karaWord.text.trim() !== '*' &&
+            timeCode > karaWord.start_time - 5
           ) {
             Sakurauchi.run('tickSounds', karaWord.tick_volume)
             this.tickSoundsCache[karaWord.start_time] = true
@@ -492,19 +498,20 @@ var Karaoke = function (kara_elem) {
         }
 
         if (
-          (s__currentSync_reg.test(kards.className) &&
-            timeCode < karaWord.start_time) ||
-          timeCode > karaWord.end_time
+          (s__currentSync.indexOf(kards.className) > -1 && !tcGtrstart) ||
+          tcGtrend
         ) {
           kards.className = kards.className.replace(s__currentSync_reg, '')
 
-          if (timeCode > karaWord.end_time) {
+          if (tcGtrend) {
             kards.style.transition = trs_default
           }
         }
 
+        /*
         kards.style.textDecoration = 'none'
         kards.style.textDecoration = 'blink'
+        */
       }
     } // Karaoke Loop
   }
