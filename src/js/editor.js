@@ -7,9 +7,9 @@ var convertTime = function (input, separator) {
     return input < 10 ? '0' + input : input
   }
   return [
-    pad(Math.floor(input / 3600)),
-    pad(Math.floor((input % 3600) / 60)),
-    pad(Math.floor(input % 60))
+    pad(~~(input / 3600)),
+    pad(~~((input % 3600) / 60)),
+    pad(~~(input % 60))
   ].join(typeof separator !== 'undefined' ? separator : ':')
 }
 
@@ -31,7 +31,7 @@ $(document).ready(() => {
 
   wavesurfer.on('audioprocess', () => {
     wavTime = wavesurfer.getCurrentTime()
-    flrsd = Math.floor(wavTime * 100)
+    flrsd = ~~(wavTime * 100)
     $('#current_time').html(convertTime(wavTime))
     $('#frame_tick').html(flrsd)
 
@@ -43,14 +43,12 @@ $(document).ready(() => {
     }
     audioSyncSleep = 0
 
-    KaraokeInstance.AudioSync(flrsd, true)
+    KaraokeInstance.AudioSync(flrsd, false)
   })
 
   wavesurfer.on('seek', () => {
-    KaraokeInstance.AudioSync(
-      Math.floor(wavesurfer.getCurrentTime() * 100),
-      true
-    )
+    KaraokeInstance.clearSync()
+    KaraokeInstance.AudioSync(~~(wavesurfer.getCurrentTime() * 100), true)
   })
 
   var prv = false
@@ -384,6 +382,7 @@ var __prevKCount = ['_', 0]
 const KaraokeEditor = {
   EditVal: (key, value, altMode, shiftMode, NonwipingMode) => {
     $(_c[key]).val(value)
+
     selectWords.forEach((details, index) => {
       var selectedObject =
         KaraokeInstance.karaokeData.timeline[details.posX].collection[
@@ -404,8 +403,8 @@ const KaraokeEditor = {
       __prevKCount = ['_', 0]
     }
 
+    KaraokeInstance.RenderDOM()
     if (!NonwipingMode) {
-      KaraokeInstance.RenderDOM()
       KaraokeEditor.clearSelection()
     }
 

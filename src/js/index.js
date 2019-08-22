@@ -146,7 +146,8 @@ let yohaneNoDOM = {
   shokan: ui_only => {
     yohaneNoDOM.noPLUI = false
     var playerElement = document.querySelector('llct-pl')
-    playerElement.style.transition = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
+    playerElement.style.transition =
+      'height 0.7s cubic-bezier(0.19, 1, 0.22, 1), transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
     playerElement.classList.remove('hide')
     playerElement.classList.add('show')
     if (yohaneNoDOM.kaizu) {
@@ -156,7 +157,7 @@ let yohaneNoDOM = {
   giran: ui_only => {
     var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition =
-      'all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
+      'height 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
     playerElement.classList.remove('show')
     playerElement.classList.add('hide')
     if (yohaneNoDOM.kaizu) {
