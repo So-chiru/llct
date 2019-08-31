@@ -196,22 +196,15 @@ let yohaneNoDOM = {
   toggleKaizu: () => {
     yohaneNoDOM.kaizu ? yohaneNoDOM.chiisakuni() : yohaneNoDOM.dekakuni()
   },
-  removeAnime: () => {
-    setTimeout(() => {
-      document.querySelector('llct-pl').classList.remove('on_animation')
-    }, 1000)
-  },
   dekakuni: () => {
     var pl_bg = document.getElementById('pl_bg')
     pl_bg.classList.add('show')
     yohaneNoDOM.noPLUI = false
-    document.querySelector('llct-pl').classList.add('on_animation')
     document.querySelector('llct-pl').classList.add('dekai')
     yohaneNoDOM.kaizu = true
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
     pl_bg.style.opacity = 1
     KaraokeInstance.clearSync()
-    yohaneNoDOM.removeAnime()
   },
   hideLyrics: () => {
     document.getElementById('lyrics_wrap').classList.add('hiddenCurtain')
@@ -227,11 +220,9 @@ let yohaneNoDOM = {
     var pl_bg = document.querySelector('llct-pl-bg')
     pl_bg.classList.remove('show')
     pl_bg.style.opacity = '0'
-    document.querySelector('llct-pl').classList.add('on_animation')
     document.querySelector('llct-pl').classList.remove('dekai')
     yohaneNoDOM.kaizu = false
     document.getElementsByTagName('body')[0].style.overflow = 'auto'
-    yohaneNoDOM.removeAnime()
   },
   play: () => {
     anime({
@@ -373,16 +364,20 @@ let yohaneNoDOM = {
     yohaneNoDOM.registerBufferBar()
     document.getElementById('karaoke').innerHTML = ''
     var meta = LLCT.getFromLists(id)
-    var webpSp = webpSupports() ? 'webp' : 'png'
-    if (dataYosoro.get('sakana') === true) {
-      document.getElementById('album_meta').src =
-        './data/' + id + '/bg.' + webpSp
-    } else {
-      document.getElementById('album_meta').src = '/live_assets/1px.png'
-      document.getElementById(
-        'album_meta'
-      ).style.backgroundColor = dataYosoro.get('yohane') ? '#323232' : '#D0D0D0'
-    }
+
+    var album_meta = document.getElementById('album_meta')
+    webpSupports().then(v => {
+      var webpSp = v ? 'webp' : 'png'
+
+      if (dataYosoro.get('sakana') === true) {
+        album_meta.src = './data/' + id + '/bg.' + webpSp
+      } else {
+        album_meta.src = '/live_assets/1px.png'
+        album_meta.style.backgroundColor = dataYosoro.get('yohane')
+          ? '#323232'
+          : '#D0D0D0'
+      }
+    })
 
     var artistText =
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[

@@ -394,20 +394,16 @@ llct-pl.show {
   visibility: visible;
 }
 
-llct-pl.on_animation {
-  will-change: transform, opacity;
+llct-pl.dekai {
+  transform: translateY(0);
 }
 
 llct-pl.hide {
   background-color: transparent;
   will-change: auto;
   opacity: 0;
-  transform: translateY(90px);
+  transform: translateY(100%);
   visibility: hidden;
-}
-
-llct-pl.dekai {
-  height: 97%;
 }
 
 llct-pl-bg.show {
@@ -446,9 +442,9 @@ llct-pl {
   bottom: -5px;
   -webkit-touch-callout: none;
   border-radius: 5px;
-  height: 80px;
+  height: 97%;
   z-index: 100;
-  transform: translateX(0px);
+  transform: translateY(calc(100% - 80px));
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   font-size: 16px;
   transition: transform, color 0.7s cubic-bezier(0.19, 1, 0.22, 1);
@@ -456,7 +452,7 @@ llct-pl {
   @media screen and (max-width: $small) {
     left: 0;
     width: 100%;
-    height: 70px;
+    transform: translateY(calc(100% - 70px));
   }
 }
 

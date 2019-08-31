@@ -51,11 +51,14 @@ var formatBytes = (a, b) => {
 }
 
 const webpSupports = () => {
-  var e = document.createElement('canvas')
-  if (e.getContext && e.getContext('2d')) {
-    return e.toDataURL('image/webp').indexOf('data:image/webp') == 0
-  }
-  return false
+  return new Promise(res => {
+    const webP = new Image()
+    webP.src =
+      'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA'
+    webP.onload = webP.onerror = function () {
+      res(webP.height === 2)
+    }
+  })
 }
 
 var __dYs_preSpace = /^\s+|\s+$/g
