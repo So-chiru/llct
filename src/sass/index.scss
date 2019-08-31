@@ -404,6 +404,7 @@ llct-pl.hide {
   opacity: 0;
   transform: translateY(100%);
   visibility: hidden;
+  pointer-events: none;
 }
 
 llct-pl-bg.show {

@@ -147,7 +147,7 @@ let yohaneNoDOM = {
     yohaneNoDOM.noPLUI = false
     var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition =
-      'height 0.7s cubic-bezier(0.19, 1, 0.22, 1), transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
+      'transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
     playerElement.classList.remove('hide')
     playerElement.classList.add('show')
     if (yohaneNoDOM.kaizu) {
@@ -157,7 +157,7 @@ let yohaneNoDOM = {
   giran: ui_only => {
     var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition =
-      'height 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
+      'transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
     playerElement.classList.remove('show')
     playerElement.classList.add('hide')
     if (yohaneNoDOM.kaizu) {
@@ -892,7 +892,6 @@ Sakurauchi.add('LLCTDOMLoad', () => {
       yohaneNoDOM.chiisakuni(true)
     }
     domGPLKa.style.transform = null
-    domGPLKa.style.height = null
     closeVal = 0
     closeDir = 0
     originCalc = null
@@ -905,15 +904,15 @@ Sakurauchi.add('LLCTDOMLoad', () => {
     closeVal = ev.deltaY
     closeDir = ev.additionalEvent === 'panup'
     if (ev.additionalEvent == 'panup' || ev.additionalEvent == 'pandown') {
-      if (ev.deltaY > 0) {
-        domGPLKa.style.transform = 'translateY(' + ev.deltaY + 'px)'
-      }
+      var get_delta = (ev.deltaY < 0 ? window.innerHeight : 0) + ev.deltaY
+      domGPLKa.style.transform =
+        'translateY(' +
+        (ev.deltaY < 0 ? Math.max(0, get_delta) : get_delta) +
+        'px)'
+
       domGPLBg.style.opacity = yohaneNoDOM.kaizu
         ? 1 - ev.deltaY / window.innerHeight
         : 1 - (ev.deltaY / window.innerHeight + 1)
-      if (ev.deltaY < 0) {
-        domGPLKa.style.height = originCalc + closeVal * -1 + 'px'
-      }
     }
   })
 })
