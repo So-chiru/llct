@@ -2,7 +2,7 @@
   "µ's": {
     "meta": {
       "translated": "µ's (뮤즈)",
-      "desc": "2010년에 결성된 아이돌 그룹으로, 러브라이브 하면 이 그룹인 만큼 넓은 인지도 자랑합니다.",
+      "desc": "2010년에 결성된 아이돌 그룹으로, 러브라이브 하면 이 그룹인 만큼 넓은 인지도를 자랑합니다.",
       "artists": ["µ's"]
     },
     "collection": {
@@ -13,27 +13,544 @@
         "karaoke": false,
         "short_kr": "보라라라"
       },
-      "Snow halation": {
+      "友情ノーチェンジ": {
         "id": "00002",
+        "translated": "우정 NO CHANGE",
+        "center": null,
+        "karaoke": false,
+        "short_kr": "우정노첸"
+      },
+      "Snow halation": {
+        "id": "00003",
         "center": null,
         "karaoke": true,
         "bladeColor": "시작은 눈 (흰색)",
         "bladeColorHEX": "#fff",
         "short_kr": "스노하레"
       },
-      "START : DASH!!": {
-        "id": "00008",
-        "album": "No Brand Girls",
+      "baby maybe 恋のボタン": {
+        "id": "00004",
         "center": null,
-        "karaoke": true,
-        "short_kr": "스탓대시"
+        "karaoke": false,
+        "translated": "baby maybe 사랑의 버튼",
+        "short_kr": "코이버튼"
+      },
+      "Love marginal": {
+        "id": "00005",
+        "center": null,
+        "karaoke": false
+      },
+      "sweet＆sweet holiday": {
+        "id": "00006",
+        "center": null,
+        "karaoke": false
+      },
+      "ダイヤモンドプリンセスの憂鬱": {
+        "id": "00007",
+        "center": null,
+        "translated": "다이아몬드 프린세스의 우울",
+        "karaoke": false
+      },
+      "ラブノベルス": {
+        "id": "00008",
+        "center": null,
+        "translated": "러브 노벨즈",
+        "karaoke": false
+      },
+      "知らないLove*教えてLove": {
+        "id": "00009",
+        "center": null,
+        "translated": "모르겠어 Love*가르쳐줘 Love",
+        "karaoke": false
+      },
+      "あ・の・ね・が・ん・ば・れ！": {
+        "id": "00010",
+        "center": null,
+        "translated": "있・잖・아・힘・을・내!",
+        "karaoke": false
+      },
+      "夏色えがおで1,2,Jump!": {
+        "id": "00011",
+        "center": null,
+        "translated": "여름빛 미소로 1, 2, Jump!",
+        "karaoke": false
+      },
+      "Mermaid festa vol.1": {
+        "id": "00012",
+        "center": null,
+        "karaoke": false
+      },
+      "私たちは未来の花": {
+        "id": "00013",
+        "center": null,
+        "translated": "우리들은 미래의 꽃",
+        "karaoke": false
+      },
+      "スピカテリブル": {
+        "id": "00014",
+        "center": null,
+        "translated": "스피카 테리블",
+        "karaoke": false
+      },
+      "愛は太陽じゃない?": {
+        "id": "00015",
+        "center": null,
+        "translated": "사랑은 태양이 아닐까?",
+        "karaoke": false
+      },
+      "もうひとりじゃないよ": {
+        "id": "00016",
+        "center": null,
+        "translated": "더 이상 혼자가 아니야",
+        "karaoke": false
+      },
+      "もぎゅっと“love”で接近中！": {
+        "id": "00017",
+        "center": null,
+        "translated": "꼬옥 \"love\"로 접근 중!",
+        "karaoke": false
+      },
+      "愛してるばんざーい！": {
+        "id": "00018",
+        "center": null,
+        "translated": "사랑해 만세!",
+        "karaoke": false
+      },
+      "Mermaid festa vol.2 ~Passionate~": {
+        "id": "00019",
+        "center": null,
+        "karaoke": false
+      },
+      "Someday of my life": {
+        "id": "00020",
+        "center": null,
+        "karaoke": false
+      },
+      "恋のシグナルRin rin rin!": {
+        "id": "00021",
+        "center": null,
+        "translated": "사랑의 시그널 Rin rin rin!",
+        "karaoke": false
+      },
+      "乙女式れんあい塾": {
+        "id": "00022",
+        "center": null,
+        "translated": "소녀식 연애 학원",
+        "karaoke": false
+      },
+      "まほうつかいはじめました！": {
+        "id": "00023",
+        "center": null,
+        "translated": "마법사 시작했습니다!",
+        "karaoke": false
+      },
+      "純愛レンズ": {
+        "id": "00024",
+        "center": null,
+        "translated": "순애 렌즈",
+        "karaoke": false
+      },
+      "告白日和、です！": {
+        "id": "00025",
+        "center": null,
+        "translated": "고백하기 좋은 날, 입니다!",
+        "karaoke": false
+      },
+      "ぶる~べりぃ♥とれいん": {
+        "id": "00026",
+        "center": null,
+        "translated": "블루~베리♥트레인",
+        "karaoke": false
+      },
+      "孤独なHeaven": {
+        "id": "00027",
+        "center": null,
+        "translated": "고독한 Heaven",
+        "karaoke": false
+      },
+      "soldier game": {
+        "id": "00028",
+        "center": null,
+        "karaoke": false
+      },
+      "Daring!!": {
+        "id": "00029",
+        "center": null,
+        "karaoke": false
+      },
+      "勇気のReason": {
+        "id": "00030",
+        "center": null,
+        "translated": "용기의 Reason",
+        "karaoke": false
+      },
+      "ありふれた悲しみの果て": {
+        "id": "00031",
+        "center": null,
+        "translated": "흔한 슬픔의 끝",
+        "karaoke": false
+      },
+      "Wonderful Rush": {
+        "id": "00032",
+        "center": null,
+        "karaoke": false
+      },
+      "Oh,Love＆Peace!": {
+        "id": "00033",
+        "center": null,
+        "karaoke": false
+      },
+      "Listen to my heart!!": {
+        "id": "00034",
+        "center": null,
+        "karaoke": false
+      },
+      "after school NAVIGATORS": {
+        "id": "00035",
+        "center": null,
+        "karaoke": false
+      },
+      "僕らは今のなかで": {
+        "id": "00036",
+        "center": null,
+        "translated": "우리들은 지금 속에서",
+        "karaoke": false
+      },
+      "WILD STARS": {
+        "id": "00037",
+        "center": null,
+        "karaoke": false
       },
       "きっと青春が聞こえる": {
         "translated": "분명 청춘이 들려올거야",
-        "id": "00024",
+        "id": "00038",
         "center": null,
         "karaoke": true,
-        "short_kr": "세슌"
+        "short_kr": "킷토세슌"
+      },
+      "輝夜の城で踊りたい": {
+        "id": "00039",
+        "center": null,
+        "translated": "카구야의 성에서 춤추고 싶어",
+        "karaoke": false
+      },
+      "ススメ→トゥモロウ": {
+        "id": "00040",
+        "center": null,
+        "translated": "나아가→Tomorrow",
+        "karaoke": false
+      },
+      "これからのSomeday": {
+        "id": "00041",
+        "center": null,
+        "translated": "앞으로 다가올 Someday",
+        "karaoke": false
+      },
+      "Wonder zone": {
+        "id": "00042",
+        "center": null,
+        "karaoke": false
+      },
+      "No brand girls": {
+        "id": "00043",
+        "center": null,
+        "karaoke": false
+      },
+      "START : DASH!!": {
+        "id": "00044",
+        "album": "No Brand Girls",
+        "center": null,
+        "karaoke": true,
+        "short_kr": "START:DASH!!"
+      },
+      "微熱からMystery": {
+        "id": "00045",
+        "center": null,
+        "translated": "미열에서 Mystery",
+        "karaoke": false
+      },
+      "キミのくせに！": {
+        "id": "00046",
+        "center": null,
+        "translated": "너 주제에!",
+        "karaoke": false
+      },
+      "Cutie Panther": {
+        "id": "00047",
+        "center": null,
+        "karaoke": false
+      },
+      "夏、終わらないで。": {
+        "id": "00048",
+        "center": null,
+        "translated": "여름, 끝나지 말아줘.",
+        "karaoke": false
+      },
+      "Pure girls project": {
+        "id": "00049",
+        "center": null,
+        "karaoke": false
+      },
+      "UNBALANCED LOVE": {
+        "id": "00050",
+        "center": null,
+        "karaoke": false
+      },
+      "Music S.T.A.R.T!!": {
+        "id": "00051",
+        "center": null,
+        "karaoke": false
+      },
+      "LOVELESS WORLD": {
+        "id": "00052",
+        "center": null,
+        "karaoke": false
+      },
+      "タカラモノズ": {
+        "id": "00053",
+        "center": null,
+        "translated": "보물들",
+        "karaoke": false
+      },
+      "Paradise Live": {
+        "id": "00054",
+        "center": null,
+        "karaoke": false
+      },
+      "それは僕たちの奇跡": {
+        "id": "00055",
+        "center": null,
+        "translated": "그것은 우리들의 기적",
+        "karaoke": false
+      },
+      "だってだって噫無情": {
+        "id": "00056",
+        "center": null,
+        "translated": "그치만 그치만 아아 무정",
+        "karaoke": false
+      },
+      "どんなときもずっと": {
+        "id": "00057",
+        "center": null,
+        "translated": "어떤 때라도 계속",
+        "karaoke": false
+      },
+      "COLORFUL VOICE": {
+        "id": "00058",
+        "center": null,
+        "translated": "",
+        "karaoke": false
+      },
+      "ユメノトビラ": {
+        "id": "00059",
+        "center": null,
+        "translated": "꿈의 문",
+        "karaoke": false
+      },
+      "SENTIMENTAL StepS": {
+        "id": "00060",
+        "center": null,
+        "karaoke": false
+      },
+      "Love wing bell": {
+        "id": "00061",
+        "center": null,
+        "karaoke": false
+      },
+      "Dancing stars on me!": {
+        "id": "00062",
+        "center": null,
+        "karaoke": false
+      },
+      "KiRa-KiRa Sensation!": {
+        "id": "00063",
+        "center": null,
+        "karaoke": false
+      },
+      "Happy maker!": {
+        "id": "00064",
+        "center": null,
+        "karaoke": false
+      },
+      "Shangri-La Shower": {
+        "id": "00065",
+        "center": null,
+        "karaoke": false
+      },
+      "るてしキスキしてる": {
+        "id": "00066",
+        "center": null,
+        "translated": "해아좋아해",
+        "karaoke": false
+      },
+      "永遠フレンズ": {
+        "id": "00067",
+        "center": null,
+        "translated": "영원 프렌즈",
+        "karaoke": false
+      },
+      "小夜啼鳥恋詩": {
+        "id": "00068",
+        "center": null,
+        "translated": "나이팅게일 러브 송",
+        "karaoke": false
+      },
+      "秋のあなたの空遠く": {
+        "id": "00069",
+        "center": null,
+        "translated": "가을의 당신의 하늘 저 멀리",
+        "karaoke": false
+      },
+      "ふたりハピネス": {
+        "id": "00070",
+        "center": null,
+        "translated": "두 사람 해피니스",
+        "karaoke": false
+      },
+      "冬がくれた予感": {
+        "id": "00071",
+        "center": null,
+        "translated": "겨울이 준 예감",
+        "karaoke": false
+      },
+      "Trouble Busters": {
+        "id": "00072",
+        "center": null,
+        "karaoke": false
+      },
+      "ミはμ’sicのミ": {
+        "id": "00073",
+        "center": null,
+        "translated": "",
+        "karaoke": false
+      },
+      "Super LOVE＝Super LIVE!": {
+        "id": "00074",
+        "center": null,
+        "translated": "",
+        "karaoke": false
+      },
+      "Angelic Angel": {
+        "id": "00075",
+        "center": null,
+        "karaoke": false
+      },
+      "Hello, 星を数えて": {
+        "id": "00076",
+        "center": null,
+        "translated": "Hello, 별을 세며",
+        "karaoke": false
+      },
+      "SUNNY DAY SONG": {
+        "id": "00077",
+        "center": null,
+        "karaoke": false
+      },
+      "？←HEARTBEAT": {
+        "id": "00078",
+        "center": null,
+        "karaoke": false
+      },
+      "僕たちはひとつの光": {
+        "id": "00079",
+        "center": null,
+        "translated": "우리는 하나의 빛",
+        "karaoke": false
+      },
+      "Future style": {
+        "id": "00080",
+        "center": null,
+        "karaoke": false
+      },
+      "これから": {
+        "id": "00081",
+        "center": null,
+        "translated": "지금부터",
+        "karaoke": false
+      },
+      "HEART to HEART!": {
+        "id": "00082",
+        "center": null,
+        "karaoke": false
+      },
+      "嵐のなかの恋だから": {
+        "id": "00083",
+        "center": null,
+        "translated": "폭풍 속의 사랑이니까",
+        "karaoke": false
+      },
+      "WAO-WAO Powerful day!": {
+        "id": "00084",
+        "center": null,
+        "karaoke": false
+      },
+      "NO EXIT ORION": {
+        "id": "00085",
+        "center": null,
+        "karaoke": false
+      },
+      "思い出以上になりたくて": {
+        "id": "00086",
+        "center": null,
+        "translated": "추억 이상이 되고 싶어서",
+        "karaoke": false
+      },
+      "春情ロマンティック": {
+        "id": "00087",
+        "center": null,
+        "translated": "춘정 로맨틱",
+        "karaoke": false
+      },
+      "錯覚CROSSROADS": {
+        "id": "00088",
+        "center": null,
+        "translated": "착각 CROSSROADS",
+        "karaoke": false
+      },
+      "PSYCHIC FIRE": {
+        "id": "00089",
+        "center": null,
+        "karaoke": false
+      },
+      "MOMENT RING": {
+        "id": "00090",
+        "center": null,
+        "karaoke": false
+      },
+      "さようならへさよなら！": {
+        "id": "00091",
+        "center": null,
+        "translated": "안녕이란 말에 안녕!",
+        "karaoke": false
+      },
+      "MUSEUMでどうしたい？": {
+        "id": "00092",
+        "center": null,
+        "translated": "MUSEUM에서 뭘하고 싶어?",
+        "karaoke": false
+      },
+      "ENDLESS PARADE": {
+        "id": "00093",
+        "center": null,
+        "karaoke": false
+      },
+      "ぷわぷわーお！": {
+        "id": "00094",
+        "center": null,
+        "translated": "푸와푸와오!",
+        "karaoke": false
+      },
+      "乙姫心で恋宮殿": {
+        "id": "00095",
+        "center": null,
+        "translated": "용녀 마음으로 사랑 궁전",
+        "karaoke": false
+      },
+      "最低で最高のParadiso": {
+        "id": "00096",
+        "center": null,
+        "translated": "최저이자 최고의 Paradiso",
+        "karaoke": false
       }
     }
   },
