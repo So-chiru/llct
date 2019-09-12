@@ -403,8 +403,8 @@ const KaraokeEditor = {
       __prevKCount = ['_', 0]
     }
 
-    KaraokeInstance.RenderDOM()
     if (!NonwipingMode) {
+      KaraokeInstance.RenderDOM()
       KaraokeEditor.clearSelection()
     }
 
