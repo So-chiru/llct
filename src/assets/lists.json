@@ -10,7 +10,7 @@
         "id": "00001",
         "translated": "우리들의 LIVE 너와의 LIFE",
         "center": null,
-        "karaoke": false,
+        "karaoke": true,
         "short_kr": "보라라라"
       },
       "友情ノーチェンジ": {
@@ -24,6 +24,7 @@
         "id": "00003",
         "center": null,
         "karaoke": true,
+        "img_short": true,
         "bladeColor": "시작은 눈 (흰색)",
         "bladeColorHEX": "#fff",
         "short_kr": "스노하레"

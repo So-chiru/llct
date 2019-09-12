@@ -3240,14 +3240,14 @@
       ]
     },
     {
-      "start_time": 19529,
+      "start_time": 18977,
       "end_time": 20294,
       "collection": [
         {
           "text": "< 블레이드 색상 변경 : 호노카 색 (주황색) >",
-          "start_time": 19629,
+          "start_time": "19077",
           "end_time": 20194,
-          "pronunciation_time": 0,
+          "pronunciation_time": "0.333",
           "type": "3",
           "text_color": "#ff961c"
         }
