@@ -32,7 +32,7 @@
       "baby maybe 恋のボタン": {
         "id": "00004",
         "center": null,
-        "karaoke": false,
+        "karaoke": true,
         "translated": "baby maybe 사랑의 버튼",
         "short_kr": "코이버튼"
       },
