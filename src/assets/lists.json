@@ -2135,7 +2135,18 @@
     "meta": {
       "translated": "니지동 (니지가사키)",
       "desc": "2017년에 결성된 아이돌 그룹으로, 러브라이브! 스쿨 아이돌 페스티벌 ALL STARS 게임에 나올 '예정'입니다.",
-      "artists": ["니지동"]
+      "artists": [
+        "니지동",
+        "우에하라 아유무 (CV. 오오니시 아구리)",
+        "나카스 카스미 (CV. 사가라 마유)",
+        "오사카 시즈쿠 (CV. 마에다 카오리)",
+        "아사카 카린 (CV. 쿠보타 미유)",
+        "미야시타 아이 (CV. 무라카미 나츠미)",
+        "코노에 카나타 (CV. 키토 아카리)",
+        "유키 세츠나 (CV. 쿠스노키 토모리)",
+        "엠마 베르데 (CV. 사시데 마리아)",
+        "텐노지 리나 (CV. 타나카 치에미)"
+      ]
     },
     "collection": {
       "TOKIMEKI Runners": {
@@ -2145,6 +2156,127 @@
         "artist": 0,
         "karaoke": true,
         "short_kr": "토메런"
+      },
+      "夢への一歩": {
+        "id": "20002",
+        "translated": "꿈으로의 한 걸음",
+        "artist": 1
+      },
+      "ダイアモンド": {
+        "id": "20003",
+        "translated": "다이아몬드",
+        "artist": 2,
+        "karaoke": true
+      },
+      "あなたの理想のヒロイン": {
+        "id": "20004",
+        "translated": "당신의 이상적인 히로인",
+        "center": null,
+        "artist": 3,
+        "karaoke": true
+      },
+      "Starlight": {
+        "id": "20005",
+        "center": null,
+        "artist": 4,
+        "karaoke": true
+      },
+      "めっちゃGoing!!": {
+        "id": "20006",
+        "translated": "엄청 Going!!",
+        "center": null,
+        "artist": 5,
+        "karaoke": true
+      },
+      "眠れる森に行きたいな": {
+        "id": "20007",
+        "translated": "잠자는 숲 속으로 가고 싶어",
+        "center": null,
+        "artist": 6,
+        "karaoke": true
+      },
+      "CHASE!": {
+        "id": "20008",
+        "center": null,
+        "artist": 7,
+        "karaoke": true
+      },
+      "Evergreen": {
+        "id": "20009",
+        "center": null,
+        "artist": 8,
+        "karaoke": true
+      },
+      "ドキピポ☆エモーション": {
+        "id": "20010",
+        "translated": "도키피포☆이모션",
+        "center": null,
+        "artist": 9,
+        "karaoke": true
+      },
+      "Love U my friends": {
+        "id": "20011",
+        "center": null,
+        "artist": 0,
+        "karaoke": true
+      },
+      "開花宣言": {
+        "id": "20012",
+        "translated": "개화선언",
+        "artist": 1,
+        "karaoke": true
+      },
+      "☆ワンダーランド☆": {
+        "id": "20013",
+        "translated": "☆원더랜드☆",
+        "artist": 2,
+        "karaoke": true
+      },
+      "オードリ": {
+        "id": "20014",
+        "translated": "오도리",
+        "center": null,
+        "artist": 3,
+        "karaoke": true
+      },
+      "Wish": {
+        "id": "20015",
+        "center": null,
+        "artist": 4,
+        "karaoke": true
+      },
+      "友 & 愛": {
+        "id": "20016",
+        "translated": "친구 & 사랑",
+        "center": null,
+        "artist": 5,
+        "karaoke": true
+      },
+      "My Own Fairy-Tale": {
+        "id": "20017",
+        "center": null,
+        "artist": 6,
+        "karaoke": true
+      },
+      "MELODY": {
+        "id": "20018",
+        "center": null,
+        "artist": 7,
+        "karaoke": true
+      },
+      "声繋ごうよ": {
+        "id": "20019",
+        "translated": "목소리를 잇자",
+        "center": null,
+        "artist": 8,
+        "karaoke": true
+      },
+      "テレテレパシー": {
+        "id": "20020",
+        "translated": "텔레텔레파시",
+        "center": null,
+        "artist": 9,
+        "karaoke": true
       }
     }
   }
