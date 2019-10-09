@@ -43,7 +43,7 @@ $(document).ready(() => {
     }
     audioSyncSleep = 0
 
-    KaraokeInstance.AudioSync(flrsd, false)
+    KaraokeInstance.AudioSync(flrsd, true)
   })
 
   wavesurfer.on('seek', () => {
@@ -403,8 +403,8 @@ const KaraokeEditor = {
       __prevKCount = ['_', 0]
     }
 
-    KaraokeInstance.RenderDOM()
     if (!NonwipingMode) {
+      KaraokeInstance.RenderDOM()
       KaraokeEditor.clearSelection()
     }
 

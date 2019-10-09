@@ -80,6 +80,8 @@ let LLCT = {
   currentPage: 0,
   openCallImage: id => {
     var pElement = document.getElementById('ps_wp')
+
+    // TODO : 반응형 이미지 크기
     var items = [
       {
         src: './data/' + id + '/call.jpg',

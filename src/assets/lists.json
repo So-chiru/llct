@@ -10,20 +10,21 @@
         "id": "00001",
         "translated": "우리들의 LIVE 너와의 LIFE",
         "center": null,
-        "karaoke": false,
+        "karaoke": true,
         "short_kr": "보라라라"
       },
       "友情ノーチェンジ": {
         "id": "00002",
         "translated": "우정 NO CHANGE",
         "center": null,
-        "karaoke": false,
+        "karaoke": true,
         "short_kr": "우정노첸"
       },
       "Snow halation": {
         "id": "00003",
         "center": null,
         "karaoke": true,
+        "img_short": true,
         "bladeColor": "시작은 눈 (흰색)",
         "bladeColorHEX": "#fff",
         "short_kr": "스노하레"
@@ -31,7 +32,7 @@
       "baby maybe 恋のボタン": {
         "id": "00004",
         "center": null,
-        "karaoke": false,
+        "karaoke": true,
         "translated": "baby maybe 사랑의 버튼",
         "short_kr": "코이버튼"
       },
@@ -466,7 +467,7 @@
         "id": "00081",
         "center": null,
         "translated": "지금부터",
-        "karaoke": false
+        "karaoke": true
       },
       "HEART to HEART!": {
         "id": "00082",
