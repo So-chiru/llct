@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Deploying to LLCTSites
           command: |
-            now --token $ZEIT_TOKEN dist --target production
+            now --token $ZEIT_TOKEN dist --prod
 workflows:
   version: 2
   build_and_tests:
