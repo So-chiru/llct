@@ -1,13 +1,13 @@
 html.editor.dark
   head
     title Karaoke Editor
-    meta(http-equiv='Content-Type', content='text/html;charset=UTF-8')
-    meta(name='theme-color', content='#242424')
-    link(rel='stylesheet', href='./yosoro.min.css')
-    link(rel='shortcut icon', href='//cdn.lovelivec.kr/data/favicon.ico', type='image/x-icon')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="if(media!='all')media='all'")
+    meta(http-equiv='Content-Type' content='text/html;charset=UTF-8')
+    meta(name='theme-color' content='#242424')
+    link(rel='stylesheet' href='./yosoro.min.css')
+    link(rel='shortcut icon' href='//cdn.lovelivec.kr/data/favicon.ico' type='image/x-icon')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/notosanskr.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet' href='https://fonts.googleapis.com/earlyaccess/notosansjp.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' media="none" onload="if(media!='all')media='all'")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     script(src='https://unpkg.com/wavesurfer.js')
     script(src='https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.min.js')
@@ -18,7 +18,7 @@ html.editor.dark
     script(src='./js/karaoke.min.js')
   body
     .hide
-      input#fInput(type='file', accept='application/json')
+      input#fInput(type='file' accept='application/json')
     .edit_nav
       .nav_actions
         button#playpause_audio.nav_btn(onclick='wavesurfer.playPause()')
@@ -53,35 +53,33 @@ html.editor.dark
           p.kr 에디터 설정 값입니다.
           p
             | 재생 속도
-            input#playback_rate.blackInput(type='number', value='1', onchange='wavesurfer.setPlaybackRate(this.value)')
+            input#playback_rate.blackInput(type='number' value='1' onchange='wavesurfer.setPlaybackRate(this.value)')
           p
             | 보정값
-            input#correcttime.blackInput(type='number', value='-10', onchange='KaraokeInstance.karaokeData.metadata.correction_time = Number(this.value)')
-          p
-            | 키를 누번 눌러 선택 해제 사용
-            input#key_pressed_twice.blackInput(type='checkbox', onchange='dataYosoro.set("useDouble", this.checked)')
-
+            input#correcttime.blackInput(type='number' value='-10' onchange='KaraokeInstance.karaokeData.metadata.correction_time = Number(this.value)')
+          br
+          p 단축키 확인 : https://github.com/So-chiru/LLCT/blob/master/README.md
           br
         .title_settings
           h1.kr 파일
           p.kr 파일 메타데이터 설정입니다.
           p
             | 블레이드 추천 HEX 값
-            input#blade_hex_meta.blackInput(type='color', value='#000', onchange='KaraokeInstance.karaokeData.metadata.bladeColorHEX = this.value')
+            input#blade_hex_meta.blackInput(type='color' value='#000' onchange='KaraokeInstance.karaokeData.metadata.bladeColorHEX = this.value')
           p
             | 블레이드 추천 멤버
-            input#blade_name_meta.blackInput(type='text', value='', onchange='KaraokeInstance.karaokeData.metadata.bladeColorMember = this.value')
+            input#blade_name_meta.blackInput(type='text' value='' onchange='KaraokeInstance.karaokeData.metadata.bladeColorMember = this.value')
       #timeline_editor.center_divier.page.notCurrentpage
         .lyrics_write
           h1.kr 가사
           p.kr
             | !! 텍스트를 모두 작성 후 수정 해 주세요. 그 후에 텍스트를 수정하면 모든 속성 값이 사라집니다. !!
-          textarea#kashi_type.blackArea.kr(rows='15', onchange='KaraokeInstance.SetTimelineData(KaraokeInstance.Render(this.value));KaraokeEditor.setLyrics(this.value);')
+          textarea#kashi_type.blackArea.kr(rows='15' onchange='KaraokeInstance.SetTimelineData(KaraokeInstance.Render(this.value));KaraokeEditor.setLyrics(this.value);')
           br
           .editor_btncollec
             button.nav_btn(onclick="KaraokeEditor.asReplacing()")
               | 각 칸마다 띄우기
-            button.nav_btn(onclick="KaraokeInstance.karaokeData.metadata.writeDone = true;$('.lyrics_write').addClass('__edit_hidden_tabs')")
+            button.nav_btn(onclick="KaraokeEditor.toggleTextEditor()")
               i.material-icons lock
               |  작성 완료
         .lyrics_render
@@ -93,31 +91,31 @@ html.editor.dark
           p 선택된 단어들의
           p
             | 텍스트
-            input#text_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'text', this.value, false, false, false)")
+            input#text_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'text', this.value, false, false, false)")
           p
             | 루비 텍스트 (없을 경우 공란)
-            input#ruby_text_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'ruby_text', this.value, false, false, false)")
+            input#ruby_text_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'ruby_text', this.value, false, false, false)")
           p
             | 시작 시간
-            input#start_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'start_time', this.value, false, false, true)")
+            input#start_time_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'start_time', this.value, false, false, true)")
           p
             | 종료 시간
-            input#end_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'end_time', this.value, false, false, true)")
+            input#end_time_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'end_time', this.value, false, false, true)")
           p
             | 발음 시간
-            input#pron_time_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'pronunciation_time', this.value, false, false, true)")
+            input#pron_time_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'pronunciation_time', this.value, false, false, true)")
           p
             | 종류
-            input#type_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'type', this.value, false, false, false)")
+            input#type_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'type', this.value, false, false, false)")
           p
             | 틱 소리 볼륨
-            input#tick_volume_val.blackInput(type='number', disabled='', onchange="KaraokeEditor.EditVal( 'tick_volume', this.value, false, false, false)")
+            input#tick_volume_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'tick_volume', this.value, false, false, false)")
           p
             | 반복 딜레이 (없을 경우 0)
-            input#repeat_delay_val.blackInput(type='text', disabled='', onchange="KaraokeEditor.EditVal( 'repeat_delay', this.value, false, false, false)")
+            input#repeat_delay_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'repeat_delay', this.value, false, false, false)")
           p
             | 선택 : 현재 텍스트 색상
-            input#text_color_val.blackInput(type='color', value='#000', onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
+            input#text_color_val.blackInput(type='color' value='#000' onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
           button.nav_btn(onclick="KaraokeEditor.toggleTextEditor()")
             | 텍스트 편집기 보기
     #__context_bg.__context_bg(onclick="editorLyricsContext.closeContext()")
@@ -138,7 +136,7 @@ html.editor.dark
       .__context_frame_item(onclick="editorLyricsContext.act('addNewLine', true)")
         p <span class="material-icons">border_bottom</span> <span>이 라인 뒤에 라인 추가</span>
     // Global site tag (gtag.js) - Google Analytics
-    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
+    script(async='' src='https://www.googletagmanager.com/gtag/js?id=UA-111995531-2')
     script.
       window.dataLayer = window.dataLayer || [];
       function gtag() {

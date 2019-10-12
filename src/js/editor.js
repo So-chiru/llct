@@ -23,6 +23,102 @@ var registerTimeUpdate = () => {
   registerEditorAFrame = requestAnimationFrame(registerTimeUpdate)
 }
 
+var EditorKeyBinds = {
+  32: () => {
+    wavesurfer.playPause()
+  },
+  37: () => {
+    wavesurfer.skip(-0.2)
+  },
+  9: () => {
+    wavesurfer.skip(-0.2)
+  },
+  87: () => {
+    KaraokeEditor.EditVal(
+      'end_time',
+      Math.floor(wavesurfer.getCurrentTime() * 100) +
+        KaraokeInstance.karaokeData.metadata.correction_time,
+      e.altKey,
+      e.shiftKey,
+      true
+    )
+    return true
+  },
+  221: () => {
+    KaraokeEditor.EditVal(
+      'end_time',
+      Math.floor(wavesurfer.getCurrentTime() * 100) +
+        KaraokeInstance.karaokeData.metadata.correction_time,
+      true,
+      e.shiftKey,
+      true
+    )
+    return true
+  },
+  80: () => {
+    KaraokeEditor.EditVal(
+      'pronunciation_time',
+      Math.floor(wavesurfer.getCurrentTime() * 100) +
+        KaraokeInstance.karaokeData.metadata.correction_time,
+      e.altKey,
+      e.shiftKey,
+      true
+    )
+    return true
+  },
+  83: () => {
+    KaraokeEditor.EditVal(
+      'start_time',
+      Math.floor(wavesurfer.getCurrentTime() * 100) +
+        KaraokeInstance.karaokeData.metadata.correction_time,
+      e.altKey,
+      e.shiftKey,
+      true
+    )
+    return true
+  },
+  46: () => {
+    KaraokeEditor.DeleteSelection()
+    return true
+  },
+  219: () => {
+    KaraokeEditor.EditVal(
+      'start_time',
+      Math.floor(wavesurfer.getCurrentTime() * 100) +
+        KaraokeInstance.karaokeData.metadata.correction_time,
+      true,
+      e.shiftKey,
+      true
+    )
+    return true
+  },
+  77: () => {
+    AudioMute()
+    return true
+  },
+  39: () => {
+    wavesurfer.skip(0.2)
+  },
+  81: () => {
+    wavesurfer.skip(0.2)
+  },
+  33: () => {
+    wavesurfer.skip(-30)
+  },
+  34: () => {
+    wavesurfer.skip(30)
+  },
+  36: () => {
+    wavesurfer.seekAndCenter(0)
+  },
+  18: () => {
+    KaraokeInstance.lineTimingValidate()
+  },
+  35: () => {
+    wavesurfer.seekAndCenter(1)
+  }
+}
+
 // 전부다 document.ready 이후 일어나야 할 일인가?
 $(document).ready(() => {
   window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
@@ -59,122 +155,29 @@ $(document).ready(() => {
     KaraokeInstance.AudioSync(~~(wavesurfer.getCurrentTime() * 100), true)
   })
 
-  var prv = false
   $(document).keydown(e => {
     logger(1, 's', 'KeyDown event : ' + e.which, 'i')
-    var onceUpdated = false
-    $('input[type="text"], input[type="number"], textarea').each((i, v) => {
-      if (!onceUpdated) onceUpdated = $(v).is(':focus')
+
+    var inputs = [
+      'input[type="text"]:focus',
+      'input[type="number"]:focus',
+      'textarea:focus'
+    ].filter(v => {
+      return document.querySelectorAll(v).length !== 0
     })
-    if (onceUpdated) return 0
-    prv = false
 
-    // TODO : Switch 리펙토링 (이: 구조가 마음에 안듬)
-    switch (e.which) {
-      case 32:
-        prv = true
-        wavesurfer.playPause()
-        break
-      case 37:
-      case 9:
-        prv = true
-        wavesurfer.skip(-0.2)
-        break
-      case 87:
-        KaraokeEditor.EditVal(
-          'end_time',
-          Math.floor(wavesurfer.getCurrentTime() * 100) +
-            KaraokeInstance.karaokeData.metadata.correction_time,
-          e.altKey,
-          e.shiftKey,
-          true
-        )
-        break
-      case 221:
-        KaraokeEditor.EditVal(
-          'end_time',
-          Math.floor(wavesurfer.getCurrentTime() * 100) +
-            KaraokeInstance.karaokeData.metadata.correction_time,
-          true,
-          e.shiftKey,
-          true
-        )
-        break
-      case 80:
-        KaraokeEditor.EditVal(
-          'pronunciation_time',
-          Math.floor(wavesurfer.getCurrentTime() * 100) +
-            KaraokeInstance.karaokeData.metadata.correction_time,
-          e.altKey,
-          e.shiftKey,
-          true
-        )
-        break
-      case 83:
-        KaraokeEditor.EditVal(
-          'start_time',
-          Math.floor(wavesurfer.getCurrentTime() * 100) +
-            KaraokeInstance.karaokeData.metadata.correction_time,
-          e.altKey,
-          e.shiftKey,
-          true
-        )
-        break
-      case 219:
-        KaraokeEditor.EditVal(
-          'start_time',
-          Math.floor(wavesurfer.getCurrentTime() * 100) +
-            KaraokeInstance.karaokeData.metadata.correction_time,
-          true,
-          e.shiftKey,
-          true
-        )
-        break
-      case 77:
-        AudioMute()
-        break
-      case 39:
-      case 81:
-        prv = true
-        wavesurfer.skip(0.2)
-        break
-      case 33:
-        prv = true
-        wavesurfer.skip(-30)
-        break
-      case 34:
-        prv = true
-        wavesurfer.skip(30)
-        break
-      case 36:
-        prv = true
-        wavesurfer.seekAndCenter(0)
-        break
-      case 18:
-        prv = true
-        KaraokeInstance.lineTimingValidate()
-        break
-      case 35:
-        prv = true
-        wavesurfer.seekAndCenter(1)
-        break
-      default:
-        break
+    if (inputs.length == 0) {
+      var def_action = true
+
+      if (typeof EditorKeyBinds[e.which] !== 'undefined') {
+        def_action = EditorKeyBinds[e.which]()
+      }
+
+      if (!def_action) {
+        e.preventDefault()
+      }
     }
-
-    if (prv) e.preventDefault()
   })
-
-  if (
-    dataYosoro.get('useDouble') == 'undefined' ||
-    dataYosoro.get('useDouble') == null
-  ) {
-    dataYosoro.set('useDouble', true)
-  }
-
-  document.getElementById('key_pressed_twice').checked = dataYosoro.get(
-    'useDouble'
-  )
 
   wavesurfer.on('play', () => {
     logger(1, 'r', 'event : wavesurfer_play', 'i')
@@ -405,18 +408,16 @@ const KaraokeEditor = {
       }
     })
 
-    var UseselectionDouble = dataYosoro.get('useDouble') === true
-
-    if (__prevKCount[0] !== key && UseselectionDouble) {
+    if (__prevKCount[0] !== key) {
       __prevKCount = ['_', 0]
     }
 
     if (!NonwipingMode) {
-      KaraokeInstance.RenderDOM()
       KaraokeEditor.clearSelection()
+      KaraokeInstance.RenderDOM()
     }
 
-    if (__prevKCount[0] === key && __prevKCount[1] >= 1 && UseselectionDouble) {
+    if (__prevKCount[0] === key && __prevKCount[1] >= 1) {
       KaraokeEditor.clearSelection()
       __prevKCount = ['_', 0]
 
@@ -424,10 +425,61 @@ const KaraokeEditor = {
     }
 
     if (shiftMode && !altMode) KaraokeEditor.clearSelection()
+  },
 
-    if (!UseselectionDouble) return 0
-    __prevKCount[0] = key
-    __prevKCount[1]++
+  DeleteSelection: () => {
+    var is_it = confirm(
+      '정말 선택 된 ' + selectWords.length + '개의 단어를 삭제할까요?'
+    )
+
+    if (!is_it) return 0
+
+    selectWords.forEach((details, index) => {
+      KaraokeInstance.karaokeData.timeline[details.posX].collection[
+        details.posY
+      ] = 'MARK_RM'
+
+      if (
+        KaraokeInstance.karaokeData.timeline[details.posX].collection.length < 1
+      ) {
+        KaraokeInstance.karaokeData.timeline = 'MARK_RM'
+      }
+    })
+
+    KaraokeEditor.removeMarked()
+
+    KaraokeEditor.clearSelection()
+    KaraokeInstance.RenderDOM()
+  },
+
+  removeMarked: () => {
+    var timeline = KaraokeInstance.karaokeData.timeline
+    var timeline_len = timeline.length
+
+    for (var x = 0; x < timeline_len; x++) {
+      var cur_x = KaraokeInstance.karaokeData.timeline[x]
+
+      if (typeof cur_x === 'string' && cur_x === 'MARK_RM') {
+        KaraokeInstance.karaokeData.timeline.splice(x, 1)
+        x--
+        continue
+      } else if (typeof cur_x === 'object') {
+        var y_collec = cur_x.collection
+        var y_collec_len = y_collec.length
+
+        for (var y = 0; y < y_collec_len; y++) {
+          if (y_collec[y] !== 'MARK_RM') continue
+
+          KaraokeInstance.karaokeData.timeline[x].collection.splice(y, 1)
+          y--
+        }
+
+        if (KaraokeInstance.karaokeData.timeline[x].collection.length < 1) {
+          KaraokeInstance.karaokeData.timeline.splice(x, 1)
+          x--
+        }
+      }
+    }
   },
 
   toggleTextEditor: () => {

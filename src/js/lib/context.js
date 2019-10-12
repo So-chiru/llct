@@ -1,4 +1,3 @@
-var __kara_d_d_rg = /kara_(\d+)_(\d+)/g
 let HugContext = class {
   constructor (element) {
     this.__obj_curPointer = null
@@ -21,8 +20,9 @@ let HugContext = class {
 
   openContext = (_ev, not_kara) => {
     var t_id = _ev.target.id
+    var test_elem = /kara_(\d+)_(\d+)/g.test(t_id)
 
-    if (__kara_d_d_rg.test(t_id) || not_kara) {
+    if (test_elem || not_kara) {
       this.__target = not_kara ? null : t_id.split('_').splice(-2)
       document.getElementById('__context_bg').style.visibility = 'visible'
       document.getElementById('__context_bg').style.pointerEvents = 'unset'
