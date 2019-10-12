@@ -1,7 +1,3 @@
-var wavTime
-var flrsd
-var audioSyncSleep = 0
-
 var convertTime = function (input, separator) {
   var pad = function (input) {
     return input < 10 ? '0' + input : input
@@ -11,6 +7,20 @@ var convertTime = function (input, separator) {
     pad(~~((input % 3600) / 60)),
     pad(~~(input % 60))
   ].join(typeof separator !== 'undefined' ? separator : ':')
+}
+
+var registerEditorAFrame = null
+
+var registerTimeUpdate = () => {
+  var wavTime = wavesurfer.getCurrentTime()
+  var flrsd = ~~(wavTime * 100)
+
+  document.getElementById('current_time').innerHTML = convertTime(wavTime)
+  document.getElementById('frame_tick').innerHTML = flrsd
+
+  KaraokeInstance.AudioSync(flrsd, false)
+
+  registerEditorAFrame = requestAnimationFrame(registerTimeUpdate)
 }
 
 // 전부다 document.ready 이후 일어나야 할 일인가?
@@ -29,21 +39,19 @@ $(document).ready(() => {
     wavesurfer.zoom(20)
   })
 
-  wavesurfer.on('audioprocess', () => {
-    wavTime = wavesurfer.getCurrentTime()
-    flrsd = ~~(wavTime * 100)
-    $('#current_time').html(convertTime(wavTime))
-    $('#frame_tick').html(flrsd)
+  wavesurfer.on('play', () => {
+    registerTimeUpdate()
+  })
 
-    // TODO : 더 좋은 방식은 없을까?
-    // CPU 사용량 제한
-    if (audioSyncSleep < 8) {
-      audioSyncSleep++
-      return
+  wavesurfer.on('seek', () => {
+    KaraokeInstance.tickSoundsCache = {}
+  })
+
+  wavesurfer.on('pause', () => {
+    if (registerEditorAFrame) {
+      cancelAnimationFrame(registerEditorAFrame)
+      registerEditorAFrame = null
     }
-    audioSyncSleep = 0
-
-    KaraokeInstance.AudioSync(flrsd, true)
   })
 
   wavesurfer.on('seek', () => {
@@ -381,7 +389,7 @@ var __prevKCount = ['_', 0]
 
 const KaraokeEditor = {
   EditVal: (key, value, altMode, shiftMode, NonwipingMode) => {
-    $(_c[key]).val(value)
+    document.querySelector(_c[key]).value = value
 
     selectWords.forEach((details, index) => {
       var selectedObject =
@@ -392,7 +400,9 @@ const KaraokeEditor = {
       selectedObject[key] = value
 
       if (!shiftMode && altMode && index === selectWords.length - 1) {
-        $(selectWords[0].perElem).toggleClass('WordSelected')
+        document
+          .querySelector(selectWords[0].perElem)
+          .toggleClass('WordSelected')
         selectWords.splice(0, 1)
       }
     })
