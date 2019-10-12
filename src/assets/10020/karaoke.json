@@ -2331,9 +2331,30 @@
       ]
     },
     {
-      "start_time": 15959,
+      "start_time": 15886,
       "end_time": 16703,
       "collection": [
+        {
+          "text": "(후 ",
+          "start_time": 15986,
+          "end_time": 16064,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 16017,
+          "end_time": 16064,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!) ",
+          "start_time": 16032,
+          "end_time": 16064,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
         {
           "text": "후",
           "start_time": 16059,

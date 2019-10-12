@@ -400,9 +400,7 @@ const KaraokeEditor = {
       selectedObject[key] = value
 
       if (!shiftMode && altMode && index === selectWords.length - 1) {
-        document
-          .querySelector(selectWords[0].perElem)
-          .toggleClass('WordSelected')
+        $(selectWords[0].perElem).toggleClass('WordSelected')
         selectWords.splice(0, 1)
       }
     })
