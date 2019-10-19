@@ -33,7 +33,7 @@ var EditorKeyBinds = {
   9: () => {
     wavesurfer.skip(-0.2)
   },
-  87: () => {
+  87: e => {
     KaraokeEditor.EditVal(
       'end_time',
       Math.floor(wavesurfer.getCurrentTime() * 100) +
@@ -44,7 +44,7 @@ var EditorKeyBinds = {
     )
     return true
   },
-  221: () => {
+  221: e => {
     KaraokeEditor.EditVal(
       'end_time',
       Math.floor(wavesurfer.getCurrentTime() * 100) +
@@ -55,7 +55,7 @@ var EditorKeyBinds = {
     )
     return true
   },
-  80: () => {
+  80: e => {
     KaraokeEditor.EditVal(
       'pronunciation_time',
       Math.floor(wavesurfer.getCurrentTime() * 100) +
@@ -66,7 +66,7 @@ var EditorKeyBinds = {
     )
     return true
   },
-  83: () => {
+  83: e => {
     KaraokeEditor.EditVal(
       'start_time',
       Math.floor(wavesurfer.getCurrentTime() * 100) +
@@ -81,7 +81,7 @@ var EditorKeyBinds = {
     KaraokeEditor.DeleteSelection()
     return true
   },
-  219: () => {
+  219: e => {
     KaraokeEditor.EditVal(
       'start_time',
       Math.floor(wavesurfer.getCurrentTime() * 100) +
@@ -170,7 +170,7 @@ $(document).ready(() => {
       var def_action = true
 
       if (typeof EditorKeyBinds[e.which] !== 'undefined') {
-        def_action = EditorKeyBinds[e.which]()
+        def_action = EditorKeyBinds[e.which](e)
       }
 
       if (!def_action) {
@@ -374,6 +374,7 @@ var _c = {
   repeat_delay: '#repeat_delay_val',
   ruby_text: '#ruby_text_val',
   text: '#text_val',
+  text_color: '#text_color_val',
   tick_volume: '#tick_volume_val'
 }
 
