@@ -152,28 +152,32 @@
           "start_time": 3518,
           "end_time": 3812,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fedd00"
         },
         {
           "text": "시",
           "start_time": 3547,
           "end_time": 3812,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fedd00"
         },
         {
           "text": "조",
           "start_time": 3584,
           "end_time": 3812,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fedd00"
         },
         {
           "text": "라 ",
           "start_time": 3600,
           "end_time": 3812,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "text_color": "#fedd00"
         },
         {
           "text": "카",
@@ -2587,6 +2591,143 @@
           "end_time": 19523,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19458,
+      "end_time": 21847,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": "19558",
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "아- ",
+          "start_time": 19558,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아-",
+          "start_time": 19770,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 19839,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 19957,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 20110,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아-",
+          "start_time": 20319,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 20390,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19464,
+      "end_time": 21847,
+      "collection": [
+        {
+          "text": "아- ",
+          "start_time": 20519,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아-",
+          "start_time": 20663,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아-",
+          "start_time": 20805,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 20942,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 21221,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아-",
+          "start_time": 21493,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "아- ",
+          "start_time": 21619,
+          "end_time": "21747",
+          "pronunciation_time": "1",
+          "type": 1
+        },
+        {
+          "text": ">",
+          "start_time": 19564,
+          "end_time": "21747",
+          "pronunciation_time": 0,
+          "type": "3"
         }
       ]
     },
