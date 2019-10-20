@@ -1502,7 +1502,7 @@
           "end_time": 9615,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": 65
+          "repeat_delay": 67
         },
         {
           "text": "x ",
@@ -1713,28 +1713,28 @@
         },
         {
           "text": "(후",
-          "start_time": 10578,
+          "start_time": 10572,
           "end_time": 10731,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후! ",
-          "start_time": 10598,
+          "start_time": 10592,
           "end_time": 10731,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
-          "start_time": 10646,
+          "start_time": 10641,
           "end_time": 10731,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
-          "start_time": 10666,
+          "start_time": 10661,
           "end_time": 10731,
           "pronunciation_time": 0,
           "type": "2"
@@ -1956,21 +1956,21 @@
         },
         {
           "text": "하이!",
-          "start_time": 11718,
+          "start_time": 11728,
           "end_time": 11840,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이!",
-          "start_time": 11750,
+          "start_time": 11758,
           "end_time": 11840,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이)",
-          "start_time": 11780,
+          "start_time": 11790,
           "end_time": 11840,
           "pronunciation_time": 0,
           "type": "2"
@@ -2253,35 +2253,35 @@
         },
         {
           "text": "하이 ",
-          "start_time": 12619,
+          "start_time": 12625,
           "end_time": 12949,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12687,
+          "start_time": 12692,
           "end_time": 12949,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12755,
+          "start_time": 12762,
           "end_time": 12949,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이 ",
-          "start_time": 12819,
+          "start_time": 12827,
           "end_time": 12949,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이)",
-          "start_time": 12887,
+          "start_time": 12899,
           "end_time": 12949,
           "pronunciation_time": 0,
           "type": "2"
@@ -3247,7 +3247,7 @@
           "text": "< 블레이드 색상 변경 : 호노카 색 (주황색) >",
           "start_time": "19077",
           "end_time": 20194,
-          "pronunciation_time": "0.333",
+          "pronunciation_time": 0.633,
           "type": "3",
           "text_color": "#ff961c"
         }
