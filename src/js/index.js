@@ -1059,7 +1059,7 @@ Sakurauchi.add('LLCTPGLoad', () => {
   document.getElementById('lyrics_wrap').addEventListener(
     'scroll',
     () => {
-      KaraokeInstance.updateLastScroll()
+      KaraokeInstance.autoScroll.update()
     },
     false
   )

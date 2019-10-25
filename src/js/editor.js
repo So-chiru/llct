@@ -286,7 +286,7 @@ $(document).ready(() => {
     ].collection.splice(
       editorLyricsContext.targetY + (addRight ? 1 : 0),
       0,
-      KaraokeInstance.SpaParsing('', false)
+      KaraokeInstance.KaraWorldStructure('', false)
     )
 
     KaraokeInstance.RenderDOM()
@@ -299,7 +299,7 @@ $(document).ready(() => {
       {
         start_time: 0,
         end_time: 0,
-        collection: [KaraokeInstance.SpaParsing('', false)]
+        collection: [KaraokeInstance.KaraWorldStructure('', false)]
       }
     )
 

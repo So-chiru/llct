@@ -1,6 +1,6 @@
 var popsHeart = {
-  __sp: typeof window.history.pushState !== 'undefined',
-  __q: () => {
+  __support: typeof window.history.pushState !== 'undefined',
+  __getQueries: () => {
     var match
     var pl = /\+/g
     var search = /([^&=]+)=?([^&]*)/g
@@ -18,8 +18,8 @@ var popsHeart = {
     return urlParams
   },
   set: function (key, value, title) {
-    if (!popsHeart.__sp) throw "This browser doesn't support pushState API."
-    var nsObj = popsHeart.__q() || {}
+    if (!popsHeart.__support) { throw "This browser doesn't support pushState API." }
+    var nsObj = popsHeart.__getQueries() || {}
     nsObj[key] = value
     var finalizedString = ''
 
@@ -197,7 +197,10 @@ let Sakurauchi = {
     parent.addEventListener(
       k,
       (...evs) => {
-        Sakurauchi.run(k + specializedID, ...evs)
+        Sakurauchi.run(
+          k + (specializedID !== '' ? ' : ' + specializedID : ''),
+          ...evs
+        )
       },
       options || null
     )
@@ -278,15 +281,43 @@ var i = [
   }
 ]
 
-var __kItv_tType = {
-  i: 'color: unset',
-  w: 'background: #ffc700; color: #323232',
-  e: 'background: #ff1500; color: #fff'
-}
-var __kItv_cType = {
-  i: 'log',
-  w: 'warn',
-  e: 'error'
+var logger = {
+  logs: {
+    i: {
+      full: 'log',
+      style: 'color: unset'
+    },
+
+    w: {
+      full: 'war',
+      style: 'background: #ffc700; color: #323232',
+    },
+
+    e: {
+      full: 'error',
+      style: 'background: #ff1500; color: #fff'
+    }
+  },
+
+  action: (type, actor, text) => {
+    let act_indicator = ''
+
+    if (actor.indexOf('s') > -1) {
+      act_indicator = '<-'
+    }
+
+    if (actor.indexOf('r') > -1) {
+      act_indicator = '>'
+    }
+
+    let type_object = logger.logs[type]
+
+    console[type_object.full](`${type.toUpperCase()} %c${type_object.style} %c${act_indicator} %c${text}`)
+  },
+
+  info: (actor, text) => this.action('i', actor, text),
+  warn: (actor, text) => this.action('w', actor, text),
+  error: (actor, text) => this.action('e', actor, text),
 }
 
 const kIntvlogger = (e, rs, msg, t) => {

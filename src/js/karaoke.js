@@ -75,20 +75,18 @@ var Karaoke = function (kara_elem) {
   this.karaoke_element = kara_elem
   this.karaokeData = null
   /**
-   * Karaoke.SpaParsing
+   * Karaoke.KaraWorldStructure
    * timeline.collection > (Object... 가사 음) 의 형식을 만들어 반환합니다.
    * @return {Object}
    */
-  this.SpaParsing = function (spa, spacing) {
-    var wordObject = {
+  this.KaraWorldStructure = function (spa, spacing) {
+    return {
       text: spa + (spacing ? ' ' : ''),
       start_time: 0,
       end_time: 0,
       pronunciation_time: 0,
       type: 1
     }
-
-    return wordObject
   }
   /**
    * Karaoke.SetTimelineData
@@ -127,11 +125,11 @@ var Karaoke = function (kara_elem) {
           var spaSplt = spa.split(/\^S_P/g)
           spaSplt.forEach((spBr, i) => {
             perLineSpacing.collection.push(
-              this.SpaParsing(spBr, spaSplt.length - 1 > i)
+              this.KaraWorldStructure(spBr, spaSplt.length - 1 > i)
             )
           })
         } else {
-          perLineSpacing.collection.push(this.SpaParsing(spa, false))
+          perLineSpacing.collection.push(this.KaraWorldStructure(spa, false))
         }
       })
 
@@ -261,7 +259,7 @@ var Karaoke = function (kara_elem) {
     for (var i = 0; i < lem.length; i++) {
       ;((_self, clf, perElem) => {
         perElem.addEventListener('click', function () {
-          KaraokeInstance.updateLastScroll()
+          KaraokeInstance.autoScroll.update()
           var posX = Number(perElem.dataset.line)
           var clcA = _self.karaokeData.timeline[posX].collection
           var clcALen = clcA.length
@@ -323,24 +321,29 @@ var Karaoke = function (kara_elem) {
     Sakurauchi.run('tickSoundChanged', this.tickSoundEnable)
   }
   this.cachedDom = {}
-  this.__auSync_karaLNum = 0
-  this.__last_scroll = 0
-  this.updateLastScroll = () => {
-    this.__last_scroll = Date.now()
-    this.__scroll_timeout && clearTimeout(this.__scroll_timeout)
+  this.autoScroll = {
+    last: 0,
+    timeout: null,
+    cache_elem: null,
+    update: () => {
+      this.autoScroll.last = Date.now()
+      this.autoScroll.timeout && clearTimeout(this.autoScroll.timeout)
+    }
   }
-  this.__scroll_timeout = null
   this.NewLineRender = new_line_element => {
-    this.__scroll_timeout && clearTimeout(this.__scroll_timeout)
+    this.autoScroll.timeout && clearTimeout(this.autoScroll.timeout)
 
-    var lyrics_wrap = document.getElementById('lyrics_wrap')
+    if (this.autoScroll.cache_elem == null) {
+      this.autoScroll.cache_elem = document.getElementById('lyrics_wrap')
+    }
 
-    if (lyrics_wrap) {
-      this.__scroll_timeout = setTimeout(() => {
-        if (Date.now() - this.__last_scroll < 3000) return
-        lyrics_wrap.scrollTop =
+    if (this.autoScroll.cache_elem) {
+      this.autoScroll.timeout = setTimeout(() => {
+        if (Date.now() - this.autoScroll.last < 3000) return
+        this.autoScroll.cache_elem.scrollTop =
           new_line_element.offsetTop -
-          (window.innerHeight - lyrics_wrap.getBoundingClientRect().height)
+          (window.innerHeight -
+            this.autoScroll.cache_elem.getBoundingClientRect().height)
       }, 950)
     }
   }
@@ -507,11 +510,6 @@ var Karaoke = function (kara_elem) {
             kards.style.transition = trs_default
           }
         }
-
-        /*
-        kards.style.textDecoration = 'none'
-        kards.style.textDecoration = 'blink'
-        */
       }
     } // Karaoke Loop
   }

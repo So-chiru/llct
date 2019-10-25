@@ -14,7 +14,7 @@ $card_border: 5px;
 
 body {
   margin: 0;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Noto Sans KR", "Noto Sans CJK KR", "NanumGothic", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -1260,7 +1260,7 @@ llct-pl-infotext span {
   .lyrics {
     font-size: 16px;
     font-weight: 100;
-    font-family: "Jua";
+    font-family: "Jua", "Noto Sans KR", "Noto Sans CJK KR", "NanumGothic";
   }
 }
 
