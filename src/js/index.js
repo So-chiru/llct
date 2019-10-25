@@ -100,7 +100,9 @@ let LLCT = {
 
     document.getElementById('popup_kara_title').innerHTML = call_object[0]
 
-    var popupKaraInstance = new Karaoke(document.getElementById('popup_karaoke'))
+    var popupKaraInstance = new Karaoke(
+      document.getElementById('popup_karaoke')
+    )
 
     fetch('./data/' + id + '/karaoke.json')
       .then(res => {

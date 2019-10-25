@@ -207,7 +207,10 @@ let Sakurauchi = {
       options || null
     )
 
-    return Sakurauchi.add(k + specializedID, fn)
+    return Sakurauchi.add(
+      k + (specializedID !== '' ? ' < ' + specializedID : ''),
+      fn
+    )
   },
 
   delisten: (k, fi, fn, pr) => {
@@ -222,7 +225,10 @@ let Sakurauchi = {
 
     var specializedID = typeof pr.id !== 'undefined' ? pr.id : ''
     pr.removeEventListener(k, null, true)
-    return Sakurauchi.remove(k + specializedID, fi)
+    return Sakurauchi.remove(
+      k + (specializedID !== '' ? ' < ' + specializedID : ''),
+      fi
+    )
   },
 
   run: (k, ...datas) => {
