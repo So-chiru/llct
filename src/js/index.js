@@ -1,7 +1,7 @@
 let requestAudioSync
 let requestAudioVolume = null
 
-let LLCTLayers = ['setting_layer', 'switch_layer']
+let LLCTLayers = ['setting_layer', 'switch_layer', 'call_layer']
 let GroupCSSSelector = {
   "µ's": 'muse',
   Aqours: 'aqours',
@@ -78,6 +78,51 @@ let LLCT = {
     }
   },
   currentPage: 0,
+  openCall: id => {
+    var currentCall = LLCT.getFromLists(id)
+
+    if (typeof currentCall[1] === 'undefined') {
+      showPopup(null, '해당 곡은 콜표가 존재하지 않습니다.')
+
+      return false
+    }
+
+    if (currentCall[1].karaoke) {
+      return LLCT.openKaraokePopup(id)
+    }
+
+    return LLCT.openCallImage(id)
+  },
+  openKaraokePopup: (id, call_object) => {
+    if (typeof call_object !== 'object') {
+      call_object = LLCT.getFromLists(id)
+    }
+
+    document.getElementById('popup_kara_title').innerHTML = call_object[0]
+
+    var popupKaraInstance = new Karaoke(document.getElementById('popup_karaoke'))
+
+    fetch('./data/' + id + '/karaoke.json')
+      .then(res => {
+        try {
+          res.json().then(v => {
+            popupKaraInstance.karaokeData = v
+            popupKaraInstance.RenderDOM(dataYosoro.get('romaji'))
+          })
+        } catch (e) {
+          return logger.error(
+            2,
+            'r',
+            'Failed to parse karaoke json. : ' + e.stack
+          )
+        }
+      })
+      .catch(e => {
+        return logger.error(2, 'r', 'Failed to get karaoke file. : ' + e.stack)
+      })
+
+    LLCT.showLayer(2)
+  },
   openCallImage: id => {
     var pElement = document.getElementById('ps_wp')
 
@@ -99,12 +144,22 @@ let LLCT = {
   },
   loadCallImage: id => {
     yohaneNoDOM.hideLyrics()
-    document.getElementById('karaoke').innerHTML =
-      `<img class="call_img" onclick="LLCT.openCallImage('${id}')" src="` +
-      './data/' +
-      id +
-      '/call.jpg' +
-      '" onload="yohaneNoDOM.showLyrics()"></img>'
+
+    var callImage = document.createElement('img')
+    callImage.className = 'call_img'
+    callImage.onclick = () => {
+      LLCT.openCallImage(id)
+    }
+    callImage.src = './data/' + id + '/call.jpg'
+    callImage.onload = () => {
+      yohaneNoDOM.showLyrics()
+    }
+    callImage.onerror = e => {
+      yohaneNoDOM.showError(e)
+      callImage.style.display = 'none'
+    }
+
+    document.getElementById('karaoke').appendChild(callImage)
     yohaneNoDOM.shokan()
   },
   loadLyrics: id => {
@@ -119,16 +174,15 @@ let LLCT = {
             yohaneNoDOM.showLyrics()
           })
         } catch (e) {
-          return logger(
+          return logger.error(
             2,
             'r',
-            'Failed to parse karaoke json. : ' + e.stack,
-            'e'
+            'Failed to parse karaoke json. : ' + e.stack
           )
         }
       })
       .catch(e => {
-        return logger(2, 'r', 'Failed to get karaoke file. : ' + e.stack, 'e')
+        return logger.error(2, 'r', 'Failed to get karaoke file. : ' + e.stack)
       })
   },
   getFromLists: id => {
@@ -218,6 +272,11 @@ let yohaneNoDOM = {
       .getElementById('lyrics_wrap_inner')
       .classList.remove('hiddenCurtain')
   },
+  showError: e => {
+    yohaneNoDOM.showLyrics()
+    document.getElementById('_of_ric').style.display = 'block'
+  },
+
   chiisakuni: () => {
     var pl_bg = document.querySelector('llct-pl-bg')
     pl_bg.classList.remove('show')
@@ -661,14 +720,15 @@ let yohane = {
     yohaneNoDOM.initialize(id)
 
     if (dataYosoro.get('notUsingMP')) {
-      LLCT.openCallImage(id)
+      LLCT.openCall(id)
       return false
     }
+
     try {
       yohane.player().src = './data/' + id + '/audio.mp3'
       yohane.setVolume(yohane.volumeStore !== null ? yohane.volumeStore : 0.5)
     } catch (e) {
-      return logger(2, 'r', e.message, 'e')
+      return logger.error(2, 'r', e.message)
     }
     yohane.__tickCaching = {}
     return true

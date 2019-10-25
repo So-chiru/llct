@@ -1323,3 +1323,17 @@ llct-pl-infotext span {
 .dark .grey_layer {
   background: rgba(50, 50, 50, 0.7);
 }
+
+.popup_karaoke {
+  margin-top: 25px;
+  max-height: 75vh;
+  overflow: auto;
+}
+
+.popup_karaoke .p_line {
+  text-align: left;
+}
+
+#popup_kara_title {
+  font-size: 32px;
+}

@@ -18,7 +18,9 @@ var popsHeart = {
     return urlParams
   },
   set: function (key, value, title) {
-    if (!popsHeart.__support) { throw "This browser doesn't support pushState API." }
+    if (!popsHeart.__support) {
+      throw "This browser doesn't support pushState API."
+    }
     var nsObj = popsHeart.__getQueries() || {}
     nsObj[key] = value
     var finalizedString = ''
@@ -95,7 +97,7 @@ var dataYosoro = {
     try {
       return localStorage.getItem(key) || null
     } catch (e) {
-      logger(1, 'r', 'error on data.__stroageG ' + e.message, 'e')
+      logger.error(1, 'r', 'error on data.__stroageG ' + e.message)
       return null
     }
   },
@@ -105,7 +107,7 @@ var dataYosoro = {
       window.localStorage.setItem(key, value)
       return true
     } catch (e) {
-      logger(1, 'r', 'error on data.__storageS ' + e.message, 'e')
+      logger.error(1, 'r', 'error on data.__storageS ' + e.message)
       return false
     }
   },
@@ -198,7 +200,7 @@ let Sakurauchi = {
       k,
       (...evs) => {
         Sakurauchi.run(
-          k + (specializedID !== '' ? ' : ' + specializedID : ''),
+          k + (specializedID !== '' ? ' < ' + specializedID : ''),
           ...evs
         )
       },
@@ -224,13 +226,13 @@ let Sakurauchi = {
   },
 
   run: (k, ...datas) => {
-    logger(2, 's', 'Sakurauchi.run called : ' + k)
+    logger.info(2, 's', 'Sakurauchi.run called : ' + k)
     if (typeof Sakurauchi.__sot[k] === 'undefined') return
     for (var _i = 0; _i < Sakurauchi.__sot[k].length; _i++) {
       try {
         Sakurauchi.__sot[k][_i](...datas)
       } catch (e) {
-        logger(
+        logger.error(
           2,
           's',
           '[' +
@@ -238,8 +240,7 @@ let Sakurauchi = {
             '] Error occured while running task #' +
             _i +
             ' : ' +
-            e.message,
-          'e'
+            e.message
         )
       }
     }
@@ -264,23 +265,6 @@ Sakurauchi.listen('load', () => {
   Sakurauchi.run('LLCTPGLoad')
 })
 
-var i = [
-  {
-    n: 'Karaoke',
-    c: 'color: #23cbff'
-  },
-
-  {
-    n: 'KaraokeEditor',
-    c: 'color: #3565d6'
-  },
-
-  {
-    n: 'Main',
-    c: 'color: #3eddcb'
-  }
-]
-
 var logger = {
   logs: {
     i: {
@@ -290,7 +274,7 @@ var logger = {
 
     w: {
       full: 'war',
-      style: 'background: #ffc700; color: #323232',
+      style: 'background: #ffc700; color: #323232'
     },
 
     e: {
@@ -299,7 +283,24 @@ var logger = {
     }
   },
 
-  action: (type, actor, text) => {
+  namespace: [
+    {
+      n: 'Karaoke',
+      c: 'color: #23cbff'
+    },
+
+    {
+      n: 'KaraokeEditor',
+      c: 'color: #3565d6'
+    },
+
+    {
+      n: 'Main',
+      c: 'color: #3eddcb'
+    }
+  ],
+
+  action: (type, namespace, actor, text) => {
     let act_indicator = ''
 
     if (actor.indexOf('s') > -1) {
@@ -312,14 +313,22 @@ var logger = {
 
     let type_object = logger.logs[type]
 
-    console[type_object.full](`${type.toUpperCase()} %c${type_object.style} %c${act_indicator} %c${text}`)
+    console[type_object.full](
+      `[${type.toUpperCase()}] %c${
+        logger.namespace[namespace].n
+      } %c${act_indicator} %c${text}`,
+      logger.namespace[namespace].c,
+      type_object.style,
+      type_object.style
+    )
   },
 
-  info: (actor, text) => this.action('i', actor, text),
-  warn: (actor, text) => this.action('w', actor, text),
-  error: (actor, text) => this.action('e', actor, text),
+  info: (namespace, actor, text) => logger.action('i', namespace, actor, text),
+  warn: (namespace, actor, text) => logger.action('w', namespace, actor, text),
+  error: (namespace, actor, text) => logger.action('e', namespace, actor, text)
 }
 
+/*
 const kIntvlogger = (e, rs, msg, t) => {
   var rx = ''
   if (rs.indexOf('s') !== -1) {
@@ -331,12 +340,13 @@ const kIntvlogger = (e, rs, msg, t) => {
   if (rx === '<') rx += '-'
 
   console[__kItv_cType[t] || 'log'](
-    `[${(t || 'i').toUpperCase()}] %c${i[e].n} %c${rx} %c${msg}`,
+    `[${(t || 'i').toUpperCase()}] %c${[e].n} %c${rx} %c${msg}`,
     i[e].c,
     'color: #a0a0a0',
     __kItv_tType[t] || __kItv_tType['i']
   )
 }
+*/
 
 const __llct_ts_func = sec => {
   sec = isNaN(sec) ? 0 : Math.floor(sec)
@@ -349,7 +359,7 @@ const __llct_ts_func = sec => {
 }
 
 window.numToTS = __llct_ts_func
-window.logger = kIntvlogger
+window.logger = logger
 
 var popupTimeout
 var showPopup = (icon, msg, fn) => {

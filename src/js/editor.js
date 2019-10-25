@@ -122,14 +122,14 @@ var EditorKeyBinds = {
 // 전부다 document.ready 이후 일어나야 할 일인가?
 $(document).ready(() => {
   window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
-  logger(1, 'r', 'event : document.ready', 'i')
+  logger.info(1, 'r', 'event : document.ready')
   window.wavesurfer = WaveSurfer.create({
     container: '#waveform',
     plugins: [WaveSurfer.cursor.create({}), WaveSurfer.regions.create({})]
   })
 
   wavesurfer.on('ready', () => {
-    logger(1, 'r', 'event : wavesurfer_ready', 'i')
+    logger.info(1, 'r', 'event : wavesurfer_ready')
     $('#duration').html(convertTime(wavesurfer.getDuration()))
     wavesurfer.toggleScroll()
     wavesurfer.zoom(20)
@@ -156,7 +156,7 @@ $(document).ready(() => {
   })
 
   $(document).keydown(e => {
-    logger(1, 's', 'KeyDown event : ' + e.which, 'i')
+    logger.info(1, 's', 'KeyDown event : ' + e.which)
 
     var inputs = [
       'input[type="text"]:focus',
@@ -180,17 +180,17 @@ $(document).ready(() => {
   })
 
   wavesurfer.on('play', () => {
-    logger(1, 'r', 'event : wavesurfer_play', 'i')
+    logger.info(1, 'r', 'event : wavesurfer_play')
     $('#playpause_audio').html('<i class="material-icons ds">pause_arrow</i>')
   })
 
   wavesurfer.on('pause', () => {
-    logger(1, 'r', 'event : wavesurfer_pause', 'i')
+    logger.info(1, 'r', 'event : wavesurfer_pause')
     $('#playpause_audio').html('<i class="material-icons">play_arrow</i>')
   })
 
   wavesurfer.on('mute', isMute => {
-    logger(1, 'r', 'event : wavesurfer_mute > ' + isMute, 'i')
+    logger.info(1, 'r', 'event : wavesurfer_mute > ' + isMute)
     $('#mute_indi').html(
       '<i class="material-icons">' +
         (isMute ? 'volume_off' : 'volume_up') +
@@ -223,11 +223,10 @@ $(document).ready(() => {
     url: './data/' + window.songID + '/karaoke.json',
     success: d => {
       if (typeof d !== 'object') {
-        return logger(
+        return logger.error(
           0,
           'r',
-          'Received karaoke json data is not valid object.',
-          'e'
+          'Received karaoke json data is not valid object.'
         )
       }
       try {
@@ -235,9 +234,9 @@ $(document).ready(() => {
         window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData.timeline)
 
         Sakurauchi.run('KaraokeLoaded')
-        logger(0, 'r', 'Karaoke Data Loaded: Server Auto Load', 'i')
+        logger.info(0, 'r', 'Karaoke Data Loaded: Server Auto Load')
       } catch (e) {
-        logger(0, 'r', 'Failed to load karaoke data.', 'e')
+        logger.error(0, 'r', 'Failed to load karaoke data.')
       }
     }
   })
@@ -575,7 +574,7 @@ const KaraokeEditor = {
 
       window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData.timeline)
       Sakurauchi.run('KaraokeLoaded')
-      logger(0, 'r', 'Karaoke Data Loaded.', 'i')
+      logger.info(0, 'r', 'Karaoke Data Loaded.')
     }
   },
   Export: customData => {

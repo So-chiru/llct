@@ -420,7 +420,7 @@ var Karaoke = function (kara_elem) {
               timeCode < repeatsSplit[g] - karaWord.repeat_delay / 3.5 &&
               !this.tickSoundsCache['r_' + repeatsSplit[g]]
             ) {
-              logger(
+              logger.info(
                 0,
                 'r',
                 'runTick @ ' +
@@ -429,8 +429,7 @@ var Karaoke = function (kara_elem) {
                   repeatsSplit[g] +
                   'tc. ' +
                   (repeatsSplit[g] - timeCode) +
-                  'tc diff.',
-                'i'
+                  'tc diff.'
               )
               ;(function (k, kw) {
                 k.style.color = 'transparent'

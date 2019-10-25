@@ -103,7 +103,7 @@ const __llct_optslists = [
               }
             })
             .catch(e =>
-              logger(2, 's', 'Failed to get ServiceWorker. ' + e.message, 'e')
+              logger.error(2, 's', 'Failed to get ServiceWorker. ' + e.message)
             )
 
           return
@@ -112,7 +112,7 @@ const __llct_optslists = [
         navigator.serviceWorker
           .register('/sw.js', { scope: '/' })
           .then(_regi => {
-            logger(2, 's', 'ServiceWorker registered. Yosoro~', 'i')
+            logger.info(2, 's', 'ServiceWorker registered. Yosoro~')
 
             _regi.addEventListener('updatefound', () => {
               window.ServWorkerInst = _regi.installing
@@ -130,11 +130,10 @@ const __llct_optslists = [
             })
           })
           .catch(e =>
-            logger(
+            logger.error(
               2,
               's',
-              'Failed to register ServiceWorker. ' + e.message,
-              'e'
+              'Failed to register ServiceWorker. ' + e.message
             )
           )
 
