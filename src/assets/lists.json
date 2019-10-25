@@ -39,7 +39,7 @@
       "Love marginal": {
         "id": "00005",
         "center": null,
-        "karaoke": false
+        "karaoke": true
       },
       "sweet＆sweet holiday": {
         "id": "00006",
@@ -456,7 +456,7 @@
         "id": "00079",
         "center": null,
         "translated": "우리는 하나의 빛",
-        "karaoke": false
+        "karaoke": true
       },
       "Future style": {
         "id": "00080",

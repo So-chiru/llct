@@ -39,11 +39,11 @@
         },
         {
           "text": "하이 ",
-          "start_time": 235,
+          "start_time": 255,
           "end_time": 1421,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": "92.333"
+          "repeat_delay": "89.13"
         },
         {
           "text": "x ",
@@ -795,21 +795,21 @@
         },
         {
           "text": "하이! ",
-          "start_time": 4601,
+          "start_time": 4611,
           "end_time": 5175,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "우- ",
-          "start_time": 4645,
+          "start_time": 4655,
           "end_time": 5175,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "하이! ",
-          "start_time": 4773,
+          "start_time": 4783,
           "end_time": 5175,
           "pronunciation_time": 0,
           "type": "2"
@@ -837,7 +837,7 @@
         },
         {
           "text": "하이!)",
-          "start_time": 5134,
+          "start_time": 5144,
           "end_time": 5175,
           "pronunciation_time": 0,
           "type": "2"
@@ -1079,7 +1079,7 @@
         },
         {
           "text": "후!) ",
-          "start_time": 6381,
+          "start_time": 6390,
           "end_time": 6594,
           "pronunciation_time": 0,
           "type": "2"
@@ -1121,7 +1121,7 @@
         },
         {
           "text": "후!)",
-          "start_time": 6559,
+          "start_time": 6568,
           "end_time": 6594,
           "pronunciation_time": 0,
           "type": "2"
@@ -1502,14 +1502,14 @@
         },
         {
           "text": "(후",
-          "start_time": 7953,
+          "start_time": 7963,
           "end_time": 8023,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
-          "start_time": 7975,
+          "start_time": 7985,
           "end_time": 8023,
           "pronunciation_time": 0,
           "type": "2"
@@ -1928,7 +1928,7 @@
           "end_time": 10296,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": "92.3333"
+          "repeat_delay": "89.13"
         },
         {
           "text": "x ",
@@ -2715,7 +2715,7 @@
         },
         {
           "text": "하이!)",
-          "start_time": 14012,
+          "start_time": 14022,
           "end_time": 14092,
           "pronunciation_time": 0,
           "type": "2"
@@ -2936,7 +2936,7 @@
         },
         {
           "text": "(후",
-          "start_time": 15251,
+          "start_time": 15250,
           "end_time": 15494,
           "pronunciation_time": 0,
           "type": "2"
@@ -3331,7 +3331,7 @@
         },
         {
           "text": "후!) ",
-          "start_time": 16695,
+          "start_time": 16697,
           "end_time": 16917,
           "pronunciation_time": 0,
           "type": "2"
@@ -3795,11 +3795,11 @@
         },
         {
           "text": "하이 ",
-          "start_time": 18195,
+          "start_time": 18205,
           "end_time": 20554,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": "93"
+          "repeat_delay": "89.13"
         },
         {
           "text": "x ",
@@ -3906,14 +3906,14 @@
         },
         {
           "text": "(후",
-          "start_time": 20937,
+          "start_time": 20947,
           "end_time": 21186,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!) ",
-          "start_time": 20956,
+          "start_time": 20969,
           "end_time": 21186,
           "pronunciation_time": 0,
           "type": "2"
@@ -4336,14 +4336,14 @@
         },
         {
           "text": "(후",
-          "start_time": 22535,
+          "start_time": 22540,
           "end_time": 22626,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
-          "start_time": 22555,
+          "start_time": 22562,
           "end_time": 22626,
           "pronunciation_time": 0,
           "type": "2"
