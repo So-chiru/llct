@@ -408,6 +408,8 @@ const KaraokeEditor = {
       }
     })
 
+    KaraokeInstance.lineTimingValidate()
+
     if (__prevKCount[0] !== key) {
       __prevKCount = ['_', 0]
     }
