@@ -465,6 +465,9 @@ let yohaneNoDOM = {
     document
       .getElementById('sing_tg')
       .classList[meta[1].singAlong ? 'add' : 'remove']('llct-pl-infdp')
+      document
+      .getElementById('furicopy_tg')
+      .classList[meta[1].furiCopy ? 'add' : 'remove']('llct-pl-infdp')
     document
       .getElementById('performed_tg')
       .classList[meta[1].notPerformed ? 'add' : 'remove']('llct-pl-infdp')

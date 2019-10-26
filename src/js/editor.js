@@ -261,7 +261,7 @@ $(document).ready(() => {
       )
     }
 
-    KaraokeInstance.RenderDOM()
+    KaraokeEditor.RenderDOM()
   })
 
   editorLyricsContext.addAction('editWord', ev => {
@@ -276,7 +276,7 @@ $(document).ready(() => {
     KaraokeInstance.karaokeData.timeline[
       editorLyricsContext.targetX
     ].collection[editorLyricsContext.targetY].text = _blk_edited
-    KaraokeInstance.RenderDOM()
+    KaraokeEditor.RenderDOM()
   })
 
   editorLyricsContext.addAction('addNewWord', addRight => {
@@ -288,7 +288,7 @@ $(document).ready(() => {
       KaraokeInstance.KaraWorldStructure('', false)
     )
 
-    KaraokeInstance.RenderDOM()
+    KaraokeEditor.RenderDOM()
   })
 
   editorLyricsContext.addAction('addNewLine', addBottom => {
@@ -302,11 +302,51 @@ $(document).ready(() => {
       }
     )
 
-    KaraokeInstance.RenderDOM()
+    KaraokeEditor.RenderDOM()
   })
 
   editorLyricsContext.addAction('concatWords', () => {
-    console.log(window.selectWords)
+    var firstPoX = selectWords[0].posX
+
+    var words_len = selectWords.length
+
+    if (words_len < 2) {
+      alert('최소 2개 이상의 단어를 선택하세요.')
+      return false
+    }
+
+    var fin_text = ''
+
+    for (var i = 0; i < words_len; i++) {
+      var selectedWord = selectWords[i]
+      if (selectedWord.posX !== firstPoX) {
+        alert(
+          '선택된 ' +
+            selectedWord.posX +
+            '번째 줄의 선택 단어는 ' +
+            firstPoX +
+            '번째의 단어와 병합될 수 없습니다. 같은 줄 안에서 처리 해 주세요.'
+        )
+        return false
+      }
+
+      fin_text +=
+        KaraokeInstance.karaokeData.timeline[selectedWord.posX].collection[
+          selectedWord.posY
+        ].text
+
+      if (i !== 0) {
+        KaraokeInstance.karaokeData.timeline[selectedWord.posX].collection[
+          selectedWord.posY
+        ] = 'MARK_RM'
+      }
+    }
+
+    KaraokeInstance.karaokeData.timeline[selectWords[0].posX].collection[
+      selectWords[0].posY
+    ].text = fin_text
+    KaraokeEditor.removeMarked()
+    KaraokeEditor.RenderDOM()
   })
 
   Sakurauchi.add('KaraokeLoaded', () => {
@@ -391,6 +431,11 @@ var valElementObject = {
 var __prevKCount = ['_', 0]
 
 const KaraokeEditor = {
+  RenderDOM: () => {
+    KaraokeEditor.clearSelection()
+    return KaraokeInstance.RenderDOM()
+  },
+
   EditVal: (key, value, altMode, shiftMode, NonwipingMode) => {
     document.querySelector(_c[key]).value = value
 
@@ -415,8 +460,7 @@ const KaraokeEditor = {
     }
 
     if (!NonwipingMode) {
-      KaraokeEditor.clearSelection()
-      KaraokeInstance.RenderDOM()
+      KaraokeEditor.RenderDOM()
     }
 
     if (__prevKCount[0] === key && __prevKCount[1] >= 1) {
@@ -449,9 +493,7 @@ const KaraokeEditor = {
     })
 
     KaraokeEditor.removeMarked()
-
-    KaraokeEditor.clearSelection()
-    KaraokeInstance.RenderDOM()
+    KaraokeEditor.RenderDOM()
   },
 
   removeMarked: () => {

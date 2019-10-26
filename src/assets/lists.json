@@ -445,7 +445,8 @@
       "SUNNY DAY SONG": {
         "id": "00077",
         "center": null,
-        "karaoke": false
+        "karaoke": true,
+        "furiCopy": true
       },
       "？←HEARTBEAT": {
         "id": "00078",
