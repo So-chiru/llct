@@ -81,6 +81,10 @@ var EditorKeyBinds = {
     KaraokeEditor.DeleteSelection()
     return true
   },
+  8: () => {
+    KaraokeEditor.DeleteSelection()
+    return true
+  },
   219: e => {
     KaraokeEditor.EditVal(
       'start_time',
