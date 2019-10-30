@@ -1353,6 +1353,7 @@
         "bladeColor": "CYaRon! (치카, 요우, 루비 색)",
         "bladeColorHEX": "#fff",
         "artist": 6,
+        "karaoke": true,
         "short_kr": "요조시테"
       },
       "P.S.の向こう側": {
