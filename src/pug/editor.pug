@@ -73,7 +73,7 @@ html.editor.dark
         .lyrics_write
           h1.kr 가사
           p.kr
-            | !! 텍스트를 모두 작성 후 수정 해 주세요. 그 후에 텍스트를 수정하면 모든 속성 값이 사라집니다. !!
+            | !! 텍스트를 모두 작성 후 수정 해 주세요. 그 후에 텍스트 편집기를 통해 수정하면 작성한 모든 속성 값이 사라집니다. (오른쪽 단어 편집기에서는 편집 가능) !!
           textarea#kashi_type.blackArea.kr(rows='15' onchange='KaraokeInstance.SetTimelineData(KaraokeInstance.Render(this.value));KaraokeEditor.setLyrics(this.value);')
           br
           .editor_btncollec
@@ -116,8 +116,11 @@ html.editor.dark
           p
             | 선택 : 현재 텍스트 색상
             input#text_color_val.blackInput(type='color' value='#000' onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
-          button.nav_btn(onclick="KaraokeEditor.toggleTextEditor()")
-            | 텍스트 편집기 보기
+          .editor_btncollec
+            button.nav_btn(onclick="KaraokeEditor.toggleTextEditor()")
+              | 텍스트 편집기 보기
+            button.nav_btn(onclick="KaraokeEditor.openPreviewPage()")
+              | 플레이어에서 보기
     #__context_bg.__context_bg(onclick="editorLyricsContext.closeContext()")
     #__context_frame.__context_frame
       .__context_frame_item(onclick="")

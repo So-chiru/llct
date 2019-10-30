@@ -164,9 +164,17 @@ let LLCT = {
     document.getElementById('karaoke').appendChild(callImage)
     yohaneNoDOM.shokan()
   },
-  loadLyrics: id => {
+  loadLyrics: (id, use_local_data) => {
     yohaneNoDOM.hideLyrics()
     yohaneNoDOM.shokan()
+
+    if (use_local_data) {
+      KaraokeInstance.karaokeData = JSON.parse(dataYosoro.get('previewSync'))
+      KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
+      yohaneNoDOM.showLyrics()
+      
+      return false
+    }
     fetch('./data/' + id + '/karaoke.json')
       .then(res => {
         try {
@@ -223,6 +231,10 @@ let yohaneNoDOM = {
     }
 
     if (!ui_only) {
+      if (popsHeart.get('preview-sync')) {
+        popsHeart.set('preview-sync', '')
+      }
+
       popsHeart.set('pid', '')
       document.title = 'LLCT'
     }
@@ -403,8 +415,8 @@ let yohaneNoDOM = {
     document.getElementById('pl_loop').innerHTML = 'loop'
     document.getElementById('pl_loop').classList.add('in_active')
   },
-  initialize: id => {
-    if (popsHeart.get('pid') !== id.toString()) {
+  initialize: (id, use_local_data) => {
+    if (popsHeart.get('pid') !== id.toString() && !use_local_data) {
       popsHeart.set('pid', id)
     }
     LLCT.audioLoadStarted = window.performance ? performance.now() : Date.now()
@@ -462,6 +474,9 @@ let yohaneNoDOM = {
           ? '#FFFFFF55'
           : '#00000055'
 
+          document
+          .getElementById('prv_warn')
+          .classList[popsHeart.get('preview-sync') ? 'add' : 'remove']('llct-pl-infdp')
     document
       .getElementById('sing_tg')
       .classList[meta[1].singAlong ? 'add' : 'remove']('llct-pl-infdp')
@@ -480,10 +495,10 @@ let yohaneNoDOM = {
     ])
 
     LLCT[
-      meta[1].karaoke && dataYosoro.get('interactiveCall') != false
+      (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) || use_local_data
         ? 'loadLyrics'
         : 'loadCallImage'
-    ](id)
+    ](id, use_local_data)
   }
 }
 
@@ -650,7 +665,7 @@ let yohane = {
     ),
   play: force => {
     if (navigator.mediaSession) {
-      var meta = LLCT.getFromLists(popsHeart.get('pid'))
+      var meta = LLCT.getFromLists(popsHeart.get('preview-sync') || popsHeart.get('pid'))
       LLCT.__playPointer = meta[2]
       var artistText =
         LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[
@@ -720,9 +735,9 @@ let yohane = {
     yohaneNoDOM.__cachedElement['left_time'].innerHTML =
       '-' + (numToTS(_dr - _ct) || '??')
   },
-  initialize: id => {
+  initialize: (id, use_local_data) => {
     KaraokeInstance.karaokeData = null
-    yohaneNoDOM.initialize(id)
+    yohaneNoDOM.initialize(id, use_local_data)
 
     if (dataYosoro.get('notUsingMP')) {
       LLCT.openCall(id)
@@ -1030,6 +1045,11 @@ Sakurauchi.add('LLCTPGLoad', () => {
         if (!dataYosoro.get('doNotUseMusicPlayer')) {
           yohaneNoDOM.dekakuni()
         }
+        return
+      } else if (popsHeart.get('preview-sync') !== null && popsHeart.get('preview-sync') !== '') {
+        LLCT.selectGroup(popsHeart.get('preview-sync').substring(0, 1), true, true)
+        yohane.initialize(popsHeart.get('preview-sync'), true)
+        yohaneNoDOM.dekakuni()
         return
       }
       // 마지막으로 선택한 그룹이 있는지에 대한 여부입니다.

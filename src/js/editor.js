@@ -126,6 +126,11 @@ var EditorKeyBinds = {
 // 전부다 document.ready 이후 일어나야 할 일인가?
 $(document).ready(() => {
   window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
+
+  KaraokeInstance.listenHook('editData', () => {
+    dataYosoro.set('previewSync', JSON.stringify(KaraokeInstance.karaokeData))
+  })
+
   logger.info(1, 'r', 'event : document.ready')
   window.wavesurfer = WaveSurfer.create({
     container: '#waveform',
@@ -458,6 +463,7 @@ const KaraokeEditor = {
     })
 
     KaraokeInstance.lineTimingValidate()
+    KaraokeInstance.runHook('editData')
 
     if (__prevKCount[0] !== key) {
       __prevKCount = ['_', 0]
@@ -663,6 +669,10 @@ const KaraokeEditor = {
 
   setLyrics: data => {
     KaraokeInstance.karaokeData.metadata.lyrics = data
+  },
+
+  openPreviewPage: () => {
+    window.open('/?preview-sync=' + urlQueryParams('id'), '_blank')
   }
 }
 

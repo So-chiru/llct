@@ -72,6 +72,40 @@ var __kara_typeList = [null, '__s', 'call', 'cmt', '_cs']
  * @param {HTMLElement} karaoke_elem
  */
 var Karaoke = function (kara_elem) {
+  this.karaHook = {} // Event Hook 선언
+  /**
+   * Event hook를 등록합니다.
+   * @param {String} hook_name Hook 이름
+   * @param {Function} func 함수
+   */
+  this.listenHook = (hook_name, func) => {
+    if (!this.karaHook[hook_name]) {
+      this.karaHook[hook_name] = []
+    }
+
+    if (typeof func !== 'function') {
+      logger.error(1, 'rs', 'ListenHook : func is not defined or not valid function type.')
+      return false
+    }
+
+    return this.karaHook[hook_name].push(func)    
+  }
+  /**
+   * hook_name 을 가진 hook를 실행합니다.
+   * 
+   * @param {String} hook_name Hook 이름
+   * @param {*} args 인자로 넘길 인자들
+   */
+  this.runHook = (hook_name, ...args) => {
+    if (!this.karaHook[hook_name]) return false
+
+    let hooks = this.karaHook[hook_name]
+    let hook_len = hooks.length
+      
+    for (var i = 0; i < hook_len; i++) {
+      hooks[i](...args)
+    }
+  }
   this.karaoke_element = kara_elem
   this.karaokeData = null
   /**
@@ -102,6 +136,8 @@ var Karaoke = function (kara_elem) {
     }
     this.RenderDOM()
     this.lineTimingValidate()
+
+    this.RunHook('editData', this.karaokeData)
   }
   this.Render = function (text) {
     var renderedData = []
@@ -245,7 +281,7 @@ var Karaoke = function (kara_elem) {
         lineI +
         '">' +
         lineI +
-        '.</p> ' +
+        '</p> ' +
         spaceEle +
         '</div>'
     }
