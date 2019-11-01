@@ -409,6 +409,7 @@ llct-pl.hide {
 llct-pl-bg.show {
   pointer-events: visible;
   opacity: 1;
+  -webkit-backdrop-filter: saturate(200%) blur(15px);
   backdrop-filter: saturate(200%) blur(15px);
 }
 
@@ -985,6 +986,7 @@ llct-pl-infotext span {
   opacity: 0.92;
   visibility: visible;
   pointer-events: all;
+  -webkit-backdrop-filter: saturate(280%) blur(25px);
   backdrop-filter: saturate(280%) blur(25px);
 }
 
