@@ -74,18 +74,18 @@
   text-shadow: 0px 0px 0px transparent !important;
 
   &.call {
-    color: #e7f1eb;
+    color: rgba(143, 189, 159, 0.5);
   }
 
   &.__s {
-    color: #d3d3d3;
+    color: rgba(182, 182, 182, 0.5);
   }
 
   &.cmt {
-    color: #e7e7e7;
+    color: rgba(231, 231, 231, 0.5);
   }
 
   &._cs {
-    color: #bdbdbd;
+    color: rgba(121, 155, 190, 0.5);
   }
 }

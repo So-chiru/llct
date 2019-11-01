@@ -68,7 +68,7 @@ html(lang="kr").index
                     p.bottom_margin
             audio#kara_audio
             audio#tick_sounds(src="/live_assets/key-press-2.mp3")
-        #__context_bg.__context_bg(onclick="vertialMenusContext.closeContext()")
+        #__context_bg.__context_bg(onclick="vertialMenusContext.closeContext()" style="visibility: visible;pointer-events: none;opacity: 0;")
         #__context_frame.__context_frame
             .__context_frame_item(onclick="vertialMenusContext.act('shuffleMusic')")
                 p <span class="material-icons-round">shuffle</span> <span>셔플 재생</span>
@@ -186,7 +186,7 @@ html(lang="kr").index
         </div>
         llct-pop
             span#__popup_icon.material-icons-round offline_bolt
-            p#__popup_txt 오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.
+            p#__popup_txt 오프라인 상태입니다. 미리 저장된 데이터를 사용합니다.
         style.
             .material-icons-round { font-family: 'Material Icons Round', 'Noto Sans KR', 'Noto Sans CJK KR', 'NanumGothic'; }
         script(defer src="/lib/ps/photoswipe.min.js")

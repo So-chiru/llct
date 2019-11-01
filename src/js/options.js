@@ -119,9 +119,9 @@ const __llct_optslists = [
 
               ServWorkerInst.addEventListener('statechange', () => {
                 if (ServWorkerInst.state !== 'installed') return 0
-                showPopup(
-                  'offline_bolt',
-                  '새로운 업데이트가 있습니다. 이곳을 눌러 새로 고칠 수 있습니다.',
+                Popup.show(
+                  'update',
+                  '새로운 콜표 업데이트가 있습니다. 여기를 눌러 새로 고쳐주세요.',
                   () => {
                     location.reload()
                   }
@@ -141,7 +141,7 @@ const __llct_optslists = [
           if (typeof obj_inf !== 'object') return 0
 
           if (obj_inf.data.cmd_t === 'popup') {
-            showPopup(obj_inf.data.data.icon, obj_inf.data.data.text)
+            Popup.show(obj_inf.data.data.icon, obj_inf.data.data.text)
             return
           }
 

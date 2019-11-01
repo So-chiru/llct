@@ -367,26 +367,50 @@ const __llct_ts_func = sec => {
 window.numToTS = __llct_ts_func
 window.logger = logger
 
-var popupTimeout
-var showPopup = (icon, msg, fn) => {
-  if (popupTimeout) clearTimeout(popupTimeout)
-  document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
-  document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
-  document.querySelector('llct-pop').style.opacity = 1
-  document.querySelector('llct-pop').style.display = 'flex'
+var Popup = {
+  __timeout_early: null,
+  __timeout: null,
+  __toff: false,
+  show: (icon, msg, fn) => {
+    if (Popup.__timeout) clearTimeout(Popup.__timeout)
+    if (Popup.__timeout_early) clearTimeout(Popup.__timeout_early)
 
-  document.querySelector('llct-pop').onclick = () => {
-    if (typeof fn === 'function') fn()
-    closePopup()
+    document.querySelector('llct-pop').style.animation = 'null'
+
+    document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
+    document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
+    document.querySelector('llct-pop').style.opacity = 1
+    document.querySelector('llct-pop').style.display = 'flex'
+
+    document.querySelector('llct-pop').onclick = () => {
+      if (typeof fn === 'function') fn()
+
+      if (Popup.__toff) return true
+      Popup.closeSmooth()
+    }
+
+    Popup.__timeout_early = setTimeout(() => {
+      Popup.__toff = true
+    }, 4000)
+    Popup.__timeout = setTimeout(Popup.closeSmooth, 4000)
+  },
+
+  close: () => {
+    document.querySelector('llct-pop').style.opacity = 0
+    document.querySelector('llct-pop').style.display = 'none'
+
+    if (Popup.__timeout) clearTimeout(Popup.__timeout)
+    if (Popup.__timeout_early) clearTimeout(Popup.__timeout_early)
+  },
+
+  closeSmooth: () => {
+    document.querySelector('llct-pop').style.animation =
+      'disappear_popup_r 800ms cubic-bezier(0.19, 1, 0.22, 1)'    
+  
+    setTimeout(() => {
+      Popup.close()
+    }, 790)
   }
-
-  popupTimeout = setTimeout(closePopup, 4800)
-}
-
-var closePopup = () => {
-  document.querySelector('llct-pop').style.opacity = 0
-  document.querySelector('llct-pop').style.display = 'none'
-  if (popupTimeout) clearTimeout(popupTimeout)
 }
 
 window.dataLayer = window.dataLayer || []

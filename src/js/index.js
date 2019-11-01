@@ -82,7 +82,7 @@ let LLCT = {
     var currentCall = LLCT.getFromLists(id)
 
     if (typeof currentCall[1] === 'undefined') {
-      showPopup(null, '해당 곡은 콜표가 존재하지 않습니다.')
+      Popup.show(null, '해당 곡은 콜표가 존재하지 않습니다.')
 
       return false
     }
@@ -1060,9 +1060,9 @@ Sakurauchi.add('LLCTPGLoad', () => {
     })
   })
   if (!window.navigator.onLine) {
-    showPopup(
+    Popup.show(
       'offline_bolt',
-      '오프라인 상태입니다. 온라인일 때 미리 저장된 데이터를 사용합니다.'
+      '오프라인 상태입니다. 미리 저장된 데이터를 사용합니다.'
     )
   }
   document.getElementById('genki_year').innerText = new Date().getFullYear()
