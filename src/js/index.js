@@ -13,6 +13,7 @@ let LLCT = {
   __cur_filterLists: [],
   __playPointer: null,
   hideLayer: i => {
+    document.querySelector('.contents_collection').classList.remove('overlayed')
     document.getElementById(LLCTLayers[i]).classList.remove('show')
     document.getElementById(LLCTLayers[i]).classList.add('hide')
     document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
@@ -20,6 +21,7 @@ let LLCT = {
     if (!yohaneNoDOM.noPLUI) yohaneNoDOM.shokan(true)
   },
   showLayer: i => {
+    document.querySelector('.contents_collection').classList.add('overlayed')
     document.getElementById(LLCTLayers[i]).classList.remove('hide')
     document.getElementById(LLCTLayers[i]).classList.add('show')
     document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
@@ -172,7 +174,7 @@ let LLCT = {
       KaraokeInstance.karaokeData = JSON.parse(dataYosoro.get('previewSync'))
       KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
       yohaneNoDOM.showLyrics()
-      
+
       return false
     }
     fetch('./data/' + id + '/karaoke.json')
@@ -275,6 +277,12 @@ let yohaneNoDOM = {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
     pl_bg.style.opacity = 1
     KaraokeInstance.clearSync()
+    try {
+      KaraokeInstance.AudioSync(yohane.timecode(), true)
+    } catch (e) {
+      logger.warn(1, 'r', 'AudioSync failed. might timeline data is not ready?')
+    }
+    Sakurauchi.run('LLCTPlayerDekaku')
   },
   hideLyrics: () => {
     document.getElementById('lyrics_wrap').classList.add('hiddenCurtain')
@@ -474,13 +482,15 @@ let yohaneNoDOM = {
           ? '#FFFFFF55'
           : '#00000055'
 
-          document
-          .getElementById('prv_warn')
-          .classList[popsHeart.get('preview-sync') ? 'add' : 'remove']('llct-pl-infdp')
+    document
+      .getElementById('prv_warn')
+      .classList[popsHeart.get('preview-sync') ? 'add' : 'remove'](
+        'llct-pl-infdp'
+      )
     document
       .getElementById('sing_tg')
       .classList[meta[1].singAlong ? 'add' : 'remove']('llct-pl-infdp')
-      document
+    document
       .getElementById('furicopy_tg')
       .classList[meta[1].furiCopy ? 'add' : 'remove']('llct-pl-infdp')
     document
@@ -495,7 +505,8 @@ let yohaneNoDOM = {
     ])
 
     LLCT[
-      (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) || use_local_data
+      (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) ||
+      use_local_data
         ? 'loadLyrics'
         : 'loadCallImage'
     ](id, use_local_data)
@@ -665,7 +676,9 @@ let yohane = {
     ),
   play: force => {
     if (navigator.mediaSession) {
-      var meta = LLCT.getFromLists(popsHeart.get('preview-sync') || popsHeart.get('pid'))
+      var meta = LLCT.getFromLists(
+        popsHeart.get('preview-sync') || popsHeart.get('pid')
+      )
       LLCT.__playPointer = meta[2]
       var artistText =
         LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[
@@ -1046,8 +1059,15 @@ Sakurauchi.add('LLCTPGLoad', () => {
           yohaneNoDOM.dekakuni()
         }
         return
-      } else if (popsHeart.get('preview-sync') !== null && popsHeart.get('preview-sync') !== '') {
-        LLCT.selectGroup(popsHeart.get('preview-sync').substring(0, 1), true, true)
+      } else if (
+        popsHeart.get('preview-sync') !== null &&
+        popsHeart.get('preview-sync') !== ''
+      ) {
+        LLCT.selectGroup(
+          popsHeart.get('preview-sync').substring(0, 1),
+          true,
+          true
+        )
         yohane.initialize(popsHeart.get('preview-sync'), true)
         yohaneNoDOM.dekakuni()
         return

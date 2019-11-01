@@ -279,7 +279,7 @@ var logger = {
     },
 
     w: {
-      full: 'war',
+      full: 'warn',
       style: 'background: #ffc700; color: #323232'
     },
 
@@ -405,8 +405,8 @@ var Popup = {
 
   closeSmooth: () => {
     document.querySelector('llct-pop').style.animation =
-      'disappear_popup_r 800ms cubic-bezier(0.19, 1, 0.22, 1)'    
-  
+      'disappear_popup_r 800ms cubic-bezier(0.19, 1, 0.22, 1)'
+
     setTimeout(() => {
       Popup.close()
     }, 790)

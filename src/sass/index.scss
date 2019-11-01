@@ -43,6 +43,11 @@ body {
   height: 100%;
   overflow: auto;
   position: relative;
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.contents_collection.overlayed {
+  transform: scale3d(0.9, 0.9, 0.9);
 }
 
 .full_page_ct {
@@ -384,7 +389,7 @@ llct-card:active {
 
 llct-pl.show {
   background-color: white;
-  opacity: 1;
+  opacity: 0.96;
   visibility: visible;
 }
 
@@ -404,6 +409,7 @@ llct-pl.hide {
 llct-pl-bg.show {
   pointer-events: visible;
   opacity: 1;
+  backdrop-filter: saturate(200%) blur(15px);
 }
 
 llct-pl-bg {
@@ -976,9 +982,10 @@ llct-pl-infotext span {
 }
 
 .screen_layer.show {
-  opacity: 1;
+  opacity: 0.92;
   visibility: visible;
   pointer-events: all;
+  backdrop-filter: saturate(280%) blur(25px);
 }
 
 .bottom_margin {
