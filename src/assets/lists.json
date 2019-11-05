@@ -1443,6 +1443,7 @@
         "bladeColor": "AZALEA (하나마루, 카난, 다이아 색)",
         "bladeColorHEX": "#fff",
         "artist": 7,
+        "karaoke": true,
         "short_kr": "토리코리"
       },
       "ときめき分類学": {
