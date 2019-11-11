@@ -2127,10 +2127,19 @@
         "artist": 0,
         "karaoke": true,
         "singAlong": true,
-        "short_kr": "점펍"
+        "short_kr": "짬밥"
+      },
+      "i-n-g, I TRY!!": {
+        "id": "10088",
+        "tag": ["잉트"],
+        "center": null,
+        "artist": 0,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "잉트라이"
       },
       "未体験HORIZON": {
-        "id": "10090",
+        "id": "10089",
         "translated": "미체험 HORIZON",
         "tag": ["4집", "미체험", "즈라이즌"],
         "center": "쿠니키다 하나마루",
@@ -2140,6 +2149,57 @@
         "karaoke": true,
         "notPerformed": true,
         "short_kr": "즈라이즌"
+      },
+      "Deep Resonance": {
+        "id": "10090",
+        "tag": ["4집", "딥레조"],
+        "center": "츠시마 요시코",
+        "bladeColor": "요시코 색 (흰색)",
+        "bladeColorHEX": "#fff",
+        "artist": 0,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "딥레조"
+      },
+      "Dance with Minotaurus": {
+        "id": "10091",
+        "tag": ["4집", "미노타군", "진정하세요", "물붕이", "물붕쿤"],
+        "artist": 0,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "딥레조"
+      },
+      "KOKORO Magic A to Z": {
+        "id": "10092",
+        "tag": [
+          "슼타",
+          "스쿠스타",
+          "코코로매직",
+          "코매",
+          "코코로야직",
+          "코코매직"
+        ],
+        "artist": 0,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "코코매직"
+      },
+      "Wake up, Challenger!!": {
+        "id": "10093",
+        "tag": [
+          "슼타",
+          "스쿠스타",
+          "일어나",
+          "코코매직",
+          "도전자",
+          "챌린저",
+          "웨이크업챌린저",
+          "챌린져"
+        ],
+        "artist": 0,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "챌린저"
       }
     }
   },
