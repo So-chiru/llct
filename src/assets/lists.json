@@ -1580,6 +1580,7 @@
         "center": "",
         "bladeColor": "Guilty Kiss (요시코, 리코, 마리 색)",
         "bladeColorHEX": "#fff",
+        "karaoke": true,
         "artist": 8,
         "short_kr": ""
       },

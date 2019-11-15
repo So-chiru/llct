@@ -389,7 +389,7 @@ llct-card:active {
 
 llct-pl.show {
   background-color: white;
-  opacity: 0.96;
+  opacity: 0.98;
   visibility: visible;
 }
 
@@ -409,8 +409,8 @@ llct-pl.hide {
 llct-pl-bg.show {
   pointer-events: visible;
   opacity: 1;
-  -webkit-backdrop-filter: saturate(200%) blur(15px);
-  backdrop-filter: saturate(200%) blur(15px);
+  -webkit-backdrop-filter: saturate(200%);
+  backdrop-filter: saturate(200%);
 }
 
 llct-pl-bg {
@@ -983,11 +983,11 @@ llct-pl-infotext span {
 }
 
 .screen_layer.show {
-  opacity: 0.92;
+  opacity: 0.98;
   visibility: visible;
   pointer-events: all;
-  -webkit-backdrop-filter: saturate(280%) blur(25px);
-  backdrop-filter: saturate(280%) blur(25px);
+  -webkit-backdrop-filter: saturate(280%);
+  backdrop-filter: saturate(280%);
 }
 
 .bottom_margin {
