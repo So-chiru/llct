@@ -1170,11 +1170,11 @@
       "end_time": 6331,
       "collection": [
         {
-          "text": "(",
+          "text": "< 박수 : ",
           "start_time": 5000,
           "end_time": 6231,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "3"
         },
         {
           "text": "짝",
@@ -1182,14 +1182,7 @@
           "end_time": 6231,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": "44"
-        },
-        {
-          "text": ")",
-          "start_time": 5000,
-          "end_time": 6231,
-          "pronunciation_time": 0,
-          "type": "2"
+          "repeat_delay": "44.471"
         }
       ]
     },
@@ -1298,7 +1291,7 @@
       ]
     },
     {
-      "start_time": 5591,
+      "start_time": 4900,
       "end_time": 6523,
       "collection": [
         {
@@ -1407,9 +1400,16 @@
           "type": 1
         },
         {
-          "text": "에",
+          "text": "에 ",
           "start_time": 6181,
           "end_time": 6423,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "> ",
+          "start_time": "5000",
+          "end_time": "6231",
           "pronunciation_time": 0,
           "type": 1
         },
@@ -3256,11 +3256,11 @@
       "end_time": 14449,
       "collection": [
         {
-          "text": "(",
+          "text": "< 박수 : ",
           "start_time": 13119,
           "end_time": 14349,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "3"
         },
         {
           "text": "짝",
@@ -3268,14 +3268,7 @@
           "end_time": 14349,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": "44"
-        },
-        {
-          "text": ")",
-          "start_time": 13119,
-          "end_time": 14349,
-          "pronunciation_time": 0,
-          "type": "2"
+          "repeat_delay": "44.471"
         }
       ]
     },
@@ -3391,7 +3384,7 @@
       ]
     },
     {
-      "start_time": 13709,
+      "start_time": 13019,
       "end_time": 14644,
       "collection": [
         {
@@ -3507,9 +3500,16 @@
           "type": 1
         },
         {
-          "text": "레",
+          "text": "레 ",
           "start_time": 14289,
           "end_time": 14544,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "> ",
+          "start_time": "13119",
+          "end_time": "14349",
           "pronunciation_time": 0,
           "type": 1
         },
@@ -4176,36 +4176,8 @@
           "type": 1
         },
         {
-          "text": "ty",
+          "text": "ty... ",
           "start_time": 17352,
-          "end_time": 17626,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 17387,
-          "end_time": 17626,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 17413,
-          "end_time": 17626,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 17438,
-          "end_time": 17626,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 17460,
           "end_time": 17626,
           "pronunciation_time": 0,
           "type": 1
@@ -4218,22 +4190,8 @@
           "type": 1
         },
         {
-          "text": "ty",
+          "text": "ty..",
           "start_time": 17528,
-          "end_time": 17626,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 17547,
-          "end_time": 17626,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 17561,
           "end_time": 17626,
           "pronunciation_time": 0,
           "type": 1
@@ -4252,36 +4210,8 @@
       "end_time": 18422,
       "collection": [
         {
-          "text": "Guil",
+          "text": "Guil..",
           "start_time": 18073,
-          "end_time": 18322,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 18103,
-          "end_time": 18322,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 18130,
-          "end_time": 18322,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ".",
-          "start_time": 18153,
-          "end_time": 18322,
-          "pronunciation_time": 0,
-          "type": 1
-        },
-        {
-          "text": ". ",
-          "start_time": 18180,
           "end_time": 18322,
           "pronunciation_time": 0,
           "type": 1
@@ -4340,11 +4270,11 @@
       "end_time": 20273,
       "collection": [
         {
-          "text": "(",
+          "text": "< 박수 : ",
           "start_time": 18589,
           "end_time": 20173,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "3"
         },
         {
           "text": "짝",
@@ -4352,14 +4282,7 @@
           "end_time": 20173,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": "44"
-        },
-        {
-          "text": ")",
-          "start_time": 18589,
-          "end_time": 20173,
-          "pronunciation_time": 0,
-          "type": "2"
+          "repeat_delay": "44.471"
         }
       ]
     },
@@ -4558,7 +4481,7 @@
       ]
     },
     {
-      "start_time": 19523,
+      "start_time": 18489,
       "end_time": 20288,
       "collection": [
         {
@@ -4672,6 +4595,13 @@
           "end_time": 20188,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": " >",
+          "start_time": "18589",
+          "end_time": "20173",
+          "pronunciation_time": 0,
+          "type": "3"
         }
       ]
     },
@@ -4708,7 +4638,7 @@
           "type": 1
         },
         {
-          "text": "ve)",
+          "text": "ve) ",
           "start_time": 20289,
           "end_time": 20332,
           "pronunciation_time": 0,
