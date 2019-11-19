@@ -1156,6 +1156,7 @@
         "center": "쿠로사와 다이아",
         "bladeColor": "다이아 색 (빨간색 계열)",
         "bladeColorHEX": "#eb3d3d",
+        "karaoke": true,
         "short_kr": "마이마이"
       },
       "MIRACLE WAVE": {
