@@ -33,6 +33,12 @@ var EditorKeyBinds = {
   9: () => {
     wavesurfer.skip(-0.2)
   },
+  66: () => {
+    wavesurfer.skip(-0.2)
+  },
+  78: () => {
+    wavesurfer.skip(0.2)
+  },
   87: e => {
     KaraokeEditor.EditVal(
       'end_time',
