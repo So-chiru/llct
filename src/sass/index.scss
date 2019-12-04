@@ -175,83 +175,83 @@ body {
   }
 }
 
-.dark .aqours {
+.dark [data-group="Aqours"] {
   background-color: rgba(0, 140, 255, 0.4);
+
+  &:hover {
+    background-color: rgba(0, 120, 255, 0.6);
+  }
+
+  &:active {
+    background-color: rgba(0, 100, 255, 0.8);
+  }
 }
 
-.dark .aqours:hover {
-  background-color: rgba(0, 120, 255, 0.6);
-}
-
-.dark .aqours:active {
-  background-color: rgba(0, 100, 255, 0.8);
-}
-
-.aqours {
+[data-group="Aqours"] {
   background-color: rgba(0, 140, 255, 0.7);
   color: rgb(255, 255, 255);
   box-shadow: 0px 0px 6px rgba(0, 140, 255, 0.3);
+
+  &:hover {
+    background-color: rgba(0, 120, 255, 0.8);
+  }
+
+  &:active {
+    background-color: rgba(0, 100, 255, 0.9);
+  }
 }
 
-.aqours:hover {
-  background-color: rgba(0, 120, 255, 0.8);
-}
-
-.aqours:active {
-  background-color: rgba(0, 100, 255, 0.9);
-}
-
-.dark .muse {
+.dark [data-group="µ's"] {
   background-color: rgba(255, 0, 200, 0.4);
+
+  &:hover {
+    background-color: rgba(255, 0, 220, 0.6);
+  }
+
+  &:active {
+    background-color: rgba(255, 0, 240, 0.7);
+  }
 }
 
-.dark .muse:hover {
-  background-color: rgba(255, 0, 220, 0.6);
-}
-
-.dark .muse:active {
-  background-color: rgba(255, 0, 240, 0.7);
-}
-
-.muse {
+[data-group="µ's"] {
   background-color: rgba(255, 0, 200, 0.5);
   color: rgb(255, 255, 255);
   box-shadow: 0px 0px 6px rgba(255, 0, 255, 0.3);
+
+  &:hover {
+    background-color: rgba(255, 0, 220, 0.7);
+  }
+
+  &:active {
+    background-color: rgba(255, 0, 240, 0.9);
+  }
 }
 
-.muse:hover {
-  background-color: rgba(255, 0, 220, 0.7);
-}
-
-.muse:active {
-  background-color: rgba(255, 0, 240, 0.9);
-}
-
-.dark .niji {
+.dark [data-group="虹同"] {
   background-color: rgba(255, 210, 0, 0.4);
   color: rgb(255, 255, 255);
+
+  &:hover {
+    background-color: rgba(255, 220, 0, 0.7);
+  }
+
+  &:active {
+    background-color: rgba(255, 230, 0, 0.8);
+  }
 }
 
-.dark .niji:hover {
-  background-color: rgba(255, 220, 0, 0.7);
-}
-
-.dark .niji:active {
-  background-color: rgba(255, 230, 0, 0.8);
-}
-
-.niji {
+[data-group="虹同"] {
   background-color: rgba(255, 210, 0, 0.6);
   color: rgb(70, 70, 70);
   box-shadow: 0px 0px 6px rgba(255, 210, 0, 0.3);
-}
 
-.niji:hover {
-  background-color: rgba(255, 220, 0, 0.7);
-}
+  &:hover {
+    background-color: rgba(255, 220, 0, 0.7);
+  }
 
-.niji:active {
-  background-color: rgba(255, 230, 0, 0.8);
+  &:active {
+    background-color: rgba(255, 230, 0, 0.8);
+  }
 }
 
 .playlist_text {

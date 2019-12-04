@@ -2,11 +2,8 @@ let requestAudioSync
 let requestAudioVolume = null
 
 let LLCTLayers = ['setting_layer', 'switch_layer', 'call_layer']
-let GroupCSSSelector = {
-  "µ's": 'muse',
-  Aqours: 'aqours',
-  虹同: 'niji'
-}
+
+dataYosoro.set('devMode', popsHeart.get('dev') != '')
 
 let LLCT = {
   __pkg_callLists: [],
@@ -53,7 +50,6 @@ let LLCT = {
    * @param {Boolean} auto 자동으로 실행되었는지 (pid에 따른 자동 그룹 선택 방지)
    */
   selectGroup: (i, notLayer, auto) => {
-    var groupBAK = LLCT.__cur_selectedGroup
     LLCT.__cur_selectedGroup = Object.keys(LLCT.fullMetaData)[i]
     LLCT.__pkg_callLists =
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].collection
@@ -63,15 +59,10 @@ let LLCT = {
 
     var groupSelection = document.getElementById('group_selection_btn')
     groupSelection.innerHTML = LLCT.__cur_selectedGroup
-    groupSelection.className += ' ' + GroupCSSSelector[LLCT.__cur_selectedGroup]
+    groupSelection.dataset.group = LLCT.__cur_selectedGroup
 
-    if (groupBAK && groupBAK != '') {
-      groupSelection.className = groupSelection.className.replace(
-        ' ' + GroupCSSSelector[groupBAK],
-        ''
-      )
-    }
     pageAdjust.buildPage()
+
     if (!auto) {
       dataYosoro.set('lastGroup', i)
     }
@@ -122,6 +113,11 @@ let LLCT = {
         }
       })
       .catch(e => {
+        if (document.getElementById('')) {
+
+        }
+
+
         return logger.error(2, 'r', 'Failed to get karaoke file. : ' + e.stack)
       })
 
@@ -174,27 +170,21 @@ let LLCT = {
       KaraokeInstance.karaokeData = JSON.parse(dataYosoro.get('previewSync'))
       KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
       yohaneNoDOM.showLyrics()
-
-      return false
+      return
     }
+
     fetch('./data/' + id + '/karaoke.json')
       .then(res => {
-        try {
+        if (!res.ok) throw new Error('Fetch Failed.')
           res.json().then(v => {
             KaraokeInstance.karaokeData = v
             KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
             yohaneNoDOM.showLyrics()
           })
-        } catch (e) {
-          return logger.error(
-            2,
-            'r',
-            'Failed to parse karaoke json. : ' + e.stack
-          )
-        }
       })
       .catch(e => {
-        return logger.error(2, 'r', 'Failed to get karaoke file. : ' + e.stack)
+        yohaneNoDOM.showError()
+        return logger.error(2, 'r', 'Failed to load karaoke file. : ' + e.stack)
       })
   },
   getFromLists: id => {
@@ -294,7 +284,7 @@ let yohaneNoDOM = {
       .getElementById('lyrics_wrap_inner')
       .classList.remove('hiddenCurtain')
   },
-  showError: e => {
+  showError: () => {
     yohaneNoDOM.showLyrics()
     document.getElementById('_of_ric').style.display = 'block'
   },
@@ -427,7 +417,6 @@ let yohaneNoDOM = {
     if (popsHeart.get('pid') !== id.toString() && !use_local_data) {
       popsHeart.set('pid', id)
     }
-    LLCT.audioLoadStarted = window.performance ? performance.now() : Date.now()
     document.getElementById('_of_ric').style.display = window.navigator.onLine
       ? 'none'
       : 'block'
@@ -467,7 +456,7 @@ let yohaneNoDOM = {
         meta[1].artist != null ? meta[1].artist : 0
       ]
     document.getElementById('title_meta').innerText =
-      dataYosoro.get('mikan') === true ? meta[1].translated || meta[0] : meta[0]
+    dataYosoro.get('devMode') ? '#' + id : dataYosoro.get('mikan') === true ? meta[1].translated || meta[0] : meta[0]
     document.getElementById('artist_meta').innerText = artistText
     document.getElementById('artist_meta').title = artistText
 
