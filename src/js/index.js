@@ -13,16 +13,21 @@ let LLCT = {
     document.querySelector('.contents_collection').classList.remove('overlayed')
     document.getElementById(LLCTLayers[i]).classList.remove('show')
     document.getElementById(LLCTLayers[i]).classList.add('hide')
-    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
-      'scale(1.2)'
-    if (!yohaneNoDOM.noPLUI) yohaneNoDOM.shokan(true)
+    document.querySelector(
+      '#' + LLCTLayers[i] + ' .layerContent'
+    ).style.transform = 'scale(1.2)'
+
+    if (!yohaneNoDOM.noPLUI && !dataYosoro.get('doNotUseMusicPlayer')) {
+      yohaneNoDOM.shokan(true)
+    }
   },
   showLayer: i => {
     document.querySelector('.contents_collection').classList.add('overlayed')
     document.getElementById(LLCTLayers[i]).classList.remove('hide')
     document.getElementById(LLCTLayers[i]).classList.add('show')
-    document.querySelector('#' + LLCTLayers[i] + ' .layer_sc').style.transform =
-      'scale(1.0)'
+    document.querySelector(
+      '#' + LLCTLayers[i] + ' .layerContent'
+    ).style.transform = 'scale(1.0)'
     if (!yohaneNoDOM.noPLUI) yohaneNoDOM.giran(true)
   },
   clearCache: () => {
@@ -99,26 +104,13 @@ let LLCT = {
 
     fetch('./data/' + id + '/karaoke.json')
       .then(res => {
-        try {
-          res.json().then(v => {
-            popupKaraInstance.karaokeData = v
-            popupKaraInstance.RenderDOM(dataYosoro.get('romaji'))
-          })
-        } catch (e) {
-          return logger.error(
-            2,
-            'r',
-            'Failed to parse karaoke json. : ' + e.stack
-          )
-        }
+        res.json().then(v => {
+          popupKaraInstance.karaokeData = v
+          popupKaraInstance.RenderDOM(dataYosoro.get('romaji'))
+        })
       })
       .catch(e => {
-        if (document.getElementById('')) {
-
-        }
-
-
-        return logger.error(2, 'r', 'Failed to get karaoke file. : ' + e.stack)
+        return logger.error(2, 'r', 'Failed to load karaoke file. : ' + e.stack)
       })
 
     LLCT.showLayer(2)
@@ -176,16 +168,49 @@ let LLCT = {
     fetch('./data/' + id + '/karaoke.json')
       .then(res => {
         if (!res.ok) throw new Error('Fetch Failed.')
-          res.json().then(v => {
-            KaraokeInstance.karaokeData = v
-            KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
-            yohaneNoDOM.showLyrics()
-          })
+        res.json().then(v => {
+          KaraokeInstance.karaokeData = v
+          KaraokeInstance.RenderDOM(dataYosoro.get('romaji'))
+          yohaneNoDOM.showLyrics()
+        })
       })
       .catch(e => {
         yohaneNoDOM.showError()
         return logger.error(2, 'r', 'Failed to load karaoke file. : ' + e.stack)
       })
+  },
+  loadLists: () => {
+    fetch('./data/lists.json').then(res => {
+      res.json().then(v => {
+        LLCT.fullMetaData = v
+        document.getElementById('loading_spin_ctlst').classList.add('done')
+        if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
+          LLCT.selectGroup(popsHeart.get('pid').substring(0, 1), true, true)
+          yohane.initialize(popsHeart.get('pid'))
+          if (!dataYosoro.get('doNotUseMusicPlayer')) {
+            yohaneNoDOM.dekakuni()
+          }
+          return
+        } else if (
+          popsHeart.get('preview-sync') !== null &&
+          popsHeart.get('preview-sync') !== ''
+        ) {
+          LLCT.selectGroup(
+            popsHeart.get('preview-sync').substring(0, 1),
+            true,
+            true
+          )
+          yohane.initialize(popsHeart.get('preview-sync'), true)
+          yohaneNoDOM.dekakuni()
+          return
+        }
+        // 마지막으로 선택한 그룹이 있는지에 대한 여부입니다.
+        var NoLastGroup =
+          dataYosoro.get('lastGroup') == null ||
+          typeof dataYosoro.get('lastGroup') === 'undefined'
+        LLCT.selectGroup(NoLastGroup ? 1 : dataYosoro.get('lastGroup'), true)
+      })
+    })
   },
   getFromLists: id => {
     var v = Object.keys(LLCT.__pkg_callLists)
@@ -204,8 +229,7 @@ let yohaneNoDOM = {
   shokan: ui_only => {
     yohaneNoDOM.noPLUI = false
     var playerElement = document.querySelector('llct-pl')
-    playerElement.style.transition =
-      'transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
+    playerElement.style.transition = 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)'
     playerElement.classList.remove('hide')
     playerElement.classList.add('show')
     if (yohaneNoDOM.kaizu) {
@@ -215,7 +239,7 @@ let yohaneNoDOM = {
   giran: ui_only => {
     var playerElement = document.querySelector('llct-pl')
     playerElement.style.transition =
-      'transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
+      'all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1)'
     playerElement.classList.remove('show')
     playerElement.classList.add('hide')
     if (yohaneNoDOM.kaizu) {
@@ -455,8 +479,11 @@ let yohaneNoDOM = {
       LLCT.fullMetaData[LLCT.__cur_selectedGroup].meta.artists[
         meta[1].artist != null ? meta[1].artist : 0
       ]
-    document.getElementById('title_meta').innerText =
-    dataYosoro.get('devMode') ? '#' + id : dataYosoro.get('mikan') === true ? meta[1].translated || meta[0] : meta[0]
+    document.getElementById('title_meta').innerText = dataYosoro.get('devMode')
+      ? '#' + id
+      : dataYosoro.get('mikan') === true
+        ? meta[1].translated || meta[0]
+        : meta[0]
     document.getElementById('artist_meta').innerText = artistText
     document.getElementById('artist_meta').title = artistText
 
@@ -791,7 +818,7 @@ let pageAdjust = {
   },
   render: pg => {
     if (!pageAdjust.clis_elem) {
-      pageAdjust.clis_elem = document.getElementById('_card_lists')
+      pageAdjust.clis_elem = document.getElementById('card_lists')
     }
     pageAdjust.clis_elem.innerHTML = ''
     if (!pg) pg = 0
@@ -1037,37 +1064,9 @@ Sakurauchi.add('LLCTPGLoad', () => {
   selectorHammer.on('swipe', ev => {
     pageAdjust[ev.direction === 2 ? 'nextPage' : 'prevPage']()
   })
-  fetch('./data/lists.json').then(res => {
-    res.json().then(v => {
-      LLCT.fullMetaData = v
-      document.getElementById('loading_spin_ctlst').classList.add('done')
-      if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
-        LLCT.selectGroup(popsHeart.get('pid').substring(0, 1), true, true)
-        yohane.initialize(popsHeart.get('pid'))
-        if (!dataYosoro.get('doNotUseMusicPlayer')) {
-          yohaneNoDOM.dekakuni()
-        }
-        return
-      } else if (
-        popsHeart.get('preview-sync') !== null &&
-        popsHeart.get('preview-sync') !== ''
-      ) {
-        LLCT.selectGroup(
-          popsHeart.get('preview-sync').substring(0, 1),
-          true,
-          true
-        )
-        yohane.initialize(popsHeart.get('preview-sync'), true)
-        yohaneNoDOM.dekakuni()
-        return
-      }
-      // 마지막으로 선택한 그룹이 있는지에 대한 여부입니다.
-      var NoLastGroup =
-        dataYosoro.get('lastGroup') == null ||
-        typeof dataYosoro.get('lastGroup') === 'undefined'
-      LLCT.selectGroup(NoLastGroup ? 1 : dataYosoro.get('lastGroup'), true)
-    })
-  })
+
+  LLCT.loadLists()
+
   if (!window.navigator.onLine) {
     Popup.show(
       'offline_bolt',
@@ -1164,32 +1163,36 @@ Sakurauchi.add('LLCTPGLoad', () => {
   })
   Sakurauchi.listen('resize', resizeFunctions, window)
   pageAdjust.onePageItems = resizeItemsCheck()
-  // 플레이어 배경 색상
-  var _ctf = new ColorThief()
-  var album_meta = document.getElementById('album_meta')
-  album_meta.crossOrigin = 'Anonymous'
-  var __cf_ng = ['217deg', '127deg', '336deg']
-  album_meta.addEventListener('load', () => {
-    if (dataYosoro.get('piigi') != true) return
-    var paletteData = _ctf.getPalette(album_meta, 4)
-    var fn_background = ''
-    for (var i = 0; i < 3; i++) {
-      if (paletteData == null) break
-      var c = paletteData[i]
-      fn_background +=
-        'linear-gradient(' +
-        __cf_ng[i] +
-        ',rgba(' +
-        c[0] +
-        ', ' +
-        c[1] +
-        ',' +
-        c[2] +
-        ',0.8),rgba(0,0,0,0) 70.71%)' +
-        (i < 2 ? ',' : '')
-    }
-    document.getElementById('cl_layer_player').style.background = fn_background
-  })
+
+  if (dataYosoro.get('piigi') && dataYosoro.get('sakana')) {
+    var colorTheif = new ColorThief()
+    var album_meta = document.getElementById('album_meta')
+    album_meta.crossOrigin = 'Anonymous'
+    var __cf_ng = ['217deg', '127deg', '336deg']
+    album_meta.addEventListener('load', () => {
+      var paletteData = colorTheif.getPalette(album_meta, 4)
+      var fn_background = ''
+      for (var i = 0; i < 3; i++) {
+        if (paletteData == null) break
+        var c = paletteData[i]
+        fn_background +=
+          'linear-gradient(' +
+          __cf_ng[i] +
+          ',rgba(' +
+          c[0] +
+          ', ' +
+          c[1] +
+          ',' +
+          c[2] +
+          ',0.8),rgba(0,0,0,0) 70.71%)' +
+          (i < 2 ? ',' : '')
+      }
+      document.getElementById(
+        'cl_layer_player'
+      ).style.background = fn_background
+    })
+  }
+
   document.getElementById('curt').style.opacity = 0
   document.getElementById('curt').style.visibility = 'none'
   document.getElementById('curt').style.pointerEvents = 'none'

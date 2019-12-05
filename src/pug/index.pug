@@ -94,7 +94,7 @@ html(lang="kr").index
                     div
                     div
                 //-p.playlist_text 플레이리스트 "Noto Sans"            
-                ._card_lists#_card_lists
+                .card_lists#card_lists
                 .navigator
                     span.nav_arrow_wrap(onclick="pageAdjust.prevPage()") <i class="material-icons-round arrow_btn thin mat-icon-hover-anime general_trans pd_onhover" alt="<">keyboard_arrow_left</i>
                     span.pg_ind <span class="thin _cur_point" id="currentPage" class="thin" onclick="LLCT.jumpToPageDialog()">1</span> <span>/</span> <span class="black" id="totalPage">1</span>
@@ -102,20 +102,20 @@ html(lang="kr").index
         .screen_layer#switch_layer.hide
             .close_btn(onclick="LLCT.hideLayer(1)")
                 p <i class="material-icons-round">close</i>
-            .layer_sc
+            .layerContent
                 h1 그룹
                 br
-                .group_grid
-                    ._btn_groupSl(onclick="LLCT.selectGroup(0)")
+                .groupPage-grid
+                    .button-projectGroup(onclick="LLCT.selectGroup(0)")
                         img.lazy.group_icon(data-src="/live_assets/us.png")
-                    ._btn_groupSl(onclick="LLCT.selectGroup(1)")
+                    .button-projectGroup(onclick="LLCT.selectGroup(1)")
                         img.lazy.group_icon(data-src="/live_assets/aqours.png")
-                    ._btn_groupSl(onclick="LLCT.selectGroup(2)")
+                    .button-projectGroup(onclick="LLCT.selectGroup(2)")
                         img.lazy.group_icon(data-src="/live_assets/niji.png")
         .screen_layer#setting_layer.hide
             .close_btn(onclick="LLCT.hideLayer(0)")
                 p <i class="material-icons-round">close</i>
-            .layer_sc
+            .layerContent
                 h1 설정
                 br
                 .toggle_collection
@@ -145,7 +145,7 @@ html(lang="kr").index
         .screen_layer#call_layer.hide
             .close_btn(onclick="LLCT.hideLayer(2)")
                 p <i class="material-icons-round">close</i>
-            .layer_sc
+            .layerContent
                 .titles
                     h1#popup_kara_title Thank you, FRIENDS!!
                 .popup_karaoke#popup_karaoke
@@ -184,11 +184,11 @@ html(lang="kr").index
                 </div>
             </div>
         </div>
-        llct-pop
+        llct-popup
             span#__popup_icon.material-icons-round offline_bolt
             p#__popup_txt 오프라인 상태입니다. 미리 저장된 데이터를 사용합니다.
         style.
-            .material-icons-round { font-family: 'Material Icons Round', 'Noto Sans KR', 'Noto Sans CJK KR', 'NanumGothic'; }
+            .material-icons-round { font-family: 'Material Icons Round', 'Material Icons'; }
         script(defer src="/lib/ps/photoswipe.min.js")
         script(defer src="/lib/ps/photoswipe-ui-default.min.js")
         script(src='./lib/aj/anime.min.js')

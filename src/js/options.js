@@ -54,8 +54,8 @@ const __llct_optslists = [
     data_key: 'notUsingMP',
     checkbox: true,
     default: false,
-    fn: v => {
-      if (v === 'true' || v == true) {
+    fn: (v, first) => {
+      if ((v === 'true' || v == true) && !first) {
         yohane.giran()
       }
     }
@@ -167,6 +167,8 @@ const OptionManager = {
     return __llct_optslists
   },
 
+  first: true,
+
   init: () => {
     var ol = __llct_optslists.length
     for (var i = 0; i < ol; i++) {
@@ -186,18 +188,18 @@ const OptionManager = {
         _e.disabled = oi.filt ? oi.filt() : false
 
         _e.onclick = () => {
-          oi.fn()
+          oi.fn(null, OptionManager.first)
           _e.disabled = oi.filt ? oi.filt() : false
         }
       } else if (oi.checkbox) {
         _e.checked = val == 'true' || val == true
-        oi.fn(val)
+        oi.fn(val, OptionManager.first)
 
         _e.onclick = ((oi, _e) => {
           return () => {
             var v = _e.checked
 
-            oi.fn(v)
+            oi.fn(v, OptionManager.first)
             dataYosoro.set(oi.data_key, v)
           }
         })(oi, _e)
@@ -212,6 +214,8 @@ const OptionManager = {
         _e.disabled = lc[1]
       }
     }
+
+    OptionManager.first = false
   }
 }
 

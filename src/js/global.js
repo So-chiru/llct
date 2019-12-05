@@ -375,14 +375,14 @@ var Popup = {
     if (Popup.__timeout) clearTimeout(Popup.__timeout)
     if (Popup.__timeout_early) clearTimeout(Popup.__timeout_early)
 
-    document.querySelector('llct-pop').style.animation = 'null'
+    document.querySelector('llct-popup').style.animation = 'null'
 
     document.getElementById('__popup_icon').innerHTML = icon || 'offline_bolt'
     document.getElementById('__popup_txt').innerHTML = msg || '메세지 없음.'
-    document.querySelector('llct-pop').style.opacity = 1
-    document.querySelector('llct-pop').style.display = 'flex'
+    document.querySelector('llct-popup').style.opacity = 1
+    document.querySelector('llct-popup').style.display = 'flex'
 
-    document.querySelector('llct-pop').onclick = () => {
+    document.querySelector('llct-popup').onclick = () => {
       if (typeof fn === 'function') fn()
 
       if (Popup.__toff) return true
@@ -396,15 +396,15 @@ var Popup = {
   },
 
   close: () => {
-    document.querySelector('llct-pop').style.opacity = 0
-    document.querySelector('llct-pop').style.display = 'none'
+    document.querySelector('llct-popup').style.opacity = 0
+    document.querySelector('llct-popup').style.display = 'none'
 
     if (Popup.__timeout) clearTimeout(Popup.__timeout)
     if (Popup.__timeout_early) clearTimeout(Popup.__timeout_early)
   },
 
   closeSmooth: () => {
-    document.querySelector('llct-pop').style.animation =
+    document.querySelector('llct-popup').style.animation =
       'disappear_popup_r 800ms cubic-bezier(0.19, 1, 0.22, 1)'
 
     setTimeout(() => {

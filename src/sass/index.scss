@@ -55,16 +55,10 @@ body {
   width: 92%;
   height: 90%;
   margin: auto;
-  margin-top: 2.5%;
+  margin-top: calc(1vw + 3.4vh);
 
   @media screen and (max-width: $medium) {
     width: 95%;
-  }
-
-  @media screen and (max-width: $small) {
-    width: 98%;
-    height: 100%;
-    margin-top: 25px;
   }
 }
 
@@ -82,7 +76,6 @@ body {
 }
 
 .header {
-  margin-left: 1.5%;
   display: flex;
   display: -webkit-flex;
 }
@@ -278,15 +271,15 @@ body {
   }
 }
 
-._card_lists {
+.card_lists {
   display: -ms-grid;
   display: -moz-grid;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  margin-top: 35px;
-  margin-bottom: 3%;
+  margin: 35px auto 3% auto;
+  width: 92vw;
 }
 
 llct-card {
@@ -304,7 +297,7 @@ llct-card {
 
   .txt {
     margin: auto;
-    font-size: 30px;
+    font-size: 27.3px;
     font-weight: 100;
     text-shadow: 0px 0px 13px #000;
     z-index: 5;
@@ -358,7 +351,7 @@ llct-card:active {
 }
 
 @media screen and (max-width: $medium) {
-  ._card_lists {
+  .card_lists {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -368,7 +361,7 @@ llct-card:active {
 }
 
 @media screen and (max-width: $small) {
-  ._card_lists {
+  .card_lists {
     grid-template-columns: repeat(1, 1fr);
   }
 
@@ -377,7 +370,8 @@ llct-card:active {
     -moz-box-sizing: padding-box;
     box-sizing: padding-box;
     width: 90%;
-    padding: 2% 2%;
+    width: -webkit-fill-available;
+    padding: 1vw 4vh;
     margin-left: auto;
     margin-right: auto;
   }
@@ -891,20 +885,12 @@ llct-pl-infotext span {
   display: -webkit-flex;
   display: flex;
   height: 80px;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 10%;
   justify-content: center;
-  vertical-align: middle;
 
   .arrow_btn {
     font-size: 50px;
     margin: auto;
     cursor: pointer;
-  }
-
-  @media screen and (max-width: $small) {
-    margin-bottom: 20%;
   }
 }
 
@@ -961,7 +947,7 @@ llct-pl-infotext span {
   }
 }
 
-.layer_sc {
+.layerContent {
   left: 5%;
   top: 5%;
   width: 90%;
@@ -971,7 +957,7 @@ llct-pl-infotext span {
 
   h1 {
     font-weight: 500;
-    font-size: 42px;
+    font-size: 38px;
     margin: 0;
   }
 }
@@ -1220,7 +1206,7 @@ llct-pl-infotext span {
   color: #797979;
 }
 
-.group_grid {
+.groupPage-grid {
   position: relative;
   display: grid;
   grid-template-columns: auto auto auto;
@@ -1239,18 +1225,18 @@ llct-pl-infotext span {
 .group_icon {
   position: relative;
   width: auto;
-  height: 100px;
+  height: calc(4vw + 7vh);
   margin: auto;
 }
 
-._btn_groupSl {
-  padding: 10%;
+.button-projectGroup {
+  padding: 5vh;
   display: grid;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   cursor: pointer;
 }
 
-._btn_groupSl:hover {
+.button-projectGroup:hover {
   transform: scale(1.05);
   background-color: rgba(92, 92, 92, 0.2);
   box-shadow: 0px 0px 8px rgba(110, 110, 110, 0.3);
@@ -1265,7 +1251,7 @@ llct-pl-infotext span {
 
   .lyrics {
     font-size: 16px;
-    font-weight: 100;
+    font-weight: 500;
     font-family: "Jua", "Noto Sans KR", "Noto Sans CJK KR", "NanumGothic";
   }
 }
