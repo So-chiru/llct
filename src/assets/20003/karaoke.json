@@ -1762,7 +1762,7 @@
     },
     {
       "start_time": 7846,
-      "end_time": 8638,
+      "end_time": 8870,
       "collection": [
         {
           "text": "코",
@@ -1828,11 +1828,32 @@
           "type": 1
         },
         {
-          "text": "테",
+          "text": "테 ",
           "start_time": 8302,
           "end_time": 8538,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": "(후 ",
+          "start_time": 8676,
+          "end_time": 8770,
+          "pronunciation_time": 0,
+          "type": 2
+        },
+        {
+          "text": "후",
+          "start_time": 8712,
+          "end_time": 8770,
+          "pronunciation_time": 0,
+          "type": 2
+        },
+        {
+          "text": "후!)",
+          "start_time": 8728,
+          "end_time": 8770,
+          "pronunciation_time": 0,
+          "type": 2
         }
       ]
     },
@@ -1850,12 +1871,12 @@
       ]
     },
     {
-      "start_time": 8744,
+      "start_time": 8745,
       "end_time": 9414,
       "collection": [
         {
           "text": "토",
-          "start_time": 8844,
+          "start_time": 8845,
           "end_time": 9314,
           "pronunciation_time": 0,
           "type": 1
@@ -1883,21 +1904,21 @@
         },
         {
           "text": "토",
-          "start_time": 8961,
+          "start_time": 8964,
           "end_time": 9314,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "마",
-          "start_time": 8981,
+          "start_time": 9000,
           "end_time": 9314,
           "pronunciation_time": 0,
           "type": 1
         },
         {
           "text": "라",
-          "start_time": 9001,
+          "start_time": 9018,
           "end_time": 9314,
           "pronunciation_time": 0,
           "type": 1
