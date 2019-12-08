@@ -948,7 +948,6 @@ Sakurauchi.add('LLCTDOMLoad', () => {
     typeof dataYosoro.get('biTick') === 'undefined'
       ? true
       : !!dataYosoro.get('biTick')
-  Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
   yohane.player().onplay = () => {
     yohaneNoDOM.play()
     requestAnimationFrame(yohane.tick)
@@ -1093,13 +1092,16 @@ Sakurauchi.add('LLCTPGLoad', () => {
     tickSound.volume = vol_d || 1
   })
   Sakurauchi.add('tickSoundChanged', v => {
-    yohaneNoDOM.tickIcon(v)
     document
       .getElementById('tick_btn')
       .classList[v ? 'remove' : 'add']('in_active')
+    
+    yohaneNoDOM.tickIcon(v)
 
     dataYosoro.set('biTick', v)
   })
+  Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
+
   Sakurauchi.listen('audioLoadStart', data => {
     if (!navigator.mediaSession) return 0
     let titleData =
