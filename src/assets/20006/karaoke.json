@@ -2015,7 +2015,7 @@
           "start_time": 10018,
           "end_time": 10196,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         }
       ]
     },
@@ -3766,56 +3766,56 @@
       "end_time": 18677,
       "collection": [
         {
-          "text": "Go",
+          "text": "Going ",
           "start_time": 18211,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "ing, ",
+          "text": "Going, ",
           "start_time": 18244,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "Go",
+          "text": "Going ",
           "start_time": 18302,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": "4"
         },
         {
-          "text": "ing! ",
+          "text": "Going! ",
           "start_time": 18329,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": "4"
         },
         {
-          "text": "Mo",
+          "text": "Moving ",
           "start_time": 18387,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "ving, ",
+          "text": "Moving, ",
           "start_time": 18422,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "Mo",
+          "text": "Moving ",
           "start_time": 18479,
           "end_time": 18577,
           "pronunciation_time": 0,
           "type": "4"
         },
         {
-          "text": "ving!",
+          "text": "Moving!",
           "start_time": 18512,
           "end_time": 18577,
           "pronunciation_time": 0,
@@ -3828,56 +3828,56 @@
       "end_time": 19065,
       "collection": [
         {
-          "text": "Go",
+          "text": "Going ",
           "start_time": 18570,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "ing, ",
+          "text": "Going, ",
           "start_time": 18608,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "Go",
+          "text": "Going ",
           "start_time": 18660,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": "4"
         },
         {
-          "text": "ing! ",
+          "text": "Going! ",
           "start_time": 18702,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": "4"
         },
         {
-          "text": "Mo",
+          "text": "Moving ",
           "start_time": 18755,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "ving, ",
+          "text": "Moving, ",
           "start_time": 18790,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": 1
         },
         {
-          "text": "Mo",
+          "text": "Moving ",
           "start_time": 18850,
           "end_time": 18965,
           "pronunciation_time": 0,
           "type": "4"
         },
         {
-          "text": "ving!",
+          "text": "Moving!",
           "start_time": 18883,
           "end_time": 18965,
           "pronunciation_time": 0,
@@ -5472,21 +5472,21 @@
           "start_time": 26201,
           "end_time": 26386,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         },
         {
           "text": "yeah ",
           "start_time": 26707,
           "end_time": 26794,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         },
         {
           "text": "yeah)",
           "start_time": 27066,
           "end_time": 27150,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 4
         }
       ]
     }
