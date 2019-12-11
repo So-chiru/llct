@@ -5,83 +5,6 @@
   },
   "timeline": [
     {
-      "start_time": 158,
-      "end_time": 3285,
-      "collection": [
-        {
-          "text": "< ",
-          "start_time": 258,
-          "end_time": 1755,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "박수 ",
-          "start_time": 258,
-          "end_time": 1755,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ": ",
-          "start_time": 258,
-          "end_time": 1755,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 258,
-          "end_time": 3185,
-          "pronunciation_time": 0,
-          "type": "2",
-          "ruby_text": "",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "x ",
-          "start_time": 258,
-          "end_time": 3185,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "(표시 ",
-          "start_time": 258,
-          "end_time": 3185,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "부분까지) ",
-          "start_time": 258,
-          "end_time": 3185,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ">",
-          "start_time": 258,
-          "end_time": 1755,
-          "pronunciation_time": 0,
-          "type": "3"
-        }
-      ]
-    },
-    {
-      "start_time": -100,
-      "end_time": 100,
-      "collection": [
-        {
-          "text": "",
-          "start_time": 0,
-          "end_time": 0,
-          "pronunciation_time": 0,
-          "type": 1
-        }
-      ]
-    },
-    {
       "start_time": 1700,
       "end_time": 2272,
       "collection": [
@@ -348,7 +271,7 @@
           "end_time": 3284,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "끝"
+          "ruby_text": ""
         }
       ]
     },
@@ -645,7 +568,7 @@
           "end_time": 5114,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "*"
+          "ruby_text": ""
         },
         {
           "text": "노 ",
@@ -744,85 +667,7 @@
           "end_time": 5114,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "대기"
-        }
-      ]
-    },
-    {
-      "start_time": 4410,
-      "end_time": 11378,
-      "collection": [
-        {
-          "text": "< ",
-          "start_time": 4510,
-          "end_time": 5266,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "* ",
-          "start_time": 4510,
-          "end_time": 5266,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "박수 ",
-          "start_time": 4510,
-          "end_time": 5266,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ": ",
-          "start_time": 4510,
-          "end_time": 5266,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 4510,
-          "end_time": 4891,
-          "pronunciation_time": 0,
-          "type": "2",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 5288,
-          "end_time": "11278",
-          "pronunciation_time": 0,
-          "type": "2",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "x ",
-          "start_time": 4510,
-          "end_time": 11278,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "(표시 ",
-          "start_time": 4510,
-          "end_time": 11278,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "부분까지) ",
-          "start_time": 4510,
-          "end_time": 11278,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ">",
-          "start_time": 4510,
-          "end_time": 5266,
-          "pronunciation_time": 0,
-          "type": "3"
+          "ruby_text": ""
         }
       ]
     },
@@ -849,7 +694,7 @@
           "end_time": 5667,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "시작"
+          "ruby_text": ""
         },
         {
           "text": "아",
@@ -1722,7 +1567,7 @@
           "end_time": 11363,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "끝"
+          "ruby_text": ""
         }
       ]
     },
@@ -2103,85 +1948,7 @@
           "end_time": 13244,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "대기"
-        }
-      ]
-    },
-    {
-      "start_time": 12532,
-      "end_time": 16616,
-      "collection": [
-        {
-          "text": "< ",
-          "start_time": "12639",
-          "end_time": 13028,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "* ",
-          "start_time": "12639",
-          "end_time": 13028,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "박수 ",
-          "start_time": "12639",
-          "end_time": 13028,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ": ",
-          "start_time": "12639",
-          "end_time": 13028,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 12639,
-          "end_time": 13028,
-          "pronunciation_time": "0.333",
-          "type": "2",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 13418,
-          "end_time": 16516,
-          "pronunciation_time": "0.333",
-          "type": "2",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "x ",
-          "start_time": 12632,
-          "end_time": 16516,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "(표시 ",
-          "start_time": 12632,
-          "end_time": 16516,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "부분까지) ",
-          "start_time": 12632,
-          "end_time": 16516,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ">",
-          "start_time": "12639",
-          "end_time": 13028,
-          "pronunciation_time": 0,
-          "type": "3"
+          "ruby_text": ""
         }
       ]
     },
@@ -2208,7 +1975,7 @@
           "end_time": 13799,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "시작"
+          "ruby_text": ""
         },
         {
           "text": "나",
@@ -2786,7 +2553,7 @@
           "end_time": 16569,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "끝"
+          "ruby_text": ""
         }
       ]
     },
@@ -3181,78 +2948,7 @@
           "end_time": 19978,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "대기"
-        }
-      ]
-    },
-    {
-      "start_time": 19119,
-      "end_time": 24755,
-      "collection": [
-        {
-          "text": "< ",
-          "start_time": 19219,
-          "end_time": 19605,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "* ",
-          "start_time": 19219,
-          "end_time": 19605,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "박수 ",
-          "start_time": 19219,
-          "end_time": 19605,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ": ",
-          "start_time": 19219,
-          "end_time": 19605,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 19219,
-          "end_time": 19605,
-          "pronunciation_time": 0,
-          "type": "2",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "짝 ",
-          "start_time": 19999,
-          "end_time": 24655,
-          "pronunciation_time": 0,
-          "type": "2",
-          "repeat_delay": "48.5"
-        },
-        {
-          "text": "x ",
-          "start_time": "19219",
-          "end_time": 24655,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": "(끝까지) ",
-          "start_time": "19219",
-          "end_time": 24655,
-          "pronunciation_time": 0,
-          "type": "3"
-        },
-        {
-          "text": ">",
-          "start_time": 19219,
-          "end_time": 19605,
-          "pronunciation_time": 0,
-          "type": "3"
+          "ruby_text": ""
         }
       ]
     },
@@ -3279,7 +2975,7 @@
           "end_time": 20373,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "시작"
+          "ruby_text": ""
         },
         {
           "text": "아",
