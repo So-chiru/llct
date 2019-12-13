@@ -1203,6 +1203,20 @@
           "type": 1
         },
         {
+          "text": "(후",
+          "start_time": 6497,
+          "end_time": 6556,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!) ",
+          "start_time": 6517,
+          "end_time": 6556,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "나",
           "start_time": 6552,
           "end_time": 6815,
@@ -1235,7 +1249,8 @@
           "start_time": 6617,
           "end_time": 6815,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "카",
@@ -1264,6 +1279,54 @@
           "end_time": 6815,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 6527,
+      "end_time": 6950,
+      "collection": [
+        {
+          "text": "* (세-",
+          "start_time": 6627,
+          "end_time": 6850,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "노 ",
+          "start_time": 6662,
+          "end_time": 6850,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와 ",
+          "start_time": 6696,
+          "end_time": 6850,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와 ",
+          "start_time": 6728,
+          "end_time": 6850,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와 ",
+          "start_time": 6764,
+          "end_time": 6850,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와)",
+          "start_time": 6798,
+          "end_time": 6850,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -2807,6 +2870,20 @@
           "type": 1
         },
         {
+          "text": "(후",
+          "start_time": 13280,
+          "end_time": 13326,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!) ",
+          "start_time": 13295,
+          "end_time": 13326,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
           "text": "유",
           "start_time": 13329,
           "end_time": 13592,
@@ -2839,7 +2916,8 @@
           "start_time": 13398,
           "end_time": 13592,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "라",
@@ -2868,6 +2946,54 @@
           "end_time": 13592,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 13296,
+      "end_time": 13699,
+      "collection": [
+        {
+          "text": "* (세-",
+          "start_time": 13396,
+          "end_time": 13599,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "노 ",
+          "start_time": 13435,
+          "end_time": 13599,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와 ",
+          "start_time": 13471,
+          "end_time": 13599,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와 ",
+          "start_time": 13507,
+          "end_time": 13599,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와 ",
+          "start_time": 13542,
+          "end_time": 13599,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후와)",
+          "start_time": 13577,
+          "end_time": 13599,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
