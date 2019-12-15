@@ -137,7 +137,7 @@ var Karaoke = function (kara_elem) {
     this.RenderDOM()
     this.lineTimingValidate()
 
-    this.RunHook('editData', this.karaokeData)
+    this.runHook('editData', this.karaokeData)
   }
   this.Render = function (text) {
     var renderedData = []
