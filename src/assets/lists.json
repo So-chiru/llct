@@ -1011,6 +1011,7 @@
         "center": "츠시마 요시코",
         "bladeColor": "요시코 색 (흰색)",
         "bladeColorHEX": "#fff",
+        "karaoke": true,
         "short_kr": "데이드림"
       },
       "G線上のシンデレラ": {
@@ -2296,75 +2297,65 @@
         "id": "20011",
         "center": null,
         "artist": 0,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "開花宣言": {
         "id": "20012",
         "translated": "개화선언",
         "artist": 1,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "☆ワンダーランド☆": {
         "id": "20013",
         "translated": "☆원더랜드☆",
         "artist": 2,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "オードリ": {
         "id": "20014",
         "translated": "오도리",
         "center": null,
         "artist": 3,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "Wish": {
         "id": "20015",
         "center": null,
         "artist": 4,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "友 & 愛": {
         "id": "20016",
         "translated": "친구 & 사랑",
         "center": null,
         "artist": 5,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "My Own Fairy-Tale": {
         "id": "20017",
         "center": null,
         "artist": 6,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "MELODY": {
         "id": "20018",
         "center": null,
         "artist": 7,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "声繋ごうよ": {
         "id": "20019",
         "translated": "목소리를 잇자",
         "center": null,
         "artist": 8,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       },
       "テレテレパシー": {
         "id": "20020",
         "translated": "텔레텔레파시",
         "center": null,
         "artist": 9,
-        "karaoke": true,
-        "notPerformed": true
+        "karaoke": true
       }
     }
   }
