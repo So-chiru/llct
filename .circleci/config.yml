@@ -1,4 +1,6 @@
 version: 2
+orbs: 
+  puppeteer: threetreeslight/puppeteer@0.1.2
 jobs:
   runs:
     docker:
