@@ -1,17 +1,21 @@
 const pkgs = require('./package.json')
 const gulp = require('gulp')
+const LLCTImgfy = require('./imgGenerator/plugins/gulp-llct/index')
 const fileCache = require('gulp-file-cache')
-let uglify = require('gulp-uglify-es').default
+const pngQuant = require('imagemin-pngquant')
+const jpegTran = require('imagemin-jpegtran')
 
 const plugins = require('gulp-load-plugins')({
   pattern: ['*'],
   scope: ['devDependencies'],
   rename: {
-    'gulp-uglify-es': 'uglify'
+    'gulp-uglify-es': 'uglify',
+    'gulp-json-minify': 'jsonm'
   }
 })
 
 let filecaches = new fileCache()
+let callFilecaches = new fileCache('.llct-call-caches')
 plugins.sass.compiler = require('node-sass')
 
 gulp.task('sass', function () {
@@ -69,7 +73,7 @@ gulp.task('json:min', () => {
   return gulp
     .src([pkgs.srcs.datas + '**/*.json'])
     .pipe(filecaches.filter())
-    .pipe(plugins.jsonminify())
+    .pipe(plugins.jsonm())
     .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/data'))
 })
@@ -91,14 +95,17 @@ gulp.task('images', () => {
     .src(pkgs.srcs.datas + '**/*.{png,jpg,jpeg,svg}')
     .pipe(filecaches.filter())
     .pipe(
-      plugins.imagemin({
-        progressive: true,
-        interlaced: true,
-        optimizationLevel: 7,
-        svgoPlugins: [{ removeViewBox: false }],
-        verbose: true,
-        use: []
-      })
+      plugins.imagemin([
+        pngQuant({
+          quality: [0.4, 0.7],
+          strip: true,
+          dithering: 0.35,
+          speed: 1
+        }),
+        jpegTran({
+          progressive: true
+        })
+      ])
     )
     .pipe(filecaches.cache())
     .pipe(gulp.dest('./dist/data'))
@@ -116,19 +123,57 @@ gulp.task('images', () => {
     .pipe(gulp.dest('./dist/data'))
 })
 
+gulp.task('callImgAssets', () => {
+  return gulp.src(pkgs.srcs.imgs + 'assets/**.*').pipe(gulp.dest('./calls'))
+})
+
+gulp.task('callImgTransfer', () => {
+  return gulp
+    .src(pkgs.srcs.datas + '**/*.json')
+    //.pipe(callFilecaches.filter())
+    .pipe(callFilecaches.cache())
+    .pipe(LLCTImgfy())
+    .pipe(
+      plugins.imagemin([
+        pngQuant({
+          quality: [0.5, 0.9],
+          strip: true,
+          dithering: 0.25,
+          speed: 1
+        })
+      ])
+    )
+    .pipe(gulp.dest('./dist/data'))
+    .pipe(
+      plugins.webp({
+        lossless: false
+      })
+    )
+    .pipe(
+      plugins.rename(p => {
+        p.extname = '.webp'
+      })
+    )
+    .pipe(gulp.dest('./dist/data'))
+})
+
 gulp.task('assets', () => {
   return gulp
     .src([
       pkgs.srcs.datas + '**/*.*',
       `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg,json}`
     ])
-    .pipe(filecaches.filter())
-    .pipe(filecaches.cache())
+    .pipe(callFilecaches.filter())
+    .pipe(callFilecaches.cache())
     .pipe(gulp.dest('./dist/data'))
 })
 
 gulp.task('root_assets', () => {
-  return gulp.src(pkgs.srcs.rdatas + '**/*').pipe(gulp.dest('./dist'))
+  return gulp
+    .src(pkgs.srcs.rdatas + '**/*')
+    .pipe(callFilecaches.filter())
+    .pipe(callFilecaches.cache())
+    .pipe(gulp.dest('./dist'))
 })
 
 gulp.task('watch', () => {
@@ -148,11 +193,17 @@ gulp.task('watch', () => {
     ],
     gulp.series('assets')
   )
+
+  gulp.watch(pkgs.srcs.datas + '**/*.json', gulp.series('callImgTransfer'))
+  gulp.watch(pkgs.srcs.imgs + 'assets/**.*', gulp.series('callImgAssets'))
   gulp.watch([pkgs.srcs.rdatas + '**/*.*'], gulp.series('root_assets'))
 
   return gulp.src('./dist').pipe(
     plugins.webserver({
-      livereload: true,
+      livereload: {
+        enabled: true,
+        port: 29102
+      },
       host: '0.0.0.0',
       port: pkgs.webSVPort,
       directoryListing: false,
@@ -161,9 +212,13 @@ gulp.task('watch', () => {
   )
 })
 
+gulp.task('callImages', gulp.series('callImgAssets', 'callImgTransfer'))
+
 gulp.task(
   'build',
   gulp.series(
+    'assets',
+    'root_assets',
     'sass',
     'sass:min',
     'js',
@@ -171,16 +226,15 @@ gulp.task(
     'json:min',
     'pug',
     'images',
-    'assets',
-    'root_assets'
+    'callImages'
   )
 )
-
-gulp.task('default', gulp.series('build', 'watch'))
 
 gulp.task(
   'init_run',
   gulp.series(
+    'assets',
+    'root_assets',
     'sass',
     'sass:min',
     'js',
@@ -188,8 +242,9 @@ gulp.task(
     'json:min',
     'pug',
     'images',
-    'assets',
-    'root_assets',
+    'callImages',
     'watch'
   )
 )
+
+gulp.task('default', gulp.series('build', 'watch'))

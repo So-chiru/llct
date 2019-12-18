@@ -84,15 +84,19 @@ var Karaoke = function (kara_elem) {
     }
 
     if (typeof func !== 'function') {
-      logger.error(1, 'rs', 'ListenHook : func is not defined or not valid function type.')
+      logger.error(
+        1,
+        'rs',
+        'ListenHook : func is not defined or not valid function type.'
+      )
       return false
     }
 
-    return this.karaHook[hook_name].push(func)    
+    return this.karaHook[hook_name].push(func)
   }
   /**
    * hook_name 을 가진 hook를 실행합니다.
-   * 
+   *
    * @param {String} hook_name Hook 이름
    * @param {*} args 인자로 넘길 인자들
    */
@@ -101,7 +105,7 @@ var Karaoke = function (kara_elem) {
 
     let hooks = this.karaHook[hook_name]
     let hook_len = hooks.length
-      
+
     for (var i = 0; i < hook_len; i++) {
       hooks[i](...args)
     }
@@ -248,8 +252,9 @@ var Karaoke = function (kara_elem) {
         var _idx = this.karaoke_element.id + '_kara_' + lineI + '_' + wordI
         spaceEle += `<p class="lyrics ${
           __kara_typeList[word.type]
-        }" id="${_idx}" ${word.text.trim() === '' &&
-          'llct-blank'} data-line="${lineI}" data-word="${wordI}" ${(typeof word.repeat_delay ===
+        }" id="${_idx}" ${
+          word.text.trim() === '' ? 'llct-blank' : ''
+        } data-line="${lineI}" data-word="${wordI}" ${(typeof word.repeat_delay ===
           'string' ||
           typeof word.repeat_delay === 'number') &&
           (word.repeat_delay != '0' || word.repeat_delay != '') &&
@@ -284,6 +289,12 @@ var Karaoke = function (kara_elem) {
         '</p> ' +
         spaceEle +
         '</div>'
+
+      if (this.karaokeData.timeline[lineI].lyrics) {
+        inserts += `<div class="p_line_lyrics" data-line="${lineI}"><p class="tr_lyrics __s">${
+          this.karaokeData.timeline[lineI].lyrics
+        }</p></div>`
+      }
     }
 
     this.karaoke_element.innerHTML = inserts
@@ -376,10 +387,7 @@ var Karaoke = function (kara_elem) {
     if (this.autoScroll.cache_elem) {
       this.autoScroll.timeout = setTimeout(() => {
         if (Date.now() - this.autoScroll.last < 3000) return
-        this.autoScroll.cache_elem.scrollTop =
-          new_line_element.offsetTop -
-          (window.innerHeight -
-            this.autoScroll.cache_elem.getBoundingClientRect().height)
+        this.autoScroll.cache_elem.scrollTop = new_line_element.offsetTop - ((this.autoScroll.cache_elem.offsetHeight - 200)/ 2)
       }, 950)
     }
   }

@@ -428,8 +428,8 @@ var _c = {
   repeat_delay: '#repeat_delay_val',
   ruby_text: '#ruby_text_val',
   text: '#text_val',
+  lyrics: '#lyrics_val',
   text_color: '#text_color_val',
-  tick_volume: '#tick_volume_val'
 }
 
 var valElementObject = {
@@ -439,8 +439,8 @@ var valElementObject = {
   '#type_val': 'type',
   '#repeat_delay_val': 'repeat_delay',
   '#ruby_text_val': 'ruby_text',
+  '#lyrics_val': 'lyrics',
   '#text_val': 'text',
-  '#tick_volume_val': 'tick_volume'
 }
 
 var __prevKCount = ['_', 0]
@@ -455,6 +455,10 @@ const KaraokeEditor = {
     document.querySelector(_c[key]).value = value
 
     selectWords.forEach((details, index) => {
+      if (key === 'lyrics') {
+        KaraokeInstance.karaokeData.timeline[details.posX].lyrics = value
+      }
+
       var selectedObject =
         KaraokeInstance.karaokeData.timeline[details.posX].collection[
           details.posY

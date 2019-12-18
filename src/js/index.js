@@ -117,13 +117,14 @@ let LLCT = {
   },
   openCallImage: id => {
     var pElement = document.getElementById('ps_wp')
+    var webpI = webpSupports() ? 'webp' : 'png'
 
     // TODO : 반응형 이미지 크기
     var items = [
       {
-        src: './data/' + id + '/call.jpg',
-        w: 3505,
-        h: 2480
+        src: './data/' + id + '/call.' + webpI,
+        w: 3232,
+        h: 2100
       }
     ]
     window.DCGall = new PhotoSwipe(pElement, PhotoSwipeUI_Default, items, {
@@ -136,13 +137,14 @@ let LLCT = {
   },
   loadCallImage: id => {
     yohaneNoDOM.hideLyrics()
+    var webpI = webpSupports() ? 'webp' : 'png'
 
     var callImage = document.createElement('img')
     callImage.className = 'call_img'
     callImage.onclick = () => {
       LLCT.openCallImage(id)
     }
-    callImage.src = './data/' + id + '/call.jpg'
+    callImage.src = './data/' + id + '/call.' + webpI
     callImage.onload = () => {
       yohaneNoDOM.showLyrics()
     }
@@ -187,6 +189,7 @@ let LLCT = {
         if (popsHeart.get('pid') !== null && popsHeart.get('pid') !== '') {
           LLCT.selectGroup(popsHeart.get('pid').substring(0, 1), true, true)
           yohane.initialize(popsHeart.get('pid'))
+
           if (!dataYosoro.get('doNotUseMusicPlayer')) {
             yohaneNoDOM.dekakuni()
           }
@@ -245,6 +248,8 @@ let yohaneNoDOM = {
     if (yohaneNoDOM.kaizu) {
       yohaneNoDOM.chiisakuni()
     }
+
+    yohane.currentSong = null
 
     if (!ui_only) {
       if (popsHeart.get('preview-sync')) {
@@ -543,6 +548,7 @@ let yohane = {
     }
   },
   volumeStore: null,
+  currentSong: null,
   prev: skipDekaku => {
     var objK = Object.keys(LLCT.__cur_filterLists)
     if (!LLCT.__playPointer) {
@@ -765,6 +771,12 @@ let yohane = {
       '-' + (numToTS(_dr - _ct) || '??')
   },
   initialize: (id, use_local_data) => {
+    if (id === yohane.currentSong) {
+      yohaneNoDOM.dekakuni()
+      return false
+    }
+
+    yohane.currentSong = id
     KaraokeInstance.karaokeData = null
     yohaneNoDOM.initialize(id, use_local_data)
 
@@ -1045,6 +1057,15 @@ Sakurauchi.add('LLCTDOMLoad', () => {
   vertialMenusContext.addAction('shuffleMusic', ev => {
     yohane.shuffle()
   })
+
+  window.addEventListener('popstate', ev => {
+    if (!ev.state || !ev.state.pid) {
+      return yohane.giran()
+    }
+
+    yohaneNoDOM.dekakuni()
+    yohane.initialize(ev.state.pid)
+  })
 })
 
 // Tether 사용
@@ -1095,7 +1116,7 @@ Sakurauchi.add('LLCTPGLoad', () => {
     document
       .getElementById('tick_btn')
       .classList[v ? 'remove' : 'add']('in_active')
-    
+
     yohaneNoDOM.tickIcon(v)
 
     dataYosoro.set('biTick', v)

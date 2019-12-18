@@ -982,12 +982,6 @@ llct-pl-infotext span {
   backdrop-filter: saturate(280%);
 }
 
-.bottom_margin {
-  position: relative;
-  display: block;
-  height: 100px;
-}
-
 .slide-right {
   -webkit-animation-name: slide-right;
   -webkit-animation-duration: 0.7s;
@@ -1187,6 +1181,8 @@ llct-pl-infotext span {
 .offline_replacer {
   display: none;
   text-align: center;
+  width: 80%;
+  margin: 0px auto 2vh auto;
 }
 
 .offline_replacer .material-icons-round {

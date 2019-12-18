@@ -88,32 +88,33 @@ html.editor.dark
             | 렌더링 된 결과가 여기에 표시됩니다.
         .lyrics_property
           h1.kr 속성
-          p 선택된 단어들의
-          p
+          p 선택된 단어의 줄 속성
+          p.inner_push
+            | 가사
+            input#lyrics_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'lyrics', this.value, false, false, false)")
+          p 선택된 단어들의 속성
+          p.inner_push
             | 텍스트
             input#text_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'text', this.value, false, false, false)")
-          p
+          p.inner_push
             | 루비 텍스트 (없을 경우 공란)
             input#ruby_text_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'ruby_text', this.value, false, false, false)")
-          p
+          p.inner_push
             | 시작 시간
             input#start_time_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'start_time', this.value, false, false, true)")
-          p
+          p.inner_push
             | 종료 시간
             input#end_time_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'end_time', this.value, false, false, true)")
-          p
+          p.inner_push
             | 발음 시간
             input#pron_time_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'pronunciation_time', this.value, false, false, true)")
-          p
+          p.inner_push
             | 종류
             input#type_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'type', this.value, false, false, false)")
-          p
-            | 틱 소리 볼륨
-            input#tick_volume_val.blackInput(type='number' disabled='' onchange="KaraokeEditor.EditVal( 'tick_volume', this.value, false, false, false)")
-          p
+          p.inner_push
             | 반복 딜레이 (없을 경우 0)
             input#repeat_delay_val.blackInput(type='text' disabled='' onchange="KaraokeEditor.EditVal( 'repeat_delay', this.value, false, false, false)")
-          p
+          p.inner_push
             | 선택 : 현재 텍스트 색상
             input#text_color_val.blackInput(type='color' value='#000' onchange="KaraokeEditor.EditVal( 'text_color', this.value, false, false, false)")
           .editor_btncollec

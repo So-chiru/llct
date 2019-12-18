@@ -190,6 +190,9 @@
     text-align: start;
     min-height: 35px;
   }
+  .p_line_lyrics {
+    display: none;
+  }
   .line_num {
     margin-right: 5px;
     margin-bottom: auto;
@@ -217,6 +220,10 @@
 
   .title_settings {
     width: 50%;
+  }
+
+  .inner_push {
+    margin-left: 15px;
   }
 
   .editor_btncollec {

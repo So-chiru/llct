@@ -65,7 +65,6 @@ html(lang="kr").index
                     llct-pl-infotext#furicopy_tg 곡 중간에 안무를 따라 하는 부분이 있을 수 있습니다.
                     llct-pl-infotext#performed_tg 이 곡은 라이브 된 적이 없습니다. 콜이 틀릴 수도 있으니, 참고용으로만 봐주세요.
                     .karaoke#karaoke
-                    p.bottom_margin
             audio#kara_audio
             audio#tick_sounds(src="/live_assets/key-press-2.mp3")
         #__context_bg.__context_bg(onclick="vertialMenusContext.closeContext()" style="visibility: visible;pointer-events: none;opacity: 0;")
@@ -125,9 +124,13 @@ html(lang="kr").index
                 .toggle_collection
                     label.ckbox 동작 줄이기 <input id="reduceMotion" class="toggle_input" type="checkbox" checked="none"><label for="reduceMotion" class="toggle_btn"><span></span></label>
                 .toggle_collection
-                    label.ckbox 사용 가능한 경우 인터렉티브 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
+                    label.ckbox 사용 가능한 경우 텍스트 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
                 .toggle_collection
-                    label.ckbox 음악 플레이어 끄기 (활성시 콜표 이미지만 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
+                    label.ckbox 사용 가능한 경우 한글 가사 표시 <input id="useLyricsShow" class="toggle_input" type="checkbox" checked="none"><label for="useLyricsShow" class="toggle_btn"><span></span></label>
+                .toggle_collection
+                    label.ckbox 가사를 사용하는 경우 전체 가사 표시 <input id="useLyricsShowFull" class="toggle_input" type="checkbox" checked="none"><label for="useLyricsShowFull" class="toggle_btn"><span></span></label>
+                .toggle_collection
+                    label.ckbox 음악 플레이어 끄기 (활성시 콜표 텍스트나 이미지 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
                 .toggle_collection
                     label.ckbox Use Romaji Instead of Hangul <input id="useRomaji" class="toggle_input" type="checkbox" checked="none"><label for="useRomaji" class="toggle_btn"><span></span></label>
                 .toggle_collection

@@ -13,7 +13,8 @@
           "start_time": 223,
           "end_time": 816,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "테",
@@ -99,7 +100,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
     },
     {
       "start_time": 720,
@@ -110,7 +112,8 @@
           "start_time": 820,
           "end_time": 1344,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "키",
@@ -210,7 +213,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
     },
     {
       "start_time": 1250,
@@ -221,7 +225,8 @@
           "start_time": 1350,
           "end_time": 1974,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "나",
@@ -321,7 +326,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "곁에 네가 있어 주기 때문에"
     },
     {
       "start_time": 1884,
@@ -332,7 +338,8 @@
           "start_time": 1984,
           "end_time": 2582,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "쿄",
@@ -439,7 +446,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "역경도 불안도 이겨나갈 수 있어"
     },
     {
       "start_time": 2482,
@@ -450,7 +458,8 @@
           "start_time": 2582,
           "end_time": 2888,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "리",
@@ -473,7 +482,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "고마워"
     },
     {
       "start_time": -100,
@@ -497,135 +507,155 @@
           "start_time": 4034,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "사",
           "start_time": 4090,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "모 ",
           "start_time": 4123,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "나",
           "start_time": 4172,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "쿠 ",
           "start_time": 4212,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "코",
           "start_time": 4248,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "론",
           "start_time": 4283,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "다",
           "start_time": 4369,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "리 ",
           "start_time": 4403,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "맛",
           "start_time": 4599,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "프",
           "start_time": 4654,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "오 ",
           "start_time": 4688,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "미",
           "start_time": 4730,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "테",
           "start_time": 4773,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "모 ",
           "start_time": 4810,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "마",
           "start_time": 4843,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "욧",
           "start_time": 4894,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "타",
           "start_time": 4955,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         },
         {
           "text": "리",
           "start_time": 4972,
           "end_time": 5144,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
         }
-      ]
+      ],
+      "lyrics": "평평한 곳에서도 넘어지거나 지도를 봐도 해멘다거나"
     },
     {
       "start_time": 5064,
@@ -636,126 +666,144 @@
           "start_time": 5164,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "카",
           "start_time": 5199,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "나",
           "start_time": 5218,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "카 ",
           "start_time": 5256,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "마",
           "start_time": 5302,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "에",
           "start_time": 5338,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "니 ",
           "start_time": 5376,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "스",
           "start_time": 5412,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "스",
           "start_time": 5468,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "마",
           "start_time": 5501,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "나",
           "start_time": 5533,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "이 ",
           "start_time": 5580,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "진",
           "start_time": 5625,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "세",
           "start_time": 5690,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "잇",
           "start_time": 5741,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "테 ",
           "start_time": 5781,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "타",
           "start_time": 5820,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "이",
           "start_time": 5864,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "헨",
@@ -763,16 +811,19 @@
           "end_time": 6110,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "*"
+          "ruby_text": "*",
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         },
         {
           "text": "다",
           "start_time": 5956,
           "end_time": 6110,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
         }
-      ]
+      ],
+      "lyrics": "여간해서 앞으로 나아가질 않아 인생이란 힘든 거야"
     },
     {
       "start_time": 5801,
@@ -865,107 +916,123 @@
           "start_time": 6150,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "우 ",
           "start_time": 6192,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "아",
           "start_time": 6227,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "루",
           "start_time": 6257,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "케",
           "start_time": 6367,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "나",
           "start_time": 6386,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "이 ",
           "start_time": 6403,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "요",
           "start_time": 6438,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "와",
           "start_time": 6470,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "네 ",
           "start_time": 6506,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "하",
           "start_time": 6539,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "이",
           "start_time": 6575,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "타 ",
           "start_time": 6611,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "토",
           "start_time": 6647,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         },
         {
           "text": "키",
           "start_time": 6664,
           "end_time": 6786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
         }
-      ]
+      ],
+      "lyrics": "\"더는 못 걷겠어\"라고 약한 소릴 뱉을 때"
     },
     {
       "start_time": 6156,
@@ -1038,93 +1105,107 @@
           "start_time": 6788,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "나",
           "start_time": 6807,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "타",
           "start_time": 6824,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "가 ",
           "start_time": 6878,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "테",
           "start_time": 6923,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "오 ",
           "start_time": 6962,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "니",
           "start_time": 6997,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "깃",
           "start_time": 7033,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "테 ",
           "start_time": 7101,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "쿠",
           "start_time": 7348,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "레",
           "start_time": 7386,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "타",
           "start_time": 7489,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         },
         {
           "text": "네",
           "start_time": 7506,
           "end_time": 7560,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 손을 잡아 주었지"
         }
-      ]
+      ],
+      "lyrics": "네가 손을 잡아 주었지"
     },
     {
       "start_time": -100,
@@ -1148,93 +1229,107 @@
           "start_time": 7564,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "와",
           "start_time": 7599,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "라",
           "start_time": 7633,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "나",
           "start_time": 7667,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "이 ",
           "start_time": 7685,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "히",
           "start_time": 7742,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "비",
           "start_time": 7776,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "카",
           "start_time": 7794,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "라 ",
           "start_time": 7848,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "잇",
           "start_time": 7885,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "포 ",
           "start_time": 7950,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "잇",
           "start_time": 8015,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "포",
           "start_time": 8072,
           "end_time": 8162,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         }
-      ]
+      ],
+      "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
     },
     {
       "start_time": 8064,
@@ -1245,107 +1340,123 @@
           "start_time": 8164,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "우",
           "start_time": 8199,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "키 ",
           "start_time": 8235,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "무",
           "start_time": 8303,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "네",
           "start_time": 8343,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "니 ",
           "start_time": 8379,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "미",
           "start_time": 8414,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "라",
           "start_time": 8447,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "이",
           "start_time": 8484,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "에 ",
           "start_time": 8520,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "후",
           "start_time": 8546,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "미",
           "start_time": 8586,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "다",
           "start_time": 8619,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "소",
           "start_time": 8641,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "우",
           "start_time": 8657,
           "end_time": 8689,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         }
-      ]
+      ],
+      "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
     },
     {
       "start_time": 8591,
@@ -1356,114 +1467,131 @@
           "start_time": 8691,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "라",
           "start_time": 8727,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "키",
           "start_time": 8763,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "라 ",
           "start_time": 8797,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "마",
           "start_time": 8870,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "부",
           "start_time": 8903,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "시",
           "start_time": 8921,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "쿠 ",
           "start_time": 8973,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "히",
           "start_time": 9008,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "카",
           "start_time": 9043,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "루 ",
           "start_time": 9080,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "마",
           "start_time": 9147,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "이",
           "start_time": 9167,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "니",
           "start_time": 9201,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "치",
           "start_time": 9238,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "와",
           "start_time": 9256,
           "end_time": 9326,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         }
-      ]
+      ],
+      "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
     },
     {
       "start_time": 9231,
@@ -1474,107 +1602,123 @@
           "start_time": 9331,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "나",
           "start_time": 9368,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "타",
           "start_time": 9403,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "니 ",
           "start_time": 9420,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "모",
           "start_time": 9458,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "랏",
           "start_time": 9488,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "타 ",
           "start_time": 9550,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "토",
           "start_time": 9596,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "비",
           "start_time": 9629,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "키",
           "start_time": 9681,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "리 ",
           "start_time": 9699,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "스",
           "start_time": 9733,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "테",
           "start_time": 9774,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "키",
           "start_time": 9815,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "나",
           "start_time": 9854,
           "end_time": 9919,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         }
-      ]
+      ],
+      "lyrics": "네게 받은 무엇보다 멋진"
     },
     {
       "start_time": 9796,
@@ -1585,30 +1729,35 @@
           "start_time": 9896,
           "end_time": 10237,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         },
         {
           "text": "레",
           "start_time": 9931,
           "end_time": 10237,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         },
         {
           "text": "젠",
           "start_time": 10012,
           "end_time": 10237,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         },
         {
           "text": "토",
           "start_time": 10053,
           "end_time": 10237,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         }
-      ]
+      ],
+      "lyrics": "선물이야"
     },
     {
       "start_time": -100,
@@ -1715,156 +1864,179 @@
           "start_time": 11372,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "토",
           "start_time": 11411,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "리",
           "start_time": 11429,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "데 ",
           "start_time": 11465,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "유",
           "start_time": 11508,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "메",
           "start_time": 11548,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "오 ",
           "start_time": 11584,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "미",
           "start_time": 11619,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "루",
           "start_time": 11671,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "요",
           "start_time": 11709,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "리 ",
           "start_time": 11747,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "잇",
           "start_time": 11937,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "쇼",
           "start_time": 11986,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "노 ",
           "start_time": 12026,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "호",
           "start_time": 12072,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "우",
           "start_time": 12114,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "가 ",
           "start_time": 12153,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "타",
           "start_time": 12186,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "노",
           "start_time": 12242,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "시",
           "start_time": 12281,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "쿠",
           "start_time": 12299,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         },
         {
           "text": "테",
           "start_time": 12318,
           "end_time": 12471,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
         }
-      ]
+      ],
+      "lyrics": "혼자서 꿈을 꾸는 거 보다 같이 꾸는 게 즐거워서"
     },
     {
       "start_time": 12402,
@@ -1875,119 +2047,136 @@
           "start_time": 12502,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "라",
           "start_time": 12540,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "이 ",
           "start_time": 12559,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "코",
           "start_time": 12596,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "토",
           "start_time": 12648,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "와 ",
           "start_time": 12683,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "한",
           "start_time": 12717,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "분",
           "start_time": 12810,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "코 ",
           "start_time": 12868,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "우",
           "start_time": 12962,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "레",
           "start_time": 12998,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "시",
           "start_time": 13033,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "이 ",
           "start_time": 13050,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "코",
           "start_time": 13083,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "토",
           "start_time": 13121,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "와 ",
           "start_time": 13156,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "무",
           "start_time": 13205,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "겐",
@@ -1995,23 +2184,27 @@
           "end_time": 13465,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "*"
+          "ruby_text": "*",
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "다",
           "start_time": 13299,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         },
         {
           "text": "이",
           "start_time": 13409,
           "end_time": 13465,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
         }
-      ]
+      ],
+      "lyrics": "힘든 일은 반으로, 기쁜 일은 무한대로"
     },
     {
       "start_time": 13145,
@@ -2104,93 +2297,107 @@
           "start_time": 13487,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "모",
           "start_time": 13527,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "다",
           "start_time": 13562,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "치",
           "start_time": 13599,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "토",
           "start_time": 13705,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "카 ",
           "start_time": 13726,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "신",
           "start_time": 13774,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "유",
           "start_time": 13834,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "우",
           "start_time": 13878,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "오 ",
           "start_time": 13914,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "코",
           "start_time": 13952,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "에",
           "start_time": 13988,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         },
         {
           "text": "다",
           "start_time": 14005,
           "end_time": 14139,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "친구라던지 절친을 넘어선"
         }
-      ]
+      ],
+      "lyrics": "친구라던지 절친을 넘어선"
     },
     {
       "start_time": 13497,
@@ -2263,86 +2470,99 @@
           "start_time": 14130,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "사",
           "start_time": 14166,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "타",
           "start_time": 14270,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "쿠",
           "start_time": 14304,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "마 ",
           "start_time": 14342,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "데",
           "start_time": 14382,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "키",
           "start_time": 14414,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "루 ",
           "start_time": 14450,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "나",
           "start_time": 14693,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "카",
           "start_time": 14726,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "마",
           "start_time": 14829,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         },
         {
           "text": "사",
           "start_time": 14848,
           "end_time": 14906,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "절차탁마 할 수 있는 동료야"
         }
-      ]
+      ],
+      "lyrics": "절차탁마 할 수 있는 동료야"
     },
     {
       "start_time": -100,
@@ -2366,93 +2586,107 @@
           "start_time": 14901,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "테",
           "start_time": 14940,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "시",
           "start_time": 14977,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "나",
           "start_time": 15015,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "이 ",
           "start_time": 15031,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "미",
           "start_time": 15081,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "치",
           "start_time": 15116,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "데",
           "start_time": 15134,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "모 ",
           "start_time": 15185,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "잇",
           "start_time": 15220,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "포 ",
           "start_time": 15295,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "잇",
           "start_time": 15360,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         },
         {
           "text": "포",
           "start_time": 15415,
           "end_time": 15494,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
         }
-      ]
+      ],
+      "lyrics": "끝없는 길이라도 한 걸음 한 걸음"
     },
     {
       "start_time": 15404,
@@ -2463,107 +2697,123 @@
           "start_time": 15504,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "키",
           "start_time": 15539,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "라",
           "start_time": 15572,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "메",
           "start_time": 15647,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "나",
           "start_time": 15682,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "케",
           "start_time": 15717,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "레",
           "start_time": 15752,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "바 ",
           "start_time": 15786,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "유",
           "start_time": 15821,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "메",
           "start_time": 15859,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "와 ",
           "start_time": 15895,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "니",
           "start_time": 15930,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "게",
           "start_time": 15965,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "나",
           "start_time": 15987,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         },
         {
           "text": "이",
           "start_time": 16004,
           "end_time": 16027,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
         }
-      ]
+      ],
+      "lyrics": "포기하지 않는다면 꿈은 도망가지 않아"
     },
     {
       "start_time": 15934,
@@ -2574,107 +2824,123 @@
           "start_time": 16034,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "나",
           "start_time": 16069,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "리",
           "start_time": 16103,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "니 ",
           "start_time": 16138,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "아",
           "start_time": 16210,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "나",
           "start_time": 16242,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "타",
           "start_time": 16262,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "가 ",
           "start_time": 16315,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "이",
           "start_time": 16352,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "테 ",
           "start_time": 16388,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "쿠",
           "start_time": 16420,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "레",
           "start_time": 16487,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "루",
           "start_time": 16507,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "카",
           "start_time": 16543,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         },
         {
           "text": "라",
           "start_time": 16577,
           "end_time": 16646,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "곁에 네가 있어 주기 때문에"
         }
-      ]
+      ],
+      "lyrics": "곁에 네가 있어 주기 때문에"
     },
     {
       "start_time": 16569,
@@ -2685,114 +2951,131 @@
           "start_time": 16669,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "쿄",
           "start_time": 16704,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "우",
           "start_time": 16741,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "모 ",
           "start_time": 16759,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "후",
           "start_time": 16797,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "안",
           "start_time": 16830,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "모 ",
           "start_time": 16893,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "노",
           "start_time": 16939,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "리",
           "start_time": 16971,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "코",
           "start_time": 17020,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "에",
           "start_time": 17037,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "테 ",
           "start_time": 17080,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "이",
           "start_time": 17112,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "케",
           "start_time": 17159,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "루",
           "start_time": 17199,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         },
         {
           "text": "요",
           "start_time": 17233,
           "end_time": 17279,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "역경도 불안도 이겨나갈 수 있어"
         }
-      ]
+      ],
+      "lyrics": "역경도 불안도 이겨나갈 수 있어"
     },
     {
       "start_time": 17165,
@@ -2803,30 +3086,35 @@
           "start_time": 17265,
           "end_time": 17580,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "리",
           "start_time": 17352,
           "end_time": 17580,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "가",
           "start_time": 17372,
           "end_time": 17580,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "토",
           "start_time": 17389,
           "end_time": 17580,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         }
-      ]
+      ],
+      "lyrics": "고마워"
     },
     {
       "start_time": -100,
@@ -2933,142 +3221,163 @@
           "start_time": 19844,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "레",
           "start_time": 19878,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "마",
           "start_time": 19896,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "데 ",
           "start_time": 19931,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "즛",
           "start_time": 19980,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "토 ",
           "start_time": 20037,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "사",
           "start_time": 20075,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "사",
           "start_time": 20093,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "에",
           "start_time": 20127,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "라",
           "start_time": 20145,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "레",
           "start_time": 20180,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "테 ",
           "start_time": 20215,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "아",
           "start_time": 20334,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "마",
           "start_time": 20354,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "에",
           "start_time": 20372,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "테 ",
           "start_time": 20429,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "키",
           "start_time": 20471,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "타",
           "start_time": 20503,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "카",
           "start_time": 20551,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         },
         {
           "text": "라",
           "start_time": 20571,
           "end_time": 20617,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
         }
-      ]
+      ],
+      "lyrics": "여태껏 항상 도움 받으며 어리광부려 왔으니까"
     },
     {
       "start_time": 20523,
@@ -3079,142 +3388,163 @@
           "start_time": 20623,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "레",
           "start_time": 20644,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "카",
           "start_time": 20660,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "라 ",
           "start_time": 20717,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "와",
           "start_time": 20761,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "타",
           "start_time": 20798,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "시",
           "start_time": 20865,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "가 ",
           "start_time": 20938,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "아",
           "start_time": 21044,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "나",
           "start_time": 21065,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "타 ",
           "start_time": 21083,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "사",
           "start_time": 21189,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "사",
           "start_time": 21209,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "에",
           "start_time": 21227,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "라",
           "start_time": 21262,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "레",
           "start_time": 21280,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "루 ",
           "start_time": 21318,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "요",
           "start_time": 21353,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "우",
           "start_time": 21394,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         },
         {
           "text": "니",
           "start_time": 21415,
           "end_time": 21475,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
         }
-      ]
+      ],
+      "lyrics": "앞으로 내가 너를 도와줄 수 있도록"
     },
     {
       "start_time": 21369,
@@ -3225,86 +3555,99 @@
           "start_time": 21469,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "토 ",
           "start_time": 21505,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "못",
           "start_time": 21555,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "토 ",
           "start_time": 21616,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "츠",
           "start_time": 21674,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "요",
           "start_time": 21696,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "쿠 ",
           "start_time": 21732,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "나",
           "start_time": 21774,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "라",
           "start_time": 21822,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "나",
           "start_time": 21842,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "쿠",
           "start_time": 21875,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         },
         {
           "text": "챠",
           "start_time": 21913,
           "end_time": 22017,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "더욱 더 강해질 거야"
         }
-      ]
+      ],
+      "lyrics": "더욱 더 강해질 거야"
     },
     {
       "start_time": 21922,
@@ -3315,58 +3658,67 @@
           "start_time": 22022,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "도",
           "start_time": 22061,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "와 ",
           "start_time": 22078,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "마",
           "start_time": 22109,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "모",
           "start_time": 22125,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "리",
           "start_time": 22154,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "타",
           "start_time": 22195,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         },
         {
           "text": "이",
           "start_time": 22345,
           "end_time": 22525,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "앞으로는 지켜주고 싶어"
         }
-      ]
+      ],
+      "lyrics": "앞으로는 지켜주고 싶어"
     },
     {
       "start_time": -100,
@@ -3390,93 +3742,107 @@
           "start_time": 22529,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "와",
           "start_time": 22564,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "라",
           "start_time": 22597,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "나",
           "start_time": 22637,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "이 ",
           "start_time": 22655,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "히",
           "start_time": 22700,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "비",
           "start_time": 22740,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "카",
           "start_time": 22758,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "라 ",
           "start_time": 22810,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "잇",
           "start_time": 22846,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "포 ",
           "start_time": 22918,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "잇",
           "start_time": 22983,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         },
         {
           "text": "포",
           "start_time": 23038,
           "end_time": 23122,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
         }
-      ]
+      ],
+      "lyrics": "변하지 않는 날들부터 한 걸음 한 걸음"
     },
     {
       "start_time": 23028,
@@ -3487,107 +3853,123 @@
           "start_time": 23128,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "우",
           "start_time": 23162,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "키 ",
           "start_time": 23196,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "무",
           "start_time": 23269,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "네",
           "start_time": 23304,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "니 ",
           "start_time": 23338,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "미",
           "start_time": 23373,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "라",
           "start_time": 23408,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "이",
           "start_time": 23442,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "에 ",
           "start_time": 23479,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "후",
           "start_time": 23515,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "미",
           "start_time": 23555,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "다",
           "start_time": 23590,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "소",
           "start_time": 23608,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         },
         {
           "text": "우",
           "start_time": 23613,
           "end_time": 23653,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
         }
-      ]
+      ],
+      "lyrics": "용기를 가슴에 두고 미래로 발디뎌 보자"
     },
     {
       "start_time": 23546,
@@ -3598,114 +3980,131 @@
           "start_time": 23646,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "라",
           "start_time": 23689,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "키",
           "start_time": 23724,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "라 ",
           "start_time": 23762,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "마",
           "start_time": 23832,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "부",
           "start_time": 23868,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "시",
           "start_time": 23887,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "쿠 ",
           "start_time": 23937,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "히",
           "start_time": 23972,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "카",
           "start_time": 24006,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "루 ",
           "start_time": 24043,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "마",
           "start_time": 24112,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "이",
           "start_time": 24134,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "니",
           "start_time": 24165,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "치",
           "start_time": 24204,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         },
         {
           "text": "와",
           "start_time": 24221,
           "end_time": 24292,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
         }
-      ]
+      ],
+      "lyrics": "반짝반짝 눈부시게 빛나는 나날은"
     },
     {
       "start_time": 24196,
@@ -3716,107 +4115,123 @@
           "start_time": 24296,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "나",
           "start_time": 24329,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "타",
           "start_time": 24364,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "니 ",
           "start_time": 24384,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "모",
           "start_time": 24423,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "랏",
           "start_time": 24455,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "타 ",
           "start_time": 24519,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "토",
           "start_time": 24565,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "비",
           "start_time": 24595,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "키",
           "start_time": 24641,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "리 ",
           "start_time": 24661,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "스",
           "start_time": 24699,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "테",
           "start_time": 24736,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "키",
           "start_time": 24785,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         },
         {
           "text": "나",
           "start_time": 24819,
           "end_time": 24861,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네게 받은 무엇보다 멋진"
         }
-      ]
+      ],
+      "lyrics": "네게 받은 무엇보다 멋진"
     },
     {
       "start_time": 24756,
@@ -3827,30 +4242,35 @@
           "start_time": 24856,
           "end_time": 25130,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         },
         {
           "text": "레",
           "start_time": 24892,
           "end_time": 25130,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         },
         {
           "text": "젠",
           "start_time": 24975,
           "end_time": 25130,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         },
         {
           "text": "토",
           "start_time": 25016,
           "end_time": 25130,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "선물이야"
         }
-      ]
+      ],
+      "lyrics": "선물이야"
     },
     {
       "start_time": -100,
@@ -3874,121 +4294,139 @@
           "start_time": 25135,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "나",
           "start_time": 25173,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "타",
           "start_time": 25212,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "가 ",
           "start_time": 25232,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "이",
           "start_time": 25267,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "루",
           "start_time": 25297,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "카",
           "start_time": 25356,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "라 ",
           "start_time": 25375,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "와",
           "start_time": 25412,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "타",
           "start_time": 25444,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "시",
           "start_time": 25489,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "모 ",
           "start_time": 25508,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "카",
           "start_time": 25544,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "가",
           "start_time": 25578,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "야",
           "start_time": 25629,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "케",
           "start_time": 25667,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         },
         {
           "text": "루",
           "start_time": 25705,
           "end_time": 25749,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "네가 있으니까 나도 빛날 수 있어"
         }
-      ]
+      ],
+      "lyrics": "네가 있으니까 나도 빛날 수 있어"
     },
     {
       "start_time": 25640,
@@ -3999,30 +4437,35 @@
           "start_time": 25740,
           "end_time": 26221,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "리",
           "start_time": 25822,
           "end_time": 26221,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "가",
           "start_time": 25843,
           "end_time": 26221,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         },
         {
           "text": "토",
           "start_time": 25861,
           "end_time": 26221,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "고마워"
         }
-      ]
+      ],
+      "lyrics": "고마워"
     },
     {
       "start_time": -100,

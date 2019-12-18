@@ -88,6 +88,24 @@ const __llct_optslists = [
     fn: v => {}
   },
   {
+    id: 'useLyricsShow',
+    data_key: 'showLyrics',
+    checkbox: true,
+    default: true,
+    fn: v => {
+      document.getElementById('karaoke').classList[v ? 'add' : 'remove']('show_lyrics')
+    }
+  },
+  {
+    id: 'useLyricsShowFull',
+    data_key: 'showLyricsFull',
+    checkbox: true,
+    default: false,
+    fn: v => {
+      document.getElementById('karaoke').classList[v ? 'add' : 'remove']('show_full_lyrics')
+    }
+  },
+  {
     id: 'useOfflineSaving',
     data_key: 'offlineShip',
     checkbox: true,

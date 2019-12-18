@@ -1,10 +1,10 @@
 ---------- Music, Album Cover, Lyrics License -----------
-Copyright (c) 2016-2017, 2019 by PL!, PL!S, PL!SM, PL!M. All rights reserved.
-Song, Album Cover, Lyrics copy goes to its creator, NOT RELATED TO THIS SOFTWARE.
+© 2016-2017, 2019 by PL!, PL!S, PL!N, BUSHI, SUNRISE, KLabGames. All rights reserved.
+Songs, Album Cover Images, Lyrics Copyrights go to their own creator or copyright holders, NOT RELATED TO THIS SOFTWARE OR SITE.
 ---------------------------------------------------------
 
----------- Site Licenses -----------
-Copyright (c) 2019 by LLCT Contributors.
+---------- Site License -----------
+© 2019 LLCT Contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -169,8 +169,55 @@ SOFTWARE.
 
 -------------------------------------------------------------
 
+js-sha3 - https://github.com/emn178/js-sha3 [MIT License]
+A simple SHA-3 / Keccak hash function for JavaScript supports UTF-8 encoding.
 
-Call Table by 러브라이브! 선샤인!! 마이너 갤러리, PL!S
+MIT License
+
+Copyright 2015-2018 Chen, Yi-Cyuan
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-------------------------------------------------------------
+
+qrcodejs - https://github.com/davidshimjs/qrcodejs [MIT License]
+Cross-browser QRCode generator for javascript
+
+The MIT License (MIT)
+---------------------
+Copyright (c) 2012 davidshimjs
+
+Permission is hereby granted, free of charge,
+to any person obtaining a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-------------------------------------------------------------
+
+Call Table Written by 러브라이브! 선샤인!! 마이너 갤러리
  - 유) ㅇㅇ (Git: shushushuka) : 콜표 싱크, 가사 작성
  - 유) ㅇㅇ (175.115) : 기능 제안
  - 유) ㅇㅇ (116.37) : 사이트 버그 제보, 기능 제안
@@ -186,4 +233,4 @@ Call Table by 러브라이브! 선샤인!! 마이너 갤러리, PL!S
  - 고) 슈**루 : 사이트 버그 제보
  - 고) J*****s : 사이트 버그 제보
  
-사이트 개발에 동참해 주시는 모든 분에게 감사 인사를 전합니다.
+귀한 시간 내셔서 사이트 개발에 동참해 주시는 모든 분들에게 감사 인사를 전합니다.

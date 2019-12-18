@@ -16,6 +16,7 @@
     "js": "./src/js/",
     "pug": "./src/pug/",
     "datas": "./src/assets/",
+    "imgs": "./src/imgGenerator/",
     "rdatas": "./src/root_assets/"
   },
   "devDependencies": {
@@ -28,7 +29,7 @@
     "gulp-copy": "^4.0.1",
     "gulp-file-cache": "^0.0.1",
     "gulp-imagemin": "^5.0.3",
-    "gulp-jsonminify": "^1.1.0",
+    "gulp-json-minify": "^1.2.2",
     "gulp-livereload": "^4.0.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-pug": "^4.0.1",
@@ -42,5 +43,9 @@
     "gulp-webserver": "^0.9.1",
     "jpegtran-bin": "^4.0.0",
     "node-sass": "^4.11.0"
+  },
+  "dependencies": {
+    "imagemin-pngquant": "^8.0.0",
+    "puppeteer": "^2.0.0"
   }
 }
