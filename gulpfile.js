@@ -128,33 +128,35 @@ gulp.task('callImgAssets', () => {
 })
 
 gulp.task('callImgTransfer', () => {
-  return gulp
-    .src(pkgs.srcs.datas + '**/*.json')
-    //.pipe(callFilecaches.filter())
-    .pipe(callFilecaches.cache())
-    .pipe(LLCTImgfy())
-    .pipe(
-      plugins.imagemin([
-        pngQuant({
-          quality: [0.5, 0.9],
-          strip: true,
-          dithering: 0.25,
-          speed: 1
+  return (
+    gulp
+      .src(pkgs.srcs.datas + '**/*.json')
+      //.pipe(callFilecaches.filter())
+      .pipe(callFilecaches.cache())
+      .pipe(LLCTImgfy())
+      .pipe(
+        plugins.imagemin([
+          pngQuant({
+            quality: [0.5, 0.9],
+            strip: true,
+            dithering: 0.25,
+            speed: 1
+          })
+        ])
+      )
+      .pipe(gulp.dest('./dist/data'))
+      .pipe(
+        plugins.webp({
+          lossless: false
         })
-      ])
-    )
-    .pipe(gulp.dest('./dist/data'))
-    .pipe(
-      plugins.webp({
-        lossless: false
-      })
-    )
-    .pipe(
-      plugins.rename(p => {
-        p.extname = '.webp'
-      })
-    )
-    .pipe(gulp.dest('./dist/data'))
+      )
+      .pipe(
+        plugins.rename(p => {
+          p.extname = '.webp'
+        })
+      )
+      .pipe(gulp.dest('./dist/data'))
+  )
 })
 
 gulp.task('assets', () => {
@@ -212,8 +214,6 @@ gulp.task('watch', () => {
   )
 })
 
-gulp.task('callImages', gulp.series('callImgAssets', 'callImgTransfer'))
-
 gulp.task(
   'build',
   gulp.series(
@@ -226,7 +226,8 @@ gulp.task(
     'json:min',
     'pug',
     'images',
-    'callImages'
+    'callImgAssets',
+    'callImgTransfer'
   )
 )
 
@@ -242,7 +243,8 @@ gulp.task(
     'json:min',
     'pug',
     'images',
-    'callImages',
+    'callImgAssets',
+    'callImgTransfer',
     'watch'
   )
 )
