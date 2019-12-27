@@ -141,14 +141,14 @@ gulp.task('callImgTransfer', () => {
           dithering: 0.25,
           speed: 1
         })
-      )
-      .pipe(
-        plugins.rename(p => {
-          p.extname = '.webp'
-        })
-      )
-      .pipe(gulp.dest('./dist/data'))
-  )
+      ])
+    )
+    .pipe(
+      plugins.rename(p => {
+        p.extname = '.webp'
+      })
+    )
+    .pipe(gulp.dest('./dist/data'))
 })
 
 gulp.task('assets', () => {
@@ -219,7 +219,7 @@ gulp.task(
     'images',
     'callImgAssets',
     'callImgTransfer',
-    'pug',
+    'pug'
   )
 )
 
