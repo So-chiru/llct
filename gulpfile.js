@@ -141,20 +141,14 @@ gulp.task('callImgTransfer', () => {
           dithering: 0.25,
           speed: 1
         })
-      ])
-    )
-    .pipe(gulp.dest('./dist/data'))
-    .pipe(
-      plugins.webp({
-        lossless: false
-      })
-    )
-    .pipe(
-      plugins.rename(p => {
-        p.extname = '.webp'
-      })
-    )
-    .pipe(gulp.dest('./dist/data'))
+      )
+      .pipe(
+        plugins.rename(p => {
+          p.extname = '.webp'
+        })
+      )
+      .pipe(gulp.dest('./dist/data'))
+  )
 })
 
 gulp.task('assets', () => {
@@ -212,8 +206,6 @@ gulp.task('watch', () => {
   )
 })
 
-gulp.task('callImages', gulp.series('callImgAssets', 'callImgTransfer'))
-
 gulp.task(
   'build',
   gulp.series(
@@ -224,9 +216,10 @@ gulp.task(
     'js',
     'js:min',
     'json:min',
-    'pug',
     'images',
-    'callImages'
+    'callImgAssets',
+    'callImgTransfer',
+    'pug',
   )
 )
 
@@ -240,9 +233,10 @@ gulp.task(
     'js',
     'js:min',
     'json:min',
-    'pug',
     'images',
-    'callImages',
+    'callImgAssets',
+    'callImgTransfer',
+    'pug',
     'watch'
   )
 )
