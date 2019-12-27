@@ -224,10 +224,10 @@ gulp.task(
     'js',
     'js:min',
     'json:min',
-    'pug',
     'images',
     'callImgAssets',
-    'callImgTransfer'
+    'callImgTransfer',
+    'pug',
   )
 )
 
@@ -241,10 +241,10 @@ gulp.task(
     'js',
     'js:min',
     'json:min',
-    'pug',
     'images',
     'callImgAssets',
     'callImgTransfer',
+    'pug',
     'watch'
   )
 )

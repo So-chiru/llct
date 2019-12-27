@@ -7,6 +7,7 @@ const path = require('path')
 const log = require('fancy-log')
 
 let lBrowser
+let lastAccess = null
 let pugCache = fs.readFileSync(
   path.join(__dirname, '../../../src/imgGenerator/', 'index.pug')
 )
@@ -79,6 +80,22 @@ let CallLists = {
 
 let genBrowser = async () => {
   lBrowser = await puppeteer.launch()
+  checkLastAccess()
+}
+
+let checkLastAccess = () => {
+  if (lastAccess && lastAccess + 10000 > Date.now()) {
+    lastAccess = null
+    lBrowser.close()
+
+    return true
+  }
+
+  setInterval(() => {
+    checkLastAccess()
+  }, 2000)
+
+  return false
 }
 
 module.exports = () => {
@@ -141,6 +158,8 @@ module.exports = () => {
 
         file.contents = await fs.readFileSync('./calls/__capture.png')
         file.basename = 'call.png'
+
+        lastAccess = Date.now()
 
         capturedImages++
       } catch (e) {
