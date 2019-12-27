@@ -84,7 +84,7 @@ let genBrowser = async () => {
 }
 
 let checkLastAccess = () => {
-  if (lastAccess && lastAccess + 10000 > Date.now()) {
+  if (lastAccess && lastAccess + 10000 < Date.now()) {
     lastAccess = null
     lBrowser.close()
 
