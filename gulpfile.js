@@ -1,6 +1,6 @@
 const pkgs = require('./package.json')
 const gulp = require('gulp')
-const LLCTImgfy = require('./imgGenerator/plugins/gulp-llct/index')
+const LLCTImgfy = require('./src/imgGenerator/plugins/gulp-llct/index')
 const fileCache = require('gulp-file-cache')
 const pngQuant = require('imagemin-pngquant')
 const jpegTran = require('imagemin-jpegtran')
@@ -130,7 +130,7 @@ gulp.task('callImgAssets', () => {
 gulp.task('callImgTransfer', () => {
   return gulp
     .src(pkgs.srcs.datas + '**/*.json')
-    //.pipe(callFilecaches.filter())
+    .pipe(callFilecaches.filter())
     .pipe(callFilecaches.cache())
     .pipe(LLCTImgfy())
     .pipe(

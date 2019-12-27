@@ -8,7 +8,7 @@ const log = require('fancy-log')
 
 let lBrowser
 let pugCache = fs.readFileSync(
-  path.join(__dirname, '../../../src/imgGenerator/', 'index.pug')
+  path.join(__dirname, '../../', 'index.pug')
 )
 
 let saveBase = path.join(__dirname, '../../../calls/')
