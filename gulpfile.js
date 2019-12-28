@@ -3,7 +3,6 @@ const gulp = require('gulp')
 const LLCTImgfy = require('./src/imgGenerator/plugins/gulp-llct/index')
 const fileCache = require('gulp-file-cache')
 const pngQuant = require('imagemin-pngquant')
-const jpegTran = require('imagemin-jpegtran')
 
 const plugins = require('gulp-load-plugins')({
   pattern: ['*'],
@@ -102,9 +101,6 @@ gulp.task('images', () => {
           dithering: 0.35,
           speed: 1
         }),
-        jpegTran({
-          progressive: true
-        })
       ])
     )
     .pipe(filecaches.cache())
@@ -114,7 +110,6 @@ gulp.task('images', () => {
         lossless: false
       })
     )
-    .pipe(filecaches.cache())
     .pipe(
       plugins.rename(p => {
         p.extname = '.webp'
@@ -131,7 +126,6 @@ gulp.task('callImgTransfer', () => {
   return gulp
     .src(pkgs.srcs.datas + '**/*.json')
     .pipe(callFilecaches.filter())
-    .pipe(callFilecaches.cache())
     .pipe(LLCTImgfy())
     .pipe(
       plugins.imagemin([
@@ -143,6 +137,7 @@ gulp.task('callImgTransfer', () => {
         })
       ])
     )
+    .pipe(gulp.dest('./dist/data'))
     .pipe(
       plugins.rename(p => {
         p.extname = '.webp'
@@ -183,7 +178,7 @@ gulp.task('watch', () => {
   gulp.watch(
     [
       pkgs.srcs.datas + '**/*.*',
-      `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg, json}`
+      `!${pkgs.srcs.datas}**/*.{png,jpg,jpeg,svg,json}`
     ],
     gulp.series('assets')
   )

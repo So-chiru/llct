@@ -8,8 +8,7 @@
   "license": "MIT",
   "webSVPort": 20417,
   "scripts": {
-    "build": "gulp build",
-    "deploy": "gh-pages -r 'git@github.com:So-chiru/LLCTSites.git' -d dist -b master"
+    "build": "gulp build"
   },
   "srcs": {
     "sass": "./src/sass/",
@@ -41,7 +40,6 @@
     "gulp-util": "^3.0.8",
     "gulp-webp": "^4.0.1",
     "gulp-webserver": "^0.9.1",
-    "jpegtran-bin": "^4.0.0",
     "node-sass": "^4.11.0"
   },
   "dependencies": {

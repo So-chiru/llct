@@ -7,9 +7,8 @@ const path = require('path')
 const log = require('fancy-log')
 
 let lBrowser
-let pugCache = fs.readFileSync(
-  path.join(__dirname, '../../', 'index.pug')
-)
+let lastAccess = Date.now()
+let pugCache = fs.readFileSync(path.join(__dirname, '../../', 'index.pug'))
 
 let saveBase = path.join(__dirname, '../../../../calls/')
 
@@ -32,11 +31,15 @@ const copyRequireAsset = () => {
     )
     fs.writeFileSync(
       saveBase + 'yosoro.min.css',
-      fs.readFileSync(path.join(__dirname, '../../../../dist/', 'yosoro.min.css'))
+      fs.readFileSync(
+        path.join(__dirname, '../../../../dist/', 'yosoro.min.css')
+      )
     )
 
     CallLists.__parsed = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '../../../../dist/data/', 'lists.json'))
+      fs.readFileSync(
+        path.join(__dirname, '../../../../dist/data/', 'lists.json')
+      )
     )
   } catch (e) {
     return false
@@ -44,6 +47,20 @@ const copyRequireAsset = () => {
 
   copiedAssets = true
   return true
+}
+
+const autoTerminate = () => {
+  if (lastAccess + 15000 < Date.now()) {
+    if (lBrowser) {
+      lBrowser.close()
+    }
+
+    return process.exit(0)
+  }
+
+  setTimeout(() => {
+    autoTerminate()
+  }, 2000)
 }
 
 let CallLists = {
@@ -79,6 +96,7 @@ let CallLists = {
 
 let genBrowser = async () => {
   lBrowser = await puppeteer.launch()
+  autoTerminate()
 }
 
 module.exports = () => {
@@ -106,8 +124,9 @@ module.exports = () => {
         return
       }
 
-      let fileNameSplit = file.path.split('/')
+      let fileNameSplit = file.path.replace(/\\/g, '/').split('/')
       let fileId = fileNameSplit[fileNameSplit.length - 2]
+
       let metadata = CallLists.find(fileId)
 
       if (!metadata) {
