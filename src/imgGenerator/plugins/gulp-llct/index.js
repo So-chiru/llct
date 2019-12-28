@@ -50,7 +50,7 @@ const copyRequireAsset = () => {
 }
 
 const autoTerminate = () => {
-  if (lastAccess + 15000 < Date.now()) {
+  if (lastAccess + 300000 < Date.now()) {
     if (lBrowser) {
       lBrowser.close()
     }
