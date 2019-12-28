@@ -27,16 +27,16 @@ const copyRequireAsset = () => {
     fs.writeFileSync(
       saveBase + 'karaoke.js',
       fs.readFileSync(
-        path.join(__dirname, '../../../dist/js/', 'karaoke.min.js')
+        path.join(__dirname, '../../../../dist/js/', 'karaoke.min.js')
       )
     )
     fs.writeFileSync(
       saveBase + 'yosoro.min.css',
-      fs.readFileSync(path.join(__dirname, '../../../dist/', 'yosoro.min.css'))
+      fs.readFileSync(path.join(__dirname, '../../../../dist/', 'yosoro.min.css'))
     )
 
     CallLists.__parsed = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '../../../dist/data/', 'lists.json'))
+      fs.readFileSync(path.join(__dirname, '../../../../dist/data/', 'lists.json'))
     )
   } catch (e) {
     return false
