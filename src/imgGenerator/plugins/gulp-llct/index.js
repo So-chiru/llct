@@ -148,6 +148,8 @@ module.exports = () => {
       }
 
       try {
+        lastAccess = Date.now()
+
         const page = await lBrowser.newPage()
         await page.goto('file://' + fileWPath)
         await page.setViewport({
@@ -160,8 +162,6 @@ module.exports = () => {
 
         file.contents = await fs.readFileSync('./calls/__capture.png')
         file.basename = 'call.png'
-
-        lastAccess = Date.now()
 
         capturedImages++
       } catch (e) {
