@@ -11,10 +11,10 @@ let pugCache = fs.readFileSync(
   path.join(__dirname, '../../', 'index.pug')
 )
 
-let saveBase = path.join(__dirname, '../../../calls/')
+let saveBase = path.join(__dirname, '../../../../calls/')
 
-if (!fs.existsSync(path.join(__dirname, '../../../calls'))) {
-  fs.mkdirSync(path.join(__dirname, '../../../calls'))
+if (!fs.existsSync(path.join(__dirname, '../../../../calls'))) {
+  fs.mkdirSync(path.join(__dirname, '../../../../calls'))
 }
 
 let copiedAssets = false
