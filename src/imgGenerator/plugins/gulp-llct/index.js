@@ -81,7 +81,6 @@ let CallLists = {
 
 let genBrowser = async () => {
   lBrowser = await puppeteer.launch()
-  autoTerminate()
 }
 
 module.exports = () => {
