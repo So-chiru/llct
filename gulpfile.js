@@ -122,7 +122,7 @@ gulp.task('callImgAssets', () => {
   return gulp.src(pkgs.srcs.imgs + 'assets/**.*').pipe(gulp.dest('./calls'))
 })
 
-gulp.task('callImgTransfer', () => {
+gulp.task('callImgTransfer', done => {
   return gulp
     .src(pkgs.srcs.datas + '**/*.json')
     .pipe(callFilecaches.filter())
@@ -148,7 +148,7 @@ gulp.task('callImgTransfer', () => {
       process.exit(1)
     })
     .once('end', () => {
-      process.exit()
+      done()
     })
 })
 
