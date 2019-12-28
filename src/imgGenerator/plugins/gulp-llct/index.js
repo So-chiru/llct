@@ -7,7 +7,6 @@ const path = require('path')
 const log = require('fancy-log')
 
 let lBrowser
-let lastAccess = Date.now()
 let pugCache = fs.readFileSync(path.join(__dirname, '../../', 'index.pug'))
 
 let saveBase = path.join(__dirname, '../../../../calls/')
@@ -47,20 +46,6 @@ const copyRequireAsset = () => {
 
   copiedAssets = true
   return true
-}
-
-const autoTerminate = () => {
-  if (lastAccess + 300000 < Date.now()) {
-    if (lBrowser) {
-      lBrowser.close()
-    }
-
-    return process.exit(0)
-  }
-
-  setTimeout(() => {
-    autoTerminate()
-  }, 2000)
 }
 
 let CallLists = {
@@ -148,8 +133,6 @@ module.exports = () => {
       }
 
       try {
-        lastAccess = Date.now()
-
         const page = await lBrowser.newPage()
         await page.goto('file://' + fileWPath)
         await page.setViewport({

@@ -100,7 +100,7 @@ gulp.task('images', () => {
           strip: true,
           dithering: 0.35,
           speed: 1
-        }),
+        })
       ])
     )
     .pipe(filecaches.cache())
@@ -144,6 +144,12 @@ gulp.task('callImgTransfer', () => {
       })
     )
     .pipe(gulp.dest('./dist/data'))
+    .once('error', () => {
+      process.exit(1)
+    })
+    .once('end', () => {
+      process.exit()
+    })
 })
 
 gulp.task('assets', () => {
