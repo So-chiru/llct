@@ -29,8 +29,7 @@ jobs:
           repository: So-chiru/LLCTAssets
           path: ../LLCTAssets/
           token: ${{ secrets.github_pat }}
-      - name: Moving Assets to dist folder
-        run: mv ../LLCTAssets/* ./dist/
+          clean: false
       - name: Deploy to LLCTSites
         run: now --token $ZEIT_TOKEN dist --prod
         env:
