@@ -214,13 +214,13 @@ gulp.task(
     'root_assets',
     'sass',
     'sass:min',
+    'images',
+    'pug',
     'js',
     'js:min',
     'json:min',
-    'images',
     'callImgAssets',
     'callImgTransfer',
-    'pug'
   )
 )
 
@@ -231,13 +231,13 @@ gulp.task(
     'root_assets',
     'sass',
     'sass:min',
+    'images',
+    'pug',
     'js',
     'js:min',
     'json:min',
-    'images',
     'callImgAssets',
     'callImgTransfer',
-    'pug',
     'watch'
   )
 )

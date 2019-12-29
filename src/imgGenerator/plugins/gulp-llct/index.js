@@ -83,8 +83,9 @@ let genBrowser = async () => {
   lBrowser = await puppeteer.launch()
 }
 
+let capturedImages = 0
+
 module.exports = () => {
-  let capturedImages = 0
   return through.obj(
     async (file, encoding, callback) => {
       if (!copyRequireAsset()) {
@@ -131,6 +132,8 @@ module.exports = () => {
         await genBrowser()
       }
 
+      log('[gulp-llct] Running capture for ' + fileId)
+
       try {
         const page = await lBrowser.newPage()
         await page.goto('file://' + fileWPath)
@@ -146,11 +149,11 @@ module.exports = () => {
         file.basename = 'call.png'
 
         capturedImages++
+
+        callback(null, file)
       } catch (e) {
         callback(new PluginError('gulp-llct', e.message))
       }
-
-      callback(null, file)
     },
     cb => {
       log(
@@ -158,6 +161,10 @@ module.exports = () => {
           capturedImages > 1 ? 's' : ''
         }.`
       )
+
+      if (lBrowser) {
+        lBrowser.close()
+      }
 
       cb()
     }

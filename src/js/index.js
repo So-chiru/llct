@@ -409,8 +409,8 @@ let yohaneNoDOM = {
           ? '#ddd'
           : '#737373'
         : is_dark
-          ? '#6b6b6b'
-          : '#c4c4c4',
+        ? '#6b6b6b'
+        : '#c4c4c4',
       delay: 0,
       duration: 300,
       easing: 'easeOutExpo'
@@ -487,8 +487,8 @@ let yohaneNoDOM = {
     document.getElementById('title_meta').innerText = dataYosoro.get('devMode')
       ? '#' + id
       : dataYosoro.get('mikan') === true
-        ? meta[1].translated || meta[0]
-        : meta[0]
+      ? meta[1].translated || meta[0]
+      : meta[0]
     document.getElementById('artist_meta').innerText = artistText
     document.getElementById('artist_meta').title = artistText
 
@@ -500,8 +500,8 @@ let yohaneNoDOM = {
       _hx != null && _hx != 'null' && _hx != '#000000' && _hx != ''
         ? _hx + '55'
         : dataYosoro.get('yohane')
-          ? '#FFFFFF55'
-          : '#00000055'
+        ? '#FFFFFF55'
+        : '#00000055'
 
     document
       .getElementById('prv_warn')
@@ -881,8 +881,8 @@ let pageAdjust = {
       var in_text = dataYosoro.get('devMode')
         ? '#' + curObj.id + '_DEV'
         : dataYosoro.get('mikan') === true
-          ? curObj.translated || objKeys[i]
-          : objKeys[i]
+        ? curObj.translated || objKeys[i]
+        : objKeys[i]
       var titleText = document.createElement('h3')
       titleText.className = 'txt'
       titleText.innerText = in_text
