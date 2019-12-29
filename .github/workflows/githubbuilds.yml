@@ -23,11 +23,14 @@ jobs:
         run: yarn
       - name: Building project
         run: yarn build
-      - uses: actions/checkout@v2
+      - name: Downloading LLCTAssets
+        uses: actions/checkout@v2
         with:
           repository: So-chiru/LLCTAssets
-          path: ./dist/
+          path: ../LLCTAssets/
           token: ${{ secrets.github_pat }}
+      - name: Moving Assets to dist folder
+        run: mv ../LLCTAssets/* ./dist/
       - name: Deploy to LLCTSites
         run: now --token $ZEIT_TOKEN dist --prod
         env:
