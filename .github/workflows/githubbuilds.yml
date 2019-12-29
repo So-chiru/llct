@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: So-chiru/LLCTAssets
-          path: $GITHUB_WORKSPACE/dist
+          path: ./dist/
           token: ${{ secrets.github_pat }}
       - name: Deploy to LLCTSites
         run: now --token $ZEIT_TOKEN dist --prod
