@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Downloading LLCTAssets
+        uses: actions/checkout
+        with:
+          repository: So-chiru/LLCTAssets
+          path: dist
+          token: ${{ secrets.github_pat }}
+          clean: false
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -23,13 +30,6 @@ jobs:
         run: yarn
       - name: Building project
         run: yarn build
-      - name: Downloading LLCTAssets
-        uses: actions/checkout@v2
-        with:
-          repository: So-chiru/LLCTAssets
-          path: ./dist
-          token: ${{ secrets.github_pat }}
-          clean: false
       - name: Deploy to LLCTSites
         run: now --token $ZEIT_TOKEN dist --prod
         env:
