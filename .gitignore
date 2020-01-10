@@ -6,3 +6,6 @@ dist
 audio.mp3
 audio.bak.mp3
 desktop.ini
+
+calls
+.*-cache*
