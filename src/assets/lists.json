@@ -3,7 +3,7 @@
     "meta": {
       "translated": "µ's (뮤즈)",
       "desc": "2010년에 결성된 아이돌 그룹으로, 러브라이브 하면 이 그룹인 만큼 넓은 인지도를 자랑합니다.",
-      "artists": ["µ's"]
+      "artists": ["µ's", "Printemps", "BiBi", "lily white"]
     },
     "collection": {
       "僕らのLIVE 君とのLIFE": {
@@ -39,42 +39,48 @@
       "Love marginal": {
         "id": "00005",
         "center": null,
-        "karaoke": true
+        "karaoke": true,
+        "artist": 1
       },
       "sweet＆sweet holiday": {
         "id": "00006",
         "center": null,
-        "karaoke": true
+        "karaoke": true,
+        "artist": 1
       },
       "ダイヤモンドプリンセスの憂鬱": {
         "id": "00007",
         "center": null,
         "translated": "다이아몬드 프린세스의 우울",
-        "karaoke": false
+        "karaoke": false,
+        "artist": 2
       },
       "ラブノベルス": {
         "id": "00008",
         "center": null,
         "translated": "러브 노벨즈",
-        "karaoke": false
+        "karaoke": false,
+        "artist": 2
       },
       "知らないLove*教えてLove": {
         "id": "00009",
         "center": null,
         "translated": "모르겠어 Love*가르쳐줘 Love",
-        "karaoke": false
+        "karaoke": false,
+        "artist": 3
       },
       "あ・の・ね・が・ん・ば・れ！": {
         "id": "00010",
         "center": null,
         "translated": "있・잖・아・힘・을・내!",
-        "karaoke": false
+        "karaoke": false,
+        "artist": 3
       },
       "夏色えがおで1,2,Jump!": {
         "id": "00011",
         "center": null,
         "translated": "여름빛 미소로 1, 2, Jump!",
-        "karaoke": false
+        "karaoke": true
       },
       "Mermaid festa vol.1": {
         "id": "00012",

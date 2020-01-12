@@ -126,6 +126,7 @@ gulp.task('callImgTransfer', done => {
   return gulp
     .src(pkgs.srcs.datas + '**/*.json')
     .pipe(callFilecaches.filter())
+    .pipe(callFilecaches.cache())
     .pipe(LLCTImgfy())
     .pipe(
       plugins.imagemin([
