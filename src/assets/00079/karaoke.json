@@ -14,7 +14,8 @@
           "start_time": 2723,
           "end_time": 3263,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "Ah! 희미한 예감에서 시작해서"
         },
         {
           "text": "호",
@@ -103,7 +104,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "Ah! 희미한 예감에서 시작해서"
     },
     {
       "start_time": 3174,
@@ -114,7 +116,8 @@
           "start_time": 3274,
           "end_time": 3812,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "Ah! 희망이 별하늘을 달려서"
         },
         {
           "text": "노",
@@ -200,7 +203,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "Ah! 희망이 별하늘을 달려서"
     },
     {
       "start_time": 3720,
@@ -212,7 +216,8 @@
           "end_time": 4365,
           "pronunciation_time": 0,
           "type": 1,
-          "text_color": "#00ab84"
+          "text_color": "#00ab84",
+          "lyrics": "꽃을 피우는 방긋 미소는"
         },
         {
           "text": "나",
@@ -308,7 +313,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "꽃을 피우는 방긋 미소는"
     },
     {
       "start_time": 4274,
@@ -319,7 +325,8 @@
           "start_time": 4374,
           "end_time": 4907,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "언제나 똑같아 우정의 미소"
         },
         {
           "text": "토 ",
@@ -398,7 +405,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "언제나 똑같아 우정의 미소"
     },
     {
       "start_time": -100,
@@ -422,7 +430,8 @@
           "start_time": 4923,
           "end_time": 5447,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "잊지 않아 언제까지나 잊지 않아"
         },
         {
           "text": "스",
@@ -522,7 +531,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "잊지 않아 언제까지나 잊지 않아"
     },
     {
       "start_time": 5382,
@@ -533,7 +543,8 @@
           "start_time": 5482,
           "end_time": 6000,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "이렇게 마음이 하나가 되는"
         },
         {
           "text": "나",
@@ -626,7 +637,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "이렇게 마음이 하나가 되는"
     },
     {
       "start_time": 5931,
@@ -637,7 +649,8 @@
           "start_time": 6031,
           "end_time": 6531,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "세계를 찾아냈어"
         },
         {
           "text": "카",
@@ -688,7 +701,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "세계를 찾아냈어"
     },
     {
       "start_time": 6447,
@@ -699,7 +713,8 @@
           "start_time": 6547,
           "end_time": 6974,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "기쁨을 (함께) 노래하자"
         },
         {
           "text": "로",
@@ -764,7 +779,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "기쁨을 (함께) 노래하자"
     },
     {
       "start_time": 6883,
@@ -775,7 +791,8 @@
           "start_time": 6983,
           "end_time": 7651,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "마지막까지 (우리는 하나）"
         },
         {
           "text": "이",
@@ -861,7 +878,8 @@
           "pronunciation_time": 0,
           "type": "4"
         }
-      ]
+      ],
+      "lyrics": "마지막까지 (우리는 하나）"
     },
     {
       "start_time": -100,
@@ -886,7 +904,8 @@
           "end_time": 8479,
           "pronunciation_time": 0,
           "type": 1,
-          "text_color": "#b2b4b2"
+          "text_color": "#b2b4b2",
+          "lyrics": "작은 새의 날개가 드디어 커다래져서"
         },
         {
           "text": "토",
@@ -1002,7 +1021,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "작은 새의 날개가 드디어 커다래져서"
     },
     {
       "start_time": 8417,
@@ -1013,7 +1033,8 @@
           "start_time": 8517,
           "end_time": 8786,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여행을 떠날 날이야"
         },
         {
           "text": "비",
@@ -1064,7 +1085,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "여행을 떠날 날이야"
     },
     {
       "start_time": 8697,
@@ -1075,7 +1097,8 @@
           "start_time": 8797,
           "end_time": 9570,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "저 멀리 펼쳐지는 바다의 색깔이 따스하게"
         },
         {
           "text": "오",
@@ -1205,7 +1228,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "저 멀리 펼쳐지는 바다의 색깔이 따스하게"
     },
     {
       "start_time": 9482,
@@ -1216,7 +1240,8 @@
           "start_time": 9582,
           "end_time": 10005,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "꿈 속에 그린 그림 같아"
         },
         {
           "text": "메",
@@ -1317,7 +1342,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "꿈 속에 그린 그림 같아"
     },
     {
       "start_time": 9917,
@@ -1328,7 +1354,8 @@
           "start_time": 10017,
           "end_time": 11063,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "애절함에 시간을 되감아 볼까?"
         },
         {
           "text": "츠",
@@ -1451,7 +1478,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "애절함에 시간을 되감아 볼까?"
     },
     {
       "start_time": 11142,
@@ -1462,7 +1490,8 @@
           "start_time": 11242,
           "end_time": 11814,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "4",
+          "lyrics": "No no no 지금이 최고야"
         },
         {
           "text": "no ",
@@ -1520,7 +1549,8 @@
           "pronunciation_time": 0,
           "type": "4"
         }
-      ]
+      ],
+      "lyrics": "No no no 지금이 최고야"
     },
     {
       "start_time": -100,
@@ -1627,7 +1657,8 @@
           "start_time": 14032,
           "end_time": 14698,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "모두와 만날 수 있었단 게 기뻐서"
         },
         {
           "text": "나",
@@ -1720,7 +1751,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "모두와 만날 수 있었단 게 기뻐서"
     },
     {
       "start_time": 14606,
@@ -1731,7 +1763,8 @@
           "start_time": 14706,
           "end_time": 15125,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "헤어지고 싶지 않아 진심이야"
         },
         {
           "text": "나",
@@ -1810,7 +1843,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "헤어지고 싶지 않아 진심이야"
     },
     {
       "start_time": 15039,
@@ -1821,7 +1855,8 @@
           "start_time": 15139,
           "end_time": 15679,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "눈물은 필요없어 이대로 춤추자"
         },
         {
           "text": "미",
@@ -1921,7 +1956,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "눈물은 필요없어 이대로 춤추자"
     },
     {
       "start_time": 15589,
@@ -1932,7 +1968,8 @@
           "start_time": 15689,
           "end_time": 16457,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "손을 흔들어 좀 더 흔들어"
         },
         {
           "text": "오 ",
@@ -2011,7 +2048,8 @@
           "pronunciation_time": 0,
           "type": "2"
         }
-      ]
+      ],
+      "lyrics": "손을 흔들어 좀 더 흔들어"
     },
     {
       "start_time": -100,
@@ -2035,7 +2073,8 @@
           "start_time": 16510,
           "end_time": 17333,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "빛을 뒤쫓아온 우리니까"
         },
         {
           "text": "카",
@@ -2156,7 +2195,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "빛을 뒤쫓아온 우리니까"
     },
     {
       "start_time": 17241,
@@ -2167,7 +2207,8 @@
           "start_time": 17341,
           "end_time": 17607,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "'안녕'은 말하지 않아"
         },
         {
           "text": "요",
@@ -2225,7 +2266,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "'안녕'은 말하지 않아"
     },
     {
       "start_time": 17519,
@@ -2236,7 +2278,8 @@
           "start_time": 17619,
           "end_time": 18021,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "다시 만나자, 불러줄래?"
         },
         {
           "text": "타 ",
@@ -2308,7 +2351,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "다시 만나자, 불러줄래?"
     },
     {
       "start_time": 17920,
@@ -2319,7 +2363,8 @@
           "start_time": 18020,
           "end_time": 18396,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "우리를"
         },
         {
           "text": "쿠",
@@ -2363,7 +2408,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "우리를"
     },
     {
       "start_time": 18314,
@@ -2374,7 +2420,8 @@
           "start_time": 18414,
           "end_time": 18835,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "근사했던 미래로 이어진 꿈"
         },
         {
           "text": "테",
@@ -2474,7 +2521,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "근사했던 미래로 이어진 꿈"
     },
     {
       "start_time": 18742,
@@ -2485,7 +2533,8 @@
           "start_time": 18842,
           "end_time": 19523,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "꿈의 미래 너와 나의 LIVE&LIFE"
         },
         {
           "text": "메",
@@ -2592,7 +2641,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "꿈의 미래 너와 나의 LIVE&LIFE"
     },
     {
       "start_time": -100,
@@ -2754,7 +2804,8 @@
           "end_time": 22564,
           "pronunciation_time": 0,
           "type": 1,
-          "text_color": "#b2b4b2"
+          "text_color": "#b2b4b2",
+          "lyrics": "작은 새의 날개가 드디어 커다래져서"
         },
         {
           "text": "토",
@@ -2870,7 +2921,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "작은 새의 날개가 드디어 커다래져서"
     },
     {
       "start_time": 22487,
@@ -2881,7 +2933,8 @@
           "start_time": 22587,
           "end_time": 22857,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "여행을 떠날 날이야"
         },
         {
           "text": "비",
@@ -2932,7 +2985,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "여행을 떠날 날이야"
     },
     {
       "start_time": 22761,
@@ -2943,7 +2997,8 @@
           "start_time": 22861,
           "end_time": 23638,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "저 멀리 펼쳐지는 바다의 색깔이 따스하게"
         },
         {
           "text": "오",
@@ -3073,7 +3128,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "저 멀리 펼쳐지는 바다의 색깔이 따스하게"
     },
     {
       "start_time": 23553,
@@ -3084,7 +3140,8 @@
           "start_time": 23653,
           "end_time": 24082,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "꿈 속에 그린 그림 같아"
         },
         {
           "text": "메",
@@ -3185,7 +3242,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "꿈 속에 그린 그림 같아"
     },
     {
       "start_time": 23982,
@@ -3196,7 +3254,8 @@
           "start_time": 24082,
           "end_time": 25091,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "애절함에 시간을 되감아 볼까?"
         },
         {
           "text": "츠",
@@ -3319,7 +3378,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "애절함에 시간을 되감아 볼까?"
     },
     {
       "start_time": 25208,
@@ -3330,7 +3390,8 @@
           "start_time": 25308,
           "end_time": 25848,
           "pronunciation_time": 0,
-          "type": "4"
+          "type": "4",
+          "lyrics": "No no no 지금이 최고야"
         },
         {
           "text": "no ",
@@ -3388,7 +3449,8 @@
           "pronunciation_time": 0,
           "type": "4"
         }
-      ]
+      ],
+      "lyrics": "No no no 지금이 최고야"
     },
     {
       "start_time": -100,
@@ -3412,7 +3474,8 @@
           "start_time": 25862,
           "end_time": 26207,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "그래도"
         },
         {
           "text": "테",
@@ -3421,7 +3484,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "그래도"
     },
     {
       "start_time": 26311,
@@ -3432,7 +3496,8 @@
           "start_time": 26411,
           "end_time": 27011,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "그래도, 지금이 최고야!"
         },
         {
           "text": "테, ",
@@ -3483,7 +3548,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "그래도, 지금이 최고야!"
     },
     {
       "start_time": -100,
@@ -3507,7 +3573,8 @@
           "start_time": 27141,
           "end_time": 27726,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "Ah! 희미한 예감에서 시작해서"
         },
         {
           "text": "호",
@@ -3596,7 +3663,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "Ah! 희미한 예감에서 시작해서"
     },
     {
       "start_time": 27631,
@@ -3607,7 +3675,8 @@
           "start_time": 27731,
           "end_time": "28928",
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "lyrics": "Ah! 빛을 뒤쫓아왔어…"
         },
         {
           "text": "히",
@@ -3700,7 +3769,8 @@
           "pronunciation_time": 0,
           "type": 1
         }
-      ]
+      ],
+      "lyrics": "Ah! 빛을 뒤쫓아왔어…"
     }
   ]
 }
