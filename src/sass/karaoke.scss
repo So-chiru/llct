@@ -77,9 +77,6 @@ llct-line[data-current="1"] + llct-line-lyrics p, .show_full_lyrics llct-line-ly
   margin-bottom: 2vh;
 }
 
-llct-line[data-current="0"] + llct-line-lyrics p, .show_full_lyrics llct-line-lyrics[data-current="0"] + llct-line-lyrics p { 
-  opacity: 0.6;
-}
 
 .line_num {
   margin: 0;
