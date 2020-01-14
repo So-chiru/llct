@@ -195,18 +195,18 @@ body {
   column-fill: auto;
 }
 
-.contents-margin .call_blocks .p_line {
+.contents-margin .call_blocks llct-line {
   display: inline-block;
   text-align: start;
   font-size: 32px;
   height: 48px;
 }
 
-.contents-margin .call_blocks .blank {
+.contents-margin .call_blocks [data-blank="1"] {
   height: 30px;
 }
 
-.contents-margin .call_blocks .lyrics .__s {
+.contents-margin .call_blocks .lyrics [data-type="1"] {
   color: #929292;
 }
 

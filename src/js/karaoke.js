@@ -29,18 +29,6 @@
  * 가사 음 마다 : NONE;
  */
 
-const __cur_line = '__cur_line'
-const s__cur_line = ' __cur_line'
-const s__cur_line_reg = /\s__cur_line/gi
-
-const __currentSync = 'currentSync'
-const s__currentSync = ' currentSync'
-const s__currentSync_reg = /\scurrentSync/gi
-
-const __josenPassing = 'josenPassing'
-const s__josenPassing = ' josenPassing'
-const s__josenPassing_reg = /\sjosenPassing/gi
-
 const c_undefined = 'undefined'
 const trs_default = 'all 0.33s ease 0s, color 0.33s ease 0s'
 const c_nbsp = '&nbsp'
@@ -64,8 +52,6 @@ const getLMInArray = (a, t, lh) => {
 
   return _mx
 }
-
-var __kara_typeList = [null, '__s', 'call', 'cmt', '_cs']
 
 /**
  * 새로운 Karaoke Class를 선언합니다.
@@ -250,11 +236,11 @@ var Karaoke = function (kara_elem) {
         }
 
         var _idx = this.karaoke_element.id + '_kara_' + lineI + '_' + wordI
-        spaceEle += `<p class="lyrics ${
-          __kara_typeList[word.type]
-        }" id="${_idx}" ${
+        spaceEle += `<p class="lyrics" id="${_idx}" ${
           word.text.trim() === '' ? 'llct-blank' : ''
-        } data-line="${lineI}" data-word="${wordI}" ${(typeof word.repeat_delay ===
+        } data-type="${
+          word.type
+        }" data-line="${lineI}" data-sync="0" data-word="${wordI}" ${(typeof word.repeat_delay ===
           'string' ||
           typeof word.repeat_delay === 'number') &&
           (word.repeat_delay != '0' || word.repeat_delay != '') &&
@@ -276,9 +262,9 @@ var Karaoke = function (kara_elem) {
       }
 
       inserts +=
-        '<div class="p_line ' +
-        (spaceEle.indexOf('llct-blank') > -1 ? 'blank' : '') +
-        '" id="' +
+        '<llct-line ' +
+        (spaceEle.indexOf('llct-blank') > -1 ? 'data-blank="1" ' : '') +
+        'id="' +
         this.karaoke_element.id +
         '_kara_' +
         lineI +
@@ -288,12 +274,10 @@ var Karaoke = function (kara_elem) {
         lineI +
         '</p> ' +
         spaceEle +
-        '</div>'
+        '</llct-line>'
 
       if (this.karaokeData.timeline[lineI].lyrics) {
-        inserts += `<div class="p_line_lyrics" data-line="${lineI}"><p class="tr_lyrics __s">${
-          this.karaokeData.timeline[lineI].lyrics
-        }</p></div>`
+        inserts += `<llct-line-lyrics data-line="${lineI}"><p class="tr_lyrics" data-type="3">${this.karaokeData.timeline[lineI].lyrics}</p></llct-line-lyrics>`
       }
     }
 
@@ -353,10 +337,7 @@ var Karaoke = function (kara_elem) {
 
     var lenCache = lyricsElement.length
     for (var dk = 0; dk < lenCache; dk++) {
-      lyricsElement[dk].className = lyricsElement[dk].className.replace(
-        /\scurrentSync/g,
-        ''
-      )
+      lyricsElement[dk].dataset.sync = "0"
     }
 
     typeof aftFunc === 'function' && aftFunc()
@@ -387,7 +368,9 @@ var Karaoke = function (kara_elem) {
     if (this.autoScroll.cache_elem) {
       this.autoScroll.timeout = setTimeout(() => {
         if (Date.now() - this.autoScroll.last < 3000) return
-        this.autoScroll.cache_elem.scrollTop = new_line_element.offsetTop - ((this.autoScroll.cache_elem.offsetHeight - 200)/ 2)
+        this.autoScroll.cache_elem.scrollTop =
+          new_line_element.offsetTop -
+          (this.autoScroll.cache_elem.offsetHeight - 200) / 2
       }, 950)
     }
   }
@@ -407,16 +390,14 @@ var Karaoke = function (kara_elem) {
       var isNotHighlighting =
         timeCode < karaLine.start_time || timeCode > karaLine.end_time
 
-      if (this.cachedDom[karaLineNum].className.indexOf(__cur_line) > -1) {
+      if (this.cachedDom[karaLineNum].dataset.current == "1") {
         if (isNotHighlighting) {
-          this.cachedDom[karaLineNum].className = this.cachedDom[
-            karaLineNum
-          ].className.replace(s__cur_line_reg, '')
+          this.cachedDom[karaLineNum].dataset.current = "0"
         }
       } else {
         if (!isNotHighlighting) {
           if (!fullRender) this.NewLineRender(this.cachedDom[karaLineNum])
-          this.cachedDom[karaLineNum].className += s__cur_line
+          this.cachedDom[karaLineNum].dataset.current = "1"
         }
       }
 
@@ -439,18 +420,19 @@ var Karaoke = function (kara_elem) {
         }
 
         var kards = this.cachedDom[preBuildID]
-        var __josenExists = kards.className.indexOf(__josenPassing) > -1
+        var passSync = kards.dataset.pass == "1"
 
         var tcGtrstart = timeCode > karaWord.start_time
         var tcGtrend = timeCode > karaWord.end_time
 
         if (tcGtrstart && tcGtrend) {
-          if (!__josenExists) {
-            kards.className += s__josenPassing
+          if (!passSync) {
+            kards.dataset.sync = "0"
+            kards.dataset.pass = "1"
           }
         } else {
-          if (__josenExists) {
-            kards.className = kards.className.replace(s__josenPassing_reg, '')
+          if (passSync) {
+            kards.dataset.pass = "0"
           }
         }
 
@@ -491,11 +473,8 @@ var Karaoke = function (kara_elem) {
           }
         }
 
-        if (kards.className.indexOf(__currentSync) == -1) {
-          kards.className =
-            tcGtrstart && !tcGtrend
-              ? kards.className + s__currentSync
-              : kards.className.replace(s__currentSync_reg, '')
+        if (kards.dataset.sync == "0") {
+          kards.dataset.sync = tcGtrstart && !tcGtrend ? "1" : "0"
 
           if (
             karaWord.type == 2 &&
@@ -514,8 +493,8 @@ var Karaoke = function (kara_elem) {
               typeof karaWord.pronunciation_time === c_undefined ||
               karaWord.pronunciation_time === 0
                 ? (((typeof karaLine.collection[karaWordNum + 1] !== c_undefined
-                  ? karaLine.collection[karaWordNum + 1].start_time
-                  : karaWord.end_time) || 70) -
+                    ? karaLine.collection[karaWordNum + 1].start_time
+                    : karaWord.end_time) || 70) -
                     karaWord.start_time) /
                   2
                 : karaWord.pronunciation_time
@@ -544,10 +523,10 @@ var Karaoke = function (kara_elem) {
         }
 
         if (
-          (s__currentSync.indexOf(kards.className) > -1 && !tcGtrstart) ||
+          (kards.sync && !tcGtrstart) ||
           tcGtrend
         ) {
-          kards.className = kards.className.replace(s__currentSync_reg, '')
+          kards.sync = "0"
 
           if (tcGtrend) {
             kards.style.transition = trs_default

@@ -17,27 +17,27 @@
   color: #a0a0a0;
 }
 
-.blank {
+[data-blank="1"] {
   height: 8px;
 }
 
-.p_line {
+llct-line {
   display: inline-block;
   min-height: 3px;
   text-align: center;
   width: 100%;
 }
 
-.show_lyrics .p_line_lyrics {
+.show_lyrics llct-line-lyrics {
   display: block;
 }
 
-.show_full_lyrics .p_line_lyrics {
+.show_full_lyrics llct-line-lyrics {
   display: block;
   visibility: visible;
 }
 
-.p_line_lyrics {
+llct-line-lyrics {
   display: none;
   visibility: hidden;
   min-height: 3px;
@@ -50,7 +50,7 @@
     0.5s marginTop cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.p_line_lyrics p {
+llct-line-lyrics p {
   font-size: 13px;
   margin: 0;
   margin-bottom: 5px;
@@ -59,11 +59,11 @@
   font-family: "Jua", "Noto Sans CJK KR", "NanumGothic";
 }
 
-.__cur_line {
+llct-line[data-current="1"] {
   will-change: color, text-shadow;
 }
 
-.__cur_line + .p_line_lyrics, .show_full_lyrics .p_line_lyrics{
+llct-line[data-current="1"] + llct-line-lyrics, .show_full_lyrics llct-line-lyrics{
   visibility: visible;
   transform: translateY(10px);
   margin-top: -10px;
@@ -71,7 +71,7 @@
   max-height: 30px;
 }
 
-.__cur_line + .p_line_lyrics p, .show_full_lyrics .p_line_lyrics p {
+llct-line[data-current="1"] + llct-line-lyrics p, .show_full_lyrics llct-line-lyrics p {
   opacity: 1;
   min-height: 3px;
   margin-bottom: 2vh;
@@ -82,61 +82,61 @@
   margin-top: auto;
 }
 
-.call {
+[data-type="2"] {
   color: #7ac74f;
 }
 
-.cmt {
+[data-type="3"] {
   color: #b1aeb7;
 }
 
-._cs {
+[data-type="4"] {
   color: #66c3ff;
 }
 
-.currentSync {
+[data-sync="1"] {
   color: rgb(255, 255, 255);
   text-shadow: 0px 0px 5px #7fd5f9;
   font-weight: 500;
   letter-spacing: 0.63px;
 
-  &.__s,
-  &.call &.cmt &.__cs {
+  &[data-type="1"],
+  &[data-type="2"] &[data-type="3"] &[data-type="1"] {
     color: rgb(255, 255, 255);
   }
 
-  &.call {
+  &[data-type="2"] {
     color: #fff;
     text-shadow: 0px 0px 5px #90e861;
     display: inline-block;
     transform: rotateZ(5deg);
   }
 
-  &.cmt {
+  &[data-type="3"] {
     text-shadow: 0px 0px 5px #004e89;
   }
 
-  &._cs {
+  &[data-type="4"] {
     text-shadow: 0px 0px 5px #0496ff;
   }
 }
 
-.josenPassing {
+[data-pass="1"] {
   text-shadow: 0px 0px 0px transparent !important;
 
-  &.call {
+  &[data-type="2"] {
     color: rgba(143, 189, 159, 0.5);
   }
 
-  &.__s {
+  &[data-type="1"] {
     color: rgba(182, 182, 182, 0.5);
   }
 
-  &.cmt {
+  &[data-type="3"] {
     color: rgba(231, 231, 231, 0.5);
   }
 
-  &._cs {
+  &[data-type="4"] {
     color: rgba(121, 155, 190, 0.5);
   }
 }
