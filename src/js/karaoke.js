@@ -264,7 +264,7 @@ var Karaoke = function (kara_elem) {
       inserts +=
         '<llct-line ' +
         (spaceEle.indexOf('llct-blank') > -1 ? 'data-blank="1" ' : '') +
-        'id="' +
+        'data-current="0" id="' +
         this.karaoke_element.id +
         '_kara_' +
         lineI +
@@ -277,7 +277,7 @@ var Karaoke = function (kara_elem) {
         '</llct-line>'
 
       if (this.karaokeData.timeline[lineI].lyrics) {
-        inserts += `<llct-line-lyrics data-line="${lineI}"><p class="tr_lyrics" data-type="3">${this.karaokeData.timeline[lineI].lyrics}</p></llct-line-lyrics>`
+        inserts += `<llct-line-lyrics data-line="${lineI}"><p class="tr_lyrics" data-type="1">${this.karaokeData.timeline[lineI].lyrics}</p></llct-line-lyrics>`
       }
     }
 
