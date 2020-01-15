@@ -749,7 +749,7 @@
           "end_time": 4624,
           "pronunciation_time": 0,
           "type": "4",
-          "ruby_text": "*"
+          "ruby_text": ""
         },
         {
           "text": "미 ",
@@ -757,7 +757,7 @@
           "end_time": 4624,
           "pronunciation_time": 0,
           "type": "4",
-          "ruby_text": "*"
+          "ruby_text": ""
         },
         {
           "text": "스",
@@ -778,7 +778,8 @@
           "start_time": 4357,
           "end_time": 4624,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "도 ",
@@ -818,25 +819,11 @@
       ]
     },
     {
-      "start_time": 4168,
+      "start_time": 4251,
       "end_time": 4733,
       "collection": [
         {
-          "text": "* (세-",
-          "start_time": 4268,
-          "end_time": 4633,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "노 ",
-          "start_time": 4309,
-          "end_time": 4633,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "하이- ",
+          "text": "* (하이- ",
           "start_time": 4351,
           "end_time": 4633,
           "pronunciation_time": 0,
@@ -3466,7 +3453,7 @@
           "end_time": 13365,
           "pronunciation_time": 0,
           "type": "4",
-          "ruby_text": "*"
+          "ruby_text": ""
         },
         {
           "text": "미 ",
@@ -3474,7 +3461,7 @@
           "end_time": 13365,
           "pronunciation_time": 0,
           "type": "4",
-          "ruby_text": "*"
+          "ruby_text": ""
         },
         {
           "text": "무",
@@ -3495,7 +3482,8 @@
           "start_time": 13122,
           "end_time": 13365,
           "pronunciation_time": 0,
-          "type": 1
+          "type": 1,
+          "ruby_text": "*"
         },
         {
           "text": "니",
@@ -3528,25 +3516,11 @@
       ]
     },
     {
-      "start_time": 12933,
+      "start_time": 13008,
       "end_time": 13482,
       "collection": [
         {
-          "text": "* (세-",
-          "start_time": 13033,
-          "end_time": 13382,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "노 ",
-          "start_time": 13070,
-          "end_time": 13382,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "하이- ",
+          "text": "* (하이- ",
           "start_time": 13108,
           "end_time": 13382,
           "pronunciation_time": 0,
