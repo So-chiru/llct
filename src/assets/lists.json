@@ -341,7 +341,8 @@
         "id": "00057",
         "center": null,
         "translated": "어떤 때라도 계속",
-        "karaoke": false
+        "singAlong": true,
+        "karaoke": true
       },
       "COLORFUL VOICE": {
         "id": "00058",
