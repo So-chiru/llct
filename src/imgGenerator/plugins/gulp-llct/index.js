@@ -128,13 +128,13 @@ module.exports = () => {
       let fileWPath = saveBase + 'index.html'
       await fs.writeFileSync(fileWPath, PResult)
 
-      if (!lBrowser) {
-        await genBrowser()
-      }
-
       log('[gulp-llct] Running capture for ' + fileId)
 
       try {
+        if (!lBrowser || !lBrowser.isConnected()) {
+          await genBrowser()
+        }
+
         const page = await lBrowser.newPage()
         await page.goto('file://' + fileWPath)
         await page.setViewport({

@@ -1,17 +1,23 @@
 html(lang="kr").index
     head
-        title LLCT
+        title LLCT - 러브라이브 콜표 사이트
         meta(http-equiv='Content-Type' content='text/html;charset=UTF-8')
         meta(name='viewport' content='width=device-width, initial-scale=0.8')
         meta(name='theme-color' content='#44caff')
         meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
-        meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,μ's,Aqours,虹ヶ咲,러브라이브 콜표, 러브라이브 선샤인 콜표")
+        meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,페스,μ's,Aqours,虹ヶ咲,러브라이브 콜표, 러브라이브 선샤인 콜표")
+        meta(property="og:type" content="website")
+        meta(property="og:title" content="LLCT - LoveLive Call Table")
+        meta(property="og:description" content="러브라이브! 시리즈 콜에 도움이 되는 러브라이브 콜표, 응원법 모음 사이트입니다.")
+        meta(property="og:image" content="https://lovelivec.kr/data/landing.png")
+        meta(property="og:url" content="https://lovelivec.kr")
         meta(meta name="apple-mobile-web-app-capable" content="yes")
         meta(meta name="apple-mobile-web-app-title" content="러브라이브! 콜표")
         meta(meta name="apple-mobile-web-app-status-bar-style" content="light")
         meta(meta name="application-name" content="러브라이브! 콜표")
         link(rel="canonical" href="https://lovelivec.kr/")
         meta(name="google-site-verification" content="w85-Ql8huyk6kbiwYBTHhbOBtAW-awQKR--_7QI5Cgw")
+        meta(name="naver-site-verification" content="1554c305166b3e7a9d17eeea1c145c7270401f73")
         link(rel="manifest" href="/manifest.json")
         link(rel="apple-touch-icon" href="/data/favicon/logo_v2.png")
         link(rel="dns-prefetch" href="https://fonts.gstatic.com")
@@ -86,13 +92,19 @@ html(lang="kr").index
                         span#group_selection_btn.ti.group_btn(onclick="LLCT.showLayer(1)") Aqours
                         .spacer_more
                             .spacer_more
+                            span#search_btn.ti.vtl_ko <span class="material-icons-round mat-icon-hover-anime pd_onhover">search</span>
                             span#more_vertical_options.ti.vtl_ko <span class="material-icons-round mat-icon-hover-anime pd_onhover">more_vert</span>
                 .lds-ellipsis.loader#loading_spin_ctlst
                     div
                     div
                     div
                     div
-                //-p.playlist_text 플레이리스트 "Noto Sans"            
+                .search_container
+                    input#search_box(placeholder="검색..." oninput="search(this.value)" onchange="search(this.value)")
+                .search_blank
+                    .circle_big
+                        img(src="/data/favicon/chika_ee.png")
+                    h1 "<span id="search_keyword">가난한 사이트 운영자를 도와주세요</span>" 에 대한 검색 결과가 없습니다.
                 .card_lists#card_lists
                 .navigator
                     span.nav_arrow_wrap(onclick="pageAdjust.prevPage()") <i class="material-icons-round arrow_btn thin mat-icon-hover-anime general_trans pd_onhover" alt="<">keyboard_arrow_left</i>
@@ -116,35 +128,42 @@ html(lang="kr").index
                 p <i class="material-icons-round">close</i>
             .layerContent
                 h1 설정
-                br
-                .toggle_collection
-                    label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" class="toggle_input" type="checkbox" checked="none"> <label for="showAs_translated" class="toggle_btn"><span></span></label>   
-                .toggle_collection
-                    label.ckbox 다크 모드 <input id="darkMode" class="toggle_input" type="checkbox" checked="none"><label for="darkMode" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 동작 줄이기 <input id="reduceMotion" class="toggle_input" type="checkbox" checked="none"><label for="reduceMotion" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 사용 가능한 경우 텍스트 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 사용 가능한 경우 한글 가사 표시 <input id="useLyricsShow" class="toggle_input" type="checkbox" checked="none"><label for="useLyricsShow" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 가사를 사용하는 경우 전체 가사 표시 <input id="useLyricsShowFull" class="toggle_input" type="checkbox" checked="none"><label for="useLyricsShowFull" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 음악 플레이어 끄기 (활성시 콜표 텍스트나 이미지 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox Use Romaji Instead of Hangul <input id="useRomaji" class="toggle_input" type="checkbox" checked="none"><label for="useRomaji" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 플레이어 배경 색상 사용 <input id="useAmbientBackground" class="toggle_input" type="checkbox" checked="none"><label for="useAmbientBackground" class="toggle_btn"><span></span></label>
-                .toggle_collection
-                    label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
-                br
-                button._btn_class_fl#offlineCacheClearBtn 오프라인 캐시 비우기
-                br
-                a.tx_wlink(href="https://github.com/So-chiru/LLCT/blob/master/LICENSE") Open Source License Notices
-                br
-                p 사이트 문의 Email: <a class="tx_wlink" href="mailto:call@lovelivec.kr">call＠lovelivec.kr</a>
+                .scrollableContent
+                    br
+                    h2 외관
+                    .leftTab
+                        .toggle_collection
+                            label.ckbox 동작 줄이기 <input id="reduceMotion" class="toggle_input" type="checkbox" checked="none"><label for="reduceMotion" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 번역된 제목으로 보기 <input id="showAs_translated" class="toggle_input" type="checkbox" checked="none"> <label for="showAs_translated" class="toggle_btn"><span></span></label>   
+                        .toggle_collection
+                            label.ckbox 다크 모드 <input id="darkMode" class="toggle_input" type="checkbox" checked="none"><label for="darkMode" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox Deep Dark (OLED 디스플레이 최적화) <input id="reallyDark" class="toggle_input" type="checkbox" checked="none"><label for="reallyDark" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 앨범 이미지 사용 <input id="useAlbumImage" class="toggle_input" type="checkbox" checked="none"><label for="useAlbumImage" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 플레이어 배경 색상 사용 <input id="useAmbientBackground" class="toggle_input" type="checkbox" checked="none"><label for="useAmbientBackground" class="toggle_btn"><span></span></label>
+                    h2 콜
+                    .leftTab
+                        .toggle_collection
+                            label.ckbox 사용 가능한 경우 텍스트 콜표 사용 (미사용시 콜표 이미지를 대신 표시) <input id="useInteractiveCall" class="toggle_input" type="checkbox" checked="none"><label for="useInteractiveCall" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 사용 가능한 경우 한글 가사 표시 <input id="useLyricsShow" class="toggle_input" type="checkbox" checked="none"><label for="useLyricsShow" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 가사를 사용하는 경우 전체 가사 표시 <input id="useLyricsShowFull" class="toggle_input" type="checkbox" checked="none"><label for="useLyricsShowFull" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 음악 플레이어 끄기 (활성시 콜표 텍스트나 이미지 표시) <input id="doNotUseMusicPlayer" class="toggle_input" type="checkbox" checked="none"><label for="doNotUseMusicPlayer" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox Use Romaji instead of Hangul in call table page <input id="useRomaji" class="toggle_input" type="checkbox" checked="none"><label for="useRomaji" class="toggle_btn"><span></span></label>
+                        .toggle_collection
+                            label.ckbox 오프라인 저장 사용 <input id="useOfflineSaving" class="toggle_input" type="checkbox" checked="none"><label for="useOfflineSaving" class="toggle_btn"><span></span></label>
+                    br
+                    button._btn_class_fl#offlineCacheClearBtn 오프라인 캐시 비우기
+                    br
+                    a.tx_wlink(href="https://github.com/So-chiru/LLCT/blob/master/LICENSE") Open Source License Notices
+                    br
+                    p 사이트 문의 Email: <a class="tx_wlink" href="mailto:call@lovelivec.kr">call＠lovelivec.kr</a>
         .screen_layer#call_layer.hide
             .close_btn(onclick="LLCT.hideLayer(2)")
                 p <i class="material-icons-round">close</i>

@@ -216,12 +216,12 @@ let LLCT = {
     })
   },
   getFromLists: id => {
-    var v = Object.keys(LLCT.__pkg_callLists)
-    for (var i = 0; i < v.length; i++) {
-      var vi = v[i]
-      if (LLCT.__pkg_callLists[vi].id != id) continue
+    let len = LLCT.__pkg_callLists.length
+    for (var i = 0; len; i++) {
+      var vi = LLCT.__pkg_callLists[i]
+      if (vi.id != id) continue
 
-      return [vi, LLCT.__pkg_callLists[vi], i]
+      return [vi.title, vi, i]
     }
   }
 }
@@ -550,33 +550,27 @@ let yohane = {
   volumeStore: null,
   currentSong: null,
   prev: skipDekaku => {
-    var objK = Object.keys(LLCT.__cur_filterLists)
     if (!LLCT.__playPointer) {
-      LLCT.__playPointer = objK.length - 1
+      LLCT.__playPointer = LLCT.__cur_filterLists.length - 1
     }
-    LLCT.__playPointer = (LLCT.__playPointer - 1 + objK.length) % objK.length
-    yohane.loadPlay(
-      LLCT.__cur_filterLists[objK[LLCT.__playPointer]].id,
-      skipDekaku
-    )
+    LLCT.__playPointer =
+      (LLCT.__playPointer - 1 + LLCT.__cur_filterLists.length) %
+      LLCT.__cur_filterLists.length
+    yohane.loadPlay(LLCT.__cur_filterLists[LLCT.__playPointer].id, skipDekaku)
   },
   next: skipDekaku => {
-    var objK = Object.keys(LLCT.__cur_filterLists)
     if (!LLCT.__playPointer) {
       LLCT.__playPointer = 0
     }
-    LLCT.__playPointer = (LLCT.__playPointer + 1) % objK.length
-    yohane.loadPlay(
-      LLCT.__cur_filterLists[objK[LLCT.__playPointer]].id,
-      skipDekaku
-    )
+    LLCT.__playPointer =
+      (LLCT.__playPointer + 1) % LLCT.__cur_filterLists.length
+    yohane.loadPlay(LLCT.__cur_filterLists[LLCT.__playPointer].id, skipDekaku)
   },
   shuffle: skipDekaku => {
-    var objK = Object.keys(LLCT.__cur_filterLists)
-    var id = (Math.random() * objK.length) << 0
+    var id = (Math.random() * LLCT.__cur_filterLists.length) << 0
     LLCT.__playPointer = id
 
-    yohane.loadPlay(LLCT.__cur_filterLists[objK[id]].id, skipDekaku)
+    yohane.loadPlay(LLCT.__cur_filterLists[id].id, skipDekaku)
   },
   setVolume: v => {
     yohane.volumeStore = v
@@ -852,11 +846,12 @@ let pageAdjust = {
     document.getElementById('totalPage').innerHTML = pageAdjust.lists.length
   },
   buildPage: () => {
-    var objKeys = Object.keys(LLCT.__cur_filterLists)
     var webpI = webpSupports() ? 'webp' : 'png'
     pageAdjust.lists = []
-    for (var i = 0; i < objKeys.length; i++) {
-      var curObj = LLCT.__cur_filterLists[objKeys[i]]
+
+    let filterLen = LLCT.__cur_filterLists.length
+    for (var i = 0; i < filterLen; i++) {
+      var curObj = LLCT.__cur_filterLists[i]
       var baseElement = document.createElement('llct-card')
       baseElement.className = 'slide-right'
       baseElement.setAttribute(
@@ -868,21 +863,23 @@ let pageAdjust = {
         var artImage = document.createElement('img')
         artImage.style = 'background-color: #323232;'
         artImage.id = curObj.id + '_bgimg'
-        artImage.alt = objKeys[i]
+        artImage.alt = curObj.title
         artImage.className = 'lazy card_bg'
         artImage.dataset.src = dataYosoro.get('devMode')
           ? 'data/10001/bg.' + webpI
           : './data/' + curObj.id + '/bg.' + webpI
         c.appendChild(artImage)
       } else {
-        baseElement.style.backgroundColor = '#323232'
+        baseElement.style.backgroundColor = dataYosoro.get('yoshiko')
+          ? '#000'
+          : '#323232'
       }
 
       var in_text = dataYosoro.get('devMode')
         ? '#' + curObj.id + '_DEV'
         : dataYosoro.get('mikan') === true
-        ? curObj.translated || objKeys[i]
-        : objKeys[i]
+        ? curObj.translated || curObj.title
+        : curObj.title
       var titleText = document.createElement('h3')
       titleText.className = 'txt'
       titleText.innerText = in_text
@@ -1068,6 +1065,79 @@ Sakurauchi.add('LLCTDOMLoad', () => {
   })
 })
 
+const search = keyword => {
+  let lists = []
+
+  document.getElementById('search_keyword').innerHTML = keyword
+
+  if (keyword == '') {
+    lists = LLCT.__pkg_callLists
+  } else {
+    keyword = keyword.toLowerCase().replace(/\s/g, '')
+    LLCT.__pkg_callLists.forEach((obj, index) => {
+      let score = 0
+
+      let title = obj.title.toLowerCase().replace(/\s/g, '')
+      if ((title.match(keyword) || []).length / title.length > 0) {
+        score += 10 * ((title.match(keyword) || []).length / title.length)
+      }
+
+      let translated = (obj.translated || '__').toLowerCase().replace(/\s/g, '')
+      if (
+        translated !== '__' &&
+        (translated.match(keyword) || []).length / translated.length > 0
+      ) {
+        score +=
+          10 * ((translated.match(keyword) || []).length / translated.length)
+      }
+
+      let short_kr = (obj.short_kr || '__').toLowerCase().replace(/\s/g, '')
+      if (
+        short_kr !== '__' &&
+        (short_kr.match(keyword) || []).length / short_kr.length > 0
+      ) {
+        score += 7 * ((short_kr.match(keyword) || []).length / short_kr.length)
+      }
+
+      if (obj.tags) {
+        obj.tags.forEach(tag => {
+          tag = tag.toLowerCase().replace(/\s/g, '')
+          if ((tag.match(keyword) || []).length / tag.length > 0) {
+            score += 5 * ((tag.match(keyword) || []).length / tag.length)
+          }
+        })
+      }
+
+      if (score > 0) {
+        lists.push({
+          ...obj,
+          score
+        })
+      }
+    })
+
+    lists.sort((a, b) => b.score - a.score)
+  }
+
+  if (
+    lists.length &&
+    document.querySelector('.search_blank').className.indexOf('show') != -1
+  ) {
+    document.querySelector('.search_blank').classList.remove('show')
+  }
+
+  if (JSON.stringify(LLCT.__cur_filterLists) == JSON.stringify(lists)) {
+    return
+  }
+
+  if (!lists.length) {
+    document.querySelector('.search_blank').classList.add('show')
+  }
+
+  LLCT.__cur_filterLists = lists
+  pageAdjust.buildPage()
+}
+
 // Tether 사용
 document.addEventListener('DOMContentLoaded', () => {
   new Tether({
@@ -1075,6 +1145,18 @@ document.addEventListener('DOMContentLoaded', () => {
     target: document.getElementById('more_vertical_options'),
     attachment: 'top right',
     targetAttachment: 'top left'
+  })
+
+  // 검색 버튼
+  document.querySelector('#search_btn').addEventListener('click', () => {
+    document.querySelector('.search_container').classList.toggle('show')
+
+    if (
+      document.querySelector('.search_container').className.indexOf('show') !==
+      -1
+    ) {
+      document.querySelector('#search_box').focus()
+    }
   })
 })
 Sakurauchi.add('LLCTPGLoad', () => {

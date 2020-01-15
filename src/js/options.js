@@ -28,6 +28,17 @@ const __llct_optslists = [
     }
   },
   {
+    id: 'reallyDark',
+    data_key: 'yoshiko',
+    checkbox: true,
+    default: false,
+    fn: v => {
+      document
+        .getElementsByTagName('body')[0]
+        .classList[v == 'true' || v == true ? 'add' : 'remove']('true_dark')
+    }
+  },
+  {
     id: 'reduceMotion',
     data_key: 'zuramaru',
     checkbox: true,
