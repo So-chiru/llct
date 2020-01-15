@@ -5035,26 +5035,26 @@
     },
     {
       "start_time": 21938,
-      "end_time": 100,
+      "end_time": 22302,
       "collection": [
         {
           "text": "* (오~ ",
           "start_time": 22038,
-          "end_time": 0,
+          "end_time": 22202,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
           "start_time": 22143,
-          "end_time": 0,
+          "end_time": 22202,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
           "start_time": 22166,
-          "end_time": 0,
+          "end_time": 22202,
           "pronunciation_time": 0,
           "type": "2"
         }
@@ -5132,47 +5132,47 @@
     },
     {
       "start_time": 22169,
-      "end_time": 100,
+      "end_time": 22598,
       "collection": [
         {
           "text": "* (세-",
           "start_time": 22269,
-          "end_time": 0,
+          "end_time": 22498,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "노 ",
           "start_time": 22309,
-          "end_time": 0,
+          "end_time": 22498,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와 ",
           "start_time": 22345,
-          "end_time": 0,
+          "end_time": 22498,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와 ",
           "start_time": 22381,
-          "end_time": 0,
+          "end_time": 22498,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와 ",
           "start_time": 22416,
-          "end_time": 0,
+          "end_time": 22498,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와)",
           "start_time": 22453,
-          "end_time": 0,
+          "end_time": 22498,
           "pronunciation_time": 0,
           "type": "2"
         }
@@ -5396,26 +5396,26 @@
     },
     {
       "start_time": 23082,
-      "end_time": 100,
+      "end_time": 23463,
       "collection": [
         {
           "text": "* (오~ ",
           "start_time": 23182,
-          "end_time": 0,
+          "end_time": 23363,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후",
           "start_time": 23289,
-          "end_time": 0,
+          "end_time": 23363,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
           "start_time": 23310,
-          "end_time": 0,
+          "end_time": 23363,
           "pronunciation_time": 0,
           "type": "2"
         }
@@ -5493,47 +5493,47 @@
     },
     {
       "start_time": 23312,
-      "end_time": 100,
+      "end_time": 23747,
       "collection": [
         {
           "text": "* (세-",
           "start_time": 23412,
-          "end_time": 0,
+          "end_time": 23647,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "노 ",
           "start_time": 23452,
-          "end_time": 0,
+          "end_time": 23647,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와 ",
           "start_time": 23490,
-          "end_time": 0,
+          "end_time": 23647,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와 ",
           "start_time": 23526,
-          "end_time": 0,
+          "end_time": 23647,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와 ",
           "start_time": 23559,
-          "end_time": 0,
+          "end_time": 23647,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후와)",
           "start_time": 23595,
-          "end_time": 0,
+          "end_time": 23647,
           "pronunciation_time": 0,
           "type": "2"
         }
@@ -5806,19 +5806,19 @@
     },
     {
       "start_time": 24528,
-      "end_time": 24809,
+      "end_time": 24807,
       "collection": [
         {
           "text": "* (후!",
           "start_time": 24628,
-          "end_time": 24709,
+          "end_time": 24707,
           "pronunciation_time": 0,
           "type": "2"
         },
         {
           "text": "후!)",
           "start_time": 24663,
-          "end_time": 24709,
+          "end_time": 24707,
           "pronunciation_time": 0,
           "type": "2"
         }
@@ -6027,28 +6027,28 @@
           "start_time": 25944,
           "end_time": 26238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "도",
           "start_time": 25980,
           "end_time": 26238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "로",
           "start_time": 26015,
           "end_time": 26238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "오)",
           "start_time": 26050,
           "end_time": 26238,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
