@@ -12,7 +12,7 @@
         "translated": "우리들의 LIVE 너와의 LIFE",
         "center": null,
         "karaoke": true,
-        "tags": ["bokuranolivekimitonolife", "borarara", "1집", "싱글", "single"],
+        "tags": ["bokuranolivekimitonolife", "borarara", "1집", "싱글", "single", "보쿠라노라이브키미토노라이프"],
         "short_kr": "보라라라"
       },
       {
@@ -21,7 +21,7 @@
         "translated": "우정 NO CHANGE",
         "center": null,
         "karaoke": true,
-        "tags": ["yujonochange", "yuujonochange", "1집앨범"],
+        "tags": ["yujonochange", "yuujonochange", "1집앨범", "유조노체인지", "유조노첸지"],
         "short_kr": "우정노첸"
       },
       {
@@ -31,7 +31,7 @@
         "karaoke": true,
         "bladeColor": "시작은 눈 (흰색)",
         "bladeColorHEX": "#fff",
-        "tags": ["snohare", "2집", "싱글", "single"],
+        "tags": ["snohare", "2집", "싱글", "single", "스노우하레이션"],
         "short_kr": "스노하레"
       },
       {
@@ -40,7 +40,7 @@
         "karaoke": true,
         "title": "baby maybe 恋のボタン",
         "translated": "baby maybe 사랑의 버튼",
-        "tags": ["snohare", "2집앨범"],
+        "tags": ["snohare", "2집앨범", "베이비메이비코이노보탄", "보탄", "버튼"],
         "short_kr": "코이버튼"
       },
       {
@@ -48,6 +48,7 @@
         "center": null,
         "karaoke": true,
         "title": "Love marginal",
+        "tags": ["러브마지널", "러브마지날"],
         "artist": 1
       },
       {
@@ -94,6 +95,8 @@
         "center": null,
         "title": "夏色えがおで1,2,Jump!",
         "translated": "여름빛 미소로 1, 2, Jump!",
+        "tags": ["나츠이로에가오데원투점프", "나츠이로리믹스", "덥다"],
+        "short_kr": "나츠이로",
         "karaoke": true
       },
       {
@@ -128,6 +131,7 @@
         "center": null,
         "title": "もうひとりじゃないよ",
         "translated": "더 이상 혼자가 아니야",
+        "tags": [ "모우히토리쟈나이", "모히토리쟈나이"],
         "karaoke": false
       },
       {
@@ -135,6 +139,8 @@
         "center": null,
         "title": "もぎゅっと“love”で接近中！",
         "translated": "꼬옥 \"love\"로 접근 중!",
+        "tags": ["모귯토러브데세킨츄", "모귯토라부데세킨츄"],
+        "short_kr": "모귯토"
         "karaoke": true
       },
       {
@@ -142,6 +148,8 @@
         "center": null,
         "title": "愛してるばんざーい！",
         "translated": "사랑해 만세!",
+        "tags": ["아이시테루반자이", "라라라"],
+        "short_kr": "아이반자이",
         "karaoke": true
       },
       {
@@ -154,6 +162,7 @@
         "id": "00020",
         "center": null,
         "title": "Someday of my life",
+        "tags": ["섬데이오브마이라이프", "섬데이오프마이라이프"],
         "karaoke": false
       },
       {
@@ -203,6 +212,7 @@
         "center": null,
         "title": "孤独なHeaven",
         "translated": "고독한 Heaven",
+        "tags": ["고도쿠나헤이븐"],
         "karaoke": false
       },
       {
@@ -215,6 +225,7 @@
         "id": "00029",
         "center": null,
         "title": "Daring!!",
+        "tags": ["다링", "달링", "덜링", "댈링", "더링", "마키곡"],
         "karaoke": false
       },
       {
@@ -222,6 +233,7 @@
         "center": null,
         "title": "勇気のReason",
         "translated": "용기의 Reason",
+        "tags": ["유키노리즌"],
         "karaoke": false
       },
       {
@@ -229,24 +241,29 @@
         "center": null,
         "title": "ありふれた悲しみの果て",
         "translated": "흔한 슬픔의 끝",
+        "tags": ["아리후레타카나시미노하테", "혼술끝", "뻔한슬픔"],
+        "short_kr": "흔슬끝",
         "karaoke": true
       },
       {
         "id": "00032",
         "title": "Wonderful Rush",
         "center": null,
+        "tags": ["원더풀러시", "원더풀러쉬", "비행기", "배게"],
         "karaoke": true
       },
       {
         "id": "00033",
         "title": "Oh,Love＆Peace!",
         "center": null,
+        "tags": ["럽앤피스", "럽엔피스", "오럽앤피스", "오럽엔피스"],
         "karaoke": true
       },
       {
         "id": "00034",
         "title": "Listen to my heart!!",
         "center": null,
+        "tags": ["리슨투마허트비트", "리슨투마이하트"],
         "karaoke": false
       },
       {
@@ -260,6 +277,8 @@
         "center": null,
         "title": "僕らは今のなかで",
         "translated": "우리들은 지금 속에서",
+        "tags": ["보쿠라와이마노나카데", "우린지금"],
+        "short_kr": "보쿠이마",
         "karaoke": true
       },
       {
@@ -275,6 +294,7 @@
         "center": null,
         "karaoke": true,
         "singAlong": true,
+        "tags": ["킷토세이슌가키코에루", "엔딩"],
         "short_kr": "킷토세슌"
       },
       {
@@ -282,6 +302,7 @@
         "title": "輝夜の城で踊りたい",
         "center": null,
         "translated": "카구야의 성에서 춤추고 싶어",
+        "tags": ["거기 후와 아니라고", "콜법관"],
         "karaoke": false
       },
       {
@@ -289,6 +310,7 @@
         "title": "ススメ→トゥモロウ",
         "center": null,
         "translated": "나아가→Tomorrow",
+        "tags": ["스스메트머러우", "스스메투모로우", "스스투모"],
         "karaoke": true
       },
       {
@@ -296,18 +318,22 @@
         "title": "これからのSomeday",
         "center": null,
         "translated": "앞으로 다가올 Someday",
+        "tags": ["코레카라노someday", "코레카라노섬데이"],
         "karaoke": false
       },
       {
         "id": "00042",
         "title": "Wonder zone",
         "center": null,
+        "tags": ["원더존", "원더"],
         "karaoke": false
       },
       {
         "id": "00043",
         "title": "No brand girls",
         "center": null,
+        "tags": ["노브랜드걸", "브랜드가 아니다 소비자다"],
+        "short_kr": "노브란",
         "karaoke": true
       },
       {
@@ -315,8 +341,9 @@
         "title": "START : DASH!!",
         "album": "No Brand Girls",
         "center": null,
+        "tags": ["스탓대쉬", "스타트대시", "스타트대쉬", "스타트엣대시", "스타트엣대쉬"],
         "karaoke": true,
-        "short_kr": "START:DASH!!"
+        "short_kr": "스탓대시"
       },
       {
         "id": "00045",
@@ -330,6 +357,7 @@
         "title": "キミのくせに！",
         "center": null,
         "translated": "너 주제에!",
+        "tags": ["키미노쿠세니", "니주제에"],
         "karaoke": false
       },
       {
@@ -343,12 +371,14 @@
         "title": "夏、終わらないで。",
         "center": null,
         "translated": "여름, 끝나지 말아줘.",
+        "tags": ["나츠오와라나이데", "제발끝나지마라"],
         "karaoke": false
       },
       {
         "id": "00049",
         "title": "Pure girls project",
         "center": null,
+        "tags": ["퓨어걸즈프로젝트", "퓨어걸스프로젝트"],
         "karaoke": false
       },
       {
@@ -361,12 +391,14 @@
         "id": "00051",
         "title": "Music S.T.A.R.T!!",
         "center": null,
+        "tags": ["뮤직스타트", "음악시작", "붸쯔니"],
         "karaoke": true
       },
       {
         "id": "00052",
         "title": "LOVELESS WORLD",
         "center": null,
+        "tags": ["러브레스월드", "럽레스월드"],
         "karaoke": false
       },
       {
@@ -374,6 +406,7 @@
         "title": "タカラモノズ",
         "center": null,
         "translated": "보물들",
+        "tags": ["타카라모노즈"],
         "karaoke": false
       },
       {
@@ -387,6 +420,8 @@
         "title": "それは僕たちの奇跡",
         "center": null,
         "translated": "그것은 우리들의 기적",
+        "tags": ["소레와보쿠타치노키세키", "소레와보쿠타치노키세츠", "소레보쿠키세키"],
+        "short_kr": "소레키세",
         "karaoke": true
       },
       {
@@ -402,6 +437,8 @@
         "center": null,
         "translated": "어떤 때라도 계속",
         "singAlong": true,
+        "tags": ["돈나토키모즛토", "돈나토키모즛또"],
+        "short_kr": "돈나토키",
         "karaoke": true
       },
       {
@@ -416,6 +453,8 @@
         "title": "ユメノトビラ",
         "center": null,
         "translated": "꿈의 문",
+        "tags": ["유메노토비라", "즛토사가시츠즈케타", "키미토보쿠토노츠나가리오사가시탄다"],
+        "short_kr": "유메토비",
         "karaoke": false
       },
       {
@@ -428,24 +467,29 @@
         "id": "00061",
         "title": "Love wing bell",
         "center": null,
+        "short_kr": "럽윙벨",
         "karaoke": false
       },
       {
         "id": "00062",
         "title": "Dancing stars on me!",
         "center": null,
+        "tags": ["먼싱스타", "댄싱스타", "댄싱스타스온미", "댄싱스타즈온미", "댄싱스타스온미"],
+        "short_kr": "댄싱스타",
         "karaoke": false
       },
       {
         "id": "00063",
         "title": "KiRa-KiRa Sensation!",
         "center": null,
+        "tags": ["키라키라센세이션"],
         "karaoke": false
       },
       {
         "id": "00064",
         "title": "Happy maker!",
         "center": null,
+        "tags": ["해피메이커"],
         "karaoke": false
       },
       {
@@ -506,20 +550,23 @@
         "id": "00073",
         "center": null,
         "title": "ミはμ’sicのミ",
-        "translated": "",
+        "translated": "미는 μ’sic의 미",
+        "short_kr": "미뮤미",
         "karaoke": false
       },
       {
         "id": "00074",
         "center": null,
         "title": "Super LOVE＝Super LIVE!",
-        "translated": "",
+        "short_kr": "슈라슈라",
+        "tags": ["superlovesuperlive", "슈퍼러브슈퍼라이브", "스파랍", "스파라이브", "위아뮤즈"],
         "karaoke": false
       },
       {
         "id": "00075",
         "title": "Angelic Angel",
         "center": null,
+        "tags": ["극장판", "엔젤릭엔젤", "AA"],
         "karaoke": false
       },
       {
@@ -527,6 +574,8 @@
         "title": "Hello, 星を数えて",
         "center": null,
         "translated": "Hello, 별을 세며",
+        "tags": ["헬로호시오카조에테", "헬로별을세며", "극장판"],
+        "short_kr": "헬로호시",
         "karaoke": false
       },
       {
@@ -534,12 +583,16 @@
         "title": "SUNNY DAY SONG",
         "center": null,
         "karaoke": true,
+        "tags": ["헬로호시오카조에테", "헬로별을세며", "극장판"],
+        "short_kr": "SDS",
         "furiCopy": true
       },
       {
         "id": "00078",
         "title": "？←HEARTBEAT",
         "center": null,
+        "tags": ["하테나하트비트", "극장판"],
+        "short_kr": "하테나",
         "karaoke": false
       },
       {
@@ -547,12 +600,16 @@
         "title": "僕たちはひとつの光",
         "center": null,
         "translated": "우리는 하나의 빛",
+        "tags": ["우리들은 하나의 빛", "눈물", "최루", "극장판"],
+        "short_kr": "보쿠히카",
         "karaoke": true
       },
       {
         "id": "00080",
         "title": "Future style",
         "center": null,
+        "tags": ["미래스타일", "극장판", "최루"],
+        "short_kr": "퓨쳐스타일",
         "karaoke": false
       },
       {
@@ -560,12 +617,16 @@
         "title": "これから",
         "center": null,
         "translated": "지금부터",
+        "tags": ["ㅠㅠㅠㅠ", "극장판", "최루"],
+        "short_kr": "코레카라",
         "karaoke": true
       },
       {
         "id": "00082",
         "title": "HEART to HEART!",
         "center": null,
+        "tags": ["특전"],
+        "short_kr": "하투하",
         "karaoke": false
       },
       {
@@ -573,6 +634,7 @@
         "title": "嵐のなかの恋だから",
         "center": null,
         "translated": "폭풍 속의 사랑이니까",
+        "tags": ["특전"],
         "karaoke": false
       },
       {
@@ -606,18 +668,22 @@
         "title": "錯覚CROSSROADS",
         "center": null,
         "translated": "착각 CROSSROADS",
+        "tags": ["그러면들어주세요", "착각크로스로드"],
         "karaoke": false
       },
       {
         "id": "00089",
         "title": "PSYCHIC FIRE",
         "center": null,
+        "tags": ["싸이파이", "싸이킥파이아", "사이킥파이아", "사이킥파이어"],
+        "short_kr": "싸이파이",
         "karaoke": false
       },
       {
         "id": "00090",
         "title": "MOMENT RING",
         "center": null,
+        "tags": ["모멘트링"],
         "karaoke": false
       },
       {
@@ -625,6 +691,8 @@
         "title": "さようならへさよなら！",
         "center": null,
         "translated": "안녕이란 말에 안녕!",
+        "tags": ["사요나라에사요나라"],
+        "short_kr": "사요사요",
         "karaoke": false
       },
       {
@@ -632,6 +700,7 @@
         "title": "MUSEUMでどうしたい？",
         "center": null,
         "translated": "MUSEUM에서 뭘하고 싶어?",
+        "tags": ["박물관"],
         "karaoke": false
       },
       {
@@ -645,6 +714,7 @@
         "title": "ぷわぷわーお！",
         "center": null,
         "translated": "푸와푸와오!",
+        "tags": ["뿌와뿌와오"],
         "karaoke": false
       },
       {
