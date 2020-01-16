@@ -560,7 +560,7 @@
         "title": "Super LOVE＝Super LIVE!",
         "short_kr": "슈라슈라",
         "tags": ["superlovesuperlive", "슈퍼러브슈퍼라이브", "스파랍", "스파라이브", "위아뮤즈"],
-        "karaoke": false
+        "karaoke": true
       },
       {
         "id": "00075",
@@ -684,7 +684,7 @@
         "title": "MOMENT RING",
         "center": null,
         "tags": ["모멘트링"],
-        "karaoke": false
+        "karaoke": true
       },
       {
         "id": "00091",
