@@ -706,13 +706,10 @@ let yohane = {
         artistText,
         meta[1]
       ])
-      yohane.player().play()
-    } else {
-      yohane
-        .player()
-        .play()
-        .then()
     }
+
+    yohane.player().play()
+
     if (force) return 0
     yohane.fade(0, yohane.volumeStore, 150, performance.now(), () => {})
   },
@@ -785,6 +782,11 @@ let yohane = {
     } catch (e) {
       return logger.error(2, 'r', e.message)
     }
+    
+    if (yohane.player().playbackRate) {
+      yohane.player().playbackRate = dataYosoro.get('fastCall') == true ? 1.5 : 1
+    }
+
     yohane.__tickCaching = {}
     return true
   },

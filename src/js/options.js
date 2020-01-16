@@ -61,6 +61,15 @@ const __llct_optslists = [
     fn: _v => {}
   },
   {
+    id: 'fastCall',
+    data_key: 'fastCall',
+    checkbox: true,
+    default: false,
+    fn: v => {
+      yohane.player().playbackRate = v ? 1.5 : 1
+    }
+  },
+  {
     id: 'doNotUseMusicPlayer',
     data_key: 'notUsingMP',
     checkbox: true,
