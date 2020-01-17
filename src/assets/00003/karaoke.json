@@ -1498,39 +1498,67 @@
         },
         {
           "text": "하이 ",
-          "start_time": 8540,
-          "end_time": 9615,
+          "start_time": 8536,
+          "end_time": 9441,
           "pronunciation_time": 0,
           "type": "2",
-          "repeat_delay": 67
+          "repeat_delay": "66"
         },
         {
           "text": "x ",
-          "start_time": 8521,
-          "end_time": 9615,
+          "start_time": 8536,
+          "end_time": 9441,
           "pronunciation_time": 0,
           "type": "3"
         },
         {
           "text": "(2절 시작 ",
-          "start_time": 8521,
-          "end_time": 9615,
+          "start_time": 8536,
+          "end_time": 9441,
           "pronunciation_time": 0,
           "type": "3"
         },
         {
           "text": "전까지) ",
+          "start_time": 8536,
+          "end_time": 9441,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "> ",
           "start_time": 8521,
           "end_time": 9615,
           "pronunciation_time": 0,
           "type": "3"
         },
         {
-          "text": ">",
-          "start_time": 8521,
-          "end_time": 9615,
+          "text": "후",
+          "start_time": 9468,
+          "end_time": 9604,
           "pronunciation_time": 0,
-          "type": "3"
+          "type": "2"
+        },
+        {
+          "text": "후! ",
+          "start_time": 9485,
+          "end_time": 9604,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 9537,
+          "end_time": 9604,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!",
+          "start_time": 9552,
+          "end_time": 9604,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     },
@@ -1710,34 +1738,6 @@
           "end_time": 10731,
           "pronunciation_time": 0,
           "type": 1
-        },
-        {
-          "text": "(후",
-          "start_time": 10572,
-          "end_time": 10731,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "후! ",
-          "start_time": 10592,
-          "end_time": 10731,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "후",
-          "start_time": 10641,
-          "end_time": 10731,
-          "pronunciation_time": 0,
-          "type": "2"
-        },
-        {
-          "text": "후!)",
-          "start_time": 10661,
-          "end_time": 10731,
-          "pronunciation_time": 0,
-          "type": "2"
         }
       ]
     },
@@ -3258,7 +3258,7 @@
       "end_time": 20294,
       "collection": [
         {
-          "text": "< 울트라 오렌지가 허용 된 회장에서만 울오를 꺽습니다 >",
+          "text": "< 울트라 오렌지가 허용 된 회장에서만 울오를 꺽습니다. >",
           "start_time": "19077",
           "end_time": 20194,
           "pronunciation_time": 0.633,
@@ -3686,6 +3686,83 @@
           "end_time": 22857,
           "pronunciation_time": 0,
           "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 22277,
+      "end_time": 24425,
+      "collection": [
+        {
+          "text": "< 후주 부분 : ",
+          "start_time": 22377,
+          "end_time": 24157,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 23239,
+          "end_time": 24165,
+          "pronunciation_time": 0,
+          "type": "2",
+          "repeat_delay": "68"
+        },
+        {
+          "text": "x (끝까지) ",
+          "start_time": 23239,
+          "end_time": 24165,
+          "pronunciation_time": 0,
+          "type": "3",
+          "repeat_delay": ""
+        },
+        {
+          "text": "> ",
+          "start_time": 22377,
+          "end_time": 24157,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "후",
+          "start_time": 24175,
+          "end_time": 24325,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후! ",
+          "start_time": 24191,
+          "end_time": 24325,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후",
+          "start_time": 24240,
+          "end_time": 24325,
+          "pronunciation_time": 0,
+          "type": "2"
+        },
+        {
+          "text": "후!",
+          "start_time": 24260,
+          "end_time": 24325,
+          "pronunciation_time": 0,
+          "type": "2"
         }
       ]
     }
