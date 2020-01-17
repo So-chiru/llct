@@ -476,7 +476,7 @@
         "center": null,
         "tags": ["먼싱스타", "댄싱스타", "댄싱스타스온미", "댄싱스타즈온미", "댄싱스타스온미"],
         "short_kr": "댄싱스타",
-        "karaoke": false
+        "karaoke": true
       },
       {
         "id": "00063",
