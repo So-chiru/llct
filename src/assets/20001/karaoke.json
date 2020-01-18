@@ -82,6 +82,32 @@
       ]
     },
     {
+      "start_time": 3558,
+      "end_time": 5341,
+      "collection": [
+        {
+          "text": "< *1 : 직관에서는 해당 부분을 4번까지만 하고 엇박도 넣지 않습니다. >",
+          "start_time": 3658,
+          "end_time": 5241,
+          "pronunciation_time": "0.333",
+          "type": "3"
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
       "start_time": 1379,
       "end_time": 1864,
       "collection": [
@@ -758,7 +784,7 @@
           "end_time": 4190,
           "pronunciation_time": "2",
           "type": 1,
-          "ruby_text": "*"
+          "ruby_text": "*1"
         },
         {
           "text": "카",
@@ -900,7 +926,7 @@
           "type": "2"
         },
         {
-          "text": "하이!)",
+          "text": "하이!) - 직관 콜 끝",
           "start_time": 4147,
           "end_time": 4203,
           "pronunciation_time": 0,
@@ -993,7 +1019,8 @@
           "start_time": 4194,
           "end_time": 4744,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "2",
+          "ruby_text": "*1 x"
         },
         {
           "text": "하이! ",
@@ -3082,7 +3109,7 @@
           "end_time": 11773,
           "pronunciation_time": 0,
           "type": 1,
-          "ruby_text": "*"
+          "ruby_text": "*1"
         },
         {
           "text": "미",
@@ -3238,7 +3265,7 @@
           "type": "2"
         },
         {
-          "text": "하이!)",
+          "text": "하이!) - 직관 콜 끝",
           "start_time": 11750,
           "end_time": 11800,
           "pronunciation_time": 0,
@@ -3345,7 +3372,8 @@
           "start_time": 11792,
           "end_time": 12324,
           "pronunciation_time": 0,
-          "type": "2"
+          "type": "2",
+          "ruby_text": "*1 x"
         },
         {
           "text": "하이! ",
