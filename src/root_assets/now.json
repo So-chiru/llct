@@ -1,7 +1,6 @@
 {
   "name": "LLCT-CDN",
   "version": 2,
-  "alias": ["lovelivec.kr", "www.lovelivec.kr"],
   "routes": [
     {
       "src": "/data/(.*)",
