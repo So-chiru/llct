@@ -525,6 +525,8 @@ let yohaneNoDOM = {
       meta[1]
     ])
 
+    Sakurauchi.run('audioInit', [meta[1].kr || meta[0], artistText, meta[1]])
+
     LLCT[
       (meta[1].karaoke && dataYosoro.get('interactiveCall') != false) ||
       use_local_data
@@ -782,9 +784,10 @@ let yohane = {
     } catch (e) {
       return logger.error(2, 'r', e.message)
     }
-    
+
     if (yohane.player().playbackRate) {
-      yohane.player().playbackRate = dataYosoro.get('fastCall') == true ? 1.5 : 1
+      yohane.player().playbackRate =
+        dataYosoro.get('fastCall') == true ? 1.5 : 1
     }
 
     yohane.__tickCaching = {}
@@ -933,50 +936,59 @@ Sakurauchi.listen('keydown', ev => {
 })
 // Karaoke 관련 Initialize
 Sakurauchi.add('LLCTDOMLoad', () => {
-  window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
-  document.querySelector('llct-pl').onclick = ev => {
-    yohaneNoDOM.dekakuOnce(ev.target)
-  }
-  KaraokeInstance.ListenClickEvent(function (instance, e) {
-    document.getElementById('kara_audio').currentTime =
-      instance.karaokeData.timeline[e.detail.posX].collection[e.detail.posY]
-        .start_time /
-        100 -
-      0.03
-  })
-  Sakurauchi.listen(
-    ['seeking', 'seeked'],
-    () => {
-      KaraokeInstance.tickSoundsCache = {}
-      KaraokeInstance.clearSync(() => {
-        KaraokeInstance.AudioSync(Math.floor(yohane.timecode()), true)
-      })
-    },
-    yohane.player()
-  )
-  KaraokeInstance.tickSoundEnable =
-    dataYosoro.get('biTick') == null ||
-    typeof dataYosoro.get('biTick') === 'undefined'
-      ? true
-      : !!dataYosoro.get('biTick')
-  yohane.player().onplay = () => {
-    yohaneNoDOM.play()
-    requestAnimationFrame(yohane.tick)
-  }
-  yohane.player().onended = () => {
-    if (yohane.is_repeat) {
-      yohane.seekTo(0)
-      yohane.play()
-      return
+  try {
+    window.KaraokeInstance = new Karaoke(document.getElementById('karaoke'))
+    document.querySelector('llct-pl').onclick = ev => {
+      yohaneNoDOM.dekakuOnce(ev.target)
     }
-    yohaneNoDOM.end()
-    if (yohane.is_shuffle) {
-      yohane.next(!yohane.kaizu)
+    KaraokeInstance.ListenClickEvent(function (instance, e) {
+      document.getElementById('kara_audio').currentTime =
+        instance.karaokeData.timeline[e.detail.posX].collection[e.detail.posY]
+          .start_time /
+          100 -
+        0.03
+    })
+    Sakurauchi.listen(
+      ['seeking', 'seeked'],
+      () => {
+        KaraokeInstance.tickSoundsCache = {}
+        KaraokeInstance.clearSync(() => {
+          KaraokeInstance.AudioSync(Math.floor(yohane.timecode()), true)
+        })
+      },
+      yohane.player()
+    )
+    KaraokeInstance.tickSoundEnable =
+      dataYosoro.get('biTick') == null ||
+      typeof dataYosoro.get('biTick') === 'undefined'
+        ? true
+        : !!dataYosoro.get('biTick')
+    yohane.player().onplay = () => {
+      yohaneNoDOM.play()
+      requestAnimationFrame(yohane.tick)
     }
-  }
-  yohane.player().onpause = () => {
-    yohaneNoDOM.pause(true)
-    cancelAnimationFrame(yohane.tick)
+    yohane.player().onended = () => {
+      if (yohane.is_repeat) {
+        yohane.seekTo(0)
+        yohane.play()
+        return
+      }
+      yohaneNoDOM.end()
+      if (yohane.is_shuffle) {
+        yohane.next(!yohane.kaizu)
+      }
+    }
+    yohane.player().onpause = () => {
+      yohaneNoDOM.pause(true)
+      cancelAnimationFrame(yohane.tick)
+    }
+  } catch (e) {
+    ga('send', 'exception', {
+      exDescription: e.message,
+      exFatal: true
+    })
+
+    console.error(e)
   }
 })
 // 플레이어 관련
@@ -1206,6 +1218,14 @@ Sakurauchi.add('LLCTPGLoad', () => {
     dataYosoro.set('biTick', v)
   })
   Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
+
+  Sakurauchi.listen('audioInit', data => {
+    ga('send', 'event', 'audio', 'play', data[2].id + ', ' + data[2].title)
+  })
+
+  Sakurauchi.listen('searched', data => {
+    ga('send', 'event', 'search', 'searched', data)
+  })
 
   Sakurauchi.listen('audioLoadStart', data => {
     if (!navigator.mediaSession) return 0

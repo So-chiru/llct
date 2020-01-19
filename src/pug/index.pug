@@ -100,7 +100,7 @@ html(lang="kr").index
                     div
                     div
                 .search_container
-                    input#search_box(placeholder="검색..." oninput="search(this.value)" onchange="search(this.value)")
+                    input#search_box(placeholder="검색..." oninput="search(this.value)" onchange="search(this.value);Sakurauchi.run('searched', this.value)")
                 .search_blank
                     .circle_big
                         img(src="/data/favicon/chika_ee.png")
