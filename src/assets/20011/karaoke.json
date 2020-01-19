@@ -3891,7 +3891,7 @@
     },
     {
       "start_time": 18454,
-      "end_time": 19054,
+      "end_time": 19454,
       "collection": [
         {
           "text": "니",
@@ -3943,11 +3943,18 @@
           "type": 1
         },
         {
-          "text": "노",
+          "text": "노 ",
           "start_time": 18748,
           "end_time": 18954,
           "pronunciation_time": 0,
           "type": 1
+        },
+        {
+          "text": "(yeah)",
+          "start_time": 19101,
+          "end_time": 19354,
+          "pronunciation_time": 0,
+          "type": "4"
         }
       ]
     },
@@ -4615,35 +4622,35 @@
           "start_time": 21717,
           "end_time": 21952,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "ve ",
           "start_time": 21746,
           "end_time": 21952,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "U ",
           "start_time": 21746,
           "end_time": 21952,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "my ",
           "start_time": 21780,
           "end_time": 21952,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         },
         {
           "text": "friends",
           "start_time": "21791",
           "end_time": 21952,
           "pronunciation_time": 0,
-          "type": 1
+          "type": "4"
         }
       ]
     },
