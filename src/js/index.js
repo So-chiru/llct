@@ -983,7 +983,7 @@ Sakurauchi.add('LLCTDOMLoad', () => {
       cancelAnimationFrame(yohane.tick)
     }
   } catch (e) {
-    ga('send', 'exception', {
+    gtag('event', 'exception', {
       exDescription: e.message,
       exFatal: true
     })
@@ -1220,11 +1220,16 @@ Sakurauchi.add('LLCTPGLoad', () => {
   Sakurauchi.run('tickSoundChanged', KaraokeInstance.tickSoundEnable)
 
   Sakurauchi.listen('audioInit', data => {
-    ga('send', 'event', 'audio', 'play', data[2].id + ', ' + data[2].title)
+    gtag('event', 'play song', {
+      event_category: 'audio',
+      event_label: data[2].id
+    })
   })
 
   Sakurauchi.listen('searched', data => {
-    ga('send', 'event', 'search', 'searched', data)
+    gtag('event', 'search', {
+      search_term: data
+    })
   })
 
   Sakurauchi.listen('audioLoadStart', data => {
