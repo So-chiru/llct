@@ -1,0 +1,32 @@
+html(lang="kr")
+  head
+    meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title LLCT
+    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+    script(src="https://hammerjs.github.io/dist/hammer.min.js")
+    script(src="mikan.min.js")
+    link(rel="stylesheet" href="mikan.min.css")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" media="none" onload="if(media!='all')media='all'")
+    style.
+      @keyframes ripple {
+        0% {
+          top: 36px;left: 36px;width: 0;height: 0;opacity: 1;
+        }
+        100% {
+          top: 0px;left: 0px;width: 72px;height: 72px;opacity: 0;
+        }
+      }
+      llct-wait div div {
+        position: absolute; border: 4px solid #476a92; opacity: 1; border-radius: 50%; animation: ripple 2s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
+      }
+  body
+    llct-wait(style="top:0;left:0;pointer-events:none;position:fixed;display:flex;width:100%;height:100%;z-index:1000;background-color:#9ddceb;")
+      div(style="display:inline-block;position:relative;width:80px;height:80px;margin:auto;")
+        div
+        div(style="animation-delay: -1s;")
+    llct-app-wrap
+      llct-app
+    llct-menu-wrap
+      llct-menu

@@ -1,0 +1,516 @@
+html,
+body {
+  margin: 0;
+  //text-rendering: geometricPrecision;
+  font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif;
+  font-display: swap;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(241, 241, 241);
+  border: 0px none #ffffff;
+  border-radius: 54px;
+  transition: 0.3s all cubic-bezier(0.19, 1, 0.22, 1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #d8d8d8;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0px none #ffffff;
+  border-radius: 29px;
+  transition: 0.3s all cubic-bezier(0.19, 1, 0.22, 1);
+}
+::-webkit-scrollbar-track:hover {
+  background: #d3d3d3;
+}
+::-webkit-scrollbar-track:active {
+  background: #bbbbbb;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+$tablet: 768px;
+$desktop: 1024px;
+
+$menu-height: 62px;
+$menu-width: 100px;
+
+$left-margin: 40px;
+
+$title-mobile-mleft: 20px;
+$title-mleft: 2vw;
+
+$title-mbottom: 20px;
+
+$app-width: 95%;
+$app-mobile-width: 95%;
+
+$mute: #757575;
+
+llct-wait {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+llct-wait.done {
+  visibility: hidden;
+  opacity: 0;
+}
+
+llct-menu-wrap {
+  left: 0;
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: $menu-height;
+  background-color: #fff;
+
+  @media screen and (max-width: $tablet) {
+    box-shadow: 0px 0px 16px rgba(196, 196, 196, 0.16);
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: $menu-width;
+    height: 100%;
+  }
+}
+
+llct-menu-wrap::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 16px rgba(196, 196, 196, 0.16);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+llct-menu-wrap:hover::after {
+  opacity: 1;
+}
+
+.llct-menu-in {
+  margin: auto;
+  text-align: center;
+
+  @media screen and (max-width: $desktop) {
+    width: 90%;
+    height: 80%;
+    display: flex;
+  }
+
+  @media screen and (min-width: $desktop) {
+    height: 80%;
+    width: auto;
+  }
+}
+
+llct-app-wrap {
+  left: 0;
+  height: calc(95% - #{$menu-height});
+  width: $app-width;
+  margin: auto;
+  position: relative;
+  display: block;
+
+  @media screen and (max-width: $tablet) {
+    width: $app-mobile-width;
+  }
+
+  @media screen and (min-width: $desktop) {
+    margin: 0;
+    left: calc(#{$menu-width} + #{$left-margin});
+    width: calc(#{$app-width} - (#{$menu-width} + #{$left-margin}));
+  }
+}
+
+// Tabs
+
+.llct-tab-title {
+  display: flex;
+  margin-left: $title-mleft;
+  margin-top: 30px;
+  margin-bottom: $title-mbottom;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 30px;
+    margin-left: $title-mobile-mleft;
+  }
+}
+
+.llct-tab-title h1 {
+  font-size: 36px;
+  letter-spacing: -0.66px;
+  color: #151515;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 30px;
+  }
+}
+
+.llct-tab-title h3 {
+  margin-left: 11px;
+  font-size: 16px;
+  color: $mute;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 14px;
+  }
+}
+
+.llct-tab-title h1,
+.llct-tab-title h3 {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.llct-tab-title-enter-active {
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.llct-tab-title-leave-active {
+  display: none;
+}
+.llct-tab-title-enter,
+.llct-tab-title-leave-to {
+  position: absolute;
+  transform: translateX(-10px);
+  opacity: 0;
+}
+.llct-tab-title-enter-to {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+// UI Elements
+
+.m-button {
+  position: relative;
+  display: grid;
+  margin: auto;
+  border-radius: 5px;
+  width: 66px;
+  height: 66px;
+
+  @media screen and (max-width: $desktop) {
+    width: 40px;
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  transition: 0.4s color cubic-bezier(0.19, 1, 0.22, 1);
+  margin-bottom: 10px;
+  user-select: none;
+}
+
+.m-button:hover {
+  color: #7c7c7c;
+}
+
+.m-button i {
+  margin: auto;
+}
+
+.m-button p {
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: -0.66px;
+  color: #666;
+
+  @media screen and (max-width: $desktop) {
+    display: none;
+  }
+}
+
+.m-button::after {
+  content: "";
+  position: absolute;
+  border-radius: 5px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 2px 8px rgba(104, 104, 104, 0.16);
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.m-button:hover::after {
+  opacity: 1;
+}
+
+.m-button-enter-active {
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.m-button-leave-active {
+  display: none;
+}
+.m-button-enter,
+.m-button-leave-to {
+  position: absolute;
+  transform: translateX(10px);
+  opacity: 0;
+}
+.m-button-enter-to {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+// Card
+
+.ayumu-cards-holder {
+  display: flex;
+  overflow: hidden;
+  overflow-x: auto;
+
+  @media screen and (max-width: $tablet) {
+    margin-left: 2.5%;
+  }
+}
+
+.ayumu-cards-holder::-webkit-scrollbar {
+  visibility: hidden;
+  height: 0px;
+}
+
+.ayumu-cards-holder {
+  scrollbar-width: none;
+}
+
+.llct-card-wrap {
+  display: flex;
+  width: 30vw;
+  min-width: 400px;
+  height: 222px;
+  margin-right: 10px;
+
+  @media screen and (max-width: $tablet) {
+    min-width: 70vw;
+    max-width: 400px;
+    height: 182px; 
+  }
+}
+
+.llct-card {
+  background-color: #333;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  transform: translateY(0px);
+  overflow: hidden;
+  letter-spacing: -0.33px;
+  box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.16);
+  user-select: none;
+  outline: none;
+}
+
+.llct-card[data-clickable="true"] {
+  cursor: pointer;
+
+  &:hover > .llct-card-bg {
+    transform: scale(1.05);
+  }
+
+  &:active > .llct-card-bg {
+    transform: scale(1.08);
+  }
+
+  &:hover > .llct-card-bg-layer {
+    backdrop-filter: blur(0px);
+  }
+}
+
+.llct-card::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 1px 32px rgba(0, 0, 0, 0.32);
+  opacity: 0;
+  transition: 0.3s opacity cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.llct-card:hover::after {
+  opacity: 1;
+}
+
+.llct-card-content {
+  position: absolute;
+  bottom: 15%;
+  margin-left: 10%;
+  z-index: 3;
+}
+
+.llct-card-content h1, .llct-card-content h3, .llct-card-bg {
+  transition: all 0.53s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.llct-card-content h1 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 20px;
+    line-height: 90%;
+    margin-top: 5px;
+  }
+}
+
+.llct-card-content h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(240, 240, 240, 0.8);
+  margin: 0;
+  margin-bottom: -2.5px;
+}
+
+.llct-card-bg,
+.llct-card-bg-layer {
+  position: absolute;
+  user-select: none;
+  opacity: 1;
+  transform: translateY(0);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+.llct-card-bg-layer {
+  z-index: 2;
+  background: linear-gradient(
+    rgba(139, 139, 139, 0.6) 0%,
+    rgba(112, 112, 112, 0.9) 100%
+  );
+  opacity: 0.9;
+  backdrop-filter: blur(2px);
+}
+
+.llct-card-bg {
+  z-index: 1;
+}
+
+.llct-card-bg img {
+  position: absolute;
+  opacity: 1;
+  transform: translateY(0);
+  width: 100%;
+  border-radius: 10px;
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+// Card Transition
+
+.llct-card-enter-active {
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1) 50ms;
+  -moz-transform: rotate(0.02deg);
+}
+.llct-card-leave-active {
+  display: none;
+}
+.llct-card-enter,
+.llct-card-leave-to {
+  position: absolute;
+  transform: translateY(10px);
+  opacity: 0;
+}
+.llct-card-enter-to {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+// Ayumu Tab
+
+.ayumu-mod-select {
+  display: flex;
+  height: 4vh;
+  margin: 2vh $title-mleft;
+  user-select: none;
+
+  @media screen and (max-width: $tablet) {
+    margin: $title-mbottom $title-mobile-mleft;
+  }
+}
+
+.ayumu-mod-buttons {
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: -0.66px;
+}
+
+.ayumu-mod-buttons div {
+  display: flex;
+  margin-right: 20px;
+  color: #151515;
+  cursor: default;
+}
+
+.ayumu-mod-buttons .in_active {
+  color: #bababa;
+  cursor: pointer;
+  transition: 0.3s all cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ayumu-mod-buttons .in_active:hover {
+  color: #9c9c9c;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.ayumu-mod-buttons .in_active:active {
+  color: #4b4b4b;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.ayumu-mod-buttons div *, .ayumu-mod-ext-buttons {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.ayumu-mod-ext-buttons {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.ayumu-mod-ext-buttons .spin {
+  transform: rotate(0deg);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ayumu-mod-ext-buttons .spin:hover {
+  transform: rotate(45deg);
+  color: #363636;
+}
+
+.ayumu-mod-ext-buttons .spin:active {
+  transform: rotate(360deg + 90deg);
+  color: #969696;
+}
+
+
+// Others
