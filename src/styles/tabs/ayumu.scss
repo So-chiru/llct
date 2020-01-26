@@ -1,0 +1,143 @@
+@import "__global";
+
+.ayumu-cards-holder {
+  display: flex;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.ayumu-cards-holder,
+.ayumu-music-cards {
+  @media screen and (max-width: $tablet) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.ayumu-cards-holder::-webkit-scrollbar {
+  visibility: hidden;
+  height: 0px;
+}
+
+.ayumu-cards-holder {
+  scrollbar-width: none;
+}
+
+.ayumu-music-cards span {
+  user-select: none;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+
+  @media screen and (max-width: $tablet) {
+    grid-column-gap: 0px;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: calc(#{$menu-height} * 1.5);
+  }
+
+  @media screen and (min-width: $tablet) and (max-width: $desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ayumu-mod-select {
+  display: flex;
+  height: 4vh;
+  margin: 3vh $title-mleft;
+  user-select: none;
+
+  @media screen and (max-width: $tablet) {
+    margin: $title-mbottom $title-mobile-mleft;
+  }
+}
+
+.ayumu-mod-buttons {
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: -0.66px;
+}
+
+.ayumu-mod-buttons div {
+  display: flex;
+  margin-right: 20px;
+  color: #151515;
+  cursor: default;
+}
+
+.ayumu-mod-buttons .in_active {
+  color: #bababa;
+  cursor: pointer;
+  transition: 50ms all cubic-bezier(0.4, 0, 0.2, 1);
+
+  i {
+    transition: 50ms transform cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover {
+    color: #9c9c9c;
+    cursor: pointer;
+  }
+
+  &:hover > i {
+    transform: translateX(2.5px);
+  }
+
+  &:active {
+    color: #4b4b4b;
+    cursor: pointer;
+  }
+
+  &:active > i {
+    transform: translateX(5px);
+  }
+}
+
+.ayumu-mod-buttons div *,
+.ayumu-mod-ext-buttons {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.ayumu-mod-ext-buttons {
+  margin-left: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.ayumu-mod-ext-buttons .spin {
+  transform: rotate(0deg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ayumu-mod-ext-buttons .spin:hover {
+  transform: rotate(45deg);
+  color: #363636;
+}
+
+.ayumu-mod-ext-buttons .spin:active {
+  transform: rotate(360deg + 90deg);
+  color: #969696;
+}
+
+// Music card transition
+
+.ayumu-music-card-enter-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ayumu-music-card-leave-active {
+  display: none;
+}
+.ayumu-music-card-enter,
+.ayumu-music-card-leave-to {
+  position: absolute;
+  transform: translateY(10px);
+  opacity: 0;
+}
+.ayumu-music-card-enter-to {
+  transform: translateY(0px);
+  opacity: 1;
+}

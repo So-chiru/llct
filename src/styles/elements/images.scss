@@ -1,0 +1,9 @@
+.llct-image-enter-active {
+  transition: 250ms opacity cubic-bezier(0.4, 0, 0.2, 1);
+}
+.llct-image-enter {
+  opacity: 0;
+}
+.llct-image-enter-to {
+  opacity: 1;
+}
