@@ -1,5 +1,5 @@
 Vue.component('llct-card', {
-  template: `<div class="llct-card-wrap">
+  template: `
     <div class="llct-card" data-clickable="true">
       <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
         <div class="llct-card-content" :data-index="index"> 
@@ -12,7 +12,7 @@ Vue.component('llct-card', {
         <img :src="url"></img>
       </div>
     </div>
-  </div>`,
+  `,
   props: ['index', 'title', 'subtitle', 'url'],
   methods: {
     beforeEnter (el) {
@@ -23,6 +23,27 @@ Vue.component('llct-card', {
       el.style.transitionDelay = ''
     }
   }
+})
+
+Vue.component('llct-music-card', {
+  template: `<div class="llct-music-card">
+    <div class="info">
+      <img :src="cover_url"></img>
+      <div class="text">
+        <h3>{{title}}</h3>
+        <p>{{artist}}</p>
+      </div class="text">
+    </div>
+    <div class="control">
+      <div class="button">
+        <i class="material-icons">playlist_add</i>
+      </diV>
+      <div class="button">
+        <i class="material-icons">play_arrow</i>
+      </div>
+    </div>
+  </div>`,
+  props: ['title', 'artist', 'cover_url']
 })
 
 Vue.component('llct-ayumu', {
@@ -43,7 +64,10 @@ Vue.component('llct-ayumu', {
       <div class="ayumu-mod-ext-buttons">
         <i class="material-icons spin">refresh</i>
       </div>
-    </div>  
+    </div>
+    <div class="ayumu-music-cards">
+      <llct-music-card v-for="(card, index) in music_cards" v-vind:key="index" :title="card.title" :artist="card.artist" :cover_url="card.cover_url"></llct-music-card>
+    </div>
   </div>
   `,
   data: () => {
@@ -76,6 +100,45 @@ Vue.component('llct-ayumu', {
           subtitle: '아아아아아아아아악!!',
           url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
         }
+      ],
+
+      music_cards: [
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        },
+
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        },
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        },
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        },
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        },
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        },
+        {
+          title: 'Thank you, FREINDS!!',
+          artist: 'Aqours',
+          cover_url: 'https://i.ytimg.com/vi/KNt8rnr4UDI/hqdefault.jpg'
+        }
       ]
     }
   },
@@ -99,7 +162,7 @@ Vue.component('llct-ayumu', {
       let duration = 1200
 
       hammer.on('pan', ev => {
-        $el.scrollLeft = $el.scrollLeft + ev.velocityX * -2
+        $el.scrollLeft = $el.scrollLeft + ev.velocityX * -10
 
         let a = ev.velocityX
         let b = ev.velocityX * -1
@@ -112,7 +175,7 @@ Vue.component('llct-ayumu', {
         let r = () => {
           a = expo(Date.now() - start, ev.velocityX, b, duration)
 
-          $el.scrollLeft = $el.scrollLeft + a * -3
+          $el.scrollLeft = $el.scrollLeft + a * -10
 
           if (a > -0.1 && a < 0.1) {
             a = undefined

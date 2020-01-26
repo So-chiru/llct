@@ -5,24 +5,24 @@ const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 const cleanCSS = require('gulp-clean-css')
 const sass = require('gulp-sass')
+const connect = require('gulp-connect')
 sass.compiler = require('node-sass')
 
-const html = () => {
-  return src('src/views/*.pug')
+const html = () =>
+  src('src/views/*.pug')
     .pipe(pug())
     .pipe(dest('dist/'))
-}
-
-const css = () => {
-  return src('src/styles/*.scss')
+    .pipe(connect.reload())
+const css = () =>
+  src('src/styles/*.scss')
     .pipe(concat('mikan.min.css'))
     .pipe(sass())
     .pipe(cleanCSS())
     .pipe(dest('dist/'))
-}
+    .pipe(connect.reload())
 
-const js = () => {
-  return src('src/js/*.js')
+const js = () =>
+  src('src/js/*.js')
     .pipe(concat('mikan.min.js'))
     .pipe(
       babel({
@@ -30,7 +30,7 @@ const js = () => {
       })
     )
     .pipe(dest('dist/'))
-}
+    .pipe(connect.reload())
 
 const watchdog = () => {
   watch(['src/js/*.js'], js)
@@ -38,5 +38,12 @@ const watchdog = () => {
   watch(['src/views/*.pug'], html)
 }
 
-exports.default = parallel(html, css, js, watchdog)
+const server = () => {
+  connect.server({
+    root: 'dist',
+    livereload: true
+  })
+}
+
 exports.build = parallel(html, css, js)
+exports.default = parallel(this.build, server, watchdog)
