@@ -6,7 +6,7 @@ Vue.component('llct-modal', {
         <h3>{{this.$root.title}}</h3>
         <p>{{this.$root.content}}</p>
         <div class="buttons_list">
-          <div class="button" v-on:click="this.$root.hide">닫기</div>
+          <div class="button" v-on:click="this.$root.hide" autofocus>닫기</div>
         </div>
       </div>
     </transition>

@@ -86,6 +86,9 @@ $shadow-6dp: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
+$standard-ease: cubic-bezier(0.4, 0, 0.2, 1);
+$decelerate-ease: cubic-bezier(0.0, 0.0, 0.2, 1);
+$accelerate-ease: cubic-bezier(0.4, 0.0, 1, 1);
 
 $tablet: 768px;
 $desktop: 1024px;

@@ -1,6 +1,6 @@
 Vue.component('llct-card', {
   template: `
-    <div class="llct-card" data-clickable="true">
+    <div class="llct-card" data-clickable="true" v-on:click="interact(id)">
       <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
         <div class="llct-card-content" :data-index="index"> 
           <h3>{{subtitle}}</h3>
@@ -13,7 +13,7 @@ Vue.component('llct-card', {
       </div>
     </div>
   `,
-  props: ['index', 'title', 'subtitle', 'url'],
+  props: ['index', 'title', 'subtitle', 'url', 'id'],
   methods: {
     beforeEnter (el) {
       el.style.transitionDelay = 45 * parseInt(el.dataset.index, 10) + 'ms'
@@ -21,6 +21,17 @@ Vue.component('llct-card', {
 
     afterEnter (el) {
       el.style.transitionDelay = ''
+    },
+
+    interact(id) {
+      console.log(id)
+      
+      if (id) {
+        this.$llctEvents.$emit('play', id)
+        return
+      }
+
+      console.log('Events?')
     }
   }
 })

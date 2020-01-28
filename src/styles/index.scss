@@ -75,6 +75,14 @@ llct-menu-wrap {
   }
 }
 
+llct-menu-wrap:hover .m-button p {
+  opacity: 0.6;
+}
+
+llct-menu-wrap .m-button:active p {
+  opacity: 1;
+}
+
 llct-menu-wrap::after {
   content: "";
   position: absolute;

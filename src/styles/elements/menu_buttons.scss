@@ -26,6 +26,12 @@
 
 .m-button i {
   margin: auto;
+  color: #c0c0c0;
+  transition: 200ms color $standard-ease;
+}
+
+.m-button.active i {
+  color: #000;
 }
 
 .m-button p {
@@ -34,9 +40,21 @@
   font-size: 12px;
   letter-spacing: -0.66px;
   color: #666;
+  opacity: 0;
+  transition: 200ms opacity $standard-ease;
 
   @media screen and (max-width: $desktop) {
     display: none;
+  }
+}
+
+.m-button:active {
+  i {
+    color: #000;
+  }
+  
+  p {
+    color: #000;
   }
 }
 

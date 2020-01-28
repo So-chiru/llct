@@ -5,6 +5,17 @@
   width: 100%;
 }
 
+.llct-tab-over {
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  
+}
+
+.llct-tab-margin {
+  margin-top: 2.5%;
+}
+
 .llct-tab-title {
   display: flex;
   margin-left: $title-mleft;
@@ -25,6 +36,11 @@
   @media screen and (max-width: $tablet) {
     font-size: 30px;
   }
+}
+
+.llct-tab-title h1.hidden {
+  color:transparent;
+  opacity: 0;
 }
 
 .llct-tab-title h3 {

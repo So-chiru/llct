@@ -11,10 +11,15 @@ Vue.component('llct-music-card', {
       <div class="button">
         <i class="material-icons">playlist_add</i>
       </diV>
-      <div class="button">
+      <div class="button" v-on:click="play(id)">
         <i class="material-icons">play_arrow</i>
       </div>
     </div>
   </div>`,
-  props: ['title', 'artist', 'cover_url']
+  props: ['title', 'artist', 'cover_url', 'id'],
+  methods: {
+    play(id) {
+      this.$llctEvents.$emit('play', id)
+    }
+  }
 })

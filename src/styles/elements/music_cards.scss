@@ -70,6 +70,19 @@
   margin-left: auto;
 }
 
+.llct-music-card .control .button {
+  cursor: pointer;
+  transition: 150ms opacity $standard-ease;
+}
+
+.llct-music-card .control .button:hover {
+  opacity: 0.6;
+}
+
+.llct-music-card .control .button:active {
+  opacity: 0.4;
+}
+
 .llct-music-card .info img {
   width: 45px;
   height: 45px;
