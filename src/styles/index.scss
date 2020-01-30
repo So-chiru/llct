@@ -134,8 +134,3 @@ llct-app-wrap {
     width: calc(#{$app-width} - (#{$menu-width} + #{$left-margin}));
   }
 }
-
-.llct-image.round {
-  background-color: #323232;
-  border-radius: 50%;
-}

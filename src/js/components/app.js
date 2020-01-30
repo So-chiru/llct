@@ -8,7 +8,7 @@ Vue.component('llct-app', {
         <h3 :key="this.$root.desc">{{this.$root.desc}}</h3>
       </transition>
     </div>
-    <div class="llct-tab-margin" v-if="this.$root.hide"></div>
+    <div class="llct-tab-margin" :class="{hidden: this.$root.hide}"></div>
     <transition-group name="llct-tabs" appear tag="span">
       <llct-ayumu v-bind:key="0" v-if="this.$root.currentTab == 0"></llct-ayumu>
       <llct-chika v-bind:key="1" v-if="this.$root.currentTab == 1"></llct-chika>

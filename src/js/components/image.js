@@ -10,8 +10,6 @@ Vue.component('llct-image', {
     }
   },
   template: `
-    <transition name="llct-image">
-      <img v-lazy="$attrs.src" v-on:load="done" v-show="$attrs.placeholder !== '' ? true : load" class="llct-image" :class="$attrs.placeholder"></img>
-    </transition>
+    <img v-lazy="$attrs.src" v-on:load="done" v-show="$attrs.placeholder !== '' ? true : load" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round'}"></img>
   `
 })

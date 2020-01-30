@@ -3,6 +3,7 @@ Vue.component('llct-card', {
     <div class="llct-card" data-clickable="true" v-on:click="interact(id, ext_url)">
       <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
         <div class="llct-card-content" :data-index="index"> 
+          <p v-if="ext_url"><i class="material-icons">exit_to_app</i> {{ext_url}}</p>
           <h3>{{subtitle}}</h3>
           <h1>{{title}}</h1>
         </div>

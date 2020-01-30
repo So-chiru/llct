@@ -1,6 +1,7 @@
 Vue.prototype.$llctEvents = new Vue()
 var siteTest = /lovelivec\.kr/g
 Vue.use(VueLazyload, {
+  observer: true,
   filter: {
     webp (listener, _) {
       if (!window.webpSupport || !siteTest.test(listener.src)) return
@@ -34,7 +35,7 @@ const init = () => {
             desc: ''
           },
           {
-            title: '음악',
+            title: '곡 목록',
             desc: ''
           },
           {

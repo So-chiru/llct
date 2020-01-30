@@ -73,6 +73,7 @@
 .llct-music-card .control .button {
   cursor: pointer;
   transition: 150ms opacity $standard-ease;
+  margin: 0px 5px;
 }
 
 .llct-music-card .control .button:hover {
@@ -100,4 +101,23 @@
   font-size: 12px;
   color: #a0a0a0;
   font-weight: bold;
+}
+
+//Music card transition
+
+.llct-music-card-enter-active {
+  transition: all 450ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.llct-music-card-leave-active {
+  display: none;
+}
+.llct-music-card-enter,
+.llct-music-card-leave-to {
+  position: absolute;
+  transform: translateY(10px);
+  opacity: 0;
+}
+.llct-music-card-enter-to {
+  transform: translateY(0px);
+  opacity: 1;
 }

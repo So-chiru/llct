@@ -7,3 +7,20 @@
 .llct-image-enter-to {
   opacity: 1;
 }
+
+.llct-image.round {
+  border-radius: 50%;
+}
+
+.llct-image {
+  opacity: 0;
+  transition: 600ms opacity cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img[lazy=loading] {
+  opacity: 0;
+}
+
+img[lazy=loaded] {
+  opacity: 1;
+}

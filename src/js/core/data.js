@@ -56,8 +56,14 @@ const LLCTData = class {
       return dataInstance
     },
     methods: {
-      refresh() {
+      refresh () {
         dataInstance.recommended()
+      },
+      artist (id, artist) {
+        let first = id.substring(0, 1)
+        let group = Object.keys(dataInstance.lists)[first]
+
+        return dataInstance.lists[group].meta.artists[artist] || artist
       }
     }
   })

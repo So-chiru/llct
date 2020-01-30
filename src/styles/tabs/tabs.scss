@@ -13,7 +13,13 @@
 }
 
 .llct-tab-margin {
-  margin-top: 2.5%;
+  margin-top: 0%;
+  display: none;
+}
+
+.llct-tab-margin.hidden {
+  display: block;
+  margin-top: 2%;
 }
 
 .llct-tab-title {

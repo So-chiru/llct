@@ -12,7 +12,7 @@ Vue.component('llct-chika', {
       </div>
     </div>
     <div class="chika-music-cards">
-      <llct-music-card placeholder="round" v-for="(data, index) in this.$llctDatas.lists[this.currentGroup].collection" v-bind:key="index" :title="data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></llct-music-card>
+      <llct-music-card placeholder="round" v-for="(data, index) in this.$llctDatas.lists[this.currentGroup].collection" v-bind:key="index" :index="index" :title="data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></llct-music-card>
     </div>
   </div>
   `,

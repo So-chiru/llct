@@ -74,6 +74,19 @@
   margin-bottom: -2.5px;
 }
 
+.llct-card-content p {
+  display: flex;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(147, 199, 255, 0.8);
+  margin: 0;
+  max-width: 70%;
+  margin-bottom: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .llct-card-bg,
 .llct-card-bg-layer {
   position: absolute;

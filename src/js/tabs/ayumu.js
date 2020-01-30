@@ -19,7 +19,7 @@ Vue.component('llct-ayumu', {
     </div>
     <div class="ayumu-music-cards">
       <transition-group name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-        <llct-music-card placeholder="round" v-for="(card, index) in songs" v-bind:key="index" :title="card.Title" :artist="card.Artist" :cover_url="card.CoverURL" :id="card.ID"></llct-music-card>
+        <llct-music-card placeholder="round" v-for="(card, index) in songs" v-bind:key="index" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="card.CoverURL" :id="card.ID"></llct-music-card>
       </transition-group>
     </div>
   </div>
@@ -44,6 +44,10 @@ Vue.component('llct-ayumu', {
 
     afterEnter (el) {
       el.style.transitionDelay = ''
+    },
+
+    getArtist (id, artist) {
+      return this.$llctDatas.artist(id, artist)
     },
 
     changeTab (id) {
