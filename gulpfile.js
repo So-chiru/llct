@@ -6,6 +6,7 @@ const babel = require('gulp-babel')
 const cleanCSS = require('gulp-clean-css')
 const sass = require('gulp-sass')
 const connect = require('gulp-connect')
+const imagemin = require('gulp-imagemin')
 sass.compiler = require('node-sass')
 
 const html = () =>
@@ -16,13 +17,18 @@ const html = () =>
 const css = () =>
   src('src/styles/**/*.scss')
     .pipe(concat('mikan.min.css'))
-    .pipe(sass({
-      includePaths: [__dirname + '/src/styles/']
-    }))
+    .pipe(
+      sass({
+        includePaths: [__dirname + '/src/styles/']
+      })
+    )
     .pipe(cleanCSS())
     .pipe(dest('dist/'))
     .pipe(connect.reload())
-
+const images = () =>
+  src('src/data/images/*')
+    .pipe(imagemin())
+    .pipe(dest('dist/assets'))
 const js = () =>
   src('src/js/**/*.js')
     .pipe(concat('mikan.min.js'))
@@ -38,6 +44,7 @@ const watchdog = () => {
   watch(['src/js/**/*.js'], js)
   watch(['src/styles/**/*.scss'], css)
   watch(['src/views/*.pug'], html)
+  watch(['src/data/images/*'], images)
 }
 
 const server = () => {
@@ -47,5 +54,5 @@ const server = () => {
   })
 }
 
-exports.build = parallel(html, css, js)
+exports.build = parallel(html, css, js, images)
 exports.default = parallel(this.build, server, watchdog)

@@ -1,8 +1,4 @@
-/**
- * Playlist.js
- */
-
-class Playlist {
+class LLCTPlaylist {
   constructor () {
     this.pointer = null
     this.lists = []

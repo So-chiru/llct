@@ -1,7 +1,7 @@
 Vue.component('llct-music-card', {
   template: `<div class="llct-music-card">
     <div class="info">
-      <llct-image v-bind:src="cover_url"></llct-image>
+      <llct-image :src="cover_url" :placeholder="placeholder"></llct-image>
       <div class="text">
         <h3>{{title}}</h3>
         <p>{{artist}}</p>
@@ -16,7 +16,7 @@ Vue.component('llct-music-card', {
       </div>
     </div>
   </div>`,
-  props: ['title', 'artist', 'cover_url', 'id'],
+  props: ['title', 'artist', 'cover_url', 'id', 'placeholder'],
   methods: {
     play(id) {
       this.$llctEvents.$emit('play', id)

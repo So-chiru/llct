@@ -11,7 +11,7 @@ Vue.component('llct-image', {
   },
   template: `
     <transition name="llct-image">
-      <img :src="$attrs" v-on:load="done" v-show="load"></img>
+      <img v-lazy="$attrs.src" v-on:load="done" v-show="$attrs.placeholder !== '' ? true : load" class="llct-image" :class="$attrs.placeholder"></img>
     </transition>
   `
 })

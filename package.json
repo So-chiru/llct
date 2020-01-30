@@ -10,5 +10,8 @@
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
     "node-sass": "^4.13.1"
+  },
+  "dependencies": {
+    "gulp-imagemin": "^7.1.0"
   }
 }

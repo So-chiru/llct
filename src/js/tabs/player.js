@@ -1,6 +1,5 @@
 Vue.component('llct-player', {
   template: `<div class="llct-tab llct-tab-over" id="3">
-  
     <div class="player-dash">
       <div class="player-left">
         <div class="player-info">
