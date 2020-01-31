@@ -3,22 +3,25 @@
 $album-wh: 60px;
 $mobile-album-wh: 45px;
 
-$close-btn-wh: 45px;
-$mobile-close-btn-wh: 35px;
-
 $button-wh: 32px;
 $button-diff-wh: 28px;
 $mobile-button-wh: 28px;
 $mobile-button-diff-wh: 24px;
 
+$thumb-size: 16px;
+
 .player-dash {
   display: flex;
-  padding-left: 2%;
-  padding-top: 2%;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
 .player-info {
   display: flex;
+
+  @media screen and (max-width: $tablet) {
+    grid-area: 1 / 1 / 2 / 4;
+  }
 }
 
 .player-info-text {
@@ -65,22 +68,29 @@ $mobile-button-diff-wh: 24px;
 }
 
 .player-left {
-  width: calc(100% - #{$close-btn-wh} * 2);
+  width: 100vw;
   display: flex;
+
+  flex: 2;
 
   @media screen and (max-width: $tablet) {
-    width: calc(100% - #{$mobile-close-btn-wh} * 2);
-  }
-}
+    width: 100%;
 
-.player-control {
-  display: flex;
-  flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
 }
 
 .player-progress {
   display: flex;
-  flex: 1;
+  flex: 5;
+
+  @media screen and (max-width: $tablet) {
+    grid-area: 2 / 1 / 3 / 5;
+  }
 }
 
 @keyframes bar-animation {
@@ -94,6 +104,10 @@ $mobile-button-diff-wh: 24px;
   display: flex;
   width: 80%;
   margin: auto;
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
 
   .current,
   .left,
@@ -118,21 +132,66 @@ $mobile-button-diff-wh: 24px;
     width: 100%;
     position: relative;
     height: 4px;
+
+    cursor: pointer;
+  }
+
+  .bar-current,
+  .bar-bg,
+  .bar-load,
+  .bar-thumb {
+    position: absolute;
+    height: 100%;
+    width: 100%;
   }
 
   .bar-current,
   .bar-bg,
   .bar-load {
-    position: absolute;
-    height: 100%;
-    width: 100%;
     border-radius: 5px;
   }
 
   .bar-current {
-    width: 32px;
+    width: 0px;
     background-color: #1975fe;
     z-index: 7;
+  }
+
+  .bar-thumb {
+    width: $thumb-size;
+    height: $thumb-size;
+    margin-top: calc(-#{$thumb-size} / 2.5);
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 8;
+    cursor: grab;
+  }
+
+  .bar-thumb:active {
+    cursor: grabbing;
+  }
+
+  .bar-thumb::after{
+    content: "";
+    position: absolute;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    box-shadow: $shadow-3dp;
+    opacity: 0.3;
+
+    transition: 250ms opacity $standard-ease;
+  }
+
+  .bar-thumb:hover::after {
+    opacity: 0.7;
+  }
+
+  .bar-thumb:active::after {
+    opacity: 1;
   }
 
   .bar-load {
@@ -144,7 +203,7 @@ $mobile-button-diff-wh: 24px;
       #cdf6ea 20px
     );
     background-size: 150% 100%;
-    
+
     animation: bar-animation 10s linear infinite;
     z-index: 8;
   }
@@ -157,10 +216,15 @@ $mobile-button-diff-wh: 24px;
 .player-btn {
   display: flex;
   margin-left: auto;
+  flex: 1;
 
   width: -moz-fit-content;
   width: -webkit-fit-content;
   width: fit-content;
+
+  @media screen and (max-width: $tablet) {
+    grid-area: 1 / 4 / 2 / 5;
+  }
 }
 
 .player-btn i.btns i {
@@ -228,30 +292,14 @@ $mobile-button-diff-wh: 24px;
 }
 
 .player-close {
-  width: $close-btn-wh;
-  height: $close-btn-wh;
-  border-radius: 50%;
   background-color: rgba(196, 196, 196, 0.16);
-  display: flex;
-  cursor: pointer;
-  user-select: none;
-  margin: auto;
-
-  @media screen and (max-width: $tablet) {
-    width: $mobile-close-btn-wh;
-    height: $mobile-close-btn-wh;
-  }
-}
-
-.player-close i {
-  margin: auto;
   transition: 150ms color $standard-ease;
 }
 
-.player-close:hover i {
+.player-close:hover {
   color: #868686;
 }
 
-.player-close:active i {
+.player-close:active {
   color: #c0c0c0;
 }

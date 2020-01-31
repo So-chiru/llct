@@ -95,6 +95,10 @@ const init = () => {
 
         let info = this.$llctDatas.getSong(id)
 
+        if (this.$llctDatas.meta == info) {
+          return false
+        }
+
         this.$llctDatas.meta = info
         this.$llctDatas.playActive = true
 

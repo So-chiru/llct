@@ -31,11 +31,12 @@
     margin-left: $title-mobile-mleft;
   }
 
-  transition: 250ms marginTop $standard-ease;
+  opacity: 0;
 }
 
 .llct-tab-title.active {
   margin-top: 30px;
+  opacity: 1;
 }
 
 .llct-tab-title h1 {
@@ -70,16 +71,15 @@
 }
 
 .llct-tab-title-enter-active {
-  transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
+  transition: 250ms all $standard-ease;
 }
-.llct-tab-title-leave-active {
-  opacity: 0;
-}
+
 .llct-tab-title-enter,
 .llct-tab-title-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
+
 .llct-tab-title-enter-to {
   transform: translateX(0px);
   opacity: 1;
@@ -88,16 +88,19 @@
 .llct-tabs-enter-active {
   transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
+
 .llct-tabs-leave-active {
   position: absolute;
   transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
+
 .llct-tabs-enter,
 .llct-tabs-leave-to {
   position: absolute;
   transform: translateY(10px);
   opacity: 0;
 }
+
 .llct-tabs-enter-to {
   transform: translateY(0px);
   opacity: 1;

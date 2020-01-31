@@ -2,13 +2,35 @@ const LLCTAudio = class {
   constructor () {
     this.audio = document.createElement('audio')
     this.audio.style.display = 'none'
+    this.animation = null
+    this.originVolume = this.audio.volume
     this.events = {}
 
     if (navigator.mediaSession) {
       this.supportMedia = true
       this.sessionInit()
     }
+
+    this.audio.addEventListener('canplaythrough', () => {
+      this.run('playable')
+    })
+
+    this.audio.addEventListener('ended', () => {
+      this.run('end')
+    })
   }
+
+  fadeOut () {
+    let play = () => {
+      return true
+
+      this.animation = requestAnimationFrame()
+    }
+
+    play()
+  }
+
+  fadeIn () {}
 
   on (name, cb, key) {
     if (!this.events[name]) {
@@ -53,13 +75,36 @@ const LLCTAudio = class {
     return !this.audio.paused
   }
 
+  get volume () {
+    return this.originVolume
+  }
+
+  set volume (v) {
+    this.originVolume = v
+  }
+
+  get progress () {
+    return this.audio.currentTime / this.audio.duration
+  }
+
+  set progress (per) {
+    this.audio.currentTime = this.audio.duration * per
+  }
+
+  seekPrev (t) {
+    this.audio.currentTime = this.audio.currentTime() - t
+  }
+
+  seekNext (t) {
+    this.audio.currentTime = this.audio.currentTime() + t
+  }
+
   play () {
     if (this.supportMedia) {
       navigator.mediaSession.playbackState = 'playing'
     }
 
     this.run('play')
-
     this.audio.play()
   }
 
@@ -69,12 +114,15 @@ const LLCTAudio = class {
     }
 
     this.run('pause')
-
     this.audio.pause()
   }
 
   currentTime () {
     return this.audio.currentTime
+  }
+
+  duration () {
+    return this.audio.duration
   }
 
   timecode () {
