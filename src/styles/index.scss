@@ -5,7 +5,8 @@ body {
   margin: 0;
   font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif;
   font-display: swap;
-  -moz-transform: rotateX(0.0002deg);
+  width: 100%;
+  height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -57,7 +58,7 @@ llct-wait.done {
 
 llct-menu-wrap {
   left: 0;
-  bottom: 0;
+  top: 0;
   position: fixed;
   display: flex;
   width: 100%;
@@ -69,9 +70,14 @@ llct-menu-wrap {
     box-shadow: 0px 0px 16px rgba(196, 196, 196, 0.16);
   }
 
+  @media screen and (max-width: $desktop) {
+    top: unset;
+    bottom: 0;
+  }
+
   @media screen and (min-width: $desktop) {
     width: $menu-width;
-    height: 100%;
+    height: 100vh;
   }
 }
 

@@ -30,8 +30,6 @@ Vue.component('llct-card', {
         return
       }
 
-      console.log(ext_url)
-
       if (ext_url) {
         window.open(ext_url, '_blank')
         return

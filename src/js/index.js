@@ -1,7 +1,6 @@
 Vue.prototype.$llctEvents = new Vue()
 var siteTest = /lovelivec\.kr/g
 Vue.use(VueLazyload, {
-  observer: true,
   filter: {
     webp (listener, _) {
       if (!window.webpSupport || !siteTest.test(listener.src)) return
@@ -61,6 +60,8 @@ const init = () => {
       },
 
       changeTab (id) {
+        this.prevTab = this.currentTab
+
         if (this.tabs[id]) {
           this.updateTitle(
             this.tabs[id].title,
@@ -72,15 +73,32 @@ const init = () => {
         this.$llctEvents.$emit('changeTab', id)
 
         this.currentTab = id
+      },
+
+      goBackTab () {
+        return this.changeTab(this.prevTab)
       }
     },
     mounted () {
       this.changeTab(0)
 
-      this.$llctEvents.$on('play', id => {
-        console.log(id)
+      this.$llctEvents.$on('requestChangeTab', id => {
+        this.changeTab(id)
+      })
 
+      this.$llctEvents.$on('requestGoBack', () => {
+        this.goBackTab()
+      })
+
+      this.$llctEvents.$on('play', id => {
         this.changeTab(3)
+
+        let info = this.$llctDatas.getSong(id)
+
+        this.$llctDatas.meta = info
+        this.$llctDatas.playActive = true
+
+        audio.load(this.$llctDatas.base + '/audio/' + id)
       })
     }
   })

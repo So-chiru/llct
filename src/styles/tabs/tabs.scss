@@ -1,7 +1,7 @@
 @import "__global";
 
 .llct-tab {
-  position: relative;
+  position: absolute;
   width: 100%;
 }
 
@@ -9,7 +9,6 @@
   z-index: 5;
   height: 100%;
   width: 100%;
-  
 }
 
 .llct-tab-margin {
@@ -24,14 +23,19 @@
 
 .llct-tab-title {
   display: flex;
+  margin-top: -54px;
   margin-left: $title-mleft;
-  margin-top: 30px;
   margin-bottom: $title-mbottom;
 
   @media screen and (max-width: $tablet) {
-    margin-top: 30px;
     margin-left: $title-mobile-mleft;
   }
+
+  transition: 250ms marginTop $standard-ease;
+}
+
+.llct-tab-title.active {
+  margin-top: 30px;
 }
 
 .llct-tab-title h1 {
@@ -45,7 +49,7 @@
 }
 
 .llct-tab-title h1.hidden {
-  color:transparent;
+  color: transparent;
   opacity: 0;
 }
 
@@ -70,7 +74,6 @@
 }
 .llct-tab-title-leave-active {
   opacity: 0;
-  display: none;
 }
 .llct-tab-title-enter,
 .llct-tab-title-leave-to {
@@ -86,8 +89,8 @@
   transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 .llct-tabs-leave-active {
-  position: relative;
-  transition: all 0.250s cubic-bezier(0.4, 0.0, 1, 1);
+  position: absolute;
+  transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
 .llct-tabs-enter,
 .llct-tabs-leave-to {
@@ -99,4 +102,3 @@
   transform: translateY(0px);
   opacity: 1;
 }
-

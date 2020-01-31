@@ -12,10 +12,11 @@ Vue.component('llct-chika', {
       </div>
     </div>
     <div class="chika-music-cards">
-      <llct-music-card placeholder="round" v-for="(data, index) in this.$llctDatas.lists[this.currentGroup].collection" v-bind:key="index" :index="index" :title="data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></llct-music-card>
+      <llct-music-card placeholder="round" v-for="(data, index) in (this.$llctDatas.lists[this.currentGroup] || {collection: []}).collection" v-bind:key="index" :index="index" :title="data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></llct-music-card>
     </div>
   </div>
   `,
+  props: ['current'],
   data: () => {
     return {
       groups: ["µ's", 'Aqours', '虹ヶ咲'],
@@ -47,7 +48,7 @@ Vue.component('llct-chika', {
       return this.$llctDatas.base + '/cover/' + id
     }
   },
-  mounted () {
+  beforeRouteEnter () {
     this.slide = new LLCTSlide(this.$el.querySelector('.group-select'), 1200)
   }
 })

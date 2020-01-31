@@ -29,7 +29,24 @@ const LLCTData = class {
 
   search (keyword) {}
 
-  getSong (id) {}
+  getListMeta (id) {
+    let first = id.substring(0, 1)
+    let group = Object.keys(this.lists)[first]
+
+    let meta = this.lists[group].collection
+
+    let idInt = parseInt(id.substring(1, id.length)) - 1
+    if (meta[idInt] && meta[idInt].id === id) {
+      return meta[idInt]
+    }
+
+    let i = meta.length
+    while (i--) {
+      if (meta[i].id == id) return meta[i]
+    }
+
+    return null
+  }
 
   recommended () {
     return new Promise((resolve, reject) => {
@@ -64,6 +81,10 @@ const LLCTData = class {
         let group = Object.keys(dataInstance.lists)[first]
 
         return dataInstance.lists[group].meta.artists[artist] || artist
+      },
+
+      getSong (id) {
+        return dataInstance.getListMeta(id)
       }
     }
   })

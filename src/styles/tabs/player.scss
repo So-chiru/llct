@@ -163,6 +163,11 @@ $mobile-button-diff-wh: 24px;
   width: fit-content;
 }
 
+.player-btn i.btns i {
+  position: absolute;
+  margin: auto;
+}
+
 .player-btn i {
   position: relative;
   margin: auto;

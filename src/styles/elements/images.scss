@@ -1,20 +1,6 @@
-.llct-image-enter-active {
-  transition: 250ms opacity cubic-bezier(0.4, 0, 0.2, 1);
-}
-.llct-image-enter {
-  opacity: 0;
-}
-.llct-image-enter-to {
-  opacity: 1;
-}
-
-.llct-image.round {
-  border-radius: 50%;
-}
-
 .llct-image {
   opacity: 0;
-  transition: 600ms opacity cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 250ms opacity cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 img[lazy=loading] {

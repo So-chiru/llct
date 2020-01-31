@@ -24,27 +24,30 @@ window.addEventListener('load', () => {
       return {
         title: '',
         content: '',
+        callback: () => {},
         open: false
       }
     },
     methods: {
-      update(title, content) {
+      update (title, content, callback) {
         this.title = title
         this.content = content
+        this.callback = typeof callback === 'function' ? callback : () => {}
       },
 
-      show() {
+      show () {
         this.open = true
       },
 
-      hide() {
+      hide () {
         this.open = false
+        this.callback()
       }
     }
   })
 
-  window.showModal = (title, content) => {
-    modal.update(title, content)
+  window.showModal = (title, content, callback) => {
+    modal.update(title, content, callback)
     modal.show()
   }
 

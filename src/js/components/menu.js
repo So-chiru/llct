@@ -13,7 +13,7 @@ Vue.component('llct-menu', {
       </div>
     </transition>
     <transition name="m-button" appear>
-      <div class="m-button" data-index="3" v-on:click="popup()" v-bind:class="{active: currentTab == 2}">
+      <div class="m-button" data-index="3" v-on:click="changeTab(2)" v-bind:class="{active: currentTab == 2}">
         <i class="material-icons" title="재생목록">playlist_play</i>
         <p>재생목록</p>
       </div>
@@ -37,24 +37,12 @@ Vue.component('llct-menu', {
     this.$llctEvents.$off('changeTab')
   },
   methods: {
-    beforeEnter (el) {
-      el.style.transitionDelay = 25 * parseInt(el.dataset.index, 10) + 'ms'
-    },
-
-    afterEnter (el) {
-      el.style.transitionDelay = ''
-    },
-
     changeTab (id) {
       this.$root.changeTab(id)
     },
 
     changeTabEvent (id) {
       this.currentTab = id
-    },
-
-    popup () {
-      showModal('경고', 'Not Implemented')
     }
   }
 })
