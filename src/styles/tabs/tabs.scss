@@ -12,6 +12,7 @@
 }
 
 .llct-tab-margin {
+  position: absolute;
   margin-top: 0%;
   display: none;
 }
@@ -26,6 +27,7 @@
   margin-top: -54px;
   margin-left: $title-mleft;
   margin-bottom: $title-mbottom;
+  user-select: none;
 
   @media screen and (max-width: $tablet) {
     margin-left: $title-mobile-mleft;

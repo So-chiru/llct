@@ -1,5 +1,5 @@
 Vue.component('llct-menu', {
-  template: `<div class="llct-menu-in">
+  template: `<div class="llct-menu-in" :class="{hidden: currentTab == 3}">
     <transition name="m-button" appear>
       <div class="m-button" data-index="1" v-on:click="changeTab(0)" v-bind:class="{active: currentTab == 0}">
         <i class="material-icons" title="메인">home</i>
@@ -28,6 +28,11 @@ Vue.component('llct-menu', {
   data: () => {
     return {
       currentTab: 0
+    }
+  },
+  watch: {
+    currentTab (v) {
+      this.$el.parentNode.classList[v == 3 ? 'add' : 'remove']('hidden')
     }
   },
   mounted () {

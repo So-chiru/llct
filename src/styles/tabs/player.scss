@@ -1,7 +1,7 @@
 @import "__global";
 
 $album-wh: 60px;
-$mobile-album-wh: 45px;
+$mobile-album-wh: 55px;
 
 $button-wh: 32px;
 $button-diff-wh: 28px;
@@ -38,12 +38,19 @@ $thumb-size: 16px;
   font-weight: bold;
 
   @media screen and (max-width: $tablet) {
-    font-size: 14px;
+    font-size: 16px;
+    margin-top: 4px;
   }
 }
 
 .player-info-text .player-song-artist {
   font-size: 14px;
+  font-weight: bold;
+  color: #c0c0c0;
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: auto;
+  }
 }
 
 .player-info-image {
@@ -134,6 +141,11 @@ $thumb-size: 16px;
     height: 4px;
 
     cursor: pointer;
+
+    @media screen and (max-width: $tablet) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 
   .bar-current,
@@ -171,11 +183,11 @@ $thumb-size: 16px;
     cursor: grabbing;
   }
 
-  .bar-thumb::after{
+  .bar-thumb::after {
     content: "";
     position: absolute;
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -291,15 +303,16 @@ $thumb-size: 16px;
   opacity: 1;
 }
 
-.player-close {
+.player-btn i.player-close {
   background-color: rgba(196, 196, 196, 0.16);
   transition: 150ms color $standard-ease;
+  margin-left: 15px;
 }
 
-.player-close:hover {
+.player-btn i.player-close:hover {
   color: #868686;
 }
 
-.player-close:active {
+.player-btn i.player-close:active {
   color: #c0c0c0;
 }
