@@ -37,12 +37,16 @@ Vue.component('llct-player', {
           </div>
         </div>
       </div>
+      <div class="player-karaoke">
+        <llct-karaoke v-if="this.id" :id="id"></llct-karaoke>
+      </div>
     </div>
   </div>
   `,
   props: ['current'],
   data: () => {
     return {
+      id: null,
       title: '',
       artist: '',
       url: '',
@@ -52,7 +56,8 @@ Vue.component('llct-player', {
       time_went: '0:00',
       time_left: '0:00',
       __timeUpdate: null,
-      __barCache: null
+      __barCache: null,
+      karaoke: {}
     }
   },
   methods: {
@@ -82,6 +87,21 @@ Vue.component('llct-player', {
 
     sync () {},
 
+    keyStoke(code, ctrl, alt, shift) {
+      switch (code) {
+        case 32: // Space
+          audio.playPause()
+          break
+        case 37: // Arrow Left
+          audio.seekPrev(5)
+          break
+        case 39: // Arrow Right
+          audio.seekNext(5)
+          break
+        default:
+      }
+    },
+
     timeUpdate () {
       let current = window.audio.currentTime()
       let duration = window.audio.duration()
@@ -108,7 +128,7 @@ Vue.component('llct-player', {
     },
 
     thumbProgress (ev) {
-      if (ev.type == 'dragstart' || ev.type=="click") {
+      if (ev.type == 'dragstart' || ev.type == 'click') {
         this.__barCache = ev.target.parentElement.getBoundingClientRect()
       }
 
@@ -191,5 +211,9 @@ Vue.component('llct-player', {
       this.watchUpdate(value)
     }
   },
-  mounted () {}
+  mounted () {
+    window.addEventListener('keydown', ev => {
+      this.keyStoke(ev.keyCode, ev.ctrlKey, ev.altKey, ev.shiftKey)
+    })
+  }
 })

@@ -3,7 +3,7 @@
 $album-wh: 60px;
 $mobile-album-wh: 55px;
 
-$button-wh: 32px;
+$button-wh: 28px;
 $button-diff-wh: 28px;
 $mobile-button-wh: 28px;
 $mobile-button-diff-wh: 24px;
@@ -315,4 +315,30 @@ $thumb-size: 16px;
 
 .player-btn i.player-close:active {
   color: #c0c0c0;
+}
+
+.player-karaoke {
+  position: relative;
+  height: 80vh;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.player-karaoke::after {
+  position: absolute;
+  content: "";
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  //background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, white);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.llct-karaoke {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }

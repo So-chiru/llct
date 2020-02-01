@@ -1,0 +1,57 @@
+
+.llct-karaoke {
+  position: relative;
+}
+
+.karaoke-line-wrap {
+  position: relative;
+  display: block;
+}
+
+.karaoke-line {
+  span {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  span[type="1"] {
+    color: #2d2d2d;
+  }
+
+  span[type="2"] {
+    color: #54c95e;
+  }
+
+  span[type="3"] {
+    color: #8a8a8a;
+  }
+
+  span[type="4"] {
+    color: #22ade4;
+  }
+}
+
+.karaoke-line .empty {
+  margin-top: 16px;
+  opacity: 0;
+  user-select: none;
+}
+
+.karaoke-word.spacer {
+  margin-right: 4px;
+}
+
+.karaoke-line, .karaoke-lyrics {
+  margin: 0;
+  display: block;
+
+  span {
+    display: inline-block;
+    letter-spacing: -0.33px;
+  }
+}
+
+.karaoke-line-wrap .karaoke-lyrics {
+  font-weight: 300;
+  margin-bottom: 7px;
+}

@@ -8,11 +8,11 @@ const LLCTData = class {
     this.lists = {}
     this.recommends = {}
 
-    this.songLists()
+    this.songs()
     this.recommended()
   }
 
-  songLists () {
+  songs () {
     return new Promise((resolve, reject) => {
       fetch(this.base + '/lists')
         .then(res => {
@@ -27,27 +27,6 @@ const LLCTData = class {
     })
   }
 
-  search (keyword) {}
-
-  getListMeta (id) {
-    let first = id.substring(0, 1)
-    let group = Object.keys(this.lists)[first]
-
-    let meta = this.lists[group].collection
-
-    let idInt = parseInt(id.substring(1, id.length)) - 1
-    if (meta[idInt] && meta[idInt].id === id) {
-      return meta[idInt]
-    }
-
-    let i = meta.length
-    while (i--) {
-      if (meta[i].id == id) return meta[i]
-    }
-
-    return null
-  }
-
   recommended () {
     return new Promise((resolve, reject) => {
       fetch(this.base + '/recommend')
@@ -57,6 +36,21 @@ const LLCTData = class {
         .then(json => {
           this.recommends = json
 
+          resolve(json)
+        })
+        .catch(e => {
+          reject(e)
+        })
+    })
+  }
+
+  karaoke (id) {
+    return new Promise((resolve, reject) => {
+      fetch(this.base + '/call/' + id)
+        .then(res => {
+          return res.json()
+        })
+        .then(json => {
           resolve(json)
         })
         .catch(e => {
@@ -84,7 +78,26 @@ const LLCTData = class {
       },
 
       getSong (id) {
-        return dataInstance.getListMeta(id)
+        let first = id.substring(0, 1)
+        let group = Object.keys(dataInstance.lists)[first]
+
+        let meta = dataInstance.lists[group].collection
+
+        let idInt = parseInt(id.substring(1, id.length)) - 1
+        if (meta[idInt] && meta[idInt].id === id) {
+          return meta[idInt]
+        }
+
+        let i = meta.length
+        while (i--) {
+          if (meta[i].id == id) return meta[i]
+        }
+
+        return null
+      },
+
+      karaoke (id) {
+        return dataInstance.karaoke(id)
       }
     }
   })

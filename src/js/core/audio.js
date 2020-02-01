@@ -18,6 +18,8 @@ const LLCTAudio = class {
     this.audio.addEventListener('ended', () => {
       this.run('end')
     })
+
+    this.volume = 0.75
   }
 
   fadeOut () {
@@ -81,6 +83,7 @@ const LLCTAudio = class {
 
   set volume (v) {
     this.originVolume = v
+    this.audio.volume = v
   }
 
   get progress () {
@@ -92,11 +95,11 @@ const LLCTAudio = class {
   }
 
   seekPrev (t) {
-    this.audio.currentTime = this.audio.currentTime() - t
+    this.audio.currentTime = this.audio.currentTime - t
   }
 
   seekNext (t) {
-    this.audio.currentTime = this.audio.currentTime() + t
+    this.audio.currentTime = this.audio.currentTime + t
   }
 
   play () {
@@ -104,8 +107,8 @@ const LLCTAudio = class {
       navigator.mediaSession.playbackState = 'playing'
     }
 
-    this.run('play')
     this.audio.play()
+    this.run('play')
   }
 
   pause () {
@@ -113,8 +116,12 @@ const LLCTAudio = class {
       navigator.mediaSession.playbackState = 'paused'
     }
 
-    this.run('pause')
     this.audio.pause()
+    this.run('pause')
+  }
+
+  playPause () {
+    this[this.audio.paused ? 'play' : 'pause']()
   }
 
   currentTime () {
