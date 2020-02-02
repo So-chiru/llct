@@ -1,5 +1,10 @@
 Vue.prototype.$llctEvents = new Vue()
 var siteTest = /lovelivec\.kr/g
+
+const queryString = name => {
+  return new URLSearchParams(window.location.search).get(name)
+}
+
 Vue.use(VueLazyload, {
   filter: {
     webp (listener, _) {
@@ -24,55 +29,50 @@ Vue.use(VueLazyload, {
 })()
 
 const init = () => {
+  var audio = new LLCTAudio({})
+
+  window.app = app
+  window.menu = menu
+  window.audio = audio
+
   var app = new Vue({
     el: 'llct-app',
     data: () => {
       return {
         tabs: [
           {
-            title: '둘러보기',
-            desc: ''
+            title: '둘러보기'
           },
           {
-            title: '곡 목록',
-            desc: ''
+            title: '곡 목록'
           },
           {
-            title: '재생목록',
-            desc: ''
+            title: '재생목록'
           },
           {
             title: '현재 재생중',
-            desc: '',
             hide: true
           }
         ],
         currentTab: 0,
-        title: '둘러보기',
-        desc: ''
+        title: '둘러보기'
       }
     },
     methods: {
-      updateTitle (title, desc, hide) {
+      updateTitle (title, hide) {
         this.title = title
-        this.desc = desc
         this.hide = hide
       },
 
       changeTab (id) {
-        this.prevTab = this.currentTab
+        this.prevTab = this.currentTab || 0
 
         if (this.tabs[id]) {
-          this.updateTitle(
-            this.tabs[id].title,
-            this.tabs[id].desc,
-            this.tabs[id].hide || false
-          )
+          this.updateTitle(this.tabs[id].title, this.tabs[id].hide || false)
         }
 
-        this.$llctEvents.$emit('changeTab', id)
-
         this.currentTab = id
+        this.$llctEvents.$emit('changeTab', id)
       },
 
       goBackTab () {
@@ -90,19 +90,46 @@ const init = () => {
         this.goBackTab()
       })
 
-      this.$llctEvents.$on('play', id => {
-        this.changeTab(3)
+      this.$llctEvents.$on('play', (id, noState, playActive) => {
+        this.$llctDatas.getSong(id).then(info => {
+          if (this.$llctDatas.meta == info) {
+            return false
+          }
 
-        let info = this.$llctDatas.getSong(id)
+          if (!noState) {
+            history.pushState(
+              { id, ...info },
+              info.title + ' - LLCT',
+              '?id=' + id
+            )
+          }
 
-        if (this.$llctDatas.meta == info) {
-          return false
+          this.$llctDatas.meta = info
+          this.$llctDatas.playActive =
+            typeof playActive !== 'undefined' ? playActive : true
+          audio.load(this.$llctDatas.base + '/audio/' + id)
+
+          this.changeTab(3)
+        })
+      })
+
+      // TODO : transition 포기? 야메루 야메루?
+      /*let idQs = queryString('id')
+      if (idQs) {
+        setTimeout(() => {
+          this.$llctEvents.$emit('play', idQs, true, false)
+        }, 0)
+      }*/
+
+      window.addEventListener('popstate', ev => {
+        if (!ev.state) {
+          this.goBackTab()
+          return
         }
 
-        this.$llctDatas.meta = info
-        this.$llctDatas.playActive = true
-
-        audio.load(this.$llctDatas.base + '/audio/' + id)
+        setTimeout(() => {
+          this.$llctEvents.$emit('play', ev.state.id, true, true)
+        }, 0)
       })
     }
   })
@@ -115,10 +142,4 @@ const init = () => {
       }
     }
   })
-
-  var audio = new LLCTAudio({})
-
-  window.app = app
-  window.menu = menu
-  window.audio = audio
 }

@@ -29,6 +29,7 @@ const images = () =>
   src('src/data/images/*')
     .pipe(imagemin())
     .pipe(dest('dist/assets'))
+const sounds = () => src('src/data/sounds/*').pipe(dest('dist/assets'))
 const js = () =>
   src('src/js/**/*.js')
     .pipe(concat('mikan.min.js'))
@@ -54,5 +55,5 @@ const server = () => {
   })
 }
 
-exports.build = parallel(html, css, js, images)
+exports.build = parallel(html, css, js, images, sounds)
 exports.default = parallel(this.build, server, watchdog)

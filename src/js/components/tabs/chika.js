@@ -1,5 +1,5 @@
 Vue.component('llct-chika', {
-  template: `<div class="llct-tab" id="1">
+  template: `<div class="llct-tab" id="tab1">
     <div class="group-select">
       <div class="group-btn" v-on:click="changeGroup(0)" v-bind:class="{active: this.currentGroup == this.groups[0]}">
         <llct-image src="/assets/us.png"></llct-image>

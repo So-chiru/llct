@@ -3,7 +3,7 @@ const timeStamp = num => {
 }
 
 Vue.component('llct-player', {
-  template: `<div class="llct-tab llct-tab-over" id="3">
+  template: `<div class="llct-tab llct-tab-over" id="tab3">
     <div class="llct-player">
       <div class="player-dash" v-show="title != ''">
         <div class="player-left">
@@ -38,7 +38,7 @@ Vue.component('llct-player', {
         </div>
       </div>
       <div class="player-karaoke">
-        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing"></llct-karaoke>
+        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :updateKaraoke="updates"></llct-karaoke>
       </div>
     </div>
   </div>
@@ -58,7 +58,8 @@ Vue.component('llct-player', {
       time_left: '0:00',
       __timeUpdate: null,
       __barCache: null,
-      karaoke: {}
+      karaoke: {},
+      updates: null
     }
   },
   methods: {
@@ -88,10 +89,17 @@ Vue.component('llct-player', {
 
     sync () {},
 
-    keyStoke (code, ctrl, alt, shift) {
+    keyStoke (ev) {
+      let code = ev.keyCode
+
+      if (ev.target instanceof HTMLInputElement && ev.target.type == 'text') {
+        return true
+      }
+
       switch (code) {
         case 32: // Space
           audio.playPause()
+          ev.preventDefault()
           break
         case 37: // Arrow Left
           audio.seekPrev(5)
@@ -99,8 +107,16 @@ Vue.component('llct-player', {
         case 39: // Arrow Right
           audio.seekNext(5)
           break
+        case 38: // Arrow Up?
+          audio.volumeUp(0.05)
+          break
+        case 40: // Arrow Down
+          audio.volumeDown(0.05)
+          break
         default:
       }
+
+      this.updates = Math.random().toString()
     },
 
     timeUpdate () {
@@ -204,7 +220,7 @@ Vue.component('llct-player', {
     }
   },
   watch: {
-    current (value) {
+    current(value) {
       if (value) this.init()
 
       if (this.playing) this.watchUpdate(this.playing)
@@ -215,8 +231,6 @@ Vue.component('llct-player', {
     }
   },
   mounted () {
-    window.addEventListener('keydown', ev => {
-      this.keyStoke(ev.keyCode, ev.ctrlKey, ev.altKey, ev.shiftKey)
-    })
+    window.addEventListener('keydown', this.keyStoke)
   }
 })

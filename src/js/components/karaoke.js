@@ -1,7 +1,5 @@
 const karaokeClear = root => {
-  let words = (root || document).querySelectorAll(
-    'span.karaoke-word'
-  )
+  let words = (root || document).querySelectorAll('span.karaoke-word')
 
   let wordLength = words.length
   while (wordLength--) {
@@ -11,9 +9,16 @@ const karaokeClear = root => {
   }
 }
 
+const karaokeCheckTick = (type, text) => {
+  return type == 2 && text != '*' && text != '('
+}
+
 let karaokeExpo = t => {
   return -Math.pow(2, (-10 * t) / 1000) + 1
 }
+
+let karaokeTick = null
+let karaokeTickCache = []
 
 /**
  * Karaoke 싱크 렌더링
@@ -48,8 +53,16 @@ const karaokeRender = (time, root, offset, full) => {
 
       let start = Number(currentWord.dataset.start)
       let end = Number(currentWord.dataset.end)
+      let type = Number(currentWord.dataset.type)
 
       if (time > start && time < end) {
+        if (!karaokeTickCache[start + '.' + end] && karaokeCheckTick(type, currentWord.innerText.trim())) {
+          karaokeTickCache[start + '.' + end] = true
+
+          karaokeTick.time = 0
+          karaokeTick.play()
+        }
+
         // 현 시간이 시작 시간 보다 크거나, 현재 시간이 끝 시간 보다 작은 경우 (싱크 속함)
 
         currentWord.dataset.active = '1'
@@ -95,7 +108,7 @@ Vue.component('llct-karaoke', {
     <div class="llct-karaoke">
       <span v-if="!error" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
-          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }">{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
+          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
         </p>
         <p class="karaoke-lyrics" v-if="line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
       </span>
@@ -122,12 +135,15 @@ Vue.component('llct-karaoke', {
     show: {
       type: Boolean,
       required: false
+    },
+    updateKaraoke: {
+      type: String,
+      required: false
     }
   },
   data () {
     return {
       karaData: { metadata: {}, timeline: [] },
-      sleep: 0,
       error: null,
       needClear: false
     }
@@ -143,14 +159,6 @@ Vue.component('llct-karaoke', {
     time: {
       deep: true,
       handler () {
-        if (this.sleep < 3) {
-          this.sleep++
-
-          return
-        }
-
-        this.sleep = 0
-
         karaokeRender(audio.timecode(), this.$el, 100)
       }
     },
@@ -164,6 +172,13 @@ Vue.component('llct-karaoke', {
         if (!this.playing && audio.currentTime() == audio.duration()) {
           this.needClear = true
         }
+      }
+    },
+    updateKaraoke: {
+      deep: true,
+      handler () {
+        karaokeClear()
+        karaokeRender(audio.timecode(), this.$el, 100, true)
       }
     }
   },
@@ -206,5 +221,11 @@ Vue.component('llct-karaoke', {
       karaokeRender(audio.timecode(), this.$el, 100, true)
     }
   },
-  mounted () {}
+  mounted () {
+    if (!karaokeTick) {
+      karaokeTick = new LLCTAudio(true)
+      karaokeTick.load('/assets/tick.mp3')
+      karaokeTick.volume = 1
+    }
+  }
 })

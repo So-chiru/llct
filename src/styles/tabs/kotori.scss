@@ -1,0 +1,60 @@
+@import "__global";
+
+.kotori-cards-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+
+  @media screen and (max-width: $tablet) {
+    grid-column-gap: 0px;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: calc(#{$menu-height} * 1.5);
+  }
+
+  @media screen and (min-width: $tablet) and (max-width: $desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .llct-card {
+    width: unset;
+    max-width: unset;
+    min-width: unset;
+
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+}
+
+.kotori-playlist-add {
+  display: flex;
+  cursor: pointer;
+
+  transition: 250ms all $standard-ease;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    background-color: rgba(32, 32, 32, 0.12);
+  }
+
+  &:active {
+    background-color: rgba(32, 32, 32, 0.24);
+  }
+
+  i {
+    font-size: 42px;
+  }
+
+  i, p {
+    margin: 0;
+  }
+
+  div {
+    text-align: center;
+    margin: auto;
+    user-select: none;
+    pointer-events: none;
+  }
+}

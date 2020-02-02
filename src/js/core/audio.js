@@ -1,13 +1,14 @@
 const LLCTAudio = class {
-  constructor () {
+  constructor (skipMedia) {
     this.audio = document.createElement('audio')
     this.audio.style.display = 'none'
     this.animation = null
     this.originVolume = this.audio.volume
     this.events = {}
 
-    if (navigator.mediaSession) {
-      this.supportMedia = true
+    this.supportMedia = !skipMedia && navigator.mediaSession
+
+    if (navigator.mediaSession && !skipMedia) {
       this.sessionInit()
     }
 
@@ -86,6 +87,14 @@ const LLCTAudio = class {
     this.audio.volume = v
   }
 
+  volumeDown (v) {
+    this.volume = this.volume - v < 0 ? 0 : this.volume - v
+  }
+
+  volumeUp (v) {
+    this.volume = this.volume + v > 1 ? 1 : this.volume + v
+  }
+
   get progress () {
     return this.audio.currentTime / this.audio.duration
   }
@@ -94,11 +103,11 @@ const LLCTAudio = class {
     this.audio.currentTime = this.audio.duration * per
   }
 
-  get time() {
+  get time () {
     return this.audio.currentTime
   }
 
-  set time(t) {
+  set time (t) {
     this.audio.currentTime = t
   }
 
@@ -115,7 +124,9 @@ const LLCTAudio = class {
       navigator.mediaSession.playbackState = 'playing'
     }
 
-    this.audio.play()
+    try {
+      this.audio.play()
+    } catch (e) {}
     this.run('play')
   }
 

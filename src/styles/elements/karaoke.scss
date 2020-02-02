@@ -8,6 +8,18 @@
   display: block;
 }
 
+.small .karaoke-line span {
+  font-size: 14px;
+}
+
+.middle .karaoke-line span {
+  font-size: 16px;
+}
+
+.big .karaoke-line span {
+  font-size: 18px;
+}
+
 .karaoke-line {
   span {
     font-weight: bold;
@@ -27,7 +39,7 @@
   }
 
   span[data-type="1"][data-passed="1"] {
-    color: #8b8b8b;
+    color: #afafaf;
   }
 
   span[data-type="2"] {
@@ -69,7 +81,6 @@
 
   span[data-color][data-passed="1"] {
     text-shadow: unset !important;
-    color: unset;
   }
 
   span[data-type="2"][data-active="1"] {
@@ -90,8 +101,11 @@
   user-select: none;
 }
 
-.karaoke-word.spacer {
-  margin-right: 4px;
+.karaoke-word em {
+  position: absolute;
+  font-size: 4px;
+  text-align: center;
+  margin-top: -5px;
 }
 
 .karaoke-line,

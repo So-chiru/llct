@@ -8,7 +8,7 @@ Vue.component('llct-music-card', {
       </div class="text">
     </div>
     <div class="control">
-      <div class="button">
+      <div class="button" v-on:click="addPlaylist(id)">
         <i class="material-icons">playlist_add</i>
       </diV>
       <div class="button" v-on:click="play(id)">
@@ -20,6 +20,12 @@ Vue.component('llct-music-card', {
   methods: {
     play (id) {
       this.$llctEvents.$emit('play', id)
+    },
+
+    addPlaylist(id) {
+      showModal('플레이리스트에 추가', '어느 플레이리스트에 추가 할까요?<br><p>PlayList</p>', () => {
+
+      })
     }
   }
 })

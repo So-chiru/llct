@@ -1,5 +1,5 @@
 Vue.component('llct-ayumu', {
-  template: `<div class="llct-tab" id="0">
+  template: `<div class="llct-tab" id="tab0">
     <div class="ayumu-cards-holder">
       <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :bg_url="card.BG" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
     </div>
