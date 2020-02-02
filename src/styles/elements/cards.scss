@@ -10,6 +10,7 @@
   user-select: none;
   outline: none;
 
+  display: -webkit-flex;
   display: flex;
   width: 30vw;
   min-width: 400px;
@@ -75,6 +76,7 @@
 }
 
 .llct-card-content p {
+  display: -webkit-flex;
   display: flex;
   font-size: 14px;
   font-weight: bold;

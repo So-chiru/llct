@@ -60,6 +60,7 @@ llct-menu-wrap {
   left: 0;
   top: 0;
   position: fixed;
+  display: -webkit-flex;
   display: flex;
   width: 100%;
   height: $menu-height;
@@ -120,6 +121,7 @@ llct-menu-wrap:hover::after {
   @media screen and (max-width: $desktop) {
     width: 90%;
     height: 80%;
+    display: -webkit-flex;
     display: flex;
   }
 

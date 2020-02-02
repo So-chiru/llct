@@ -11,12 +11,18 @@ $mobile-button-diff-wh: 24px;
 $thumb-size: 16px;
 
 .player-dash {
+  display: -webkit-flex;
   display: flex;
   margin-left: 2%;
   margin-top: 2%;
+
+  @media screen and (max-width: $tablet) {
+    max-height: 90px;
+  }
 }
 
 .player-info {
+  display: -webkit-flex;
   display: flex;
 
   @media screen and (max-width: $tablet) {
@@ -34,10 +40,15 @@ $thumb-size: 16px;
 }
 
 .player-info-text .player-song-title {
+  display: block;
   font-size: 22px;
+  overflow: hidden;
   font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media screen and (max-width: $tablet) {
+    max-width: 150px;
     font-size: 16px;
     margin-top: 4px;
   }
@@ -62,6 +73,11 @@ $thumb-size: 16px;
   @media screen and (max-width: $tablet) {
     width: $mobile-album-wh;
     height: $mobile-album-wh;
+
+    min-width: $mobile-album-wh;
+    min-height: #{$mobile-album-wh};
+
+    margin-right: 4vw;
   }
 
   box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.12);
@@ -76,6 +92,7 @@ $thumb-size: 16px;
 
 .player-left {
   width: 100vw;
+  display: -webkit-flex;
   display: flex;
 
   flex: 2;
@@ -92,6 +109,7 @@ $thumb-size: 16px;
 }
 
 .player-progress {
+  display: -webkit-flex;
   display: flex;
   flex: 5;
 
@@ -108,6 +126,7 @@ $thumb-size: 16px;
 }
 
 .player-progress-inner {
+  display: -webkit-flex;
   display: flex;
   width: 80%;
   margin: auto;
@@ -226,6 +245,7 @@ $thumb-size: 16px;
   }
 }
 .player-btn {
+  display: -webkit-flex;
   display: flex;
   margin-left: auto;
   flex: 1;
@@ -261,6 +281,7 @@ $thumb-size: 16px;
     font-size: $mobile-button-wh;
     width: $mobile-button-wh;
     height: $mobile-button-wh;
+    padding: 5px;
   }
 
   &.diff {
@@ -307,6 +328,10 @@ $thumb-size: 16px;
   background-color: rgba(196, 196, 196, 0.16);
   transition: 150ms color $standard-ease;
   margin-left: 15px;
+
+  @media screen and (max-width: $tablet) {
+    margin-left: 5px; 
+  }
 }
 
 .player-btn i.player-close:hover {
@@ -319,17 +344,23 @@ $thumb-size: 16px;
 
 .player-karaoke {
   position: relative;
-  height: 80vh;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  height: calc(80vh - 60px);
+  margin-top: 30px;
+  margin-bottom: 30px;
   width: 100%;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: calc(90vh - 60px);
+  }
 }
 
 .player-karaoke::after {
   position: absolute;
   content: "";
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   //background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, white);

@@ -94,6 +94,14 @@ const LLCTAudio = class {
     this.audio.currentTime = this.audio.duration * per
   }
 
+  get time() {
+    return this.audio.currentTime
+  }
+
+  set time(t) {
+    this.audio.currentTime = t
+  }
+
   seekPrev (t) {
     this.audio.currentTime = this.audio.currentTime - t
   }
@@ -133,7 +141,7 @@ const LLCTAudio = class {
   }
 
   timecode () {
-    return this.audio.currentTime / 100
+    return this.audio.currentTime * 100
   }
 
   sessionInit () {

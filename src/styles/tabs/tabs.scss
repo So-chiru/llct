@@ -23,6 +23,7 @@
 }
 
 .llct-tab-title {
+  display: -webkit-flex;
   display: flex;
   margin-top: -54px;
   margin-left: $title-mleft;

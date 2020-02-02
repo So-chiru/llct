@@ -15,6 +15,7 @@
 
   padding: 0px 5%;
 
+  display: -webkit-flex;
   display: flex;
   min-width: 70px;
   height: 82px;
@@ -53,6 +54,7 @@
 
 .llct-music-card .info,
 .llct-music-card .control {
+  display: -webkit-flex;
   display: flex;
   margin-top: auto;
   margin-bottom: auto;

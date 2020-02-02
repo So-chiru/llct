@@ -38,7 +38,7 @@ Vue.component('llct-player', {
         </div>
       </div>
       <div class="player-karaoke">
-        <llct-karaoke v-if="this.id" :id="id"></llct-karaoke>
+        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing"></llct-karaoke>
       </div>
     </div>
   </div>
@@ -47,6 +47,7 @@ Vue.component('llct-player', {
   data: () => {
     return {
       id: null,
+      time: null,
       title: '',
       artist: '',
       url: '',
@@ -87,7 +88,7 @@ Vue.component('llct-player', {
 
     sync () {},
 
-    keyStoke(code, ctrl, alt, shift) {
+    keyStoke (code, ctrl, alt, shift) {
       switch (code) {
         case 32: // Space
           audio.playPause()
@@ -107,6 +108,8 @@ Vue.component('llct-player', {
       let duration = window.audio.duration()
       this.time_went = timeStamp(Math.floor(current))
       this.time_left = timeStamp(Math.floor(duration - current))
+
+      this.time = current
 
       this.progress = (current / duration) * 100
     },

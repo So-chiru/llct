@@ -1,6 +1,7 @@
 @import "__global";
 
 .ayumu-cards-holder {
+  display: -webkit-flex;
   display: flex;
   overflow: hidden;
   overflow-x: auto;
@@ -41,6 +42,7 @@
 }
 
 .ayumu-mod-select {
+  display: -webkit-flex;
   display: flex;
   height: 4vh;
   margin: 3vh $title-mleft;
@@ -52,6 +54,7 @@
 }
 
 .ayumu-mod-buttons {
+  display: -webkit-flex;
   display: flex;
   font-weight: bold;
   font-size: 20px;
@@ -59,6 +62,7 @@
 }
 
 .ayumu-mod-buttons div {
+  display: -webkit-flex;
   display: flex;
   margin-right: 20px;
   color: #151515;
