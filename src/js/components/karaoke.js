@@ -5,8 +5,11 @@ const karaokeClear = root => {
   while (wordLength--) {
     words[wordLength].dataset.active = '0'
     words[wordLength].dataset.passed = '0'
+    delete words[wordLength].dataset.tick
     words[wordLength].style.textShadow = null
   }
+
+  karaokeTickCache = []
 }
 
 const karaokeCheckTick = (type, text) => {
@@ -56,11 +59,40 @@ const karaokeRender = (time, root, offset, full) => {
       let type = Number(currentWord.dataset.type)
 
       if (time > start && time < end) {
-        if (!karaokeTickCache[start + '.' + end] && karaokeCheckTick(type, currentWord.innerText.trim())) {
+        if (
+          !karaokeTickCache[start + '.' + end] &&
+          karaokeCheckTick(type, currentWord.innerText.trim())
+        ) {
           karaokeTickCache[start + '.' + end] = true
 
           karaokeTick.time = 0
           karaokeTick.play()
+        }
+
+        if (currentWord.dataset.repeat) {
+          let repeat = currentWord.dataset.repeat.split(',')
+          let repeatIter = repeat.length
+          let delay = Number(currentWord.dataset.delay)
+
+          while (repeatIter--) {
+            if (
+              time > Number(repeat[repeatIter]) &&
+              !karaokeTickCache[start + '.' + end + '.' + repeat[repeatIter]]
+            ) {
+              karaokeTickCache[
+                start + '.' + end + '.' + repeat[repeatIter]
+              ] = true
+
+              currentWord.dataset.tick = '1'
+
+              setTimeout(() => {
+                currentWord.dataset.tick = '0'
+              }, delay * 0.9)
+
+              karaokeTick.time = 0
+              karaokeTick.play()
+            }
+          }
         }
 
         // 현 시간이 시작 시간 보다 크거나, 현재 시간이 끝 시간 보다 작은 경우 (싱크 속함)
@@ -108,7 +140,7 @@ Vue.component('llct-karaoke', {
     <div class="llct-karaoke">
       <span v-if="!error" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
-          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
+          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-repeat="word.repeat_delay ? calcRepeat(word) : null" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
         </p>
         <p class="karaoke-lyrics" v-if="line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
       </span>
@@ -208,6 +240,20 @@ Vue.component('llct-karaoke', {
           }
         })
       }
+    },
+
+    calcRepeat (data) {
+      let f = ''
+      let s = Number(data.start_time)
+      let m = Number(data.end_time) - s
+      let d = Number(data.repeat_delay)
+      let x = Math.round(m / d)
+
+      for (var i = 1; i < x; i++) {
+        f += s + d * i + (i + 1 != x ? ',' : '')
+      }
+
+      return f
     },
 
     jump (ev) {

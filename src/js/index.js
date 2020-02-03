@@ -90,7 +90,7 @@ const init = () => {
         this.goBackTab()
       })
 
-      this.$llctEvents.$on('play', (id, noState, playActive) => {
+      this.$llctEvents.$on('play', (id, noState, playActive, noTab) => {
         this.$llctDatas.getSong(id).then(info => {
           if (this.$llctDatas.meta == info) {
             return false
@@ -109,17 +109,18 @@ const init = () => {
             typeof playActive !== 'undefined' ? playActive : true
           audio.load(this.$llctDatas.base + '/audio/' + id)
 
-          this.changeTab(3)
+          if (!noTab) {
+            this.changeTab(3)
+          }
         })
       })
 
-      // TODO : transition 포기? 야메루 야메루?
-      /*let idQs = queryString('id')
+      let idQs = queryString('id')
       if (idQs) {
         setTimeout(() => {
-          this.$llctEvents.$emit('play', idQs, true, false)
+          this.$llctEvents.$emit('play', idQs, true, false, true)
         }, 0)
-      }*/
+      }
 
       window.addEventListener('popstate', ev => {
         if (!ev.state) {
