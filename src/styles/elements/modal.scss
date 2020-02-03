@@ -13,7 +13,8 @@
   opacity: 1;
 }
 
-.llct-modal, .llct-modal .bg-layer {
+.llct-modal,
+.llct-modal .bg-layer {
   position: fixed;
   left: 0;
   top: 0;
@@ -25,7 +26,7 @@
 
 .llct-modal .contents {
   z-index: 101;
-  margin:auto;
+  margin: auto;
 
   padding: 30px 40px;
   border-radius: 10px;
@@ -64,36 +65,59 @@
   margin-bottom: 20px;
 }
 
-.llct-modal .buttons_list {
+.llct-modal .buttons_list,
+.llct-modal .button_wrap {
   display: -webkit-flex;
   display: flex;
-  width: 100%;
   margin-top: 20px;
 }
 
+.llct-modal.buttons_list {
+  width: 100%;
+}
+
+.llct-modal .button_wrap {
+  margin-left: auto;
+}
 
 .llct-modal .button {
+  margin-left: 10px;
+}
+
+.llct-modal .button,
+.llct-modal .more input[type="button"] {
   position: relative;
-  margin-left: auto;
-  border: 0.5px solid rgba(0, 0, 0, .12);
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
   width: fit-content;
   border-radius: 5px;
 
   padding: 1.5% 35px;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline-style: none;
 }
 
 .llct-modal .button::after {
   position: absolute;
   content: "";
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  box-shadow: $shadow-3dp;
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: $shadow-3dp;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.llct-modal .more input[type="button"]:hover,
+.llct-modal .more input[type="button"]:focus {
+  box-shadow: $shadow-1dp;
+}
+
+.llct-modal .more input[type="button"]:active {
+  box-shadow: $shadow-2dp;
 }
 
 .llct-modal .button:hover::after {
@@ -132,4 +156,66 @@
 
 .llct-modal {
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.llct-modal .more {
+  margin-top: 10px;
+
+  input[type="button"],
+  input[type="text"] {
+    width: 100%;
+    padding: 3% 35px;
+    margin: 10px 0px;
+  }
+
+  input[type="button"] {
+    border: 0.5px solid rgba(20, 106, 236, 0.9);
+    color: rgba(20, 106, 236, 0.9);
+    font-family: $font;
+    font-weight: 300;
+  }
+
+  input[type="text"] {
+    border-radius: 5px;
+    border: 0.5px solid rgba(20, 157, 236, 0.9);
+
+    color: rgba(20, 106, 236, 0.9);
+  }
+
+  input[type="text"]::placeholder {
+    color: rgba(179, 202, 236, 0.9);
+    font-family: $font;
+  }
+
+  .error_text {
+    color: rgb(219, 80, 80);
+    font-size: 14px;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .error_text i {
+    font-size: 16px;
+    margin-right: 5px;
+    margin-top: auto;
+  }
+}
+
+// Modal error transition
+
+.modal-error-enter-active {
+  transition: 250ms all $decelerate-ease;
+}
+.modal-error-leave-active {
+  transition: 200ms all $accelerate-ease;
+}
+.modal-error-enter,
+.modal-error-leave-to {
+  position: absolute;
+  transform: translateX(10px);
+  opacity: 0;
+}
+.modal-error-enter-to {
+  transform: translateX(0px);
+  opacity: 1;
 }

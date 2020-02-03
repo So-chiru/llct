@@ -32,7 +32,7 @@ Vue.component('llct-player', {
             <i class="material-icons" v-show="!playing" v-on:click="play">play_arrow</i>
             <i class="material-icons" v-show="playing" v-on:click="pause">pause</i>
             <i class="material-icons" v-on:click="skip">skip_next</i>
-            <i class="material-icons diff" v-on:click="sync">sync</i>
+            <i class="material-icons diff" v-on:click="more">more_vert</i>
             <i class="material-icons player-close" v-on:click="close">close</i>
           </div>
         </div>
@@ -87,7 +87,7 @@ Vue.component('llct-player', {
       window.audio.next()
     },
 
-    sync () {},
+    more () {},
 
     keyStoke (ev) {
       let code = ev.keyCode
@@ -103,15 +103,19 @@ Vue.component('llct-player', {
           break
         case 37: // Arrow Left
           audio.seekPrev(5)
+          ev.preventDefault()
           break
         case 39: // Arrow Right
           audio.seekNext(5)
+          ev.preventDefault()
           break
         case 38: // Arrow Up?
           audio.volumeUp(0.05)
+          ev.preventDefault()
           break
         case 40: // Arrow Down
           audio.volumeDown(0.05)
+          ev.preventDefault()
           break
         default:
       }
@@ -166,7 +170,7 @@ Vue.component('llct-player', {
 
     init () {
       if (!this.$llctDatas.meta) {
-        window.showModal('플레이어', '재생 중인 곡이 없습니다.', () => {
+        window.showModal('플레이어', '재생 중인 곡이 없습니다.', null, () => {
           this.close()
         })
 

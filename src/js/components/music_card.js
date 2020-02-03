@@ -22,10 +22,28 @@ Vue.component('llct-music-card', {
       this.$llctEvents.$emit('play', id)
     },
 
-    addPlaylist(id) {
-      showModal('플레이리스트에 추가', '어느 플레이리스트에 추가 할까요?<br><p>PlayList</p>', () => {
+    addPlaylist (id) {
+      if (!true) { // TODO : 재생목록 가져오기
+        return showModal(
+          '재생목록 없음',
+          '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.'
+        )
+      }
 
-      })
+      showModal(
+        '플레이리스트에 추가',
+        '어느 플레이리스트에 추가 할까요?',
+        [
+          {
+            type: 'button',
+            default: 'HAHA',
+            callback: () => {
+              // TODO : 해당 재생 목록에 추가
+            }
+          }
+        ],
+        () => {}
+      )
     }
   }
 })

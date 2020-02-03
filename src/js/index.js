@@ -115,12 +115,14 @@ const init = () => {
         })
       })
 
-      let idQs = queryString('id')
-      if (idQs) {
-        setTimeout(() => {
-          this.$llctEvents.$emit('play', idQs, true, false, true)
-        }, 0)
-      }
+      this.$nextTick(() => {
+        let idQs = queryString('id')
+        if (idQs) {
+          setTimeout(() => {
+            this.$llctEvents.$emit('play', idQs, true, false, false)
+          }, 0)
+        }
+      })
 
       window.addEventListener('popstate', ev => {
         if (!ev.state) {
