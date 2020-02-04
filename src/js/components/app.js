@@ -11,7 +11,6 @@ Vue.component('llct-app', {
       <llct-ayumu key="tab0" v-show="AyumuTab" :current="AyumuTab"></llct-ayumu>
       <llct-chika key="'tab1" v-show="ChikaTab" :current="ChikaTab"></llct-chika>
       <llct-kotori key="tab2" v-show="KotoriTab" :current="KotoriTab"></llct-kotori>
-      <llct-kotori-detail key="tab4" v-show="KotoriDetailTab" :current="KotoriDetailTab"></llct-kotori-detail>
       <llct-player key="tab3" v-show="PlayerTab" :current="PlayerTab"></llct-player>
     </transition-group>
   </div>`,
@@ -32,9 +31,6 @@ Vue.component('llct-app', {
     },
     PlayerTab () {
       return this.currentTab == 3
-    },
-    KotoriDetailTab () {
-      return this.currentTab == 4
     }
   },
   beforeCreate () {

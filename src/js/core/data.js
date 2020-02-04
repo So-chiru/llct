@@ -6,12 +6,17 @@ const LLCTData = class {
 
     this.base = base
     this.lists = {}
-    this.playlists = {}
+    this.playlists = []
+    this.defaulPlaylistStore = {}
     this.recommends = {}
 
     this.songs()
     this.recommended()
-    this.playlist()
+    this.defaultPlaylist()
+  }
+
+  event (name, data) {
+    window.dispatchEvent(new CustomEvent(name + 'Receive', { detail: data }))
   }
 
   songs () {
@@ -39,6 +44,8 @@ const LLCTData = class {
         .then(json => {
           this.recommends = json
 
+          this.event('recommend', this.recommends)
+
           resolve(json)
         })
         .catch(e => {
@@ -47,14 +54,16 @@ const LLCTData = class {
     })
   }
 
-  playlist () {
+  defaultPlaylist () {
     return new Promise((resolve, reject) => {
       fetch(this.base + '/playlists')
         .then(res => {
           return res.json()
         })
         .then(json => {
-          this.playlists = json
+          this.defaulPlaylistStore = json
+
+          this.event('playlist', this.defaulPlaylistStore)
 
           resolve(json)
         })
@@ -132,7 +141,9 @@ const LLCTData = class {
         return dataInstance.karaoke(id)
       },
 
-      playlist () {}
+      playlist () {
+        return dataInstance.defaultPlaylist()
+      }
     }
   })
 })()

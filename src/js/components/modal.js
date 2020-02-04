@@ -6,9 +6,9 @@ Vue.component('llct-modal', {
         <h3>{{this.$root.title}}</h3>
         <p>{{this.$root.content}}</p>
         <div class="more" :class="{error: this.$root.error}">
-          <input v-for="(item, index) in this.$root.inputs" :data-index="index" v-on:click="inputClickCb" v-on:keyup="inputEnterCb" :type="item.type" :value="item.default" :placeholder="item.placeholder" autofocus></input>
+          <input v-for="(item, index) in this.$root.inputs" :data-index="index" v-on:click="inputClickCb" v-on:keyup="inputEnterCb" :type="item.type" :value="item.value || item.default" :data-limit="item.limit" :placeholder="item.placeholder" autofocus></input>
           <transition name="modal-error">
-            <p class="error_text" v-if="this.$root.error"><i class="material-icons">warning</i> {{this.$root.error}}</p>
+            <p class="error_text" :class="{show: this.$root.error}" :key="this.$root.errorShake"><i class="material-icons">warning</i> {{this.$root.error || ''}}</p>
           </transition>
         </div>
         <div class="buttons_list">
@@ -25,6 +25,23 @@ Vue.component('llct-modal', {
   </div>
   `,
   methods: {
+    checkInput (ev) {
+      let ori = this.$root.inputs[ev.target.dataset.index]
+      let error = ori.check ? ori.check(ev.target.value) : null
+
+      if (
+        ev.target.dataset.limit &&
+        ev.target.value.trim().length > Number(ev.target.dataset.limit)
+      ) {
+        error =
+          '입력 값은 ' + ev.target.dataset.limit + '자를 넘을 수 없습니다.'
+      } else if (ev.target.value.trim() === '') {
+        error = '입력 값은 빈칸이 될 수 없습니다.'
+      }
+
+      return error
+    },
+
     inputClickCb (ev) {
       if (ev.target.type == 'text') {
         return
@@ -36,19 +53,20 @@ Vue.component('llct-modal', {
     },
 
     inputEnterCb (ev) {
-      if (ev.target.value.trim() === '') {
-        this.$root.error = '입력 값은 빈칸이 될 수 없습니다.'
-        return true
+      this.$root.error = this.checkInput(ev)
+
+      this.$root.inputs[ev.target.dataset.index].value = ev.target.value
+
+      if (!this.$root.error) {
+        if (ev.keyCode !== 13) {
+          return
+        }
+
+        let index = Number(ev.target.dataset.index)
+        this.$root.inputCb(ev.target, index)
       } else {
-        this.$root.error = null
+        this.$root.errorShake = Math.random()
       }
-
-      if (ev.keyCode !== 13) {
-        return
-      }
-
-      let index = Number(ev.target.dataset.index)
-      this.$root.inputCb(ev.target, index)
     },
 
     accept () {
@@ -71,16 +89,17 @@ window.addEventListener('load', () => {
         callback: () => {},
         open: false,
         error: null,
+        errorShake: Math.random(),
         inputs: [
           {
             type: 'button',
-            default: '어느 버튼',
+            default: 'Example Button',
             callback: null
           },
           {
             type: 'text',
             default: '',
-            placeholder: '여기에 텍스트 입력...',
+            placeholder: 'Example Input',
             callback: v => {
               console.log(v)
             }
@@ -91,6 +110,7 @@ window.addEventListener('load', () => {
     methods: {
       update (title, content, inputs, accept, close) {
         this.error = null
+        this.enterDone = false
 
         this.title = title
         this.content = content
@@ -99,21 +119,22 @@ window.addEventListener('load', () => {
         this.acceptCb = typeof accept === 'function' ? accept : () => {}
         this.closeCb = typeof close === 'function' ? close : () => {}
 
-        if (typeof accept === 'function' && typeof close !== 'function') {
+        if (typeof accept === 'function' && !close) {
           this.acceptCb = () => {}
-          this.closeCb = typeof accept === 'function' ? accept : () => {}
+          this.closeCb = accept
         }
       },
 
       inputCb (el, index) {
         let input = this.inputs || {}
 
-        if (!input[index]) return false
+        if (!input[index] || this.enterDone) return false
 
         if (input[index].callback) {
           input[index].callback(el.type == 'text' ? el.value : el)
         }
 
+        this.enterDone = true
         this.open = false
       },
 
@@ -122,13 +143,21 @@ window.addEventListener('load', () => {
       },
 
       accept (value) {
+        if (!this.enterDone) {
+          this.acceptCb(value)
+        }
+
+        this.enterDone = true
         this.open = false
-        this.acceptCb(value)
       },
 
       hide () {
+        if (!this.enterDone) {
+          this.closeCb()
+        }
+
+        this.enterDone = true
         this.open = false
-        this.closeCb()
       }
     },
 
@@ -148,10 +177,14 @@ window.addEventListener('load', () => {
     }
   })
 
-  window.showModal = (title, content, inputs, callback) => {
-    modal.update(title, content, inputs, callback)
+  window.showModal = (title, content, inputs, accept, close) => {
+    modal.update(title, content, inputs, accept, close)
     modal.show()
   }
+
+  window.addEventListener('keydown', ev => {
+    if (ev.keyCode == 27 && modal.open) modal.open = false
+  })
 
   if (window) window.modal = modal
 })

@@ -43,7 +43,7 @@
   background-color: #fff;
 
   @media screen and (max-width: $tablet) {
-    padding: 4% 6%;
+    padding: 4vh 10vw;
 
     min-width: 60%;
     max-width: 80%;
@@ -60,16 +60,16 @@
 }
 
 .llct-modal .contents h3 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .llct-modal .buttons_list,
 .llct-modal .button_wrap {
   display: -webkit-flex;
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .llct-modal.buttons_list {
@@ -192,6 +192,12 @@
     font-size: 14px;
     display: -webkit-flex;
     display: flex;
+    height: 20px;
+    visibility: hidden;
+  }
+
+  .error_text.show {
+    visibility: visible;
   }
 
   .error_text i {
@@ -203,8 +209,27 @@
 
 // Modal error transition
 
+@keyframes shake {
+  0% {
+    transform: translateX(-2px, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  75% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
 .modal-error-enter-active {
   transition: 250ms all $decelerate-ease;
+  animation: shake 300ms $standard-ease;
 }
 .modal-error-leave-active {
   transition: 200ms all $accelerate-ease;
@@ -212,10 +237,8 @@
 .modal-error-enter,
 .modal-error-leave-to {
   position: absolute;
-  transform: translateX(10px);
   opacity: 0;
 }
 .modal-error-enter-to {
-  transform: translateX(0px);
   opacity: 1;
 }

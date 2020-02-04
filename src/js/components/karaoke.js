@@ -10,6 +10,7 @@ const karaokeClear = root => {
   }
 
   karaokeTickCache = []
+  karaokeScrollCache = []
 }
 
 const karaokeCheckTick = (type, text) => {
@@ -22,6 +23,7 @@ let karaokeExpo = t => {
 
 let karaokeTick = null
 let karaokeTickCache = []
+let karaokeScrollCache = []
 
 /**
  * Karaoke 싱크 렌더링
@@ -29,8 +31,9 @@ let karaokeTickCache = []
  * @param {HTMLElement} root root Element (default: document)
  * @param {Number} offset 시간 offset
  * @param {Boolean} full 전체 렌더링 여부
+ * @param {Function} newline 새 라인 스크롤 함수
  */
-const karaokeRender = (time, root, offset, full) => {
+const karaokeRender = (time, root, offset, full, newline) => {
   let lines = (root || document).querySelectorAll('.karaoke-line')
 
   let lineLength = lines.length
@@ -44,7 +47,30 @@ const karaokeRender = (time, root, offset, full) => {
       !full
     ) {
       // 현 시간이 시작 시간 - offset 보다 작거나, 현재 시간이 끝 시간 + offset 보다 큰 경우
-      continue
+
+      if (currentLine.dataset.active) {
+        currentLine.dataset.active = '0'
+      }
+    } else if (
+      (time > Number(currentLine.dataset.start) ||
+        time < Number(currentLine.dataset.end)) &&
+      Number(currentLine.dataset.start) > -1 &&
+      Number(currentLine.dataset.end) > -1
+    ) {
+      currentLine.dataset.active = '1'
+      if (
+        newline &&
+        !karaokeScrollCache[
+          currentLine.dataset.start + '.' + currentLine.dataset.end
+        ]
+      ) {
+        setTimeout(() => {
+          newline(currentLine)
+        }, 1000)
+        karaokeScrollCache[
+          currentLine.dataset.start + '.' + currentLine.dataset.end
+        ] = true
+      }
     }
 
     let words = currentLine.querySelectorAll('span.karaoke-word')
@@ -168,8 +194,12 @@ Vue.component('llct-karaoke', {
       type: Boolean,
       required: false
     },
+    autoScroll: {
+      type: Boolean,
+      required: false
+    },
     updateKaraoke: {
-      type: String,
+      type: [String, Number],
       required: false
     }
   },
@@ -177,7 +207,8 @@ Vue.component('llct-karaoke', {
     return {
       karaData: { metadata: {}, timeline: [] },
       error: null,
-      needClear: false
+      needClear: false,
+      lastScroll: 0
     }
   },
   watch: {
@@ -191,7 +222,7 @@ Vue.component('llct-karaoke', {
     time: {
       deep: true,
       handler () {
-        karaokeRender(audio.timecode(), this.$el, 100)
+        karaokeRender(audio.timecode(), this.$el, 5, false, this.scrollSong)
       }
     },
     playing: {
@@ -210,7 +241,7 @@ Vue.component('llct-karaoke', {
       deep: true,
       handler () {
         karaokeClear()
-        karaokeRender(audio.timecode(), this.$el, 100, true)
+        karaokeRender(audio.timecode(), this.$el, 5, true)
       }
     }
   },
@@ -236,10 +267,34 @@ Vue.component('llct-karaoke', {
       if (!karaokeFocusDetect) {
         karaokeFocusDetect = window.addEventListener('focus', () => {
           if (!this.error) {
-            karaokeRender(audio.timecode(), this.$el, 100, true)
+            karaokeRender(audio.timecode(), this.$el, 5, true)
           }
         })
       }
+    },
+
+    scrollTop (pos) {
+      this.$el.scrollTop = pos
+    },
+
+    scrollSong (el) {
+      if (this.lastScroll + 3000 > Date.now()) return true
+
+      let thisBound = this.$el.getBoundingClientRect().height
+      let offset = el.parentNode.offsetTop
+
+      this.scrollTop(
+        offset - (thisBound - (window.screen.height - thisBound) / 2) / 2
+      )
+    },
+
+    scrollToElem (el) {
+      let thisBound = this.$el.getBoundingClientRect().height
+      let offset = el.parentNode.parentNode.offsetTop
+
+      this.scrollTop(
+        offset - (thisBound - (window.screen.height - thisBound) / 2) / 2
+      )
     },
 
     calcRepeat (data) {
@@ -264,7 +319,7 @@ Vue.component('llct-karaoke', {
       karaokeClear()
       audio.time = (Number(ev.target.dataset.start) - 10) / 100
 
-      karaokeRender(audio.timecode(), this.$el, 100, true)
+      karaokeRender(audio.timecode(), this.$el, 5, true)
     }
   },
   mounted () {
@@ -273,5 +328,16 @@ Vue.component('llct-karaoke', {
       karaokeTick.load('/assets/tick.mp3')
       karaokeTick.volume = 1
     }
+
+    this.$el.addEventListener(
+      'scroll',
+      () => {
+        this.lastScroll = Date.now()
+      },
+      false
+    )
+  },
+  updated () {
+    this.scrollTop(0)
   }
 })

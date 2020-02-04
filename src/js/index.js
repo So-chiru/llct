@@ -30,9 +30,6 @@ Vue.use(VueLazyload, {
 
 const init = () => {
   var audio = new LLCTAudio({})
-
-  window.app = app
-  window.menu = menu
   window.audio = audio
 
   var app = new Vue({
@@ -145,4 +142,7 @@ const init = () => {
       }
     }
   })
+
+  window.app = app
+  window.menu = menu
 }

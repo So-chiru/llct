@@ -38,7 +38,7 @@ Vue.component('llct-player', {
         </div>
       </div>
       <div class="player-karaoke">
-        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :updateKaraoke="updates"></llct-karaoke>
+        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :autoScroll="true" :updateKaraoke="updates"></llct-karaoke>
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@ Vue.component('llct-player', {
       el.style.transitionDelay = ''
     },
 
-    close () {
+    close() {
       this.$llctEvents.$emit('requestGoBack')
     },
 
@@ -119,8 +119,6 @@ Vue.component('llct-player', {
           break
         default:
       }
-
-      this.updates = Math.random().toString()
     },
 
     timeUpdate () {
@@ -177,7 +175,7 @@ Vue.component('llct-player', {
         return
       }
 
-      window.audio.on(
+      audio.on(
         'play',
         () => {
           this.playing = true
@@ -185,7 +183,7 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      window.audio.on(
+      audio.on(
         'pause',
         () => {
           this.playing = false
@@ -193,7 +191,7 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      window.audio.on(
+      audio.on(
         'end',
         () => {
           this.playing = false
@@ -201,13 +199,17 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      window.audio.on(
+      audio.on(
         'playable',
         () => {
           this.playable = true
         },
         'playerInstance'
       )
+
+      audio.on('seek', () => {
+        this.updates = Math.random()
+      }, 'playerInstance')
 
       if (this.$llctDatas.playActive) {
         audio.play()
@@ -224,10 +226,12 @@ Vue.component('llct-player', {
     }
   },
   watch: {
-    current(value) {
+    current (value) {
       if (value) this.init()
-
-      if (this.playing) this.watchUpdate(this.playing)
+      if (this.playing) {
+        this.updates = Math.random()
+        this.watchUpdate(this.playing)
+      }
     },
 
     playing (value) {

@@ -57,7 +57,7 @@ Vue.component('llct-ayumu', {
   },
   mounted () {
     this.slider = new LLCTSlide(
-      this.$el.querySelector('.ayumu-cards-holder'),
+      this.$el.querySelector('.ayumu-cards-holder span'),
       1200
     )
   }

@@ -101,6 +101,7 @@ const LLCTAudio = class {
 
   set progress (per) {
     this.audio.currentTime = this.audio.duration * per
+    this.run('seek')
   }
 
   get time () {
@@ -109,14 +110,17 @@ const LLCTAudio = class {
 
   set time (t) {
     this.audio.currentTime = t
+    this.run('seek')
   }
 
   seekPrev (t) {
     this.audio.currentTime = this.audio.currentTime - t
+    this.run('seek')
   }
 
   seekNext (t) {
     this.audio.currentTime = this.audio.currentTime + t
+    this.run('seek')
   }
 
   play () {
