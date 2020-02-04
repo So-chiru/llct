@@ -26,34 +26,38 @@ Vue.component('llct-music-card', {
       let plBtns = []
       let leastOne = false
 
-      for (var i = 0; i < window.playlists.length; i++) {
-        let listObj = window.playlists[i]
+      this.$llctDatas.getSong(id).then(song => {
+        for (var i = 0; i < window.playlists.length; i++) {
+          let listObj = window.playlists[i]
 
-        if (!listObj.readOnly) {
-          leastOne = true
+          if (!listObj.readOnly) {
+            leastOne = true
+          } else {
+            continue
+          }
+
+          plBtns.push({
+            type: 'button',
+            default: listObj.title,
+            callback: _v => {
+              listObj.add(song)
+            }
+          })
         }
 
-        plBtns.push({
-          type: 'button',
-          default: listObj.title,
-          callback: () => {
-            // TODO : 재생 목록에 추가
-          }
-        })
-      }
+        if (!window.playlists.length || !leastOne) {
+          return showModal(
+            '재생목록 없음',
+            '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.'
+          )
+        }
 
-      if (!window.playlists.length || !leastOne) {
-        return showModal(
-          '재생목록 없음',
-          '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.'
+        showModal(
+          '플레이리스트에 추가',
+          '어느 플레이리스트에 추가 할까요?',
+          plBtns
         )
-      }
-
-      showModal(
-        '플레이리스트에 추가',
-        '어느 플레이리스트에 추가 할까요?',
-        plBtns
-      )
+      })
     }
   }
 })

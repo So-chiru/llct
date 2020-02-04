@@ -8,6 +8,10 @@ class LLCTPlaylist {
     this.nextFunc = () => {}
     this.prevFunc = () => {}
   }
+
+  add (item) {
+    this.lists.push(item)
+  }
 }
 
 window.addEventListener('playlistReceive', ev => {
@@ -15,7 +19,8 @@ window.addEventListener('playlistReceive', ev => {
     return false
   }
 
-  window.playlists = []
+  window.playlists =
+    JSON.parse(localStorage.getItem('LLCTPlaylist') || '[]') || []
 
   let listsLen = ev.detail.lists.length
   for (var i = 0; i < listsLen; i++) {

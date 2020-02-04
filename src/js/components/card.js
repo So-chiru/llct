@@ -1,6 +1,6 @@
 Vue.component('llct-card', {
   template: `
-    <div class="llct-card" data-clickable="true" v-on:click="interact(id, ext_url)">
+    <div class="llct-card" data-clickable="true" v-on:click="interact(id, ext_url, title)">
       <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
         <div class="llct-card-content" :data-index="index"> 
           <p v-if="ext_url"><i class="material-icons">exit_to_app</i> <span>{{urlForm(ext_url)}}</span></p>
@@ -14,7 +14,7 @@ Vue.component('llct-card', {
       </div>
     </div>
   `,
-  props: ['index', 'title', 'subtitle', 'bg_url', 'id', 'ext_url'],
+  props: ['index', 'title', 'subtitle', 'bg_url', 'id', 'ext_url', 'oclick'],
   methods: {
     beforeEnter (el) {
       el.style.transitionDelay = 45 * parseInt(el.dataset.index, 10) + 'ms'
@@ -28,7 +28,7 @@ Vue.component('llct-card', {
       return new URL(url).host || url
     },
 
-    interact (id, ext_url) {
+    interact (id, ext_url, title) {
       if (id) {
         this.$llctEvents.$emit('play', id)
         return
@@ -37,6 +37,10 @@ Vue.component('llct-card', {
       if (ext_url) {
         window.open(ext_url, '_blank')
         return
+      }
+
+      if (this.oclick) {
+        this.oclick(title)
       }
     }
   }

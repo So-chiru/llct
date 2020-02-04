@@ -1,7 +1,7 @@
 Vue.component('llct-kotori', {
   template: `<div class="llct-tab" id="tab2">
     <div class="kotori-cards-list">
-      <llct-card v-for="(card, index) in playLists" v-bind:key="index" :index="index" :title="card.title" :subtitle="'총 ' + (card.items || []).length + '곡 수록'" :bg_url="card.bg ? card.bg : card.items ? this.$llctDatas.getCoverURL(card.items[0]) : null"></llct-card>
+      <llct-card v-for="(card, index) in playLists" v-bind:key="index" v-on:click="openPlaylist()" :index="index" :oclick="openPlaylist" :data-title="card.title" :title="card.title" :subtitle="'총 ' + (card.lists || []).length + '곡 수록'" :bg_url="card.bg ? card.bg : card.items ? this.$llctDatas.getCoverURL(card.items[0]) : null"></llct-card>
       <div class="kotori-playlist-add" v-on:click="playLists.length >= 30 ? noMorePlaylist() : addPlaylist()">
         <div>
           <i class="material-icons">add</i>
@@ -9,22 +9,54 @@ Vue.component('llct-kotori', {
         </div>
       </div>
     </div>
-    <llct-kotori-detail></llct-kotori-detail>
+    <llct-kotori-detail :selected="selectedPlaylist"></llct-kotori-detail>
   </div>`,
   props: ['current'],
   data () {
     return {
-      playLists: window.playlists
+      playLists: window.playlists,
+      selectedPlaylist: null
+    }
+  },
+  watch: {
+    current (v) {
+      if (!v && this.selectedPlaylist) this.selectedPlaylist = null
+    },
+    playLists (v) {
+      let lis = []
+      for (var i = 0; i < window.playlists.length; i++) {
+        let item = v[i]
+
+        if (!item.readOnly) lis.push(item)
+      }
+
+      localStorage.setItem('LLCTPlaylist', JSON.stringify(lis))
     }
   },
   methods: {
+    openPlaylist (title) {
+      for (var i = 0; i < window.playlists.length; i++) {
+        if (playlists[i].title == title) {
+          this.selectedPlaylist = playlists[i]
+        }
+      }
+    },
+
+    remove () {
+      for (var i = 0; i < window.playlists.length; i++) {
+        if (playlists[i].title == this.selectedPlaylist.title) {
+          return playlists.splice(i, 1)
+        }
+      }
+    },
+
     playlistCb (v) {
       if (!v || v == '' || v.length > 30) return false
 
-      let pl = new LLCTPlaylist(v, true)
+      let pl = new LLCTPlaylist(v, false)
       window.playlists.push(pl)
 
-      // TODO : Tab in
+      this.selectedPlaylist = pl
     },
 
     noMorePlaylist () {
@@ -46,7 +78,8 @@ Vue.component('llct-kotori', {
             limit: 30,
             check: text => {
               for (var i = 0; i < window.playlists.length; i++) {
-                if (window.playlists[i].title == text.trim()) return '이미 동일한 이름의 플레이리스트가 있습니다.'
+                if (window.playlists[i].title == text.trim())
+                  return '이미 동일한 이름의 플레이리스트가 있습니다.'
               }
 
               return null
