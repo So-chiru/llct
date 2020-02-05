@@ -12,7 +12,14 @@
         "translated": "우리들의 LIVE 너와의 LIFE",
         "center": null,
         "karaoke": true,
-        "tags": ["bokuranolivekimitonolife", "borarara", "1집", "싱글", "single", "보쿠라노라이브키미토노라이프"],
+        "tags": [
+          "bokuranolivekimitonolife",
+          "borarara",
+          "1집",
+          "싱글",
+          "single",
+          "보쿠라노라이브키미토노라이프"
+        ],
         "short_kr": "보라라라"
       },
       {
@@ -21,7 +28,13 @@
         "translated": "우정 NO CHANGE",
         "center": null,
         "karaoke": true,
-        "tags": ["yujonochange", "yuujonochange", "1집앨범", "유조노체인지", "유조노첸지"],
+        "tags": [
+          "yujonochange",
+          "yuujonochange",
+          "1집앨범",
+          "유조노체인지",
+          "유조노첸지"
+        ],
         "short_kr": "우정노첸"
       },
       {
@@ -40,7 +53,13 @@
         "karaoke": true,
         "title": "baby maybe 恋のボタン",
         "translated": "baby maybe 사랑의 버튼",
-        "tags": ["snohare", "2집앨범", "베이비메이비코이노보탄", "보탄", "버튼"],
+        "tags": [
+          "snohare",
+          "2집앨범",
+          "베이비메이비코이노보탄",
+          "보탄",
+          "버튼"
+        ],
         "short_kr": "코이버튼"
       },
       {
@@ -131,7 +150,7 @@
         "center": null,
         "title": "もうひとりじゃないよ",
         "translated": "더 이상 혼자가 아니야",
-        "tags": [ "모우히토리쟈나이", "모히토리쟈나이"],
+        "tags": ["모우히토리쟈나이", "모히토리쟈나이"],
         "karaoke": false
       },
       {
@@ -341,7 +360,13 @@
         "title": "START : DASH!!",
         "album": "No Brand Girls",
         "center": null,
-        "tags": ["스탓대쉬", "스타트대시", "스타트대쉬", "스타트엣대시", "스타트엣대쉬"],
+        "tags": [
+          "스탓대쉬",
+          "스타트대시",
+          "스타트대쉬",
+          "스타트엣대시",
+          "스타트엣대쉬"
+        ],
         "karaoke": true,
         "short_kr": "스탓대시"
       },
@@ -420,7 +445,11 @@
         "title": "それは僕たちの奇跡",
         "center": null,
         "translated": "그것은 우리들의 기적",
-        "tags": ["소레와보쿠타치노키세키", "소레와보쿠타치노키세츠", "소레보쿠키세키"],
+        "tags": [
+          "소레와보쿠타치노키세키",
+          "소레와보쿠타치노키세츠",
+          "소레보쿠키세키"
+        ],
         "short_kr": "소레키세",
         "karaoke": true
       },
@@ -453,7 +482,11 @@
         "title": "ユメノトビラ",
         "center": null,
         "translated": "꿈의 문",
-        "tags": ["유메노토비라", "즛토사가시츠즈케타", "키미토보쿠토노츠나가리오사가시탄다"],
+        "tags": [
+          "유메노토비라",
+          "즛토사가시츠즈케타",
+          "키미토보쿠토노츠나가리오사가시탄다"
+        ],
         "short_kr": "유메토비",
         "karaoke": true
       },
@@ -474,7 +507,13 @@
         "id": "00062",
         "title": "Dancing stars on me!",
         "center": null,
-        "tags": ["먼싱스타", "댄싱스타", "댄싱스타스온미", "댄싱스타즈온미", "댄싱스타스온미"],
+        "tags": [
+          "먼싱스타",
+          "댄싱스타",
+          "댄싱스타스온미",
+          "댄싱스타즈온미",
+          "댄싱스타스온미"
+        ],
         "short_kr": "댄싱스타",
         "karaoke": true
       },
@@ -559,7 +598,13 @@
         "center": null,
         "title": "Super LOVE＝Super LIVE!",
         "short_kr": "슈라슈라",
-        "tags": ["superlovesuperlive", "슈퍼러브슈퍼라이브", "스파랍", "스파라이브", "위아뮤즈"],
+        "tags": [
+          "superlovesuperlive",
+          "슈퍼러브슈퍼라이브",
+          "스파랍",
+          "스파라이브",
+          "위아뮤즈"
+        ],
         "karaoke": true
       },
       {
@@ -2372,6 +2417,16 @@
       },
       {
         "id": "10088",
+        "title": "冒険Type A, B, C!!",
+        "translated": "모험Type A, B, C!!",
+        "tag": ["보오켄타이프ABC", "보켄타입ABC"],
+        "center": null,
+        "artist": 0,
+        "karaoke": true,
+        "singAlong": true
+      },
+      {
+        "id": "10089",
         "title": "i-n-g, I TRY!!",
         "tag": ["잉트"],
         "center": null,
@@ -2381,7 +2436,7 @@
         "short_kr": "잉트라이"
       },
       {
-        "id": "10089",
+        "id": "10090",
         "title": "未体験HORIZON",
         "translated": "미체험 HORIZON",
         "tag": ["4집", "미체험", "즈라이즌"],
@@ -2390,11 +2445,11 @@
         "bladeColorHEX": "#ffe944",
         "artist": 0,
         "karaoke": true,
-        "notPerformed": true,
+        "notPerformed": false,
         "short_kr": "즈라이즌"
       },
       {
-        "id": "10090",
+        "id": "10091",
         "title": "Deep Resonance",
         "tag": ["4집", "딥레조"],
         "center": "츠시마 요시코",
@@ -2406,7 +2461,7 @@
         "short_kr": "딥레조"
       },
       {
-        "id": "10091",
+        "id": "10092",
         "title": "Dance with Minotaurus",
         "tag": ["4집", "미노타군", "진정하세요", "물붕이", "물붕쿤"],
         "artist": 0,
@@ -2415,7 +2470,7 @@
         "short_kr": "딥레조"
       },
       {
-        "id": "10092",
+        "id": "10093",
         "title": "KOKORO Magic A to Z",
         "tag": [
           "슼타",
@@ -2431,7 +2486,7 @@
         "short_kr": "코코매직"
       },
       {
-        "id": "10093",
+        "id": "10094",
         "title": "Wake up, Challenger!!",
         "tag": [
           "슼타",
@@ -2449,6 +2504,106 @@
         "karaoke": true,
         "notPerformed": true,
         "short_kr": "챌린저"
+      },
+      {
+        "id": "10095",
+        "title": "New Romatic Sailors",
+        "tag": [
+          "새낭만항해자",
+          "뉴로만틱세일러즈",
+          "뉴로맨틱세일러즈",
+          "세일러스"
+        ],
+        "artist": 8,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "뉴로만"
+      },
+      {
+        "id": "10096",
+        "title": "Love Pulsar",
+        "tag": [
+          "럽펄서",
+          "러브펄서",
+          "wwwwwwwwwwwwwwwwwwww",
+          "ㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+          "하하하하하하하하하"
+        ],
+        "artist": 8,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "럽펄서"
+      },
+      {
+        "id": "10097",
+        "title": "Phantom Rocket Adventure",
+        "tag": ["팬텀로켓어드벤쳐", "펜텀로켓어드벤쳐", "로켓", "로캣"],
+        "artist": 8,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "팬텀로켓"
+      },
+      {
+        "id": "10098",
+        "title": "Braveheart Coaster",
+        "tag": ["브레이브하트코스터", "브렙하트코스터", "브레입하트코스터"],
+        "artist": 6,
+        "karaoke": true,
+        "notPerformed": true
+      },
+      {
+        "id": "10099",
+        "title": "CHANGELESS",
+        "tag": ["체인지레스", "첸지레스", "쳰지레스"],
+        "artist": 6,
+        "karaoke": true,
+        "notPerformed": true,
+        "short_kr": "첸지레스"
+      },
+      {
+        "id": "10100",
+        "title": "コドク・テレポート",
+        "translated": "고독・텔레포트",
+        "tag": [
+          "코도쿠테레포트",
+          "코도쿠텔레포트",
+          "고도쿠텔레포트",
+          "고독텔레포트"
+        ],
+        "artist": 6,
+        "karaoke": true,
+        "notPerformed": true
+      },
+      {
+        "id": "10101",
+        "title": "Amazing Travel DNA",
+        "tag": [
+          "으메이징",
+          "어메이징트라벨디엔에이",
+          "어메이징토라벨디엔에이",
+          "토라벨"
+        ],
+        "artist": 7,
+        "karaoke": true,
+        "notPerformed": true
+      },
+      {
+        "id": "10102",
+        "title": "空中恋愛論",
+        "translated": "공중연애론",
+        "tag": ["공중연애", "공중연얘"],
+        "artist": 7,
+        "karaoke": true,
+        "notPerformed": true
+      },
+      {
+        "id": "10103",
+        "title": "メイズセカイ",
+        "translated": "미로 세계",
+        "tag": ["메이즈세카이", "메이즈러너", "미로세카이"],
+        "artist": 7,
+        "karaoke": true,
+        "notPerformed": true
       }
     ]
   },
