@@ -2,7 +2,7 @@ Vue.component('llct-ayumu', {
   template: `<div class="llct-tab" id="tab0">
     <div class="ayumu-cards-holder">
       <transition-group name="llct-card">
-        <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :bg_url="card.BG" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
+        <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="card.BG" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
       </transition-group>
     </div>
     <div class="ayumu-mod-select">

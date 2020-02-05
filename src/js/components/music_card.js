@@ -8,18 +8,31 @@ Vue.component('llct-music-card', {
       </div class="text">
     </div>
     <div class="control">
-      <div class="button" v-on:click="addPlaylist(id)">
+      <div class="button" v-on:click="addPlaylist(id)" v-if="!disablePlaylist">
         <i class="material-icons">playlist_add</i>
       </diV>
       <div class="button" v-on:click="play(id)">
         <i class="material-icons">play_arrow</i>
       </div>
+      <div class="button" v-if="removeButton" v-on:click="removeButton">
+        <i class="material-icons" :data-index="index">close</i>
+      </div>
     </div>
   </div>`,
-  props: ['title', 'artist', 'cover_url', 'id', 'placeholder', 'index'],
+  props: [
+    'title',
+    'artist',
+    'cover_url',
+    'id',
+    'placeholder',
+    'index',
+    'disablePlaylist',
+    'removeButton',
+    'playlist'
+  ],
   methods: {
     play (id) {
-      this.$llctEvents.$emit('play', id)
+      this.$llctEvents.$emit('play', this.playlist ? this.playlist : id)
     },
 
     addPlaylist (id) {
@@ -27,8 +40,8 @@ Vue.component('llct-music-card', {
       let leastOne = false
 
       this.$llctDatas.getSong(id).then(song => {
-        for (var i = 0; i < window.playlists.length; i++) {
-          let listObj = window.playlists[i]
+        for (var i = 0; i < window.playlists.length(); i++) {
+          let listObj = window.playlists.lists[i]
 
           if (!listObj.readOnly) {
             leastOne = true
@@ -36,16 +49,18 @@ Vue.component('llct-music-card', {
             continue
           }
 
-          plBtns.push({
-            type: 'button',
-            default: listObj.title,
-            callback: _v => {
-              listObj.add(song)
-            }
-          })
+          ;(i => {
+            plBtns.push({
+              type: 'button',
+              default: listObj.title,
+              callback: _v => {
+                window.playlists.addSong(i, song)
+              }
+            })
+          })(i)
         }
 
-        if (!window.playlists.length || !leastOne) {
+        if (!window.playlists.length() || !leastOne) {
           return showModal(
             '재생목록 없음',
             '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.'

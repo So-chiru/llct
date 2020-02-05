@@ -133,7 +133,7 @@ const LLCTData = class {
         })
       },
 
-      getCoverURL (id) {
+      getCoverURL(id) {
         return dataInstance.base + '/cover/' + id
       },
 

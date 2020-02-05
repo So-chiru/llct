@@ -70,11 +70,9 @@ Vue.component('llct-modal', {
     },
 
     accept () {
-      let txt = this.$el.querySelector('input[type="text"]')
-
-      if (txt) {
-        this.$root.accept(txt.value)
-      }
+      this.$root.accept(
+        (this.$el.querySelector('input[type="text"]') || {}).value
+      )
     }
   }
 })
@@ -108,13 +106,14 @@ window.addEventListener('load', () => {
       }
     },
     methods: {
-      update (title, content, inputs, accept, close) {
+      update (title, content, inputs, accept, close, confirm) {
         this.error = null
         this.enterDone = false
 
         this.title = title
         this.content = content
         this.inputs = inputs || []
+        this.confirm = confirm || false
 
         this.acceptCb = typeof accept === 'function' ? accept : () => {}
         this.closeCb = typeof close === 'function' ? close : () => {}
@@ -163,6 +162,10 @@ window.addEventListener('load', () => {
 
     computed: {
       acceptBtnNeed () {
+        if (this.confirm) {
+          return true
+        }
+
         let inputLen = this.inputs.length
         if (!inputLen) {
           return false
@@ -177,8 +180,8 @@ window.addEventListener('load', () => {
     }
   })
 
-  window.showModal = (title, content, inputs, accept, close) => {
-    modal.update(title, content, inputs, accept, close)
+  window.showModal = (title, content, inputs, accept, close, confirm) => {
+    modal.update(title, content, inputs, accept, close, confirm)
     modal.show()
   }
 

@@ -1,20 +1,27 @@
 Vue.component('llct-kotori-detail', {
   template: `<div class="kotori-in-tab" :class="{show: selected != null}">
     <div class="content">
-      <h1>{{select.title}}</h1>
-      <h3>총 {{(select.lists || []).length}}개의 곡 있음</h3>
-      <div v-if="!select.readOnly" v-on:click="remove">삭제</div>
-
+      <div class="out-meta">
+        <div class="meta">
+          <h1>{{select.title}}</h1>
+          <div class="control">
+            <h3>총 {{(select.lists || []).length}}개의 곡이 재생목록에 있습니다.</h3>
+            <div class="remove" v-if="!select.readOnly" v-on:click="removeConfirm">재생목록 삭제</div>
+          </div>
+        </div>
+        <div class="close" v-on:click="close"><i class="material-icons">close</i></div>
+      </div>
       <div class="lists">
-        <llct-music-card placeholder="round" v-for="(data, index) in (select.lists || [])" v-bind:key="index" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></llct-music-card>
+        <draggable v-model="select.lists" :move="checkMovable" draggable=".llct-music-card" @end="dragged">
+          <llct-music-card placeholder="round" v-for="(data, index) in (select.lists || [])" :key="index" :removeButton="removeSong" :disablePlaylist="true" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></llct-music-card>
+        </draggable>
       </div>
     </div>
-    <div class="bg" :key="selected != null" v-on:click="close"></div>
   </div>`,
   props: ['current', 'selected'],
   data () {
     return {
-      playLists: window.playlists,
+      playLists: window.playlists || {} || [],
       select: this.selected || {}
     }
   },
@@ -28,9 +35,40 @@ Vue.component('llct-kotori-detail', {
       this.$parent.selectedPlaylist = null
     },
 
+    checkMovable () {
+      return !this.select.readOnly
+    },
+
+    removeConfirm () {
+      if (!this.select.lists.length) {
+        this.remove()
+        return
+      }
+
+      showModal(
+        '재생목록 삭제',
+        '정말 "' + this.select.title + '" 재생목록을 삭제할까요?',
+        null,
+        () => {
+          this.remove()
+        },
+        () => {},
+        true
+      )
+    },
+
     remove () {
       this.$parent.remove()
       this.close()
+    },
+
+    dragged () {
+      window.playlists.save()
+    },
+
+    removeSong (ev) {
+      window.playlists.find(this.select.title).remove(ev.target.dataset.index)
+      window.playlists.save()
     },
 
     getImageURL (id) {

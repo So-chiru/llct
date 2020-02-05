@@ -166,7 +166,7 @@ Vue.component('llct-karaoke', {
     <div class="llct-karaoke">
       <span v-if="!error" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
-          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-repeat="word.repeat_delay ? calcRepeat(word) : null" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
+          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="word.text + word.start_time" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-repeat="word.repeat_delay ? calcRepeat(word) : null" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
         </p>
         <p class="karaoke-lyrics" v-if="line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
       </span>
