@@ -5,6 +5,7 @@ const LLCTAudio = class {
     this.animation = null
     this.originVolume = this.audio.volume
     this.events = {}
+    this.playlists = {}
 
     this.supportMedia = !skipMedia && navigator.mediaSession
 
@@ -111,6 +112,14 @@ const LLCTAudio = class {
   set time (t) {
     this.audio.currentTime = t
     this.run('seek')
+  }
+
+  set playlist (pl) {
+    this.playlists = pl
+  }
+
+  get playlist () {
+    return window.playlists.find(this.playlists)
   }
 
   seekPrev (t) {

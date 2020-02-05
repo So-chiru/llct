@@ -32,7 +32,14 @@ Vue.component('llct-music-card', {
   ],
   methods: {
     play (id) {
-      this.$llctEvents.$emit('play', this.playlist ? this.playlist : id)
+      this.$llctEvents.$emit(
+        'play',
+        this.playlist ? this.playlist : id,
+        false,
+        true,
+        null,
+        this.playlist && typeof this.index === 'number' ? this.index : null
+      )
     },
 
     addPlaylist (id) {

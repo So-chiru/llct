@@ -4,9 +4,6 @@ class LLCTPlaylist {
     this.lists = []
     this.title = title || null
     this.readOnly = readOnly || false
-
-    this.nextFunc = () => {}
-    this.prevFunc = () => {}
   }
 
   add (item) {
@@ -24,6 +21,32 @@ class LLCTPlaylist {
 
   remove (index) {
     this.lists.splice(index, 1)
+  }
+
+  next () {
+    if (this.__pointer != null) {
+      this.__pointer =
+        this.__pointer + 1 == this.lists.length ? 0 : this.__pointer + 1
+      return this.lists[this.__pointer]
+    } else {
+      this.__pointer = 1
+      return this.lists[1]
+    }
+  }
+
+  prev () {
+    if (this.__pointer != null) {
+      this.__pointer =
+        this.__pointer - 1 < 0 ? this.lists.length - 1 : this.__pointer - 1
+      return this.lists[this.__pointer]
+    } else {
+      this.__pointer = this.lists.length - 1
+      return this.lists[this.lists.length - 1]
+    }
+  }
+
+  isEnd() {
+    return this.__pointer + 1 >= this.lists.length
   }
 }
 
@@ -48,10 +71,11 @@ class PlaylistHolder {
     this.save()
   }
 
-  find (title) {
+  find (title, indexOnly) {
     let listsIter = this.lists.length
     while (listsIter--) {
-      if (this.lists[listsIter].title === title) return this.lists[listsIter]
+      if (this.lists[listsIter].title === title)
+        return indexOnly ? listsIter : this.lists[listsIter]
     }
   }
 

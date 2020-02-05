@@ -87,30 +87,47 @@ const init = () => {
         this.goBackTab()
       })
 
-      this.$llctEvents.$on('play', (id, noState, playActive, noTab) => {
-        this.$llctDatas.getSong(id).then(info => {
-          if (this.$llctDatas.meta == info) {
-            return false
+      this.$llctEvents.$on(
+        'play',
+        (id, noState, playActive, noTab, playlistIndex) => {
+          if (typeof id === 'object') {
+            let pl = playlists.find(id.title, true)
+
+            playlists.lists[pl].__pointer = playlistIndex
+            window.audio.playlist = playlists.lists[pl].title
+
+            if (typeof playlistIndex === 'number') {
+              id = playlists.lists[pl].lists[playlistIndex].id
+            }
           }
 
-          if (!noState) {
-            history.pushState(
-              { id, ...info },
-              info.title + ' - LLCT',
-              '?id=' + id
-            )
-          }
+          this.$llctDatas.getSong(id).then(info => {
+            if (!noTab && this.$llctDatas.meta == info) {
+              this.changeTab(3)
+              return false
+            }
 
-          this.$llctDatas.meta = info
-          this.$llctDatas.playActive =
-            typeof playActive !== 'undefined' ? playActive : true
-          audio.load(this.$llctDatas.base + '/audio/' + id)
+            if (!noState) {
+              history.pushState(
+                { id, ...info },
+                info.title + ' - LLCT',
+                '?id=' + id
+              )
+            }
 
-          if (!noTab) {
-            this.changeTab(3)
-          }
-        })
-      })
+            this.$llctDatas.meta = info
+            this.$llctDatas.playActive =
+              typeof playActive !== 'undefined' ? playActive : true
+            audio.load(this.$llctDatas.base + '/audio/' + id)
+
+            if (!noTab) {
+              this.changeTab(3)
+            } else {
+              this.$llctEvents.$emit('callContentChange')
+            }
+          })
+        }
+      )
 
       this.$nextTick(() => {
         let idQs = queryString('id')
@@ -127,9 +144,7 @@ const init = () => {
           return
         }
 
-        setTimeout(() => {
-          this.$llctEvents.$emit('play', ev.state.id, true, true)
-        }, 0)
+        this.$llctEvents.$emit('play', ev.state.id, true, true, true)
       })
     }
   })

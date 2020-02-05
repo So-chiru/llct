@@ -31,7 +31,7 @@ Vue.component('llct-player', {
           <div class="player-btn">
             <i class="material-icons" v-show="!playing" v-on:click="play">play_arrow</i>
             <i class="material-icons" v-show="playing" v-on:click="pause">pause</i>
-            <i class="material-icons" v-on:click="skip">skip_next</i>
+            <i class="material-icons" v-on:click="next">skip_next</i>
             <i class="material-icons diff" v-on:click="more">more_vert</i>
             <i class="material-icons player-close" v-on:click="close">close</i>
           </div>
@@ -71,7 +71,7 @@ Vue.component('llct-player', {
       el.style.transitionDelay = ''
     },
 
-    close() {
+    close () {
       this.$llctEvents.$emit('requestGoBack')
     },
 
@@ -83,8 +83,33 @@ Vue.component('llct-player', {
       window.audio.pause()
     },
 
-    skip () {
-      window.audio.next()
+    next () {
+      if (audio.playlist.next) {
+        let end = window.audio.playlist.isEnd()
+        let next = audio.playlist.next()
+        this.$llctDatas.meta = next
+        this.$llctDatas.playActive = !end
+
+        history.pushState(
+          { id: next.id, ...next },
+          next.title + ' - LLCT',
+          '?id=' + next.id
+        )
+
+        audio.load(this.$llctDatas.base + '/audio/' + next.id)
+        this.init()
+      }
+    },
+
+    prev () {
+      if (audio.playlist.prev) {
+        let prev = audio.playlist.prev()
+        this.$llctDatas.meta = prev
+        this.$llctDatas.playActive = true
+
+        audio.load(this.$llctDatas.base + '/audio/' + prev.id)
+        this.init()
+      }
     },
 
     more () {},
@@ -194,6 +219,12 @@ Vue.component('llct-player', {
       audio.on(
         'end',
         () => {
+          console.log(window.audio.playlist.isEnd())
+          if (window.audio.playlist && !window.audio.playlist.isEnd()) {
+            this.next()
+            return
+          }
+
           this.playing = false
         },
         'playerInstance'
@@ -203,18 +234,18 @@ Vue.component('llct-player', {
         'playable',
         () => {
           this.playable = true
+          this.timeUpdate()
         },
         'playerInstance'
       )
 
-      audio.on('seek', () => {
-        this.updates = Math.random()
-      }, 'playerInstance')
-
-      if (this.$llctDatas.playActive) {
-        audio.play()
-        this.$llctDatas.playActive = false
-      }
+      audio.on(
+        'seek',
+        () => {
+          this.updates = Math.random()
+        },
+        'playerInstance'
+      )
 
       this.id = this.$llctDatas.meta.id
       this.title = this.$llctDatas.meta.title
@@ -223,6 +254,13 @@ Vue.component('llct-player', {
         this.$llctDatas.meta.artist || '0'
       )
       this.url = this.$llctDatas.base + '/cover/' + this.id
+
+      this.playing = audio.playing
+
+      if (this.$llctDatas.playActive) {
+        audio.play()
+        this.$llctDatas.playActive = false
+      }
     }
   },
   watch: {
@@ -240,5 +278,9 @@ Vue.component('llct-player', {
   },
   mounted () {
     window.addEventListener('keydown', this.keyStoke)
+
+    this.$llctEvents.$on('callContentChange', () => {
+      this.init()
+    })
   }
 })
