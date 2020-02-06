@@ -113,6 +113,57 @@
   }
 }
 
+.dark .karaoke-line {
+  span[data-type="1"] {
+    color: #727272;
+  }
+
+  span[data-type="1"][data-passed="1"] {
+    color: #363636;
+  }
+
+  span[data-type="2"] {
+    color: #3fc24a;
+  }
+
+  span[data-type="2"][data-passed="1"] {
+    color: #38523a;
+  }
+
+  span[data-type="3"] {
+    color: #4c5861;
+  }
+
+  span[data-type="3"][data-passed="1"] {
+    color: #3c4347;
+  }
+
+  span[data-type="4"] {
+    color: #27b2e9;
+  }
+
+  span[data-type="4"][data-passed="1"] {
+    color: #274957;
+  }
+
+  span[data-active="1"] {
+    text-shadow: 0px 0px 4px #22ade4;
+    color: #fff;
+  }
+
+  span[data-color] {
+    opacity: 0.7;
+  }
+
+  span[data-color][data-active="1"] {
+    opacity: 1;
+  }
+
+  span[data-color][data-passed="1"] {
+    text-shadow: unset !important;
+  }
+}
+
 .karaoke-line .empty {
   margin-top: 16px;
   opacity: 0;

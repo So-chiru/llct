@@ -68,3 +68,15 @@
     pointer-events: none;
   }
 }
+
+.dark .kotori-playlist-add {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  &:hover {
+    background-color: rgba(110, 110, 110, 0.12);
+  }
+
+  &:active {
+    background-color: rgba(110, 110, 110, 0.24);
+  }
+}

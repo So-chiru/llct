@@ -51,6 +51,9 @@ const init = () => {
           {
             title: '현재 재생중',
             hide: true
+          },
+          {
+            title: '설정'
           }
         ],
         currentTab: 0,
@@ -170,4 +173,12 @@ const init = () => {
 
   window.app = app
   window.menu = menu
+}
+
+const darkInit = () => {
+  let dark = LLCTSettings.get('useDarkMode')
+
+  if (dark) {
+    document.querySelector('body').classList.add('dark')
+  }
 }

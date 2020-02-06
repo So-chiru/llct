@@ -8,13 +8,13 @@ Vue.component('llct-music-card', {
       </div class="text">
     </div>
     <div class="control">
-      <div class="button" v-on:click="addPlaylist(id)" v-if="!disablePlaylist">
+      <div class="button sub" v-on:click="addPlaylist(id)" v-if="!disablePlaylist">
         <i class="material-icons">playlist_add</i>
       </diV>
       <div class="button" v-on:click="play(id)">
         <i class="material-icons">play_arrow</i>
       </div>
-      <div class="button" v-if="removeButton" v-on:click="removeButton">
+      <div class="button sub" v-if="removeButton" v-on:click="removeButton">
         <i class="material-icons" :data-index="index">close</i>
       </div>
     </div>
@@ -31,7 +31,7 @@ Vue.component('llct-music-card', {
     'playlist'
   ],
   methods: {
-    play (id) {
+    play(id) {
       this.$llctEvents.$emit(
         'play',
         this.playlist ? this.playlist : id,

@@ -30,8 +30,16 @@
   transition: 200ms color $standard-ease;
 }
 
+.dark .m-button i {
+  color: #8a8a8a;
+}
+
 .m-button.active i {
   color: #000;
+}
+
+.dark .m-button.active i {
+  color: #fff;
 }
 
 .m-button p {
@@ -48,6 +56,10 @@
   }
 }
 
+.dark .m-button p {
+  color: #fff;
+}
+
 .m-button:active {
   i {
     color: #000;
@@ -55,6 +67,12 @@
   
   p {
     color: #000;
+  }
+}
+
+.dark .m-button:active {
+  i, p {
+    color: #fff;
   }
 }
 
@@ -82,7 +100,7 @@
 }
 
 .m-button-enter-active {
-  transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
+  transition: all 0.4s $decelerate-ease;
 }
 .m-button-leave-active {
   display: none;

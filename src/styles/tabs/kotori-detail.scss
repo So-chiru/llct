@@ -102,7 +102,7 @@
     }
 
     .meta h1 {
-      font-size: 42px;
+      font-size: 36px;
       margin-bottom: 5px;
 
       @media screen and (max-width: $tablet) {
@@ -127,6 +127,10 @@
     height: 75vh;
     overflow: scroll;
   }
+}
+
+.dark .kotori-in-tab {
+  background-color: #151515;
 }
 
 .kotori-in-tab.show {

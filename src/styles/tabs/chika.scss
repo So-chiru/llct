@@ -51,6 +51,10 @@
   opacity: 0;
 }
 
+.dark .group-btn::after {
+  background-color: rgba(204, 239, 254, .18);
+}
+
 .group-btn.active::after {
   opacity: 0.4;
 }

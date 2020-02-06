@@ -69,6 +69,10 @@
   cursor: default;
 }
 
+.dark .ayumu-mod-buttons div {
+  color: #fff;
+}
+
 .ayumu-mod-buttons .in_active {
   color: #bababa;
   cursor: pointer;
@@ -97,6 +101,18 @@
   }
 }
 
+.dark .ayumu-mod-buttons .in_active {
+  color: #4d4d4d;
+
+  &:hover {
+    color: #696969;
+  }
+
+  &:active {
+    color: #acacac;
+  }
+}
+
 .ayumu-mod-buttons div *,
 .ayumu-mod-ext-buttons {
   margin-top: auto;
@@ -119,9 +135,17 @@
   color: #363636;
 }
 
+.dark .ayumu-mod-ext-buttons .spin:hover {
+  color: #c5c5c5;
+}
+
 .ayumu-mod-ext-buttons .spin:active {
   transform: rotate(360deg + 90deg);
   color: #969696;
+}
+
+.dark .ayumu-mod-ext-buttons .spin:active {
+  color: #5c5c5c;
 }
 
 // Music card transition

@@ -50,6 +50,10 @@
   }
 }
 
+.dark .llct-modal .contents {
+  background-color: #1a1a1a;
+}
+
 .llct-modal .contents * {
   margin: 0;
 }
@@ -98,6 +102,21 @@
   outline-style: none;
 }
 
+.dark .llct-modal .button,
+.dark .llct-modal .more input[type="button"] {
+  background: #242424;
+}
+
+.dark .llct-modal .button:hover,
+.dark .llct-modal .more input[type="button"]:hover {
+  background: #313131;
+}
+
+.dark .llct-modal .button:active,
+.dark .llct-modal .more input[type="button"]:active {
+  background: #3f3f3f;
+}
+
 .llct-modal .button::after {
   position: absolute;
   content: "";
@@ -139,6 +158,10 @@
   opacity: 0;
   visibility: hidden;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .llct-modal .bg-layer {
+  background-color: rgba(32, 32, 32, 0.62);
 }
 
 .llct-modal .contents {
@@ -205,6 +228,11 @@
     margin-right: 5px;
     margin-top: auto;
   }
+}
+
+.dark .llct-modal .more input[type="text"] {
+  background-color: #323232;
+  border: 0.5px solid rgba(23, 96, 138, 0.9);
 }
 
 // Modal error transition

@@ -24,6 +24,10 @@
   }
 }
 
+.dark .llct-card {
+  background-color: rgba(32, 32, 32, 0.3);
+}
+
 .llct-card[data-clickable="true"] {
   cursor: pointer;
 
@@ -111,6 +115,13 @@
   );
   opacity: 0.9;
   backdrop-filter: blur(2px);
+}
+
+.dark .llct-card-bg-layer {
+  background: linear-gradient(
+    rgba(139, 139, 139, 0.6) 0%,
+    rgba(77, 77, 77, 0.9) 100%
+  );
 }
 
 .llct-card-bg {

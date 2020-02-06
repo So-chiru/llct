@@ -30,6 +30,10 @@
   }
 }
 
+.dark .llct-music-card {
+  background-color: #242424;
+}
+
 .llct-music-card::after {
   content: "";
   z-index: -1;
@@ -70,6 +74,16 @@
 
 .llct-music-card .control {
   margin-left: auto;
+
+  @media screen and (max-width: $tablet) {
+    padding: 10px;
+  }
+}
+
+.dark .llct-music-card .control {
+  .sub {
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .llct-music-card .control .button {
@@ -103,6 +117,10 @@
   font-size: 12px;
   color: #a0a0a0;
   font-weight: bold;
+}
+
+.dark .llct-music-card .info p {
+  color: #7e7e7e;
 }
 
 //Music card transition

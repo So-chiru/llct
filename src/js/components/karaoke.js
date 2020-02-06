@@ -64,14 +64,12 @@ const karaokeRender = (time, root, offset, full, newline) => {
       ) {
         setTimeout(() => {
           newline(currentLine)
-        }, 1000)
+        }, 950)
         karaokeScrollCache[
           currentLine.dataset.start + '.' + currentLine.dataset.end
         ] = true
       }
     }
-
-    currentLine = undefined
   }
 
   let words = (root || document).querySelectorAll(
@@ -180,7 +178,7 @@ Vue.component('llct-karaoke', {
       </span>
       <div class="error" v-if="error">
         <img></img>
-        <h3>아악! 콜표야아악!! 나 쥬거어어억!!!!!</h3>
+        <h3>아악!</h3>
         <p>콜표를 불러올 수 없습니다. (미 등록 혹은 연결 오류) - {{error.message}}</p>
       </div>
     </div>
@@ -217,7 +215,6 @@ Vue.component('llct-karaoke', {
       error: null,
       needClear: false,
       lastScroll: 0,
-      sleep: 0
     }
   },
   watch: {
@@ -231,14 +228,7 @@ Vue.component('llct-karaoke', {
     time: {
       deep: true,
       handler () {
-        if (this.sleep < 2) {
-          this.sleep++
-          return
-        }
-
         karaokeRender(audio.timecode(), this.$el, 5, false, this.scrollSong)
-
-        this.sleep = 0
       }
     },
     playing: {

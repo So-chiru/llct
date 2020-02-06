@@ -104,10 +104,10 @@ class PlaylistHolder {
 
       if (item.readOnly) continue
 
-      let lisLen = item.lists.length
+      /*let lisLen = item.lists.length
       for (var z = 0; z < lisLen; z++) {
         item.lists[z] = item.lists[z].id
-      }
+      }*/
 
       lis.push(item)
     }
@@ -135,14 +135,14 @@ window.addEventListener('playlistReceive', ev => {
       let data = preData[i]
       let pl = new LLCTPlaylist()
 
-      for (var z = 0; z < data.lists.length; z++) {
+      /*for (var z = 0; z < data.lists.length; z++) {
         let id = data.lists[z]
 
         let song = ev.detail.getSong(id)
         data.lists[z] = song
-        pl.import(data)
-      }
+      }*/
 
+      pl.import(data)
       playlists.add(pl, true)
     }
   }

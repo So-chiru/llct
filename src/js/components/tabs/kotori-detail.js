@@ -12,7 +12,7 @@ Vue.component('llct-kotori-detail', {
         <div class="close" v-on:click="close"><i class="material-icons">close</i></div>
       </div>
       <div class="lists">
-        <draggable v-model="select.lists" :move="checkMovable" draggable=".llct-music-card" @end="dragged">
+        <draggable v-model="select.lists" :move="checkMovable" filter=".control" draggable=".llct-music-card" @end="dragged">
           <llct-music-card placeholder="round" v-for="(data, index) in (select.lists || [])" :key="index" :playlist="select" :removeButton="removeSong" :disablePlaylist="true" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></llct-music-card>
         </draggable>
       </div>

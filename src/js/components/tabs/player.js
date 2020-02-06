@@ -19,7 +19,7 @@ Vue.component('llct-player', {
           <div class="player-progress">
             <div class="player-progress-inner">
               <div class="current">{{time_went}}</div>
-              <div class="bar" v-on:click="thumbProgress" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress">
+              <div class="bar" v-on:click="thumbProgress">
                 <div class="bar-thumb" :style="{left: 'calc(' + progress + '% - 8px)'}" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress" draggable="true"></div>
                 <div class="bar-current" :style="{width: progress + '%'}" v-if="playable"></div>
                 <div class="bar-load" v-else></div>
@@ -29,12 +29,12 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-btn">
-            <i class="material-icons" v-show="!playing" v-on:click="play">play_arrow</i>
-            <i class="material-icons" v-show="playing" v-on:click="pause">pause</i>
-            <i class="material-icons" v-show="audio.playlist" v-on:click="next">skip_next</i>
-            <i class="material-icons" v-show="!audio.playlist" :class="{deactive: !audio.repeat}" v-on:click="repeat">sync</i>
-            <i class="material-icons diff" v-on:click="more">more_vert</i>
-            <i class="material-icons player-close" v-on:click="close">close</i>
+            <i class="material-icons" v-show="!playing" v-on:click="play" alt="재생 버튼">play_arrow</i>
+            <i class="material-icons" v-show="playing" v-on:click="pause" alt="일시정지 버튼">pause</i>
+            <i class="material-icons" v-show="audio.playlist" v-on:click="next" alt="다음 곡 스킵 버튼">skip_next</i>
+            <i class="material-icons" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat">sync</i>
+            <i class="material-icons diff" alt="설정 버튼" v-on:click="more">more_vert</i>
+            <i class="material-icons player-close" alt="닫기 버튼" v-on:click="close">close</i>
           </div>
         </div>
       </div>
@@ -198,12 +198,11 @@ Vue.component('llct-player', {
     },
 
     thumbProgress (ev) {
-      if (ev.type == 'dragstart' || ev.type == 'click') {
+      if ((ev.type == 'dragstart' || ev.type == 'click') && !this.__barCache) {
         this.__barCache = ev.target.parentElement.getBoundingClientRect()
       }
 
       let p = (ev.x - this.__barCache.x) / this.__barCache.width
-
       if (p < 0) return false
 
       window.audio.progress = p
@@ -264,10 +263,13 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
+      let delay = Date.now()
       audio.on(
         'seek',
-        () => {
-          this.updates = Math.random()
+        short => {
+          if (short && delay + 10 < Date.now()) {
+            this.updates = Math.random()
+          }
         },
         'playerInstance'
       )

@@ -12,6 +12,11 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+body.dark {
+  background-color: #151515;
+  color: #fff;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -86,6 +91,11 @@ llct-menu-wrap {
   }
 }
 
+.dark llct-menu-wrap {
+  background-color: #151515;
+  color: #fff;
+}
+
 llct-menu-wrap.hidden {
   transition: 250ms transform $accelerate-ease;
 
@@ -111,6 +121,10 @@ llct-menu-wrap::after {
   box-shadow: 0px 0px 16px rgba(196, 196, 196, 0.16);
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark llct-menu-wrap::after {
+  box-shadow: 0px 0px 16px rgba(27, 27, 27, 0.66);
 }
 
 llct-menu-wrap:hover::after {
