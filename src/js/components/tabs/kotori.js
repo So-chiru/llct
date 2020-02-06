@@ -1,7 +1,7 @@
 Vue.component('llct-kotori', {
   template: `<div class="llct-tab" id="tab2">
     <div class="kotori-cards-list">
-      <llct-card v-for="(card, index) in playLists" v-bind:key="hash(card)" v-on:click="openPlaylist()" :index="index" :oclick="openPlaylist" :data-title="card.title" :title="card.title" :subtitle="'총 ' + (card.lists || []).length + '곡 수록'" :bg_url="card.bg ? card.bg : card.lists ? getCoverURL((card.lists[0] || {}).id) : null"></llct-card>
+      <llct-card v-for="(card, index) in playLists" v-bind:key="hash(card)" v-on:click="openPlaylist()" :oclick="openPlaylist" :data-title="card.title" :title="card.title" :subtitle="'총 ' + (card.lists || []).length + '곡 수록'" :bg_url="card.bg ? card.bg : card.lists ? getCoverURL((card.lists[0] || {}).id) : null"></llct-card>
       <div class="kotori-playlist-add" v-on:click="playLists.length >= 30 ? noMorePlaylist() : addPlaylist()">
         <div>
           <i class="material-icons">add</i>
@@ -91,6 +91,10 @@ Vue.component('llct-kotori', {
   mounted () {
     this.$llctEvents.$on('openPlaylist', title => {
       this.selectedPlaylist = window.playlists.find(title)
+    })
+
+    window.addEventListener('renderPlaylist', ev => {
+      this.playLists = ev.detail.playlists.lists
     })
   }
 })

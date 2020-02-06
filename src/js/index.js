@@ -1,4 +1,6 @@
 Vue.prototype.$llctEvents = new Vue()
+Vue.prototype.$llctPlaylist = window.playlists
+
 var siteTest = /lovelivec\.kr/g
 
 const queryString = name => {
@@ -99,33 +101,34 @@ const init = () => {
             if (typeof playlistIndex === 'number') {
               id = playlists.lists[pl].lists[playlistIndex].id
             }
+          } else {
+            window.audio.playlist = null
           }
 
-          this.$llctDatas.getSong(id).then(info => {
-            if (!noTab && this.$llctDatas.meta == info) {
-              this.changeTab(3)
-              return false
-            }
+          let info = this.$llctDatas.getSong(id)
+          if (!noTab && this.$llctDatas.meta == info) {
+            this.changeTab(3)
+            return false
+          }
 
-            if (!noState) {
-              history.pushState(
-                { id, ...info },
-                info.title + ' - LLCT',
-                '?id=' + id
-              )
-            }
+          if (!noState) {
+            history.pushState(
+              { id, ...info, playlist: window.audio.playlist },
+              info.title + ' - LLCT',
+              '?id=' + id
+            )
+          }
 
-            this.$llctDatas.meta = info
-            this.$llctDatas.playActive =
-              typeof playActive !== 'undefined' ? playActive : true
-            audio.load(this.$llctDatas.base + '/audio/' + id)
+          this.$llctDatas.meta = info
+          this.$llctDatas.playActive =
+            typeof playActive !== 'undefined' ? playActive : true
+          audio.load(this.$llctDatas.base + '/audio/' + id)
 
-            if (!noTab) {
-              this.changeTab(3)
-            } else {
-              this.$llctEvents.$emit('callContentChange')
-            }
-          })
+          if (!noTab) {
+            this.changeTab(3)
+          } else {
+            this.$llctEvents.$emit('callContentChange')
+          }
         }
       )
 
@@ -144,7 +147,14 @@ const init = () => {
           return
         }
 
-        this.$llctEvents.$emit('play', ev.state.id, true, true, true)
+        this.$llctEvents.$emit(
+          'play',
+          ev.state.playlist ? ev.state.playlist : ev.state.id,
+          true,
+          true,
+          true,
+          ev.state.playlist ? ev.state.playlist.__pointer : null
+        )
       })
     }
   })

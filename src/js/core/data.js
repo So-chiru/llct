@@ -9,6 +9,7 @@ const LLCTData = class {
     this.playlists = []
     this.defaulPlaylistStore = {}
     this.recommends = {}
+    this.events = {}
 
     this.songs()
     this.recommended()
@@ -19,15 +20,48 @@ const LLCTData = class {
     window.dispatchEvent(new CustomEvent(name + 'Receive', { detail: data }))
   }
 
+  on (name, cb, key) {
+    if (!this.events[name]) {
+      this.events[name] = []
+    }
+
+    var i = this.events[name].length
+
+    while (key && i--) {
+      if (this.events[name][i].key == key) return false
+    }
+
+    return this.events[name].push({ key, cb })
+  }
+
+  off (name) {
+    this.events[name] = {}
+  }
+
+  run (name, ...params) {
+    if (!this.events[name]) return
+    let i = this.events[name].length
+
+    while (i--) {
+      this.events[name][i].cb(...params)
+    }
+  }
+
   songs () {
     return new Promise((resolve, reject) => {
+      this.runningGetSong = true
+
       fetch(this.base + '/lists')
         .then(res => {
           return res.json()
         })
         .then(json => {
           this.lists = json
-          return this.lists
+
+          resolve(this.lists)
+
+          this.run('song')
+          this.runningGetSong = true
         })
         .catch(e => {
           reject(e)
@@ -63,7 +97,7 @@ const LLCTData = class {
         .then(json => {
           this.defaulPlaylistStore = json
 
-          this.event('playlist', this.defaulPlaylistStore)
+          // this.event('playlist', this.defaulPlaylistStore)
 
           resolve(json)
         })
@@ -95,6 +129,15 @@ const LLCTData = class {
     data () {
       return dataInstance
     },
+    watch: {
+      defaulPlaylistStore (data) {
+        window.dispatchEvent(
+          new CustomEvent('playlistReceive', {
+            detail: { data, getSong: this.getSong }
+          })
+        )
+      }
+    },
     methods: {
       refresh () {
         dataInstance.recommended()
@@ -103,37 +146,31 @@ const LLCTData = class {
         let first = id.substring(0, 1)
         let group = Object.keys(dataInstance.lists)[first]
 
-        return dataInstance.lists[group].meta.artists[artist] || artist
+        return group && dataInstance.lists[group]
+          ? dataInstance.lists[group].meta.artists[artist] || artist
+          : null
       },
 
       getSong (id) {
-        return new Promise((resolve, reject) => {
-          if (Object.keys(dataInstance.lists).length) {
-            resolve(dataInstance.lists)
-          } else {
-            resolve(dataInstance.songs())
-          }
-        }).then(lists => {
-          let first = id.substring(0, 1)
-          let group = Object.keys(lists)[first]
+        let first = id.substring(0, 1)
+        let group = Object.keys(dataInstance.lists)[first]
 
-          let meta = lists[group].collection
+        let meta = dataInstance.lists[group].collection
 
-          let idInt = parseInt(id.substring(1, id.length)) - 1
-          if (meta[idInt] && meta[idInt].id === id) {
-            return meta[idInt]
-          }
+        let idInt = parseInt(id.substring(1, id.length)) - 1
+        if (meta[idInt] && meta[idInt].id === id) {
+          return meta[idInt]
+        }
 
-          let i = meta.length
-          while (i--) {
-            if (meta[i].id == id) return meta[i]
-          }
+        let i = meta.length
+        while (i--) {
+          if (meta[i].id == id) return meta[i]
+        }
 
-          return null
-        })
+        return null
       },
 
-      getCoverURL(id) {
+      getCoverURL (id) {
         return dataInstance.base + '/cover/' + id
       },
 

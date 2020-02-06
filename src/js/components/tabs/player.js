@@ -31,7 +31,8 @@ Vue.component('llct-player', {
           <div class="player-btn">
             <i class="material-icons" v-show="!playing" v-on:click="play">play_arrow</i>
             <i class="material-icons" v-show="playing" v-on:click="pause">pause</i>
-            <i class="material-icons" v-on:click="next">skip_next</i>
+            <i class="material-icons" v-show="audio.playlist" v-on:click="next">skip_next</i>
+            <i class="material-icons" v-show="!audio.playlist" :class="{deactive: !audio.repeat}" v-on:click="repeat">sync</i>
             <i class="material-icons diff" v-on:click="more">more_vert</i>
             <i class="material-icons player-close" v-on:click="close">close</i>
           </div>
@@ -40,6 +41,15 @@ Vue.component('llct-player', {
       <div class="player-karaoke">
         <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :autoScroll="true" :updateKaraoke="updates"></llct-karaoke>
       </div>
+    </div>
+    <div class="player-vertical" :class="{show: displayVertical}">
+      <div class="content">
+        <h3>음악 볼륨</h3>
+        <input type="range" v-model="audioVolume" max="1" min="0" step="0.01" value="audio.volume"></input>
+        <h3>틱소리 볼륨</h3>
+        <input type="range" v-model="tickVolume" max="1" min="0" step="0.01" value="1"></input>
+      </div>
+      <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
   </div>
   `,
@@ -58,8 +68,12 @@ Vue.component('llct-player', {
       time_left: '0:00',
       __timeUpdate: null,
       __barCache: null,
+      audio: window.audio,
+      audioVolume: 0.75,
+      tickVolume: 1,
       karaoke: {},
-      updates: null
+      updates: null,
+      displayVertical: false
     }
   },
   methods: {
@@ -79,19 +93,23 @@ Vue.component('llct-player', {
       window.audio.play()
     },
 
+    repeat () {
+      window.audio.repeatToggle()
+    },
+
     pause () {
       window.audio.pause()
     },
 
     next () {
-      if (audio.playlist.next) {
+      if (audio.playlist && audio.playlist.next) {
         let end = window.audio.playlist.isEnd()
         let next = audio.playlist.next()
         this.$llctDatas.meta = next
         this.$llctDatas.playActive = !end
 
         history.pushState(
-          { id: next.id, ...next },
+          { id: next.id, ...next, playlist: window.audio.playlist },
           next.title + ' - LLCT',
           '?id=' + next.id
         )
@@ -102,7 +120,7 @@ Vue.component('llct-player', {
     },
 
     prev () {
-      if (audio.playlist.prev) {
+      if (audio.playlist && audio.playlist.prev) {
         let prev = audio.playlist.prev()
         this.$llctDatas.meta = prev
         this.$llctDatas.playActive = true
@@ -112,7 +130,10 @@ Vue.component('llct-player', {
       }
     },
 
-    more () {},
+    more (ev) {
+      console.log(ev)
+      this.displayVertical = true
+    },
 
     keyStoke (ev) {
       let code = ev.keyCode
@@ -122,6 +143,9 @@ Vue.component('llct-player', {
       }
 
       switch (code) {
+        case 27: // Esc
+          if (this.displayVertical) this.displayVertical = false
+          break
         case 32: // Space
           audio.playPause()
           ev.preventDefault()
@@ -204,6 +228,7 @@ Vue.component('llct-player', {
         'play',
         () => {
           this.playing = true
+          this.updates = Math.random()
         },
         'playerInstance'
       )
@@ -212,6 +237,7 @@ Vue.component('llct-player', {
         'pause',
         () => {
           this.playing = false
+          this.updates = Math.random()
         },
         'playerInstance'
       )
@@ -219,7 +245,6 @@ Vue.component('llct-player', {
       audio.on(
         'end',
         () => {
-          console.log(window.audio.playlist.isEnd())
           if (window.audio.playlist && !window.audio.playlist.isEnd()) {
             this.next()
             return
@@ -270,10 +295,22 @@ Vue.component('llct-player', {
         this.updates = Math.random()
         this.watchUpdate(this.playing)
       }
+
+      if (this.displayVertical) {
+        this.displayVertical = false
+      }
     },
 
     playing (value) {
       this.watchUpdate(value)
+    },
+
+    audioVolume (v) {
+      window.audio.volume = v
+    },
+
+    tickVolume (v) {
+      karaokeTick.volume = v
     }
   },
   mounted () {

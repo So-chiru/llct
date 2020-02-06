@@ -70,9 +70,13 @@ Vue.component('llct-modal', {
     },
 
     accept () {
-      this.$root.accept(
-        (this.$el.querySelector('input[type="text"]') || {}).value
-      )
+      if (!this.$root.error) {
+        this.$root.accept(
+          (this.$el.querySelector('input[type="text"]') || {}).value
+        )
+      } else {
+        this.$root.errorShake = Math.random()
+      }
     }
   }
 })

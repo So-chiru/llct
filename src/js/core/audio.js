@@ -6,6 +6,7 @@ const LLCTAudio = class {
     this.originVolume = this.audio.volume
     this.events = {}
     this.playlists = {}
+    this.repeat = false
 
     this.supportMedia = !skipMedia && navigator.mediaSession
 
@@ -19,22 +20,20 @@ const LLCTAudio = class {
 
     this.audio.addEventListener('ended', () => {
       this.run('end')
+
+      if (this.repeat) this.play()
     })
 
     this.volume = 0.75
   }
 
   fadeOut () {
-    let play = () => {
-      return true
-
-      this.animation = requestAnimationFrame()
-    }
-
-    play()
+    // TODO : FadeOut
   }
 
-  fadeIn () {}
+  fadeIn () {
+    // TODO : FadeIn
+  }
 
   on (name, cb, key) {
     if (!this.events[name]) {
@@ -84,6 +83,8 @@ const LLCTAudio = class {
   }
 
   set volume (v) {
+    if (typeof v === 'string') v = Number(v)
+
     this.originVolume = v
     this.audio.volume = v
   }
@@ -119,7 +120,7 @@ const LLCTAudio = class {
   }
 
   get playlist () {
-    return window.playlists.find(this.playlists)
+    return window.playlists ? window.playlists.find(this.playlists) : null
   }
 
   seekPrev (t) {
@@ -130,6 +131,10 @@ const LLCTAudio = class {
   seekNext (t) {
     this.audio.currentTime = this.audio.currentTime + t
     this.run('seek')
+  }
+
+  repeatToggle () {
+    this.repeat = !this.repeat
   }
 
   play () {

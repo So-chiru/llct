@@ -45,7 +45,7 @@ class LLCTPlaylist {
     }
   }
 
-  isEnd() {
+  isEnd () {
     return this.__pointer + 1 >= this.lists.length
   }
 }
@@ -55,9 +55,9 @@ class PlaylistHolder {
     this.lists = []
   }
 
-  add (item) {
+  add (item, skipSave) {
     let pos = this.lists.push(item)
-    this.save()
+    if (!skipSave) this.save()
 
     return pos
   }
@@ -97,10 +97,19 @@ class PlaylistHolder {
 
   save () {
     let lis = []
-    for (var i = 0; i < this.length(); i++) {
-      let item = this.lists[i]
 
-      if (!item.readOnly) lis.push(item)
+    let thisLen = this.length()
+    for (var i = 0; i < thisLen; i++) {
+      let item = JSON.parse(JSON.stringify(this.lists[i]))
+
+      if (item.readOnly) continue
+
+      let lisLen = item.lists.length
+      for (var z = 0; z < lisLen; z++) {
+        item.lists[z] = item.lists[z].id
+      }
+
+      lis.push(item)
     }
 
     localStorage.setItem('LLCTPlaylist', JSON.stringify(lis))
@@ -112,7 +121,7 @@ class PlaylistHolder {
 }
 
 window.addEventListener('playlistReceive', ev => {
-  if (!ev.detail || !ev.detail.lists) {
+  if (!ev.detail || !ev.detail.data.lists) {
     return false
   }
 
@@ -125,18 +134,31 @@ window.addEventListener('playlistReceive', ev => {
     for (var i = 0; i < len; i++) {
       let data = preData[i]
       let pl = new LLCTPlaylist()
-      pl.import(data)
 
-      playlists.add(pl)
+      for (var z = 0; z < data.lists.length; z++) {
+        let id = data.lists[z]
+
+        let song = ev.detail.getSong(id)
+        data.lists[z] = song
+        pl.import(data)
+      }
+
+      playlists.add(pl, true)
     }
   }
 
-  let listsLen = ev.detail.lists.length
+  let listsLen = ev.detail.data.lists.length
   for (var i = 0; i < listsLen; i++) {
-    let list = ev.detail.lists[i]
+    let list = ev.detail.data.lists[i]
 
     let pl = new LLCTPlaylist(list.Title, true)
 
-    playlists.add(pl)
+    playlists.add(pl, true)
   }
+
+  window.dispatchEvent(
+    new CustomEvent('renderPlaylist', {
+      detail: { playlists }
+    })
+  )
 })

@@ -41,21 +41,19 @@ const karaokeRender = (time, root, offset, full, newline) => {
   while (lineLength--) {
     let currentLine = lines[lineLength]
 
-    if (
-      (time < Number(currentLine.dataset.start) - offset ||
-        time > Number(currentLine.dataset.end) + offset) &&
-      !full
-    ) {
+    let lineStart = Number(currentLine.dataset.start)
+    let lineEnd = Number(currentLine.dataset.end)
+
+    if (time < lineStart - offset || time > lineEnd + offset) {
       // 현 시간이 시작 시간 - offset 보다 작거나, 현재 시간이 끝 시간 + offset 보다 큰 경우
 
       if (currentLine.dataset.active) {
         currentLine.dataset.active = '0'
       }
     } else if (
-      (time > Number(currentLine.dataset.start) ||
-        time < Number(currentLine.dataset.end)) &&
-      Number(currentLine.dataset.start) > -1 &&
-      Number(currentLine.dataset.end) > -1
+      (time > lineStart || time < lineEnd) &&
+      lineStart > -1 &&
+      lineEnd > -1
     ) {
       currentLine.dataset.active = '1'
       if (
@@ -73,88 +71,98 @@ const karaokeRender = (time, root, offset, full, newline) => {
       }
     }
 
-    let words = currentLine.querySelectorAll('span.karaoke-word')
-    let wordLength = words.length
+    currentLine = undefined
+  }
 
-    while (wordLength--) {
-      let currentWord = words[wordLength]
-      let nextWord = words[wordLength + 1] || null
+  let words = (root || document).querySelectorAll(
+    (full ? '' : 'p[data-active="1"]') + ' span.karaoke-word'
+  )
 
-      let start = Number(currentWord.dataset.start)
-      let end = Number(currentWord.dataset.end)
-      let type = Number(currentWord.dataset.type)
+  let wordLength = words.length
 
-      if (time > start && time < end) {
-        if (
-          !karaokeTickCache[start + '.' + end] &&
-          karaokeCheckTick(type, currentWord.innerText.trim())
-        ) {
-          karaokeTickCache[start + '.' + end] = true
+  while (wordLength--) {
+    let currentWord = words[wordLength]
+    let nextWord = words[wordLength + 1] || null
 
-          karaokeTick.time = 0
-          karaokeTick.play()
-        }
+    let start = Number(currentWord.dataset.start)
+    let end = Number(currentWord.dataset.end)
+    let type = Number(currentWord.dataset.type)
 
-        if (currentWord.dataset.repeat) {
-          let repeat = currentWord.dataset.repeat.split(',')
-          let repeatIter = repeat.length
-          let delay = Number(currentWord.dataset.delay)
+    if (time > start && time < end) {
+      if (
+        !karaokeTickCache[start + '.' + end] &&
+        karaokeCheckTick(type, currentWord.innerText.trim())
+      ) {
+        karaokeTickCache[start + '.' + end] = true
 
-          while (repeatIter--) {
-            if (
-              time > Number(repeat[repeatIter]) &&
-              !karaokeTickCache[start + '.' + end + '.' + repeat[repeatIter]]
-            ) {
-              karaokeTickCache[
-                start + '.' + end + '.' + repeat[repeatIter]
-              ] = true
+        karaokeTick.time = 0
+        karaokeTick.play()
+      }
 
-              currentWord.dataset.tick = '1'
+      if (currentWord.dataset.repeat) {
+        let repeat = currentWord.dataset.repeat.split(',')
+        let repeatIter = repeat.length
+        let delay = Number(currentWord.dataset.delay)
 
-              setTimeout(() => {
-                currentWord.dataset.tick = '0'
-              }, delay * 0.9)
+        while (repeatIter--) {
+          if (
+            !karaokeTickCache[start + '.' + end + '.' + repeat[repeatIter]] &&
+            time > Number(repeat[repeatIter])
+          ) {
+            karaokeTickCache[
+              start + '.' + end + '.' + repeat[repeatIter]
+            ] = true
 
-              karaokeTick.time = 0
-              karaokeTick.play()
-            }
+            currentWord.dataset.tick = '1'
+
+            setTimeout(() => {
+              currentWord.dataset.tick = '0'
+            }, delay * 0.9)
+
+            karaokeTick.time = 0
+            karaokeTick.play()
           }
         }
 
-        // 현 시간이 시작 시간 보다 크거나, 현재 시간이 끝 시간 보다 작은 경우 (싱크 속함)
+        repeat = undefined
+        repeatIter = undefined
+      }
 
-        currentWord.dataset.active = '1'
+      // 현 시간이 시작 시간 보다 크거나, 현재 시간이 끝 시간 보다 작은 경우 (싱크 속함)
+
+      currentWord.dataset.active = '1'
+    } else {
+      currentWord.dataset.active = '0'
+    }
+
+    if (
+      !currentWord.style.transitionDuration &&
+      currentWord.dataset.passed == '0'
+    ) {
+      if (currentWord.dataset.pronounce) {
+        currentWord.style.transitionDuration =
+          currentWord.dataset.pronounce + 's'
       } else {
-        currentWord.dataset.active = '0'
-      }
+        let nEnd = nextWord
+          ? nextWord.dataset.start - start
+          : currentWord.parentElement.dataset.end - start
 
-      if (
-        currentWord.dataset.passed == '0' &&
-        !currentWord.style.transitionDuration
-      ) {
-        if (currentWord.dataset.pronounce) {
-          currentWord.style.transitionDuration =
-            currentWord.dataset.pronounce + 's'
-        } else {
-          let nEnd = nextWord
-            ? nextWord.dataset.start - start
-            : currentLine.dataset.end - start
+        let calc = nEnd < 300 ? nEnd + 270 : nEnd
 
-          let calc = nEnd < 300 ? nEnd + 270 : nEnd
-
-          currentWord.style.transitionDuration = calc + 'ms'
-        }
-      }
-
-      if (!currentWord.style.textShadow && currentWord.dataset.color) {
-        currentWord.style.textShadow = `0px 0px 3px ${currentWord.dataset.color}`
-      }
-
-      if (time > end) {
-        currentWord.dataset.passed = '1'
-        currentWord.style.transitionDuration = null
+        currentWord.style.transitionDuration = calc + 'ms'
       }
     }
+
+    if (!currentWord.style.textShadow && currentWord.dataset.color) {
+      currentWord.style.textShadow = `0px 0px 3px ${currentWord.dataset.color}`
+    }
+
+    if (time > end) {
+      currentWord.dataset.passed = '1'
+      currentWord.style.transitionDuration = null
+    }
+
+    currentWord = undefined
   }
 }
 
@@ -208,7 +216,8 @@ Vue.component('llct-karaoke', {
       karaData: { metadata: {}, timeline: [] },
       error: null,
       needClear: false,
-      lastScroll: 0
+      lastScroll: 0,
+      sleep: 0
     }
   },
   watch: {
@@ -222,7 +231,14 @@ Vue.component('llct-karaoke', {
     time: {
       deep: true,
       handler () {
+        if (this.sleep < 2) {
+          this.sleep++
+          return
+        }
+
         karaokeRender(audio.timecode(), this.$el, 5, false, this.scrollSong)
+
+        this.sleep = 0
       }
     },
     playing: {
