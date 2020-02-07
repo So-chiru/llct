@@ -115,11 +115,11 @@
 
 .dark .karaoke-line {
   span[data-type="1"] {
-    color: #727272;
+    color: #979797;
   }
 
   span[data-type="1"][data-passed="1"] {
-    color: #363636;
+    color: #555555;
   }
 
   span[data-type="2"] {
@@ -131,7 +131,7 @@
   }
 
   span[data-type="3"] {
-    color: #4c5861;
+    color: #6d7d7e;
   }
 
   span[data-type="3"][data-passed="1"] {
@@ -191,6 +191,10 @@
 .karaoke-line-wrap .karaoke-lyrics {
   font-weight: 300;
   margin-bottom: 7px;
+}
+
+.dark .karaoke-line-wrap .karaoke-lyrics {
+  color: #969696;
 }
 
 .llct-karaoke .error {

@@ -48,6 +48,10 @@
   transition: 150ms opacity cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.dark .llct-music-card::after {
+  background-color: #474747;
+}
+
 .llct-music-card:hover::after {
   opacity: 0.6;
 }

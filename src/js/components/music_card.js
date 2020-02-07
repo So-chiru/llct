@@ -3,7 +3,8 @@ Vue.component('llct-music-card', {
     <div class="info">
       <llct-image :src="cover_url" :placeholder="placeholder"></llct-image>
       <div class="text">
-        <h3>{{title}}</h3>
+        <h3 v-if="!useAlt">{{title}}</h3>
+        <h3 v-else>{{alt}}</h3>
         <p>{{artist}}</p>
       </div class="text">
     </div>
@@ -28,10 +29,12 @@ Vue.component('llct-music-card', {
     'index',
     'disablePlaylist',
     'removeButton',
-    'playlist'
+    'playlist',
+    'useAlt',
+    'alt'
   ],
   methods: {
-    play(id) {
+    play (id) {
       this.$llctEvents.$emit(
         'play',
         this.playlist ? this.playlist : id,

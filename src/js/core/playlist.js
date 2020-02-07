@@ -153,6 +153,8 @@ window.addEventListener('playlistReceive', ev => {
 
     let pl = new LLCTPlaylist(list.Title, true)
 
+    list.lists = list.Items
+    pl.import(list)
     playlists.add(pl, true)
   }
 

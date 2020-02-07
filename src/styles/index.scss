@@ -10,11 +10,16 @@ body {
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
+  transition: 250ms background $standard-ease, 250ms color $standard-ease;
 }
 
 body.dark {
   background-color: #151515;
   color: #fff;
+}
+
+.reduce-motion * {
+  transition: unset !important;
 }
 
 ::-webkit-scrollbar {
@@ -31,12 +36,27 @@ body.dark {
   border-radius: 54px;
   transition: 0.3s all cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgb(78, 78, 78);
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #ffffff;
 }
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgb(121, 121, 121);
+}
+
 ::-webkit-scrollbar-thumb:active {
   background: #d8d8d8;
 }
+
+.dark ::-webkit-scrollbar-thumb:active {
+  background: rgb(146, 146, 146);
+}
+
 ::-webkit-scrollbar-track {
   background: transparent;
   border: 0px none #ffffff;
@@ -46,9 +66,19 @@ body.dark {
 ::-webkit-scrollbar-track:hover {
   background: #d3d3d3;
 }
+
+.dark ::-webkit-scrollbar-track:hover {
+  background: #2b2b2b;
+}
+
 ::-webkit-scrollbar-track:active {
   background: #bbbbbb;
 }
+
+.dark ::-webkit-scrollbar-track:active {
+  background: #303030;
+}
+
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
@@ -74,7 +104,8 @@ llct-menu-wrap {
   height: $menu-height;
   background-color: #fff;
   z-index: 10;
-  transition: 250ms transform $decelerate-ease;
+  transition: 250ms transform $decelerate-ease, 250ms background $standard-ease,
+    250ms color $standard-ease;
 
   @media screen and (max-width: $tablet) {
     box-shadow: 0px 0px 16px rgba(196, 196, 196, 0.16);
@@ -94,6 +125,10 @@ llct-menu-wrap {
 .dark llct-menu-wrap {
   background-color: #151515;
   color: #fff;
+
+  @media screen and (max-width: $tablet) {
+    box-shadow: unset;
+  }
 }
 
 llct-menu-wrap.hidden {

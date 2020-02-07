@@ -33,7 +33,7 @@ let karaokeScrollCache = []
  * @param {Boolean} full 전체 렌더링 여부
  * @param {Function} newline 새 라인 스크롤 함수
  */
-const karaokeRender = (time, root, offset, full, newline) => {
+const karaokeRender = (time, root, offset, full, newline, tick) => {
   let lines = (root || document).querySelectorAll('.karaoke-line')
 
   let lineLength = lines.length
@@ -88,6 +88,7 @@ const karaokeRender = (time, root, offset, full, newline) => {
 
     if (time > start && time < end) {
       if (
+        tick &&
         !karaokeTickCache[start + '.' + end] &&
         karaokeCheckTick(type, currentWord.innerText.trim())
       ) {
@@ -112,10 +113,11 @@ const karaokeRender = (time, root, offset, full, newline) => {
             ] = true
 
             currentWord.dataset.tick = '1'
-
-            setTimeout(() => {
-              currentWord.dataset.tick = '0'
-            }, delay * 0.9)
+            ;(c => {
+              setTimeout(() => {
+                c.dataset.tick = '0'
+              }, delay * 0.9)
+            })(currentWord)
 
             karaokeTick.time = 0
             karaokeTick.play()
@@ -174,7 +176,7 @@ Vue.component('llct-karaoke', {
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
           <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="word.text + word.start_time" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-repeat="word.repeat_delay ? calcRepeat(word) : null" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
         </p>
-        <p class="karaoke-lyrics" v-if="line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
+        <p class="karaoke-lyrics" v-if="showLyrics && line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
       </span>
       <div class="error" v-if="error">
         <img></img>
@@ -207,6 +209,10 @@ Vue.component('llct-karaoke', {
     updateKaraoke: {
       type: [String, Number],
       required: false
+    },
+    tickEnable: {
+      type: Boolean,
+      required: false
     }
   },
   data () {
@@ -214,7 +220,12 @@ Vue.component('llct-karaoke', {
       karaData: { metadata: {}, timeline: [] },
       error: null,
       needClear: false,
-      lastScroll: 0,
+      lastScroll: 0
+    }
+  },
+  computed: {
+    showLyrics () {
+      return LLCTSettings.get('useLyrics')
     }
   },
   watch: {
@@ -227,8 +238,32 @@ Vue.component('llct-karaoke', {
     },
     time: {
       deep: true,
-      handler () {
-        karaokeRender(audio.timecode(), this.$el, 5, false, this.scrollSong)
+      handler (v) {
+        if (this.lastTime && Math.abs(this.lastTime - v) > 3) {
+          karaokeRender(
+            audio.timecode(),
+            this.$el,
+            5,
+            true,
+            this.scrollSong,
+            this.tickEnable
+          )
+
+          this.lastTime = v
+
+          return
+        }
+
+        karaokeRender(
+          audio.timecode(),
+          this.$el,
+          5,
+          false,
+          this.scrollSong,
+          this.tickEnable
+        )
+
+        this.lastTime = v
       }
     },
     playing: {
@@ -247,7 +282,14 @@ Vue.component('llct-karaoke', {
       deep: true,
       handler () {
         karaokeClear()
-        karaokeRender(audio.timecode(), this.$el, 5, true)
+        karaokeRender(
+          audio.timecode(),
+          this.$el,
+          5,
+          true,
+          null,
+          this.tickEnable
+        )
       }
     }
   },
@@ -263,7 +305,7 @@ Vue.component('llct-karaoke', {
           this.karaData = data
 
           setTimeout(() => {
-            karaokeRender(0, this.$el, 0, true)
+            karaokeRender(0, this.$el, 0, true, null, this.tickEnable)
           }, 0)
         })
         .catch(e => {
@@ -273,7 +315,14 @@ Vue.component('llct-karaoke', {
       if (!karaokeFocusDetect) {
         karaokeFocusDetect = window.addEventListener('focus', () => {
           if (!this.error) {
-            karaokeRender(audio.timecode(), this.$el, 5, true)
+            karaokeRender(
+              audio.timecode(),
+              this.$el,
+              5,
+              true,
+              null,
+              this.tickEnable
+            )
           }
         })
       }
@@ -322,10 +371,10 @@ Vue.component('llct-karaoke', {
         return false
       }
 
-      karaokeClear()
       audio.time = (Number(ev.target.dataset.start) - 10) / 100
 
-      karaokeRender(audio.timecode(), this.$el, 5, true)
+      karaokeClear()
+      karaokeRender(audio.timecode(), this.$el, 5, true, null, this.tickEnable)
     }
   },
   mounted () {

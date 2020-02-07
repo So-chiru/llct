@@ -89,6 +89,14 @@ const LLCTAudio = class {
     this.audio.volume = v
   }
 
+  get speed () {
+    return this.audio.playbackRate
+  }
+
+  set speed (v) {
+    this.audio.playbackRate = v
+  }
+
   volumeDown (v) {
     this.volume = this.volume - v < 0 ? 0 : this.volume - v
   }
@@ -135,6 +143,16 @@ const LLCTAudio = class {
 
   repeatToggle () {
     this.repeat = !this.repeat
+  }
+
+  setMetadata(title, artist, cover) {
+    if (this.supportMedia) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: title,
+        artist: artist,
+        artwork: [{ src: cover }]
+      })
+    }
   }
 
   play () {

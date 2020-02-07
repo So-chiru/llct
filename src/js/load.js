@@ -1,4 +1,12 @@
+const isIE = () => {
+  return window.document.documentMode
+}
+
 window.addEventListener('DOMContentLoaded', () => {
+  if (isIE()) {
+    location.href = 'https://browser-update.org/update-browser.html'
+  }
+
   if (typeof darkInit !== 'undefined') darkInit()
 })
 

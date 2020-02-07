@@ -50,3 +50,44 @@
     color: #c0c0c0;
   }
 }
+
+.setsuna-section {
+  display: block;
+  margin: 3vh auto;
+  
+  & > h3 {
+    font-size: 24px;
+    margin: 0;
+  }
+}
+
+.setsuna-options {
+  .setsuna-option {
+    display: -webkit-flex;
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
+    transition: 250ms border $standard-ease;
+    padding: 10px 0px;
+
+    p {
+      margin: 0;
+      font-weight: 500;
+      flex: 9;
+      margin-left: 40px
+    }
+
+    .control {
+      margin: auto;
+      flex: 1;
+    }
+  }
+}
+
+.dark .setsuna-option {
+  border-bottom: 1px solid #323232;
+}
+
+.switch {
+  width: 50px;
+  height: 25px;
+}

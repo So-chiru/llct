@@ -4,7 +4,8 @@ Vue.component('llct-app', {
       <transition name="llct-tab-title" appear>
         <h1 :key="this.$root.title" :class="{hidden: this.$root.hide}">{{this.$root.title}}</h1>
       </transition>
-      <i class="material-icons" v-on:click="changeTab(4)">settings</i>
+      <i class="material-icons" v-if="SetsunaTab" v-on:click="goBack()">close</i>
+      <i class="material-icons" v-if="!SetsunaTab" v-on:click="changeTab(4)">settings</i>
     </div>
     <div class="llct-tab-margin" :class="{hidden: this.$root.hide}"></div>
     <transition-group name="llct-tabs" tag="div" mode="out-in">
@@ -38,6 +39,9 @@ Vue.component('llct-app', {
     }
   },
   methods: {
+    goBack() {
+      this.$root.goBackTab()
+    },
     changeTab (id) {
       this.$root.changeTab(id)
     }

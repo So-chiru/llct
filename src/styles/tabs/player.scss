@@ -383,6 +383,10 @@ $thumb-size: 16px;
   }
 }
 
+.reduce-motion .player-karaoke .llct-karaoke {
+  scroll-behavior: auto;
+}
+
 .player-karaoke::after {
   position: absolute;
   content: "";
@@ -434,8 +438,15 @@ $thumb-size: 16px;
       min-width: 60%;
       max-width: 80%;
     }
+
+    h3 .value-indicator {
+      font-size: 12px;
+      margin-left: 5px;
+      color:rgb(121, 121, 121);
+    }
   }
 }
+
 
 .dark .player-vertical {
   .bg {
@@ -443,7 +454,7 @@ $thumb-size: 16px;
   }
 
   .content {
-    background-color: #151515;
+    background-color: #2b2b2b;
   }
 }
 

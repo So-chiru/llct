@@ -39,15 +39,17 @@ Vue.component('llct-player', {
         </div>
       </div>
       <div class="player-karaoke">
-        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :autoScroll="true" :updateKaraoke="updates"></llct-karaoke>
+        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :tickEnable="this.tickVolume > 0" :autoScroll="true" :updateKaraoke="updates"></llct-karaoke>
       </div>
     </div>
     <div class="player-vertical" :class="{show: displayVertical}">
       <div class="content">
-        <h3>음악 볼륨</h3>
+        <h3>음악 볼륨 <span class="value-indicator">{{Math.round(audioVolume * 100)}}%</span></h3>
         <input type="range" v-model="audioVolume" max="1" min="0" step="0.01" value="audio.volume"></input>
-        <h3>틱소리 볼륨</h3>
+        <h3>틱소리 볼륨 <span class="value-indicator">{{Math.round(tickVolume * 100)}}%</span></h3>
         <input type="range" v-model="tickVolume" max="1" min="0" step="0.01" value="1"></input>
+        <h3>재생 속도 <span class="value-indicator">{{playbackSpeed}}x</span></h3>
+        <input type="range" v-model="playbackSpeed" max="2" min="0.2" step="0.05" value="1"></input>
       </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
@@ -69,8 +71,9 @@ Vue.component('llct-player', {
       __timeUpdate: null,
       __barCache: null,
       audio: window.audio,
-      audioVolume: 0.75,
-      tickVolume: 1,
+      audioVolume: localStorage.getItem('LLCT.Audio.audioVolume') || 0.75,
+      tickVolume: localStorage.getItem('LLCT.Audio.tickVolume') || 1,
+      playbackSpeed: localStorage.getItem('LLCT.Audio.playbackSpeed') || 1,
       karaoke: {},
       updates: null,
       displayVertical: false
@@ -131,8 +134,17 @@ Vue.component('llct-player', {
     },
 
     more (ev) {
-      console.log(ev)
       this.displayVertical = true
+    },
+
+    volumeUp (v) {
+      this.audioVolume =
+        this.audioVolume + v > 1 ? 1 : Number(this.audioVolume) + v
+    },
+
+    volumeDown (v) {
+      this.audioVolume =
+        this.audioVolume - v < 0 ? 0 : Number(this.audioVolume) - v
     },
 
     keyStoke (ev) {
@@ -159,11 +171,11 @@ Vue.component('llct-player', {
           ev.preventDefault()
           break
         case 38: // Arrow Up?
-          audio.volumeUp(0.05)
+          this.volumeUp(0.05)
           ev.preventDefault()
           break
         case 40: // Arrow Down
-          audio.volumeDown(0.05)
+          this.volumeDown(0.05)
           ev.preventDefault()
           break
         default:
@@ -263,6 +275,13 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
+      audio.volume = this.audioVolume
+      audio.speed = this.playbackSpeed
+
+      if (karaokeTick) {
+        karaokeTick.volume = this.tickVolume
+      }
+
       let delay = Date.now()
       audio.on(
         'seek',
@@ -275,12 +294,19 @@ Vue.component('llct-player', {
       )
 
       this.id = this.$llctDatas.meta.id
-      this.title = this.$llctDatas.meta.title
+      this.title = this.$llctDatas.meta[
+        this.$llctDatas.meta.translated &&
+        LLCTSettings.get('useTranslatedTitle')
+          ? 'translated'
+          : 'title'
+      ]
       this.artist = this.$llctDatas.artist(
         this.id,
         this.$llctDatas.meta.artist || '0'
       )
       this.url = this.$llctDatas.base + '/cover/' + this.id
+
+      audio.setMetadata(this.title, this.artist, this.url)
 
       this.playing = audio.playing
 
@@ -309,14 +335,24 @@ Vue.component('llct-player', {
 
     audioVolume (v) {
       window.audio.volume = v
+      localStorage.setItem('LLCT.Audio.audioVolume', v)
     },
 
     tickVolume (v) {
       karaokeTick.volume = v
+      localStorage.setItem('LLCT.Audio.tickVolume', v)
+    },
+
+    playbackSpeed (v) {
+      window.audio.speed = v
+      localStorage.setItem('LLCT.Audio.playbackSpeed', v)
     }
   },
   mounted () {
     window.addEventListener('keydown', this.keyStoke)
+
+    audio.next = this.next
+    audio.prev = this.prev
 
     this.$llctEvents.$on('callContentChange', () => {
       this.init()
