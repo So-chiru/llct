@@ -66,7 +66,6 @@ const LLCTAudio = class {
     this.audio.src = url
 
     this.run('load')
-
     this.audio.load()
   }
 
@@ -131,6 +130,11 @@ const LLCTAudio = class {
     return window.playlists ? window.playlists.find(this.playlists) : null
   }
 
+  stop () {
+    this.pause()
+    this.load(null)
+  }
+
   seekPrev (t) {
     this.audio.currentTime = this.audio.currentTime - t
     this.run('seek')
@@ -145,7 +149,7 @@ const LLCTAudio = class {
     this.repeat = !this.repeat
   }
 
-  setMetadata(title, artist, cover) {
+  setMetadata (title, artist, cover) {
     if (this.supportMedia) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: title,

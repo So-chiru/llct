@@ -125,7 +125,10 @@ const init = () => {
           this.$llctDatas.meta = info
           this.$llctDatas.playActive =
             typeof playActive !== 'undefined' ? playActive : true
-          audio.load(this.$llctDatas.base + '/audio/' + id)
+          
+          if (LLCTSettings.get('usePlayer')) {
+            audio.load(this.$llctDatas.base + '/audio/' + id)
+          }
 
           if (!noTab) {
             this.changeTab(3)

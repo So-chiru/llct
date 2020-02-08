@@ -7,15 +7,21 @@ Vue.component('llct-image', {
   methods: {
     done () {
       this.load = true
+    },
+
+    errHandle (ev) {
+      if (this.error) {
+        this.error(ev)
+      }
     }
   },
-  props: ['shouldShow'],
+  props: ['shouldShow', 'error'],
   computed: {
     show () {
       return window.LLCTSettings.get('useImages') || this.shouldShow
     }
   },
   template: `
-    <img v-lazy="$attrs.src" v-on:load="done" v-show="show ? ($attrs.placeholder !== '' ? true : (show ? load : false)) : false" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round'}"></img>
+    <img v-lazy="$attrs.src" v-on:error="errHandle" v-on:load="done" v-show="show ? ($attrs.placeholder !== '' ? true : (show ? load : false)) : false" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round'}"></img>
   `
 })

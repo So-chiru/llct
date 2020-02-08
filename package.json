@@ -1,4 +1,11 @@
 {
+  "name": "llct",
+  "version": "2.0.0",
+  "description": "LoveLive Call Table collection",
+  "main": "index.js",
+  "repository": "https://github.com/So-chiru/LLCT/",
+  "author": "So-chiru <unleash9224@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
@@ -9,9 +16,13 @@
     "gulp-connect": "^5.7.0",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
     "node-sass": "^4.13.1"
   },
   "dependencies": {
     "gulp-imagemin": "^7.1.0"
+  },
+  "scripts": {
+    "build": "gulp build"
   }
 }

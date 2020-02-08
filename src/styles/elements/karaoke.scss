@@ -217,4 +217,19 @@
     font-size: 18px;
     color: #a0a0a0;
   }
+
+  @media screen and (max-width: $tablet) {
+    h3 {
+      font-size: 26px;
+    }
+  
+    p {
+      font-size: 14px;
+      color: #a0a0a0;
+    }
+  }
+}
+
+.karaoke-image {
+  width: 100%;
 }

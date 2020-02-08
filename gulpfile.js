@@ -6,6 +6,7 @@ const babel = require('gulp-babel')
 const cleanCSS = require('gulp-clean-css')
 const sass = require('gulp-sass')
 const connect = require('gulp-connect')
+const uglify = require('gulp-uglify')
 const imagemin = require('gulp-imagemin')
 sass.compiler = require('node-sass')
 
@@ -38,13 +39,25 @@ const js = () =>
         presets: ['@babel/env']
       })
     )
+    .pipe(uglify())
     .pipe(dest('dist/'))
     .pipe(connect.reload())
+const jsBuild = () =>
+  src('src/js/**/*.js')
+    .pipe(concat('mikan.min.js'))
+    .pipe(
+      babel({
+        presets: ['@babel/env']
+      })
+    )
+    .pipe(uglify())
+    .pipe(dest('dist/'))
 
 const watchdog = () => {
   watch(['src/js/**/*.js'], js)
   watch(['src/styles/**/*.scss'], css)
   watch(['src/views/*.pug'], html)
+  watch(['src/data/sounds/*'], sounds)
   watch(['src/data/images/*'], images)
 }
 
@@ -55,5 +68,6 @@ const server = () => {
   })
 }
 
-exports.build = parallel(html, css, js, images, sounds)
-exports.default = parallel(this.build, server, watchdog)
+exports.build = parallel(html, css, jsBuild, images, sounds)
+exports.build_o = parallel(html, css, js, images, sounds)
+exports.default = parallel(this.build_o, server, watchdog)

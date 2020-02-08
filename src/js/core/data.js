@@ -174,8 +174,10 @@ const LLCTData = class {
         return dataInstance.base + '/cover/' + id
       },
 
-      karaoke (id) {
-        return dataInstance.karaoke(id)
+      karaoke (id, useImg) {
+        return this.getSong(id).karaoke && !useImg
+          ? dataInstance.karaoke(id)
+          : 'img'
       },
 
       playlist () {

@@ -43,20 +43,37 @@ const llctSettingDefault = [
     default: false
   },
   {
+    title: '곡 플레이어 활성화',
+    id: 'usePlayer',
+    category: 1,
+    type: 'checkbox',
+    default: true,
+    func: v => {
+      if (!v && window && window.audio) {
+        window.audio.stop()
+      }
+    }
+  },
+  {
     title: '가사 사용',
     id: 'useLyrics',
     category: 1,
     type: 'checkbox',
-    default: true,
-    func: v => {}
+    default: true
+  },
+  {
+    title: '타임 싱크 콜표대신 이미지 사용',
+    id: 'useImageInstead',
+    category: 1,
+    type: 'checkbox',
+    default: false
   },
   {
     title: '페이지 전반에 사용되는 이미지 활성화',
     id: 'useImages',
     category: 2,
     type: 'checkbox',
-    default: true,
-    func: v => {}
+    default: true
   }
 ]
 

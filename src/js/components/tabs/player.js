@@ -17,7 +17,7 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-progress">
-            <div class="player-progress-inner">
+            <div class="player-progress-inner" v-if="usePlayer">
               <div class="current">{{time_went}}</div>
               <div class="bar" v-on:click="thumbProgress">
                 <div class="bar-thumb" :style="{left: 'calc(' + progress + '% - 8px)'}" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress" draggable="true"></div>
@@ -29,11 +29,11 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-btn">
-            <i class="material-icons" v-show="!playing" v-on:click="play" alt="재생 버튼">play_arrow</i>
-            <i class="material-icons" v-show="playing" v-on:click="pause" alt="일시정지 버튼">pause</i>
-            <i class="material-icons" v-show="audio.playlist" v-on:click="next" alt="다음 곡 스킵 버튼">skip_next</i>
-            <i class="material-icons" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat">sync</i>
-            <i class="material-icons diff" alt="설정 버튼" v-on:click="more">more_vert</i>
+            <i v-if="usePlayer" class="material-icons" v-show="!playing" v-on:click="play" alt="재생 버튼">play_arrow</i>
+            <i v-if="usePlayer" class="material-icons" v-show="playing" v-on:click="pause" alt="일시정지 버튼">pause</i>
+            <i v-if="usePlayer" class="material-icons" v-show="audio.playlist" v-on:click="next" alt="다음 곡 스킵 버튼">skip_next</i>
+            <i v-if="usePlayer" class="material-icons" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat">sync</i>
+            <i v-if="usePlayer" class="material-icons diff" alt="설정 버튼" v-on:click="more">more_vert</i>
             <i class="material-icons player-close" alt="닫기 버튼" v-on:click="close">close</i>
           </div>
         </div>
@@ -45,7 +45,7 @@ Vue.component('llct-player', {
     <div class="player-vertical" :class="{show: displayVertical}">
       <div class="content">
         <h3>음악 볼륨 <span class="value-indicator">{{Math.round(audioVolume * 100)}}%</span></h3>
-        <input type="range" v-model="audioVolume" max="1" min="0" step="0.01" value="audio.volume"></input>
+        <input type="range" v-model="audioVolume" max="1" min="0" step="0.01"></input>
         <h3>틱소리 볼륨 <span class="value-indicator">{{Math.round(tickVolume * 100)}}%</span></h3>
         <input type="range" v-model="tickVolume" max="1" min="0" step="0.01" value="1"></input>
         <h3>재생 속도 <span class="value-indicator">{{playbackSpeed}}x</span></h3>
@@ -76,7 +76,8 @@ Vue.component('llct-player', {
       playbackSpeed: localStorage.getItem('LLCT.Audio.playbackSpeed') || 1,
       karaoke: {},
       updates: null,
-      displayVertical: false
+      displayVertical: false,
+      usePlayer: LLCTSettings.get('usePlayer')
     }
   },
   methods: {
@@ -235,6 +236,8 @@ Vue.component('llct-player', {
         return
       }
 
+      this.usePlayer = LLCTSettings.get('usePlayer')
+
       audio.on(
         'play',
         () => {
@@ -310,7 +313,7 @@ Vue.component('llct-player', {
 
       this.playing = audio.playing
 
-      if (this.$llctDatas.playActive) {
+      if (this.$llctDatas.playActive && this.usePlayer) {
         audio.play()
         this.$llctDatas.playActive = false
       }

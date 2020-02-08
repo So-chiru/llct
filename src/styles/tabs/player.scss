@@ -437,6 +437,10 @@ $thumb-size: 16px;
 
       min-width: 60%;
       max-width: 80%;
+
+      input {
+        width: 100%;
+      }
     }
 
     h3 .value-indicator {

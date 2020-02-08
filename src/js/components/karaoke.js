@@ -1,3 +1,19 @@
+const karaokeCalcRepeat = (start, end, repeat) => {
+  let f = ''
+  let m = end - start
+  let x = Math.round(m / repeat)
+
+  if (x < 1) {
+    return ''
+  }
+
+  for (var i = 1; i < x; i++) {
+    f += start + repeat * i + (i + 1 != x ? ',' : '')
+  }
+
+  return f
+}
+
 const karaokeClear = root => {
   let words = (root || document).querySelectorAll('span.karaoke-word')
 
@@ -51,9 +67,9 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
         currentLine.dataset.active = '0'
       }
     } else if (
-      (time > lineStart || time < lineEnd) &&
-      lineStart > -1 &&
-      lineEnd > -1
+      lineEnd !== 100 &&
+      lineEnd > -1 &&
+      (time > lineStart || time < lineEnd)
     ) {
       currentLine.dataset.active = '1'
       if (
@@ -85,6 +101,15 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
     let start = Number(currentWord.dataset.start)
     let end = Number(currentWord.dataset.end)
     let type = Number(currentWord.dataset.type)
+    let delay = Number(currentWord.dataset.delay)
+
+    if (
+      !Number.isNaN(delay) &&
+      !currentWord.dataset.repeat &&
+      Number(delay) > 0
+    ) {
+      currentWord.dataset.repeat = karaokeCalcRepeat(start, end, Number(delay))
+    }
 
     if (time > start && time < end) {
       if (
@@ -101,7 +126,6 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
       if (currentWord.dataset.repeat) {
         let repeat = currentWord.dataset.repeat.split(',')
         let repeatIter = repeat.length
-        let delay = Number(currentWord.dataset.delay)
 
         while (repeatIter--) {
           if (
@@ -172,14 +196,16 @@ let karaokeFocusDetect = null
 Vue.component('llct-karaoke', {
   template: `
     <div class="llct-karaoke">
-      <span v-if="!error" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
+      <span v-if="!error && (!karaImage && !useImage)" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
-          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="word.text + word.start_time" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-repeat="word.repeat_delay ? calcRepeat(word) : null" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
+          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="word.text + word.start_time" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
         </p>
         <p class="karaoke-lyrics" v-if="showLyrics && line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
       </span>
+      <span v-if="(karaImage || useImage) && !error">
+        <img class="karaoke-image" :src="karaImage" v-on:error="imgHandler"></img>
+      </span>
       <div class="error" v-if="error">
-        <img></img>
         <h3>아악!</h3>
         <p>콜표를 불러올 수 없습니다. (미 등록 혹은 연결 오류) - {{error.message}}</p>
       </div>
@@ -220,12 +246,17 @@ Vue.component('llct-karaoke', {
       karaData: { metadata: {}, timeline: [] },
       error: null,
       needClear: false,
-      lastScroll: 0
+      lastScroll: 0,
+      karaImage: null
     }
   },
   computed: {
     showLyrics () {
       return LLCTSettings.get('useLyrics')
+    },
+
+    useImage () {
+      return LLCTSettings.get('useImageInstead')
     }
   },
   watch: {
@@ -298,19 +329,28 @@ Vue.component('llct-karaoke', {
       this.error = null
       karaokeClear()
 
-      let request = this.$llctDatas.karaoke(this.id)
+      let request = this.$llctDatas.karaoke(
+        this.id,
+        LLCTSettings.get('useImageInstead')
+      )
 
-      request
-        .then(data => {
-          this.karaData = data
+      if (request === 'img') {
+        this.karaImage = this.$llctDatas.base + '/call/' + this.id + '?img=true'
+      } else {
+        this.karaImage = null
 
-          setTimeout(() => {
-            karaokeRender(0, this.$el, 0, true, null, this.tickEnable)
-          }, 0)
-        })
-        .catch(e => {
-          this.error = e
-        })
+        request
+          .then(data => {
+            this.karaData = data
+
+            setTimeout(() => {
+              karaokeRender(0, this.$el, 0, true, null, this.tickEnable)
+            }, 0)
+          })
+          .catch(e => {
+            this.error = e
+          })
+      }
 
       if (!karaokeFocusDetect) {
         karaokeFocusDetect = window.addEventListener('focus', () => {
@@ -352,22 +392,8 @@ Vue.component('llct-karaoke', {
       )
     },
 
-    calcRepeat (data) {
-      let f = ''
-      let s = Number(data.start_time)
-      let m = Number(data.end_time) - s
-      let d = Number(data.repeat_delay)
-      let x = Math.round(m / d)
-
-      for (var i = 1; i < x; i++) {
-        f += s + d * i + (i + 1 != x ? ',' : '')
-      }
-
-      return f
-    },
-
     jump (ev) {
-      if (!ev.target) {
+      if (!ev.target || !this.$parent.usePlayer) {
         return false
       }
 
@@ -375,6 +401,11 @@ Vue.component('llct-karaoke', {
 
       karaokeClear()
       karaokeRender(audio.timecode(), this.$el, 5, true, null, this.tickEnable)
+    },
+
+    imgHandler(ev) {
+      ev.message = 'Failed to load call image.'
+      this.error = ev
     }
   },
   mounted () {
