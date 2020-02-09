@@ -20,6 +20,7 @@
   @media screen and (max-width: $tablet) {
     max-width: unset;
     width: 90vw;
+    height: 52px;
   }
 
   border-radius: 10px;
@@ -39,6 +40,10 @@
     padding: 5px 20px;
     border-radius: 10px;
     width: 100%;
+
+    @media screen and (max-width: $tablet) {
+      font-size: 14px;
+    }
 
     p,
     .button,
