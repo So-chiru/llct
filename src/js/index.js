@@ -34,6 +34,15 @@ const init = () => {
   var audio = new LLCTAudio(false)
   window.audio = audio
 
+  window.addEventListener('errorReceive', ev => {
+    window.showToast(
+      'API 서버에 연결할 수 없습니다. ' + ev.detail.message,
+      'warning',
+      true,
+      10000
+    )
+  })
+
   var app = new Vue({
     el: 'llct-app',
     data: () => {
@@ -125,9 +134,16 @@ const init = () => {
           this.$llctDatas.meta = info
           this.$llctDatas.playActive =
             typeof playActive !== 'undefined' ? playActive : true
-          
+
           if (LLCTSettings.get('usePlayer')) {
             audio.load(this.$llctDatas.base + '/audio/' + id)
+          }
+
+          if (gtag) {
+            gtag('event', 'play song', {
+              event_category: 'audio',
+              event_label: this.$llctDatas.meta.title
+            })
           }
 
           if (!noTab) {

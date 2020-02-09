@@ -1,14 +1,21 @@
 html(lang="kr")
   head
-    meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="description" content="")
     title LLCT
-    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js")
+    link(rel="manifest" href="/manifest.json")
+    script.
+      window.isDev = #{dev}
+    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue." + (dev ? '' : 'min.') + "js")
     script(src="https://cdn.jsdelivr.net/npm/vue-lazyload@1.3.3/vue-lazyload.min.js")
     script(src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js")
     script(src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js")
     script(src="mikan.min.js")
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-111995531-2")
+    link(rel="shortcut icon" href="/assets/favicon.ico")
+    link(rel="apple-touch-icon" href="/assets/logo_v2.png")
     link(rel="stylesheet" href="mikan.min.css")
     link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP|Noto+Sans+KR&display=swap" media="none" onload="if(media!='all')media='all'")
@@ -34,3 +41,9 @@ html(lang="kr")
     llct-menu-wrap
       llct-menu
     llct-modal
+    llct-toast
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-111995531-2');

@@ -12,7 +12,13 @@ sass.compiler = require('node-sass')
 
 const html = () =>
   src('src/views/*.pug')
-    .pipe(pug())
+    .pipe(
+      pug({
+        locals: {
+          dev: process.env.NODE_ENV !== 'production'
+        }
+      })
+    )
     .pipe(dest('dist/'))
     .pipe(connect.reload())
 const css = () =>
@@ -27,10 +33,11 @@ const css = () =>
     .pipe(dest('dist/'))
     .pipe(connect.reload())
 const images = () =>
-  src('src/data/images/*')
+  src('src/data/images/**/*')
     .pipe(imagemin())
     .pipe(dest('dist/assets'))
-const sounds = () => src('src/data/sounds/*').pipe(dest('dist/assets'))
+const sounds = () => src('src/data/sounds/**/*').pipe(dest('dist/assets'))
+const root = () => src('src/root/**/*').pipe(dest('dist/'))
 const js = () =>
   src('src/js/**/*.js')
     .pipe(concat('mikan.min.js'))
@@ -39,7 +46,6 @@ const js = () =>
         presets: ['@babel/env']
       })
     )
-    .pipe(uglify())
     .pipe(dest('dist/'))
     .pipe(connect.reload())
 const jsBuild = () =>
@@ -57,8 +63,9 @@ const watchdog = () => {
   watch(['src/js/**/*.js'], js)
   watch(['src/styles/**/*.scss'], css)
   watch(['src/views/*.pug'], html)
-  watch(['src/data/sounds/*'], sounds)
-  watch(['src/data/images/*'], images)
+  watch(['src/root/**/*'], root)
+  watch(['src/data/sounds/**/*'], sounds)
+  watch(['src/data/images/**/*'], images)
 }
 
 const server = () => {
@@ -68,6 +75,6 @@ const server = () => {
   })
 }
 
-exports.build = parallel(html, css, jsBuild, images, sounds)
-exports.build_o = parallel(html, css, js, images, sounds)
+exports.build = parallel(html, css, jsBuild, root, images, sounds)
+exports.build_o = parallel(html, css, js, root, images, sounds)
 exports.default = parallel(this.build_o, server, watchdog)

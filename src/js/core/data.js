@@ -64,6 +64,8 @@ const LLCTData = class {
           this.runningGetSong = true
         })
         .catch(e => {
+          this.event('error', e)
+
           reject(e)
         })
     })
@@ -83,6 +85,8 @@ const LLCTData = class {
           resolve(json)
         })
         .catch(e => {
+          this.event('error', e)
+
           reject(e)
         })
     })
@@ -102,6 +106,8 @@ const LLCTData = class {
           resolve(json)
         })
         .catch(e => {
+          this.event('error', e)
+
           reject(e)
         })
     })
@@ -123,8 +129,10 @@ const LLCTData = class {
   }
 }
 
-;(() => {
-  var dataInstance = new LLCTData('https://api.lovelivec.kr')
+  ; (() => {
+  var dataInstance = new LLCTData(
+    window.isDev ? 'http://127.0.0.1:10210' : 'https://api.lovelivec.kr'
+  )
   Vue.prototype.$llctDatas = new Vue({
     data () {
       return dataInstance
