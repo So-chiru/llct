@@ -45,7 +45,7 @@ window.addEventListener('load', () => {
 
         this.clickCb = typeof click === 'function' ? click : () => {}
 
-        if (typeof autoClose !== 'boolean' && !autoClose && autoClose) {
+        if ((typeof autoClose !== 'boolean' && !autoClose) || autoClose) {
           this.autoClose = setTimeout(
             this.hide,
             autoClose && typeof autoClose === 'number' ? autoClose : 5000

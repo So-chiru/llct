@@ -362,7 +362,7 @@ Vue.component('llct-player', {
     })
   },
 
-  beforeDestory() {
-    window.addEventListener('keydown', this.keyStoke)
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.keyStoke)
   }
 })

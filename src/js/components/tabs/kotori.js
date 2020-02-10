@@ -100,7 +100,7 @@ Vue.component('llct-kotori', {
     window.addEventListener('renderPlaylist', this.evHandler)
   },
 
-  beforeDestory () {
+  beforeDestroy () {
     window.removeEventListener('renderPlaylist', this.evHandler)
   }
 })

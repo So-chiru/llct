@@ -85,7 +85,7 @@ Vue.component('llct-kotori-detail', {
     window.addEventListener('keydown', this.evKeydown)
   },
 
-  beforeDestory () {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.evKeydown)
   }
 })
