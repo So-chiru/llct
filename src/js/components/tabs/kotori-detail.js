@@ -21,7 +21,7 @@ Vue.component('llct-kotori-detail', {
   props: ['current', 'selected'],
   data () {
     return {
-      playLists: window.playlists || {} || [],
+      playLists: window.playlists || {},
       select: this.selected || {}
     }
   },
@@ -76,11 +76,16 @@ Vue.component('llct-kotori-detail', {
     },
     getArtist (id, artist) {
       return this.$llctDatas.artist(id, artist)
+    },
+    evKeydown (ev) {
+      if (ev.keyCode == 27 && this.select) this.close()
     }
   },
   mounted () {
-    window.addEventListener('keydown', ev => {
-      if (ev.keyCode == 27 && this.select) this.close()
-    })
+    window.addEventListener('keydown', this.evKeydown)
+  },
+
+  beforeDestory () {
+    window.removeEventListener('keydown', this.evKeydown)
   }
 })

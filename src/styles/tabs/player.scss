@@ -9,6 +9,7 @@ $mobile-button-wh: 28px;
 $mobile-button-diff-wh: 24px;
 
 $thumb-size: 16px;
+$mobile-thumb-size: 12px;
 
 .player-dash {
   display: -webkit-flex;
@@ -205,6 +206,12 @@ $thumb-size: 16px;
     background-color: #fff;
     z-index: 8;
     cursor: grab;
+
+    @media screen and (max-width: $tablet) {
+      width: $mobile-thumb-size;
+      height: $mobile-thumb-size;
+      margin-top: calc(-#{$mobile-thumb-size} / 2.5);
+    }
   }
 
   .bar-thumb:active {

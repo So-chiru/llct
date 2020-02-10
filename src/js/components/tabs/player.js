@@ -360,5 +360,9 @@ Vue.component('llct-player', {
     this.$llctEvents.$on('callContentChange', () => {
       this.init()
     })
+  },
+
+  beforeDestory() {
+    window.addEventListener('keydown', this.keyStoke)
   }
 })

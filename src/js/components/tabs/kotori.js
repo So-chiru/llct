@@ -86,6 +86,10 @@ Vue.component('llct-kotori', {
         this.playlistCb,
         () => {}
       )
+    },
+
+    evHandler (ev) {
+      this.playLists = ev.detail.playlists.lists
     }
   },
   mounted () {
@@ -93,8 +97,10 @@ Vue.component('llct-kotori', {
       this.selectedPlaylist = window.playlists.find(title)
     })
 
-    window.addEventListener('renderPlaylist', ev => {
-      this.playLists = ev.detail.playlists.lists
-    })
+    window.addEventListener('renderPlaylist', this.evHandler)
+  },
+
+  beforeDestory () {
+    window.removeEventListener('renderPlaylist', this.evHandler)
   }
 })

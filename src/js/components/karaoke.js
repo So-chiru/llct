@@ -171,7 +171,7 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
           ? nextWord.dataset.start - start
           : currentWord.parentElement.dataset.end - start
 
-        let calc = nEnd < 300 ? nEnd + 270 : nEnd
+        let calc = nEnd < 300 ? nEnd + 330 : nEnd + 200
 
         currentWord.style.transitionDuration = calc + 'ms'
       }
