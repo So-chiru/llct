@@ -63,6 +63,13 @@ $mobile-thumb-size: 12px;
   @media screen and (max-width: $tablet) {
     margin-bottom: auto;
     font-size: 11px;
+    height: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
   }
 }
 

@@ -191,6 +191,11 @@
 .karaoke-line-wrap .karaoke-lyrics {
   font-weight: 300;
   margin-bottom: 7px;
+  font-size: 14px;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 12px;
+  }
 }
 
 .dark .karaoke-line-wrap .karaoke-lyrics {
@@ -222,7 +227,7 @@
     h3 {
       font-size: 26px;
     }
-  
+
     p {
       font-size: 14px;
       color: #a0a0a0;

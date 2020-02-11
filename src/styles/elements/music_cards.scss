@@ -70,6 +70,17 @@
 
 .llct-music-card .info .text {
   margin-left: 15px;
+
+  h3,
+  p {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+  }
 }
 
 .llct-music-card .info .text * {

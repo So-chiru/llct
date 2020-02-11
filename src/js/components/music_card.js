@@ -3,9 +3,9 @@ Vue.component('llct-music-card', {
     <div class="info">
       <llct-image :src="cover_url" :placeholder="placeholder"></llct-image>
       <div class="text">
-        <h3 v-if="!useAlt">{{title}}</h3>
-        <h3 v-else>{{alt}}</h3>
-        <p>{{artist}}</p>
+        <h3 v-if="!useAlt" :title="title">{{title}}</h3>
+        <h3 v-else :title="alt">{{alt}}</h3>
+        <p :title="artist">{{artist}}</p>
       </div class="text">
     </div>
     <div class="control">

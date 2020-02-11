@@ -28,6 +28,10 @@
   margin: auto;
   color: #c0c0c0;
   transition: 200ms color $standard-ease;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 20px;
+  }
 }
 
 .dark .m-button i {

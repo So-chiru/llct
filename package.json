@@ -20,7 +20,8 @@
     "node-sass": "^4.13.1"
   },
   "dependencies": {
-    "gulp-imagemin": "^7.1.0"
+    "gulp-imagemin": "^7.1.0",
+    "yargs": "^15.1.0"
   },
   "scripts": {
     "build": "gulp build"

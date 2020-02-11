@@ -8,6 +8,7 @@ const sass = require('gulp-sass')
 const connect = require('gulp-connect')
 const uglify = require('gulp-uglify')
 const imagemin = require('gulp-imagemin')
+const argv = require('yargs').argv
 sass.compiler = require('node-sass')
 
 const html = () =>
@@ -15,7 +16,10 @@ const html = () =>
     .pipe(
       pug({
         locals: {
-          dev: process.env.NODE_ENV !== 'production'
+          dev:
+            !argv.production &&
+            !argv.prod &&
+            process.env.NODE_ENV !== 'production'
         }
       })
     )
