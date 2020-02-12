@@ -2516,7 +2516,6 @@
         ],
         "artist": 8,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "뉴로만"
       },
       {
@@ -2531,7 +2530,6 @@
         ],
         "artist": 8,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "럽펄서"
       },
       {
@@ -2540,7 +2538,6 @@
         "tag": ["팬텀로켓어드벤쳐", "펜텀로켓어드벤쳐", "로켓", "로캣"],
         "artist": 8,
         "karaoke": true,
-        "notPerformed": true,
         "short_kr": "팬텀로켓"
       },
       {
