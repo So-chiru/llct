@@ -74,6 +74,13 @@ const llctSettingDefault = [
     category: 2,
     type: 'checkbox',
     default: true
+  },
+  {
+    title: '오프라인 저장 사용',
+    id: 'useOffline',
+    category: 2,
+    type: 'checkbox',
+    default: false
   }
 ]
 

@@ -77,4 +77,11 @@ window.addEventListener('load', () => {
   })
 
   if (window) window.toast = toast
+
+  window.showToast(
+    '7센하를 지지하여 콜표 사이트 제작자를 도와주세요.',
+    'favorite',
+    false,
+    8000
+  )
 })

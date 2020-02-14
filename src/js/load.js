@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (typeof darkInit !== 'undefined') darkInit()
+  if (typeof registerWorker !== 'undefined') registerWorker()
 })
 
 window.addEventListener('load', () => {
