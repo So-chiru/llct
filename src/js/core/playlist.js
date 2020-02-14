@@ -1,3 +1,18 @@
+// DeepCopy code by c7x43t https://github.com/c7x43t
+const deepCopy = o => {
+  if (typeof o !== 'object' || o === null) return o
+  let newO, i
+  if (o instanceof Array) {
+    let l
+    newO = []
+    for (i = 0, l = o.length; i < l; i++) newO[i] = deepCopy(o[i])
+    return newO
+  }
+  newO = {}
+  for (i in o) if (o.hasOwnProperty(i)) newO[i] = deepCopy(o[i])
+  return newO
+}
+
 class LLCTPlaylist {
   constructor (title, readOnly) {
     this.__pointer = null
@@ -100,7 +115,7 @@ class PlaylistHolder {
 
     let thisLen = this.length()
     for (var i = 0; i < thisLen; i++) {
-      let item = JSON.parse(JSON.stringify(this.lists[i]))
+      let item = deepCopy(this.lists[i])
 
       if (item.readOnly) continue
 
