@@ -76,7 +76,7 @@ const llctSettingDefault = [
     default: true
   },
   {
-    title: '오프라인 저장 사용',
+    title: '오프라인 저장 사용 (현재 개발 중)',
     id: 'useOffline',
     category: 2,
     type: 'checkbox',
