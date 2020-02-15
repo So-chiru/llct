@@ -14,6 +14,7 @@ body {
   -webkit-tap-highlight-color: transparent;
   transition: 250ms background $standard-ease, 250ms color $standard-ease;
   background-color: #fff;
+  color: #000;
 }
 
 html.dark, .dark body {
