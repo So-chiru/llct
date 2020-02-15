@@ -10,9 +10,14 @@ const llctSettingDefault = [
       return [window.matchMedia('(prefers-color-scheme: dark)').matches, false]
     },
     func: v => {
-      if (typeof v !== 'undefined' && document && document.querySelector) {
-        document.querySelector('body').classList[v ? 'add' : 'remove']('dark')
+      if (!document || !document.querySelector) return
+
+      if (typeof v !== 'undefined') {
+        document.querySelector('html').classList[v ? 'add' : 'remove']('dark')
       }
+
+      let metaColor = document.querySelector('meta[name=theme-color]')
+      metaColor.setAttribute('content', v ? '#151515' : '#fff')
     }
   },
   {

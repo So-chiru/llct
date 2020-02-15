@@ -3,7 +3,6 @@ html(lang="kr")
     meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title LLCT - 러브라이브 콜표 사이트
-    meta(name='theme-color' content='#44caff')
     meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
     meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,페스,μ's,Aqours,虹ヶ咲,러브라이브 콜표, 러브라이브 선샤인 콜표")
     meta(property="og:type" content="website")
@@ -13,6 +12,8 @@ html(lang="kr")
     meta(name="apple-mobile-web-app-capable" content="yes")
     meta(name="apple-mobile-web-app-title" content="LLCT")
     meta(name="application-name" content="LLCT")
+    meta(name="theme-color" content="#cceffe")
+    meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
     meta(property="og:url" content="https://lovelivec.kr")
     link(rel="manifest" href="/manifest.json")
     script.
@@ -46,8 +47,9 @@ html(lang="kr")
       div(style="display:inline-block;position:relative;width:80px;height:80px;margin:auto;")
         div
         div(style="animation-delay: -1s;")
-    llct-app-wrap
-      llct-app
+    .app-wrap
+      llct-app-wrap
+        llct-app
     llct-menu-wrap
       llct-menu
     llct-modal

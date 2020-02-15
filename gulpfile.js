@@ -75,7 +75,8 @@ const watchdog = () => {
 const server = () => {
   connect.server({
     root: 'dist',
-    livereload: true
+    livereload: true,
+    host: '0.0.0.0'
   })
 }
 

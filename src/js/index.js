@@ -198,6 +198,6 @@ const darkInit = () => {
   let dark = LLCTSettings.get('useDarkMode')
 
   if (dark) {
-    document.querySelector('body').classList.add('dark')
+    document.querySelector('html').classList.add('dark')
   }
 }
