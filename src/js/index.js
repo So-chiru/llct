@@ -201,3 +201,14 @@ const darkInit = () => {
     document.querySelector('html').classList.add('dark')
   }
 }
+
+const colorBlindInit = () => {
+  let tritanomaly = LLCTSettings.get('useTritanomaly')
+  let monochromacy = LLCTSettings.get('useMonochromacy')
+
+  if (tritanomaly) {
+    document.querySelector('html').classList.add('tritanomaly')
+  } else if (monochromacy) {
+    document.querySelector('html').classList.add('monochromacy')
+  }
+}

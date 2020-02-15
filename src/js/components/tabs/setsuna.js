@@ -20,8 +20,8 @@ Vue.component('llct-setsuna', {
           <div class="setsuna-option" v-for="(item, index) in categoryList">
             <p>{{item.title}}</p>
             <div class="control">
-              <input type="checkbox" v-if="item.type == 'checkbox'" :data-id="item.id" v-model="item.value" :disabled="item.disabled" :checked="item.value" v-on:change="update"></input>
-              <input type="text" v-if="item.type == 'text'" :data-id="item.id" :disabled="item.disabled" :value="item.value" v-on:change="update"></input>
+              <input type="checkbox" v-if="item.type == 'checkbox'" :data-id="item.id" v-model="item.value" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :checked="item.value" v-on:change="update"></input>
+              <input type="text" v-if="item.type == 'text'" :data-id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :value="item.value" v-on:change="update"></input>
             </div>
           </div>
         </div>

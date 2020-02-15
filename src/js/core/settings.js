@@ -86,6 +86,40 @@ const llctSettingDefault = [
     category: 2,
     type: 'checkbox',
     default: false
+  },
+  {
+    title: '청색약/맹 모드',
+    id: 'useTritanomaly',
+    disableAt: 'useMonochromacy',
+    category: 2,
+    type: 'checkbox',
+    default: false,
+    func: v => {
+      if (!document || !document.querySelector) return
+
+      if (typeof v !== 'undefined') {
+        document
+          .querySelector('html')
+          .classList[v ? 'add' : 'remove']('tritanomaly')
+      }
+    }
+  },
+  {
+    title: '완전 색맹 모드',
+    id: 'useMonochromacy',
+    category: 2,
+    type: 'checkbox',
+    disableAt: 'useTritanomaly',
+    default: false,
+    func: v => {
+      if (!document || !document.querySelector) return
+
+      if (typeof v !== 'undefined') {
+        document
+          .querySelector('html')
+          .classList[v ? 'add' : 'remove']('monochromacy')
+      }
+    }
   }
 ]
 

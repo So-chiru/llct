@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (typeof darkInit !== 'undefined') darkInit()
+  if (typeof colorBlindInit !== 'undefined') colorBlindInit()
   if (typeof registerWorker !== 'undefined') registerWorker()
 })
 
