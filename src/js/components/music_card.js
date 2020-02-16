@@ -1,14 +1,14 @@
 Vue.component('llct-music-card', {
-  template: `<div class="llct-music-card" v-bind:key="title" :data-index="index">
+  template: `<div class="llct-music-card" v-bind:key="title" :data-index="index" :class="{skeleton: skeleton}">
     <div class="info">
-      <llct-image :src="cover_url" :placeholder="placeholder"></llct-image>
+      <llct-image :src="cover_url" :placeholder="placeholder" :skeleton="skeleton"></llct-image>
       <div class="text">
-        <h3 v-if="!useAlt" :title="title">{{title}}</h3>
+        <h3 v-if="!useAlt" :title="title" :class="{skeleton: skeleton}">{{title}}</h3>
         <h3 v-else :title="alt">{{alt}}</h3>
-        <p :title="artist">{{artist}}</p>
+        <p :title="artist" :class="{skeleton: skeleton}">{{artist}}</p>
       </div class="text">
     </div>
-    <div class="control">
+    <div class="control" v-if="!skeleton">
       <div class="button sub" v-on:click="addPlaylist(id)" v-if="!disablePlaylist">
         <i class="material-icons">playlist_add</i>
       </diV>
@@ -30,6 +30,7 @@ Vue.component('llct-music-card', {
     'disablePlaylist',
     'removeButton',
     'playlist',
+    'skeleton',
     'useAlt',
     'alt'
   ],

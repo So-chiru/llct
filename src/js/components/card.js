@@ -1,20 +1,31 @@
 Vue.component('llct-card', {
   template: `
-    <div class="llct-card" data-clickable="true" v-on:click="interact(id, ext_url, title, playlist)">
+    <div class="llct-card" :data-clickable="!static" v-on:click="interact(id, ext_url, title, playlist)">
       <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
         <div class="llct-card-content" :data-index="index"> 
           <p v-if="ext_url"><i class="material-icons">exit_to_app</i> <span>{{urlForm(ext_url)}}</span></p>
-          <h3>{{subtitle}}</h3>
-          <h1>{{title}}</h1>
+          <h3 :class="{skeleton: skeleton}">{{subtitle}}</h3>
+          <h1 :class="{skeleton: skeleton}">{{title}}</h1>
         </div>
       </transition>
-      <div class="llct-card-bg-layer"></div>
+      <div class="llct-card-bg-layer" :class="{skeleton: skeleton}"></div>
       <div class="llct-card-bg">
         <llct-image v-bind:src="bg_url"></llct-image>
       </div>
     </div>
   `,
-  props: ['index', 'title', 'subtitle', 'bg_url', 'id', 'ext_url', 'oclick', 'playlist'],
+  props: [
+    'index',
+    'title',
+    'subtitle',
+    'bg_url',
+    'id',
+    'static',
+    'ext_url',
+    'oclick',
+    'playlist',
+    'skeleton'
+  ],
   methods: {
     beforeEnter (el) {
       el.style.transitionDelay = 45 * parseInt(el.dataset.index, 10) + 'ms'

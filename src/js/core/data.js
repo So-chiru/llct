@@ -10,10 +10,6 @@ const LLCTData = class {
     this.defaulPlaylistStore = {}
     this.recommends = {}
     this.events = {}
-
-    this.songs()
-    this.recommended()
-    this.defaultPlaylist()
   }
 
   event (name, data) {
@@ -193,4 +189,10 @@ const LLCTData = class {
       }
     }
   })
+    
+    window.addEventListener('load', () => {
+      dataInstance.songs()
+      dataInstance.recommended()
+      dataInstance.defaultPlaylist()
+    })
 })()

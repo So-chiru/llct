@@ -15,9 +15,10 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
   if (typeof init !== 'undefined') init()
 
-  let load = document.querySelector('llct-wait')
-
-  if (load) {
-    load.classList.add('done')
+  window.dataLayer = window.dataLayer || []
+  function gtag () {
+    dataLayer.push(arguments)
   }
+  gtag('js', new Date())
+  gtag('config', 'UA-111995531-2')
 })

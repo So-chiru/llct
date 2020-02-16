@@ -10,3 +10,11 @@ img[lazy=loading] {
 img[lazy=loaded] {
   opacity: 1;
 }
+
+.llct-image.skeleton {
+  background: #dadada;
+}
+
+.dark .llct-image.skeleton {
+  background: #242424;
+}

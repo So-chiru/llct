@@ -11,8 +11,11 @@ Vue.component('llct-chika', {
         <llct-image :shouldShow="true" src="/assets/niji.png"></llct-image>
       </div>
     </div>
-    <div class="chika-music-cards">
+    <div class="chika-music-cards" v-if="this.$llctDatas.lists[this.currentGroup]">
       <llct-music-card placeholder="round" v-for="(data, index) in (this.$llctDatas.lists[this.currentGroup] || {collection: []}).collection" v-bind:key="index + '.' + useTranslated()" :index="index" :title="data.title" :useAlt="useTranslated()" :alt="data.translated || data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></llct-music-card>
+    </div>
+    <div class="chika-music-cards" v-else>
+      <llct-music-card v-for="(n, index) in 18" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true"></llct-music-card>
     </div>
   </div>
   `,
@@ -24,7 +27,7 @@ Vue.component('llct-chika', {
     }
   },
   methods: {
-    useTranslated() {
+    useTranslated () {
       return LLCTSettings.get('useTranslatedTitle')
     },
 
