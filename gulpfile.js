@@ -23,7 +23,7 @@ const html = () =>
         }
       })
     )
-    .pipe(dest('dist/'))
+    .pipe(dest('public/'))
     .pipe(connect.reload())
 const css = () =>
   src('src/styles/**/*.scss')
@@ -34,14 +34,14 @@ const css = () =>
       })
     )
     .pipe(cleanCSS())
-    .pipe(dest('dist/'))
+    .pipe(dest('public/'))
     .pipe(connect.reload())
 const images = () =>
   src('src/data/images/**/*')
     .pipe(imagemin())
-    .pipe(dest('dist/assets'))
-const sounds = () => src('src/data/sounds/**/*').pipe(dest('dist/assets'))
-const root = () => src('src/root/**/*').pipe(dest('dist/'))
+    .pipe(dest('public/assets'))
+const sounds = () => src('src/data/sounds/**/*').pipe(dest('public/assets'))
+const root = () => src('src/root/**/*').pipe(dest('public/'))
 const js = () =>
   src('src/js/**/*.js')
     .pipe(concat('mikan.min.js'))
@@ -50,7 +50,7 @@ const js = () =>
         presets: ['@babel/env']
       })
     )
-    .pipe(dest('dist/'))
+    .pipe(dest('public/'))
     .pipe(connect.reload())
 const jsBuild = () =>
   src('src/js/**/*.js')
@@ -61,7 +61,7 @@ const jsBuild = () =>
       })
     )
     .pipe(uglify())
-    .pipe(dest('dist/'))
+    .pipe(dest('public/'))
 
 const watchdog = () => {
   watch(['src/js/**/*.js'], js)
@@ -74,7 +74,7 @@ const watchdog = () => {
 
 const server = () => {
   connect.server({
-    root: 'dist',
+    root: 'public',
     livereload: true,
     host: '0.0.0.0'
   })

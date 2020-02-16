@@ -22,6 +22,6 @@ jobs:
       - name: Building project
         run: yarn build
       - name: Deploy to LLCTSites
-        run: now -t $ZEIT_TOKEN dist -c --prod
+        run: now -t $ZEIT_TOKEN public -c --prod
         env:
           ZEIT_TOKEN: ${{ secrets.zeit_token }}
