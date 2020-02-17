@@ -1,5 +1,5 @@
-const CACHE = 'llct-cache-v20200217-0240'
-const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200217-0240'
+const CACHE = 'llct-cache-v20200217-0544'
+const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200217-0544'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
   '/',
@@ -17,8 +17,7 @@ const CACHE_URL = [
   'https://fonts.googleapis.com/css?family=Material+Icons|Jua|Noto+Sans+JP|Noto+Sans+KR&display=swap',
   '/mikan.min.css',
   '/mikan.min.js',
-  '/manifest.json',
-  'https://lovelivec.kr'
+  '/manifest.json'
 ]
 
 const tempData = url => {
