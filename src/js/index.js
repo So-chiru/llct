@@ -26,9 +26,23 @@ Vue.use(VueLazyload, {
   }
   img.src =
     'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA'
-  // lossless: 'UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==',
-  // alpha: 'UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==',
 })()
+
+const preInit = () => {
+  window.addEventListener('songReceive', _data => {
+    let qs = queryString('id')
+    if (!qs) return false
+
+    let v = new Vue()
+
+    if (!v.$llctEvents.playEventInit) {
+      v.$llctEvents.playQueue = qs
+      return
+    }
+
+    v.$llctEvents.$emit('play', qs, true, false, false)
+  })
+}
 
 const init = () => {
   var audio = new LLCTAudio(false)
@@ -42,6 +56,17 @@ const init = () => {
       10000
     )
   })
+
+  if (!navigator.onLine) {
+    setTimeout(() => {
+      window.showToast(
+        '오프라인 상태입니다. 저장된 곡만 재생할 수 있습니다.',
+        'warning',
+        false,
+        2000
+      )
+    }, 0)
+  }
 
   var app = new Vue({
     el: 'llct-app',
@@ -139,29 +164,33 @@ const init = () => {
             audio.load(this.$llctDatas.base + '/audio/' + id)
           }
 
-          if (gtag) {
-            gtag('event', 'play song', {
-              event_category: 'audio',
-              event_label: this.$llctDatas.meta.title
-            })
-          }
-
           if (!noTab) {
             this.changeTab(3)
           } else {
             this.$llctEvents.$emit('callContentChange')
           }
+
+          if (window.gtag) {
+            gtag('event', 'play song', {
+              event_category: 'audio',
+              event_label: this.$llctDatas.meta.title
+            })
+          }
         }
       )
 
-      this.$nextTick(() => {
-        let idQs = queryString('id')
-        if (idQs) {
-          setTimeout(() => {
-            this.$llctEvents.$emit('play', idQs, true, false, false)
-          }, 0)
-        }
-      })
+      this.$llctEvents.playEventInit = true
+
+      if (this.$llctEvents.playQueue) {
+        this.$llctEvents.$emit(
+          'play',
+          this.$llctEvents.playQueue,
+          true,
+          false,
+          false
+        )
+        this.$llctEvents.playQueue = null
+      }
 
       window.addEventListener('popstate', ev => {
         if (!ev.state) {

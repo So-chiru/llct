@@ -6,25 +6,26 @@ const babel = require('gulp-babel')
 const cleanCSS = require('gulp-clean-css')
 const sass = require('gulp-sass')
 const connect = require('gulp-connect')
+const gif = require('gulp-if')
 const uglify = require('gulp-uglify')
 const imagemin = require('gulp-imagemin')
 const argv = require('yargs').argv
 sass.compiler = require('node-sass')
+
+let dev =
+  !argv.production && !argv.prod && process.env.NODE_ENV !== 'production'
 
 const html = () =>
   src('src/views/*.pug')
     .pipe(
       pug({
         locals: {
-          dev:
-            !argv.production &&
-            !argv.prod &&
-            process.env.NODE_ENV !== 'production'
+          dev: dev
         }
       })
     )
     .pipe(dest('public/'))
-    .pipe(connect.reload())
+    .pipe(gif(dev, connect.reload()))
 const css = () =>
   src('src/styles/**/*.scss')
     .pipe(concat('mikan.min.css'))
@@ -35,7 +36,7 @@ const css = () =>
     )
     .pipe(cleanCSS())
     .pipe(dest('public/'))
-    .pipe(connect.reload())
+    .pipe(gif(dev, connect.reload()))
 const images = () =>
   src('src/data/images/**/*')
     .pipe(imagemin())
@@ -51,7 +52,7 @@ const js = () =>
       })
     )
     .pipe(dest('public/'))
-    .pipe(connect.reload())
+    .pipe(gif(dev, connect.reload()))
 const jsBuild = () =>
   src('src/js/**/*.js')
     .pipe(concat('mikan.min.js'))
@@ -75,7 +76,7 @@ const watchdog = () => {
 const server = () => {
   connect.server({
     root: 'public',
-    livereload: true,
+    livereload: dev,
     host: '0.0.0.0'
   })
 }

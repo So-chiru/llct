@@ -1,34 +1,31 @@
 html(lang="kr")
   head
+    script window.isDev = #{dev}
     meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title LLCT - 러브라이브 콜표 사이트
-    meta(name="description" content="러브라이브! 선샤인!! 팬미팅, 직관, 뷰잉 콜에 도움이 되는 콜표 모음 사이트입니다.")
-    meta(name="tags" content="러브라이브,콜표,선샤인,럽샤인,아쿠아,뮤즈,니지가사키,페스,μ's,Aqours,虹ヶ咲,러브라이브 콜표, 러브라이브 선샤인 콜표")
+    meta(name="description" content="러브라이브! 시리즈 라이브 콜에 도움이 되는 콜표 모음 사이트입니다.")
+    meta(name="tags" content="러브라이브,콜표,선샤인,아쿠아,뮤즈,니지가사키,μ's,Aqours,러브라이브 콜표, 러브라이브 선샤인 콜표")
     meta(property="og:type" content="website")
+    meta(property="og:url" content="https://lovelivec.kr")
+    meta(property="og:image" content="/assets/logo/landing.png")
     meta(property="og:title" content="LLCT - LoveLive Call Table")
     meta(property="og:description" content="러브라이브! 시리즈 콜에 도움이 되는 러브라이브 콜표, 응원법 모음 사이트입니다.")
-    meta(property="og:image" content="https://lovelivec.kr/assets/logo/landing.png")
-    meta(name="apple-mobile-web-app-capable" content="yes")
     meta(name="apple-mobile-web-app-title" content="LLCT")
-    meta(name="application-name" content="LLCT")
-    meta(name="theme-color" content="#cceffe")
+    meta(name="apple-mobile-web-app-capable" content="yes")
     meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
-    meta(property="og:url" content="https://lovelivec.kr")
+    meta(name="theme-color" content="#cceffe")
     link(rel="manifest" href="/manifest.json")
-    script.
-      window.isDev = #{dev}
-    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue." + (dev ? '' : 'min.') + "js")
+    link(rel="apple-touch-icon" href="/assets/logo/logo_v2.png")
+    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue."+(dev?'':'min.')+"js")
     script(src="https://cdn.jsdelivr.net/npm/vue-lazyload@1.3.3/vue-lazyload.min.js")
     script(async src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js")
-    script(async src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js")
     script(async src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js")
+    script(async src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js")
     script(src="mikan.min.js")
     link(rel="shortcut icon" href="/assets/logo/favicon.ico")
-    link(rel="apple-touch-icon" href="/assets/logo/logo_v2.png")
     link(rel="stylesheet" href="mikan.min.css")
-    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
-    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+JP|Noto+Sans+KR&display=swap" media="none" onload="if(media!='all')media='all'")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Jua|Noto+Sans+JP|Noto+Sans+KR&display=swap")
   body
     .app-wrap
       llct-app-wrap
@@ -37,4 +34,3 @@ html(lang="kr")
       llct-menu
     llct-modal
     llct-toast
-    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-111995531-2")

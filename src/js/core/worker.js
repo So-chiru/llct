@@ -5,5 +5,14 @@ const registerWorker = () => {
     return false
   }
 
-  console.log(useOffline)
+  navigator.serviceWorker.register('/worker.js').then(reg => {
+    
+  }, (err) => {
+    window.showToast(
+      '서비스 워커 등록 실패',
+      'warning',
+      true,
+      2000
+    )
+  });
 }

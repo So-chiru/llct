@@ -125,7 +125,7 @@ const LLCTData = class {
   }
 }
 
-  ; (() => {
+;(() => {
   var dataInstance = new LLCTData(
     window.isDev ? 'http://127.0.0.1:10210' : 'https://api.lovelivec.kr'
   )
@@ -138,6 +138,13 @@ const LLCTData = class {
         window.dispatchEvent(
           new CustomEvent('playlistReceive', {
             detail: { data, getSong: this.getSong }
+          })
+        )
+      },
+      lists(data) {
+        window.dispatchEvent(
+          new CustomEvent('songReceive', {
+            detail: { data }
           })
         )
       }
@@ -186,13 +193,15 @@ const LLCTData = class {
 
       playlist () {
         return dataInstance.defaultPlaylist()
-      }
+      },
+
+      on: dataInstance.on
     }
   })
-    
-    window.addEventListener('load', () => {
-      dataInstance.songs()
-      dataInstance.recommended()
-      dataInstance.defaultPlaylist()
-    })
+
+  window.addEventListener('load', () => {
+    dataInstance.songs()
+    dataInstance.recommended()
+    dataInstance.defaultPlaylist()
+  })
 })()
