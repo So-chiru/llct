@@ -1,4 +1,4 @@
-const CACHE = 'llct-cache-v20200217-0544'
+const CACHE = 'llct-cache-v20200218-0919'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200217-0544'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
@@ -10,11 +10,13 @@ const CACHE_URL = [
   '/assets/tick.mp3',
   '/assets/logo/logo-192.png',
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
+  'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js',
   'https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js',
   'https://cdn.jsdelivr.net/npm/vue-lazyload@1.3.3/vue-lazyload.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js',
   'https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js',
-  'https://fonts.googleapis.com/css?family=Material+Icons|Jua|Noto+Sans+JP|Noto+Sans+KR&display=swap',
+  'https://fonts.googleapis.com/css?family=Material+Icons|Noto+Sans+KR:100,300,400,500,700&display=swap',
+  'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2',
   '/mikan.min.css',
   '/mikan.min.js',
   '/manifest.json'

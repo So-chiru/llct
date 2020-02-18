@@ -125,7 +125,7 @@ const LLCTData = class {
   }
 }
 
-;(() => {
+  ; (() => {
   var dataInstance = new LLCTData(
     window.isDev ? 'http://127.0.0.1:10210' : 'https://api.lovelivec.kr'
   )
