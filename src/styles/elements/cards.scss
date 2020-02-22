@@ -115,10 +115,25 @@
   display: flex;
   font-size: 14px;
   font-weight: bold;
-  color: rgba(147, 199, 255, 0.8);
   margin: 0;
   margin-bottom: auto;
   overflow: hidden;
+}
+
+.llct-card-content p.ext_url {
+  color: rgba(147, 199, 255, 0.8);
+}
+
+.llct-card-content p.spoiler {
+  color: rgba(253, 250, 31, 0.8);
+  margin-bottom: 5px;
+
+  .material-icons {
+    font-size: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 3px;
+  }
 }
 
 .llct-card-content p span {

@@ -21,10 +21,13 @@ const registerWorker = () => {
 
     if (ev.data.cmd == 0x01) {
       window.showToast(
-        '페이지 업데이트가 있습니다. 페이지를 새로 고쳐주세요.',
+        '페이지 업데이트가 있습니다. 팝업을 눌러 새로 고치세요.',
         'cloud_done',
         false,
-        10000
+        10000,
+        () => {
+          location.reload()
+        }
       )
     }
   })

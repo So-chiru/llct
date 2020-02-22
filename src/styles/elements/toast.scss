@@ -8,6 +8,7 @@
   display: -webkit-flex;
   display: flex;
   user-select: none;
+  transition: 0.3s background cubic-bezier(0.19, 1, 0.22, 1);
 
   max-width: 50vw;
   height: 62px;
@@ -28,6 +29,14 @@
   border: 1px solid transparent;
   background-color: #fff;
   color: #000;
+
+  &.hover:hover {
+    background-color: rgb(249, 249, 249);
+  }
+
+  &.hover:active {
+    background-color: rgb(233, 233, 233);
+  }
 
   .contents,
   .text {
@@ -95,6 +104,14 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   background-color: #333;
   color: rgb(219, 219, 219);
+
+  &.hover:hover {
+    background-color: #393939;
+  }
+
+  &.hover:active {
+    background-color: #424242;
+  }
 }
 
 .dark .llct-toast.error {
