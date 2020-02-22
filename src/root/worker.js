@@ -1,4 +1,4 @@
-const CACHE = 'llct-cache-v20200220-0902'
+const CACHE = 'llct-cache-v20200220-0929'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200217-0544'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
@@ -140,9 +140,18 @@ self.addEventListener('activate', ev => {
     })
   )
 
+  self.clients.matchAll().then(clients => {
+    clients.forEach(cli =>
+      cli.postMessage({
+        cmd: 0x01,
+        msg: null
+      })
+    )
+  })
+
   return self.clients.claim()
 })
 
 self.addEventListener('message', msg => {
-  // console.log(msg)
+  //console.log(msg)
 })
