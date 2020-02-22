@@ -67,6 +67,7 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
         currentLine.dataset.active = '0'
       }
     } else if (
+      lineStart !== -100 &&
       lineEnd !== 100 &&
       lineEnd > -1 &&
       (time > lineStart || time < lineEnd)
