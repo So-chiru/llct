@@ -40,8 +40,12 @@
     transform: scale(1.08);
   }
 
-  &:hover > .llct-card-bg-layer {
+  &:hover .llct-card-bg-layer {
     backdrop-filter: blur(0px);
+  }
+
+  &:hover .llct-card-bg-layer.spoiler {
+    backdrop-filter: blur(25px);
   }
 }
 
@@ -79,7 +83,6 @@
   margin-bottom: -2.5px;
 }
 
-
 .llct-card-content h3.skeleton {
   background: rgb(233, 233, 233);
   border-radius: 10px;
@@ -96,7 +99,6 @@
   min-height: 24px;
   animation: skeleton 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
 }
-
 
 .dark .llct-card-content h3.skeleton {
   background: hsl(0, 0%, 18%);
@@ -136,6 +138,10 @@
   border-radius: 10px;
 }
 
+.llct-card-bg.spoiler img {
+  filter: blur(10px);
+}
+
 .llct-card-bg-layer {
   z-index: 2;
   background: linear-gradient(
@@ -144,6 +150,14 @@
   );
   opacity: 0.9;
   backdrop-filter: blur(2px);
+
+  &.spoiler {
+    backdrop-filter: blur(30px);
+  }
+}
+
+.dark .llct-card-bg-layer.spoiler {
+  backdrop-filter: blur(30px);
 }
 
 .llct-card-bg-layer.skeleton {
@@ -154,7 +168,8 @@
 }
 
 @keyframes skeleton {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.9;
   }
 
@@ -164,7 +179,8 @@
 }
 
 @keyframes dark-skeleton {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
 

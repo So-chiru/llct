@@ -8,8 +8,8 @@ Vue.component('llct-card', {
           <h1 :class="{skeleton: skeleton}">{{title}}</h1>
         </div>
       </transition>
-      <div class="llct-card-bg-layer" :class="{skeleton: skeleton}"></div>
-      <div class="llct-card-bg">
+      <div class="llct-card-bg-layer" :class="{skeleton: skeleton, spoiler: spoiler}"></div>
+      <div class="llct-card-bg" :class="{spoiler: spoiler}">
         <llct-image v-bind:src="bg_url"></llct-image>
       </div>
     </div>
@@ -24,6 +24,7 @@ Vue.component('llct-card', {
     'ext_url',
     'oclick',
     'playlist',
+    'spoiler',
     'skeleton'
   ],
   methods: {
