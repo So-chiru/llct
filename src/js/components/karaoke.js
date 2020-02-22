@@ -137,10 +137,11 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
             ] = true
 
             currentWord.dataset.tick = '1'
+              
             ;(c => {
               setTimeout(() => {
                 c.dataset.tick = '0'
-              }, delay * 0.9)
+              }, delay * 2)
             })(currentWord)
 
             karaokeTick.time = 0
@@ -161,7 +162,8 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
 
     if (
       !currentWord.style.transitionDuration &&
-      currentWord.dataset.passed == '0'
+      currentWord.dataset.passed == '0' &&
+      !currentWord.dataset.repeat
     ) {
       if (currentWord.dataset.pronounce) {
         currentWord.style.transitionDuration =
