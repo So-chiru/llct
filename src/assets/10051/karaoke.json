@@ -7,100 +7,147 @@
   },
   "timeline": [
     {
-      "start_time": 2361,
-      "end_time": 2973,
+      "start_time": -64,
+      "end_time": 2525,
+      "collection": [
+        {
+          "text": "< 전주 부분 : ",
+          "start_time": 36,
+          "end_time": 2425,
+          "pronunciation_time": 0,
+          "type": 1
+        },
+        {
+          "text": "하이 ",
+          "start_time": 188,
+          "end_time": 1631,
+          "pronunciation_time": 0,
+          "type": "2",
+          "repeat_delay": "60"
+        },
+        {
+          "text": "x (전주 끝까지) ",
+          "start_time": 188,
+          "end_time": 1631,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": ">",
+          "start_time": 36,
+          "end_time": 2425,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 2365,
+      "end_time": 2972,
       "collection": [
         {
           "text": "아",
-          "start_time": 2461,
-          "end_time": 2873,
+          "start_time": 2465,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
           "text_color": "#ff46ff",
-          "lyrics": "새로운 여행은"
+          "lyrics": "새로운 여행은",
+          "type": 1
         },
         {
           "text": "타",
-          "start_time": 2489,
-          "end_time": 2873,
+          "start_time": 2495,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "라",
-          "start_time": 2517,
-          "end_time": 2873,
+          "start_time": 2525,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "시",
-          "start_time": 2548,
-          "end_time": 2873,
+          "start_time": 2553,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
-          "text": "이 ",
-          "start_time": 2563,
-          "end_time": 2873,
+          "text": "이",
+          "start_time": 2568,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "타",
-          "start_time": 2639,
-          "end_time": 2873,
+          "start_time": 2643,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "비",
-          "start_time": 2656,
-          "end_time": 2873,
+          "start_time": 2660,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "다",
-          "start_time": 2671,
-          "end_time": 2873,
+          "start_time": 2676,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "치",
-          "start_time": 2728,
-          "end_time": 2873,
+          "start_time": 2732,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         },
         {
           "text": "와",
-          "start_time": 2785,
-          "end_time": 2873,
+          "start_time": 2796,
+          "end_time": 2872,
           "pronunciation_time": 0,
-          "type": 1,
-          "text_color": "#ff46ff"
+          "text_color": "#ff46ff",
+          "type": 1
         }
-      ],
-      "lyrics": "새로운 여행은"
+      ]
     },
     {
-      "start_time": 2781,
+      "start_time": 2787,
       "end_time": 3502,
       "collection": [
         {
           "text": "이",
-          "start_time": 2881,
+          "start_time": 2887,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -109,7 +156,7 @@
         },
         {
           "text": "츠",
-          "start_time": 2897,
+          "start_time": 2905,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -117,7 +164,7 @@
         },
         {
           "text": "닷",
-          "start_time": 2913,
+          "start_time": 2919,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -125,7 +172,7 @@
         },
         {
           "text": "테 ",
-          "start_time": 2957,
+          "start_time": 2961,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -133,7 +180,7 @@
         },
         {
           "text": "스",
-          "start_time": 3100,
+          "start_time": 3087,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -141,7 +188,7 @@
         },
         {
           "text": "테",
-          "start_time": 3123,
+          "start_time": 3121,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -149,7 +196,7 @@
         },
         {
           "text": "키",
-          "start_time": 3151,
+          "start_time": 3148,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -157,7 +204,7 @@
         },
         {
           "text": "다",
-          "start_time": 3237,
+          "start_time": 3240,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -165,7 +212,7 @@
         },
         {
           "text": "네",
-          "start_time": 3253,
+          "start_time": 3258,
           "end_time": 3402,
           "pronunciation_time": 0,
           "type": 1,
@@ -3208,6 +3255,54 @@
         }
       ],
       "lyrics": "사라지지않아..."
+    },
+    {
+      "start_time": -100,
+      "end_time": 100,
+      "collection": [
+        {
+          "text": "",
+          "start_time": 0,
+          "end_time": 0,
+          "pronunciation_time": 0,
+          "type": 1
+        }
+      ]
+    },
+    {
+      "start_time": 19839,
+      "end_time": 21970,
+      "collection": [
+        {
+          "text": "< 간주 부분 : ",
+          "start_time": 19939,
+          "end_time": 21870,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": "하이 ",
+          "start_time": 19986,
+          "end_time": 21866,
+          "pronunciation_time": 0,
+          "type": "2",
+          "repeat_delay": "60"
+        },
+        {
+          "text": "x (간주 끝까지) ",
+          "start_time": 19986,
+          "end_time": 21866,
+          "pronunciation_time": 0,
+          "type": "3"
+        },
+        {
+          "text": ">",
+          "start_time": 19939,
+          "end_time": 21870,
+          "pronunciation_time": 0,
+          "type": "3"
+        }
+      ]
     },
     {
       "start_time": -100,
