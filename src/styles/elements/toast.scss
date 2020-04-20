@@ -95,9 +95,19 @@
   }
 }
 
-.llct-toast.error {
+.llct-toast[data-type="error"] {
   background-color: #FF6464;
   color: #fff;
+}
+
+.llct-toast[data-type="warning"] {
+  background-color: #f7af15;
+  color: #fff;
+}
+
+.llct-toast[data-type="cake"] {
+  background: linear-gradient(40deg, rgb(162, 248, 201), rgb(166, 212, 243));
+  color: rgb(35, 100, 73);
 }
 
 .dark .llct-toast {
@@ -114,11 +124,20 @@
   }
 }
 
-.dark .llct-toast.error {
+.dark .llct-toast[data-type="error"] {
   background-color: #d41717;
   color: #fff;
 }
 
+.dark .llct-toast[data-type="warning"] {
+  background-color: #eeb02b;
+  color: #000;
+}
+
+.llct-toast[data-type="cake"] {
+  background: linear-gradient(40deg, rgb(162, 248, 201), rgb(166, 212, 243));
+  color: rgb(35, 100, 73);
+}
 
 .llct-toast::after {
   content: "";

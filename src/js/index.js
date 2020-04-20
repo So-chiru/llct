@@ -57,6 +57,18 @@ const init = () => {
     )
   })
 
+  window.addEventListener('recommendReceive', ev => {
+    if (ev.detail.Notices && ev.detail.Notices.Msg.length) {
+      console.log(ev.detail.Notices)
+      window.showToast(
+        ev.detail.Notices.Msg,
+        ev.detail.Notices.Icon,
+        ev.detail.Notices.Type,
+        ev.detail.Notices.Time
+      )
+    }
+  })
+
   if (!navigator.onLine) {
     setTimeout(() => {
       window.showToast(

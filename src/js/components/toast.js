@@ -1,7 +1,7 @@
 Vue.component('llct-toast', {
   template: `
   <transition name="llct-toast" appear>
-    <div class="llct-toast" :class="{'error':this.$root.error, hover: this.$root.clickCb}" :key="this.$root.id" v-show="this.$root.open">
+    <div class="llct-toast" :class="{hover: this.$root.clickCb}" :data-type="this.$root.type" :key="this.$root.id" v-show="this.$root.open">
       <div class="contents" v-on:click="click">
         <div class="text">
           <i class="material-icons">{{this.$root.icon}}</i>
@@ -34,16 +34,16 @@ window.addEventListener('load', () => {
         content: '',
         clickCb: null,
         open: false,
-        error: null,
+        type: null,
         autoClose: null
       }
     },
     methods: {
-      update (content, icon, error, autoClose, click) {
+      update (content, icon, type, autoClose, click) {
         this.content = content
         this.id = Math.random()
         this.icon = icon || 'info'
-        this.error = error
+        this.type = typeof type === 'boolean' ? (type ? 'error' : 'info') : type
         this.clickCb = click
 
         if ((typeof autoClose !== 'boolean' && !autoClose) || autoClose) {
@@ -64,12 +64,12 @@ window.addEventListener('load', () => {
     }
   })
 
-  window.showToast = (content, icon, error, autoClose, click) => {
+  window.showToast = (content, icon, type, autoClose, click) => {
     if (toast.autoClose) {
       clearTimeout(toast.autoClose)
     }
 
-    toast.update(content, icon, error, autoClose, click)
+    toast.update(content, icon, type, autoClose, click)
     toast.show()
   }
 
