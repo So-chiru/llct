@@ -12,6 +12,10 @@ MIT License, [여기에서 사용된 라이브러리, 전문을 읽을 수 있�
 
 [Now](https://now.sh)에서 호스팅 중인 [사이트가 있습니다!](https://lovelivec.kr)
 
+## 디자인
+
+[이 Figma](https://www.figma.com/file/y2XT4hDU090ISuXt9ZtcGB/LLCT-Love-Live-Call-Table?node-id=0%3A1) 링크에서 디자인 컨셉을 확인하실 수 있습니다.
+
 ## 주의 사항
 
 본 사이트의 콜은 언제나 정해진 기준이 아닌, 보편적으로 사용되는 콜을 정리한 사이트입니다. 본 사이트의 콜은 명확하지 않을 수 있으며, 이를 해결하기 위해 러브라이브! 커뮤니티의 의견을 반영하여 언제든지 업데이트 될 수 있습니다.
