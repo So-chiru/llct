@@ -1,5 +1,5 @@
 Vue.component('llct-setsuna', {
-  template: `<div class="llct-tab" id="tab4">
+  template: `<div class="llct-tab" id="tab5">
     <div class="setsuna-info">
       <div class="header">
         <h1>LLCT</h1>

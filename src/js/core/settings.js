@@ -81,13 +81,6 @@ const llctSettingDefault = [
     default: true
   },
   {
-    title: '오프라인 저장 사용 (현재 개발 중)',
-    id: 'useOffline',
-    category: 2,
-    type: 'checkbox',
-    default: false
-  },
-  {
     title: '청색약/맹 모드',
     id: 'useTritanomaly',
     disableAt: 'useMonochromacy',

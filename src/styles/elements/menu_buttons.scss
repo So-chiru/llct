@@ -18,6 +18,7 @@
   transition: 0.4s color cubic-bezier(0, 0, 0.2, 1);
   margin-bottom: 10px;
   user-select: none;
+  outline: none;
 }
 
 .m-button:hover {
@@ -65,14 +66,31 @@
 }
 
 .m-button:active {
-  i {
-    color: #000;
-  }
-  
-  p {
+  i, p {
     color: #000;
   }
 }
+
+.m-button:focus {
+  i, p {
+    color: rgb(75, 75, 75);
+  }
+
+  p {
+    opacity: 1;
+  }
+}
+
+.dark .m-button:focus {
+  i, p {
+    color: rgb(230, 230, 230);
+  }
+
+  p {
+    opacity: 1;
+  }
+}
+
 
 .dark .m-button:active {
   i, p {
@@ -97,6 +115,10 @@
 
 .m-button:hover::after {
   opacity: 0.4;
+}
+
+.m-button:focus::after {
+  opacity: 0.7;
 }
 
 .m-button:active::after {

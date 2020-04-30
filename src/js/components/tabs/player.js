@@ -3,7 +3,7 @@ const timeStamp = num => {
 }
 
 Vue.component('llct-player', {
-  template: `<div class="llct-tab llct-tab-over" id="tab3">
+  template: `<div class="llct-tab llct-tab-over" id="tab4">
     <div class="llct-player">
       <div class="player-dash" v-show="title != ''">
         <div class="player-left">
@@ -29,12 +29,12 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-btn">
-            <i v-if="usePlayer" class="material-icons" v-show="!playing" v-on:click="play" alt="재생 버튼">play_arrow</i>
-            <i v-if="usePlayer" class="material-icons" v-show="playing" v-on:click="pause" alt="일시정지 버튼">pause</i>
-            <i v-if="usePlayer" class="material-icons" v-show="audio.playlist" v-on:click="next" alt="다음 곡 스킵 버튼">skip_next</i>
-            <i v-if="usePlayer" class="material-icons diff" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat">sync</i>
-            <i v-if="usePlayer" class="material-icons diff" alt="설정 버튼" v-on:click="more">more_vert</i>
-            <i class="material-icons player-close" alt="닫기 버튼" v-on:click="close">close</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="5" v-show="!playing" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="6" v-show="playing" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="7" v-show="audio.playlist" v-on:click="next" v-on:keypress="ev => ev.keyCode == '13' && next()" alt="다음 곡 스킵 버튼">skip_next</i>
+            <i v-if="usePlayer" class="material-icons diff" tabindex="8" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat" v-on:keypress="ev => ev.keyCode == '13' && repeat()">sync</i>
+            <i v-if="usePlayer" class="material-icons diff" tabindex="9" alt="설정 버튼" v-on:click="more" v-on:keypress="ev => ev.keyCode == '13' && more()">more_vert</i>
+            <i class="material-icons player-close" tabindex="10" alt="닫기 버튼" v-on:click="close" v-on:keypress="ev => ev.keyCode == '13' && close()">close</i>
           </div>
         </div>
       </div>

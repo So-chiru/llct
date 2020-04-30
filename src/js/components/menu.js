@@ -1,38 +1,27 @@
 Vue.component('llct-menu', {
-  template: `<div class="llct-menu-in" :class="{hidden: currentTab == 3}">
-    <transition name="m-button" appear @before-enter="beforeEnter" @after-enter="afterEnter">
-      <div class="m-button" data-index="1" v-on:click="changeTab(0)" v-bind:class="{active: currentTab == 0}">
-        <i class="material-icons" title="메인">home</i>
-        <p>메인</p>
-      </div>
-    </transition>
-    <transition name="m-button" appear @before-enter="beforeEnter" @after-enter="afterEnter">
-      <div class="m-button" data-index="2" v-on:click="changeTab(1)" v-bind:class="{active: currentTab == 1}">
-        <i class="material-icons" title="음악">library_music</i>
-        <p>음악</p>
-      </div>
-    </transition>
-    <transition name="m-button" appear @before-enter="beforeEnter" @after-enter="afterEnter">
-      <div class="m-button" data-index="3" v-on:click="changeTab(2)" v-bind:class="{active: currentTab == 2}">
-        <i class="material-icons" title="재생목록">playlist_play</i>
-        <p>재생목록</p>
-      </div>
-    </transition>
-    <transition name="m-button" appear @before-enter="beforeEnter" @after-enter="afterEnter">
-      <div class="m-button" data-index="4" v-on:click="changeTab(3)" v-bind:class="{active: currentTab == 3}">
-        <i class="material-icons" title="지금 재생 중">equalizer</i>
-        <p>재생 중</p>
+  template: `<div class="llct-menu-in" :class="{hidden: currentTab == 5}">
+    <transition name="m-button" v-for="(item, i) in lists" appear @before-enter="beforeEnter" @after-enter="afterEnter">
+      <div class="m-button" :data-index="i + 1" :tabindex="40 + (i + 1)" v-on:click="changeTab(i)" v-on:keypress="(ev) => ev.keyCode == 13 && changeTab(i)" v-bind:class="{active: currentTab == i}">
+        <i class="material-icons" :title="item.title">{{item.icon}}</i>
+        <p>{{item.title}}</p>
       </div>
     </transition>
   </div>`,
   data: () => {
     return {
-      currentTab: 0
+      currentTab: 0,
+      lists: [
+        { title: '메인', icon: 'home' },
+        { title: '음악', icon: 'library_music' },
+        { title: '재생목록', icon: 'playlist_play' },
+        { title: '검색', icon: 'search' },
+        { title: '지금 재생 중', icon: 'equalizer' }
+      ]
     }
   },
   watch: {
     currentTab (v) {
-      this.$el.parentNode.classList[v == 3 ? 'add' : 'remove']('hidden')
+      this.$el.parentNode.classList[v == 4 ? 'add' : 'remove']('hidden')
     }
   },
   mounted () {

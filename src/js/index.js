@@ -59,7 +59,6 @@ const init = () => {
 
   window.addEventListener('recommendReceive', ev => {
     if (ev.detail.Notices && ev.detail.Notices.Msg.length) {
-      console.log(ev.detail.Notices)
       window.showToast(
         ev.detail.Notices.Msg,
         ev.detail.Notices.Icon,
@@ -93,6 +92,9 @@ const init = () => {
           },
           {
             title: '재생목록'
+          },
+          {
+            title: '검색'
           },
           {
             title: '현재 재생중',
@@ -156,7 +158,7 @@ const init = () => {
 
           let info = this.$llctDatas.getSong(id)
           if (!noTab && this.$llctDatas.meta == info) {
-            this.changeTab(3)
+            this.changeTab(4)
             return false
           }
 
@@ -177,7 +179,7 @@ const init = () => {
           }
 
           if (!noTab) {
-            this.changeTab(3)
+            this.changeTab(4)
           } else {
             this.$llctEvents.$emit('callContentChange')
           }
