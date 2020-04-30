@@ -5,7 +5,7 @@ Vue.component('llct-ayumu', {
         <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="card.BG" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
       </span>
       <span v-if="!this.$llctDatas.recommends.Cards">
-        <llct-card v-for="(n, index) in 3" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true"></llct-card>
+        <llct-card v-for="(n, index) in 3" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></llct-card>
       </span>
     </div>
     <div class="ayumu-mod-select">
@@ -27,7 +27,7 @@ Vue.component('llct-ayumu', {
         <llct-music-card placeholder="round" v-for="(card, index) in this.$llctDatas.recommends.Songs" v-bind:key="'card' + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></llct-music-card>
       </transition-group>
       <transition-group v-else name="llct-card">
-        <llct-music-card v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true"></llct-music-card>
+        <llct-music-card v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true" v-once></llct-music-card>
       </transition-group>  
     </div>
   </div>

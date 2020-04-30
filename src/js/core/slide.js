@@ -1,3 +1,15 @@
+const findCard = elem => {
+  if (elem === null) {
+    return false
+  }
+
+  if (elem.className && elem.className == 'llct-card') {
+    return elem
+  }
+
+  return findCard(elem.parentNode)
+}
+
 const LLCTSlide = class {
   constructor ($el, duration) {
     if (!$el) {
@@ -19,14 +31,28 @@ const LLCTSlide = class {
       return c * (-Math.pow(2, (-10 * t) / d) + 1) + b
     }
 
+    let started = false
+    let grab_elem = null
+
     this.hammer.on('pan', ev => {
       this.$el.scrollLeft = this.$el.scrollLeft + ev.velocityX * -10
+
+      if (!started) {
+        grab_elem = findCard(ev.target)
+
+        if (grab_elem) {
+          grab_elem.dataset.dragging = 'true'
+        }
+
+        started = true
+      }
 
       let a = ev.velocityX
       let b = ev.velocityX * -1
       let start = ev.timeStamp
 
       if (!ev.isFinal) return false
+      started = false
 
       let req = null
 

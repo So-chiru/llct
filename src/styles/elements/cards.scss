@@ -49,6 +49,10 @@
   }
 }
 
+.llct-card[data-dragging="true"] {
+  cursor: grabbing;
+}
+
 .llct-card-content {
   position: absolute;
   bottom: 15%;
