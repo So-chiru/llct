@@ -6,13 +6,14 @@ Vue.component('llct-searchbox', {
         <i class="material-icons search_icon">search</i>
       </div>
       <input type="text" :placeholder="placeholder" tabindex="10"></input>
-      <div class="enter_wrap" tabindex="11" v-on:keypress="ev => ev.keyCode == 13 && enter(this.$el.querySelector('input').value)" v-on:click="enter(this.$el.querySelector('input').value)">
+      <div class="enter_wrap" tabindex="11" v-on:keypress="ev => ev.keyCode == 13 && enter(this.$el.querySelector('input').value)" v-on:click="() => enter(this.$el.querySelector('input').value)">
         <i class="material-icons">keyboard_return</i>
       </div>
-      <div class="extra-text" v-show="extraText">
-        <i class="material-icons>warning</i>
-        <p>{{extraText || ''}}</p>
-      </div>
+      <transition name="llct-card">
+        <div class="extra-text" :key="'searchbox_' + extraText" v-show="extraText && extraText.length">
+          <p>{{extraText || ''}}</p>
+        </div>
+       </transition>
     </div>
   </transition>
   `,

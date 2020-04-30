@@ -1,6 +1,8 @@
+$search-height: 40px;
+
 .llct-searchbox {
   position: relative;
-  height: 40px;
+  height: $search-height;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -83,6 +85,21 @@
     position: relative;
     margin: auto;
   }
+
+  .extra-text {
+    position: absolute;
+    display: flex;
+    margin-top: $search-height + 10px;
+    background-color: rgb(255, 255, 255);
+    z-index: 100;
+    padding: 0px 20px;
+    border-radius: 10px;
+    box-shadow: $shadow-2dp;
+
+    i {
+      margin-right: 5px;
+    }
+  }
 }
 
 .dark .llct-searchbox {
@@ -98,5 +115,9 @@
 
   input {
     color: #f1f1f1;
+  }
+
+  .extra-text {
+    background-color: rgba(42, 42, 42, 1);
   }
 }

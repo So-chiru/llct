@@ -1,7 +1,7 @@
 Vue.component('llct-search', {
   template: `<div class="llct-tab" id="tab3">
     <div class="search-info">
-      <llct-searchbox placeholder="여기에 검색할 텍스트 입력" :extraText="waitEnter && waitEnter + '개의 검색 결과가 있지만, 성능을 위해 표시하지 않았습니다. 엔터를 눌러 확인할 수 있습니다.' || ''" :enter="goSearch" :type="(v) => goSearch(v, true)"></llct-searchbox>
+      <llct-searchbox placeholder="여기에 검색할 텍스트 입력" :extraText="waitEnter && waitEnter + '개의 검색 결과가 있지만, 렌더링 성능을 위해 표시하지 않았습니다. 엔터를 눌러 결과를 확인할 수 있습니다.' || ''" :enter="(v) => goSearch(v, false)" :type="(v) => goSearch(v, true)"></llct-searchbox>
       <div class="search-music-cards" v-if="this.searchedData && this.searchedData.length">
         <transition-group name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
           <llct-music-card placeholder="round" v-for="(card, index) in this.searchedData" v-bind:key="'card_search_' + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></llct-music-card>
@@ -51,16 +51,13 @@ Vue.component('llct-search', {
       this.keyword = v
 
       let s = this.$llctDatas.search(v)
-
-      if (skipLarge && s.length > 10) {
+      this.waitEnter = s.length > 15 ? s.length : 0
+      if (skipLarge && s.length > 15) {
         return
       }
 
+      this.waitEnter = 0
       this.searchedData = s
-    },
-
-    recommend (v) {
-      console.log(v)
     }
   }
 })
