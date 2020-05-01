@@ -19,6 +19,7 @@ class LLCTPlaylist {
     this.lists = []
     this.title = title || null
     this.readOnly = readOnly || false
+    this.repeat = Boolean(localStorage.getItem('LLCT.Audio.RepeatPlaylist'))
   }
 
   add (item) {
@@ -38,15 +39,25 @@ class LLCTPlaylist {
     this.lists.splice(index, 1)
   }
 
+  first () {
+    this.__pointer = 0
+    return this.lists[0]
+  }
+
+  last () {
+    this.__pointer = this.lists.length - 1
+    return this.lists[this.lists.length - 1]
+  }
+
   next () {
     if (this.__pointer != null) {
       this.__pointer =
         this.__pointer + 1 == this.lists.length ? 0 : this.__pointer + 1
       return this.lists[this.__pointer]
-    } else {
-      this.__pointer = 1
-      return this.lists[1]
     }
+
+    this.__pointer = 1
+    return this.lists[1]
   }
 
   prev () {
@@ -54,10 +65,9 @@ class LLCTPlaylist {
       this.__pointer =
         this.__pointer - 1 < 0 ? this.lists.length - 1 : this.__pointer - 1
       return this.lists[this.__pointer]
-    } else {
-      this.__pointer = this.lists.length - 1
-      return this.lists[this.lists.length - 1]
     }
+
+    return this.last()
   }
 
   isEnd () {

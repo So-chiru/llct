@@ -50,7 +50,9 @@ Vue.component('llct-player', {
         <input type="range" v-model="tickVolume" max="1" min="0" step="0.01" value="1"></input>
         <h3>재생 속도 <span class="value-indicator">{{playbackSpeed}}x</span></h3>
         <input type="range" v-model="playbackSpeed" max="2" min="0.2" step="0.05" value="1"></input>
-      </div>
+        <h3>플레이리스트 반복 재생 <span class="value-indicator">{{playlistRepeat && '켜짐' || '꺼짐'}}</span></h3>
+        <input type="checkbox" v-model="playlistRepeat" checked="false"></input>
+        </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
   </div>
@@ -74,6 +76,7 @@ Vue.component('llct-player', {
       audioVolume: localStorage.getItem('LLCT.Audio.audioVolume') || 0.75,
       tickVolume: localStorage.getItem('LLCT.Audio.tickVolume') || 1,
       playbackSpeed: localStorage.getItem('LLCT.Audio.playbackSpeed') || 1,
+      playlistRepeat: localStorage.getItem('LLCT.Audio.RepeatPlaylist') == 'true',
       karaoke: {},
       updates: null,
       displayVertical: false,
@@ -103,6 +106,40 @@ Vue.component('llct-player', {
 
     pause () {
       window.audio.pause()
+    },
+
+    first () {
+      if (audio.playlist && audio.playlist.first) {
+        let first = audio.playlist.first()
+        this.$llctDatas.meta = first
+        this.$llctDatas.playActive = true
+
+        history.pushState(
+          { id: first.id, ...first, playlist: window.audio.playlist },
+          first.title + ' - LLCT',
+          '?id=' + first.id
+        )
+
+        audio.load(this.$llctDatas.base + '/audio/' + first.id)
+        this.init()
+      }
+    },
+
+    last () {
+      if (audio.playlist && audio.playlist.last) {
+        let last = audio.playlist.last()
+        this.$llctDatas.meta = last
+        this.$llctDatas.playActive = true
+
+        history.pushState(
+          { id: last.id, ...last, playlist: window.audio.playlist },
+          last.title + ' - LLCT',
+          '?id=' + last.id
+        )
+
+        audio.load(this.$llctDatas.base + '/audio/' + last.id)
+        this.init()
+      }
     },
 
     next () {
@@ -259,9 +296,12 @@ Vue.component('llct-player', {
       audio.on(
         'end',
         () => {
-          if (window.audio.playlist && !window.audio.playlist.isEnd()) {
-            this.next()
-            return
+          if (window.audio.playlist) {
+            if (!window.audio.playlist.isEnd()) {
+              return this.next()
+            } else if (window.audio.playlist.repeat) {
+              return this.first()
+            }
           }
 
           this.playing = false
@@ -349,6 +389,14 @@ Vue.component('llct-player', {
     playbackSpeed (v) {
       window.audio.speed = v
       localStorage.setItem('LLCT.Audio.playbackSpeed', v)
+    },
+
+    playlistRepeat(v) {
+      if (window.audio.playlist) {
+        window.audio.playlist.repeat = v
+      }
+
+      localStorage.setItem('LLCT.Audio.RepeatPlaylist', v)
     }
   },
   mounted () {
@@ -362,7 +410,7 @@ Vue.component('llct-player', {
     })
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.keyStoke)
   }
 })
