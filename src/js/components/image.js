@@ -5,7 +5,19 @@ Vue.component('llct-image', {
     }
   },
   methods: {
-    done () {
+    done() {
+      if (this.full) {
+        let height = this.$el.clientHeight
+        let parentHeight = this.$el.parentNode.clientHeight
+
+        if (height < parentHeight) {
+          this.$el.style.minWidth = "100%"
+          this.$el.style.minHeight = "100%"
+        }
+
+        return
+      }
+
       this.load = true
     },
 
@@ -15,7 +27,7 @@ Vue.component('llct-image', {
       }
     }
   },
-  props: ['shouldShow', 'error', 'skeleton'],
+  props: ['shouldShow', 'error', 'skeleton', 'full'],
   computed: {
     show () {
       return window.LLCTSettings.get('useImages') || this.shouldShow

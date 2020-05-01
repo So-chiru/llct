@@ -24,7 +24,7 @@ Vue.component('llct-ayumu', {
     </div>
     <div class="ayumu-music-cards">
       <transition-group v-if="this.$llctDatas.recommends.Songs" name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-        <llct-music-card placeholder="round" v-for="(card, index) in this.$llctDatas.recommends.Songs" v-bind:key="'card' + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></llct-music-card>
+        <llct-music-card placeholder="round" v-for="(card, index) in this.$llctDatas.recommends.Songs" v-bind:key="'card' + Math.random() + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></llct-music-card>
       </transition-group>
       <transition-group v-else name="llct-card">
         <llct-music-card v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true" v-once></llct-music-card>
