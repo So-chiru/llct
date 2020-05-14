@@ -138,15 +138,16 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
             ] = true
 
             currentWord.dataset.tick = '1'
-              
             ;(c => {
               setTimeout(() => {
                 c.dataset.tick = '0'
-              }, delay * 2)
+              }, delay * 0.5)
             })(currentWord)
 
-            karaokeTick.currentTime = 0
-            karaokeTick.play(null, true)
+            requestAnimationFrame(() => {
+              karaokeTick.currentTime = 0
+              karaokeTick.play(null, true)
+            })
           }
         }
 
@@ -406,7 +407,7 @@ Vue.component('llct-karaoke', {
       karaokeRender(audio.timecode(), this.$el, 5, true, null, this.tickEnable)
     },
 
-    imgHandler(ev) {
+    imgHandler (ev) {
       ev.message = 'Failed to load call image.'
       this.error = ev
     }

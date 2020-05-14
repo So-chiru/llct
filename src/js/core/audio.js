@@ -81,7 +81,7 @@ const LLCTAudio = class {
     }
 
     this.audio.events.on('canplaythrough', () => {
-      this.events.run('playable')
+      // Can play
     })
 
     this.audio.events.on('load', data => {
@@ -97,6 +97,9 @@ const LLCTAudio = class {
           if (this.playOnLoad) {
             this.play()
           }
+
+          this.loading = false
+          this.events.run('playable')
         },
 
         e => {
@@ -140,6 +143,7 @@ const LLCTAudio = class {
     }, 0)
     this.destroySource()
 
+    this.loading = true
     this.audio.load(url)
     this.events.run('load')
   }

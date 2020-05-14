@@ -21,7 +21,7 @@ Vue.component('llct-player', {
               <div class="current">{{time_went}}</div>
               <div class="bar" v-on:click="thumbProgress">
                 <div class="bar-thumb" :style="{left: 'calc(' + progress + '% - 8px)'}" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress" draggable="true"></div>
-                <div class="bar-current" :style="{width: progress + '%'}" v-if="playable"></div>
+                <div class="bar-current" :style="{width: progress + '%'}" v-if="playable && !audio.loading"></div>
                 <div class="bar-load" v-else></div>
                 <div class="bar-bg"></div>
               </div>
@@ -69,6 +69,7 @@ Vue.component('llct-player', {
       url: '',
       playing: false,
       playable: false,
+      loading: false,
       progress: 0,
       time_went: '0:00',
       time_left: '0:00',
