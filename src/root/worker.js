@@ -1,4 +1,4 @@
-const CACHE = 'llct-cache-v202005014-2312'
+const CACHE = 'llct-cache-v20200515-0839'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200505-0945'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
@@ -61,6 +61,10 @@ self.addEventListener('fetch', ev => {
     ev.request.url.indexOf('googletag') > -1 ||
     ev.request.url.indexOf('analytics') > -1
   ) {
+    return ev
+  }
+
+  if (ev.request.url.indexOf('/audio/') > -1) {
     return ev
   }
 
