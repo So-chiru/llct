@@ -42,7 +42,7 @@ Vue.component('llct-ayumu', {
       this.cards.push(item)
     },
     beforeEnter (el) {
-      el.style.transitionDelay = 25 * parseInt(el.dataset.index, 10) + 'ms'
+      el.style.transitionDelay = 25 * Number(el.dataset.index, 10) + 'ms'
     },
 
     afterEnter (el) {

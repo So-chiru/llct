@@ -1,4 +1,4 @@
-const CACHE = 'llct-cache-v20200501-1159'
+const CACHE = 'llct-cache-v202005014-2312'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200505-0945'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
@@ -8,6 +8,7 @@ const CACHE_URL = [
   '/assets/niji.png',
   '/assets/us.png',
   '/assets/tick.mp3',
+  '/assets/llct-effects-1.mp3',
   '/assets/logo/logo-192.png',
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js',

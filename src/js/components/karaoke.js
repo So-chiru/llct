@@ -120,8 +120,8 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
       ) {
         karaokeTickCache[start + '.' + end] = true
 
-        karaokeTick.time = 0
-        karaokeTick.play()
+        karaokeTick.currentTime = 0
+        karaokeTick.play(null, true)
       }
 
       if (currentWord.dataset.repeat) {
@@ -145,8 +145,8 @@ const karaokeRender = (time, root, offset, full, newline, tick) => {
               }, delay * 2)
             })(currentWord)
 
-            karaokeTick.time = 0
-            karaokeTick.play()
+            karaokeTick.currentTime = 0
+            karaokeTick.play(null, true)
           }
         }
 
@@ -307,7 +307,7 @@ Vue.component('llct-karaoke', {
           karaokeClear()
         }
 
-        if (!this.playing && audio.currentTime() == audio.duration()) {
+        if (!this.playing && audio.currentTime == audio.duration) {
           this.needClear = true
         }
       }

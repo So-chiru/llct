@@ -52,6 +52,8 @@ Vue.component('llct-player', {
         <input type="range" v-model="playbackSpeed" max="2" min="0.2" step="0.05" value="1"></input>
         <h3>플레이리스트 반복 재생 <span class="value-indicator">{{playlistRepeat && '켜짐' || '꺼짐'}}</span></h3>
         <input type="checkbox" v-model="playlistRepeat" checked="false"></input>
+        <h3>공연장 효과 <span class="value-indicator">{{useLiveEffects && '켜짐' || '꺼짐'}}</span></h3>
+        <input type="checkbox" v-model="useLiveEffects" checked="false"></input>
         </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
@@ -76,7 +78,9 @@ Vue.component('llct-player', {
       audioVolume: localStorage.getItem('LLCT.Audio.audioVolume') || 0.75,
       tickVolume: localStorage.getItem('LLCT.Audio.tickVolume') || 1,
       playbackSpeed: localStorage.getItem('LLCT.Audio.playbackSpeed') || 1,
-      playlistRepeat: localStorage.getItem('LLCT.Audio.RepeatPlaylist') == 'true',
+      playlistRepeat:
+        localStorage.getItem('LLCT.Audio.RepeatPlaylist') == 'true',
+      useLiveEffects: localStorage.getItem('LLCT.Audio.LiveEffects') == 'true',
       karaoke: {},
       updates: null,
       displayVertical: false,
@@ -85,7 +89,7 @@ Vue.component('llct-player', {
   },
   methods: {
     beforeEnter (el) {
-      el.style.transitionDelay = 25 * parseInt(el.dataset.index, 10) + 'ms'
+      el.style.transitionDelay = 25 * Number(el.dataset.index) + 'ms'
     },
 
     afterEnter (el) {
@@ -221,8 +225,8 @@ Vue.component('llct-player', {
     },
 
     timeUpdate () {
-      let current = window.audio.currentTime()
-      let duration = window.audio.duration()
+      let current = window.audio.currentTime
+      let duration = window.audio.duration
       this.time_went = timeStamp(Math.floor(current))
       this.time_left = timeStamp(Math.floor(duration - current))
 
@@ -275,7 +279,7 @@ Vue.component('llct-player', {
 
       this.usePlayer = LLCTSettings.get('usePlayer')
 
-      audio.on(
+      audio.events.on(
         'play',
         () => {
           this.playing = true
@@ -284,7 +288,7 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      audio.on(
+      audio.events.on(
         'pause',
         () => {
           this.playing = false
@@ -293,7 +297,7 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      audio.on(
+      audio.events.on(
         'end',
         () => {
           if (window.audio.playlist) {
@@ -309,7 +313,7 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      audio.on(
+      audio.events.on(
         'playable',
         () => {
           this.playable = true
@@ -326,7 +330,7 @@ Vue.component('llct-player', {
       }
 
       let delay = Date.now()
-      audio.on(
+      audio.events.on(
         'seek',
         short => {
           if (short && delay + 10 < Date.now()) {
@@ -391,12 +395,20 @@ Vue.component('llct-player', {
       localStorage.setItem('LLCT.Audio.playbackSpeed', v)
     },
 
-    playlistRepeat(v) {
+    playlistRepeat (v) {
       if (window.audio.playlist) {
         window.audio.playlist.repeat = v
       }
 
       localStorage.setItem('LLCT.Audio.RepeatPlaylist', v)
+    },
+
+    useLiveEffects (v) {
+      if (window.audio) {
+        window.audio.liveEffect(v)
+      }
+
+      localStorage.setItem('LLCT.Audio.LiveEffects', v)
     }
   },
   mounted () {

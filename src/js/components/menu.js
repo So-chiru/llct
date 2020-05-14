@@ -32,7 +32,7 @@ Vue.component('llct-menu', {
   },
   methods: {
     beforeEnter (el) {
-      el.style.transitionDelay = 75 * parseInt(el.dataset.index, 10) + 'ms'
+      el.style.transitionDelay = 75 * Number(el.dataset.index, 10) + 'ms'
     },
 
     afterEnter (el) {

@@ -30,7 +30,7 @@ Vue.component('llct-card', {
   ],
   methods: {
     beforeEnter (el) {
-      el.style.transitionDelay = 45 * parseInt(el.dataset.index, 10) + 'ms'
+      el.style.transitionDelay = 45 * Number(el.dataset.index) + 'ms'
     },
 
     afterEnter (el) {

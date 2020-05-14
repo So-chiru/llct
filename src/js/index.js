@@ -48,6 +48,8 @@ const init = () => {
   var audio = new LLCTAudio(false)
   window.audio = audio
 
+  window.audio.useFadeInOut = LLCTSettings.get('useFadeInOut') || false
+
   window.addEventListener('errorReceive', ev => {
     window.showToast(
       'API 서버에 연결할 수 없습니다. ' + ev.detail.message,

@@ -74,6 +74,18 @@ const llctSettingDefault = [
     default: false
   },
   {
+    title: '노래 재생시 가감속 효과 사용',
+    id: 'useFadeInOut',
+    category: 1,
+    type: 'checkbox',
+    default: true,
+    func: v => {
+      if (window && window.audio) {
+        window.audio.useFadeInOut = v
+      }
+    }
+  },
+  {
     title: '페이지 전반에 사용되는 이미지 활성화',
     id: 'useImages',
     category: 2,

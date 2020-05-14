@@ -253,7 +253,7 @@ const LLCTData = class {
 
         let meta = dataInstance.lists[group].collection
 
-        let idInt = parseInt(id.substring(1, id.length)) - 1
+        let idInt = Number(id.substring(1, id.length)) - 1
         if (meta[idInt] && meta[idInt].id === id) {
           return meta[idInt]
         }
