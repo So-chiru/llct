@@ -414,7 +414,7 @@ Vue.component('llct-karaoke', {
   },
   mounted () {
     if (!karaokeTick) {
-      karaokeTick = new LLCTAudio(true)
+      karaokeTick = new LLCTAudio(true, true)
       karaokeTick.load('/assets/tick.mp3')
       karaokeTick.volume = 1
     }

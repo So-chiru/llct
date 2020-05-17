@@ -1,4 +1,4 @@
-@import "__global";
+@import '__global';
 
 $album-wh: 60px;
 $mobile-album-wh: 45px;
@@ -69,7 +69,7 @@ $mobile-thumb-size: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    word-wrap:break-word;
+    word-wrap: break-word;
   }
 }
 
@@ -211,8 +211,9 @@ $mobile-thumb-size: 12px;
     margin-top: calc(-#{$thumb-size} / 2.5);
     border-radius: 50%;
     background-color: #fff;
-    z-index: 8;
+    z-index: 9;
     cursor: grab;
+    transition: 0.3s opacity cubic-bezier(0.19, 1, 0.22, 1);
 
     @media screen and (max-width: $tablet) {
       width: $mobile-thumb-size;
@@ -226,7 +227,7 @@ $mobile-thumb-size: 12px;
   }
 
   .bar-thumb::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 0;
@@ -249,17 +250,38 @@ $mobile-thumb-size: 12px;
   }
 
   .bar-load {
-    background: repeating-linear-gradient(
-      -45deg,
-      #5bc3d3,
-      #5bc3d3 10px,
-      #cdf6ea 10px,
-      #cdf6ea 20px
-    );
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+
     background-size: 150% 100%;
 
     animation: bar-animation 10s linear infinite;
     z-index: 8;
+  }
+
+  &[data-phase='fetching'] {
+    .bar-thumb {
+      opacity: 0;
+    }
+
+    .bar-load {
+      background: repeating-linear-gradient(
+        -45deg,
+        #5bc3d3,
+        #5bc3d3 10px,
+        #cdf6ea 10px,
+        #cdf6ea 20px
+      );
+    }
+  }
+
+  &[data-phase='buffering'] {
+    .bar-thumb {
+      opacity: 0;
+    }
+
+    .bar-load {
+      background: rgba(161, 161, 161, 0.5);
+    }
   }
 
   .bar-bg {
@@ -267,6 +289,11 @@ $mobile-thumb-size: 12px;
     z-index: 6;
   }
 }
+
+.dark .player-progress-inner .bar-load[data-phase='buffering'] {
+  background: rgba(236, 236, 236, 0.5);
+}
+
 .player-btn {
   display: -webkit-flex;
   display: flex;
@@ -339,7 +366,7 @@ $mobile-thumb-size: 12px;
 }
 
 .player-btn i::after {
-  content: " ";
+  content: ' ';
   position: absolute;
   left: 0;
   top: 0;
@@ -403,7 +430,7 @@ $mobile-thumb-size: 12px;
 
 .player-karaoke::after {
   position: absolute;
-  content: "";
+  content: '';
   left: 0;
   top: 0;
   width: 100%;
@@ -446,26 +473,26 @@ $mobile-thumb-size: 12px;
     padding: 30px 40px;
     transform: translateY(10px);
 
-    input[type=range] {
+    input[type='range'] {
       -webkit-appearance: none;
       width: 100%;
       margin: 6px 0;
       background: transparent;
     }
 
-    input[type=range]:focus {
+    input[type='range']:focus {
       outline: none;
     }
-    input[type=range]::-webkit-slider-runnable-track {
+    input[type='range']::-webkit-slider-runnable-track {
       width: 100%;
       height: 3px;
       cursor: pointer;
-      box-shadow:  $shadow-2dp;
+      box-shadow: $shadow-2dp;
       background: rgba(255, 255, 255, 0.12);
       border-radius: 25px;
       border: 0px solid #000101;
     }
-    input[type=range]::-webkit-slider-thumb {
+    input[type='range']::-webkit-slider-thumb {
       box-shadow: $shadow-1dp;
       border: 0px;
       height: 15px;
@@ -476,10 +503,10 @@ $mobile-thumb-size: 12px;
       -webkit-appearance: none;
       margin-top: -6px;
     }
-    input[type=range]:focus::-webkit-slider-runnable-track {
+    input[type='range']:focus::-webkit-slider-runnable-track {
       background: rgba(255, 255, 255, 0.12);
     }
-    input[type=range]::-moz-range-track {
+    input[type='range']::-moz-range-track {
       width: 100%;
       height: 3px;
       cursor: pointer;
@@ -488,7 +515,7 @@ $mobile-thumb-size: 12px;
       border-radius: 25px;
       border: 0px solid #000101;
     }
-    input[type=range]::-moz-range-thumb {
+    input[type='range']::-moz-range-thumb {
       box-shadow: $shadow-1dp;
       border: 0px;
       height: 15px;
@@ -497,7 +524,6 @@ $mobile-thumb-size: 12px;
       background: #2f7bec;
       cursor: pointer;
     }
-    
 
     @media screen and (max-width: $tablet) {
       padding: 4vh 10vw;
@@ -509,11 +535,10 @@ $mobile-thumb-size: 12px;
     h3 .value-indicator {
       font-size: 12px;
       margin-left: 5px;
-      color:rgb(121, 121, 121);
+      color: rgb(121, 121, 121);
     }
   }
 }
-
 
 .dark .player-vertical {
   .bg {

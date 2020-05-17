@@ -17,12 +17,12 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-progress">
-            <div class="player-progress-inner" v-if="usePlayer">
+            <div class="player-progress-inner" v-if="usePlayer" :data-phase="phase">
               <div class="current">{{time_went}}</div>
               <div class="bar" v-on:click="thumbProgress">
                 <div class="bar-thumb" :style="{left: 'calc(' + progress + '% - 8px)'}" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress" draggable="true"></div>
                 <div class="bar-current" :style="{width: progress + '%'}" v-if="playable && !audio.loading"></div>
-                <div class="bar-load" v-else></div>
+                <div class="bar-load" :style="{width: load_progress + '%'}" v-else></div>
                 <div class="bar-bg"></div>
               </div>
               <div class="left">-{{time_left}}</div>
@@ -71,6 +71,8 @@ Vue.component('llct-player', {
       playable: false,
       loading: false,
       progress: 0,
+      phase: 'fetching',
+      load_progress: 100,
       time_went: '0:00',
       time_left: '0:00',
       __timeUpdate: null,
@@ -233,7 +235,7 @@ Vue.component('llct-player', {
 
       this.time = current
 
-      this.progress = (current / duration) * 100
+      this.progress = current === 0 ? 0 : (current / duration) * 100
     },
 
     watchUpdate (playing) {
@@ -279,6 +281,8 @@ Vue.component('llct-player', {
       }
 
       this.usePlayer = LLCTSettings.get('usePlayer')
+      this.phase = 'fetching'
+      this.loading = true
 
       audio.events.on(
         'play',
@@ -297,6 +301,15 @@ Vue.component('llct-player', {
         },
         'playerInstance'
       )
+
+      audio.events.on('loading', (done, size) => {
+        this.phase = 'buffering'
+        this.load_progress = (done / size) * 100
+      })
+
+      audio.events.on('playable', () => {
+        this.phase = 'ready'
+      })
 
       audio.events.on(
         'end',

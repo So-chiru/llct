@@ -21,6 +21,7 @@
     "node-sass": "^4.13.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "gulp-imagemin": "^7.1.0",
     "yargs": "^15.1.0"
   },

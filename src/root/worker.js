@@ -1,4 +1,4 @@
-const CACHE = 'llct-cache-v20200515-0839'
+const CACHE = 'llct-cache-v20200517-2020'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200505-0945'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
@@ -14,6 +14,7 @@ const CACHE_URL = [
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js',
   'https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js',
   'https://cdn.jsdelivr.net/npm/vue-lazyload@1.3.3/vue-lazyload.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.8.7/polyfill.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js',
   'https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js',
   'https://fonts.googleapis.com/css?family=Material+Icons|Noto+Sans+KR:100,300,400,500,700&display=swap',

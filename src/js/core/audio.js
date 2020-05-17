@@ -1,5 +1,24 @@
 const quint = x => 1 - Math.pow(1 - x, 3)
 
+const concatBuffer = (...bufs) => {
+  let len = bufs.length
+  let bytelen = bufs.reduce((p, c) => p.length + c.length)
+
+  let result = new Uint8Array(bytelen)
+
+  for (var i = 0; i < len; i++) {
+    let buf = bufs[i]
+
+    let tmp = new Uint8Array(result.byteLength + buf.byteLength)
+    tmp.set(result, 0)
+    tmp.set(new Uint8Array(buf), result.byteLength)
+
+    result = tmp
+  }
+
+  return result.buffer
+}
+
 const LLCTEvent = class {
   constructor () {
     this.events = {}
@@ -37,11 +56,41 @@ const LLCTAudioSource = class {
   constructor () {
     this.buffer = null
     this.events = new LLCTEvent()
+    this.loaded = 0
+    this.full = 0
+  }
+
+  progress (res) {
+    const reader = res.body.getReader()
+
+    let buffer = []
+
+    this.full = Number(res.headers.get('Content-Length'))
+
+    return new Promise(async (resolve, _) => {
+      while (true) {
+        const { done, value } = await reader.read()
+
+        if (done) {
+          resolve(concatBuffer(...buffer))
+          break
+        }
+
+        this.loaded += value.length
+
+        this.events.run('loading', this.loaded, this.full)
+
+        buffer.push(value)
+      }
+    })
   }
 
   load (url) {
+    this.loaded = 0
+    this.full = 0
+
     fetch(url)
-      .then(res => res.arrayBuffer())
+      .then(this.progress.bind(this))
       .then(v => {
         this.buffer = v
 
@@ -58,7 +107,7 @@ const LLCTAudioSource = class {
 }
 
 const LLCTAudio = class {
-  constructor (noMediaSession) {
+  constructor (noMediaSession, noEffects) {
     this.audio = new LLCTAudioSource()
     this.animation = null
     this.originVolume = 0.75
@@ -67,6 +116,10 @@ const LLCTAudio = class {
     this.repeat = false
     this.paused = true
     this.loaded = false
+
+    if (noEffects) {
+      this.disableEffects = true
+    }
 
     this.transitionTime = 0.2
     this.audioTime = 0
@@ -79,6 +132,8 @@ const LLCTAudio = class {
     if (navigator.mediaSession && !noMediaSession) {
       this.sessionInit()
     }
+
+    this.audio.events.on('loading', (f, s) => this.events.run('loading', f, s))
 
     this.audio.events.on('canplaythrough', () => {
       // Can play
@@ -148,7 +203,11 @@ const LLCTAudio = class {
     this.events.run('load')
   }
 
-  createConvolver () {
+  createConvolver() {
+    if (this.disableEffects) {
+      return
+    }
+
     this.convolver = this.context.createConvolver()
     this.convolverSource = new LLCTAudioSource()
     this.convolverSource.load('/assets/llct-effects-1.mp3')
@@ -173,10 +232,28 @@ const LLCTAudio = class {
     })
   }
 
+  createCompressor () {
+    this.compressor = this.context.createDynamicsCompressor()
+    this.compressor.connect(this.destination)
+
+    this.compressor.threshold.value = -30
+    this.compressor.knee.value = 40
+    this.compressor.ratio.value = 6
+    this.compressor.attack.value = 0.2
+    this.compressor.release.value = 0.25
+  }
+
   destroyConvolver () {
     if (this.convolver) {
       this.convolver.disconnect()
       this.convolver = null
+    }
+  }
+
+  destroyCompressor () {
+    if (this.compressor) {
+      this.compressor.disconnect()
+      this.compressor = null
     }
   }
 
@@ -186,11 +263,13 @@ const LLCTAudio = class {
     this.loadStart = new Date()
     this.destination = this.context.destination
 
+    this.createCompressor()
+
     this.dry = this.context.createGain()
     this.wet = this.context.createGain()
 
-    this.dry.connect(this.destination)
-    this.wet.connect(this.destination)
+    this.dry.connect(this.compressor)
+    this.wet.connect(this.compressor)
 
     let timing = () => {
       requestAnimationFrame(timing)
@@ -208,10 +287,13 @@ const LLCTAudio = class {
           ) / this.transitionTime
         )
 
-        this.dry.gain.value = Math.min(1, this.volume * e)
+        this.dry.gain.value = Math.min(
+          1,
+          this.volume * e * (this.convolver ? 0.8 : 1)
+        )
 
         if (this.fadeTo > 0) {
-          this.wet.gain.value = Math.min(1, this.volume * e * 0.25)
+          this.wet.gain.value = Math.min(1, this.volume * e * 0.2)
         }
 
         if (this.fadeUntil + 0.1 < this.context.currentTime) {
@@ -295,8 +377,8 @@ const LLCTAudio = class {
     if (typeof v === 'string') v = Number(v)
 
     this.originVolume = v
-    this.dry.gain.value = v
-    this.wet.gain.value = v * 0.25
+    this.dry.gain.value = v * (this.convolver ? 0.8 : 1)
+    this.wet.gain.value = v * 0.2
   }
 
   get speed () {
