@@ -91,6 +91,7 @@ const LLCTData = class {
     this.defaulPlaylistStore = {}
     this.recommends = {}
     this.events = {}
+    this.recentPlayed = []
 
     this.songKeys = []
   }
@@ -150,6 +151,11 @@ const LLCTData = class {
           reject(e)
         })
     })
+  }
+
+  loadRecent () {
+    this.recentPlayed =
+      JSON.parse(localStorage.getItem('LLCT.RecentPlayed') || '{}') || []
   }
 
   recommended () {
@@ -358,7 +364,33 @@ const LLCTData = class {
         return dataInstance.defaultPlaylist()
       },
 
-      on: dataInstance.on
+      on: dataInstance.on,
+
+      addRecentPlayed (obj) {
+        if (this.recentPlayed[0] && this.recentPlayed[0].id === obj.id) {
+          return
+        }
+
+        if (this.recentPlayed.length > 1) {
+          for (var i = 0; i < this.recentPlayed.length; i++) {
+            if (this.recentPlayed[i].id === obj.id) {
+              this.recentPlayed.splice(i, 1)
+              i--
+            }
+          }
+        }
+
+        this.recentPlayed.unshift(obj)
+
+        if (this.recentPlayed.length > 12) {
+          this.recentPlayed.splice(this.recentPlayed.length - 1, 1)
+        }
+
+        localStorage.setItem(
+          'LLCT.RecentPlayed',
+          JSON.stringify(this.recentPlayed)
+        )
+      }
     }
   })
 
@@ -366,5 +398,7 @@ const LLCTData = class {
     dataInstance.songs()
     dataInstance.recommended()
     dataInstance.defaultPlaylist()
+
+    dataInstance.loadRecent()
   })
 })()

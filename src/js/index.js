@@ -172,6 +172,8 @@ const init = () => {
             )
           }
 
+          this.$llctDatas.addRecentPlayed({ id, ...info })
+
           this.$llctDatas.meta = info
           this.$llctDatas.playActive =
             typeof playActive !== 'undefined' ? playActive : true

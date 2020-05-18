@@ -10,8 +10,11 @@ Vue.component('llct-ayumu', {
     </div>
     <div class="ayumu-mod-select">
       <div class="ayumu-mod-buttons">
-        <div>
+        <div v-on:click="mode = 0" :class="{in_active: mode !== 0}">
           <p>추천 곡</p>
+        </div>
+        <div v-on:click="mode = 1" :class="{in_active: mode !== 1}">
+          <p>최근 들은 곡</p>
         </div>
         <div class="in_active" v-on:click="changeTab(1)">
           <p>모든 곡</p>
@@ -24,7 +27,8 @@ Vue.component('llct-ayumu', {
     </div>
     <div class="ayumu-music-cards">
       <transition-group v-if="this.$llctDatas.recommends.Songs" name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-        <llct-music-card placeholder="round" v-for="(card, index) in this.$llctDatas.recommends.Songs" v-bind:key="'card' + Math.random() + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></llct-music-card>
+        <llct-music-card v-show="mode === 0" placeholder="round" v-for="(card, index) in this.$llctDatas.recommends.Songs" v-bind:key="'card' + Math.random() + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></llct-music-card>
+        <llct-music-card v-show="mode === 1" placeholder="round" v-for="(card, index) in this.$llctDatas.recentPlayed" v-bind:key="'card' + Math.random() + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></llct-music-card>
       </transition-group>
       <transition-group v-else name="llct-card">
         <llct-music-card v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true" v-once></llct-music-card>
@@ -33,6 +37,12 @@ Vue.component('llct-ayumu', {
   </div>
   `,
   props: ['current'],
+  data () {
+    return {
+      mode: 0,
+      recentMusics: []
+    }
+  },
   methods: {
     addCard (item) {
       if (typeof item !== 'object') {
@@ -49,7 +59,7 @@ Vue.component('llct-ayumu', {
       el.style.transitionDelay = ''
     },
 
-    getArtist (id, artist) {
+    getArtist(id, artist) {
       return this.$llctDatas.artist(id, artist)
     },
 
@@ -63,7 +73,7 @@ Vue.component('llct-ayumu', {
 
     refresh () {
       this.$llctDatas.refresh()
-    }
+    },
   },
   mounted () {
     this.slider = new LLCTSlide(
