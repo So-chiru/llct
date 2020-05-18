@@ -155,7 +155,7 @@ const LLCTData = class {
 
   loadRecent () {
     this.recentPlayed =
-      JSON.parse(localStorage.getItem('LLCT.RecentPlayed') || '{}') || []
+      JSON.parse(localStorage.getItem('LLCT.RecentPlayed') || '[]') || []
   }
 
   recommended () {
@@ -366,7 +366,11 @@ const LLCTData = class {
 
       on: dataInstance.on,
 
-      addRecentPlayed (obj) {
+      addRecentPlayed(obj) {
+        if (!this.recentPlayed) {
+          this.recentPlayed = []
+        }
+
         if (this.recentPlayed[0] && this.recentPlayed[0].id === obj.id) {
           return
         }
