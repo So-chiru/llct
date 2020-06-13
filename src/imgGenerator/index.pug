@@ -56,7 +56,7 @@ html(lang="kr")
         document.querySelector('#call_hash').innerHTML = sha3_256(JSON.stringify(karadata)).substring(0, 8)
 
         new QRCode(document.querySelector('.wack'), {
-          text: "https://lovelivec.kr/?pid=#{metadata.id}",
+          text: "https://lovelivec.kr/?id=#{metadata.id}",
           width: 180,
           height: 180,
           colorDark : "#0060ad",

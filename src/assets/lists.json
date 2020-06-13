@@ -2618,7 +2618,10 @@
         "코노에 카나타 (CV. 키토 아카리)",
         "유키 세츠나 (CV. 쿠스노키 토모리)",
         "엠마 베르데 (CV. 사시데 마리아)",
-        "텐노지 리나 (CV. 타나카 치에미)"
+        "텐노지 리나 (CV. 타나카 치에미)",
+        "DiverDiva",
+        "A・ZU・NA",
+        "QU4RTZ"
       ]
     },
     "collection": [
@@ -2770,6 +2773,48 @@
         "translated": "텔레텔레파시",
         "center": null,
         "artist": 9,
+        "karaoke": true
+      },
+      {
+        "id": "20021",
+        "title": "SUPER NOVA",
+        "center": null,
+        "artist": 10,
+        "karaoke": true
+      },
+      {
+        "id": "20022",
+        "title": "Love Triangle",
+        "center": null,
+        "artist": 10,
+        "karaoke": true
+      },
+      {
+        "id": "20023",
+        "title": "Dream Land!Dream World!",
+        "center": null,
+        "artist": 11,
+        "karaoke": true
+      },
+      {
+        "id": "20024",
+        "title": "Cheer for you!!",
+        "center": null,
+        "artist": 11,
+        "karaoke": true
+      },
+      {
+        "id": "20025",
+        "title": "Sing & Smile!!",
+        "center": null,
+        "artist": 12,
+        "karaoke": true
+      },
+      {
+        "id": "20026",
+        "title": "Beautiful Moonlight",
+        "center": null,
+        "artist": 12,
         "karaoke": true
       }
     ]
