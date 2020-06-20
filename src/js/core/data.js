@@ -289,8 +289,9 @@ const LLCTData = class {
 
           let ga = this.artist(music.id, music.artist)
 
-          let searchStr = `${music.title}-${music.translated + '-' ||
-            ''}${music.short_kr + '-' || ''}${
+          let searchStr = `${music.title}-${
+            music.translated ? music.translated + '-' : ''
+          }${music.short_kr ? music.short_kr + '-' : ''}${
             music.tags ? music.tags.join('-') + '.' : ''
           }-${ga}`
             .replace(/\s|[!@#$%^&*(),.?":{}|<>♡★☆○●！]/g, '')
@@ -322,12 +323,7 @@ const LLCTData = class {
               rate += 100
             }
 
-            let l = LCS(
-              (itemChosung && itemChosung) || item,
-              keyword,
-              item.length,
-              keyword.length
-            )
+            let l = LCS((itemChosung ? itemChosung : '') || item, keyword)
 
             if (l.length < 1) {
               continue
@@ -362,7 +358,7 @@ const LLCTData = class {
 
       on: dataInstance.on,
 
-      addRecentPlayed(obj) {
+      addRecentPlayed (obj) {
         if (!this.recentPlayed) {
           this.recentPlayed = []
         }

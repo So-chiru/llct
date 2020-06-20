@@ -1,12 +1,17 @@
 const registerWorker = () => {
-  if (!'serviceWorker' in navigator) {
+  if (!('serviceWorker' in navigator)) {
     return false
   }
 
   navigator.serviceWorker.register('/worker.js').then(
     _ => {},
     err => {
-      window.showToast('서비스 워커 등록 실패, ' + err.message, 'warning', true, 2000)
+      window.showToast(
+        '서비스 워커 등록 실패, ' + err.message,
+        'warning',
+        true,
+        2000
+      )
     }
   )
 

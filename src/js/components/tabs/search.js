@@ -32,7 +32,7 @@ Vue.component('llct-search', {
   },
   methods: {
     beforeEnter (el) {
-      el.style.transitionDelay = 25 * Number(el.dataset.index, 10) + 'ms'
+      el.style.transitionDelay = 25 * Number(el.dataset.index) + 'ms'
     },
 
     afterEnter (el) {

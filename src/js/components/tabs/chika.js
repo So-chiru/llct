@@ -32,7 +32,7 @@ Vue.component('llct-chika', {
     },
 
     beforeEnter (el) {
-      el.style.transitionDelay = 75 * Number(el.dataset.index, 10) + 'ms'
+      el.style.transitionDelay = 75 * Number(el.dataset.index) + 'ms'
     },
 
     afterEnter (el) {

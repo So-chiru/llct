@@ -157,9 +157,7 @@ const LLCTAudio = class {
           this.events.run('playable')
         },
 
-        e => {
-          'Error with decoding audio data' + e.err
-        }
+        e => 'Error with decoding audio data' + e.err
       )
     })
 
@@ -203,7 +201,7 @@ const LLCTAudio = class {
     this.events.run('load')
   }
 
-  createConvolver() {
+  createConvolver () {
     if (this.disableEffects) {
       return
     }
@@ -225,9 +223,7 @@ const LLCTAudio = class {
           this.convolver.connect(this.wet)
         },
 
-        e => {
-          'Error with decoding audio data' + e.err
-        }
+        e => 'Error with decoding audio data' + e.err
       )
     })
   }
