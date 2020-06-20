@@ -2,7 +2,7 @@ Vue.component('llct-ayumu', {
   template: `<div class="llct-tab" id="tab0">
     <div class="ayumu-cards-holder">
       <span>
-        <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="card.BG" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
+        <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="idfy(card.BG)" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
       </span>
       <span v-if="!this.$llctDatas.recommends.Cards">
         <llct-card v-for="(n, index) in 3" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></llct-card>
@@ -59,7 +59,7 @@ Vue.component('llct-ayumu', {
       el.style.transitionDelay = ''
     },
 
-    getArtist(id, artist) {
+    getArtist (id, artist) {
       return this.$llctDatas.artist(id, artist)
     },
 
@@ -67,13 +67,19 @@ Vue.component('llct-ayumu', {
       this.$root.changeTab(id)
     },
 
+    idfy (str) {
+      return str.indexOf('LLCT.ID$') > -1
+        ? `${this.$llctDatas.base}/cover/${str.split('LLCT.ID$')[1]}`
+        : str
+    },
+
     getCoverURL (id) {
-      return this.$llctDatas.base + '/cover/' + id
+      return `${this.$llctDatas.base}/cover/75/${id}`
     },
 
     refresh () {
       this.$llctDatas.refresh()
-    },
+    }
   },
   mounted () {
     this.slider = new LLCTSlide(

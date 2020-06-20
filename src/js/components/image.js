@@ -27,13 +27,13 @@ Vue.component('llct-image', {
       }
     }
   },
-  props: ['shouldShow', 'error', 'skeleton', 'full'],
+  props: ['shouldShow', 'error', 'skeleton', 'full', 'image'],
   computed: {
     show () {
       return window.LLCTSettings.get('useImages') || this.shouldShow
     }
   },
   template: `
-    <img v-lazy="$attrs.src" v-on:error="errHandle" v-on:load="done" v-show="show ? ($attrs.placeholder !== '' ? true : (show ? load : false)) : false" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round', skeleton: skeleton}"></img>
+    <img v-lazy="$attrs.src" :alt="image || 'LLCT Image'" v-on:error="errHandle" v-on:load="done" v-show="show ? ($attrs.placeholder !== '' ? true : (show ? load : false)) : false" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round', skeleton: skeleton}"></img>
   `
 })

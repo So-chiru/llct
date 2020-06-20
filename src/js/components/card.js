@@ -11,7 +11,7 @@ Vue.component('llct-card', {
       </transition>
       <div class="llct-card-bg-layer" :class="{skeleton: skeleton, spoiler: spoiler}"></div>
       <div class="llct-card-bg" :class="{spoiler: spoiler}">
-        <llct-image v-bind:src="bg_url" :full="true"></llct-image>
+        <llct-image v-bind:src="bg_url" :full="true" :alt="title + ' 커버 이미지'"></llct-image>
       </div>
     </div>
   `,

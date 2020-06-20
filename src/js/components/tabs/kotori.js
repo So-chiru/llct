@@ -9,13 +9,14 @@ Vue.component('llct-kotori', {
         </div>
       </div>
     </div>
-    <llct-kotori-detail :selected="selectedPlaylist"></llct-kotori-detail>
+    <llct-kotori-detail :selected="selectedPlaylist" :lastpl="lastPlaylist"></llct-kotori-detail>
   </div>`,
   props: ['current'],
   data () {
     return {
       playLists: (window.playlists || {}).lists || [],
-      selectedPlaylist: null
+      selectedPlaylist: null,
+      lastPlaylist: null
     }
   },
   watch: {
@@ -35,6 +36,7 @@ Vue.component('llct-kotori', {
       for (var i = 0; i < window.playlists.length(); i++) {
         if (playlists.lists[i].title == title) {
           this.selectedPlaylist = playlists.lists[i]
+          this.lastPlaylist = playlists.lists[i]
         }
       }
     },
@@ -54,6 +56,7 @@ Vue.component('llct-kotori', {
       window.playlists.add(pl)
 
       this.selectedPlaylist = pl
+      this.lastPlaylist = pl
     },
 
     noMorePlaylist () {
@@ -61,6 +64,10 @@ Vue.component('llct-kotori', {
         '재생목록 만들기',
         window.playlists.length() + '개 이상 플레이리스트를 만들 수 없습니다.'
       )
+    },
+
+    clearPlaylist() {
+      
     },
 
     addPlaylist () {
@@ -95,6 +102,7 @@ Vue.component('llct-kotori', {
   mounted () {
     this.$llctEvents.$on('openPlaylist', title => {
       this.selectedPlaylist = window.playlists.find(title)
+      this.lastPlaylist = this.selectedPlaylist
     })
 
     window.addEventListener('renderPlaylist', this.evHandler)

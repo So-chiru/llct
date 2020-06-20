@@ -1,7 +1,7 @@
 Vue.component('llct-music-card', {
   template: `<div class="llct-music-card" v-bind:key="title" :data-index="index" :class="{skeleton: skeleton}">
     <div class="info">
-      <llct-image :src="cover_url" :placeholder="placeholder" :skeleton="skeleton"></llct-image>
+      <llct-image :src="cover_url" :placeholder="placeholder" :skeleton="skeleton" :alt="title + ' 앨범 커버'"></llct-image>
       <div class="text">
         <h3 v-if="!useAlt" :title="title" :class="{skeleton: skeleton}">{{title}}</h3>
         <h3 v-else :title="alt">{{alt}}</h3>

@@ -350,10 +350,6 @@ const LLCTData = class {
         return musics
       },
 
-      getCoverURL (id) {
-        return dataInstance.base + '/cover/' + id
-      },
-
       karaoke (id, useImg) {
         return this.getSong(id).karaoke && !useImg
           ? dataInstance.karaoke(id)

@@ -3,31 +3,36 @@ Vue.component('llct-kotori-detail', {
     <div class="content">
       <div class="out-meta">
         <div class="meta">
-          <h1>{{select.title}}</h1>
+          <h1>{{last.title}}</h1>
           <div class="control">
-            <h3>총 {{(select.lists || []).length}}개의 곡이 재생목록에 있습니다.</h3>
-            <div class="remove" v-if="!select.readOnly" v-on:click="removeConfirm">재생목록 삭제</div>
+            <h3>총 {{(last.lists || []).length}}개의 곡이 재생목록에 있습니다.</h3>
+            <div class="remove" v-if="!last.readOnly" v-on:click="removeConfirm">재생목록 삭제</div>
           </div>
         </div>
         <div class="close" v-on:click="close"><i class="material-icons">close</i></div>
       </div>
       <div class="lists">
-        <draggable v-model="select.lists" :move="checkMovable" :disabled="!checkMovable()" :handle="'.info'" :touchStartThreshold="50" :animation="200" filter=".control" easing="cubic-bezier(0.4, 0, 0.2, 1)" draggable=".llct-music-card" @end="dragged">
-          <llct-music-card placeholder="round" v-for="(data, index) in (select.lists || [])" :key="index" :playlist="select" :removeButton="select.readOnly ? false : removeSong" :disablePlaylist="!select.readOnly" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></llct-music-card>
+        <draggable v-model="last.lists" :move="checkMovable" :disabled="!checkMovable()" :handle="'.info'" :touchStartThreshold="50" :animation="200" filter=".control" easing="cubic-bezier(0.4, 0, 0.2, 1)" draggable=".llct-music-card" @end="dragged">
+          <llct-music-card placeholder="round" v-for="(data, index) in (last.lists || [])" :key="index" :playlist="last" :removeButton="last.readOnly ? false : removeSong" :disablePlaylist="!last.readOnly" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></llct-music-card>
         </draggable>
       </div>
     </div>
   </div>`,
-  props: ['current', 'selected'],
+  props: ['current', 'selected', 'lastpl'],
   data () {
     return {
       playLists: window.playlists || {},
-      select: this.selected || {}
+      select: this.selected || {},
+      last: this.lastpl || {},
     }
   },
   watch: {
     selected (v) {
       this.select = v || {}
+    },
+
+    lastpl (v) {
+      this.last = v || {}
     }
   },
   methods: {
@@ -72,7 +77,7 @@ Vue.component('llct-kotori-detail', {
     },
 
     getImageURL (id) {
-      return this.$llctDatas.base + '/cover/' + id
+      return `${this.$llctDatas.base}/cover/75/${id}`
     },
     getArtist (id, artist) {
       return this.$llctDatas.artist(id, artist)

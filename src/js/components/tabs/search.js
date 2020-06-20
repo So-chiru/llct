@@ -44,7 +44,7 @@ Vue.component('llct-search', {
     },
 
     getCoverURL (id) {
-      return this.$llctDatas.base + '/cover/' + id
+      return `${this.$llctDatas.base}/cover/75/${id}`
     },
 
     goSearch (v, skipLarge) {

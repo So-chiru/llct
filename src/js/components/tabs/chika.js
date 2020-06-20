@@ -52,7 +52,7 @@ Vue.component('llct-chika', {
     },
 
     getImageURL (id) {
-      return this.$llctDatas.base + '/cover/' + id
+      return `${this.$llctDatas.base}/cover/75/${id}`
     }
   },
   beforeRouteEnter () {

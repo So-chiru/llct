@@ -247,6 +247,10 @@ const darkInit = () => {
   if (dark) {
     document.querySelector('html').classList.add('dark')
   }
+
+  document.head
+    .querySelector('meta[name="theme-color"')
+    .setAttribute('content', dark ? '#151515' : '#fff')
 }
 
 const colorBlindInit = () => {
