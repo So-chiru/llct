@@ -4,7 +4,6 @@
   display: -webkit-flex;
   display: flex;
   overflow: hidden;
-  overflow-x: auto;
   scrollbar-width: none;
 }
 
@@ -59,6 +58,10 @@
   font-weight: bold;
   font-size: 20px;
   letter-spacing: -0.66px;
+
+  @media screen and (max-width: $tablet) {
+    font-size: calc(1vw + 2vh);
+  }
 }
 
 .ayumu-mod-buttons div {
@@ -117,6 +120,7 @@
 .ayumu-mod-ext-buttons {
   margin-top: auto;
   margin-bottom: auto;
+  font-size: calc(0.6vw + 1.6vh);
 }
 
 .ayumu-mod-ext-buttons {

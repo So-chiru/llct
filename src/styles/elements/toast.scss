@@ -49,6 +49,7 @@
     padding: 5px 20px;
     border-radius: 10px;
     width: 100%;
+    overflow: hidden;
 
     @media screen and (max-width: $tablet) {
       font-size: 14px;
@@ -65,6 +66,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      width: 80%;
     }
 
     .text .material-icons {
@@ -75,11 +77,11 @@
       margin-left: 0;
       letter-spacing: -0.66px;
       font-weight: 400;
+      width: 90%;
+      margin-right: 0;
     }
 
     .button {
-      margin-left: 20px;
-      margin-right: 0;
       opacity: 0.25;
       cursor: pointer;
       transition: 200ms opacity $standard-ease;

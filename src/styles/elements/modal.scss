@@ -1,4 +1,4 @@
-@import "__global";
+@import '__global';
 
 .llct-modal {
   z-index: 100;
@@ -28,7 +28,7 @@
   z-index: 101;
   margin: auto;
 
-  padding: 30px 40px;
+  padding: 5vh 6vw;
   border-radius: 10px;
   width: -moz-fit-content;
   width: -webkit-fit-content;
@@ -43,7 +43,7 @@
   background-color: #fff;
 
   @media screen and (max-width: $tablet) {
-    padding: 4vh 10vw;
+    padding: 3vh 8vw;
 
     min-width: 60%;
     max-width: 80%;
@@ -51,7 +51,8 @@
 }
 
 .dark .llct-modal .contents {
-  background-color: #2b2b2b;
+  background-color: rgba(43, 43, 43, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
 }
 
 .llct-modal .contents * {
@@ -59,14 +60,15 @@
 }
 
 .llct-modal .contents p {
-  font-weight: 100;
+  font-weight: 500;
   font-size: 18px;
 }
 
 .llct-modal .contents h3 {
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 15px;
   margin-bottom: 10px;
+  color: #3fa4fd;
 }
 
 .llct-modal .buttons_list,
@@ -89,37 +91,41 @@
 }
 
 .llct-modal .button,
-.llct-modal .more input[type="button"] {
+.llct-modal .more input[type='button'] {
   position: relative;
   border: 0.5px solid rgba(0, 0, 0, 0.12);
   background: #fff;
   width: fit-content;
+  width: -webkit-fill-available;
+  width: fill-available;
   border-radius: 5px;
 
-  padding: 1.5% 35px;
+  padding: 0.8vh 3.3vw;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline-style: none;
 }
 
 .dark .llct-modal .button,
-.dark .llct-modal .more input[type="button"] {
-  background: #242424;
+.dark .llct-modal .more input[type='button'] {
+  background: rgba(63, 164, 253, 0.12);
+  backdrop-filter: blur(10px) saturate(200%);
+  border: 0;
 }
 
 .dark .llct-modal .button:hover,
-.dark .llct-modal .more input[type="button"]:hover {
+.dark .llct-modal .more input[type='button']:hover {
   background: #313131;
 }
 
 .dark .llct-modal .button:active,
-.dark .llct-modal .more input[type="button"]:active {
+.dark .llct-modal .more input[type='button']:active {
   background: #3f3f3f;
 }
 
 .llct-modal .button::after {
   position: absolute;
-  content: "";
+  content: '';
   left: 0;
   top: 0;
   width: 100%;
@@ -130,12 +136,12 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.llct-modal .more input[type="button"]:hover,
-.llct-modal .more input[type="button"]:focus {
+.llct-modal .more input[type='button']:hover,
+.llct-modal .more input[type='button']:focus {
   box-shadow: $shadow-1dp;
 }
 
-.llct-modal .more input[type="button"]:active {
+.llct-modal .more input[type='button']:active {
   box-shadow: $shadow-2dp;
 }
 
@@ -184,28 +190,29 @@
 .llct-modal .more {
   margin-top: 10px;
 
-  input[type="button"],
-  input[type="text"] {
+  input[type='button'],
+  input[type='text'] {
     width: 100%;
     padding: 3% 35px;
     margin: 10px 0px;
   }
 
-  input[type="button"] {
+  input[type='button'] {
     border: 0.5px solid rgba(20, 106, 236, 0.9);
     color: rgba(20, 106, 236, 0.9);
     font-family: $font;
     font-weight: 300;
   }
 
-  input[type="text"] {
+  input[type='text'] {
     border-radius: 5px;
     border: 0.5px solid rgba(20, 157, 236, 0.9);
+    outline: none;
 
     color: rgba(20, 106, 236, 0.9);
   }
 
-  input[type="text"]::placeholder {
+  input[type='text']::placeholder {
     color: rgba(179, 202, 236, 0.9);
     font-family: $font;
   }
@@ -216,11 +223,15 @@
     display: -webkit-flex;
     display: flex;
     height: 20px;
+    opacity: 0;
+    transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+
     visibility: hidden;
   }
 
   .error_text.show {
     visibility: visible;
+    opacity: 1;
   }
 
   .error_text i {
@@ -230,9 +241,10 @@
   }
 }
 
-.dark .llct-modal .more input[type="text"] {
+.dark .llct-modal .more input[type='text'] {
   background-color: #323232;
-  border: 0.5px solid rgba(23, 96, 138, 0.9);
+  border: 1px solid rgba(63, 164, 253, 0.7);
+  color: #3fa4fd;
 }
 
 // Modal error transition
@@ -256,11 +268,11 @@
 }
 
 .modal-error-enter-active {
-  transition: 250ms all $decelerate-ease;
+  transition: all 250ms $decelerate-ease;
   animation: shake 300ms $standard-ease;
 }
 .modal-error-leave-active {
-  transition: 200ms all $accelerate-ease;
+  transition: all 250ms $accelerate-ease;
 }
 .modal-error-enter,
 .modal-error-leave-to {

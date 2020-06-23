@@ -22,7 +22,7 @@
   overflow: visible;
 
   @media screen and (max-width: $tablet) {
-    height: 72px;
+    height: 8vh;
   }
 
   @media screen and (min-width: $tablet) and (max-width: $desktop) {
@@ -113,11 +113,13 @@
 }
 
 .llct-music-card .info .text {
+  height: auto;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: 15px;
 
   h3,
   p {
-    height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -185,22 +187,39 @@
 }
 
 .llct-music-card .info img {
-  width: 45px;
-  height: 45px;
+  width: calc(3vw + 4vh);
+  height: calc(3vw + 4vh);
+
+  max-width: 45px;
+  max-height: 45px;
   border-radius: 50%;
   margin-top: auto;
   margin-bottom: auto;
+
+  @media screen and (max-width: $tablet) {
+    max-width: 35px;
+    max-height: 35px;
+  }
 }
 
 .llct-music-card .info h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
+
+  @media screen and (max-width: $tablet) {
+    font-size: calc(9px + 0.3vh);
+  }
 }
 
 .llct-music-card .info p {
-  font-size: 12px;
+  font-size: 11px;
+  margin-top: -1px;
   color: #a0a0a0;
   font-weight: bold;
+
+  @media screen and (max-width: $tablet) {
+    font-size: calc(7px + 0.3vh);
+  }
 }
 
 .dark .llct-music-card .info p {

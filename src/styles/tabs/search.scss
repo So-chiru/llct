@@ -79,6 +79,10 @@
   width: 100%;
   margin-top: 5vh;
 
+  @media screen and (max-width: $tablet) {
+    margin-top: 10vh;
+  }
+
   display: flex;
 
   .inner {
@@ -88,7 +92,13 @@
   h1 {
     font-size: 26px;
     letter-spacing: -1.66px;
-  } 
+    font-weight: 300;
+
+    @media screen and (max-width: $tablet) {
+      font-size: calc(1.5vw + 2vh);
+      text-align: center;
+    }
+  }
 
   .big-icon {
     width: 200px;
@@ -96,11 +106,25 @@
     display: flex;
     position: relative;
 
+    margin-left: auto;
+    margin-right: auto;
+
+    @media screen and (max-width: $tablet) {
+      width: 150px;
+      height: 150px;
+
+      .material-icons {
+        font-size: calc(4vw + 4vh);
+      }
+    }
+
     .material-icons {
       margin: auto;
       font-size: 100px;
 
-      animation: bigIconText 5s cubic-bezier(.2,.5,.5,.9) infinite;
+      
+
+      animation: bigIconText 5s cubic-bezier(0.2, 0.5, 0.5, 0.9) infinite;
     }
 
     .bg {
@@ -111,14 +135,13 @@
       border-radius: 50%;
       background-color: rgba(172, 172, 172, 0.12);
 
-
-      animation: bigIcon 5s cubic-bezier(.2,.5,.5,.9) infinite;
+      animation: bigIcon 5s cubic-bezier(0.2, 0.5, 0.5, 0.9) infinite;
     }
   }
 }
 
 .dark .search-music-nores {
   .big-icon .bg {
-      background-color: rgba(172, 172, 172, 0.12);
+    background-color: rgba(172, 172, 172, 0.12);
   }
 }

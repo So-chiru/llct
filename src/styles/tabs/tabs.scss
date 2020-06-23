@@ -38,8 +38,13 @@
 }
 
 .llct-tab-title.active {
-  margin-top: 30px;
+  margin-top: 3.3vh;
+  margin-bottom: 3vh;
   opacity: 1;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 4vh;
+  }
 }
 
 .llct-tab-title h1 {
@@ -48,7 +53,7 @@
   color: #151515;
 
   @media screen and (max-width: $tablet) {
-    font-size: 30px;
+    font-size: calc(1.6vw + 3vh);
   }
 }
 

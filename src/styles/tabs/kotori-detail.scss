@@ -36,6 +36,10 @@
       }
     }
 
+    @media screen and (max-width: $tablet) {
+      height: 90%;
+    }
+
     .remove::after {
       content: "";
       position: absolute;
@@ -102,19 +106,17 @@
     }
 
     .meta h1 {
-      font-size: 36px;
+      font-size: calc(1.8vw + 1.4vh);
       margin-bottom: 5px;
-
-      @media screen and (max-width: $tablet) {
-        font-size: 26px;
-      }
     }
 
     .meta h3 {
       color: #a0a0a0;
 
+      font-size: 16px;
+
       @media screen and (max-width: $tablet) {
-        font-size: 13px;
+        font-size: calc(1vw + 1vh);
       }
     }
   }

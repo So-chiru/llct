@@ -1,4 +1,4 @@
-@import "__global.scss";
+@import '__global.scss';
 
 .llct-card {
   background-color: #333;
@@ -20,7 +20,7 @@
   @media screen and (max-width: $tablet) {
     min-width: 70vw;
     max-width: 400px;
-    height: 182px;
+    height: 24vh;
   }
 }
 
@@ -28,7 +28,7 @@
   background-color: rgba(32, 32, 32, 0.3);
 }
 
-.llct-card[data-clickable="true"] {
+.llct-card[data-clickable='true'] {
   cursor: pointer;
 
   &:hover > .llct-card-bg,
@@ -49,7 +49,7 @@
   }
 }
 
-.llct-card[data-dragging="true"] {
+.llct-card[data-dragging='true'] {
   cursor: grabbing;
 }
 
@@ -73,7 +73,7 @@
   margin: 0;
 
   @media screen and (max-width: $tablet) {
-    font-size: 20px;
+    font-size: calc(1vw + 2vh);
     line-height: 90%;
     margin-top: 5px;
   }
@@ -85,6 +85,10 @@
   color: rgba(240, 240, 240, 0.8);
   margin: 0;
   margin-bottom: -2.5px;
+
+  @media screen and (max-width: $tablet) {
+    font-size: calc(1vw + 1vh);
+  }
 }
 
 .llct-card-content h3.skeleton {
@@ -122,6 +126,14 @@
   margin: 0;
   margin-bottom: auto;
   overflow: hidden;
+
+  @media screen and (max-width: $tablet) {
+    font-size: calc(1vw + 1vh);
+
+    .material-icons {
+      font-size: calc(2vw + 1vh);
+    }
+  }
 }
 
 .llct-card-content p.ext_url {

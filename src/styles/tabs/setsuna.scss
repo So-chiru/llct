@@ -38,6 +38,10 @@
       font-size: 14px;
       margin: 0;
       font-weight: bold;
+
+      @media screen and (max-width: $tablet) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -84,6 +88,7 @@
       font-weight: 500;
       flex: 9;
       margin-left: 40px;
+      font-size: 14px;
     }
 
     .control {

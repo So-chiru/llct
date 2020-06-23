@@ -1,7 +1,7 @@
 Vue.component('llct-toast', {
   template: `
   <transition name="llct-toast" appear>
-    <div class="llct-toast" :class="{hover: this.$root.clickCb}" :data-type="this.$root.type" :key="this.$root.id" v-show="this.$root.open">
+    <div class="llct-toast" :class="{hover: this.$root.clickCb}" :title="this.$root.content" :data-type="this.$root.type" :key="this.$root.id" v-show="this.$root.open">
       <div class="contents" v-on:click="click">
         <div class="text">
           <i class="material-icons">{{this.$root.icon}}</i>
