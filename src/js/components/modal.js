@@ -8,12 +8,12 @@ Vue.component('llct-modal', {
         <div class="more" :class="{error: this.$root.error}">
           <input v-for="(item, index) in this.$root.inputs" :data-index="index" v-on:click="inputClickCb" v-on:keyup="inputEnterCb" :type="item.type" :value="item.value || item.default" :data-limit="item.limit" :placeholder="item.placeholder" autofocus></input>
           <transition name="modal-error">
-            <p class="error_text" :class="{show: this.$root.error}" :key="this.$root.errorShake"><i class="material-icons">warning</i> {{this.$root.error || ''}}</p>
+            <p class="error_text" :class="{show: this.$root.error}" :key="this.$root.errorShake"><i v-if="this.$root.error" class="material-icons">warning</i> {{this.$root.error || ''}}</p>
           </transition>
         </div>
         <div class="buttons_list">
           <div class="button_wrap">
-            <div class="button" v-if="this.$root.acceptBtnNeed" v-on:click="accept">확인</div>
+            <div class="button" v-if="this.$root.acceptBtnNeed" v-on:click="accept">{{this.$root.acceptText || '확인'}}</div>
             <div class="button" v-on:click="this.$root.hide">닫기</div>
           </div>
         </div>
@@ -110,7 +110,7 @@ window.addEventListener('load', () => {
       }
     },
     methods: {
-      update (title, content, inputs, accept, close, confirm) {
+      update (title, content, inputs, accept, close, confirm, acceptText) {
         this.error = null
         this.enterDone = false
 
@@ -126,6 +126,8 @@ window.addEventListener('load', () => {
           this.acceptCb = () => {}
           this.closeCb = accept
         }
+
+        this.acceptText = acceptText || '확인'
       },
 
       inputCb (el, index) {
@@ -184,8 +186,8 @@ window.addEventListener('load', () => {
     }
   })
 
-  window.showModal = (title, content, inputs, accept, close, confirm) => {
-    modal.update(title, content, inputs, accept, close, confirm)
+  window.showModal = (title, content, inputs, accept, close, confirm, acceptText) => {
+    modal.update(title, content, inputs, accept, close, confirm, acceptText)
     modal.show()
   }
 

@@ -2,7 +2,7 @@
 
 .llct-card {
   background-color: #333;
-  border-radius: 10px;
+  border-radius: 13.3px;
   transform: translateY(0px);
   overflow: hidden;
   letter-spacing: -0.33px;
@@ -93,7 +93,7 @@
 
 .llct-card-content h3.skeleton {
   background: rgb(233, 233, 233);
-  border-radius: 10px;
+  border-radius: 13.3px;
   width: 130px;
   min-height: 18px;
   margin-bottom: 5px;
@@ -102,7 +102,7 @@
 
 .llct-card-content h1.skeleton {
   background: rgb(240, 240, 240);
-  border-radius: 10px;
+  border-radius: 13.3px;
   width: 200px;
   min-height: 24px;
   animation: skeleton 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
@@ -166,7 +166,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  border-radius: 10px;
+  border-radius: 13.3px;
 }
 
 .llct-card-bg.spoiler img {
@@ -242,7 +242,7 @@
   opacity: 1;
   transform: translateY(0);
   width: 100%;
-  border-radius: 10px;
+  border-radius: 13.3px;
   image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
 }

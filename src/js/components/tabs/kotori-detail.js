@@ -58,7 +58,8 @@ Vue.component('llct-kotori-detail', {
           this.remove()
         },
         () => {},
-        true
+        true,
+        '삭제'
       )
     },
 

@@ -91,7 +91,9 @@ Vue.component('llct-kotori', {
           }
         ],
         this.playlistCb,
-        () => {}
+        () => { },
+        null,
+        '만들기'
       )
     },
 

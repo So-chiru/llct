@@ -124,7 +124,7 @@ $mobile-thumb-size: 12px;
 .player-progress {
   display: -webkit-flex;
   display: flex;
-  flex: 5;
+  flex: 3;
 
   @media screen and (max-width: $tablet) {
     grid-area: 2 / 1 / 3 / 5;
@@ -196,7 +196,7 @@ $mobile-thumb-size: 12px;
   .bar-current,
   .bar-bg,
   .bar-load {
-    border-radius: 5px;
+    border-radius: 8.3px;
   }
 
   .bar-current {
@@ -469,7 +469,7 @@ $mobile-thumb-size: 12px;
     margin: auto;
     z-index: 20;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 13.3px;
     padding: 30px 40px;
     transform: translateY(10px);
 
