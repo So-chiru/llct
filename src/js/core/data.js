@@ -132,7 +132,8 @@ const LLCTData = class {
       this.runningGetSong = true
 
       fetch(this.base + '/lists', {
-        method: 'GET'
+        method: 'GET',
+        mode: 'cors'
       })
         .then(res => {
           return res.json()
@@ -163,7 +164,8 @@ const LLCTData = class {
   recommended () {
     return new Promise((resolve, reject) => {
       fetch(this.base + '/recommend', {
-        method: 'GET'
+        method: 'GET',
+        mode: 'cors'
       })
         .then(res => {
           return res.json()
@@ -186,7 +188,8 @@ const LLCTData = class {
   defaultPlaylist () {
     return new Promise((resolve, reject) => {
       fetch(this.base + '/playlists', {
-        method: 'GET'
+        method: 'GET',
+        mode: 'cors'
       })
         .then(res => {
           return res.json()
@@ -209,7 +212,8 @@ const LLCTData = class {
   karaoke (id) {
     return new Promise((resolve, reject) => {
       fetch(this.base + '/call/' + id, {
-        method: 'GET'
+        method: 'GET',
+        mode: 'cors'
       })
         .then(res => {
           return res.json()
