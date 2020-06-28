@@ -98,7 +98,7 @@ const llctSettingDefault = [
     id: 'useNativeMode',
     category: 1,
     type: 'checkbox',
-    default: false,
+    default: true,
     func: v => {
       window.location.reload()
     }
