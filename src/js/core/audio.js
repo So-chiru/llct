@@ -147,7 +147,9 @@ const LLCTAudio = class {
 
     this.audio.events.on('load', data => {
       if (this.useNative) {
-        this.context.src = URL.createObjectURL(new File([data], 'audio'))
+        this.context.src = URL.createObjectURL(
+          new Blob([data], { type: 'audio/mp3' })
+        )
         this.context.playbackRate = this.playbackRate
 
         this.context.addEventListener('canplaythrough', () => {

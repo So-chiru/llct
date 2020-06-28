@@ -94,7 +94,7 @@ const llctSettingDefault = [
   },
   {
     title: 'Native 플레이어 모드',
-    desc: 'HTML5 플레이어를 사용합니다. 자세한 내용은 <a href="https://www.notion.so/lovelivec/4c5a0ae6b02b48a4b37d53b52fbd94a0">LLCT 사용법</a>에서 참고하세요.',
+    desc: 'Audio API 대신 기본 HTML5 플레이어를 사용합니다. 자세한 내용은 <a href="https://www.notion.so/lovelivec/4c5a0ae6b02b48a4b37d53b52fbd94a0">LLCT 사용법</a>에서 참고하세요.',
     id: 'useNativeMode',
     category: 1,
     type: 'checkbox',

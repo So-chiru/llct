@@ -8,7 +8,7 @@ Vue.component('llct-app', {
       <i class="material-icons" v-if="!SetsunaTab" v-on:click="changeTab(5)" tabindex="2" v-on:keypress="ev => ev.keyCode == 13 && changeTab(5)">settings</i>
     </div>
     <div class="llct-tab-margin" :class="{hidden: this.$root.hide}"></div>
-    <transition-group name="llct-tabs" tag="div" mode="out-in">
+    <transition-group name="llct-tabs" tag="div">
       <llct-ayumu key="tab0" v-show="AyumuTab" :current="AyumuTab"></llct-ayumu>
       <llct-chika key="'tab1" v-show="ChikaTab" :current="ChikaTab"></llct-chika>
       <llct-kotori key="tab2" v-show="KotoriTab" :current="KotoriTab"></llct-kotori>
