@@ -256,11 +256,11 @@ Vue.component('llct-karaoke', {
   },
   computed: {
     showLyrics () {
-      return LLCTSettings.get('useLyrics')
+      return LLCTSettings.get('useLyrics') || false
     },
 
     useImage () {
-      return LLCTSettings.get('useImageInstead')
+      return LLCTSettings.get('useImageInstead') || false
     }
   },
   watch: {

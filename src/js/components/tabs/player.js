@@ -52,8 +52,9 @@ Vue.component('llct-player', {
         <input type="range" v-model="playbackSpeed" max="2" min="0.2" step="0.05" value="1"></input>
         <h3>플레이리스트 반복 재생 <span class="value-indicator">{{playlistRepeat && '켜짐' || '꺼짐'}}</span></h3>
         <input type="checkbox" v-model="playlistRepeat" checked="false"></input>
-        <h3>공연장 효과 <span class="value-indicator">{{useLiveEffects && '켜짐' || '꺼짐'}}</span></h3>
-        <input type="checkbox" v-model="useLiveEffects" checked="false"></input>
+        <h3>공연장 효과 <span class="value-indicator">{{useNativeMode ? '사용 불가능' : useLiveEffects && '켜짐' || '꺼짐'}}</span></h3>
+        <input type="checkbox" v-model="useLiveEffects" :disabled="useNativeMode" checked="false"></input>
+        <p v-if="useNativeMode" class="muted_warning"><i class="material-icons muted_warning">warning</i>이 효과는 Native 모드에서 사용할 수 없습니다.</p>
         </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
@@ -84,6 +85,7 @@ Vue.component('llct-player', {
       playlistRepeat:
         localStorage.getItem('LLCT.Audio.RepeatPlaylist') == 'true',
       useLiveEffects: localStorage.getItem('LLCT.Audio.LiveEffects') == 'true',
+      useNativeMode: LLCTSettings.get('useNativeMode'),
       karaoke: {},
       updates: null,
       displayVertical: false,
@@ -280,6 +282,7 @@ Vue.component('llct-player', {
         return
       }
 
+      this.useNativeMode = LLCTSettings.get('useNativeMode')
       this.usePlayer = LLCTSettings.get('usePlayer')
       this.phase = 'fetching'
       this.loading = true

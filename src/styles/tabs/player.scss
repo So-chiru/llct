@@ -537,6 +537,19 @@ $mobile-thumb-size: 12px;
       margin-left: 5px;
       color: rgb(121, 121, 121);
     }
+
+    .muted_warning {
+      font-size: 12px;
+      color: rgb(189, 112, 40);
+      display: -webkit-flex;
+      display: flex;
+
+      i {
+        font-size: 12px;
+        margin: auto;
+        margin-right: 5px;
+      }
+    }
   }
 }
 

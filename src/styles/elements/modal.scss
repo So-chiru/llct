@@ -190,6 +190,10 @@
     box-sizing: border-box;
     padding: 3% 35px;
     margin: 10px 0px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 
   input[type='button'] {

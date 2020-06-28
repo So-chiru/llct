@@ -2,6 +2,7 @@ const LLCTSettingCategory = ['UI', '플레이어', '미디어']
 const llctSettingDefault = [
   {
     title: '다크모드 사용',
+    desc: '사이트를 어둡게 만듭니다.',
     id: 'useDarkMode',
     category: 0,
     type: 'checkbox',
@@ -22,6 +23,7 @@ const llctSettingDefault = [
   },
   {
     title: '동작 줄이기',
+    desc: '사이트의 모든 전환 효과를 비활성화합니다.',
     id: 'reduceMotion',
     category: 0,
     type: 'checkbox',
@@ -42,6 +44,7 @@ const llctSettingDefault = [
   },
   {
     title: '번역된 제목 표시',
+    desc: '음악 카드, 음악 정보에서 일본어 제목 대신 한글을 표시합니다.',
     id: 'useTranslatedTitle',
     category: 0,
     type: 'checkbox',
@@ -49,6 +52,7 @@ const llctSettingDefault = [
   },
   {
     title: '곡 플레이어 활성화',
+    desc: '곡 플레이어를 사용합니다. 비활성화시 노래를 로딩하지 않고 콜만 표시합니다.',
     id: 'usePlayer',
     category: 1,
     type: 'checkbox',
@@ -61,6 +65,7 @@ const llctSettingDefault = [
   },
   {
     title: '가사 사용',
+    desc: '가사를 사용합니다. 비활성화시 가사를 표시하지 않습니다.',
     id: 'useLyrics',
     category: 1,
     type: 'checkbox',
@@ -68,6 +73,7 @@ const llctSettingDefault = [
   },
   {
     title: '타임 싱크 콜표대신 이미지 사용',
+    desc: '시간에 맞춰 가사가 표시되는 콜표 대신 기존 이미지 방식을 사용합니다.',
     id: 'useImageInstead',
     category: 1,
     type: 'checkbox',
@@ -75,6 +81,7 @@ const llctSettingDefault = [
   },
   {
     title: '노래 재생시 가감속 효과 사용',
+    desc: '노래 재생 / 멈춤시 볼륨이 커/작아지는 효과를 사용합니다. (Native에서 사용 불가)',
     id: 'useFadeInOut',
     category: 1,
     type: 'checkbox',
@@ -86,7 +93,19 @@ const llctSettingDefault = [
     }
   },
   {
+    title: 'Native 플레이어 모드',
+    desc: 'HTML5 플레이어를 사용합니다. 자세한 내용은 <a href="https://www.notion.so/lovelivec/4c5a0ae6b02b48a4b37d53b52fbd94a0">LLCT 사용법</a>에서 참고하세요.',
+    id: 'useNativeMode',
+    category: 1,
+    type: 'checkbox',
+    default: false,
+    func: v => {
+      window.location.reload()
+    }
+  },
+  {
     title: '페이지 전반에 사용되는 이미지 활성화',
+    desc: '노래 카드의 이미지를 표시하지 않습니다. 데이터 절약에 도움이 될 수 있습니다.',
     id: 'useImages',
     category: 2,
     type: 'checkbox',
@@ -94,6 +113,7 @@ const llctSettingDefault = [
   },
   {
     title: '청색약/맹 모드',
+    desc: '색맹 사용자를 위해 가사의 색상을 구분 가능하게 조정 합니다.',
     id: 'useTritanomaly',
     disableAt: 'useMonochromacy',
     category: 2,
@@ -111,6 +131,7 @@ const llctSettingDefault = [
   },
   {
     title: '완전 색맹 모드',
+    desc: '색맹 사용자를 위해 가사의 색상을 구분 가능하게 조정 합니다.',
     id: 'useMonochromacy',
     category: 2,
     type: 'checkbox',

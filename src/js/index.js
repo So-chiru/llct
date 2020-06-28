@@ -45,7 +45,7 @@ const preInit = () => {
 }
 
 const init = () => {
-  var audio = new LLCTAudio(false)
+  var audio = new LLCTAudio(false, null, LLCTSettings.get('useNativeMode') || false)
   window.audio = audio
 
   window.audio.useFadeInOut = LLCTSettings.get('useFadeInOut') || false

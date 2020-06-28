@@ -107,7 +107,7 @@ const LLCTAudioSource = class {
 }
 
 const LLCTAudio = class {
-  constructor (noMediaSession, noEffects) {
+  constructor (noMediaSession, noEffects, useNativePlayer) {
     this.audio = new LLCTAudioSource()
     this.animation = null
     this.originVolume = 0.75
@@ -121,11 +121,17 @@ const LLCTAudio = class {
       this.disableEffects = true
     }
 
+    this.useNative = useNativePlayer
+
     this.transitionTime = 0.2
     this.audioTime = 0
     this.playbackRate = 1
 
-    this.initAudioAPI()
+    if (this.useNative) {
+      this.initPlayer()
+    } else {
+      this.initAudioAPI()
+    }
 
     this.supportMedia = !noMediaSession && navigator.mediaSession
 
@@ -140,11 +146,28 @@ const LLCTAudio = class {
     })
 
     this.audio.events.on('load', data => {
+      if (this.useNative) {
+        this.context.src = URL.createObjectURL(new File([data], 'audio'))
+        this.context.playbackRate = this.playbackRate
+
+        this.context.addEventListener('canplaythrough', () => {
+          this.loading = false
+          this.loaded = true
+          this.duration = this.context.duration
+          this.events.run('playable')
+        })
+
+        if (this.playOnLoad) {
+          this.play()
+        }
+
+        return
+      }
+
       this.context.decodeAudioData(
         data,
         buffer => {
           this.currentTime = 0
-          this.loadOffset = Math.max(0, (new Date() - this.loadStart) / 1000)
           this.loaded = true
 
           this.savedBuffer = buffer
@@ -202,6 +225,12 @@ const LLCTAudio = class {
   }
 
   createConvolver () {
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Audio API mode, not native player mode.'
+      )
+    }
+
     if (this.disableEffects) {
       return
     }
@@ -229,6 +258,12 @@ const LLCTAudio = class {
   }
 
   createCompressor () {
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Audio API mode, not native player mode.'
+      )
+    }
+
     this.compressor = this.context.createDynamicsCompressor()
     this.compressor.connect(this.destination)
 
@@ -240,6 +275,12 @@ const LLCTAudio = class {
   }
 
   destroyConvolver () {
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Audio API mode, not native player mode.'
+      )
+    }
+
     if (this.convolver) {
       this.convolver.disconnect()
       this.convolver = null
@@ -247,10 +288,21 @@ const LLCTAudio = class {
   }
 
   destroyCompressor () {
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Audio API mode, not native player mode.'
+      )
+    }
+
     if (this.compressor) {
       this.compressor.disconnect()
       this.compressor = null
     }
+  }
+
+  initPlayer () {
+    this.context = document.createElement('audio')
+    document.querySelector('body').appendChild(this.context)
   }
 
   initAudioAPI () {
@@ -319,6 +371,12 @@ const LLCTAudio = class {
   }
 
   liveEffect (toggle) {
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Audio API mode, not native player mode.'
+      )
+    }
+
     if (toggle) {
       this.createConvolver()
     } else {
@@ -327,6 +385,12 @@ const LLCTAudio = class {
   }
 
   createSource (buffer) {
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Audio API mode, not native player mode.'
+      )
+    }
+
     if (this.source) {
       try {
         this.destroySource()
@@ -373,8 +437,13 @@ const LLCTAudio = class {
     if (typeof v === 'string') v = Number(v)
 
     this.originVolume = v
-    this.dry.gain.value = v * (this.convolver ? 0.8 : 1)
-    this.wet.gain.value = v * 0.2
+
+    if (this.useNative) {
+      this.context.volume = v
+    } else {
+      this.dry.gain.value = v * (this.convolver ? 0.8 : 1)
+      this.wet.gain.value = v * 0.2
+    }
   }
 
   get speed () {
@@ -384,8 +453,12 @@ const LLCTAudio = class {
   set speed (v) {
     this.playbackRate = v
 
-    if (this.source && this.source.playbackRate) {
-      this.source.playbackRate.value = v
+    if (this.useNative) {
+      this.context.playbackRate = v
+    } else {
+      if (this.source && this.source.playbackRate) {
+        this.source.playbackRate.value = v
+      }
     }
   }
 
@@ -462,9 +535,12 @@ const LLCTAudio = class {
     }
 
     try {
-      this.createSource()
-
-      this.source.start(this.context.currentTime, offset || this.audioTime)
+      if (this.useNative) {
+        this.context.play()
+      } else {
+        this.createSource()
+        this.source.start(this.context.currentTime, offset || this.audioTime)
+      }
 
       if (this.useFadeInOut && !skipFade) {
         this.fadeIn()
@@ -489,7 +565,13 @@ const LLCTAudio = class {
     }
 
     try {
-      this.source.stop(this.context.currentTime + (this.useFadeInOut ? 0.3 : 0))
+      if (this.useNative) {
+        this.context.pause()
+      } else {
+        this.source.stop(
+          this.context.currentTime + (this.useFadeInOut ? 0.3 : 0)
+        )
+      }
     } catch (e) {
       console.error(e)
     }
@@ -507,11 +589,15 @@ const LLCTAudio = class {
   }
 
   get currentTime () {
-    return this.audioTime
+    return this.useNative ? this.context.currentTime : this.audioTime
   }
 
   set currentTime (v) {
-    this.audioTime = v
+    if (this.useNative) {
+      this.context.currentTime = v
+    } else {
+      this.audioTime = v
+    }
   }
 
   get duration () {

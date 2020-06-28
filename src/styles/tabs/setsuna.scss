@@ -1,4 +1,4 @@
-@import "__global";
+@import '__global';
 
 .setsuna-info,
 .setsuna-in {
@@ -72,6 +72,7 @@
   & > h3 {
     font-size: 24px;
     margin: 0;
+    margin-bottom: 5px;
   }
 }
 
@@ -83,12 +84,31 @@
     transition: 250ms border $standard-ease;
     padding: 10px 0px;
 
-    p {
+    .info {
       margin: 0;
-      font-weight: 500;
       flex: 9;
       margin-left: 40px;
-      font-size: 14px;
+
+      p {
+        margin: 0;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      p.muted {
+        font-weight: 300;
+        font-size: 12px;
+        opacity: 0.7;
+      }
+
+      a {
+        text-decoration: none;
+        color: #2d78e7;
+
+        &:hover {
+          color: rgb(14, 92, 209);
+        }
+      }
     }
 
     .control {
