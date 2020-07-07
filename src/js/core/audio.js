@@ -111,6 +111,7 @@ const LLCTAudio = class {
     this.audio = new LLCTAudioSource()
     this.animation = null
     this.originVolume = 0.75
+    this.originBassVolume = 0
     this.events = new LLCTEvent()
     this.playlists = {}
     this.repeat = false
@@ -203,6 +204,7 @@ const LLCTAudio = class {
     })
 
     this.volume = 0.75
+    this.bassVolume = 0
   }
 
   fadeOut () {
@@ -318,7 +320,16 @@ const LLCTAudio = class {
     this.dry = this.context.createGain()
     this.wet = this.context.createGain()
 
-    this.dry.connect(this.compressor)
+    this.bassFilter = this.context.createBiquadFilter()
+    this.bassFilter.type = 'lowshelf'
+    this.bassFilter.frequency.value = 145
+    this.bassFilter.Q.value = 40
+    this.bassFilter.gain.value = this.bassVolume
+
+    this.dry.connect(this.bassFilter)
+    this.bassFilter.connect(this.compressor)
+
+    //this.dry.connect(this.compressor)
     this.wet.connect(this.compressor)
 
     let timing = () => {
@@ -429,6 +440,20 @@ const LLCTAudio = class {
 
   get playing () {
     return !this.paused
+  }
+
+  get bassVolume() {
+    return this.originBassVolume
+  }
+
+  set bassVolume(v) {
+    if (typeof v === 'string') v = Number(v)
+
+    this.originBassVolume = v
+
+    if (!this.useNative) {
+      this.bassFilter.gain.value = v
+    }
   }
 
   get volume () {

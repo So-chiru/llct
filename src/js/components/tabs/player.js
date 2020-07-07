@@ -54,7 +54,9 @@ Vue.component('llct-player', {
         <input type="checkbox" v-model="playlistRepeat" checked="false"></input>
         <h3>공연장 효과 <span class="value-indicator">{{useNativeMode ? '사용 불가능' : useLiveEffects && '켜짐' || '꺼짐'}}</span></h3>
         <input type="checkbox" v-model="useLiveEffects" :disabled="useNativeMode" checked="false"></input>
-        <p v-if="useNativeMode" class="muted_warning"><i class="material-icons muted_warning">warning</i>이 효과는 Native 모드에서 사용할 수 없습니다.</p>
+        <h3>베이스 EQ <span class="value-indicator" :class="{warn: Number(audioBassVolume) >= 7.5}">{{useNativeMode ? '사용 불가능' : Number(audioBassVolume).toFixed(2) + 'db'}}</span></h3>
+        <input type="range" :disabled="useNativeMode" v-model="audioBassVolume" max="15" min="-5" step="0.25"></input>
+        <p v-if="useNativeMode" class="muted_warning"><i class="material-icons muted_warning">warning</i>음악 효과는 Native 모드에서 사용할 수 없습니다.</p>
         </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
@@ -81,6 +83,7 @@ Vue.component('llct-player', {
       audio: window.audio,
       audioVolume: localStorage.getItem('LLCT.Audio.audioVolume') || 0.75,
       tickVolume: localStorage.getItem('LLCT.Audio.tickVolume') || 1,
+      audioBassVolume: localStorage.getItem('LLCT.Audio.audioBassVolume') || 0,
       playbackSpeed: localStorage.getItem('LLCT.Audio.playbackSpeed') || 1,
       playlistRepeat:
         localStorage.getItem('LLCT.Audio.RepeatPlaylist') == 'true',
@@ -340,6 +343,7 @@ Vue.component('llct-player', {
       )
 
       audio.volume = this.audioVolume
+      audio.bassVolume = this.audioBassVolume
       audio.speed = this.playbackSpeed
 
       if (karaokeTick) {
@@ -400,6 +404,11 @@ Vue.component('llct-player', {
     audioVolume (v) {
       window.audio.volume = v
       localStorage.setItem('LLCT.Audio.audioVolume', v)
+    },
+
+    audioBassVolume (v) {
+      window.audio.bassVolume = v
+      localStorage.setItem('LLCT.Audio.audioBassVolume', v)
     },
 
     tickVolume (v) {

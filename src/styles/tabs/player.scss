@@ -464,6 +464,10 @@ $mobile-thumb-size: 12px;
     cursor: pointer;
   }
 
+  h3 {
+    margin-bottom: 5px;
+  }
+
   .content {
     transition: all 200ms $accelerate-ease;
     margin: auto;
@@ -536,6 +540,10 @@ $mobile-thumb-size: 12px;
       font-size: 12px;
       margin-left: 5px;
       color: rgb(121, 121, 121);
+
+      &.warn {
+        color: rgb(212, 96, 50);
+      }
     }
 
     .muted_warning {
