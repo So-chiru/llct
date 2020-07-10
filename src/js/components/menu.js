@@ -1,7 +1,7 @@
 Vue.component('llct-menu', {
   template: `<div class="llct-menu-in" :class="{hidden: currentTab == 5}">
     <transition name="m-button" v-for="(item, i) in lists" appear @before-enter="beforeEnter" @after-enter="afterEnter">
-      <div class="m-button" :data-index="i + 1" :tabindex="40 + (i + 1)" v-on:click="changeTab(i)" v-on:keypress="(ev) => ev.keyCode == 13 && changeTab(i)" v-bind:class="{active: currentTab == i}">
+      <div class="m-button" :data-index="i + 1" :tabindex="40 + (i + 1)" v-on:pointerup="changeTab(i)" v-on:keypress="(ev) => ev.keyCode == 13 && changeTab(i)" v-bind:class="{active: currentTab == i}">
         <i class="material-icons" :title="item.title">{{item.icon}}</i>
         <p>{{item.title}}</p>
       </div>

@@ -9,7 +9,7 @@ Vue.component('llct-searchbox', {
       <div class="enter_wrap" tabindex="11" v-on:keypress="ev => ev.keyCode == 13 && enter(this.$el.querySelector('input').value)" v-on:click="() => enter(this.$el.querySelector('input').value)">
         <i class="material-icons">keyboard_return</i>
       </div>
-      <transition name="llct-card">
+      <transition name="llct-down-upin">
         <div class="extra-text" :key="'searchbox_' + extraText" v-show="extraText && extraText.length">
           <p>{{extraText || ''}}</p>
         </div>

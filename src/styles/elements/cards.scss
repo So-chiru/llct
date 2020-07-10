@@ -250,7 +250,7 @@
 // Card Transition
 
 .llct-card-enter-active {
-  transition: all 450ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 250ms $defaultCubic;
 }
 .llct-card-leave-active {
   display: none;
@@ -258,10 +258,25 @@
 .llct-card-enter,
 .llct-card-leave-to {
   position: absolute;
-  transform: translateY(10px);
   opacity: 0;
 }
 .llct-card-enter-to {
+  opacity: 1;
+}
+
+.llct-down-upin-enter-active {
+  transition: all 250ms $defaultCubic;
+}
+.llct-down-upin-leave-active {
+  display: none;
+}
+.llct-down-upin-enter,
+.llct-down-upin-leave-to {
+  position: absolute;
+  transform: translateY(10px);
+  opacity: 0;
+}
+.llct-down-upin-enter-to {
   transform: translateY(0px);
   opacity: 1;
 }

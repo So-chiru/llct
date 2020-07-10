@@ -1,13 +1,13 @@
 Vue.component('llct-chika', {
   template: `<div class="llct-tab" id="tab1">
     <div class="group-select">
-      <div class="group-btn" v-on:click="changeGroup(0)" v-bind:class="{active: this.currentGroup == this.groups[0]}">
+      <div class="group-btn" v-on:pointerup="changeGroup(0)" v-bind:class="{active: this.currentGroup == this.groups[0]}">
         <llct-image :shouldShow="true" src="/assets/us.png"></llct-image>
       </div>
-      <div class="group-btn" v-on:click="changeGroup(1)" v-bind:class="{active: this.currentGroup == this.groups[1]}">
+      <div class="group-btn" v-on:pointerup="changeGroup(1)" v-bind:class="{active: this.currentGroup == this.groups[1]}">
         <llct-image :shouldShow="true" src="/assets/aqours.png"></llct-image>
       </div>
-      <div class="group-btn" v-on:click="changeGroup(2)" v-bind:class="{active: this.currentGroup == this.groups[2]}">
+      <div class="group-btn" v-on:pointerup="changeGroup(2)" v-bind:class="{active: this.currentGroup == this.groups[2]}">
         <llct-image :shouldShow="true" src="/assets/niji.png"></llct-image>
       </div>
     </div>

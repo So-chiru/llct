@@ -9,12 +9,12 @@ Vue.component('llct-app', {
     </div>
     <div class="llct-tab-margin" :class="{hidden: this.$root.hide}"></div>
     <transition-group name="llct-tabs" tag="div">
-      <llct-ayumu key="tab0" v-show="AyumuTab" :current="AyumuTab"></llct-ayumu>
-      <llct-chika key="'tab1" v-show="ChikaTab" :current="ChikaTab"></llct-chika>
-      <llct-kotori key="tab2" v-show="KotoriTab" :current="KotoriTab"></llct-kotori>
-      <llct-search key="tab3" v-show="SearchTab" :current="SearchTab"></llct-search>
-      <llct-player key="tab4" v-show="PlayerTab" :current="PlayerTab"></llct-player>
-      <llct-setsuna key="tab5" v-show="SetsunaTab" :current="SetsunaTab"></llct-setsuna>
+      <llct-ayumu key="AyumuTab" v-show="AyumuTab" :current="AyumuTab"></llct-ayumu>
+      <llct-chika key="ChikaTab" v-show="ChikaTab" :current="ChikaTab"></llct-chika>
+      <llct-kotori key="KotoriTab" v-show="KotoriTab" :current="KotoriTab"></llct-kotori>
+      <llct-search key="SearchTab" v-show="SearchTab" :current="SearchTab"></llct-search>
+      <llct-player key="PlayerTab" v-show="PlayerTab" :current="PlayerTab"></llct-player>
+      <llct-setsuna key="SetsunaTab" v-show="SetsunaTab" :current="SetsunaTab"></llct-setsuna>
     </transition-group>
   </div>`,
   data: () => {

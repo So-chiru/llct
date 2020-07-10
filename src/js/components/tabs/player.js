@@ -29,8 +29,8 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-btn">
-            <i v-if="usePlayer" class="material-icons" tabindex="5" v-show="!playing" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
-            <i v-if="usePlayer" class="material-icons" tabindex="6" v-show="playing" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="5" v-show="!playing && !play_onload" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="6" v-show="playing || play_onload" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
             <i v-if="usePlayer" class="material-icons" tabindex="7" v-show="audio.playlist" v-on:click="next" v-on:keypress="ev => ev.keyCode == '13' && next()" alt="다음 곡 스킵 버튼">skip_next</i>
             <i v-if="usePlayer" class="material-icons diff" tabindex="8" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat" v-on:keypress="ev => ev.keyCode == '13' && repeat()">sync</i>
             <i v-if="usePlayer" class="material-icons diff" tabindex="9" alt="설정 버튼" v-on:click="more" v-on:keypress="ev => ev.keyCode == '13' && more()">more_vert</i>
@@ -73,6 +73,7 @@ Vue.component('llct-player', {
       playing: false,
       playable: false,
       loading: false,
+      play_onload: false,
       progress: 0,
       phase: 'fetching',
       load_progress: 100,
@@ -109,6 +110,13 @@ Vue.component('llct-player', {
     },
 
     play () {
+      if (!this.playable) {
+        this.play_onload = true
+
+        return false
+      }
+
+      this.play_onload = false
       window.audio.play()
     },
 
@@ -117,7 +125,15 @@ Vue.component('llct-player', {
     },
 
     pause () {
+      if (this.play_onload) {
+        this.play_onload = false
+      }
+
       window.audio.pause()
+    },
+
+    playPause () {
+      return this[this.playing || this.play_onload ? 'pause' : 'play']()
     },
 
     first () {
@@ -209,7 +225,7 @@ Vue.component('llct-player', {
           if (this.displayVertical) this.displayVertical = false
           break
         case 32: // Space
-          audio.playPause()
+          this.playPause()
           ev.preventDefault()
           break
         case 37: // Arrow Left
@@ -313,10 +329,6 @@ Vue.component('llct-player', {
         this.load_progress = (done / size) * 100
       })
 
-      audio.events.on('playable', () => {
-        this.phase = 'ready'
-      })
-
       audio.events.on(
         'end',
         () => {
@@ -336,7 +348,14 @@ Vue.component('llct-player', {
       audio.events.on(
         'playable',
         () => {
+          this.phase = 'ready'
+
           this.playable = true
+
+          if (this.play_onload) {
+            this.play()
+          }
+
           this.timeUpdate()
         },
         'playerInstance'

@@ -157,12 +157,13 @@ const LLCTAudio = class {
           this.loading = false
           this.loaded = true
           this.duration = this.context.duration
-          this.events.run('playable')
-        })
 
-        if (this.playOnLoad) {
-          this.play()
-        }
+          this.events.run('playable')
+
+          if (this.playOnLoad) {
+            this.play()
+          }
+        })
 
         return
       }
@@ -175,12 +176,21 @@ const LLCTAudio = class {
 
           this.savedBuffer = buffer
 
-          if (this.playOnLoad) {
-            this.play()
+          if (!this.audioElement && this.supportMedia) {
+            this.audioElement = document.createElement('audio')
+            this.audioElement.setAttribute('autoplay', true)
+            this.audioElement.setAttribute('muted', true)
+            this.audioElement.volume = 0
+
+            document.querySelector('body').appendChild(this.audioElement)
           }
 
           this.loading = false
           this.events.run('playable')
+
+          if (this.playOnLoad) {
+            this.play()
+          }
         },
 
         e => 'Error with decoding audio data' + e.err
@@ -225,6 +235,7 @@ const LLCTAudio = class {
 
     this.loading = true
     this.audio.load(url)
+
     this.events.run('load')
   }
 
@@ -333,7 +344,11 @@ const LLCTAudio = class {
     this.wet.connect(this.compressor)
 
     let timing = () => {
-      requestAnimationFrame(timing)
+      if (document.hidden) {
+        setTimeout(timing, 0)
+      } else {
+        requestAnimationFrame(timing)
+      }
 
       if (typeof this.fadeTo !== 'undefined') {
         let e = quint(
@@ -442,11 +457,11 @@ const LLCTAudio = class {
     return !this.paused
   }
 
-  get bassVolume() {
+  get bassVolume () {
     return this.originBassVolume
   }
 
-  set bassVolume(v) {
+  set bassVolume (v) {
     if (typeof v === 'string') v = Number(v)
 
     this.originBassVolume = v
@@ -567,6 +582,22 @@ const LLCTAudio = class {
       } else {
         this.createSource()
         this.source.start(this.context.currentTime, offset || this.audioTime)
+
+        if (this.audioElement) {
+          if (
+            !this.audioElement.src ||
+            this.audioElement.dataset.duration != this.duration
+          ) {
+            this.audioElement.src = createSilentAudio(
+              Math.round(this.duration),
+              44100
+            )
+
+            this.audioElement.dataset.duration = this.duration
+          }
+
+          this.audioElement.play()
+        }
       }
 
       if (this.useFadeInOut && !skipFade) {
@@ -598,6 +629,10 @@ const LLCTAudio = class {
         this.source.stop(
           this.context.currentTime + (this.useFadeInOut ? 0.3 : 0)
         )
+
+        if (this.audioElement) {
+          this.audioElement.pause()
+        }
       }
     } catch (e) {
       console.error(e)
