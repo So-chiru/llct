@@ -351,10 +351,6 @@ const LLCTAudio = class {
         requestAnimationFrame(timing)
       }
 
-      if (this.paused) {
-        return
-      }
-
       if (typeof this.fadeTo !== 'undefined') {
         let e = quint(
           Math.max(
