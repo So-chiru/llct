@@ -95,7 +95,6 @@ const LLCTAudioSource = class {
         this.buffer = v
 
         this.events.run('load', v)
-        this.events.run('canplaythrough')
       })
       .catch(err => {
         this.buffer = null
@@ -142,10 +141,6 @@ const LLCTAudio = class {
 
     this.audio.events.on('loading', (f, s) => this.events.run('loading', f, s))
 
-    this.audio.events.on('canplaythrough', () => {
-      // Can play
-    })
-
     this.audio.events.on('load', data => {
       if (this.useNative) {
         this.context.src = URL.createObjectURL(
@@ -172,6 +167,7 @@ const LLCTAudio = class {
         data,
         buffer => {
           this.currentTime = 0
+          this.loading = false
           this.loaded = true
 
           this.savedBuffer = buffer
@@ -185,7 +181,6 @@ const LLCTAudio = class {
             document.querySelector('body').appendChild(this.audioElement)
           }
 
-          this.loading = false
           this.events.run('playable')
 
           if (this.playOnLoad) {
@@ -240,14 +235,14 @@ const LLCTAudio = class {
   }
 
   createConvolver () {
-    if (this.useNative) {
-      throw new Error(
-        'This feature is supported in the Audio API mode, not native player mode.'
-      )
-    }
-
     if (this.disableEffects) {
       return
+    }
+
+    if (this.useNative) {
+      throw new Error(
+        'This feature is supported in the Web Audio API mode, not in the native player mode.'
+      )
     }
 
     this.convolver = this.context.createConvolver()
@@ -285,8 +280,8 @@ const LLCTAudio = class {
     this.compressor.threshold.value = -30
     this.compressor.knee.value = 40
     this.compressor.ratio.value = 6
-    this.compressor.attack.value = 0.2
-    this.compressor.release.value = 0.25
+    this.compressor.attack.value = 0.02
+    this.compressor.release.value = 0.025
   }
 
   destroyConvolver () {
@@ -325,6 +320,12 @@ const LLCTAudio = class {
     this.context = new (window.AudioContext || window.webkitAudioContext)()
     this.loadStart = new Date()
     this.destination = this.context.destination
+    this.latency =
+      this.context.baseLatency && (this.context.baseLatency * 1000).toFixed(2)
+    this.outputLatency =
+      this.context.outputLatency &&
+      (this.context.outputLatency * 1000).toFixed(2)
+    this.sampleRate = this.context.sampleRate
 
     this.createCompressor()
 
@@ -348,6 +349,10 @@ const LLCTAudio = class {
         setTimeout(timing, 0)
       } else {
         requestAnimationFrame(timing)
+      }
+
+      if (this.paused) {
+        return
       }
 
       if (typeof this.fadeTo !== 'undefined') {

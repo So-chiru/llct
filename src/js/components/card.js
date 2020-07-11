@@ -41,8 +41,8 @@ Vue.component('llct-card', {
       return new URL(url).host || url
     },
 
-    interact(id, ext_url, title, playlist) {
-      if (this.$el.dataset.dragging == "true") {
+    interact (id, ext_url, title, playlist) {
+      if (this.$el.dataset.dragging == 'true') {
         this.$el.dataset.dragging = false
 
         return

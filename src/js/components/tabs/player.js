@@ -57,6 +57,9 @@ Vue.component('llct-player', {
         <h3>베이스 EQ <span class="value-indicator" :class="{warn: Number(audioBassVolume) >= 7.5}">{{useNativeMode ? '사용 불가능' : Number(audioBassVolume).toFixed(2) + 'db'}}</span></h3>
         <input type="range" :disabled="useNativeMode" v-model="audioBassVolume" max="15" min="-5" step="0.25"></input>
         <p v-if="useNativeMode" class="muted_warning"><i class="material-icons muted_warning">warning</i>음악 효과는 Native 모드에서 사용할 수 없습니다.</p>
+        <p v-if="!useNativeMode" class="muted">
+          SR: <span>{{audio.sampleRate}}</span>Hz, <span v-if="audio.latency">Latency: {{audio.latency}}ms {{audio.outputLatency ? '(o / ' + audio.outputLatency + 'ms)' : '' }}</span>
+        </p>
         </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
     </div>
@@ -266,6 +269,7 @@ Vue.component('llct-player', {
           : null
       }
 
+      
       let v = () => {
         if (!this.current) return
 
