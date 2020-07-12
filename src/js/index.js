@@ -179,8 +179,10 @@ const init = () => {
           this.$llctDatas.addRecentPlayed({ id, ...info })
 
           this.$llctDatas.meta = info
-          this.$llctDatas.playActive =
+          this.$llctEvents.$emit(
+            'setPlayOnLoad',
             typeof playActive !== 'undefined' ? playActive : true
+          )
 
           if (LLCTSettings.get('usePlayer')) {
             audio.load(this.$llctDatas.base + '/audio/' + id)

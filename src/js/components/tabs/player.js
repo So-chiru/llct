@@ -20,8 +20,8 @@ Vue.component('llct-player', {
             <div class="player-progress-inner" v-if="usePlayer" :data-phase="phase">
               <div class="current">{{time_went}}</div>
               <div class="bar" v-on:click="thumbProgress">
-                <div class="bar-thumb" :style="{left: 'calc(' + progress + '% - 8px)'}" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress" draggable="true"></div>
-                <div class="bar-current" :style="{width: progress + '%'}" v-if="playable && !audio.loading"></div>
+                <div class="bar-thumb" :style="{transform: 'translateX(calc((' + bar_size + 'px *' + progress + ') - 8px))'}" v-on:dragstart="thumbProgress" v-on:drag="thumbProgress" draggable="true"></div>
+                <div class="bar-current" :style="{transform: 'scaleX(' + progress + ')'}" v-if="playable && !audio.loading"></div>
                 <div class="bar-load" :style="{width: load_progress + '%'}" v-else></div>
                 <div class="bar-bg"></div>
               </div>
@@ -96,7 +96,8 @@ Vue.component('llct-player', {
       karaoke: {},
       updates: null,
       displayVertical: false,
-      usePlayer: LLCTSettings.get('usePlayer')
+      usePlayer: LLCTSettings.get('usePlayer'),
+      bar_size: 0
     }
   },
   methods: {
@@ -143,7 +144,7 @@ Vue.component('llct-player', {
       if (audio.playlist && audio.playlist.first) {
         let first = audio.playlist.first()
         this.$llctDatas.meta = first
-        this.$llctDatas.playActive = true
+        this.play_onload = true
 
         history.pushState(
           { id: first.id, ...first, playlist: window.audio.playlist },
@@ -160,7 +161,7 @@ Vue.component('llct-player', {
       if (audio.playlist && audio.playlist.last) {
         let last = audio.playlist.last()
         this.$llctDatas.meta = last
-        this.$llctDatas.playActive = true
+        this.play_onload = true
 
         history.pushState(
           { id: last.id, ...last, playlist: window.audio.playlist },
@@ -178,7 +179,7 @@ Vue.component('llct-player', {
         let end = window.audio.playlist.isEnd()
         let next = audio.playlist.next()
         this.$llctDatas.meta = next
-        this.$llctDatas.playActive = !end
+        this.play_onload = !end
 
         history.pushState(
           { id: next.id, ...next, playlist: window.audio.playlist },
@@ -195,7 +196,7 @@ Vue.component('llct-player', {
       if (audio.playlist && audio.playlist.prev) {
         let prev = audio.playlist.prev()
         this.$llctDatas.meta = prev
-        this.$llctDatas.playActive = true
+        this.play_onload = true
 
         audio.load(this.$llctDatas.base + '/audio/' + prev.id)
         this.init()
@@ -259,7 +260,7 @@ Vue.component('llct-player', {
 
       this.time = current
 
-      this.progress = current === 0 ? 0 : (current / duration) * 100
+      this.progress = current === 0 ? 0 : current / duration
     },
 
     watchUpdate (playing) {
@@ -269,7 +270,6 @@ Vue.component('llct-player', {
           : null
       }
 
-      
       let v = () => {
         if (!this.current) return
 
@@ -296,6 +296,14 @@ Vue.component('llct-player', {
       return true
     },
 
+    updateBarSize () {
+      requestAnimationFrame(() => {
+        this.bar_size = this.$el
+          .querySelector('.bar')
+          .getBoundingClientRect().width
+      })
+    },
+
     init () {
       if (!this.$llctDatas.meta) {
         window.showModal('플레이어', '재생 중인 곡이 없습니다.', null, () => {
@@ -313,8 +321,8 @@ Vue.component('llct-player', {
       audio.events.on(
         'play',
         () => {
-          this.playing = true
           this.updates = Math.random()
+          this.playing = true
         },
         'playerInstance'
       )
@@ -323,7 +331,6 @@ Vue.component('llct-player', {
         'pause',
         () => {
           this.playing = false
-          this.updates = Math.random()
         },
         'playerInstance'
       )
@@ -355,12 +362,11 @@ Vue.component('llct-player', {
           this.phase = 'ready'
 
           this.playable = true
+          this.timeUpdate()
 
           if (this.play_onload) {
             this.play()
           }
-
-          this.timeUpdate()
         },
         'playerInstance'
       )
@@ -400,18 +406,12 @@ Vue.component('llct-player', {
       audio.setMetadata(this.title, this.artist, this.url)
 
       this.playing = audio.playing
-
-      if (this.$llctDatas.playActive && this.usePlayer) {
-        audio.play()
-        this.$llctDatas.playActive = false
-      }
     }
   },
   watch: {
     current (value) {
       if (value) this.init()
       if (this.playing) {
-        this.updates = Math.random()
         this.watchUpdate(this.playing)
       }
 
@@ -422,6 +422,7 @@ Vue.component('llct-player', {
 
     playing (value) {
       this.watchUpdate(value)
+      this.updateBarSize()
     },
 
     audioVolume (v) {
@@ -468,6 +469,14 @@ Vue.component('llct-player', {
 
     this.$llctEvents.$on('callContentChange', () => {
       this.init()
+    })
+
+    this.$llctEvents.$on('setPlayOnLoad', v => {
+      this.play_onload = v
+    })
+
+    window.addEventListener('resize', () => {
+      this.updateBarSize()
     })
   },
 

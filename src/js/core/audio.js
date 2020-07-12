@@ -202,7 +202,7 @@ const LLCTAudio = class {
       this.destroySource()
 
       if (this.playing) {
-        this.play(null, true)
+        this.play(true)
       } else {
         this.pause()
       }
@@ -229,8 +229,8 @@ const LLCTAudio = class {
     this.destroySource()
 
     this.loading = true
-    this.audio.load(url)
 
+    this.audio.load(url)
     this.events.run('load')
   }
 
@@ -345,12 +345,6 @@ const LLCTAudio = class {
     this.wet.connect(this.compressor)
 
     let timing = () => {
-      if (document.hidden) {
-        setTimeout(timing, 0)
-      } else {
-        requestAnimationFrame(timing)
-      }
-
       if (typeof this.fadeTo !== 'undefined') {
         let e = quint(
           Math.max(
@@ -392,11 +386,19 @@ const LLCTAudio = class {
       }
 
       this.__lastTime = Date.now()
+
+      if (document.hidden) {
+        setTimeout(timing, 0)
+      } else {
+        requestAnimationFrame(timing)
+      }
     }
 
     timing()
 
-    this.liveEffect(localStorage.getItem('LLCT.Audio.LiveEffects') == 'true')
+    if (!this.disableEffects) {
+      this.liveEffect(localStorage.getItem('LLCT.Audio.LiveEffects') == 'true')
+    }
   }
 
   liveEffect (toggle) {
@@ -568,7 +570,7 @@ const LLCTAudio = class {
     }
   }
 
-  play (offset, skipFade) {
+  play (skipFade) {
     if (!this.loaded) {
       this.playOnLoad = true
     }
@@ -582,7 +584,7 @@ const LLCTAudio = class {
         this.context.play()
       } else {
         this.createSource()
-        this.source.start(this.context.currentTime, offset || this.audioTime)
+        this.source.start(this.context.currentTime, this.audioTime)
 
         if (this.audioElement) {
           if (

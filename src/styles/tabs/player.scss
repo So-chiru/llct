@@ -199,8 +199,15 @@ $mobile-thumb-size: 12px;
     border-radius: 8.3px;
   }
 
+  .bar-current,
+  .bar-thumb {
+    will-change: transform;
+  }
+
   .bar-current {
-    width: 0px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
     background-color: #1975fe;
     z-index: 7;
   }
@@ -448,7 +455,7 @@ $mobile-thumb-size: 12px;
   left: 0;
   top: 0;
   z-index: 16;
-  transition: all 200ms $accelerate-ease;
+  transition: all 200ms $defaultCubic;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -469,7 +476,7 @@ $mobile-thumb-size: 12px;
   }
 
   .content {
-    transition: all 200ms $accelerate-ease;
+    transition: all 200ms $defaultCubic;
     margin: auto;
     z-index: 20;
     background-color: #fff;
