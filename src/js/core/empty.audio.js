@@ -4,9 +4,11 @@ function createSilentAudio (time, freq) {
   const length = time * freq
   const AudioContext =
     window.AudioContext || window.webkitAudioContext || window.mozAudioContext
-  if (!AudioContext) {
-    console.log('No Audio Context')
+
+  if (typeof AudioContext === 'undefined') {
+    throw new Error("This browser doesn't support AudioContext.")
   }
+
   const context = new AudioContext()
   const audioFile = context.createBuffer(1, length, freq)
   return URL.createObjectURL(bufferToWave(audioFile, length))

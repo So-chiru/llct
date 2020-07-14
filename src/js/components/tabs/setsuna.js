@@ -23,7 +23,7 @@ Vue.component('llct-setsuna', {
               <p class="muted" v-html="item.desc"></p>
             </div>
             <div class="control">
-              <input type="checkbox" v-if="item.type == 'checkbox'" :data-id="item.id" v-model="item.value" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :checked="item.value" v-on:change="update"></input>
+              <llct-checkbox v-if="item.type == 'checkbox'" :id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :checked="item.value" :onChange="update"></llct-checkbox>
               <input type="text" v-if="item.type == 'text'" :data-id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :value="item.value" v-on:change="update"></input>
             </div>
           </div>

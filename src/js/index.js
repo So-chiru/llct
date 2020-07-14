@@ -7,6 +7,7 @@ const queryString = name => {
   return new URLSearchParams(window.location.search).get(name)
 }
 
+//Vue.use(Vuex)
 Vue.use(VueLazyload, {
   filter: {
     webp (listener, _) {
@@ -87,6 +88,7 @@ const init = () => {
 
   var app = new Vue({
     el: 'llct-app',
+    // store: window.llctStore,
     data: () => {
       return {
         tabs: [

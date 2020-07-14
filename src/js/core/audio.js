@@ -143,6 +143,10 @@ const LLCTAudio = class {
 
     this.audio.events.on('load', data => {
       if (this.useNative) {
+        if (this.context.src) {
+          URL.revokeObjectURL(this.context.src)
+        }
+
         this.context.src = URL.createObjectURL(
           new Blob([data], { type: 'audio/mp3' })
         )
@@ -173,7 +177,14 @@ const LLCTAudio = class {
           this.savedBuffer = buffer
 
           if (!this.audioElement && this.supportMedia) {
+            document
+              .querySelectorAll('audio[data-empty-audio="1"]')
+              .forEach(v => {
+                URL.revokeObjectURL(v.src)
+              })
+
             this.audioElement = document.createElement('audio')
+            this.audioElement.dataset.emptyAudio = 1
             this.audioElement.setAttribute('autoplay', true)
             this.audioElement.setAttribute('muted', true)
             this.audioElement.volume = 0

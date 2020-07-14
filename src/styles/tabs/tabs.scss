@@ -65,6 +65,8 @@
   position: relative;
   cursor: pointer;
   margin: auto $title-mleft auto auto;
+  user-select: none;
+  outline: none;
 
   @media screen and (max-width: $tablet) {
     margin: auto $title-mobile-mleft auto auto;

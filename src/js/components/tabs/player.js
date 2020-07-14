@@ -39,7 +39,7 @@ Vue.component('llct-player', {
         </div>
       </div>
       <div class="player-karaoke">
-        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :tickEnable="this.tickVolume > 0" :autoScroll="true" :updateKaraoke="updates"></llct-karaoke>
+        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :tickEnable="this.tickVolume > 0" :autoScroll="true"></llct-karaoke>
       </div>
     </div>
     <div class="player-vertical" :class="{show: displayVertical}">
@@ -50,15 +50,19 @@ Vue.component('llct-player', {
         <input type="range" v-model="tickVolume" max="1" min="0" step="0.01" value="1"></input>
         <h3>재생 속도 <span class="value-indicator">{{playbackSpeed}}x</span></h3>
         <input type="range" v-model="playbackSpeed" max="2" min="0.2" step="0.05" value="1"></input>
-        <h3>플레이리스트 반복 재생 <span class="value-indicator">{{playlistRepeat && '켜짐' || '꺼짐'}}</span></h3>
-        <input type="checkbox" v-model="playlistRepeat" checked="false"></input>
-        <h3>공연장 효과 <span class="value-indicator">{{useNativeMode ? '사용 불가능' : useLiveEffects && '켜짐' || '꺼짐'}}</span></h3>
-        <input type="checkbox" v-model="useLiveEffects" :disabled="useNativeMode" checked="false"></input>
+        <div class="inset">
+          <h3>플레이리스트 반복 재생</h3>
+          <llct-checkbox id="playlistRepeat" :checked="playlistRepeat" :onChange="(v) => playlistRepeat = v.target.checked"></llct-checkbox>
+        </div>
+        <div class="inset">
+          <h3>공연장 효과</h3>
+          <llct-checkbox id="useLiveEffects" :disabled="useNativeMode" :checked="useLiveEffects" :onChange="(v) => useLiveEffects = v.target.checked"></llct-checkbox>
+        </div>
         <h3>베이스 EQ <span class="value-indicator" :class="{warn: Number(audioBassVolume) >= 7.5}">{{useNativeMode ? '사용 불가능' : Number(audioBassVolume).toFixed(2) + 'db'}}</span></h3>
-        <input type="range" :disabled="useNativeMode" v-model="audioBassVolume" max="15" min="-5" step="0.25"></input>
+        <input type="range" v-if="!useNativeMode" v-model="audioBassVolume" max="15" min="-5" step="0.25"></input>
         <p v-if="useNativeMode" class="muted_warning"><i class="material-icons muted_warning">warning</i>음악 효과는 Native 모드에서 사용할 수 없습니다.</p>
         <p v-if="!useNativeMode" class="muted">
-          SR: <span>{{audio.sampleRate}}</span>Hz, <span v-if="audio.latency">Latency: {{audio.latency}}ms {{audio.outputLatency ? '(o / ' + audio.outputLatency + 'ms)' : '' }}</span>
+          SR: <span>{{audio.sampleRate}}</span>Hz<span v-if="audio.latency">, Latency: {{audio.latency}}ms {{audio.outputLatency ? '(o / ' + audio.outputLatency + 'ms)' : '' }}</span>
         </p>
         </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
@@ -94,7 +98,6 @@ Vue.component('llct-player', {
       useLiveEffects: localStorage.getItem('LLCT.Audio.LiveEffects') == 'true',
       useNativeMode: LLCTSettings.get('useNativeMode'),
       karaoke: {},
-      updates: null,
       displayVertical: false,
       usePlayer: LLCTSettings.get('usePlayer'),
       bar_size: 0
@@ -321,7 +324,7 @@ Vue.component('llct-player', {
       audio.events.on(
         'play',
         () => {
-          this.updates = Math.random()
+          this.$llctEvents.$emit('karaokeUpdate')
           this.playing = true
         },
         'playerInstance'
@@ -384,7 +387,7 @@ Vue.component('llct-player', {
         'seek',
         short => {
           if (short && delay + 10 < Date.now()) {
-            this.updates = Math.random()
+            this.$llctEvents.$emit('karaokeUpdate')
           }
         },
         'playerInstance'

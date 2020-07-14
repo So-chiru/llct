@@ -311,6 +311,12 @@ $mobile-thumb-size: 12px;
   width: -webkit-fit-content;
   width: fit-content;
 
+  &,
+  i {
+    user-select: none;
+    outline: none;
+  }
+
   @media screen and (max-width: $tablet) {
     grid-area: 1 / 4 / 2 / 5;
   }
@@ -460,6 +466,10 @@ $mobile-thumb-size: 12px;
   visibility: hidden;
   pointer-events: none;
 
+  h3 {
+    font-size: 16px;
+  }
+
   .bg {
     position: absolute;
     left: 0;
@@ -471,7 +481,8 @@ $mobile-thumb-size: 12px;
     cursor: pointer;
   }
 
-  h3 {
+  h3,
+  .inset {
     margin-bottom: 5px;
   }
 
@@ -483,57 +494,30 @@ $mobile-thumb-size: 12px;
     border-radius: 13.3px;
     padding: 30px 40px;
     transform: translateY(10px);
+    min-width: 250px;
+
+    .inset {
+      display: flex;
+      margin-top: 15px;
+
+      h3,
+      .llct-checkbox {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      & > h3 {
+        margin-right: auto;
+      }
+    }
 
     input[type='range'] {
-      -webkit-appearance: none;
       width: 100%;
-      margin: 6px 0;
-      background: transparent;
+      height: 5px;
     }
 
     input[type='range']:focus {
       outline: none;
-    }
-    input[type='range']::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 3px;
-      cursor: pointer;
-      box-shadow: $shadow-2dp;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 25px;
-      border: 0px solid #000101;
-    }
-    input[type='range']::-webkit-slider-thumb {
-      box-shadow: $shadow-1dp;
-      border: 0px;
-      height: 15px;
-      width: 15px;
-      border-radius: 50px;
-      background: #2f7bec;
-      cursor: pointer;
-      -webkit-appearance: none;
-      margin-top: -6px;
-    }
-    input[type='range']:focus::-webkit-slider-runnable-track {
-      background: rgba(255, 255, 255, 0.12);
-    }
-    input[type='range']::-moz-range-track {
-      width: 100%;
-      height: 3px;
-      cursor: pointer;
-      box-shadow: $shadow-2dp;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 25px;
-      border: 0px solid #000101;
-    }
-    input[type='range']::-moz-range-thumb {
-      box-shadow: $shadow-1dp;
-      border: 0px;
-      height: 15px;
-      width: 15px;
-      border-radius: 50px;
-      background: #2f7bec;
-      cursor: pointer;
     }
 
     @media screen and (max-width: $tablet) {
@@ -554,7 +538,7 @@ $mobile-thumb-size: 12px;
     }
 
     .muted {
-      font-size: 12px;
+      font-size: 11px;
       color: rgb(121, 121, 121);
     }
 

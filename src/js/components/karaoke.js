@@ -14,7 +14,6 @@ const LEFT_BRACKET = '('
 const SPACE_REGEX = /\s/g
 
 const karaokeCalcRepeat = (start, end, repeat) => {
-  let f = EMPTY
   let m = end - start
   let x = Math.round(m / repeat)
 
@@ -22,10 +21,10 @@ const karaokeCalcRepeat = (start, end, repeat) => {
     return EMPTY
   }
 
+  let f = EMPTY
   for (var i = 1; i < x; i++) {
     f += start + repeat * i + (i + 1 != x ? COMMA : EMPTY)
   }
-
   return f
 }
 
@@ -88,7 +87,7 @@ const karaokeRender = (time, root = document, full, newline, tick) => {
       }
 
       let start_dot_end = line_dset.start + DOT + line_dset.end
-      if (newline && !karaokeScrollCache[start_dot_end]) {
+      if (typeof newline === 'function' && !karaokeScrollCache[start_dot_end]) {
         setTimeout(() => {
           newline(currentLine)
         }, 950)
@@ -211,8 +210,7 @@ Vue.component('llct-karaoke', {
         <img class="karaoke-image" :src="karaImage" v-on:error="imgHandler"></img>
       </span>
       <div class="error" v-if="error">
-        <h3>아악!</h3>
-        <p>콜표를 불러올 수 없습니다. (미 등록 혹은 연결 오류) - {{error.message}}</p>
+        <p>콜표를 불러올 수 없습니다. - {{error.message}}</p>
       </div>
     </div>
   `,
@@ -235,10 +233,6 @@ Vue.component('llct-karaoke', {
     },
     autoScroll: {
       type: Boolean,
-      required: false
-    },
-    updateKaraoke: {
-      type: [String, Number],
       required: false
     },
     tickEnable: {
@@ -282,12 +276,6 @@ Vue.component('llct-karaoke', {
         }
 
         karaokeRender(tCode, this.$el, false, this.scrollSong, this.tickEnable)
-      }
-    },
-    updateKaraoke: {
-      handler () {
-        karaokeClear()
-        karaokeRender(audio.timecode(), this.$el, true, null, this.tickEnable)
       }
     }
   },
@@ -338,6 +326,11 @@ Vue.component('llct-karaoke', {
       this.$el.scrollTop = pos
     },
 
+    reRender () {
+      karaokeClear()
+      karaokeRender(audio.timecode(), this.$el, true, null, this.tickEnable)
+    },
+
     scrollSong (el) {
       if (this.lastScroll + 3000 > Date.now()) return true
 
@@ -365,12 +358,11 @@ Vue.component('llct-karaoke', {
 
       audio.time = (Number(ev.target.dataset.start) - 10) / 100
 
-      karaokeClear()
-      karaokeRender(audio.timecode(), this.$el, true, null, this.tickEnable)
+      this.reRender()
     },
 
     imgHandler (ev) {
-      ev.message = 'Failed to load call image.'
+      ev.message = '이미지 로드 실패.'
       this.error = ev
     }
   },
@@ -388,6 +380,8 @@ Vue.component('llct-karaoke', {
       },
       false
     )
+
+    this.$llctEvents.$on('karaokeUpdate', this.reRender)
   },
   updated () {
     this.scrollTop(0)

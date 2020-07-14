@@ -216,6 +216,10 @@ const LLCTData = class {
         mode: 'cors'
       })
         .then(res => {
+          if (!res.ok) {
+            throw new Error(res.status + ' ' + res.statusText)
+          }
+
           return res.json()
         })
         .then(json => {
