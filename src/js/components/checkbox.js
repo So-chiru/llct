@@ -1,4 +1,4 @@
-Vue.component('llct-checkbox', {
+export default {
   template: `<div class="llct-checkbox" :class="{disabled: disabled}" :data-id="id" :data-on="on" v-on:click="toggle">
     <div class="selected" :style="{transform: 'translateX(' + (typeof translateX !== 'undefined' ? translateX : (this.on ? 18 : 0)) + 'px)'}" v-on:pointermove="hover" v-on:pointerdown="down" v-on:pointerup="up" v-on:pointerout="out">
     </div>
@@ -95,4 +95,4 @@ Vue.component('llct-checkbox', {
       }
     }
   }
-})
+}

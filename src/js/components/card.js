@@ -1,4 +1,9 @@
-Vue.component('llct-card', {
+import LLCTImage from './image'
+
+export default {
+  components: {
+    LLCTImage
+  },
   template: `
     <div class="llct-card" :data-clickable="!static" v-on:click="interact(id, ext_url, title, playlist)">
       <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
@@ -11,7 +16,7 @@ Vue.component('llct-card', {
       </transition>
       <div class="llct-card-bg-layer" :class="{skeleton: skeleton, spoiler: spoiler}"></div>
       <div class="llct-card-bg" :class="{spoiler: spoiler}">
-        <llct-image v-bind:src="bg_url" :full="true" :alt="title + ' 커버 이미지'"></llct-image>
+        <LLCTImage v-bind:src="bg_url" :full="true" :alt="title + ' 커버 이미지'"></LLCTImage>
       </div>
     </div>
   `,
@@ -49,7 +54,11 @@ Vue.component('llct-card', {
       }
 
       if (id) {
-        this.$llctEvents.$emit('play', id)
+        this.$store.dispatch('player/play', {
+          id,
+          moveTab: true,
+          playOnLoad: true
+        })
         return
       }
 
@@ -68,4 +77,4 @@ Vue.component('llct-card', {
       }
     }
   }
-})
+}

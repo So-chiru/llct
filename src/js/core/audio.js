@@ -1,3 +1,7 @@
+import { createSilentAudio } from './empty.audio'
+
+const eventBus = require('./events')
+
 const quint = x => 1 - Math.pow(1 - x, 3)
 
 const concatBuffer = (...bufs) => {
@@ -19,43 +23,10 @@ const concatBuffer = (...bufs) => {
   return result.buffer
 }
 
-const LLCTEvent = class {
-  constructor () {
-    this.events = {}
-  }
-
-  on (name, cb, key) {
-    if (!this.events[name]) {
-      this.events[name] = []
-    }
-
-    var i = this.events[name].length
-
-    while (key && i--) {
-      if (this.events[name][i].key == key) return false
-    }
-
-    return this.events[name].push({ key, cb })
-  }
-
-  off (name) {
-    this.events[name] = {}
-  }
-
-  run (name, ...params) {
-    if (!this.events[name]) return
-    let i = this.events[name].length
-
-    while (i--) {
-      this.events[name][i].cb(...params)
-    }
-  }
-}
-
 const LLCTAudioSource = class {
   constructor () {
     this.buffer = null
-    this.events = new LLCTEvent()
+    this.events = new eventBus()
     this.loaded = 0
     this.full = 0
   }
@@ -105,14 +76,13 @@ const LLCTAudioSource = class {
   }
 }
 
-const LLCTAudio = class {
+export default class LLCTAudio {
   constructor (noMediaSession, noEffects, useNativePlayer) {
     this.audio = new LLCTAudioSource()
     this.animation = null
     this.originVolume = 0.75
     this.originBassVolume = 0
-    this.events = new LLCTEvent()
-    this.playlists = {}
+    this.events = new eventBus()
     this.repeat = false
     this.paused = true
     this.loaded = false
@@ -542,14 +512,6 @@ const LLCTAudio = class {
   set time (t) {
     this.currentTime = t
     this.events.run('seek')
-  }
-
-  set playlist (pl) {
-    this.playlists = pl
-  }
-
-  get playlist () {
-    return window.playlists ? window.playlists.find(this.playlists) : null
   }
 
   stop () {

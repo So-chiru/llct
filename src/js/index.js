@@ -1,5 +1,33 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import VueLazyload from 'vue-lazyload'
+
+import { store } from './store/index'
+
+import * as Toast from './components/toast'
+
+import LLCTAudio from './core/audio'
+
+const Data = require('./core/data')
+
+const worker = require('./core/worker')
+const settings = require('./core/settings')
+
+Vue.use(Vuex)
+
+require('./components/main/app')
+require('./components/main/menu')
+
+require('./components/toast')
+
+require('./components/tabs/ayumu')
+require('./components/tabs/chika')
+require('./components/tabs/kotori')
+require('./components/tabs/player')
+require('./components/tabs/search')
+require('./components/tabs/setsuna')
+
 Vue.prototype.$llctEvents = new Vue()
-Vue.prototype.$llctPlaylist = window.playlists
 
 var siteTest = /lovelivec\.kr/g
 
@@ -7,7 +35,6 @@ const queryString = name => {
   return new URLSearchParams(window.location.search).get(name)
 }
 
-//Vue.use(Vuex)
 Vue.use(VueLazyload, {
   filter: {
     webp (listener, _) {
@@ -29,55 +56,14 @@ Vue.use(VueLazyload, {
     'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA'
 })()
 
-const preInit = () => {
-  window.addEventListener('songReceive', _data => {
-    let qs = queryString('id')
-    if (!qs) return false
-
-    let v = new Vue()
-
-    if (!v.$llctEvents.playEventInit) {
-      v.$llctEvents.playQueue = qs
-      return
-    }
-
-    v.$llctEvents.$emit('play', qs, true, false, false)
-  })
-}
-
 const init = () => {
-  var audio = new LLCTAudio(
-    false,
-    null,
-    LLCTSettings.get('useNativeMode') || false
-  )
+  var audio = new LLCTAudio(false, null, settings.get('useNativeMode') || false)
   window.audio = audio
-
-  window.audio.useFadeInOut = LLCTSettings.get('useFadeInOut') || false
-
-  window.addEventListener('errorReceive', ev => {
-    window.showToast(
-      'API 서버에 연결할 수 없습니다. ' + ev.detail.message,
-      'warning',
-      true,
-      10000
-    )
-  })
-
-  window.addEventListener('recommendReceive', ev => {
-    if (ev.detail.Notices && ev.detail.Notices.Msg.length) {
-      window.showToast(
-        ev.detail.Notices.Msg,
-        ev.detail.Notices.Icon,
-        ev.detail.Notices.Type,
-        ev.detail.Notices.Time
-      )
-    }
-  })
+  window.audio.useFadeInOut = settings.get('useFadeInOut') || false
 
   if (!navigator.onLine) {
     setTimeout(() => {
-      window.showToast(
+      Toast.show(
         '오프라인 상태입니다. 저장된 곡만 재생할 수 있습니다.',
         'warning',
         false,
@@ -88,135 +74,42 @@ const init = () => {
 
   var app = new Vue({
     el: 'llct-app',
-    // store: window.llctStore,
-    data: () => {
-      return {
-        tabs: [
-          {
-            title: '둘러보기'
-          },
-          {
-            title: '곡 목록'
-          },
-          {
-            title: '재생목록'
-          },
-          {
-            title: '검색'
-          },
-          {
-            title: '현재 재생중',
-            hide: true
-          },
-          {
-            title: '설정'
-          }
-        ],
-        currentTab: 0,
-        title: '둘러보기'
-      }
-    },
+    store,
     methods: {
-      updateTitle (title, hide) {
-        this.title = title
-        this.hide = hide
-      },
-
       changeTab (id) {
-        this.prevTab = this.currentTab || 0
-
-        if (this.tabs[id]) {
-          this.updateTitle(this.tabs[id].title, this.tabs[id].hide || false)
-        }
-
-        this.currentTab = id
-        this.$llctEvents.$emit('changeTab', id)
+        this.$store.commit('tab/changeTo', id)
       },
 
       goBackTab () {
-        return this.changeTab(this.prevTab)
+        this.$store.commit('tab/changeTo', this.$store.state.tab.previous)
+      },
+
+      play (id, noURLState, playOnLoad, moveTab, playlistIndex) {
+        this.$store.dispatch('player/play', {
+          id,
+          noURLState,
+          playOnLoad,
+          moveTab,
+          playlistIndex
+        })
       }
     },
     mounted () {
-      this.changeTab(0)
+      this.$llctDatas.$on('listsLoaded', _ => {
+        let id = queryString('id')
 
-      this.$llctEvents.$on('requestChangeTab', id => {
-        this.changeTab(id)
-      })
-
-      this.$llctEvents.$on('requestGoBack', () => {
-        this.goBackTab()
-      })
-
-      this.$llctEvents.$on(
-        'play',
-        (id, noState, playActive, noTab, playlistIndex) => {
-          if (typeof id === 'object') {
-            let pl = playlists.find(id.title, true)
-
-            playlists.lists[pl].__pointer = playlistIndex
-            window.audio.playlist = playlists.lists[pl].title
-
-            if (typeof playlistIndex === 'number') {
-              id = playlists.lists[pl].lists[playlistIndex].id
-            }
-          } else {
-            window.audio.playlist = null
-          }
-
-          let info = this.$llctDatas.getSong(id)
-          if (!noTab && this.$llctDatas.meta == info) {
-            this.changeTab(4)
-            return false
-          }
-
-          if (!noState) {
-            history.pushState(
-              { id, ...info, playlist: window.audio.playlist },
-              info.title + ' - LLCT',
-              '?id=' + id
-            )
-          }
-
-          this.$llctDatas.addRecentPlayed({ id, ...info })
-
-          this.$llctDatas.meta = info
-          this.$llctEvents.$emit(
-            'setPlayOnLoad',
-            typeof playActive !== 'undefined' ? playActive : true
-          )
-
-          if (LLCTSettings.get('usePlayer')) {
-            audio.load(this.$llctDatas.base + '/audio/' + id)
-          }
-
-          if (!noTab) {
-            this.changeTab(4)
-          } else {
-            this.$llctEvents.$emit('callContentChange')
-          }
-
-          if (window.gtag) {
-            gtag('event', 'play song', {
-              event_category: 'audio',
-              event_label: this.$llctDatas.meta.title
-            })
-          }
+        if (!id) {
+          return
         }
-      )
 
-      this.$llctEvents.playEventInit = true
-
-      if (this.$llctEvents.playQueue) {
-        this.$llctEvents.$emit(
-          'play',
-          this.$llctEvents.playQueue,
-          true,
-          false,
-          false
-        )
-        this.$llctEvents.playQueue = null
-      }
+        this.$store.dispatch('player/play', {
+          id,
+          moveTab: true,
+          noURLState: true,
+          playOnLoad: false,
+          playlistIndex: null
+        })
+      })
 
       window.addEventListener('popstate', ev => {
         if (!ev.state) {
@@ -224,13 +117,23 @@ const init = () => {
           return
         }
 
-        this.$llctEvents.$emit(
-          'play',
-          ev.state.playlist ? ev.state.playlist : ev.state.id,
-          true,
-          true,
-          true,
-          ev.state.playlist ? ev.state.playlist.__pointer : null
+        this.$store.dispatch(
+          'player/play',
+          ev.state.playlist
+            ? {
+                playlist: ev.state.playlist,
+                moveTab: true,
+                noURLState: true,
+                playOnLoad: true,
+                playlistIndex: ev.state.playlist.__pointer
+              }
+            : {
+                playlist: ev.state.playlist,
+                moveTab: true,
+                noURLState: true,
+                playOnLoad: true,
+                playlistIndex: null
+              }
         )
       })
     }
@@ -238,19 +141,25 @@ const init = () => {
 
   var menu = new Vue({
     el: 'llct-menu',
-    methods: {
-      changeTab (id) {
-        app.changeTab(id)
-      }
-    }
+    store
   })
 
   window.app = app
   window.menu = menu
 }
 
-const darkInit = () => {
-  let dark = LLCTSettings.get('useDarkMode')
+const isIE = () => {
+  return window.document.documentMode
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (isIE()) {
+    location.href = 'https://browser-update.org/update-browser.html'
+  }
+
+  // darkMode
+
+  let dark = settings.get('useDarkMode')
 
   if (dark) {
     document.querySelector('html').classList.add('dark')
@@ -259,15 +168,31 @@ const darkInit = () => {
   document.head
     .querySelector('meta[name="theme-color"')
     .setAttribute('content', dark ? '#151515' : '#fff')
-}
 
-const colorBlindInit = () => {
-  let tritanomaly = LLCTSettings.get('useTritanomaly')
-  let monochromacy = LLCTSettings.get('useMonochromacy')
+  // color Blind
+
+  let tritanomaly = settings.get('useTritanomaly')
+  let monochromacy = settings.get('useMonochromacy')
 
   if (tritanomaly) {
     document.querySelector('html').classList.add('tritanomaly')
   } else if (monochromacy) {
     document.querySelector('html').classList.add('monochromacy')
   }
-}
+})
+
+window.addEventListener('load', () => {
+  init()
+  worker.register()
+
+  let s = document.createElement('script')
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=UA-111995531-2'
+  document.querySelector('head').appendChild(s)
+
+  window.dataLayer = window.dataLayer || []
+  function gtag () {
+    dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
+  gtag('config', 'UA-111995531-2')
+})

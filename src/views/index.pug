@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 html(lang="kr")
   head
-    script window.isDev = #{dev}
     meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title LLCT - 러브라이브 콜표 사이트
@@ -18,17 +17,18 @@ html(lang="kr")
     meta(name="theme-color" content="#fff")
     link(rel="manifest" href="/manifest.json")
     link(rel="apple-touch-icon" href="/assets/logo/logo_v2.png")
-    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue."+(dev?'':'min.')+"js")
-    //script(src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/vue-lazyload@1.3.3/vue-lazyload.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.8.7/polyfill.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js")
-    script(src="mikan.min.js")
     link(rel="shortcut icon" href="/assets/logo/favicon.ico")
-    link(rel="stylesheet" href="mikan.min.css")
-    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Noto+Sans+KR:100,300,400,500,700&display=swap")
+    style.
+      @font-face {
+        font-family: 'Material Icons';font-style: normal;font-weight: 400;font-display: swap;src: url(/assets/mi.woff2) format('woff2');
+      }
+      .material-icons {
+        font-family: 'Material Icons';font-weight: normal;font-style: normal;font-size: 24px;line-height: 1;letter-spacing: normal;text-transform: none;display: inline-block;white-space: nowrap;word-wrap: normal;direction: ltr;-webkit-font-feature-settings: 'liga';-webkit-font-smoothing: antialiased;
+      }
+
+    script(src="mikan.js")
+    link(rel="stylesheet" href="mikan.css")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700&display=swap")
   body
     .app-wrap
       llct-app-wrap

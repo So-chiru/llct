@@ -1,30 +1,16 @@
-// const LLCTTabs = {
-//   MAIN: 0,
-//   MUSIC: 1,
-//   PLAYLIST: 2,
-//   SEARCH: 3,
-//   PLAYER: 4,
-//   SETTINGS: 5
-// }
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-// window.LLCTTabs = LLCTTabs
+import { tabModule } from './modules/tab'
+import { playerModule } from './modules/player'
+import { dataModule } from './modules/data'
 
-// const tabModule = {
-//   state: () => {
-//     return {
-//       tab: LLCTTabs.MAIN
-//     }
-//   },
-//   mutations: {
-//     changeTab: (state, to) => {
-//       state.tab = to
-//     }
-//   },
-//   actions: {}
-// }
+Vue.use(Vuex)
 
-// window.llctStore = new Vuex.Store({
-//   modules: {
-//     tab: window.tabModule
-//   }
-// })
+export const store = new Vuex.Store({
+  modules: {
+    tab: tabModule,
+    player: playerModule,
+    data: dataModule
+  }
+})

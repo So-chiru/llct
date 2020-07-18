@@ -1,4 +1,4 @@
-@import '__global';
+@import '../global';
 
 $album-wh: 60px;
 $mobile-album-wh: 45px;
@@ -197,6 +197,7 @@ $mobile-thumb-size: 12px;
   .bar-bg,
   .bar-load {
     border-radius: 8.3px;
+    box-sizing: border-box;
   }
 
   .bar-current,

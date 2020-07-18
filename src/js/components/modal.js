@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 Vue.component('llct-modal', {
   template: `
   <div class="llct-modal" :class="{'show':this.$root.open}">
@@ -81,8 +83,10 @@ Vue.component('llct-modal', {
   }
 })
 
+export let modal
+
 window.addEventListener('load', () => {
-  let modal = new Vue({
+  modal = new Vue({
     el: 'llct-modal',
     data: () => {
       return {
@@ -185,15 +189,21 @@ window.addEventListener('load', () => {
       }
     }
   })
+})
 
-  window.showModal = (title, content, inputs, accept, close, confirm, acceptText) => {
-    modal.update(title, content, inputs, accept, close, confirm, acceptText)
-    modal.show()
-  }
+export const show = (
+  title,
+  content,
+  inputs,
+  accept,
+  close,
+  confirm,
+  acceptText
+) => {
+  modal.update(title, content, inputs, accept, close, confirm, acceptText)
+  modal.show()
+}
 
-  window.addEventListener('keydown', ev => {
-    if (ev.keyCode == 27 && modal.open) modal.open = false
-  })
-
-  if (window) window.modal = modal
+window.addEventListener('keydown', ev => {
+  if (ev.keyCode == 27 && modal.open) modal.open = false
 })

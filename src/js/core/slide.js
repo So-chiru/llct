@@ -1,3 +1,5 @@
+import Hammer from 'hammerjs'
+
 const findCard = elem => {
   if (elem === null) {
     return false
@@ -10,7 +12,7 @@ const findCard = elem => {
   return findCard(elem.parentNode)
 }
 
-const LLCTSlide = class {
+export class Slider {
   constructor ($el, duration) {
     if (!$el) {
       throw new Error('element is not defined.')

@@ -13,7 +13,7 @@ const deepCopy = o => {
   return newO
 }
 
-class LLCTPlaylist {
+export class LLCTPlaylist {
   constructor (title, readOnly) {
     this.__pointer = null
     this.lists = []
@@ -75,7 +75,7 @@ class LLCTPlaylist {
   }
 }
 
-class PlaylistHolder {
+export class Holder {
   constructor () {
     this.lists = []
   }
@@ -83,7 +83,6 @@ class PlaylistHolder {
   add (item, skipSave) {
     let pos = this.lists.push(item)
     if (!skipSave) this.save()
-
     return pos
   }
 
@@ -144,49 +143,3 @@ class PlaylistHolder {
     return this.lists.length
   }
 }
-
-window.addEventListener('playlistReceive', ev => {
-  if (!ev.detail || !ev.detail.data.lists) {
-    return false
-  }
-
-  window.playlists = new PlaylistHolder()
-
-  let preData = JSON.parse(localStorage.getItem('LLCTPlaylist') || '[]')
-
-  let len = preData.length
-  if (len) {
-    for (var i = 0; i < len; i++) {
-      let data = preData[i]
-      let pl = new LLCTPlaylist()
-
-      /*for (var z = 0; z < data.lists.length; z++) {
-        let id = data.lists[z]
-
-        let song = ev.detail.getSong(id)
-        data.lists[z] = song
-      }*/
-
-      pl.import(data)
-      playlists.add(pl, true)
-    }
-  }
-
-  let listsLen = ev.detail.data.lists.length
-  for (var i = 0; i < listsLen; i++) {
-    let list = ev.detail.data.lists[i]
-
-    let pl = new LLCTPlaylist(list.Title, true)
-
-    list.spoiler = list.Spoiler || false
-    list.lists = list.Items
-    pl.import(list)
-    playlists.add(pl, true)
-  }
-
-  window.dispatchEvent(
-    new CustomEvent('renderPlaylist', {
-      detail: { playlists }
-    })
-  )
-})

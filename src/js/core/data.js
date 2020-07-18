@@ -1,20 +1,21 @@
+import Vue from 'vue'
+import { store } from '../store/index'
+
+import * as Toast from '../components/toast'
+import * as Playlist from './playlist'
+import settings from './settings'
+
 // from https://github.com/trekhleb/javascript-algorithms/blob/master/src/algorithms/string/longest-common-substring/longestCommonSubstring.js
 const LCS = (string1, string2) => {
-  // Convert strings to arrays to treat unicode symbols length correctly.
-  // For example:
-  // '𐌵'.length === 2
-  // [...'𐌵'].length === 1
   const s1 = [...string1]
   const s2 = [...string2]
 
-  // Init the matrix of all substring lengths to use Dynamic Programming approach.
   const substringMatrix = Array(s2.length + 1)
     .fill(null)
     .map(() => {
       return Array(s1.length + 1).fill(null)
     })
 
-  // Fill the first row and first column with zeros to provide initial values.
   for (let columnIndex = 0; columnIndex <= s1.length; columnIndex += 1) {
     substringMatrix[0][columnIndex] = 0
   }
@@ -23,7 +24,6 @@ const LCS = (string1, string2) => {
     substringMatrix[rowIndex][0] = 0
   }
 
-  // Build the matrix of all substring lengths to use Dynamic Programming approach.
   let longestSubstringLength = 0
   let longestSubstringColumn = 0
   let longestSubstringRow = 0
@@ -37,8 +37,6 @@ const LCS = (string1, string2) => {
         substringMatrix[rowIndex][columnIndex] = 0
       }
 
-      // Try to find the biggest length of all common substring lengths
-      // and to memorize its last character position (indices)
       if (substringMatrix[rowIndex][columnIndex] > longestSubstringLength) {
         longestSubstringLength = substringMatrix[rowIndex][columnIndex]
         longestSubstringColumn = columnIndex
@@ -48,11 +46,9 @@ const LCS = (string1, string2) => {
   }
 
   if (longestSubstringLength === 0) {
-    // Longest common substring has not been found.
     return ''
   }
 
-  // Detect the longest substring from the matrix.
   let longestSubstring = ''
 
   while (substringMatrix[longestSubstringRow][longestSubstringColumn] > 0) {
@@ -79,203 +75,104 @@ const chosung = str => {
   return arr.join('')
 }
 
-const LLCTData = class {
-  constructor (base) {
-    if (!base) {
-      base = '/'
-    }
+const host =
+  window.location.hostname.indexOf('lovelivec.kr') === -1
+    ? 'http://' + window.location.hostname + ':10210'
+    : 'https://api.lovelivec.kr'
 
-    this.base = base
-    this.lists = {}
-    this.playlists = []
-    this.defaulPlaylistStore = {}
-    this.recommends = {}
-    this.events = {}
-    this.recentPlayed = []
-
-    this.songKeys = []
-  }
-
-  event (name, data) {
-    window.dispatchEvent(new CustomEvent(name + 'Receive', { detail: data }))
-  }
-
-  on (name, cb, key) {
-    if (!this.events[name]) {
-      this.events[name] = []
-    }
-
-    var i = this.events[name].length
-
-    while (key && i--) {
-      if (this.events[name][i].key == key) return false
-    }
-
-    return this.events[name].push({ key, cb })
-  }
-
-  off (name) {
-    this.events[name] = {}
-  }
-
-  run (name, ...params) {
-    if (!this.events[name]) return
-    let i = this.events[name].length
-
-    while (i--) {
-      this.events[name][i].cb(...params)
-    }
-  }
-
-  songs () {
-    return new Promise((resolve, reject) => {
-      this.runningGetSong = true
-
-      fetch(this.base + '/lists', {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(res => {
-          return res.json()
-        })
-        .then(json => {
-          this.lists = json
-
-          resolve(this.lists)
-
-          this.songKeys = Object.keys(this.lists)
-
-          this.run('song')
-          this.runningGetSong = true
-        })
-        .catch(e => {
-          this.event('error', e)
-
-          reject(e)
-        })
-    })
-  }
-
-  loadRecent () {
-    this.recentPlayed =
-      JSON.parse(localStorage.getItem('LLCT.RecentPlayed') || '[]') || []
-  }
-
-  recommended () {
-    return new Promise((resolve, reject) => {
-      fetch(this.base + '/recommend', {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(res => {
-          return res.json()
-        })
-        .then(json => {
-          this.recommends = json
-
-          this.event('recommend', this.recommends)
-
-          resolve(json)
-        })
-        .catch(e => {
-          this.event('error', e)
-
-          reject(e)
-        })
-    })
-  }
-
-  defaultPlaylist () {
-    return new Promise((resolve, reject) => {
-      fetch(this.base + '/playlists', {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(res => {
-          return res.json()
-        })
-        .then(json => {
-          this.defaulPlaylistStore = json
-
-          // this.event('playlist', this.defaulPlaylistStore)
-
-          resolve(json)
-        })
-        .catch(e => {
-          this.event('error', e)
-
-          reject(e)
-        })
-    })
-  }
-
-  karaoke (id) {
-    return new Promise((resolve, reject) => {
-      fetch(this.base + '/call/' + id, {
-        method: 'GET',
-        mode: 'cors'
-      })
-        .then(res => {
-          if (!res.ok) {
-            throw new Error(res.status + ' ' + res.statusText)
+const dataFetch = {
+  karaoke: id =>
+    new Promise((resolve, reject) =>
+      fetch(`${host}/call/${id}`)
+        .then(v => {
+          if (!v.ok) {
+            reject(`${v.status} ${v.statusText}`)
           }
 
-          return res.json()
+          return v.json()
         })
-        .then(json => {
-          resolve(json)
-        })
+        .then(v => resolve(v))
         .catch(e => {
           reject(e)
         })
-    })
-  }
+    ),
+  lists: () =>
+    new Promise((resolve, reject) =>
+      fetch(`${host}/lists`)
+        .then(v => {
+          if (!v.ok) {
+            reject(`${v.status} ${v.statusText}`)
+          }
+
+          return v.json()
+        })
+        .then(v => resolve(v))
+        .catch(e => {
+          reject(e)
+        })
+    ),
+  playlists: () =>
+    new Promise((resolve, reject) =>
+      fetch(`${host}/playlists`)
+        .then(v => {
+          if (!v.ok) {
+            reject(`${v.status} ${v.statusText}`)
+          }
+
+          return v.json()
+        })
+        .then(v => resolve(v))
+        .catch(e => {
+          reject(e)
+        })
+    ),
+  recommends: () =>
+    new Promise((resolve, reject) =>
+      fetch(`${host}/recommend`)
+        .then(v => {
+          if (!v.ok) {
+            reject(`${v.status} ${v.statusText}`)
+          }
+
+          return v.json()
+        })
+        .then(v => resolve(v))
+        .catch(e => {
+          reject(e)
+        })
+    )
 }
 
 ;(() => {
-  var dataInstance = new LLCTData(
-    window.isDev
-      ? 'http://' + window.location.hostname + ':10210'
-      : 'https://api.lovelivec.kr'
-  )
-  Vue.prototype.$llctDatas = new Vue({
+  let $llctDatas = new Vue({
     data () {
-      return dataInstance
-    },
-    watch: {
-      defaulPlaylistStore (data) {
-        window.dispatchEvent(
-          new CustomEvent('playlistReceive', {
-            detail: { data, getSong: this.getSong }
-          })
-        )
-      },
-      lists (data) {
-        window.dispatchEvent(
-          new CustomEvent('songReceive', {
-            detail: { data }
-          })
-        )
+      return {
+        base: host,
+        useImages: settings.get('useImages'),
+        useTranslatedTitle: settings.get('useTranslatedTitle')
       }
     },
+    store,
     methods: {
       refresh () {
-        dataInstance.recommended()
+        this.dataHandle('recommends', dataFetch.recommends())
       },
       artist (id, artist) {
         let first = id.substring(0, 1)
-        let group = this.songKeys[first]
+        let group = this.groups[first]
 
-        return group && dataInstance.lists[group]
-          ? dataInstance.lists[group].meta.artists[artist || 0] || artist || 0
+        return group && this.$store.state.data.lists[group]
+          ? this.$store.state.data.lists[group].meta.artists[artist || 0] ||
+              artist ||
+              0
           : null
       },
 
       getSong (id) {
         let first = id.substring(0, 1)
-        let group = this.songKeys[first]
+        let group = this.groups[first]
 
-        let meta = dataInstance.lists[group].collection
+        let meta = this.$store.state.data.lists[group].collection
 
         let idInt = Number(id.substring(1, id.length)) - 1
         if (meta[idInt] && meta[idInt].id === id) {
@@ -297,8 +194,10 @@ const LLCTData = class {
 
         let musics = []
 
-        for (var i = 0; i < this.songKeys.length; i++) {
-          musics.push(...dataInstance.lists[this.songKeys[i]].collection)
+        for (var i = 0; i < this.groups.length; i++) {
+          musics.push(
+            ...this.$store.state.data.lists[this.groups[i]].collection
+          )
         }
 
         let musicsLen = musics.length
@@ -307,11 +206,9 @@ const LLCTData = class {
 
           let ga = this.artist(music.id, music.artist)
 
-          let searchStr = `${music.title}-${
-            music.translated ? music.translated + '-' : ''
-          }${music.short_kr ? music.short_kr + '-' : ''}${
-            music.tags ? music.tags.join('-') + '.' : ''
-          }-${ga}`
+          let searchStr = `${music.title}-${music.tr ? music.tr + '-' : ''}${
+            music.sk ? music.sk + '-' : ''
+          }${music.tags ? music.tags.join('-') + '.' : ''}-${ga}`
             .replace(/\s|[!@#$%^&*(),.?":{}|<>♡★☆○●！]/g, '')
             .toLowerCase()
             .split('-')
@@ -365,54 +262,81 @@ const LLCTData = class {
       },
 
       karaoke (id, useImg) {
-        return this.getSong(id).karaoke && !useImg
-          ? dataInstance.karaoke(id)
-          : 'img'
+        return this.getSong(id).ka && !useImg ? dataFetch.karaoke(id) : 'img'
       },
 
-      playlist () {
-        return dataInstance.defaultPlaylist()
-      },
+      async dataHandle (name, pm, afterCb) {
+        try {
+          let data = await pm
+          this.$store.commit(`data/${name}`, data)
 
-      on: dataInstance.on,
-
-      addRecentPlayed (obj) {
-        if (!this.recentPlayed) {
-          this.recentPlayed = []
-        }
-
-        if (this.recentPlayed[0] && this.recentPlayed[0].id === obj.id) {
-          return
-        }
-
-        if (this.recentPlayed.length > 1) {
-          for (var i = 0; i < this.recentPlayed.length; i++) {
-            if (this.recentPlayed[i].id === obj.id) {
-              this.recentPlayed.splice(i, 1)
-              i--
-            }
+          if (typeof afterCb === 'function') {
+            afterCb(data)
           }
+        } catch (e) {
+          Toast.show(
+            'API 서버에 연결할 수 없습니다. ' + e.message,
+            'warning',
+            true,
+            10000
+          )
         }
-
-        this.recentPlayed.unshift(obj)
-
-        if (this.recentPlayed.length > 12) {
-          this.recentPlayed.splice(this.recentPlayed.length - 1, 1)
-        }
-
-        localStorage.setItem(
-          'LLCT.RecentPlayed',
-          JSON.stringify(this.recentPlayed)
-        )
       }
     }
   })
 
-  window.addEventListener('load', () => {
-    dataInstance.songs()
-    dataInstance.recommended()
-    dataInstance.defaultPlaylist()
+  Vue.prototype.$llctDatas = $llctDatas
 
-    dataInstance.loadRecent()
+  window.addEventListener('load', () => {
+    $llctDatas.dataHandle('lists', dataFetch.lists(), data => {
+      $llctDatas.$emit('listsLoaded', data)
+      $llctDatas.groups = Object.keys(data)
+    })
+    $llctDatas.dataHandle('recommends', dataFetch.recommends(), data => {
+      if (data.Notices && data.Notices.Msg.length) {
+        Toast.show(
+          data.Notices.Msg,
+          data.Notices.Icon,
+          data.Notices.Type,
+          data.Notices.Time
+        )
+      }
+    })
+    $llctDatas.dataHandle('playlists', dataFetch.playlists(), data => {
+      if (!data.lists) {
+        return false
+      }
+
+      $llctDatas.$store.commit('data/playlistsHolder', new Playlist.Holder())
+
+      let preData = JSON.parse(localStorage.getItem('LLCTPlaylist') || '[]')
+
+      let len = preData.length
+      if (len) {
+        for (var i = 0; i < len; i++) {
+          let pred = preData[i]
+          let pl = new Playlist.LLCTPlaylist()
+
+          pl.import(pred)
+          $llctDatas.$store.state.data.playlistsHolder.add(pl, true)
+        }
+      }
+
+      let listsLen = data.lists.length
+      for (var i = 0; i < listsLen; i++) {
+        let list = data.lists[i]
+
+        let pl = new Playlist.LLCTPlaylist(list.Title, true)
+
+        list.spoiler = list.Spoiler || false
+        list.lists = list.Items
+
+        delete list.Title
+        delete list.Items
+
+        pl.import(list)
+        $llctDatas.$store.state.data.playlistsHolder.add(pl, true)
+      }
+    })
   })
 })()

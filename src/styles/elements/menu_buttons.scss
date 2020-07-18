@@ -1,4 +1,4 @@
-@import "__global";
+@import "../global";
 
 .m-button {
   position: relative;
@@ -126,7 +126,7 @@
 }
 
 .m-button-enter-active {
-  transition: all 0.4s $decelerate-ease;
+  transition: opacity 0.4s $decelerate-ease;
 }
 .m-button-leave-active {
   display: none;

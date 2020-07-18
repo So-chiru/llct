@@ -1,4 +1,4 @@
-Vue.component('llct-searchbox', {
+export default {
   template: `
   <transition name="llct-searchbox" appear>
     <div class="llct-searchbox">
@@ -47,4 +47,4 @@ Vue.component('llct-searchbox', {
       }
     })
   }
-})
+}

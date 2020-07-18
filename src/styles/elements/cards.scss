@@ -1,4 +1,4 @@
-@import '__global.scss';
+@import '../global.scss';
 
 .llct-card {
   background-color: #333;
@@ -60,10 +60,8 @@
   z-index: 3;
 }
 
-.llct-card-content h1,
-.llct-card-content h3,
 .llct-card-bg {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .llct-card-content h1 {

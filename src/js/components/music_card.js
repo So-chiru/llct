@@ -1,7 +1,14 @@
-Vue.component('llct-music-card', {
+import LLCTImage from './image'
+
+import * as Modal from './modal'
+
+export default {
+  components: {
+    LLCTImage
+  },
   template: `<div class="llct-music-card" v-bind:key="title" :data-index="index" :class="{skeleton: skeleton}">
     <div class="info">
-      <llct-image :src="cover_url" :placeholder="placeholder" :skeleton="skeleton" :alt="title + ' 앨범 커버'"></llct-image>
+      <LLCTImage :src="cover_url" :placeholder="placeholder" :skeleton="skeleton" :alt="title + ' 앨범 커버'"></LLCTImage>
       <div class="text">
         <h3 v-if="!useAlt" :title="title" :class="{skeleton: skeleton}">{{title}}</h3>
         <h3 v-else :title="alt">{{alt}}</h3>
@@ -36,13 +43,23 @@ Vue.component('llct-music-card', {
   ],
   methods: {
     play (id) {
-      this.$llctEvents.$emit(
-        'play',
-        this.playlist ? this.playlist : id,
-        false,
-        true,
-        null,
-        this.playlist && typeof this.index === 'number' ? this.index : null
+      this.$store.dispatch(
+        'player/play',
+        this.playlist
+          ? {
+              playlist: this.playlist,
+              noURLState: false,
+              playOnLoad: true,
+              moveTab: true,
+              playlistIndex: typeof this.index === 'number' ? this.index : null
+            }
+          : {
+              id,
+              noURLState: false,
+              playOnLoad: true,
+              moveTab: true,
+              playlistIndex: null
+            }
       )
     },
 
@@ -51,8 +68,12 @@ Vue.component('llct-music-card', {
       let leastOne = false
 
       let song = this.$llctDatas.getSong(id)
-      for (var i = 0; i < window.playlists.length(); i++) {
-        let listObj = window.playlists.lists[i]
+      for (
+        var i = 0;
+        i < this.$store.state.data.playlistsHolder.length();
+        i++
+      ) {
+        let listObj = this.$store.state.data.playlistsHolder.lists[i]
 
         if (!listObj.readOnly) {
           leastOne = true
@@ -65,24 +86,24 @@ Vue.component('llct-music-card', {
             type: 'button',
             default: listObj.title,
             callback: _v => {
-              window.playlists.addSong(i, song)
+              this.$store.state.data.playlistsHolder.addSong(i, song)
             }
           })
         })(i)
       }
 
-      if (!window.playlists.length() || !leastOne) {
-        return showModal(
+      if (!this.$store.state.data.playlistsHolder.length() || !leastOne) {
+        return Modal.show(
           '재생목록 없음',
           '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.'
         )
       }
 
-      showModal(
+      Modal.show(
         '플레이리스트에 추가',
         '어느 플레이리스트에 추가 할까요?',
         plBtns
       )
     }
   }
-})
+}

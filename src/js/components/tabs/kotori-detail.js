@@ -1,4 +1,13 @@
-Vue.component('llct-kotori-detail', {
+import draggable from 'vuedraggable'
+import LLCTMusicCard from '../music_card'
+
+import * as Modal from '../modal'
+
+export default {
+  components: {
+    draggable,
+    LLCTMusicCard
+  },
   template: `<div class="kotori-in-tab" :class="{show: selected != null}">
     <div class="content">
       <div class="out-meta">
@@ -13,7 +22,7 @@ Vue.component('llct-kotori-detail', {
       </div>
       <div class="lists">
         <draggable v-model="last.lists" :move="checkMovable" :disabled="!checkMovable()" :handle="'.info'" :touchStartThreshold="50" :animation="200" filter=".control" easing="cubic-bezier(0.4, 0, 0.2, 1)" draggable=".llct-music-card" @end="dragged">
-          <llct-music-card placeholder="round" v-for="(data, index) in (last.lists || [])" :key="index" :playlist="last" :removeButton="last.readOnly ? false : removeSong" :disablePlaylist="!last.readOnly" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></llct-music-card>
+          <LLCTMusicCard placeholder="round" v-for="(data, index) in (last.lists || [])" :key="index" :playlist="last" :removeButton="last.readOnly ? false : removeSong" :disablePlaylist="!last.readOnly" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></LLCTMusicCard>
         </draggable>
       </div>
     </div>
@@ -21,9 +30,9 @@ Vue.component('llct-kotori-detail', {
   props: ['current', 'selected', 'lastpl'],
   data () {
     return {
-      playLists: window.playlists || {},
+      playLists: this.$store.state.data.playlistsHolder || {},
       select: this.selected || {},
-      last: this.lastpl || {},
+      last: this.lastpl || {}
     }
   },
   watch: {
@@ -50,7 +59,7 @@ Vue.component('llct-kotori-detail', {
         return
       }
 
-      showModal(
+      Modal.show(
         '재생목록 삭제',
         '정말 "' + this.select.title + '" 재생목록을 삭제할까요?',
         null,
@@ -69,19 +78,21 @@ Vue.component('llct-kotori-detail', {
     },
 
     dragged () {
-      window.playlists.save()
+      this.$store.state.data.playlistsHolder.save()
     },
 
     removeSong (ev) {
-      window.playlists.find(this.select.title).remove(ev.target.dataset.index)
-      window.playlists.save()
+      this.$store.state.data.playlistsHolder
+        .find(this.select.title)
+        .remove(ev.target.dataset.index)
+      this.$store.state.data.playlistsHolder.save()
     },
 
     getImageURL (id) {
       return `${this.$llctDatas.base}/cover/75/${id}`
     },
     getArtist (id, artist) {
-      return this.$llctDatas.artist(id, artist)
+      return this.$store.state.data.getArtist(this.$store.state, id, artist)
     },
     evKeydown (ev) {
       if (ev.keyCode == 27 && this.select) this.close()
@@ -94,4 +105,4 @@ Vue.component('llct-kotori-detail', {
   beforeDestroy () {
     window.removeEventListener('keydown', this.evKeydown)
   }
-})
+}

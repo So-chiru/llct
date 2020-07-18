@@ -1,18 +1,34 @@
+import draggable from 'vuedraggable'
+
+import LLCTCheckbox from '../checkbox'
+import LLCTKaraoke from '../karaoke'
+
+import { LLCTRepeatState, LLCTPlayState } from '../../store/modules/player'
+
+import { show } from '../modal'
+
+const settings = require('../../core/settings')
+
 const timeStamp = num => {
   return new Date((num || 0) * 1000).toISOString().substr(14, 5)
 }
 
-Vue.component('llct-player', {
+export default {
+  components: {
+    draggable,
+    LLCTCheckbox,
+    LLCTKaraoke
+  },
   template: `<div class="llct-tab llct-tab-over" id="tab4">
     <div class="llct-player">
-      <div class="player-dash" v-show="title != ''">
+      <div class="player-dash" v-show="title !== null">
         <div class="player-left">
           <div class="player-info">
             <div class="player-info-image">
               <img :src="url"></img>
             </div>
             <div class="player-info-text">
-              <p class="player-song-title" :title="title">{{title}}</p>
+              <p class="player-song-title" :title="title">{{preferTitle}}</p>
               <p class="player-song-artist" :title="artist">{{artist}}</p>
             </div>
           </div>
@@ -29,17 +45,17 @@ Vue.component('llct-player', {
             </div>
           </div>
           <div class="player-btn">
-            <i v-if="usePlayer" class="material-icons" tabindex="5" v-show="!playing && !play_onload" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
-            <i v-if="usePlayer" class="material-icons" tabindex="6" v-show="playing || play_onload" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
-            <i v-if="usePlayer" class="material-icons" tabindex="7" v-show="audio.playlist" v-on:click="next" v-on:keypress="ev => ev.keyCode == '13' && next()" alt="다음 곡 스킵 버튼">skip_next</i>
-            <i v-if="usePlayer" class="material-icons diff" tabindex="8" v-show="!audio.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat" v-on:keypress="ev => ev.keyCode == '13' && repeat()">sync</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="5" v-show="!playing && !this.$store.state.player.play.autoplay" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="6" v-show="playing || this.$store.state.player.play.autoplay" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="7" v-show="this.$store.state.player.playlist" v-on:click="next" v-on:keypress="ev => ev.keyCode == '13' && next()" alt="다음 곡 스킵 버튼">skip_next</i>
+            <i v-if="usePlayer" class="material-icons diff" tabindex="8" v-show="!this.$store.state.player.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat" v-on:keypress="ev => ev.keyCode == '13' && repeat()">sync</i>
             <i v-if="usePlayer" class="material-icons diff" tabindex="9" alt="설정 버튼" v-on:click="more" v-on:keypress="ev => ev.keyCode == '13' && more()">more_vert</i>
             <i class="material-icons player-close" tabindex="10" alt="닫기 버튼" v-on:click="close" v-on:keypress="ev => ev.keyCode == '13' && close()">close</i>
           </div>
         </div>
       </div>
       <div class="player-karaoke">
-        <llct-karaoke v-if="this.id" :id="id" :time="time" :playing="playing" :tickEnable="this.tickVolume > 0" :autoScroll="true"></llct-karaoke>
+        <LLCTKaraoke v-if="this.id" :id="id" :time="time" :playing="playing" :tickEnable="this.tickVolume > 0" :autoScroll="true"></LLCTKaraoke>
       </div>
     </div>
     <div class="player-vertical" :class="{show: displayVertical}">
@@ -52,11 +68,11 @@ Vue.component('llct-player', {
         <input type="range" v-model="playbackSpeed" max="2" min="0.2" step="0.05" value="1"></input>
         <div class="inset">
           <h3>플레이리스트 반복 재생</h3>
-          <llct-checkbox id="playlistRepeat" :checked="playlistRepeat" :onChange="(v) => playlistRepeat = v.target.checked"></llct-checkbox>
+          <LLCTCheckbox id="playlistRepeat" :checked="playlistRepeat" :onChange="(v) => playlistRepeat = v.target.checked"></LLCTCheckbox>
         </div>
         <div class="inset">
           <h3>공연장 효과</h3>
-          <llct-checkbox id="useLiveEffects" :disabled="useNativeMode" :checked="useLiveEffects" :onChange="(v) => useLiveEffects = v.target.checked"></llct-checkbox>
+          <LLCTCheckbox id="useLiveEffects" :disabled="useNativeMode" :checked="useLiveEffects" :onChange="(v) => useLiveEffects = v.target.checked"></LLCTCheckbox>
         </div>
         <h3>베이스 EQ <span class="value-indicator" :class="{warn: Number(audioBassVolume) >= 7.5}">{{useNativeMode ? '사용 불가능' : Number(audioBassVolume).toFixed(2) + 'db'}}</span></h3>
         <input type="range" v-if="!useNativeMode" v-model="audioBassVolume" max="15" min="-5" step="0.25"></input>
@@ -72,15 +88,9 @@ Vue.component('llct-player', {
   props: ['current'],
   data: () => {
     return {
-      id: null,
       time: null,
-      title: '',
-      artist: '',
       url: '',
-      playing: false,
-      playable: false,
       loading: false,
-      play_onload: false,
       progress: 0,
       phase: 'fetching',
       load_progress: 100,
@@ -96,11 +106,39 @@ Vue.component('llct-player', {
       playlistRepeat:
         localStorage.getItem('LLCT.Audio.RepeatPlaylist') == 'true',
       useLiveEffects: localStorage.getItem('LLCT.Audio.LiveEffects') == 'true',
-      useNativeMode: LLCTSettings.get('useNativeMode'),
+      useNativeMode: settings.get('useNativeMode'),
       karaoke: {},
       displayVertical: false,
-      usePlayer: LLCTSettings.get('usePlayer'),
+      usePlayer: settings.get('usePlayer'),
       bar_size: 0
+    }
+  },
+  computed: {
+    id () {
+      return this.$store.state.player.metadata.id
+    },
+    title () {
+      return this.$store.state.player.metadata.title
+    },
+    preferTitle () {
+      return this.$store.state.player.metadata[
+        this.$llctDatas.useTranslatedTitle ? 'tr' : 'title'
+      ]
+    },
+    artist () {
+      return this.$store.state.data.getArtist(
+        this.$store.state,
+        this.$store.state.player.metadata.id || '0',
+        this.$store.state.player.metadata.artist
+      )
+    },
+
+    playing () {
+      return this.$store.state.player.play.ing
+    },
+
+    playable () {
+      return this.$store.state.player.play.able
     }
   },
   methods: {
@@ -113,17 +151,17 @@ Vue.component('llct-player', {
     },
 
     close () {
-      this.$llctEvents.$emit('requestGoBack')
+      this.$store.commit('tab/back')
     },
 
     play () {
       if (!this.playable) {
-        this.play_onload = true
+        this.$store.commit('player/playOnLoad', true)
 
         return false
       }
 
-      this.play_onload = false
+      this.$store.commit('player/playOnLoad', false)
       window.audio.play()
     },
 
@@ -132,25 +170,37 @@ Vue.component('llct-player', {
     },
 
     pause () {
-      if (this.play_onload) {
-        this.play_onload = false
+      if (this.$store.state.player.play.autoplay) {
+        this.$store.commit('player/playOnLoad', false)
       }
 
       window.audio.pause()
     },
 
     playPause () {
-      return this[this.playing || this.play_onload ? 'pause' : 'play']()
+      return this[
+        this.playing || this.$store.state.player.play.autoplay
+          ? 'pause'
+          : 'play'
+      ]()
     },
 
     first () {
-      if (audio.playlist && audio.playlist.first) {
-        let first = audio.playlist.first()
-        this.$llctDatas.meta = first
-        this.play_onload = true
+      if (
+        this.$store.state.player.playlist &&
+        this.$store.state.player.playlist.first
+      ) {
+        let first = this.$store.state.player.playlist.first()
+
+        this.$store.dispatch('player/play', { obj: first })
+        this.$store.commit('player/playOnLoad', true)
 
         history.pushState(
-          { id: first.id, ...first, playlist: window.audio.playlist },
+          {
+            id: first.id,
+            ...first,
+            playlist: this.$store.state.player.playlist
+          },
           first.title + ' - LLCT',
           '?id=' + first.id
         )
@@ -161,13 +211,20 @@ Vue.component('llct-player', {
     },
 
     last () {
-      if (audio.playlist && audio.playlist.last) {
-        let last = audio.playlist.last()
-        this.$llctDatas.meta = last
-        this.play_onload = true
+      if (
+        this.$store.state.player.playlist &&
+        this.$store.state.player.playlist.last
+      ) {
+        let last = this.$store.state.player.playlist.last()
+        this.$store.dispatch('player/play', { obj: last })
+        this.$store.commit('player/playOnLoad', true)
 
         history.pushState(
-          { id: last.id, ...last, playlist: window.audio.playlist },
+          {
+            id: last.id,
+            ...last,
+            playlist: this.$store.state.player.playlist
+          },
           last.title + ' - LLCT',
           '?id=' + last.id
         )
@@ -178,14 +235,21 @@ Vue.component('llct-player', {
     },
 
     next () {
-      if (audio.playlist && audio.playlist.next) {
-        let end = window.audio.playlist.isEnd()
-        let next = audio.playlist.next()
-        this.$llctDatas.meta = next
-        this.play_onload = !end
+      if (
+        this.$store.state.player.playlist &&
+        this.$store.state.player.playlist.next
+      ) {
+        let end = this.$store.state.player.playlist.isEnd()
+        let next = this.$store.state.player.playlist.next()
+        this.$store.dispatch('player/play', { obj: next })
+        this.$store.commit('player/playOnLoad', !end)
 
         history.pushState(
-          { id: next.id, ...next, playlist: window.audio.playlist },
+          {
+            id: next.id,
+            ...next,
+            playlist: this.$store.state.player.playlist
+          },
           next.title + ' - LLCT',
           '?id=' + next.id
         )
@@ -196,10 +260,13 @@ Vue.component('llct-player', {
     },
 
     prev () {
-      if (audio.playlist && audio.playlist.prev) {
-        let prev = audio.playlist.prev()
-        this.$llctDatas.meta = prev
-        this.play_onload = true
+      if (
+        this.$store.state.player.playlist &&
+        this.$store.state.player.playlist.prev
+      ) {
+        let prev = this.$store.state.player.playlist.prev()
+        this.$store.dispatch('player/play', { obj: prev })
+        this.$store.commit('player/playOnLoad', true)
 
         audio.load(this.$llctDatas.base + '/audio/' + prev.id)
         this.init()
@@ -308,16 +375,16 @@ Vue.component('llct-player', {
     },
 
     init () {
-      if (!this.$llctDatas.meta) {
-        window.showModal('플레이어', '재생 중인 곡이 없습니다.', null, () => {
+      if (!this.$store.state.player.metadata.id) {
+        show('플레이어', '재생 중인 곡이 없습니다.', null, () => {
           this.close()
         })
 
         return
       }
 
-      this.useNativeMode = LLCTSettings.get('useNativeMode')
-      this.usePlayer = LLCTSettings.get('usePlayer')
+      this.useNativeMode = settings.get('useNativeMode')
+      this.usePlayer = settings.get('usePlayer')
       this.phase = 'fetching'
       this.loading = true
 
@@ -325,7 +392,7 @@ Vue.component('llct-player', {
         'play',
         () => {
           this.$llctEvents.$emit('karaokeUpdate')
-          this.playing = true
+          this.$store.commit('player/playStateUpdate', true)
         },
         'playerInstance'
       )
@@ -333,7 +400,7 @@ Vue.component('llct-player', {
       audio.events.on(
         'pause',
         () => {
-          this.playing = false
+          this.$store.commit('player/playStateUpdate', false)
         },
         'playerInstance'
       )
@@ -346,15 +413,15 @@ Vue.component('llct-player', {
       audio.events.on(
         'end',
         () => {
-          if (window.audio.playlist) {
-            if (!window.audio.playlist.isEnd()) {
+          if (this.$store.state.player.playlist) {
+            if (!this.$store.state.player.playlist.isEnd()) {
               return this.next()
-            } else if (window.audio.playlist.repeat) {
+            } else if (this.$store.state.player.playlist.repeat) {
               return this.first()
             }
           }
 
-          this.playing = false
+          this.$store.commit('player/playStateUpdate', false)
         },
         'playerInstance'
       )
@@ -364,10 +431,10 @@ Vue.component('llct-player', {
         () => {
           this.phase = 'ready'
 
-          this.playable = true
+          this.$store.commit('player/ableStateUpdate', true)
           this.timeUpdate()
 
-          if (this.play_onload) {
+          if (this.$store.state.player.play.autoplay) {
             this.play()
           }
         },
@@ -377,10 +444,6 @@ Vue.component('llct-player', {
       audio.volume = this.audioVolume
       audio.bassVolume = this.audioBassVolume
       audio.speed = this.playbackSpeed
-
-      if (karaokeTick) {
-        karaokeTick.volume = this.tickVolume
-      }
 
       let delay = Date.now()
       audio.events.on(
@@ -393,29 +456,16 @@ Vue.component('llct-player', {
         'playerInstance'
       )
 
-      this.id = this.$llctDatas.meta.id
-      this.title = this.$llctDatas.meta[
-        this.$llctDatas.meta.translated &&
-        LLCTSettings.get('useTranslatedTitle')
-          ? 'translated'
-          : 'title'
-      ]
-      this.artist = this.$llctDatas.artist(
-        this.id,
-        this.$llctDatas.meta.artist || '0'
-      )
       this.url = this.$llctDatas.base + '/cover/' + this.id
-
       audio.setMetadata(this.title, this.artist, this.url)
-
-      this.playing = audio.playing
+      this.$store.commit('player/playStateUpdate', audio.playing)
     }
   },
   watch: {
     current (value) {
       if (value) this.init()
       if (this.playing) {
-        this.watchUpdate(this.playing)
+        this.watchUpdate(true)
       }
 
       if (this.displayVertical) {
@@ -439,7 +489,6 @@ Vue.component('llct-player', {
     },
 
     tickVolume (v) {
-      karaokeTick.volume = v
       localStorage.setItem('LLCT.Audio.tickVolume', v)
     },
 
@@ -449,8 +498,8 @@ Vue.component('llct-player', {
     },
 
     playlistRepeat (v) {
-      if (window.audio.playlist) {
-        window.audio.playlist.repeat = v
+      if (this.$store.state.player.playlist) {
+        this.$store.commit('player/repeat', LLCTRepeatState.REPEAT_PLAYLIST)
       }
 
       localStorage.setItem('LLCT.Audio.RepeatPlaylist', v)
@@ -470,14 +519,6 @@ Vue.component('llct-player', {
     audio.next = this.next
     audio.prev = this.prev
 
-    this.$llctEvents.$on('callContentChange', () => {
-      this.init()
-    })
-
-    this.$llctEvents.$on('setPlayOnLoad', v => {
-      this.play_onload = v
-    })
-
     window.addEventListener('resize', () => {
       this.updateBarSize()
     })
@@ -486,4 +527,4 @@ Vue.component('llct-player', {
   beforeDestroy () {
     window.removeEventListener('keydown', this.keyStoke)
   }
-})
+}

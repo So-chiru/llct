@@ -1,21 +1,31 @@
-Vue.component('llct-chika', {
+import { Slider } from '../../core/slide'
+import LLCTImage from '../image'
+import LLCTMusicCard from '../music_card'
+
+const settings = require('../../core/settings')
+
+export default {
+  components: {
+    LLCTImage,
+    LLCTMusicCard
+  },
   template: `<div class="llct-tab" id="tab1">
     <div class="group-select">
       <div class="group-btn" v-on:pointerup="changeGroup(0)" v-bind:class="{active: this.currentGroup == this.groups[0]}">
-        <llct-image :shouldShow="true" src="/assets/us.png"></llct-image>
+        <LLCTImage :shouldShow="true" src="/assets/us.png"></LLCTImage>
       </div>
       <div class="group-btn" v-on:pointerup="changeGroup(1)" v-bind:class="{active: this.currentGroup == this.groups[1]}">
-        <llct-image :shouldShow="true" src="/assets/aqours.png"></llct-image>
+        <LLCTImage :shouldShow="true" src="/assets/aqours.png"></LLCTImage>
       </div>
       <div class="group-btn" v-on:pointerup="changeGroup(2)" v-bind:class="{active: this.currentGroup == this.groups[2]}">
-        <llct-image :shouldShow="true" src="/assets/niji.png"></llct-image>
+        <LLCTImage :shouldShow="true" src="/assets/niji.png"></LLCTImage>
       </div>
     </div>
-    <div class="chika-music-cards" v-if="this.$llctDatas.lists[this.currentGroup]">
-      <llct-music-card placeholder="round" v-for="(data, index) in (this.$llctDatas.lists[this.currentGroup] || {collection: []}).collection" v-bind:key="index + '.' + useTranslated()" :index="index" :title="data.title" :useAlt="useTranslated()" :alt="data.translated || data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></llct-music-card>
+    <div class="chika-music-cards" v-if="this.$store.state.data.lists[this.currentGroup]">
+      <LLCTMusicCard placeholder="round" v-for="(data, index) in (this.$store.state.data.lists[this.currentGroup] || {collection: []}).collection" v-bind:key="index + '.' + useTranslated()" :index="index" :title="data.title" :useAlt="useTranslated()" :alt="data.tr || data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></LLCTMusicCard>
     </div>
     <div class="chika-music-cards" v-else>
-      <llct-music-card v-for="(n, index) in 18" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true"></llct-music-card>
+      <LLCTMusicCard v-for="(n, index) in 18" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true"></LLCTMusicCard>
     </div>
   </div>
   `,
@@ -28,7 +38,7 @@ Vue.component('llct-chika', {
   },
   methods: {
     useTranslated () {
-      return LLCTSettings.get('useTranslatedTitle')
+      return this.$llctDatas.useTranslatedTitle
     },
 
     beforeEnter (el) {
@@ -45,7 +55,7 @@ Vue.component('llct-chika', {
 
     getArtist (artist) {
       return (
-        this.$llctDatas.lists[this.currentGroup].meta.artists[artist] ||
+        this.$store.state.data.lists[this.currentGroup].meta.artists[artist] ||
         artist ||
         this.currentGroup
       )
@@ -56,6 +66,6 @@ Vue.component('llct-chika', {
     }
   },
   beforeRouteEnter () {
-    this.slide = new LLCTSlide(this.$el.querySelector('.group-select'), 1200)
+    this.slide = new Slider(this.$el.querySelector('.group-select'), 1200)
   }
-})
+}

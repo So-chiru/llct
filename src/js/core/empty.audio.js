@@ -1,6 +1,6 @@
 // from https://github.com/edoudou/create-silent-audio
 
-function createSilentAudio (time, freq) {
+export const createSilentAudio = (time, freq) => {
   const length = time * freq
   const AudioContext =
     window.AudioContext || window.webkitAudioContext || window.mozAudioContext
@@ -70,5 +70,3 @@ function bufferToWave (abuffer, len) {
     pos += 4
   }
 }
-
-window.createSilentAudio = createSilentAudio

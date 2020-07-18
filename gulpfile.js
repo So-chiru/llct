@@ -20,7 +20,7 @@ const html = () =>
     .pipe(
       pug({
         locals: {
-          dev: dev
+          dev
         }
       })
     )

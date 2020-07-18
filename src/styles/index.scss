@@ -1,4 +1,4 @@
-@import "__global";
+@import 'global';
 
 $dark-bg: #151515;
 
@@ -10,6 +10,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: scroll;
+  scroll-behavior: smooth;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
@@ -18,7 +19,8 @@ body {
   color: #000;
 }
 
-html.dark, .dark body {
+html.dark,
+.dark body {
   background-color: $dark-bg;
   color: #fff;
 }
@@ -27,8 +29,8 @@ html.dark, .dark body {
   transition: 250ms background $standard-ease;
   background-color: #fff;
   position: relative;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
 }
@@ -46,8 +48,8 @@ html.dark, .dark body {
   height: 8px;
 
   @media screen and (max-width: $desktop) {
-  width: 2px;
-  height: 2px; 
+    width: 2px;
+    height: 2px;
   }
 }
 ::-webkit-scrollbar-button {
@@ -58,7 +60,6 @@ html.dark, .dark body {
   background: rgb(241, 241, 241);
   border: 0px none #ffffff;
   border-radius: 54px;
-  transition: 0.3s all cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark ::-webkit-scrollbar-thumb {
@@ -85,7 +86,6 @@ html.dark, .dark body {
   background: transparent;
   border: 0px none #ffffff;
   border-radius: 29px;
-  transition: 0.3s all cubic-bezier(0.4, 0, 0.2, 1);
 }
 ::-webkit-scrollbar-track:hover {
   background: #d3d3d3;
@@ -105,17 +105,6 @@ html.dark, .dark body {
 
 ::-webkit-scrollbar-corner {
   background: transparent;
-}
-
-llct-wait {
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-llct-wait.done {
-  visibility: hidden;
-  opacity: 0;
 }
 
 llct-menu-wrap {
@@ -144,6 +133,14 @@ llct-menu-wrap {
     width: $menu-width;
     height: 100vh;
   }
+
+  &.hidden {
+    transition: 250ms transform $accelerate-ease;
+
+    @media screen and (max-width: $tablet) {
+      transform: translateY(calc(#{$menu-height} + 10px));
+    }
+  }
 }
 
 .dark llct-menu-wrap {
@@ -152,14 +149,6 @@ llct-menu-wrap {
 
   @media screen and (max-width: $tablet) {
     box-shadow: unset;
-  }
-}
-
-llct-menu-wrap.hidden {
-  transition: 250ms transform $accelerate-ease;
-
-  @media screen and (max-width: $tablet) {
-    transform: translateY(calc(#{$menu-height} + 10px));
   }
 }
 
@@ -172,7 +161,7 @@ llct-menu-wrap .m-button:active p {
 }
 
 llct-menu-wrap::after {
-  content: "";
+  content: '';
   position: absolute;
   pointer-events: none;
   width: 100%;

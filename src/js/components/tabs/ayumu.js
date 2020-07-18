@@ -1,11 +1,20 @@
-Vue.component('llct-ayumu', {
+import LLCTCard from '../card'
+import LLCTMusicCard from '../music_card'
+
+import { Slider } from '../../core/slide'
+
+export default {
+  components: {
+    LLCTCard,
+    LLCTMusicCard
+  },
   template: `<div class="llct-tab" id="tab0">
     <div class="ayumu-cards-holder">
       <span>
-        <llct-card v-for="(card, index) in this.$llctDatas.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="idfy(card.BG)" :ext_url="card.ExtURL" :id="card.ID"></llct-card>
+        <LLCTCard v-for="(card, index) in this.$store.state.data.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="idfy(card.BG)" :ext_url="card.ExtURL" :id="card.ID"></LLCTCard>
       </span>
-      <span v-if="!this.$llctDatas.recommends.Cards">
-        <llct-card v-for="(n, index) in 3" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></llct-card>
+      <span v-if="!this.$store.state.data.recommends.Cards">
+        <LLCTCard v-for="(n, index) in 3" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></LLCTCard>
       </span>
     </div>
     <div class="ayumu-mod-select">
@@ -26,12 +35,12 @@ Vue.component('llct-ayumu', {
       </div>
     </div>
     <div class="ayumu-music-cards">
-      <transition-group v-if="this.$llctDatas.recommends.Songs" name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-        <llct-music-card v-show="mode === 0" placeholder="round" v-for="(card, index) in this.$llctDatas.recommends.Songs" v-bind:key="'card' + Math.random() + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></llct-music-card>
-        <llct-music-card v-show="mode === 1" placeholder="round" v-for="(card, index) in this.$llctDatas.recentPlayed" v-bind:key="'card' + Math.random() + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></llct-music-card>
+      <transition-group v-if="this.$store.state.data.recommends.Songs" name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
+        <LLCTMusicCard v-show="mode === 0" placeholder="round" v-for="(card, index) in this.$store.state.data.recommends.Songs" v-bind:key="'card' + Math.random() + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></LLCTMusicCard>
+        <LLCTMusicCard v-show="mode === 1" placeholder="round" v-for="(card, index) in this.$store.state.data.recentPlayed" v-bind:key="'card' + Math.random() + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></LLCTMusicCard>
       </transition-group>
       <transition-group v-else name="llct-card">
-        <llct-music-card v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true" v-once></llct-music-card>
+        <LLCTMusicCard v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true" v-once></LLCTMusicCard>
       </transition-group>  
     </div>
   </div>
@@ -39,8 +48,7 @@ Vue.component('llct-ayumu', {
   props: ['current'],
   data () {
     return {
-      mode: 0,
-      recentMusics: []
+      mode: 0
     }
   },
   methods: {
@@ -60,7 +68,7 @@ Vue.component('llct-ayumu', {
     },
 
     getArtist (id, artist) {
-      return this.$llctDatas.artist(id, artist)
+      return this.$store.state.data.getArtist(this.$store.state, id, artist)
     },
 
     changeTab (id) {
@@ -82,9 +90,9 @@ Vue.component('llct-ayumu', {
     }
   },
   mounted () {
-    this.slider = new LLCTSlide(
+    this.slider = new Slider(
       this.$el.querySelector('.ayumu-cards-holder span'),
       1200
     )
   }
-})
+}

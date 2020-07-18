@@ -1,4 +1,4 @@
-@import "__global";
+@import "../global";
 
 .group-select {
   display: -webkit-flex;
@@ -18,21 +18,20 @@
 
 .group-btn,
 .group-btn img {
-  height: 30px;
+  height: 25px;
 }
 
 .group-btn {
   position: relative;
   min-width: 100px;
   width: 300px;
-  height: 40px;
+  height: 30px;
   border-radius: 13.3px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 10px 20px;
   display: -webkit-flex;
   display: flex;
   margin-right: 10px;
-  transition: 150ms all $standard-ease;
 }
 
 .group-btn.active {

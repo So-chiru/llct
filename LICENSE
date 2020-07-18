@@ -1,8 +1,7 @@
-Site contents (audio, images, lyrics)
+Site contents (Audio, Album Images, Lyrics)
 
 © 2013, 2016-2017, 2019 by PL!, PL!S, PL!N, BUSHI, SUNRISE, KLabGames.
-Audio contents, album images and lyrics translation's copyrights are belongs to each copyright holder.
-NOT RELATED THIS PROJECT (LLCT, https://lovelivec.kr or this repository.) 
+THESE COMPANIES ARE NOT RELATED WITH THIS PROJECT (LLCT, https://lovelivec.kr or this repository.) 
 
 ---------------------------------------------------------
 
@@ -381,7 +380,7 @@ Material Icons - [Apache License]
 
 -------------------------------------------------------------
 
-/src/js/core/sha3.min.js - [MIT License]
+js-sha3 - [MIT License]
 
 Copyright 2015-2018 Chen, Yi-Cyuan
 

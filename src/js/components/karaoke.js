@@ -1,3 +1,6 @@
+import settings from '../core/settings'
+import LLCTAudio from '../core/audio'
+
 const KARA_WORD_SELECTOR = 'span.karaoke-word'
 const KARA_LINE_SELECTOR = '.karaoke-line'
 const P_ACTIVE = 'p[data-active="1"] '
@@ -50,8 +53,6 @@ const karaokeCheckTick = t => {
 let karaokeTick = null
 let karaokeTickCache = []
 let karaokeScrollCache = []
-
-let lastPlayed = 1000000
 
 /**
  * Karaoke 싱크 렌더링
@@ -151,7 +152,6 @@ const karaokeRender = (time, root = document, full, newline, tick) => {
         !karaokeTickCache[start_end] &&
         karaokeCheckTick(currentWord.innerText.replace(SPACE_REGEX, EMPTY))
       ) {
-        lastPlayed = time
         karaokeTickCache[start_end] = true
 
         karaokeTick.currentTime = 0
@@ -194,15 +194,14 @@ const karaokeRender = (time, root = document, full, newline, tick) => {
   }
 }
 
-let karaokeFrame = null
 let karaokeFocusDetect = null
 
-Vue.component('llct-karaoke', {
+export default {
   template: `
     <div class="llct-karaoke">
       <span v-if="!error && (!karaImage && !useImage)" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
-          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="word.text + word.start_time" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
+          <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="'word_' + word.text + word.start_time + '.' + Math.random()" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
         </p>
         <p class="karaoke-lyrics" v-if="showLyrics && line.lyrics && line.lyrics.length > 0">{{line.lyrics}}</p>
       </span>
@@ -210,7 +209,7 @@ Vue.component('llct-karaoke', {
         <img class="karaoke-image" :src="karaImage" v-on:error="imgHandler"></img>
       </span>
       <div class="error" v-if="error">
-        <p>콜표를 불러올 수 없습니다. - {{error.message}}</p>
+        <p>콜표를 불러올 수 없습니다. {{error.message ? '- ' + error.message : ''}}</p>
       </div>
     </div>
   `,
@@ -251,11 +250,11 @@ Vue.component('llct-karaoke', {
   },
   computed: {
     showLyrics () {
-      return LLCTSettings.get('useLyrics') || false
+      return settings.get('useLyrics') || false
     },
 
     useImage () {
-      return LLCTSettings.get('useImageInstead') || false
+      return settings.get('useImageInstead') || false
     }
   },
   watch: {
@@ -286,7 +285,7 @@ Vue.component('llct-karaoke', {
 
       let request = this.$llctDatas.karaoke(
         this.id,
-        LLCTSettings.get('useImageInstead')
+        settings.get('useImageInstead')
       )
 
       if (request === 'img') {
@@ -386,4 +385,4 @@ Vue.component('llct-karaoke', {
   updated () {
     this.scrollTop(0)
   }
-})
+}

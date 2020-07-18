@@ -1,3 +1,5 @@
+@import '../global';
+
 $search-height: 40px;
 
 .llct-searchbox {
@@ -6,13 +8,12 @@ $search-height: 40px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  box-sizing: border-box;
 
   background-color: rgba(236, 236, 236, 0.6);
   transition: 0.35s all cubic-bezier(0.19, 1, 0.22, 1);
 
   border-radius: 13.3px;
-  display:  flex;
+  display: flex;
 
   &:hover {
     background-color: rgba(236, 236, 236, 0.9);
@@ -26,9 +27,10 @@ $search-height: 40px;
     position: relative;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 
     border-radius: 13.3px;
-    border:0;
+    border: 0;
 
     padding: 4px 0px;
 
@@ -45,7 +47,8 @@ $search-height: 40px;
     outline: none;
   }
 
-  .icon_wrap, .enter_wrap {
+  .icon_wrap,
+  .enter_wrap {
     display: flex;
 
     width: 2.5vw;
@@ -80,7 +83,7 @@ $search-height: 40px;
   }
 
   .search_icon {
-    margin:auto;
+    margin: auto;
     pointer-events: none;
 
     opacity: 0.3;

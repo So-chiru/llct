@@ -1,3 +1,7 @@
+import Vue from 'vue'
+
+let toast
+
 Vue.component('llct-toast', {
   template: `
   <transition name="llct-toast" appear>
@@ -23,8 +27,8 @@ Vue.component('llct-toast', {
   }
 })
 
-window.addEventListener('load', () => {
-  let toast = new Vue({
+window.addEventListener('DOMContentLoaded', () => {
+  toast = new Vue({
     el: 'llct-toast',
     data: () => {
       return {
@@ -63,19 +67,19 @@ window.addEventListener('load', () => {
       }
     }
   })
+})
 
-  window.showToast = (content, icon, type, autoClose, click) => {
-    if (toast.autoClose) {
-      clearTimeout(toast.autoClose)
-    }
+window.addEventListener('keydown', ev => {
+  if (ev.keyCode == 27 && toast.open) modal.open = false
+})
 
-    toast.update(content, icon, type, autoClose, click)
-    toast.show()
+export const show = (content, icon, type, autoClose, click) => {
+  if (toast.autoClose) {
+    clearTimeout(toast.autoClose)
   }
 
-  window.addEventListener('keydown', ev => {
-    if (ev.keyCode == 27 && toast.open) modal.open = false
-  })
+  toast.update(content, icon, type, autoClose, click)
+  toast.show()
+}
 
-  if (window) window.toast = toast
-})
+export default toast

@@ -1,10 +1,17 @@
-Vue.component('llct-search', {
+import LLCTMusicCard from '../music_card'
+import LLCTSearchbox from '../searchbox'
+
+export default {
+  components: {
+    LLCTMusicCard,
+    LLCTSearchbox
+  },
   template: `<div class="llct-tab" id="tab3">
     <div class="search-info">
-      <llct-searchbox placeholder="여기에 검색할 텍스트 입력" :extraText="waitEnter && waitEnter + '개의 검색 결과가 있지만, 렌더링 성능을 위해 표시하지 않았습니다. 엔터를 눌러 결과를 확인할 수 있습니다.' || ''" :enter="(v) => goSearch(v, false)" :type="(v) => goSearch(v, true)"></llct-searchbox>
+      <LLCTSearchbox placeholder="여기에 검색할 텍스트 입력" :extraText="waitEnter && waitEnter + '개의 검색 결과가 있지만, 렌더링 성능을 위해 표시하지 않았습니다. 엔터를 눌러 결과를 확인할 수 있습니다.' || ''" :enter="(v) => goSearch(v, false)" :type="(v) => goSearch(v, true)"></LLCTSearchbox>
       <div class="search-music-cards" v-if="this.searchedData && this.searchedData.length">
         <transition-group name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-          <llct-music-card placeholder="round" v-for="(card, index) in this.searchedData" v-bind:key="'card_search_' + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></llct-music-card>
+          <LLCTMusicCard placeholder="round" v-for="(card, index) in this.searchedData" v-bind:key="'card_search_' + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></LLCTMusicCard>
         </transition-group>
       </div>
       <div class="search-music-nores" v-else>
@@ -27,7 +34,7 @@ Vue.component('llct-search', {
     return {
       searchedData: null,
       keyword: '',
-      waitEnter: 0,
+      waitEnter: 0
     }
   },
   methods: {
@@ -40,7 +47,7 @@ Vue.component('llct-search', {
     },
 
     getArtist (id, artist) {
-      return this.$llctDatas.artist(id, artist)
+      return this.$store.state.data.getArtist(this.$store.state, id, artist)
     },
 
     getCoverURL (id) {
@@ -60,4 +67,4 @@ Vue.component('llct-search', {
       this.searchedData = s
     }
   }
-})
+}

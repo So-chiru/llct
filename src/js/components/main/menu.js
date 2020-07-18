@@ -1,7 +1,9 @@
+import Vue from 'vue'
+
 Vue.component('llct-menu', {
-  template: `<div class="llct-menu-in" :class="{hidden: currentTab == 5}">
+  template: `<div class="llct-menu-in" :class="{hidden: tab == 5}">
     <transition name="m-button" v-for="(item, i) in lists" appear @before-enter="beforeEnter" @after-enter="afterEnter">
-      <div class="m-button" :data-index="i + 1" :tabindex="40 + (i + 1)" v-on:pointerup="changeTab(i)" v-on:keypress="(ev) => ev.keyCode == 13 && changeTab(i)" v-bind:class="{active: currentTab == i}">
+      <div class="m-button" :data-index="i + 1" :tabindex="40 + (i + 1)" v-on:pointerup="changeTab(i)" v-on:keypress="(ev) => ev.keyCode == 13 && changeTab(i)" v-bind:class="{active: tab == i}">
         <i class="material-icons" :title="item.title">{{item.icon}}</i>
         <p>{{item.title}}</p>
       </div>
@@ -9,7 +11,6 @@ Vue.component('llct-menu', {
   </div>`,
   data: () => {
     return {
-      currentTab: 0,
       lists: [
         { title: '메인', icon: 'home' },
         { title: '음악', icon: 'library_music' },
@@ -19,16 +20,15 @@ Vue.component('llct-menu', {
       ]
     }
   },
-  watch: {
-    currentTab (v) {
-      this.$el.parentNode.classList[v == 4 ? 'add' : 'remove']('hidden')
+  computed: {
+    tab () {
+      return this.$store.state.tab.current
     }
   },
-  mounted () {
-    this.$llctEvents.$on('changeTab', this.changeTabEvent)
-  },
-  beforeDestroy () {
-    this.$llctEvents.$off('changeTab')
+  watch: {
+    tab (v) {
+      this.$el.parentNode.classList[v == 4 ? 'add' : 'remove']('hidden')
+    }
   },
   methods: {
     beforeEnter (el) {
@@ -40,11 +40,7 @@ Vue.component('llct-menu', {
     },
 
     changeTab (id) {
-      this.$root.changeTab(id)
-    },
-
-    changeTabEvent (id) {
-      this.currentTab = id
+      this.$store.commit('tab/changeTo', id)
     }
   }
 })

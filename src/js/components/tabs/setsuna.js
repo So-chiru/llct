@@ -1,4 +1,10 @@
-Vue.component('llct-setsuna', {
+import LLCTCheckbox from '../checkbox'
+import settings from '../../core/settings'
+
+export default {
+  components: {
+    LLCTCheckbox
+  },
   template: `<div class="llct-tab" id="tab5">
     <div class="setsuna-info">
       <div class="header">
@@ -14,16 +20,16 @@ Vue.component('llct-setsuna', {
       </div>
     </div>
     <div class="setsuna-in">
-      <div class="setsuna-section" v-for="(categoryList, categoryIndex) in settings.lists">
-        <h3>{{category[categoryIndex]}}</h3>
+      <div class="setsuna-section" v-for="(categoryList, categoryIndex) in settings.categories">
+        <h3>{{settings.categories[categoryIndex]}}</h3>
         <div class="setsuna-options">
-          <div class="setsuna-option" v-for="(item, index) in categoryList">
+          <div class="setsuna-option" v-for="(item, index) in settings.lists[categoryIndex]">
             <div class="info">
               <p>{{item.title}}</p>
               <p class="muted" v-html="item.desc"></p>
             </div>
             <div class="control">
-              <llct-checkbox v-if="item.type == 'checkbox'" :id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :checked="item.value" :onChange="update"></llct-checkbox>
+              <LLCTCheckbox v-if="item.type == 'checkbox'" :id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :checked="item.value" :onChange="update"></LLCTCheckbox>
               <input type="text" v-if="item.type == 'text'" :data-id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :value="item.value" v-on:change="update"></input>
             </div>
           </div>
@@ -33,10 +39,9 @@ Vue.component('llct-setsuna', {
   </div>
   `,
   props: ['current'],
-  data: () => {
-    return {
-      settings: window.LLCTSettings,
-      category: window.LLCTSettingCategory
+  computed: {
+    settings () {
+      return settings
     }
   },
   watch: {
@@ -50,7 +55,7 @@ Vue.component('llct-setsuna', {
         return
       }
 
-      LLCTSettings.set(
+      settings.set(
         ev.target.dataset.id,
         ev.target.type === 'checkbox' ? ev.target.checked : ev.target.value
       )
@@ -60,4 +65,4 @@ Vue.component('llct-setsuna', {
       window.open(link, '_blank')
     }
   }
-})
+}

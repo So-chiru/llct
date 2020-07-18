@@ -1,4 +1,7 @@
-const LLCTSettingCategory = ['UI', '플레이어', '미디어']
+if (!window.settings) {
+  window.settings = {}
+}
+
 const llctSettingDefault = [
   {
     title: '다크모드 사용',
@@ -48,11 +51,17 @@ const llctSettingDefault = [
     id: 'useTranslatedTitle',
     category: 0,
     type: 'checkbox',
-    default: false
+    default: false,
+    func: v => {
+      if (window.app) {
+        window.app.$llctDatas.useTranslatedTitle = v
+      }
+    }
   },
   {
     title: '곡 플레이어 활성화',
-    desc: '곡 플레이어를 사용합니다. 비활성화시 노래를 로딩하지 않고 콜만 표시합니다.',
+    desc:
+      '곡 플레이어를 사용합니다. 비활성화시 노래를 로딩하지 않고 콜만 표시합니다.',
     id: 'usePlayer',
     category: 1,
     type: 'checkbox',
@@ -65,15 +74,16 @@ const llctSettingDefault = [
   },
   {
     title: '가사 사용',
-    desc: '가사를 사용합니다. 비활성화시 가사를 표시하지 않습니다.',
+    desc: '가사 음 밑에 한글 뜻이 적힌 가사를 표시합니다.',
     id: 'useLyrics',
     category: 1,
     type: 'checkbox',
     default: true
   },
   {
-    title: '타임 싱크 콜표대신 이미지 사용',
-    desc: '시간에 맞춰 가사가 표시되는 콜표 대신 기존 이미지 방식을 사용합니다.',
+    title: '타임 싱크 콜표 대신 이미지 사용',
+    desc:
+      '시간에 맞춰 가사가 표시되는 콜표 대신 기존 이미지 방식을 사용합니다.',
     id: 'useImageInstead',
     category: 1,
     type: 'checkbox',
@@ -81,9 +91,11 @@ const llctSettingDefault = [
   },
   {
     title: '노래 재생시 가감속 효과 사용',
-    desc: '노래 재생 / 멈춤시 볼륨이 커/작아지는 효과를 사용합니다. (Native에서 사용 불가)',
+    desc:
+      '노래 재생 / 멈춤시 볼륨이 점점 커지거나 작아지는 효과를 사용합니다. (Native에서 사용 불가)',
     id: 'useFadeInOut',
     category: 1,
+    disableAt: 'useNativeMode',
     type: 'checkbox',
     default: true,
     func: v => {
@@ -94,7 +106,8 @@ const llctSettingDefault = [
   },
   {
     title: 'Native 플레이어 모드',
-    desc: 'Audio API 대신 기본 HTML5 플레이어를 사용합니다. 자세한 내용은 <a href="https://www.notion.so/lovelivec/4c5a0ae6b02b48a4b37d53b52fbd94a0">LLCT 사용법</a>에서 참고하세요.',
+    desc:
+      'Audio API 대신 기본 HTML5 플레이어를 사용합니다. 자세한 내용은 <a href="https://www.notion.so/lovelivec/4c5a0ae6b02b48a4b37d53b52fbd94a0">LLCT 사용법</a>에서 참고하세요.',
     id: 'useNativeMode',
     category: 1,
     type: 'checkbox',
@@ -105,11 +118,17 @@ const llctSettingDefault = [
   },
   {
     title: '페이지 전반에 사용되는 이미지 활성화',
-    desc: '노래 카드의 이미지를 표시하지 않습니다. 데이터 절약에 도움이 될 수 있습니다.',
+    desc:
+      '노래 카드의 이미지를 표시합니다. 끄면 데이터 절약에 도움이 될 수 있습니다.',
     id: 'useImages',
     category: 2,
     type: 'checkbox',
-    default: true
+    default: true,
+    func: v => {
+      if (window.app) {
+        window.app.$llctDatas.useImages = v
+      }
+    }
   },
   {
     title: '청색약/맹 모드',
@@ -152,6 +171,11 @@ const llctSettingDefault = [
 class LLCTSetting {
   constructor () {
     this.lists = []
+    this.categories = ['UI', '플레이어', '미디어']
+
+    for (var i = 0; i < llctSettingDefault.length; i++) {
+      this.import(llctSettingDefault[i])
+    }
   }
 
   import (obj) {
@@ -183,6 +207,8 @@ class LLCTSetting {
     if (typeof obj.value === 'undefined') {
       obj.value = obj.default || null
     }
+
+    window.settings[obj.id] = obj.value
 
     this.lists[obj.category].push(obj)
   }
@@ -224,6 +250,8 @@ class LLCTSetting {
             item.func(value)
           }
 
+          window.settings[item.id] = value
+
           this.save()
 
           done = true
@@ -253,11 +281,4 @@ class LLCTSetting {
   }
 }
 
-const initSetting = () => {
-  window.LLCTSettings = new LLCTSetting()
-
-  for (var i = 0; i < llctSettingDefault.length; i++) {
-    LLCTSettings.import(llctSettingDefault[i])
-  }
-}
-initSetting()
+module.exports = new LLCTSetting()
