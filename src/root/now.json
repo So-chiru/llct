@@ -6,6 +6,10 @@
       "src": "/data/(.*)",
       "headers": { "cache-control": "s-maxage=86400" },
       "dest": "/data/$1"
+    },
+    {
+      "src": "/play/(.*)",
+      "dest": "/?id=$1"
     }
   ],
   "builds": [{ "src": "**", "use": "@now/static" }]
