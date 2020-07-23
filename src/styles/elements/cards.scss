@@ -223,13 +223,19 @@
 }
 
 .dark .llct-card-bg-layer.skeleton {
-  background: #242424;
+  background: linear-gradient(
+    rgba(60, 60, 60, 0.7) 0%,
+    rgba(24, 24, 24, 0.9) 100%
+  );
   backdrop-filter: unset;
   animation: dark-skeleton 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
 }
 
 .dark .llct-card-bg-layer {
-  background: #242424;
+  background: linear-gradient(
+    rgba(60, 60, 60, 0.7) 0%,
+    rgba(24, 24, 24, 0.9) 100%
+  );
 }
 
 .llct-card-bg {

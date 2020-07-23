@@ -67,12 +67,12 @@
 }
 
 .dark .llct-music-card.skeleton {
-  background: #242424;
+  background: #222;
   animation: dark-music-skeleton 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
 }
 
 .dark .llct-music-card {
-  background-color: #242424;
+  background-color: #222;
 }
 
 .llct-music-card::after {
@@ -94,11 +94,11 @@
 }
 
 .llct-music-card:hover::after {
-  opacity: 0.6;
+  opacity: 0.2;
 }
 
 .llct-music-card:active::after {
-  opacity: 1;
+  opacity: 0.4;
 }
 
 .llct-music-card.grayOut:hover::after {
