@@ -1,9 +1,11 @@
 import LLCTCheckbox from '../checkbox'
+import LLCTButton from '../button'
 import settings from '../../core/settings'
 
 export default {
   components: {
-    LLCTCheckbox
+    LLCTCheckbox,
+    LLCTButton
   },
   template: `<div class="llct-tab" id="tab5">
     <div class="setsuna-info">
@@ -30,6 +32,7 @@ export default {
             </div>
             <div class="control">
               <LLCTCheckbox v-if="item.type == 'checkbox'" :id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :checked="item.value" :onChange="update"></LLCTCheckbox>
+              <LLCTButton v-if="item.type == 'button'" :id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :click="update" :text="item.title"></LLCTButton>
               <input type="text" v-if="item.type == 'text'" :data-id="item.id" :disabled="item.disabled || item.disableAt ? settings.get(item.disableAt) : false" :value="item.value" v-on:change="update"></input>
             </div>
           </div>

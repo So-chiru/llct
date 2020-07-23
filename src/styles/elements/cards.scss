@@ -1,7 +1,7 @@
 @import '../global.scss';
 
 .llct-card {
-  background-color: #333;
+  background-color: #ccc;
   border-radius: 13.3px;
   transform: translateY(0px);
   overflow: hidden;
@@ -9,6 +9,8 @@
   box-shadow: $shadow-0dp;
   user-select: none;
   outline: none;
+
+  transition: 0.3s background-color $defaultCubic;
 
   display: -webkit-flex;
   display: flex;
@@ -174,8 +176,8 @@
 .llct-card-bg-layer {
   z-index: 2;
   background: linear-gradient(
-    rgba(139, 139, 139, 0.6) 0%,
-    rgba(112, 112, 112, 0.9) 100%
+    rgba(181, 181, 181, 0.6) 0%,
+    rgba(161, 161, 161, 0.9) 100%
   );
   opacity: 0.9;
   backdrop-filter: blur(2px);
@@ -183,6 +185,8 @@
   &.spoiler {
     backdrop-filter: blur(30px);
   }
+
+  transition: 0.3s background $defaultCubic;
 }
 
 .dark .llct-card-bg-layer.spoiler {
@@ -225,10 +229,7 @@
 }
 
 .dark .llct-card-bg-layer {
-  background: linear-gradient(
-    rgba(139, 139, 139, 0.6) 0%,
-    rgba(77, 77, 77, 0.9) 100%
-  );
+  background: #242424;
 }
 
 .llct-card-bg {

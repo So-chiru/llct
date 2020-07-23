@@ -1,5 +1,5 @@
 import LLCTCard from '../card'
-import LLCTMusicCard from '../music_card'
+import LLCTMusicCard from '../music_card.ts'
 
 import { Slider } from '../../core/slide'
 

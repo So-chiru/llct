@@ -128,10 +128,6 @@ export default class LLCTAudio {
           this.duration = this.context.duration
 
           this.events.run('playable')
-
-          if (this.playOnLoad) {
-            this.play()
-          }
         })
 
         return
@@ -163,10 +159,6 @@ export default class LLCTAudio {
           }
 
           this.events.run('playable')
-
-          if (this.playOnLoad) {
-            this.play()
-          }
         },
 
         e => 'Error with decoding audio data' + e.err
@@ -375,7 +367,9 @@ export default class LLCTAudio {
       }
     }
 
-    timing()
+    requestAnimationFrame(() => {
+      timing()
+    })
 
     if (!this.disableEffects) {
       this.liveEffect(localStorage.getItem('LLCT.Audio.LiveEffects') == 'true')
@@ -423,7 +417,6 @@ export default class LLCTAudio {
   }
 
   destroySource () {
-    this.playOnLoad = false
     this.loaded = false
 
     if (this.source) {
@@ -544,10 +537,6 @@ export default class LLCTAudio {
   }
 
   play (skipFade) {
-    if (!this.loaded) {
-      this.playOnLoad = true
-    }
-
     if (this.supportMedia) {
       navigator.mediaSession.playbackState = 'playing'
     }

@@ -1,0 +1,65 @@
+@import '../global.scss';
+
+.llct-button {
+  margin-left: 10px;
+}
+
+.llct-button,
+.llct-modal .more input[type='button'] {
+  position: relative;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  border-radius: 8.3px;
+
+  padding: 0.8vh 3.3vw;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline-style: none;
+}
+
+.dark .llct-button,
+.dark .llct-modal .more input[type='button'] {
+  background: rgba(63, 164, 253, 0.12);
+  backdrop-filter: blur(10px) saturate(200%);
+  border: 0;
+}
+
+.dark .llct-button:hover,
+.dark .llct-modal .more input[type='button']:hover {
+  background: #313131;
+}
+
+.dark .llct-button:active,
+.dark .llct-modal .more input[type='button']:active {
+  background: #3f3f3f;
+}
+
+.llct-button::after {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8.3px;
+  opacity: 0;
+  box-shadow: $shadow-3dp;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.llct-modal .more input[type='button']:hover,
+.llct-modal .more input[type='button']:focus {
+  box-shadow: $shadow-1dp;
+}
+
+.llct-modal .more input[type='button']:active {
+  box-shadow: $shadow-2dp;
+}
+
+.llct-button:hover::after {
+  opacity: 0.4;
+}
+
+.llct-button:active::after {
+  opacity: 1;
+}

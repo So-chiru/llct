@@ -1,5 +1,5 @@
 import draggable from 'vuedraggable'
-import LLCTMusicCard from '../music_card'
+import LLCTMusicCard from '../music_card.ts'
 
 import * as Modal from '../modal'
 

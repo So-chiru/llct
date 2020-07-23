@@ -1,7 +1,52 @@
 import Vue from 'vue'
-import { store } from '../store/index'
+import { store } from '../store/index.ts'
 
-import * as Toast from '../components/toast'
+let lastCacheCheck = 0
+let keysCache = []
+
+const findInKeys = (keys, id) => {
+  let keyLength = keys.length
+  for (var i = 0; i < keyLength; i++) {
+    if (keys[i].url.indexOf('/call/' + id) > -1) {
+      return true
+    }
+  }
+
+  return false
+}
+
+const checkHas = id =>
+  new Promise((resolve, reject) => {
+    if (keysCache.length) {
+      resolve(findInKeys(keysCache, id))
+
+      if (lastCacheCheck > Date.now()) {
+        return
+      }
+    }
+
+    lastCacheCheck = Date.now() + 5000
+
+    if (!window.caches) {
+      return true
+    }
+
+    return caches
+      .keys()
+      .then(v => {
+        return v.filter(v => v.indexOf('cache-dynamic') > -1)[0]
+      })
+      .then(v => caches.open(v))
+      .then(async v => {
+        let keys = await v.keys()
+        keysCache = keys
+
+        resolve(findInKeys(keys, id))
+      })
+      .catch(reject)
+  })
+
+import * as Toast from '../components/toast.ts'
 import * as Playlist from './playlist'
 import settings from './settings'
 
@@ -149,7 +194,8 @@ const dataFetch = {
       return {
         base: host,
         useImages: settings.get('useImages'),
-        useTranslatedTitle: settings.get('useTranslatedTitle')
+        useTranslatedTitle: settings.get('useTranslatedTitle'),
+        cacheSize: 0
       }
     },
     store,
@@ -281,6 +327,14 @@ const dataFetch = {
             10000
           )
         }
+      },
+
+      checkAvailable (id) {
+        if (typeof id === 'undefined') {
+          return true
+        }
+
+        return checkHas(id)
       }
     }
   })

@@ -1,6 +1,11 @@
 import Vue from 'vue'
 
+import LLCTButton from './button'
+
 Vue.component('llct-modal', {
+  components: {
+    LLCTButton
+  },
   template: `
   <div class="llct-modal" :class="{'show':this.$root.open}">
     <transition name="llct-modal" appear>
@@ -15,8 +20,8 @@ Vue.component('llct-modal', {
         </div>
         <div class="buttons_list">
           <div class="button_wrap">
-            <div class="button" v-if="this.$root.acceptBtnNeed" v-on:click="accept">{{this.$root.acceptText || '확인'}}</div>
-            <div class="button" v-on:click="this.$root.hide">닫기</div>
+            <LLCTButton v-if="this.$root.acceptBtnNeed" :click="accept" :text="this.$root.acceptText || '확인'"></LLCTButton>
+            <LLCTButton :click="this.$root.hide" text="닫기"></LLCTButton>
           </div>
         </div>
       </div>

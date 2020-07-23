@@ -1,12 +1,13 @@
 import LLCTImage from './image'
 
 import * as Modal from './modal'
+import * as Toast from '../components/toast.ts'
 
 export default {
   components: {
     LLCTImage
   },
-  template: `<div class="llct-music-card" v-bind:key="title" :data-index="index" :class="{skeleton: skeleton}">
+  template: `<div class="llct-music-card" :key="title + '.' + (offline && grayOut)" :data-index="index" :class="{skeleton: skeleton, grayOut: offline && grayOut}" :title="offline && grayOut ? '다운로드하지 않은 콜표입니다.' : ''">
     <div class="info">
       <LLCTImage :src="cover_url" :placeholder="placeholder" :skeleton="skeleton" :alt="title + ' 앨범 커버'"></LLCTImage>
       <div class="text">
@@ -39,10 +40,29 @@ export default {
     'playlist',
     'skeleton',
     'useAlt',
-    'alt'
+    'alt',
+    'currentGroup'
   ],
+  watch: {
+    async currentGroup () {
+      this.grayOut = false
+
+      this.grayOut =
+        !navigator.onLine && !(await this.$llctDatas.checkAvailable(this.id))
+    }
+  },
+  data () {
+    return {
+      grayOut: null
+    }
+  },
+  computed: {
+    offline () {
+      return !navigator.onLine
+    }
+  },
   methods: {
-    play (id) {
+    playAnyway (id) {
       this.$store.dispatch(
         'player/play',
         this.playlist
@@ -61,6 +81,23 @@ export default {
               playlistIndex: null
             }
       )
+    },
+    play (id) {
+      if (this.grayOut) {
+        Toast.show(
+          '다운로드하지 않은 콜표입니다. 계속하려면 여기를 클릭하세요.',
+          'offline_bolt',
+          false,
+          3000,
+          () => {
+            this.playAnyway(id)
+          }
+        )
+
+        return
+      }
+
+      this.playAnyway(id)
     },
 
     addPlaylist (id) {
@@ -105,5 +142,10 @@ export default {
         plBtns
       )
     }
+  },
+
+  async mounted () {
+    this.grayOut =
+      !navigator.onLine && !(await this.$llctDatas.checkAvailable(this.id))
   }
 }

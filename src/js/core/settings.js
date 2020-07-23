@@ -59,6 +59,18 @@ const llctSettingDefault = [
     }
   },
   {
+    title: '사이트 알림 받기',
+    desc:
+      '가능한 경우 라이브 알림, 다운로드 상태 등을 시스템 알림으로 받습니다.',
+    id: 'useNotification',
+    category: 0,
+    type: 'checkbox',
+    disableAt: () => {
+      return !('Notification' in window)
+    },
+    default: false
+  },
+  {
     title: '곡 플레이어 활성화',
     desc:
       '곡 플레이어를 사용합니다. 비활성화시 노래를 로딩하지 않고 콜만 표시합니다.',
@@ -165,6 +177,17 @@ const llctSettingDefault = [
           .classList[v ? 'add' : 'remove']('monochromacy')
       }
     }
+  },
+  {
+    title: '캐시 비우기',
+    desc: '사이트에서 사용 중인 캐시 (콜표 이미지, 콜표 텍스트) 를 지웁니다.',
+    id: 'clearSiteCache',
+    category: 2,
+    type: 'button',
+    default: false,
+    func: () => {
+      window.clearCaches()
+    }
   }
 ]
 
@@ -198,6 +221,12 @@ class LLCTSetting {
       obj.value = res[0]
     }
 
+    if (obj.disableAt) {
+      if (typeof obj.disableAt === 'function') {
+        obj.disabled = obj.disableAt()
+      }
+    }
+
     let storageGet = localStorage.getItem('LLCT.' + obj.id)
 
     if (storageGet) {
@@ -209,7 +238,6 @@ class LLCTSetting {
     }
 
     window.settings[obj.id] = obj.value
-
     this.lists[obj.category].push(obj)
   }
 
@@ -233,35 +261,32 @@ class LLCTSetting {
     return null
   }
 
-  set (id, value) {
-    let done = false
-
+  find (id) {
     for (var i = 0; i < this.lists.length; i++) {
       let category = this.lists[i]
-
       if (!category) continue
+
       for (var z = 0; z < category.length; z++) {
-        let item = category[z]
-
-        if (item.id === id) {
-          item.value = value
-
-          if (item.func) {
-            item.func(value)
-          }
-
-          window.settings[item.id] = value
-
-          this.save()
-
-          done = true
-          break
+        if (category[z].id === id) {
+          return category[z]
         }
       }
+    }
 
-      if (done) {
-        break
-      }
+    return null
+  }
+
+  set (id, value) {
+    let item = this.find(id)
+    item.value = value
+
+    if (item.func) {
+      item.func(value)
+    }
+
+    if (item.type !== 'button') {
+      window.settings[item.id] = value
+      this.save()
     }
   }
 

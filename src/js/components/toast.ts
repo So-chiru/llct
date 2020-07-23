@@ -70,10 +70,25 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 window.addEventListener('keydown', ev => {
-  if (ev.keyCode == 27 && toast.open) modal.open = false
+  if (ev.keyCode == 27 && toast.open) toast.open = false
 })
 
-export const show = (content, icon, type, autoClose, click) => {
+/**
+ * 토스트를 표시합니다.
+ *
+ * @param content 토스트의 내용
+ * @param icon 토스트의 아이콘
+ * @param type 토스트가 에러인지의 여부
+ * @param autoClose 토스트가 자동으로 닫힐 시간
+ * @param click 클릭하면 실행할 함수
+ */
+export const show = (
+  content: String,
+  icon: String,
+  type: Boolean,
+  autoClose: Number,
+  click: Function
+) => {
   if (toast.autoClose) {
     clearTimeout(toast.autoClose)
   }

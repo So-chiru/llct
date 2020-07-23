@@ -1,9 +1,11 @@
-const CACHE = 'llct-cache-v20200718-2046'
+const CACHE = 'llct-cache-v20200724-0005'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200620-1623'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
   '/',
   '/?utm_source=pwa',
+  '/?utm_source=homescreen',
+  '/assets/mi.woff',
   '/assets/aqours.png',
   '/assets/niji.png',
   '/assets/us.png',
@@ -24,7 +26,7 @@ const tempData = url => {
     url.indexOf('/lists') > -1 ||
     url.indexOf('/playlists') > -1 ||
     url.indexOf('/recommend') > -1 ||
-    url.indexOf('/call') > -1
+    url.indexOf('/cover') > -1
   )
 }
 
@@ -38,6 +40,29 @@ const filter = url => {
 
   return url
 }
+
+const getSizes = () =>
+  new Promise((resolve, reject) => {
+    caches
+      .open(DYNAMIC_CACHE)
+      .then(async v => {
+        let keys = await v.keys()
+        let reqs = []
+
+        if (!keys.length) {
+          resolve(0)
+        }
+
+        for (var i = 0; i < keys.length; i++) {
+          reqs.push(
+            await (await (await fetch(keys[i])).arrayBuffer()).byteLength
+          )
+        }
+
+        resolve((await Promise.all(reqs)).reduce((p, n) => p + n))
+      })
+      .catch(reject)
+  })
 
 self.addEventListener('install', ev => {
   ev.waitUntil(
@@ -154,6 +179,22 @@ self.addEventListener('activate', ev => {
   return self.clients.claim()
 })
 
-self.addEventListener('message', msg => {
-  //console.log(msg)
+self.addEventListener('message', async msg => {
+  if (msg.data === 'getSizes') {
+    let size = await getSizes()
+
+    self.clients.matchAll().then(clients => {
+      clients.forEach(cli => cli.postMessage({ cmd: 0x02, msg: size }))
+    })
+  } else if (msg.data === 'clearCaches') {
+    let removed = await getSizes()
+
+    caches.delete(DYNAMIC_CACHE)
+
+    setTimeout(() => {
+      self.clients.matchAll().then(clients => {
+        clients.forEach(cli => cli.postMessage({ cmd: 0x02, msg: 0, removed }))
+      })
+    }, 0)
+  }
 })

@@ -3,7 +3,7 @@ import draggable from 'vuedraggable'
 import LLCTCheckbox from '../checkbox'
 import LLCTKaraoke from '../karaoke'
 
-import { LLCTRepeatState, LLCTPlayState } from '../../store/modules/player'
+import { LLCTRepeatState } from '../../store/modules/player.ts'
 
 import { show } from '../modal'
 

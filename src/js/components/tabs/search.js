@@ -1,5 +1,5 @@
-import LLCTMusicCard from '../music_card'
-import LLCTSearchbox from '../searchbox'
+import LLCTMusicCard from '../music_card.ts'
+import LLCTSearchbox from '../searchbox.ts'
 
 export default {
   components: {

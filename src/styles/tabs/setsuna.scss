@@ -122,7 +122,16 @@
 
     .control {
       margin: auto;
-      flex: 1;
+      flex: 3;
+
+      .llct-button {
+        width: fit-content;
+      }
+
+      .llct-checkbox,
+      .llct-button {
+        margin: auto;
+      }
     }
   }
 }

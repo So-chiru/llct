@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 Vue.component('llct-menu', {
   template: `<div class="llct-menu-in" :class="{hidden: tab == 5}">
-    <transition name="m-button" v-for="(item, i) in lists" appear @before-enter="beforeEnter" @after-enter="afterEnter">
+    <transition name="m-button" v-for="(item, i) in lists" :key="'mbutton' + i" appear @before-enter="beforeEnter" @after-enter="afterEnter">
       <div class="m-button" :data-index="i + 1" :tabindex="40 + (i + 1)" v-on:pointerup="changeTab(i)" v-on:keypress="(ev) => ev.keyCode == 13 && changeTab(i)" v-bind:class="{active: tab == i}">
         <i class="material-icons" :title="item.title">{{item.icon}}</i>
         <p>{{item.title}}</p>

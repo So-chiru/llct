@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueLazyload from 'vue-lazyload'
 
-import { store } from './store/index'
+import { store } from './store/index.ts'
 
-import * as Toast from './components/toast'
+import * as Toast from './components/toast.ts'
 
 import LLCTAudio from './core/audio'
 
@@ -17,8 +17,6 @@ Vue.use(Vuex)
 
 require('./components/main/app')
 require('./components/main/menu')
-
-require('./components/toast')
 
 require('./components/tabs/ayumu')
 require('./components/tabs/chika')
@@ -57,10 +55,6 @@ Vue.use(VueLazyload, {
 })()
 
 const init = () => {
-  var audio = new LLCTAudio(false, null, settings.get('useNativeMode') || false)
-  window.audio = audio
-  window.audio.useFadeInOut = settings.get('useFadeInOut') || false
-
   if (!navigator.onLine) {
     setTimeout(() => {
       Toast.show(
@@ -71,6 +65,10 @@ const init = () => {
       )
     }, 0)
   }
+
+  var audio = new LLCTAudio(false, null, settings.get('useNativeMode') || false)
+  window.audio = audio
+  window.audio.useFadeInOut = settings.get('useFadeInOut') || false
 
   var app = new Vue({
     el: 'llct-app',

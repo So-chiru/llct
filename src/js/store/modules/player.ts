@@ -1,4 +1,4 @@
-import { LLCTTabPointer } from './tab'
+import { LLCTTabPointer } from './tab.ts'
 import settings from '../../core/settings'
 
 export const LLCTPlayState = {
@@ -97,12 +97,12 @@ export const playerModule = {
 
       commit('play', song)
 
-      if (window.app) {
-        app.$store.commit('data/addRecentPlayed', song)
+      if (window['app']) {
+        window['app'].$store.commit('data/addRecentPlayed', song)
       }
 
       if (args.moveTab && window.app) {
-        app.changeTab(LLCTTabPointer.PLAYER)
+        window['app'].changeTab(LLCTTabPointer.PLAYER)
       }
 
       if (args.playOnLoad) {
@@ -118,11 +118,13 @@ export const playerModule = {
       }
 
       if (settings.get('usePlayer')) {
-        audio.load(app.$llctDatas.base + '/audio/' + song.id)
+        window['audio'].load(
+          window['app'].$llctDatas.base + '/audio/' + song.id
+        )
       }
 
-      if (window.gtag) {
-        gtag('event', 'play song', {
+      if (window['gtag']) {
+        window['gtag']('event', 'play song', {
           event_category: 'audio',
           event_label: song.title
         })

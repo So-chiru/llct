@@ -1,4 +1,4 @@
-@import "../global";
+@import '../global';
 
 .llct-music-card {
   z-index: 10;
@@ -29,10 +29,15 @@
   @media screen and (min-width: $tablet) and (max-width: $desktop) {
     height: 72px;
   }
+
+  &.grayOut .info, &.grayOut .control {
+    opacity: 0.3;
+  }
 }
 
 @keyframes music-skeleton {
-  0%, 100% {
+  0%,
+  100% {
     background-color: rgb(248, 248, 248);
     opacity: 1;
   }
@@ -51,7 +56,8 @@
 }
 
 @keyframes dark-music-skeleton {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
 
@@ -70,7 +76,7 @@
 }
 
 .llct-music-card::after {
-  content: "";
+  content: '';
   z-index: -1;
   box-shadow: $shadow-2dp;
   border-radius: 13.3px;
@@ -95,6 +101,14 @@
   opacity: 1;
 }
 
+.llct-music-card.grayOut:hover::after {
+  opacity: 0.1;
+}
+
+.llct-music-card.grayOut:active::after {
+  opacity: 0.1;
+}
+
 .llct-music-card .info,
 .llct-music-card .control {
   display: -webkit-flex;
@@ -107,7 +121,6 @@
   background: #f0f0f0;
   opacity: 1;
 }
-
 
 .dark .llct-music-card .info .llct-image.skeleton {
   background: #333333;
