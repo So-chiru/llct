@@ -33,11 +33,11 @@
 
     transition-duration: 330ms;
     transition-property: all;
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition-timing-function: $defaultCubic;
   }
 
   span[data-active='0'] {
-    transition-duration: 600ms !important;
+    transition-duration: 200ms !important;
   }
 
   span[data-type='1'] {
@@ -98,17 +98,15 @@
   span[data-type='2'][data-active='1'][data-tick='0'] {
     text-shadow: 0px 0px 4px #54c95e;
     color: #fff;
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-    transition-property: color;
-    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition-property: color, text-shadow;
   }
 
   span[data-type='2'][data-active='1'][data-tick='1'] {
     text-shadow: 0px 0px 4px #fff;
     color: #54c95e;
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-    transition-property: color;
-    transition-duration: 100ms;
+    transition-timing-function: ease;
+    transition-property: color, text-shadow;
   }
 
   span[data-type='3'][data-active='1'] {

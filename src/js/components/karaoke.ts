@@ -34,6 +34,8 @@ const karaokeCalcRepeat = (start, end, repeat) => {
 const karaokeClear = () => {
   let words = document.querySelectorAll(KARA_WORD_SELECTOR)
 
+  repeatCaches = {}
+
   let wordLength = words.length
   while (wordLength--) {
     let word = words[wordLength] as HTMLElement
@@ -54,6 +56,7 @@ const karaokeCheckTick = t => {
 let karaokeTick = null
 let karaokeTickCache = []
 let karaokeScrollCache = []
+let repeatCaches = {}
 
 /**
  * Karaoke 싱크 렌더링
@@ -80,7 +83,7 @@ const karaokeRender = (
     let line_end = Number(currentLine.getAttribute('data-end'))
 
     if (time < line_start || time > line_end) {
-      if (currentLine.getAttribute('data-active')) {
+      if (currentLine.getAttribute('data-active') === '1') {
         currentLine.setAttribute('data-active', '0')
       }
     } else if (
@@ -89,7 +92,7 @@ const karaokeRender = (
       line_end > -1 &&
       (time > line_start || time < line_end)
     ) {
-      if (!currentLine.getAttribute('data-active')) {
+      if (currentLine.getAttribute('data-active') !== '1') {
         currentLine.setAttribute('data-active', '1')
       }
 
@@ -115,37 +118,38 @@ const karaokeRender = (
 
     let start = Number(currentWord.getAttribute('data-start'))
     let end = Number(currentWord.getAttribute('data-end'))
-    let type = Number(currentWord.getAttribute('data-type'))
     let delay = Number(currentWord.getAttribute('data-delay'))
-    let repeat = currentWord.getAttribute('data-repeat')
 
-    let start_end = start + DOT + end
+    let start_end = currentWord.getAttribute('word') + DOT + start + DOT + end
+    let repeat = repeatCaches[start_end]
 
-    if (typeof delay === 'number' && !repeat && delay > 0) {
-      currentWord.setAttribute(
-        'data-repeat',
-        karaokeCalcRepeat(start, end, Number(delay))
+    if (!repeat && delay) {
+      repeatCaches[start_end] = karaokeCalcRepeat(start, end, delay).split(
+        COMMA
       )
     }
 
     if (time > start && time < end) {
+      currentWord.setAttribute('data-active', '1')
+
+      let type = Number(currentWord.getAttribute('data-type'))
+
       if (repeat) {
-        let repeat_calc = repeat.split(COMMA)
-        let repeatIter = repeat_calc.length
+        let repeatIter = repeat.length
 
         while (repeatIter--) {
           if (
-            !karaokeTickCache[start_end + DOT + repeat_calc[repeatIter]] &&
-            time > Number(repeat_calc[repeatIter])
+            !karaokeTickCache[start_end + DOT + repeat[repeatIter]] &&
+            time > repeat[repeatIter]
           ) {
-            karaokeTickCache[start_end + DOT + repeat_calc[repeatIter]] = true
+            karaokeTickCache[start_end + DOT + repeat[repeatIter]] = true
 
             currentWord.setAttribute('data-tick', '1')
-            ;(c => {
+            ;(c =>
               setTimeout(() => {
                 c.setAttribute('data-tick', '0')
-              }, delay * 0.5)
-            })(currentWord)
+                c.style.transitionDuration = delay / 5 + 'ms'
+              }, delay))(currentWord)
 
             if (tick) {
               karaokeTick.currentTime = 0
@@ -164,8 +168,6 @@ const karaokeRender = (
         karaokeTick.currentTime = 0
         karaokeTick.play(null, true)
       }
-
-      currentWord.setAttribute('data-active', '1')
     } else {
       currentWord.setAttribute('data-active', '0')
     }
@@ -190,13 +192,12 @@ const karaokeRender = (
           ? Number(nextWord.getAttribute('data-start')) - start
           : Number(currentWord.parentElement.getAttribute('data-end')) - start
 
-        let calc = nEnd < 300 ? nEnd + 330 : nEnd + 200
-
-        currentWord.style.transitionDuration = calc + 'ms'
+        currentWord.style.transitionDuration =
+          (nEnd < 200 ? nEnd + 100 : nEnd + 60) + 'ms'
       }
     }
 
-    let color = currentWord.getAttribute('color')
+    let color = currentWord.getAttribute('data-color')
     if (!currentWord.style.textShadow && color) {
       currentWord.style.textShadow = ZZTPIXEL + color
     }
