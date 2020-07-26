@@ -1,11 +1,11 @@
-const CACHE = 'llct-cache-v20200725-1211'
+const CACHE = 'llct-cache-v20200726-1246'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200620-1623'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
   '/',
   '/?utm_source=pwa',
   '/?utm_source=homescreen',
-  '/assets/mi.woff',
+  '/assets/mi.woff2',
   '/assets/aqours.png',
   '/assets/niji.png',
   '/assets/us.png',
@@ -15,7 +15,6 @@ const CACHE_URL = [
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js',
   'https://fonts.googleapis.com/css?family=Material+Icons|Noto+Sans+KR:100,300,400,500,700&display=swap',
-  'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2',
   '/mikan.css',
   '/mikan.js',
   '/manifest.json'
@@ -71,10 +70,19 @@ self.addEventListener('install', ev => {
       .then(c => {
         return c.addAll(CACHE_URL)
       })
-      .then(() => {
+      .catch(e => {
+        self.clients.matchAll().then(clients => {
+          clients.forEach(cli =>
+            cli.postMessage({
+              cmd: 0x03,
+              error: e
+            })
+          )
+        })
+      })
+      .finally(() => {
         return self.skipWaiting()
       })
-      .catch(_ => {})
   )
 })
 

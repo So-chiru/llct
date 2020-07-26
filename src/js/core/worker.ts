@@ -81,6 +81,16 @@ export const register = () => {
           null
         )
       }
+    } else if (ev.data.cmd == 0x03) {
+      Toast.show(
+        '서비스 워커 설치 오류. ' + ev.data.error,
+        'signal_cellular_connected_no_internet_4_bar',
+        true,
+        10000,
+        () => {
+          location.reload()
+        }
+      )
     }
   })
 }
