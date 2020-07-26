@@ -1,5 +1,5 @@
 import LLCTCard from '../card'
-import LLCTMusicCard from '../music_card.ts'
+import LLCTMusicCard from '../music_card'
 
 import { Slider } from '../../core/slide'
 
@@ -14,7 +14,7 @@ export default {
         <LLCTCard v-for="(card, index) in this.$store.state.data.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="idfy(card.BG)" :ext_url="card.ExtURL" :id="card.ID"></LLCTCard>
       </span>
       <span v-if="!this.$store.state.data.recommends.Cards">
-        <LLCTCard v-for="(n, index) in 3" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></LLCTCard>
+        <LLCTCard v-for="(n, index) in 4" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></LLCTCard>
       </span>
     </div>
     <div class="ayumu-mod-select">

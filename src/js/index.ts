@@ -2,57 +2,48 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueLazyload from 'vue-lazyload'
 
-import { store } from './store/index.ts'
+import { store } from './store/index'
 
-import * as Toast from './components/toast.ts'
+import * as Toast from './components/toast'
 
 import LLCTAudio from './core/audio'
 
+declare global {
+  interface Window {
+    audio: LLCTAudio
+    dataLayer: Array<IArguments>
+
+    app: Vue
+    menu: Vue
+
+    settings: Object
+  }
+
+  interface Document {
+    documentMode?: any
+  }
+}
+
 const Data = require('./core/data')
 
-const worker = require('./core/worker')
-const settings = require('./core/settings')
+import * as worker from './core/worker'
+import settings from './core/settings'
 
 Vue.use(Vuex)
 
-require('./components/main/app')
-require('./components/main/menu')
+import './components/main/app'
+import './components/main/menu'
 
-require('./components/tabs/ayumu')
-require('./components/tabs/chika')
-require('./components/tabs/kotori')
-require('./components/tabs/player')
-require('./components/tabs/search')
-require('./components/tabs/setsuna')
+import './components/tabs/ayumu'
+import './components/tabs/chika'
+import './components/tabs/kotori'
+import './components/tabs/player'
+import './components/tabs/search'
+import './components/tabs/setsuna'
 
 Vue.prototype.$llctEvents = new Vue()
 
-var siteTest = /lovelivec\.kr/g
-
-const queryString = name => {
-  return new URLSearchParams(window.location.search).get(name)
-}
-
-Vue.use(VueLazyload, {
-  filter: {
-    webp (listener, _) {
-      if (!window.webpSupport || !siteTest.test(listener.src)) return
-      listener.src += '?webp'
-    }
-  }
-})
-;(() => {
-  var img = new Image()
-  img.onload = function () {
-    var result = img.width > 0 && img.height > 0
-    window.webpSupport = result
-  }
-  img.onerror = function () {
-    window.webpSupport = false
-  }
-  img.src =
-    'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA'
-})()
+Vue.use(VueLazyload)
 
 const init = () => {
   if (!navigator.onLine) {
@@ -61,7 +52,8 @@ const init = () => {
         '오프라인 상태입니다. 저장된 곡만 재생할 수 있습니다.',
         'warning',
         false,
-        2000
+        2000,
+        () => {}
       )
     }, 0)
   }
@@ -94,7 +86,7 @@ const init = () => {
     },
     mounted () {
       this.$llctDatas.$on('listsLoaded', _ => {
-        let id = queryString('id')
+        let id = new URLSearchParams(window.location.search).get('id')
 
         if (!id) {
           return
@@ -146,12 +138,8 @@ const init = () => {
   window.menu = menu
 }
 
-const isIE = () => {
-  return window.document.documentMode
-}
-
 window.addEventListener('DOMContentLoaded', () => {
-  if (isIE()) {
+  if (window.document.documentMode) {
     location.href = 'https://browser-update.org/update-browser.html'
   }
 
@@ -188,8 +176,8 @@ window.addEventListener('load', () => {
   document.querySelector('head').appendChild(s)
 
   window.dataLayer = window.dataLayer || []
-  function gtag () {
-    dataLayer.push(arguments)
+  function gtag (...args) {
+    window.dataLayer.push(...args)
   }
   gtag('js', new Date())
   gtag('config', 'UA-111995531-2')

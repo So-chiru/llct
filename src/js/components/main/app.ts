@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import { LLCTTabPointer } from '../../store/modules/tab.ts'
+import { LLCTTabPointer } from '../../store/modules/tab'
 
 import LLCTSearch from '../tabs/search'
 import LLCTChika from '../tabs/chika'

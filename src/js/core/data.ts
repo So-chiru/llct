@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import { store } from '../store/index.ts'
+import { store } from '../store/index'
 
 let lastCacheCheck = 0
-let keysCache = []
+let keysCache
 
 const findInKeys = (keys, id) => {
   let keyLength = keys.length
@@ -17,7 +17,7 @@ const findInKeys = (keys, id) => {
 
 const checkHas = id =>
   new Promise((resolve, reject) => {
-    if (keysCache.length) {
+    if (keysCache && keysCache.length) {
       resolve(findInKeys(keysCache, id))
 
       if (lastCacheCheck > Date.now()) {
@@ -46,7 +46,7 @@ const checkHas = id =>
       .catch(reject)
   })
 
-import * as Toast from '../components/toast.ts'
+import * as Toast from '../components/toast'
 import * as Playlist from './playlist'
 import settings from './settings'
 
@@ -187,7 +187,6 @@ const dataFetch = {
         })
     )
 }
-
 ;(() => {
   let $llctDatas = new Vue({
     data () {
@@ -324,7 +323,8 @@ const dataFetch = {
             'API 서버에 연결할 수 없습니다. ' + e.message,
             'warning',
             true,
-            10000
+            10000,
+            null
           )
         }
       },
@@ -344,7 +344,7 @@ const dataFetch = {
   window.addEventListener('load', () => {
     $llctDatas.dataHandle('lists', dataFetch.lists(), data => {
       $llctDatas.$emit('listsLoaded', data)
-      $llctDatas.groups = Object.keys(data)
+      $llctDatas['groups'] = Object.keys(data)
     })
     $llctDatas.dataHandle('recommends', dataFetch.recommends(), data => {
       if (data.Notices && data.Notices.Msg.length) {
@@ -352,7 +352,8 @@ const dataFetch = {
           data.Notices.Msg,
           data.Notices.Icon,
           data.Notices.Type,
-          data.Notices.Time
+          data.Notices.Time,
+          null
         )
       }
     })
@@ -369,7 +370,7 @@ const dataFetch = {
       if (len) {
         for (var i = 0; i < len; i++) {
           let pred = preData[i]
-          let pl = new Playlist.LLCTPlaylist()
+          let pl = new Playlist.LLCTPlaylist(null, null)
 
           pl.import(pred)
           $llctDatas.$store.state.data.playlistsHolder.add(pl, true)

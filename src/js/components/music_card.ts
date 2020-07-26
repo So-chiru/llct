@@ -1,7 +1,7 @@
 import LLCTImage from './image'
 
 import * as Modal from './modal'
-import * as Toast from '../components/toast.ts'
+import * as Toast from '../components/toast'
 
 export default {
   components: {
@@ -53,7 +53,8 @@ export default {
   },
   data () {
     return {
-      grayOut: null
+      grayOut: null,
+      oneMore: false
     }
   },
   computed: {
@@ -83,9 +84,17 @@ export default {
       )
     },
     play (id) {
-      if (this.grayOut) {
+      if (this.grayOut && !this.oneMore) {
+        if (!this.oneMore) {
+          this.oneMore = true
+
+          setTimeout(() => {
+            this.oneMore = false
+          }, 500)
+        }
+
         Toast.show(
-          '다운로드하지 않은 콜표입니다. 계속하려면 여기를 클릭하세요.',
+          '다운로드하지 않은 콜표입니다. 계속하려면 한번 더 클릭하거나 여기를 클릭하세요.',
           'offline_bolt',
           false,
           3000,
@@ -97,11 +106,13 @@ export default {
         return
       }
 
+      this.oneMore = false
+
       this.playAnyway(id)
     },
 
     addPlaylist (id) {
-      let plBtns = []
+      let buttons = []
       let leastOne = false
 
       let song = this.$llctDatas.getSong(id)
@@ -119,7 +130,7 @@ export default {
         }
 
         ;(i => {
-          plBtns.push({
+          buttons.push({
             type: 'button',
             default: listObj.title,
             callback: _v => {
@@ -132,14 +143,23 @@ export default {
       if (!this.$store.state.data.playlistsHolder.length() || !leastOne) {
         return Modal.show(
           '재생목록 없음',
-          '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.'
+          '만든 재생목록이 없습니다. 재생목록 탭에서 새로 만들어주세요.',
+          null,
+          null,
+          null,
+          null,
+          null
         )
       }
 
       Modal.show(
         '플레이리스트에 추가',
         '어느 플레이리스트에 추가 할까요?',
-        plBtns
+        buttons,
+        null,
+        null,
+        null,
+        null
       )
     }
   },

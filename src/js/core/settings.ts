@@ -2,7 +2,20 @@ if (!window.settings) {
   window.settings = {}
 }
 
-const llctSettingDefault = [
+interface SettingsObject {
+  title: string
+  id: string
+  desc: string
+  category: Number
+  check?: Function
+  type: string
+  disableAt?: string
+  disableAtFunc?: Function
+  default: Boolean
+  func?: Function
+}
+
+const llctSettingDefault: Array<SettingsObject> = [
   {
     title: '다크모드 사용',
     desc: '사이트를 어둡게 만듭니다.',
@@ -54,7 +67,7 @@ const llctSettingDefault = [
     default: false,
     func: v => {
       if (window.app) {
-        window.app.$llctDatas.useTranslatedTitle = v
+        window.app['$llctDatas'].useTranslatedTitle = v
       }
     }
   },
@@ -65,7 +78,7 @@ const llctSettingDefault = [
     id: 'useNotification',
     category: 0,
     type: 'checkbox',
-    disableAt: () => {
+    disableAtFunc: () => {
       return !('Notification' in window)
     },
     default: false
@@ -138,7 +151,7 @@ const llctSettingDefault = [
     default: true,
     func: v => {
       if (window.app) {
-        window.app.$llctDatas.useImages = v
+        window.app['$llctDatas'].useImages = v
       }
     }
   },
@@ -192,6 +205,9 @@ const llctSettingDefault = [
 ]
 
 class LLCTSetting {
+  lists: Array<Array<SettingsObject>>
+  categories: Array<String>
+
   constructor () {
     this.lists = []
     this.categories = ['UI', '플레이어', '미디어']
@@ -241,7 +257,7 @@ class LLCTSetting {
     this.lists[obj.category].push(obj)
   }
 
-  get (id) {
+  get (id?) {
     let arr = [].concat.apply([], this.lists)
 
     if (!id) {
@@ -278,7 +294,7 @@ class LLCTSetting {
 
   set (id, value) {
     let item = this.find(id)
-    item.value = value
+    item['value'] = value
 
     if (item.func) {
       item.func(value)
@@ -306,4 +322,4 @@ class LLCTSetting {
   }
 }
 
-module.exports = new LLCTSetting()
+export default new LLCTSetting()

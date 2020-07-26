@@ -1,5 +1,5 @@
-import draggable from 'vuedraggable'
-import LLCTMusicCard from '../music_card.ts'
+const draggable = require('vuedraggable')
+import LLCTMusicCard from '../music_card'
 
 import * as Modal from '../modal'
 

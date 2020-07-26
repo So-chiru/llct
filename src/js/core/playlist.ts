@@ -13,7 +13,18 @@ const deepCopy = o => {
   return newO
 }
 
+interface LLCTMusic {
+  title: String
+  lists: Array<any>
+}
+
 export class LLCTPlaylist {
+  __pointer: number
+  lists: Array<Object>
+  title: String
+  readOnly: Boolean
+  repeat: Boolean
+
   constructor (title, readOnly) {
     this.__pointer = null
     this.lists = []
@@ -76,6 +87,8 @@ export class LLCTPlaylist {
 }
 
 export class Holder {
+  lists: Array<LLCTMusic>
+
   constructor () {
     this.lists = []
   }

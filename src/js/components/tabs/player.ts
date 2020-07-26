@@ -1,13 +1,13 @@
-import draggable from 'vuedraggable'
+const draggable = require('vuedraggable')
 
 import LLCTCheckbox from '../checkbox'
 import LLCTKaraoke from '../karaoke'
 
-import { LLCTRepeatState } from '../../store/modules/player.ts'
+import { LLCTRepeatState } from '../../store/modules/player'
 
 import { show } from '../modal'
 
-const settings = require('../../core/settings')
+import settings from '../../core/settings'
 
 const timeStamp = num => {
   return new Date((num || 0) * 1000).toISOString().substr(14, 5)
@@ -78,7 +78,7 @@ export default {
         <input type="range" v-if="!useNativeMode" v-model="audioBassVolume" max="15" min="-5" step="0.25"></input>
         <p v-if="useNativeMode" class="muted_warning"><i class="material-icons muted_warning">warning</i>음악 효과는 Native 모드에서 사용할 수 없습니다.</p>
         <p v-if="!useNativeMode" class="muted">
-          SR: <span>{{audio.sampleRate}}</span>Hz<span v-if="audio.latency">, Latency: {{audio.latency}}ms {{audio.outputLatency ? '(o / ' + audio.outputLatency + 'ms)' : '' }}</span>
+          SR: <span>{{audio.sampleRate}}</span>Hz<span v-if="audio.latency">, Render: <span class="latency-indicator" :class="{warn: renderLatency > 1, danger: renderLatency > 3}">{{renderLatency}}ms</span>, Latency: {{audio.latency}}ms</span>
         </p>
         </div>
       <div class="bg" v-on:click="displayVertical = false"></div>
@@ -110,7 +110,8 @@ export default {
       karaoke: {},
       displayVertical: false,
       usePlayer: settings.get('usePlayer'),
-      bar_size: 0
+      bar_size: 0,
+      renderLatency: 0
     }
   },
   computed: {
@@ -205,7 +206,7 @@ export default {
           '?id=' + first.id
         )
 
-        audio.load(this.$llctDatas.base + '/audio/' + first.id)
+        window.audio.load(this.$llctDatas.base + '/audio/' + first.id)
         this.init()
       }
     },
@@ -229,7 +230,7 @@ export default {
           '?id=' + last.id
         )
 
-        audio.load(this.$llctDatas.base + '/audio/' + last.id)
+        window.audio.load(this.$llctDatas.base + '/audio/' + last.id)
         this.init()
       }
     },
@@ -254,7 +255,7 @@ export default {
           '?id=' + next.id
         )
 
-        audio.load(this.$llctDatas.base + '/audio/' + next.id)
+        window.audio.load(this.$llctDatas.base + '/audio/' + next.id)
         this.init()
       }
     },
@@ -268,7 +269,7 @@ export default {
         this.$store.dispatch('player/play', { obj: prev })
         this.$store.commit('player/playOnLoad', true)
 
-        audio.load(this.$llctDatas.base + '/audio/' + prev.id)
+        window.audio.load(this.$llctDatas.base + '/audio/' + prev.id)
         this.init()
       }
     },
@@ -303,11 +304,11 @@ export default {
           ev.preventDefault()
           break
         case 37: // Arrow Left
-          audio.seekPrev(5)
+          window.audio.seekPrev(5)
           ev.preventDefault()
           break
         case 39: // Arrow Right
-          audio.seekNext(5)
+          window.audio.seekNext(5)
           ev.preventDefault()
           break
         case 38: // Arrow Up?
@@ -325,8 +326,8 @@ export default {
     timeUpdate () {
       let current = window.audio.currentTime
       let duration = window.audio.duration
-      this.time_went = timeStamp(Math.floor(current))
-      this.time_left = timeStamp(Math.floor(duration - current))
+      this.time_went = timeStamp(current | 0)
+      this.time_left = timeStamp((duration - current) | 0)
 
       this.time = current
 
@@ -368,17 +369,29 @@ export default {
 
     updateBarSize () {
       requestAnimationFrame(() => {
-        this.bar_size = this.$el
-          .querySelector('.bar')
-          .getBoundingClientRect().width
+        let el = this.$el.querySelector('.bar')
+
+        if (!el) {
+          return
+        }
+
+        this.bar_size = el.getBoundingClientRect().width
       })
     },
 
     init () {
       if (!this.$store.state.player.metadata.id) {
-        show('플레이어', '재생 중인 곡이 없습니다.', null, () => {
-          this.close()
-        })
+        show(
+          '플레이어',
+          '재생 중인 곡이 없습니다.',
+          null,
+          () => {
+            this.close()
+          },
+          null,
+          null,
+          null
+        )
 
         return
       }
@@ -388,7 +401,7 @@ export default {
       this.phase = 'fetching'
       this.loading = true
 
-      audio.events.on(
+      window.audio.events.on(
         'play',
         () => {
           this.$llctEvents.$emit('karaokeUpdate')
@@ -397,7 +410,7 @@ export default {
         'playerInstance'
       )
 
-      audio.events.on(
+      window.audio.events.on(
         'pause',
         () => {
           this.$store.commit('player/playStateUpdate', false)
@@ -405,12 +418,12 @@ export default {
         'playerInstance'
       )
 
-      audio.events.on('loading', (done, size) => {
+      window.audio.events.on('loading', (done, size) => {
         this.phase = 'buffering'
         this.load_progress = (done / size) * 100
       })
 
-      audio.events.on(
+      window.audio.events.on(
         'end',
         () => {
           if (this.$store.state.player.playlist) {
@@ -426,7 +439,7 @@ export default {
         'playerInstance'
       )
 
-      audio.events.on(
+      window.audio.events.on(
         'playable',
         () => {
           this.phase = 'ready'
@@ -441,12 +454,12 @@ export default {
         'playerInstance'
       )
 
-      audio.volume = this.audioVolume
-      audio.bassVolume = this.audioBassVolume
-      audio.speed = this.playbackSpeed
+      window.audio.volume = this.audioVolume
+      window.audio.bassVolume = this.audioBassVolume
+      window.audio.speed = this.playbackSpeed
 
       let delay = Date.now()
-      audio.events.on(
+      window.audio.events.on(
         'seek',
         short => {
           if (short && delay + 10 < Date.now()) {
@@ -457,8 +470,8 @@ export default {
       )
 
       this.url = this.$llctDatas.base + '/cover/' + this.id
-      audio.setMetadata(this.title, this.artist, this.url)
-      this.$store.commit('player/playStateUpdate', audio.playing)
+      window.audio.setMetadata(this.title, this.artist, this.url)
+      this.$store.commit('player/playStateUpdate', window.audio.playing)
     }
   },
   watch: {
@@ -516,8 +529,8 @@ export default {
   mounted () {
     window.addEventListener('keydown', this.keyStoke)
 
-    audio.next = this.next
-    audio.prev = this.prev
+    window.audio.next = this.next
+    window.audio.prev = this.prev
 
     window.addEventListener('resize', () => {
       this.updateBarSize()

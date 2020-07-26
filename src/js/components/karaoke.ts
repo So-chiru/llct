@@ -31,15 +31,16 @@ const karaokeCalcRepeat = (start, end, repeat) => {
   return f
 }
 
-const karaokeClear = root => {
-  let words = (root || document).querySelectorAll(KARA_WORD_SELECTOR)
+const karaokeClear = () => {
+  let words = document.querySelectorAll(KARA_WORD_SELECTOR)
 
   let wordLength = words.length
   while (wordLength--) {
-    words[wordLength].dataset.active = 0
-    words[wordLength].dataset.passed = 0
-    delete words[wordLength].dataset.tick
-    words[wordLength].style.textShadow = null
+    let word = words[wordLength] as HTMLElement
+    word.setAttribute('data-active', '0')
+    word.setAttribute('data-passed', '0')
+    word.removeAttribute('data-tick')
+    word.style.textShadow = null
   }
 
   karaokeTickCache = []
@@ -56,93 +57,99 @@ let karaokeScrollCache = []
 
 /**
  * Karaoke 싱크 렌더링
- * @param {Number} time 현재 시간 코드
- * @param {HTMLElement} root root Element (default: document)
- * @param {Boolean} full 전체 렌더링 여부
- * @param {Function} newline 새 라인 스크롤 함수
- * @param {Boolean} tick 틱소리 사용 여부
+ * @param time 현재 시간 코드
+ * @param root root Element (default: document)
+ * @param full_render 전체 렌더링 여부
+ * @param newline 새 라인 스크롤 함수
+ * @param tick 틱소리 사용 여부
  */
-const karaokeRender = (time, root = document, full, newline, tick) => {
+const karaokeRender = (
+  time,
+  root = document,
+  full_render,
+  newline: Function,
+  tick: Boolean
+) => {
   let lines = root.querySelectorAll(KARA_LINE_SELECTOR)
 
   let lineLength = lines.length
   while (lineLength--) {
     let currentLine = lines[lineLength]
-    let line_dset = currentLine.dataset
 
-    let lineStart = Number(line_dset.start)
-    let lineEnd = Number(line_dset.end)
+    let line_start = Number(currentLine.getAttribute('data-start'))
+    let line_end = Number(currentLine.getAttribute('data-end'))
 
-    if (time < lineStart || time > lineEnd) {
-      if (line_dset.active && !currentLine.dataset.active) {
-        currentLine.dataset.active = 0
+    if (time < line_start || time > line_end) {
+      if (currentLine.getAttribute('data-active')) {
+        currentLine.setAttribute('data-active', '0')
       }
     } else if (
-      lineStart !== -100 &&
-      lineEnd !== 100 &&
-      lineEnd > -1 &&
-      (time > lineStart || time < lineEnd)
+      line_start !== -100 &&
+      line_end !== 100 &&
+      line_end > -1 &&
+      (time > line_start || time < line_end)
     ) {
-      if (!currentLine.dataset.active) {
-        currentLine.dataset.active = 1
+      if (!currentLine.getAttribute('data-active')) {
+        currentLine.setAttribute('data-active', '1')
       }
 
-      let start_dot_end = line_dset.start + DOT + line_dset.end
-      if (typeof newline === 'function' && !karaokeScrollCache[start_dot_end]) {
+      if (
+        typeof newline === 'function' &&
+        !karaokeScrollCache[line_start + DOT + line_end]
+      ) {
         setTimeout(() => {
           newline(currentLine)
         }, 950)
-        karaokeScrollCache[start_dot_end] = true
+        karaokeScrollCache[line_start + DOT + line_end] = true
       }
     }
   }
 
   let words = root.querySelectorAll(
-    (full ? EMPTY : P_ACTIVE) + KARA_WORD_SELECTOR
+    (full_render ? EMPTY : P_ACTIVE) + KARA_WORD_SELECTOR
   )
 
   let wordLength = words.length
   while (wordLength--) {
-    let currentWord = words[wordLength]
+    let currentWord = words[wordLength] as HTMLElement
 
-    let dset = currentWord.dataset
-    let start = Number(dset.start)
-    let end = Number(dset.end)
-    let type = Number(dset.type)
-    let delay = Number(dset.delay)
+    let start = Number(currentWord.getAttribute('data-start'))
+    let end = Number(currentWord.getAttribute('data-end'))
+    let type = Number(currentWord.getAttribute('data-type'))
+    let delay = Number(currentWord.getAttribute('data-delay'))
+    let repeat = currentWord.getAttribute('data-repeat')
 
     let start_end = start + DOT + end
 
-    if (!Number.isNaN(delay) && !dset.repeat && delay > 0) {
-      dset.repeat = karaokeCalcRepeat(start, end, Number(delay))
+    if (typeof delay === 'number' && !repeat && delay > 0) {
+      currentWord.setAttribute(
+        'data-repeat',
+        karaokeCalcRepeat(start, end, Number(delay))
+      )
     }
 
     if (time > start && time < end) {
-      if (dset.repeat) {
-        let repeat = dset.repeat.split(COMMA)
-        let repeatIter = repeat.length
+      if (repeat) {
+        let repeat_calc = repeat.split(COMMA)
+        let repeatIter = repeat_calc.length
 
         while (repeatIter--) {
-          let start_end_repeat = start_end + DOT + repeat[repeatIter]
-
           if (
-            !karaokeTickCache[start_end_repeat] &&
-            time > Number(repeat[repeatIter])
+            !karaokeTickCache[start_end + DOT + repeat_calc[repeatIter]] &&
+            time > Number(repeat_calc[repeatIter])
           ) {
-            karaokeTickCache[start_end_repeat] = true
+            karaokeTickCache[start_end + DOT + repeat_calc[repeatIter]] = true
 
-            currentWord.dataset.tick = 1
+            currentWord.setAttribute('data-tick', '1')
             ;(c => {
               setTimeout(() => {
-                c.dataset.tick = 0
+                c.setAttribute('data-tick', '0')
               }, delay * 0.5)
             })(currentWord)
 
             if (tick) {
-              requestAnimationFrame(() => {
-                karaokeTick.currentTime = 0
-                karaokeTick.play(null, true)
-              })
+              karaokeTick.currentTime = 0
+              karaokeTick.play(null, true)
             }
           }
         }
@@ -158,29 +165,30 @@ const karaokeRender = (time, root = document, full, newline, tick) => {
         karaokeTick.play(null, true)
       }
 
-      currentWord.dataset.active = 1
+      currentWord.setAttribute('data-active', '1')
     } else {
-      currentWord.dataset.active = 0
+      currentWord.setAttribute('data-active', '0')
     }
 
     if (time > end) {
-      currentWord.dataset.passed = 1
+      currentWord.setAttribute('data-passed', '1')
 
       if (currentWord.style.transitionDuration) {
         currentWord.style.transitionDuration = null
       }
     } else if (
       !currentWord.style.transitionDuration &&
-      dset.passed == 0 &&
-      !dset.repeat
+      currentWord.getAttribute('data-passed') == '0' &&
+      !repeat
     ) {
-      if (dset.pronounce) {
-        currentWord.style.transitionDuration = dset.pronounce + 's'
+      let pron = currentWord.getAttribute('data-pronounce')
+      if (pron) {
+        currentWord.style.transitionDuration = pron + 's'
       } else {
         let nextWord = words[wordLength + 1] || null
         let nEnd = nextWord
-          ? nextWord.dataset.start - start
-          : currentWord.parentElement.dataset.end - start
+          ? Number(nextWord.getAttribute('data-start')) - start
+          : Number(currentWord.parentElement.getAttribute('data-end')) - start
 
         let calc = nEnd < 300 ? nEnd + 330 : nEnd + 200
 
@@ -188,13 +196,16 @@ const karaokeRender = (time, root = document, full, newline, tick) => {
       }
     }
 
-    if (!currentWord.style.textShadow && dset.color) {
-      currentWord.style.textShadow = ZZTPIXEL + dset.color
+    let color = currentWord.getAttribute('color')
+    if (!currentWord.style.textShadow && color) {
+      currentWord.style.textShadow = ZZTPIXEL + color
     }
   }
 }
 
 let karaokeFocusDetect = null
+
+let latencySleep = 0
 
 export default {
   template: `
@@ -266,7 +277,7 @@ export default {
     },
     time: {
       handler (v) {
-        let tCode = audio.timecode()
+        let tCode = window.audio.timecode()
         this.lastTime = v
 
         if (this.lastTime && Math.abs(this.lastTime - v) > 3) {
@@ -274,7 +285,14 @@ export default {
           return
         }
 
+        let perf = performance.now()
         karaokeRender(tCode, this.$el, false, this.scrollSong, this.tickEnable)
+
+        if (latencySleep < perf) {
+          this.$parent.renderLatency = (performance.now() - perf).toFixed(2)
+
+          latencySleep = performance.now() + 100
+        }
       }
     }
   },
@@ -310,7 +328,7 @@ export default {
         karaokeFocusDetect = window.addEventListener('focus', () => {
           if (!this.error) {
             karaokeRender(
-              audio.timecode(),
+              window.audio.timecode(),
               this.$el,
               true,
               null,
@@ -327,7 +345,13 @@ export default {
 
     reRender () {
       karaokeClear()
-      karaokeRender(audio.timecode(), this.$el, true, null, this.tickEnable)
+      karaokeRender(
+        window.audio.timecode(),
+        this.$el,
+        true,
+        null,
+        this.tickEnable
+      )
     },
 
     scrollSong (el) {
@@ -355,7 +379,7 @@ export default {
         return false
       }
 
-      audio.time = (Number(ev.target.dataset.start) - 10) / 100
+      window.audio.time = (Number(ev.target.dataset.start) - 10) / 100
 
       this.reRender()
     },
@@ -367,7 +391,7 @@ export default {
   },
   mounted () {
     if (!karaokeTick) {
-      karaokeTick = new LLCTAudio(true, true)
+      karaokeTick = new LLCTAudio(true, true, false)
       karaokeTick.load('/assets/tick.mp3')
       karaokeTick.volume = 1
     }

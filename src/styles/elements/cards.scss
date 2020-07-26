@@ -252,6 +252,12 @@
   image-rendering: -webkit-optimize-contrast;
 }
 
+// .llct-card-bg img::after {
+//   position: absolute;
+//   filter: blur(16px);
+//   content: " ";
+// }
+
 // Card Transition
 
 .llct-card-enter-active {

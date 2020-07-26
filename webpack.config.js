@@ -2,14 +2,16 @@ const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 const dev = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   mode: dev ? 'development' : 'production',
   entry: {
-    mikan: ['babel-polyfill', path.resolve('src', 'index.js')]
+    mikan: ['babel-polyfill', path.resolve('src', 'index.ts')]
   },
   output: {
     filename: '[name].js',
@@ -24,7 +26,17 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-typescript']
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: {
+                    browsers: ['last 2 versions', 'safari >= 7']
+                  }
+                }
+              ],
+              '@babel/preset-typescript'
+            ]
           }
         }
       },
@@ -89,16 +101,25 @@ module.exports = {
         }
       ]
     }),
-
     new HtmlWebpackPlugin({
       template: './src/views/index.pug',
       filename: 'index.html',
       inject: false
+    }),
+    new webpack.DefinePlugin({
+      PRODUCTION: !dev
     })
   ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true
+      })
+    ]
+  },
   resolve: {
-    extensions: ['.js', '.css'],
+    extensions: ['.js', '.ts', '.tsx', '.css'],
     modules: ['node_modules'],
-    alias: { vue: 'vue/dist/vue.esm.browser' + (!dev ? '.min' : '') + '.js' }
+    alias: { vue: 'vue/dist/vue.common.' + (!dev ? 'prod' : 'dev') + '.js' }
   }
 }

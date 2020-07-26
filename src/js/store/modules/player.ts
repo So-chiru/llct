@@ -1,4 +1,4 @@
-import { LLCTTabPointer } from './tab.ts'
+import { LLCTTabPointer } from './tab'
 import settings from '../../core/settings'
 
 export const LLCTPlayState = {
@@ -56,15 +56,15 @@ export const playerModule = {
       state.metadata.translated = data.tr || data.title
     },
 
-    playStateUpdate (state, bool) {
+    playStateUpdate (state, bool: Boolean) {
       state.play.ing = bool || false
     },
 
-    ableStateUpdate (state, bool) {
+    ableStateUpdate (state, bool: Boolean) {
       state.play.able = bool || false
     },
 
-    playOnLoad (state, bool) {
+    playOnLoad (state, bool: Boolean) {
       state.play.autoplay = bool || false
     },
 
@@ -101,8 +101,8 @@ export const playerModule = {
         window['app'].$store.commit('data/addRecentPlayed', song)
       }
 
-      if (args.moveTab && window.app) {
-        window['app'].changeTab(LLCTTabPointer.PLAYER)
+      if (args.moveTab && window['app']) {
+        window['app']['changeTab'](LLCTTabPointer.PLAYER)
       }
 
       if (args.playOnLoad) {
@@ -111,7 +111,7 @@ export const playerModule = {
 
       if (!args.noURLState) {
         history.pushState(
-          { ...song, playlist: app.$store.state.player.playlist },
+          { ...song, playlist: window['app'].$store.state.player.playlist },
           song.title + ' - LLCT',
           '?id=' + song.id
         )
@@ -119,12 +119,12 @@ export const playerModule = {
 
       if (settings.get('usePlayer')) {
         window['audio'].load(
-          window['app'].$llctDatas.base + '/audio/' + song.id
+          window['app']['$llctDatas'].base + '/audio/' + song.id
         )
       }
 
       if (window['gtag']) {
-        window['gtag']('event', 'play song', {
+        window['gtag']('event', 'play song v2', {
           event_category: 'audio',
           event_label: song.title
         })

@@ -442,6 +442,16 @@ $mobile-thumb-size: 12px;
   scroll-behavior: auto;
 }
 
+.latency-indicator {
+  &.warn {
+    color: #d48832;
+  }
+
+  &.danger {
+    color: #d43232;
+  }
+}
+
 .player-karaoke::after {
   position: absolute;
   content: '';

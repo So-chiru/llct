@@ -1,6 +1,6 @@
 import { Slider } from '../../core/slide'
 import LLCTImage from '../image'
-import LLCTMusicCard from '../music_card.ts'
+import LLCTMusicCard from '../music_card'
 
 export default {
   components: {

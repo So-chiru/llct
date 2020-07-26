@@ -1,7 +1,14 @@
-import * as Toast from '../components/toast.ts'
+import * as Toast from '../components/toast'
 import settings from './settings'
 
 export let showNotification
+
+declare global {
+  interface Window {
+    getSize: Function
+    clearCaches: Function
+  }
+}
 
 window.getSize = () => {
   navigator.serviceWorker.controller.postMessage('getSizes')
@@ -33,7 +40,13 @@ export const register = () => {
       }
     },
     err => {
-      Toast.show('서비스 워커 등록 실패, ' + err.message, 'warning', true, 2000)
+      Toast.show(
+        '서비스 워커 등록 실패, ' + err.message,
+        'warning',
+        true,
+        2000,
+        null
+      )
     }
   )
 
@@ -56,7 +69,7 @@ export const register = () => {
       )
     } else if (ev.data.cmd == 0x02) {
       if (window.app) {
-        app.$llctDatas.cacheSize = 0
+        window.app['$llctDatas']['cacheSize'] = 0
       }
 
       if (ev.data.removed) {
@@ -64,7 +77,8 @@ export const register = () => {
           ev.data.removed + ' 바이트를 캐시에서 제거했습니다.',
           'delete',
           false,
-          1000
+          1000,
+          null
         )
       }
     }

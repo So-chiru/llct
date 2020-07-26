@@ -1,5 +1,7 @@
 import { createSilentAudio } from './empty.audio'
 
+const TRANSITION_TIME = 0.2
+
 const eventBus = require('./events')
 
 const quint = x => 1 - Math.pow(1 - x, 3)
@@ -23,7 +25,13 @@ const concatBuffer = (...bufs) => {
   return result.buffer
 }
 
-const LLCTAudioSource = class {
+class LLCTAudioSource {
+  buffer: any
+  events: eventBus
+  loaded: number
+  full: number
+  src: string
+
   constructor () {
     this.buffer = null
     this.events = new eventBus()
@@ -60,6 +68,8 @@ const LLCTAudioSource = class {
     this.loaded = 0
     this.full = 0
 
+    this.src = url
+
     fetch(url)
       .then(this.progress.bind(this))
       .then(v => {
@@ -77,9 +87,55 @@ const LLCTAudioSource = class {
 }
 
 export default class LLCTAudio {
+  audio: LLCTAudioSource
+  originVolume: number
+  originBassVolume: number
+  events: eventBus
+  repeat: boolean
+  paused: boolean
+  loaded: boolean
+
+  disableEffects: boolean
+  useNative: boolean
+
+  audioTime: number
+  playbackRate: number
+
+  supportMedia: boolean
+
+  context: any
+  loading: boolean
+
+  savedBuffer: Object
+  audioElement?: HTMLAudioElement
+
+  fadeTo: number
+  fadeUntil: number
+
+  convolver: ConvolverNode
+  convolverSource: LLCTAudioSource
+
+  compressor: DynamicsCompressorNode
+  source: AudioBufferSourceNode
+
+  wet: GainNode
+  dry: GainNode
+
+  destination: AudioDestinationNode
+  latency: number | string
+  sampleRate: number
+
+  bassFilter: BiquadFilterNode
+  useFadeInOut?: boolean
+
+  prev?: Function
+  next?: Function
+
+  __lastTime: number
+  __d: number
+
   constructor (noMediaSession, noEffects, useNativePlayer) {
     this.audio = new LLCTAudioSource()
-    this.animation = null
     this.originVolume = 0.75
     this.originBassVolume = 0
     this.events = new eventBus()
@@ -93,7 +149,6 @@ export default class LLCTAudio {
 
     this.useNative = useNativePlayer
 
-    this.transitionTime = 0.2
     this.audioTime = 0
     this.playbackRate = 1
 
@@ -103,9 +158,9 @@ export default class LLCTAudio {
       this.initAudioAPI()
     }
 
-    this.supportMedia = !noMediaSession && navigator.mediaSession
+    this.supportMedia = !noMediaSession && navigator['mediaSession']
 
-    if (navigator.mediaSession && !noMediaSession) {
+    if (navigator['mediaSession'] && !noMediaSession) {
       this.sessionInit()
     }
 
@@ -117,8 +172,9 @@ export default class LLCTAudio {
           URL.revokeObjectURL(this.context.src)
         }
 
-        this.context.src = URL.createObjectURL(
-          new Blob([data], { type: 'audio/mp3' })
+        this.context.setAttribute(
+          'src',
+          URL.createObjectURL(new Blob([data], { type: 'audio/mp3' }))
         )
         this.context.playbackRate = this.playbackRate
 
@@ -146,14 +202,14 @@ export default class LLCTAudio {
             document
               .querySelectorAll('audio[data-empty-audio="1"]')
               .forEach(v => {
-                URL.revokeObjectURL(v.src)
+                URL.revokeObjectURL(v['src'])
               })
 
             this.audioElement = document.createElement('audio')
-            this.audioElement.dataset.emptyAudio = 1
-            this.audioElement.setAttribute('autoplay', true)
-            this.audioElement.setAttribute('muted', true)
-            this.audioElement.volume = 0
+            this.audioElement.setAttribute('data-empty-audio', '1')
+            this.audioElement.setAttribute('autoplay', 'true')
+            this.audioElement.setAttribute('muted', 'true')
+            this.audioElement['volume'] = 0
 
             document.querySelector('body').appendChild(this.audioElement)
           }
@@ -187,12 +243,12 @@ export default class LLCTAudio {
 
   fadeOut () {
     this.fadeTo = 0
-    this.fadeUntil = this.context.currentTime + this.transitionTime
+    this.fadeUntil = this.context.currentTime + TRANSITION_TIME
   }
 
   fadeIn () {
     this.fadeTo = this.volume
-    this.fadeUntil = this.context.currentTime + this.transitionTime
+    this.fadeUntil = this.context.currentTime + TRANSITION_TIME
   }
 
   load (url) {
@@ -290,14 +346,10 @@ export default class LLCTAudio {
 
   initAudioAPI () {
     // Web Audio API
-    this.context = new (window.AudioContext || window.webkitAudioContext)()
-    this.loadStart = new Date()
+    this.context = new (window.AudioContext || window['webkitAudioContext'])()
     this.destination = this.context.destination
     this.latency =
       this.context.baseLatency && (this.context.baseLatency * 1000).toFixed(2)
-    this.outputLatency =
-      this.context.outputLatency &&
-      (this.context.outputLatency * 1000).toFixed(2)
     this.sampleRate = this.context.sampleRate
 
     this.createCompressor()
@@ -318,6 +370,12 @@ export default class LLCTAudio {
     this.wet.connect(this.compressor)
 
     let timing = () => {
+      if (this.playing && this.__lastTime) {
+        this.currentTime +=
+          ((performance.now() - this.__lastTime) / 1000) * this.playbackRate
+      }
+      this.__lastTime = performance.now()
+
       if (typeof this.fadeTo !== 'undefined') {
         let e = quint(
           Math.max(
@@ -328,7 +386,7 @@ export default class LLCTAudio {
                 ? this.context.currentTime - this.fadeUntil
                 : this.fadeUntil - this.context.currentTime
             )
-          ) / this.transitionTime
+          ) / TRANSITION_TIME
         )
 
         this.dry.gain.value = Math.min(
@@ -346,11 +404,6 @@ export default class LLCTAudio {
         }
       }
 
-      if (this.playing && this.__lastTime) {
-        this.currentTime +=
-          ((Date.now() - this.__lastTime) / 1000) * this.playbackRate
-      }
-
       if (this.duration <= this.currentTime) {
         this.paused = true
         this.currentTime = 0
@@ -358,13 +411,7 @@ export default class LLCTAudio {
         this.events.run('ended')
       }
 
-      this.__lastTime = Date.now()
-
-      if (document.hidden) {
-        setTimeout(timing, 0)
-      } else {
-        requestAnimationFrame(timing)
-      }
+      requestAnimationFrame(timing)
     }
 
     requestAnimationFrame(() => {
@@ -536,7 +583,7 @@ export default class LLCTAudio {
     }
   }
 
-  play (skipFade) {
+  play (skipFade?) {
     if (this.supportMedia) {
       navigator.mediaSession.playbackState = 'playing'
     }
@@ -545,20 +592,24 @@ export default class LLCTAudio {
       if (this.useNative) {
         this.context.play()
       } else {
-        this.createSource()
+        this.createSource(null)
         this.source.start(this.context.currentTime, this.audioTime)
 
         if (this.audioElement) {
           if (
             !this.audioElement.src ||
-            this.audioElement.dataset.duration != this.duration
+            this.audioElement.getAttribute('data-duration') !=
+              this.duration.toString()
           ) {
             this.audioElement.src = createSilentAudio(
               Math.round(this.duration),
               44100
             )
 
-            this.audioElement.dataset.duration = this.duration
+            this.audioElement.setAttribute(
+              'data-duration',
+              this.duration.toString()
+            )
           }
 
           this.audioElement.play()

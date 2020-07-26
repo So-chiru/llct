@@ -3,7 +3,9 @@
 export const createSilentAudio = (time, freq) => {
   const length = time * freq
   const AudioContext =
-    window.AudioContext || window.webkitAudioContext || window.mozAudioContext
+    window.AudioContext ||
+    window['webkitAudioContext'] ||
+    window['mozAudioContext']
 
   if (typeof AudioContext === 'undefined') {
     throw new Error("This browser doesn't support AudioContext.")

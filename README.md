@@ -1,12 +1,8 @@
 # LLCT
 
-LoveLive Call Table, 러브라이브 콜표 모음집
+LoveLive Call Table
 
 [![withLove](https://forthebadge.com/images/badges/built-with-love.svg)](https://sochiru.pw) [![js](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com) [![js](https://forthebadge.com/images/badges/made-with-pug.svg)](https://www.pugjs.org) [![forthebadge](https://forthebadge.com/images/badges/designed-in-ms-paint.svg)](https://forthebadge.com)
-
-## 라이센스
-
-MIT License, [여기에서 사용된 라이브러리, 전문을 읽을 수 있습니다.](https://github.com/So-chiru/LLCT/blob/master/LICENSE)
 
 ## 사이트
 
@@ -43,10 +39,10 @@ $ yarn
 
 ### 실행
 
-그 후에는 LLCT 폴더 내에서 gulp 명령을 실행하여 빌드할 수 있습니다.
+그 후에는 LLCT 폴더 내에서 `webpack` 이나 `webpack-dev-server` 명령을 실행하여 빌드할 수 있습니다. 빌드 프로그램이 깔려 있지 않아 오류가 뜬다면 명령어 `yarn global add webpack-cli` 혹은 `yarn global add webpack-dev-server`를 사용하여 설치하세요. 
 
 ```bash
-$ gulp
+$ webpack-dev-server
 ```
 
 그후 http://127.0.0.1:8080 으로 접속하시면 됩니다.
@@ -155,3 +151,7 @@ Issues에 재현 과정과 오류 내용을 알려주세요. 아니면 직접 �
 ## 개발 참여
 
 오탈자 수정, 자막 싱크 추가, 기능 추가 등 모든 종류의 수정을 환영합니다. 개발에 참여하고 싶으시면 이슈나 Pull Request를 남겨주세요.
+
+## 라이센스
+
+MIT License. [여기에서 사용된 라이브러리, 전문을 읽을 수 있습니다.](https://github.com/So-chiru/LLCT/blob/master/LICENSE)

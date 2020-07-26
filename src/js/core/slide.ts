@@ -13,6 +13,10 @@ const findCard = elem => {
 }
 
 export class Slider {
+  $el: HTMLElement
+  velocityDuration: number
+  hammer: Hammer
+
   constructor ($el, duration) {
     if (!$el) {
       throw new Error('element is not defined.')

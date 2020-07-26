@@ -89,7 +89,12 @@ export default {
       Modal.show(
         '재생목록 만들기',
         this.$store.state.data.playlistsHolder.length() +
-          '개 이상 플레이리스트를 만들 수 없습니다.'
+          '개 이상 플레이리스트를 만들 수 없습니다.',
+        null,
+        null,
+        null,
+        null,
+        null
       )
     },
 

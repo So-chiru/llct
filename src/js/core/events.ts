@@ -1,9 +1,11 @@
 class eventBus {
+  events: Object
+
   constructor () {
     this.events = {}
   }
 
-  on (name, cb, key) {
+  on (name, cb, key?) {
     if (!this.events[name]) {
       this.events[name] = []
     }
