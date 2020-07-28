@@ -1,3 +1,12 @@
+import { Module } from 'vuex'
+
+interface TabModuleState {
+  current: number
+  previous: number
+  title: string
+  hide: boolean
+}
+
 export const LLCTTabPointer = {
   MAIN: 0,
   MUSIC: 1,
@@ -35,7 +44,7 @@ export const LLCTTabs = [
   }
 ]
 
-export const tabModule = {
+export const tabModule: Module<TabModuleState, null> = {
   namespaced: true,
   state: () => {
     return {
@@ -46,7 +55,7 @@ export const tabModule = {
     }
   },
   mutations: {
-    changeTo: (state, to) => {
+    changeTo: (state, to: number) => {
       if (typeof LLCTTabs[to] === 'undefined') {
         throw new Error('Given tab is not exists.')
       }
@@ -55,7 +64,7 @@ export const tabModule = {
       state.current = to
 
       state.title = LLCTTabs[to].title
-      state.hide = LLCTTabs[to].hide
+      state.hide = LLCTTabs[to].hide || false
     },
 
     back: state => {
@@ -64,7 +73,7 @@ export const tabModule = {
       state.previous = current
 
       state.title = LLCTTabs[state.current].title
-      state.hide = LLCTTabs[state.current].hide
+      state.hide = LLCTTabs[state.current].hide || false
     }
   },
   actions: {}

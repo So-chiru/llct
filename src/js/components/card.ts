@@ -6,7 +6,11 @@ export default {
   },
   template: `
     <div class="llct-card" :data-clickable="!static" v-on:click="interact(id, ext_url, title, playlist)">
-      <transition name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter">
+      <div class="llct-card-content" v-if="skeleton" :data-index="index"> 
+        <h3 class="skeleton">{{subtitle}}</h3>
+        <h1 class="skeleton">{{title}}</h1>
+      </div>
+      <transition name="llct-card" v-else appear @before-enter="beforeEnter" @after-enter="afterEnter">
         <div class="llct-card-content" :data-index="index"> 
           <p v-if="spoiler" class="spoiler"><i class="material-icons">warning</i> <span>스포일러 주의</span></p>
           <p v-if="ext_url" class="ext_url"><i class="material-icons">exit_to_app</i> <span>{{urlForm(ext_url)}}</span></p>
@@ -34,19 +38,19 @@ export default {
     'skeleton'
   ],
   methods: {
-    beforeEnter (el) {
+    beforeEnter (el: HTMLElement) {
       el.style.transitionDelay = 45 * Number(el.dataset.index) + 'ms'
     },
 
-    afterEnter (el) {
+    afterEnter (el: HTMLElement) {
       el.style.transitionDelay = ''
     },
 
-    urlForm (url) {
+    urlForm (url: string) {
       return new URL(url).host || url
     },
 
-    interact (id, ext_url, title, playlist) {
+    interact (id: string, ext_url: string, title: string, playlist) {
       if (this.$el.dataset.dragging == 'true') {
         this.$el.dataset.dragging = false
 

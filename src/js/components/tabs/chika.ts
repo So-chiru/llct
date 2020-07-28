@@ -20,7 +20,7 @@ export default {
       </div>
     </div>
     <div class="chika-music-cards" v-if="this.$store.state.data.lists[this.currentGroup]">
-      <LLCTMusicCard placeholder="round" v-for="(data, index) in (this.$store.state.data.lists[this.currentGroup] || {collection: []}).collection" v-bind:key="index + '.' + useTranslated()" :currentGroup="currentGroup" :index="index" :title="data.title" :useAlt="useTranslated()" :alt="data.tr || data.title" :artist="getArtist(data.artist)" :cover_url="getImageURL(data.id)" :id="data.id"></LLCTMusicCard>
+      <LLCTMusicCard placeholder="round" v-for="(data, index) in (this.$store.state.data.lists[this.currentGroup] || {collection: []}).collection" v-bind:key="index + '.' + useTranslated()" :currentGroup="currentGroup" :index="index" :title="data.title" :useAlt="useTranslated()" :alt="data.tr || data.title" :artist="getArtist(data.artist || 0)" :cover_url="getImageURL(data.id)" :id="data.id"></LLCTMusicCard>
     </div>
     <div class="chika-music-cards" v-else>
       <LLCTMusicCard v-for="(n, index) in 18" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true"></LLCTMusicCard>

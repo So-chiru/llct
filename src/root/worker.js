@@ -1,5 +1,5 @@
-const CACHE = 'llct-cache-v20200726-1352'
-const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200620-1623'
+const CACHE = 'llct-cache-v20200729-0003'
+const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200729-0003'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
   '/',
@@ -14,7 +14,7 @@ const CACHE_URL = [
   '/assets/logo/logo-192.png',
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
   'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js',
-  'https://fonts.googleapis.com/css?family=Material+Icons|Noto+Sans+KR:100,300,400,500,700&display=swap',
+  'https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700&display=swap',
   '/mikan.css',
   '/mikan.js',
   '/manifest.json'

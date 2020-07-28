@@ -1,4 +1,6 @@
-export const getSong = (rootState, id) => {
+import { Module } from 'vuex'
+
+export const getSong = (rootState, id: string) => {
   if (typeof rootState === 'undefined') {
     throw new Error('rootState is not defined.')
   }
@@ -7,7 +9,7 @@ export const getSong = (rootState, id) => {
     throw new Error('id is not defined.')
   }
 
-  let group = Object.keys(rootState.data.lists)[id[0]]
+  let group = Object.keys(rootState.data.lists)[Number(id[0])]
   let groupSongs = rootState.data.lists[group].collection
 
   let songIndex = parseInt(id.substring(1, id.length)) - 1
@@ -25,7 +27,7 @@ export const getSong = (rootState, id) => {
   return null
 }
 
-export const getArtist = (rootState, id, artist) => {
+export const getArtist = (rootState, id: string, artist: number) => {
   if (typeof rootState === 'undefined') {
     throw new Error('rootState is not defined.')
   }
@@ -44,7 +46,17 @@ export const getArtist = (rootState, id, artist) => {
   return group.meta.artists[artist || 0] || artist || 0
 }
 
-export const dataModule = {
+interface DataModuleObject {
+  recommends: object
+  playlists: object
+  lists: object
+  recentPlayed: Array<LLCTMusic>
+  playlistsHolder: object
+  getSong: Function
+  getArtist: Function
+}
+
+export const dataModule: Module<DataModuleObject, null> = {
   namespaced: true,
   state: () => {
     return {

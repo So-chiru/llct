@@ -24,6 +24,12 @@ declare global {
   }
 }
 
+// declare module 'vue/types/vue' {
+//   interface Vue {
+//     $llctDatas: llctDatas
+//   }
+// }
+
 const Data = require('./core/data')
 
 import * as worker from './core/worker'
@@ -43,7 +49,27 @@ import './components/tabs/setsuna'
 
 Vue.prototype.$llctEvents = new Vue()
 
-Vue.use(VueLazyload)
+let webpSupport = false
+;(() => {
+  let img = new Image()
+  img.onload = () => (webpSupport = img.width > 0 && img.height > 0)
+  img.onerror = () => (webpSupport = false)
+  img.src =
+    'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA'
+})()
+
+Vue.use(VueLazyload, {
+  observer: true,
+
+  filter: {
+    webp (listener: HTMLImageElement) {
+      if (!webpSupport) return
+      if (/\/cover\/\d+\//.test(listener.src)) {
+        listener.src += '?webp'
+      }
+    }
+  }
+})
 
 const init = () => {
   if (!navigator.onLine) {
@@ -66,7 +92,7 @@ const init = () => {
     el: 'llct-app',
     store,
     methods: {
-      changeTab (id) {
+      changeTab (id: string) {
         this.$store.commit('tab/changeTo', id)
       },
 
@@ -74,7 +100,13 @@ const init = () => {
         this.$store.commit('tab/changeTo', this.$store.state.tab.previous)
       },
 
-      play (id, noURLState, playOnLoad, moveTab, playlistIndex) {
+      play (
+        id: string,
+        noURLState: boolean,
+        playOnLoad: boolean,
+        moveTab: boolean,
+        playlistIndex: number
+      ) {
         this.$store.dispatch('player/play', {
           id,
           noURLState,
@@ -85,7 +117,7 @@ const init = () => {
       }
     },
     mounted () {
-      this.$llctDatas.$on('listsLoaded', _ => {
+      this.$root.$llctDatas.$on('listsLoaded', () => {
         let id = new URLSearchParams(window.location.search).get('id')
 
         if (!id) {
@@ -148,12 +180,12 @@ window.addEventListener('DOMContentLoaded', () => {
   let dark = settings.get('useDarkMode')
 
   if (dark) {
-    document.querySelector('html').classList.add('dark')
+    document.querySelector('html')!.classList.add('dark')
   }
 
   document.head
     .querySelector('meta[name="theme-color"')
-    .setAttribute('content', dark ? '#151515' : '#fff')
+    ?.setAttribute('content', dark ? '#151515' : '#fff')
 
   // color Blind
 
@@ -161,9 +193,9 @@ window.addEventListener('DOMContentLoaded', () => {
   let monochromacy = settings.get('useMonochromacy')
 
   if (tritanomaly) {
-    document.querySelector('html').classList.add('tritanomaly')
+    document.querySelector('html')!.classList.add('tritanomaly')
   } else if (monochromacy) {
-    document.querySelector('html').classList.add('monochromacy')
+    document.querySelector('html')!.classList.add('monochromacy')
   }
 })
 
@@ -173,10 +205,10 @@ window.addEventListener('load', () => {
 
   let s = document.createElement('script')
   s.src = 'https://www.googletagmanager.com/gtag/js?id=UA-111995531-2'
-  document.querySelector('head').appendChild(s)
+  document.querySelector('head')!.appendChild(s)
 
   window.dataLayer = window.dataLayer || []
-  function gtag (...args) {
+  function gtag (...args: any) {
     window.dataLayer.push(...args)
   }
   gtag('js', new Date())

@@ -1,5 +1,42 @@
 import { LLCTTabPointer } from './tab'
 import settings from '../../core/settings'
+import { Module } from 'vuex'
+
+interface PlayerPlayObject {
+  state: number
+  ing: boolean
+  able: boolean
+  progress: number
+  autoplay: boolean
+}
+
+interface PlayerSettingsObject {
+  usePlayer: boolean
+  audioVolume?: number | null
+  tickVolume?: number | null
+  bassVolume?: number | null
+  speed: number
+  live: boolean
+  native: boolean
+  repeat: number
+}
+
+interface PlayerMetadataObject {
+  id: string
+  title: string
+  artist: number | null
+  cover?: string | null
+  translated?: string
+}
+
+interface PlayerModuleState {
+  audio: null
+  playlist: null
+
+  play: PlayerPlayObject
+  metadata: PlayerMetadataObject
+  settings: PlayerSettingsObject
+}
 
 export const LLCTPlayState = {
   UNLOAD: 0,
@@ -16,18 +53,18 @@ export const LLCTRepeatState = {
   REPEAT_PLAYLIST: 2
 }
 
-export const playerModule = {
+export const playerModule: Module<PlayerModuleState, null> = {
   namespaced: true,
   state: () => {
     return {
       audio: null,
       playlist: null,
       metadata: {
-        id: null,
-        title: null,
+        id: '',
+        title: '',
         artist: null,
         cover: null,
-        translated: null
+        translated: ''
       },
       play: {
         state: LLCTPlayState.UNLOAD,
@@ -56,15 +93,15 @@ export const playerModule = {
       state.metadata.translated = data.tr || data.title
     },
 
-    playStateUpdate (state, bool: Boolean) {
+    playStateUpdate (state, bool: boolean) {
       state.play.ing = bool || false
     },
 
-    ableStateUpdate (state, bool: Boolean) {
+    ableStateUpdate (state, bool: boolean) {
       state.play.able = bool || false
     },
 
-    playOnLoad (state, bool: Boolean) {
+    playOnLoad (state, bool: boolean) {
       state.play.autoplay = bool || false
     },
 
@@ -74,10 +111,6 @@ export const playerModule = {
 
     repeat (state, statenum) {
       state.settings.repeat = statenum
-    },
-
-    settingsUpdate (state, key, value) {
-      state.settings[key] = value
     }
   },
   actions: {
@@ -98,11 +131,11 @@ export const playerModule = {
       commit('play', song)
 
       if (window['app']) {
-        window['app'].$store.commit('data/addRecentPlayed', song)
+        window.app.$store.commit('data/addRecentPlayed', song)
       }
 
       if (args.moveTab && window['app']) {
-        window['app']['changeTab'](LLCTTabPointer.PLAYER)
+        window.app['changeTab'](LLCTTabPointer.PLAYER)
       }
 
       if (args.playOnLoad) {
@@ -111,20 +144,18 @@ export const playerModule = {
 
       if (!args.noURLState) {
         history.pushState(
-          { ...song, playlist: window['app'].$store.state.player.playlist },
+          { ...song, playlist: window.app.$store.state.player.playlist },
           song.title + ' - LLCT',
           '?id=' + song.id
         )
       }
 
       if (settings.get('usePlayer')) {
-        window['audio'].load(
-          window['app']['$llctDatas'].base + '/audio/' + song.id
-        )
+        window.audio.load(window.app['$llctDatas'].base + '/audio/' + song.id)
       }
 
-      if (window['gtag']) {
-        window['gtag']('event', 'play song v2', {
+      if (window.gtag) {
+        window.gtag('event', 'play song v2', {
           event_category: 'audio',
           event_label: song.title
         })

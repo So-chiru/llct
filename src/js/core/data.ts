@@ -187,211 +187,212 @@ const dataFetch = {
         })
     )
 }
-;(() => {
-  let $llctDatas = new Vue({
-    data () {
-      return {
-        base: host,
-        useImages: settings.get('useImages'),
-        useTranslatedTitle: settings.get('useTranslatedTitle'),
-        cacheSize: 0
-      }
+export let $llctDatas = new Vue({
+  data () {
+    return {
+      base: host,
+      useImages: settings.get('useImages'),
+      useTranslatedTitle: settings.get('useTranslatedTitle'),
+      cacheSize: 0
+    }
+  },
+  store,
+  methods: {
+    refresh () {
+      this.dataHandle('recommends', dataFetch.recommends(), null)
     },
-    store,
-    methods: {
-      refresh () {
-        this.dataHandle('recommends', dataFetch.recommends())
-      },
-      artist (id, artist) {
-        let first = id.substring(0, 1)
-        let group = this.groups[first]
+    /**
+     *
+     * @param id 아티스트의 이름을 가져올 곡의 ID
+     * @param artist 아티스트의 숫자 (meta.artists의 index)
+     */
+    artist (id: string, artist: number): string | null {
+      let first = id.substring(0, 1)
+      let group = this.groups[first]
 
-        return group && this.$store.state.data.lists[group]
-          ? this.$store.state.data.lists[group].meta.artists[artist || 0] ||
-              artist ||
-              0
-          : null
-      },
+      return group && this.$store.state.data.lists[group]
+        ? this.$store.state.data.lists[group].meta.artists[artist || 0] ||
+            artist ||
+            0
+        : null
+    },
 
-      getSong (id) {
-        let first = id.substring(0, 1)
-        let group = this.groups[first]
+    getSong (id) {
+      let first = id.substring(0, 1)
+      let group = this.groups[first]
 
-        let meta = this.$store.state.data.lists[group].collection
+      let meta = this.$store.state.data.lists[group].collection
 
-        let idInt = Number(id.substring(1, id.length)) - 1
-        if (meta[idInt] && meta[idInt].id === id) {
-          return meta[idInt]
-        }
+      let idInt = Number(id.substring(1, id.length)) - 1
+      if (meta[idInt] && meta[idInt].id === id) {
+        return meta[idInt]
+      }
 
-        let i = meta.length
-        while (i--) {
-          if (meta[i].id == id) return meta[i]
-        }
+      let i = meta.length
+      while (i--) {
+        if (meta[i].id == id) return meta[i]
+      }
 
-        return null
-      },
+      return null
+    },
 
-      search (keyword) {
-        if (keyword === '') {
-          return []
-        }
+    search (keyword) {
+      if (keyword === '') {
+        return []
+      }
 
-        let musics = []
+      let musics = []
 
-        for (var i = 0; i < this.groups.length; i++) {
-          musics.push(
-            ...this.$store.state.data.lists[this.groups[i]].collection
-          )
-        }
+      for (var i = 0; i < this.groups.length; i++) {
+        musics.push(...this.$store.state.data.lists[this.groups[i]].collection)
+      }
 
-        let musicsLen = musics.length
-        for (var i = 0; i < musicsLen; i++) {
-          let music = musics[i]
+      let musicsLen = musics.length
+      for (var i = 0; i < musicsLen; i++) {
+        let music = musics[i]
 
-          let ga = this.artist(music.id, music.artist)
+        let ga = this.artist(music.id, music.artist)
 
-          let searchStr = `${music.title}-${music.tr ? music.tr + '-' : ''}${
-            music.sk ? music.sk + '-' : ''
-          }${music.tags ? music.tags.join('-') + '.' : ''}-${ga}`
-            .replace(/\s|[!@#$%^&*(),.?":{}|<>♡★☆○●！]/g, '')
-            .toLowerCase()
-            .split('-')
+        let searchStr = `${music.title}-${music.tr ? music.tr + '-' : ''}${
+          music.sk ? music.sk + '-' : ''
+        }${music.tags ? music.tags.join('-') + '.' : ''}-${ga}`
+          .replace(/\s|[!@#$%^&*(),.?":{}|<>♡★☆○●！]/g, '')
+          .toLowerCase()
+          .split('-')
 
-          keyword = keyword
-            .toLowerCase()
-            .replace(/\s|[!@#$%^&*(),.?":{}|<>♡★☆○●！]/g, '')
+        keyword = keyword
+          .toLowerCase()
+          .replace(/\s|[!@#$%^&*(),.?":{}|<>♡★☆○●！]/g, '')
 
-          let searchIter = searchStr.length
-          let rate = 0
+        let searchIter = searchStr.length
+        let rate = 0
 
-          while (searchIter--) {
-            let item = searchStr[searchIter]
-            let index = item.indexOf(keyword)
+        while (searchIter--) {
+          let item = searchStr[searchIter]
+          let index = item.indexOf(keyword)
 
-            let itemChosung = false
+          let itemChosung = false
 
-            if (/[ㄱ-ㅎ]/.test(keyword)) {
-              itemChosung = chosung(item)
-            }
-
-            if (item === '' || (index === -1 && !itemChosung)) {
-              continue
-            }
-
-            if (item === keyword) {
-              rate += 100
-            }
-
-            let l = LCS((itemChosung ? itemChosung : '') || item, keyword)
-
-            if (l.length < 1) {
-              continue
-            }
-
-            rate += 100 * (l.length * (1 - index / item.length))
+          if (/[ㄱ-ㅎ]/.test(keyword)) {
+            itemChosung = chosung(item)
           }
 
-          if (rate < 10) {
-            musics[i] = false
-
+          if (item === '' || (index === -1 && !itemChosung)) {
             continue
           }
 
-          musics[i].rate = rate
-        }
-
-        musics = musics.filter(v => v !== false).sort((a, b) => b.rate - a.rate)
-
-        return musics
-      },
-
-      karaoke (id, useImg) {
-        return this.getSong(id).ka && !useImg ? dataFetch.karaoke(id) : 'img'
-      },
-
-      async dataHandle (name, pm, afterCb) {
-        try {
-          let data = await pm
-          this.$store.commit(`data/${name}`, data)
-
-          if (typeof afterCb === 'function') {
-            afterCb(data)
+          if (item === keyword) {
+            rate += 100
           }
-        } catch (e) {
-          Toast.show(
-            'API 서버에 연결할 수 없습니다. ' + e.message,
-            'warning',
-            true,
-            10000,
-            null
-          )
-        }
-      },
 
-      checkAvailable (id) {
-        if (typeof id === 'undefined') {
-          return true
+          let l = LCS((itemChosung ? itemChosung : '') || item, keyword)
+
+          if (l.length < 1) {
+            continue
+          }
+
+          rate += 100 * (l.length * (1 - index / item.length))
         }
 
-        return checkHas(id)
+        if (rate < 10) {
+          musics[i] = false
+
+          continue
+        }
+
+        musics[i].rate = rate
       }
-    }
-  })
 
-  Vue.prototype.$llctDatas = $llctDatas
+      musics = musics.filter(v => v !== false).sort((a, b) => b.rate - a.rate)
 
-  window.addEventListener('load', () => {
-    $llctDatas.dataHandle('lists', dataFetch.lists(), data => {
-      $llctDatas.$emit('listsLoaded', data)
-      $llctDatas['groups'] = Object.keys(data)
-    })
-    $llctDatas.dataHandle('recommends', dataFetch.recommends(), data => {
-      if (data.Notices && data.Notices.Msg.length) {
+      return musics
+    },
+
+    karaoke (id, useImg) {
+      return this.getSong(id).ka && !useImg ? dataFetch.karaoke(id) : 'img'
+    },
+
+    async dataHandle (name, pm, afterCb) {
+      try {
+        let data = await pm
+        this.$store.commit(`data/${name}`, data)
+
+        if (typeof afterCb === 'function') {
+          afterCb(data)
+        }
+      } catch (e) {
         Toast.show(
-          data.Notices.Msg,
-          data.Notices.Icon,
-          data.Notices.Type,
-          data.Notices.Time,
+          'API 서버에 연결할 수 없습니다. ' + e.message,
+          'warning',
+          true,
+          10000,
           null
         )
       }
-    })
-    $llctDatas.dataHandle('playlists', dataFetch.playlists(), data => {
-      if (!data.lists) {
-        return false
+    },
+
+    checkAvailable (id) {
+      if (typeof id === 'undefined') {
+        return true
       }
 
-      $llctDatas.$store.commit('data/playlistsHolder', new Playlist.Holder())
+      return checkHas(id)
+    }
+  }
+})
 
-      let preData = JSON.parse(localStorage.getItem('LLCTPlaylist') || '[]')
+Vue.prototype.$llctDatas = $llctDatas
 
-      let len = preData.length
-      if (len) {
-        for (var i = 0; i < len; i++) {
-          let pred = preData[i]
-          let pl = new Playlist.LLCTPlaylist(null, null)
+window.addEventListener('load', () => {
+  $llctDatas.dataHandle('lists', dataFetch.lists(), data => {
+    $llctDatas.$emit('listsLoaded', data)
+    $llctDatas['groups'] = Object.keys(data)
+  })
+  $llctDatas.dataHandle('recommends', dataFetch.recommends(), data => {
+    if (data.Notices && data.Notices.Msg.length) {
+      Toast.show(
+        data.Notices.Msg,
+        data.Notices.Icon,
+        data.Notices.Type,
+        data.Notices.Time,
+        null
+      )
+    }
+  })
+  $llctDatas.dataHandle('playlists', dataFetch.playlists(), data => {
+    if (!data.lists) {
+      return false
+    }
 
-          pl.import(pred)
-          $llctDatas.$store.state.data.playlistsHolder.add(pl, true)
-        }
-      }
+    $llctDatas.$store.commit('data/playlistsHolder', new Playlist.Holder())
 
-      let listsLen = data.lists.length
-      for (var i = 0; i < listsLen; i++) {
-        let list = data.lists[i]
+    let preData = JSON.parse(localStorage.getItem('LLCTPlaylist') || '[]')
 
-        let pl = new Playlist.LLCTPlaylist(list.Title, true)
+    let len = preData.length
+    if (len) {
+      for (var i = 0; i < len; i++) {
+        let pred = preData[i]
+        let pl = new Playlist.LLCTPlaylist(null, null)
 
-        list.spoiler = list.Spoiler || false
-        list.lists = list.Items
-
-        delete list.Title
-        delete list.Items
-
-        pl.import(list)
+        pl.import(pred)
         $llctDatas.$store.state.data.playlistsHolder.add(pl, true)
       }
-    })
+    }
+
+    let listsLen = data.lists.length
+    for (var i = 0; i < listsLen; i++) {
+      let list = data.lists[i]
+
+      let pl = new Playlist.LLCTPlaylist(list.Title, true)
+
+      list.spoiler = list.Spoiler || false
+      list.lists = list.Items
+
+      delete list.Title
+      delete list.Items
+
+      pl.import(list)
+      $llctDatas.$store.state.data.playlistsHolder.add(pl, true)
+    }
   })
-})()
+})

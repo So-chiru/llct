@@ -123,7 +123,7 @@ export default {
     },
     preferTitle () {
       return this.$store.state.player.metadata[
-        this.$llctDatas.useTranslatedTitle ? 'tr' : 'title'
+        this.$llctDatas.useTranslatedTitle ? 'translated' : 'title'
       ]
     },
     artist () {

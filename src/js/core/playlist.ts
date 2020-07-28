@@ -12,12 +12,6 @@ const deepCopy = o => {
   for (i in o) if (o.hasOwnProperty(i)) newO[i] = deepCopy(o[i])
   return newO
 }
-
-interface LLCTMusic {
-  title: String
-  lists: Array<any>
-}
-
 export class LLCTPlaylist {
   __pointer: number
   lists: Array<Object>
