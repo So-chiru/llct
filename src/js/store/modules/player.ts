@@ -151,7 +151,12 @@ export const playerModule: Module<PlayerModuleState, null> = {
       }
 
       if (settings.get('usePlayer')) {
-        window.audio.load(window.app['$llctDatas'].base + '/audio/' + song.id)
+        window.audio.load(
+          window.app['$llctDatas'].base +
+            '/audio/' +
+            song.id +
+            `${window.audioFlags ? '?flags=' + window.audioFlags : ''}`
+        )
       }
 
       if (window.gtag) {

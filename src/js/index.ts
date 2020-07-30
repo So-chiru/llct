@@ -16,6 +16,8 @@ declare global {
     app: Vue
     menu: Vue
 
+    audioFlags: string | null
+
     settings: Object
   }
 
@@ -23,6 +25,8 @@ declare global {
     documentMode?: any
   }
 }
+
+window.audioFlags = new URLSearchParams(window.location.search).get('flags')
 
 // declare module 'vue/types/vue' {
 //   interface Vue {

@@ -206,7 +206,12 @@ export default {
           '?id=' + first.id
         )
 
-        window.audio.load(this.$llctDatas.base + '/audio/' + first.id)
+        window.audio.load(
+          this.$llctDatas.base +
+            '/audio/' +
+            first.id +
+            `${window.audioFlags ? '?flags=' + window.audioFlags : ''}`
+        )
         this.init()
       }
     },
@@ -230,7 +235,12 @@ export default {
           '?id=' + last.id
         )
 
-        window.audio.load(this.$llctDatas.base + '/audio/' + last.id)
+        window.audio.load(
+          this.$llctDatas.base +
+            '/audio/' +
+            last.id +
+            `${window.audioFlags ? '?flags=' + window.audioFlags : ''}`
+        )
         this.init()
       }
     },
@@ -255,7 +265,12 @@ export default {
           '?id=' + next.id
         )
 
-        window.audio.load(this.$llctDatas.base + '/audio/' + next.id)
+        window.audio.load(
+          this.$llctDatas.base +
+            '/audio/' +
+            next.id +
+            `${window.audioFlags ? '?flags=' + window.audioFlags : ''}`
+        )
         this.init()
       }
     },
@@ -269,7 +284,12 @@ export default {
         this.$store.dispatch('player/play', { obj: prev })
         this.$store.commit('player/playOnLoad', true)
 
-        window.audio.load(this.$llctDatas.base + '/audio/' + prev.id)
+        window.audio.load(
+          this.$llctDatas.base +
+            '/audio/' +
+            prev.id +
+            `${window.audioFlags ? '?flags=' + window.audioFlags : ''}`
+        )
         this.init()
       }
     },

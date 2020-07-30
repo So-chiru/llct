@@ -391,11 +391,11 @@ export default class LLCTAudio {
 
         this.dry.gain.value = Math.min(
           1,
-          this.volume * e * (this.convolver ? 0.8 : 1)
+          this.volume * e * (this.convolver ? 0.77 : 1)
         )
 
         if (this.fadeTo > 0) {
-          this.wet.gain.value = Math.min(1, this.volume * e * 0.2)
+          this.wet.gain.value = Math.min(1, this.volume * e * 0.23)
         }
 
         if (this.fadeUntil + 0.1 < this.context.currentTime) {
@@ -507,8 +507,8 @@ export default class LLCTAudio {
     if (this.useNative) {
       this.context.volume = v
     } else {
-      this.dry.gain.value = v * (this.convolver ? 0.8 : 1)
-      this.wet.gain.value = v * 0.2
+      this.dry.gain.value = v * (this.convolver ? 0.77 : 1)
+      this.wet.gain.value = v * 0.23
     }
   }
 
