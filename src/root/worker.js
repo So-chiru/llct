@@ -1,5 +1,5 @@
-const CACHE = 'llct-cache-v20200729-0003'
-const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200729-0003'
+const CACHE = 'llct-cache-v20200803-01946'
+const DYNAMIC_CACHE = 'llct-cache-dynamic-v20200803-01946'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
   '/',
