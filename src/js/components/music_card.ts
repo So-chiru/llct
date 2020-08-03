@@ -19,7 +19,7 @@ export default {
       <div class="button sub" v-on:click="addPlaylist(cardData.id)" v-if="!disablePlaylist">
         <i class="material-icons">playlist_add</i>
       </diV>
-      <div class="button" v-on:click="play(cardData.id)">
+      <div class="button" v-on:click="play()">
         <i class="material-icons">play_arrow</i>
       </div>
       <div class="button sub" v-if="removeButton" v-on:click="removeButton">
@@ -64,7 +64,7 @@ export default {
       return this.$llctDatas.useTranslatedTitle
     },
 
-    playAnyway (id) {
+    playAnyway(id) {
       this.$store.dispatch(
         'player/play',
         this.playlist
@@ -84,7 +84,7 @@ export default {
             }
       )
     },
-    play (id) {
+    play() {
       if (this.grayOut && !this.oneMoreTab) {
         if (!this.oneMoreTab) {
           this.oneMoreTab = true
@@ -100,7 +100,7 @@ export default {
           false,
           3000,
           () => {
-            this.playAnyway(id)
+            this.playAnyway(this.cardData.id)
           }
         )
 
@@ -109,7 +109,7 @@ export default {
 
       this.oneMoreTab = false
 
-      this.playAnyway(id)
+      this.playAnyway(this.cardData.id)
     },
 
     addPlaylist (id) {

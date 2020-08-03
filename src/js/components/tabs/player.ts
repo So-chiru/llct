@@ -21,11 +21,12 @@ export default {
   },
   template: `<div class="llct-tab llct-tab-over" id="tab4">
     <div class="llct-player">
-      <div class="player-dash" v-show="title !== null">
+      <div class="player-dash" v-show="title !== null && title != ''">
         <div class="player-left">
           <div class="player-info">
             <div class="player-info-image">
               <img :src="url"></img>
+              <img :src="url" class="backdrop" :class="{ active: playing }"></img>
             </div>
             <div class="player-info-text">
               <p class="player-song-title" :title="title">{{preferTitle}}</p>
@@ -193,7 +194,7 @@ export default {
       ) {
         let first = this.$store.state.player.playlist.first()
 
-        this.$store.dispatch('player/play', { obj: first })
+        this.$store.dispatch('player/play', { id: first })
         this.$store.commit('player/playOnLoad', true)
 
         history.pushState(
@@ -222,7 +223,7 @@ export default {
         this.$store.state.player.playlist.last
       ) {
         let last = this.$store.state.player.playlist.last()
-        this.$store.dispatch('player/play', { obj: last })
+        this.$store.dispatch('player/play', { id: last })
         this.$store.commit('player/playOnLoad', true)
 
         history.pushState(
@@ -252,7 +253,7 @@ export default {
       ) {
         let end = this.$store.state.player.playlist.isEnd()
         let next = this.$store.state.player.playlist.next()
-        this.$store.dispatch('player/play', { obj: next })
+        this.$store.dispatch('player/play', { id: next })
         this.$store.commit('player/playOnLoad', !end)
 
         history.pushState(
@@ -281,7 +282,7 @@ export default {
         this.$store.state.player.playlist.prev
       ) {
         let prev = this.$store.state.player.playlist.prev()
-        this.$store.dispatch('player/play', { obj: prev })
+        this.$store.dispatch('player/play', { id: prev })
         this.$store.commit('player/playOnLoad', true)
 
         window.audio.load(

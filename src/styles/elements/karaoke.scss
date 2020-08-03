@@ -44,6 +44,14 @@
   box-sizing: border-box;
   margin-right: 10.3px;
 
+  &:first-child {
+    margin-left: auto;
+  }
+
+  &:last-child {
+    margin-right: auto;
+  }
+
   p {
     margin: 0;
   }

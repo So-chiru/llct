@@ -93,7 +93,6 @@ export class Slider {
 
 Vue.directive('slider', {
   bind: el => {
-    console.log('slider')
     new Slider(el, null)
   },
 

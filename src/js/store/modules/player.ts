@@ -122,7 +122,10 @@ export const playerModule: Module<PlayerModuleState, null> = {
       } else if (typeof args.obj === 'object') {
         song = args.obj
       } else if (typeof args.playlist === 'object') {
-        song = args.playlist.lists[args.playlistIndex || 0]
+        song = rootState.data.getSong(
+          rootState,
+          args.playlist.lists[args.playlistIndex || 0]
+        )
         commit('playlist', args.playlist)
       } else {
         throw new Error('args.id or args.obj is not defined.')

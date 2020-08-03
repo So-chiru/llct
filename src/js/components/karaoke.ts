@@ -250,8 +250,6 @@ const parseRGB = str => {
 
 const inverseColor = c => 255 - c
 
-let karaokeFocusDetect = null
-
 let latencySleep = 0
 
 export default {
@@ -263,11 +261,11 @@ export default {
           <p class="notice-title">블레이드 추천 색상</p>
           <p class="notice-desc" :style="{color: karaColor.hex && karaColor.hex, textShadow: (lowContrast ? inverse(karaColor.hex) : karaColor.hex && karaColor.hex) + ' 0px 0px ' + (lowContrast ? '6px' : '16px')}">{{karaColor.text}}</p>
         </span>
-        <span class="karaoke-notice" v-show="karaData && karaData.metadata && karaData.metadata.singAlong">
+        <span class="karaoke-notice" v-if="karaData && karaData.metadata && karaData.metadata.singAlong">
           <p class="notice-title">떼창곡</p>
           <p class="notice-desc">노래 가사를 따라 불러주세요.</p>
         </span>
-        <span class="karaoke-notice" v-show="karaData && karaData.metadata && karaData.metadata.notPerformed">
+        <span class="karaoke-notice" v-if="karaData && karaData.metadata && karaData.metadata.notPerformed">
           <p class="notice-title">아직 공연한 적 없는 곡</p>
           <p class="notice-desc">제각자 콜이 다를 수 있습니다.</p>
         </span>
@@ -366,9 +364,14 @@ export default {
     },
 
     calculateColor (color) {
+      let q = this.$el.querySelector('.color-notice')
+
+      if (!q) {
+        return
+      }
+
       let parent = parseRGB(
-        window.getComputedStyle(this.$el.querySelector('.color-notice'), null)
-          .backgroundColor || 'rgb(255, 255, 255)'
+        window.getComputedStyle(q, null).backgroundColor || 'rgb(255, 255, 255)'
       )
 
       let rgb = hexToRGB(color.hex)
@@ -391,12 +394,11 @@ export default {
       })
 
       this.karaData = { metadata: {}, timeline: [] }
+      this.karaImage = null
 
       if (request.lyricsType === 'img') {
         this.karaImage = this.$llctDatas.base + '/call/' + this.id + '?img=true'
       } else {
-        this.karaImage = null
-
         request.lyricsType
           .then(data => {
             this.karaData = data
@@ -410,19 +412,17 @@ export default {
           })
       }
 
-      if (!karaokeFocusDetect) {
-        karaokeFocusDetect = window.addEventListener('focus', () => {
-          if (!this.error) {
-            karaokeRender(
-              window.audio.timecode(),
-              this.$el,
-              true,
-              null,
-              this.tickEnable
-            )
-          }
-        })
-      }
+      window.addEventListener('focus', () => {
+        if (!this.error) {
+          karaokeRender(
+            window.audio.timecode(),
+            this.$el,
+            true,
+            null,
+            this.tickEnable
+          )
+        }
+      })
     },
 
     scrollTop (pos) {
