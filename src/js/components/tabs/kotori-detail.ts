@@ -21,8 +21,8 @@ export default {
         <div class="close" v-on:click="close"><i class="material-icons">close</i></div>
       </div>
       <div class="lists">
-        <draggable v-model="last.lists" :move="checkMovable" :disabled="!checkMovable()" :handle="'.info'" :touchStartThreshold="50" :animation="200" filter=".control" easing="cubic-bezier(0.4, 0, 0.2, 1)" draggable=".llct-music-card" @end="dragged">
-          <LLCTMusicCard placeholder="round" v-for="(data, index) in (last.lists || [])" :key="index" :playlist="last" :removeButton="last.readOnly ? false : removeSong" :disablePlaylist="!last.readOnly" :index="index" :title="data.title" :artist="getArtist(data.id, data.artist || '0')" :cover_url="getImageURL(data.id || '10001')" :id="data.id"></LLCTMusicCard>
+        <draggable v-model="last.lists" :key="updates" :move="checkMovable" :disabled="!checkMovable()" :handle="'.info'" :touchStartThreshold="50" :animation="200" filter=".control" easing="cubic-bezier(0.5, 0.3, 0.2, 0.9)" draggable=".llct-music-card" @end="dragged">
+          <LLCTMusicCard placeholder="round" v-for="(data, index) in (last.lists || [])" :key="index" :playlist="last" :removeButton="last.readOnly ? false : removeSong" :disablePlaylist="!last.readOnly" :index="index" :data="data"></LLCTMusicCard>
         </draggable>
       </div>
     </div>
@@ -32,7 +32,8 @@ export default {
     return {
       playLists: this.$store.state.data.playlistsHolder || {},
       select: this.selected || {},
-      last: this.lastpl || {}
+      last: this.lastpl || {},
+      updates: Math.random()
     }
   },
   watch: {
@@ -77,8 +78,14 @@ export default {
       this.close()
     },
 
-    dragged () {
+    dragged() {
+      this.$store.state.data.playlistsHolder
+        .find(this.last.title)
+        .replaceWith(this.last.lists)
+      
       this.$store.state.data.playlistsHolder.save()
+
+      this.updates = Math.random()
     },
 
     removeSong (ev) {

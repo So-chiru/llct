@@ -4,8 +4,6 @@ import * as Playlist from '../../core/playlist'
 
 import LLCTKotoriDetail from './kotori-detail'
 
-import { sha3_256 } from 'js-sha3'
-
 import * as Modal from '../modal'
 
 export default {
@@ -15,7 +13,7 @@ export default {
   },
   template: `<div class="llct-tab llct-no-transform" id="tab2">
     <div class="kotori-cards-list">
-      <LLCTCard v-for="(card, index) in playlists" v-bind:key="hash(card)" v-on:click="openPlaylist()" :oclick="openPlaylist" :data-title="card.title" :spoiler="card.spoiler" :title="card.title" :subtitle="'총 ' + (card.lists || []).length + '곡 수록'" :bg_url="card.bg ? card.bg : card.lists ? getCoverURL((card.lists[0] || {}).id) : null"></LLCTCard>
+      <LLCTCard v-for="(card, index) in playlists" v-bind:key="hash(card)" v-on:click="openPlaylist()" :oclick="openPlaylist" :playlist="card.title" :data-title="card.title" :data="card" :title="card.title" :spoiler="card.spoiler" :subtitle="'총 ' + (card.lists || []).length + '곡 수록'" :bg_url="card.bg ? card.bg : card.lists ? getCoverURL(card.lists[0] || {}) : null"></LLCTCard>
       <div class="kotori-playlist-add" v-on:click="playlists.length >= 30 ? noMorePlaylist() : addPlaylist()">
         <div>
           <i class="material-icons">add</i>
@@ -47,7 +45,7 @@ export default {
       return this.$llctDatas.base + '/cover/' + id
     },
     hash (obj) {
-      return sha3_256(JSON.stringify(obj))
+      return JSON.stringify(obj)
     },
 
     openPlaylist (title) {

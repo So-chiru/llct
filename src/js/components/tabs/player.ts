@@ -45,12 +45,12 @@ export default {
             </div>
           </div>
           <div class="player-btn">
-            <i v-if="usePlayer" class="material-icons" tabindex="5" v-show="!playing && !this.$store.state.player.play.autoplay" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
-            <i v-if="usePlayer" class="material-icons" tabindex="6" v-show="playing || this.$store.state.player.play.autoplay" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
-            <i v-if="usePlayer" class="material-icons" tabindex="7" v-show="this.$store.state.player.playlist" v-on:click="next" v-on:keypress="ev => ev.keyCode == '13' && next()" alt="다음 곡 스킵 버튼">skip_next</i>
-            <i v-if="usePlayer" class="material-icons diff" tabindex="8" v-show="!this.$store.state.player.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat" v-on:keypress="ev => ev.keyCode == '13' && repeat()">sync</i>
-            <i v-if="usePlayer" class="material-icons diff" tabindex="9" alt="설정 버튼" v-on:click="more" v-on:keypress="ev => ev.keyCode == '13' && more()">more_vert</i>
-            <i class="material-icons player-close" tabindex="10" alt="닫기 버튼" v-on:click="close" v-on:keypress="ev => ev.keyCode == '13' && close()">close</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="5" role="button" v-show="!playing && !this.$store.state.player.play.autoplay" v-on:click="play" v-on:keypress="ev => ev.keyCode == '13' && play()" alt="재생 버튼">play_arrow</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="6" role="button" v-show="playing || this.$store.state.player.play.autoplay" v-on:click="pause" v-on:keypress="ev => ev.keyCode == '13' && pause()" alt="일시정지 버튼">pause</i>
+            <i v-if="usePlayer" class="material-icons" tabindex="7" role="button" v-show="this.$store.state.player.playlist" v-on:click="next" v-on:keypress="ev => ev.keyCode == '13' && next()" alt="다음 곡 스킵 버튼">skip_next</i>
+            <i v-if="usePlayer" class="material-icons diff" tabindex="8" role="button" v-show="!this.$store.state.player.playlist" alt="반복 설정 버튼" :class="{deactive: !audio.repeat}" v-on:click="repeat" v-on:keypress="ev => ev.keyCode == '13' && repeat()">sync</i>
+            <i v-if="usePlayer" class="material-icons diff" tabindex="9" role="button" alt="설정 버튼" v-on:click="more" v-on:keypress="ev => ev.keyCode == '13' && more()">more_vert</i>
+            <i class="material-icons player-close" tabindex="10" role="button" alt="닫기 버튼" v-on:click="close" v-on:keypress="ev => ev.keyCode == '13' && close()">close</i>
           </div>
         </div>
       </div>

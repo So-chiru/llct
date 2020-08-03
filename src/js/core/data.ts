@@ -217,7 +217,7 @@ export let $llctDatas = new Vue({
         : null
     },
 
-    getSong (id) {
+    getSong (id: string): object | null {
       let first = id.substring(0, 1)
       let group = this.groups[first]
 
@@ -309,16 +309,26 @@ export let $llctDatas = new Vue({
     },
 
     karaoke (id, useImg) {
-      return this.getSong(id).ka && !useImg ? dataFetch.karaoke(id) : 'img'
+      let metadata = this.getSong(id)
+
+      return {
+        lyricsType: metadata.ka && !useImg ? dataFetch.karaoke(id) : 'img',
+        color: {
+          text: metadata.bladeColor,
+          hex: metadata.bladeColorHEX
+        }
+      }
     },
 
     async dataHandle (name, pm, afterCb) {
       try {
         let data = await pm
-        this.$store.commit(`data/${name}`, data)
+        await this.$store.commit(`data/${name}`, data)
 
         if (typeof afterCb === 'function') {
-          afterCb(data)
+          requestAnimationFrame(() => {
+            afterCb(data)
+          })
         }
       } catch (e) {
         Toast.show(
@@ -346,17 +356,12 @@ Vue.prototype.$llctDatas = $llctDatas
 window.addEventListener('load', () => {
   $llctDatas.dataHandle('lists', dataFetch.lists(), data => {
     $llctDatas.$emit('listsLoaded', data)
-    $llctDatas['groups'] = Object.keys(data)
+    $llctDatas.groups = Object.keys(data)
   })
+
   $llctDatas.dataHandle('recommends', dataFetch.recommends(), data => {
-    if (data.Notices && data.Notices.Msg.length) {
-      Toast.show(
-        data.Notices.Msg,
-        data.Notices.Icon,
-        data.Notices.Type,
-        data.Notices.Time,
-        null
-      )
+    if (data.n && data.n.Msg.length) {
+      Toast.show(data.n.Msg, data.n.Icon, data.n.Type, data.n.Time, null)
     }
   })
   $llctDatas.dataHandle('playlists', dataFetch.playlists(), data => {

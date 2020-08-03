@@ -204,6 +204,52 @@ const karaokeRender = (
   }
 }
 
+const luminance = (r, g, b) => {
+  var a = [r, g, b].map(v => {
+    v /= 255
+
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)
+  })
+
+  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722
+}
+
+const contrast = (rgb1, rgb2) => {
+  let lum1 = luminance(rgb1[0], rgb1[1], rgb1[2])
+  let lum2 = luminance(rgb2[0], rgb2[1], rgb2[2])
+
+  let brightest = Math.max(lum1, lum2)
+  let darkest = Math.min(lum1, lum2)
+  return (brightest + 0.05) / darkest + 0.05
+}
+
+const hexToRGB = hex => {
+  let v = hex.indexOf('#') === 0 ? hex.substring(1, hex.length) : hex
+
+  v = v.match(v.length === 3 ? /.{1,1}/g : /.{1,2}/g).map(v => {
+    if (v.length === 1) {
+      v = v + v
+    }
+
+    return parseInt(v, 16)
+  })
+
+  return v
+}
+
+const padding = v => (v.length === 1 ? '0' + v : v)
+const RGBToHex = r => '#' + r.map(v => padding(v.toString(16))).join('')
+
+const parseRGB = str => {
+  return str
+    .replace(')', '')
+    .split('(')[1]
+    .split(',')
+    .map(v => Number(v.trim()))
+}
+
+const inverseColor = c => 255 - c
+
 let karaokeFocusDetect = null
 
 let latencySleep = 0
@@ -211,6 +257,21 @@ let latencySleep = 0
 export default {
   template: `
     <div class="llct-karaoke">
+      <span class="karaoke-notice-wrap" v-slider>
+        <span class="karaoke-notice color-notice" v-if="karaColor.text || karaColor.hex">
+          <span class="notice-color-layer" :style="{backgroundColor: karaColor.hex}"></span>
+          <p class="notice-title">블레이드 추천 색상</p>
+          <p class="notice-desc" :style="{color: karaColor.hex && karaColor.hex, textShadow: (lowContrast ? inverse(karaColor.hex) : karaColor.hex && karaColor.hex) + ' 0px 0px ' + (lowContrast ? '6px' : '16px')}">{{karaColor.text}}</p>
+        </span>
+        <span class="karaoke-notice" v-show="karaData && karaData.metadata && karaData.metadata.singAlong">
+          <p class="notice-title">떼창곡</p>
+          <p class="notice-desc">노래 가사를 따라 불러주세요.</p>
+        </span>
+        <span class="karaoke-notice" v-show="karaData && karaData.metadata && karaData.metadata.notPerformed">
+          <p class="notice-title">아직 공연한 적 없는 곡</p>
+          <p class="notice-desc">제각자 콜이 다를 수 있습니다.</p>
+        </span>
+      </span>
       <span v-if="!error && (!karaImage && !useImage)" v-for="(line, lineIndex) in karaData.timeline" class="karaoke-line-wrap" :key="'line_' + lineIndex">
         <p class="karaoke-line" :data-line="lineIndex" :data-start="line.start_time" :data-end="line.end_time">
           <span class="karaoke-word" v-for="(word, wordIndex) in line.collection" :key="'word_' + word.text + word.start_time + '.' + Math.random()" v-on:click="jump" data-active="0" data-passed="0" :data-color="word.text_color" :data-delay="word.repeat_delay" :data-pronounce="word.pronunciation_time || false" :data-word="wordIndex" :data-type="word.type" :data-start="word.start_time" :data-end="word.end_time" :class="{empty: word.text == '' }"><em v-if="word.ruby_text">{{word.ruby_text}}</em>{{word.text.replace(/\ /gi, '&nbsp;')}}</span>
@@ -257,7 +318,9 @@ export default {
       error: null,
       needClear: false,
       lastScroll: 0,
-      karaImage: null
+      karaImage: null,
+      karaColor: null,
+      lowContrast: false
     }
   },
   computed: {
@@ -298,6 +361,20 @@ export default {
     }
   },
   methods: {
+    inverse (c) {
+      return RGBToHex(hexToRGB(c).map(v => inverseColor(v)))
+    },
+
+    calculateColor (color) {
+      let parent = parseRGB(
+        window.getComputedStyle(this.$el.querySelector('.color-notice'), null)
+          .backgroundColor || 'rgb(255, 255, 255)'
+      )
+
+      let rgb = hexToRGB(color.hex)
+      this.lowContrast = contrast(parent, rgb) < 1.5
+    },
+
     load () {
       this.error = null
       karaokeClear()
@@ -307,12 +384,20 @@ export default {
         settings.get('useImageInstead')
       )
 
-      if (request === 'img') {
+      this.karaColor = request.color
+
+      requestAnimationFrame(() => {
+        this.calculateColor(this.karaColor)
+      })
+
+      this.karaData = { metadata: {}, timeline: [] }
+
+      if (request.lyricsType === 'img') {
         this.karaImage = this.$llctDatas.base + '/call/' + this.id + '?img=true'
       } else {
         this.karaImage = null
 
-        request
+        request.lyricsType
           .then(data => {
             this.karaData = data
 

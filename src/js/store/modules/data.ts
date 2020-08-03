@@ -10,6 +10,7 @@ export const getSong = (rootState, id: string) => {
   }
 
   let group = Object.keys(rootState.data.lists)[Number(id[0])]
+
   let groupSongs = rootState.data.lists[group].collection
 
   let songIndex = parseInt(id.substring(1, id.length)) - 1

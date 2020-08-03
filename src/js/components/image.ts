@@ -33,6 +33,6 @@ export default {
   },
   props: ['shouldShow', 'error', 'skeleton', 'full', 'image'],
   template: `
-    <img v-lazy="$attrs.src" :alt="image || 'LLCT Image'" v-on:error="errHandle" v-on:load="done" v-show="show() ? ($attrs.placeholder !== '' ? true : (show() ? load : false)) : false" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round', skeleton: skeleton}"></img>
+    <img v-lazy="$attrs.src" :alt="image || 'LLCT Image'" :key="$attrs.src + show + Math.random()" v-on:error="errHandle" v-on:load="done" v-show="show() ? ($attrs.placeholder !== '' ? true : (show() ? load : false)) : false" class="llct-image" :class="{loaded: done, round: $attrs.placeholder == 'round', skeleton: skeleton}"></img>
   `
 }

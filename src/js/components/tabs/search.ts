@@ -11,7 +11,7 @@ export default {
       <LLCTSearchbox placeholder="여기에 검색할 텍스트 입력" :extraText="waitEnter && waitEnter + '개의 검색 결과가 있지만, 렌더링 성능을 위해 표시하지 않았습니다. 엔터를 눌러 결과를 확인할 수 있습니다.' || ''" :enter="(v) => goSearch(v, false)" :type="(v) => goSearch(v, true)"></LLCTSearchbox>
       <div class="search-music-cards" v-if="this.searchedData && this.searchedData.length">
         <transition-group name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-          <LLCTMusicCard placeholder="round" v-for="(card, index) in this.searchedData" v-bind:key="'card_search_' + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></LLCTMusicCard>
+          <LLCTMusicCard placeholder="round" v-for="(card, index) in this.searchedData" v-bind:key="'card_search_' + card.id" :data="card"></LLCTMusicCard>
         </transition-group>
       </div>
       <div class="search-music-nores" v-else>

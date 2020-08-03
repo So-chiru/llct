@@ -10,10 +10,10 @@ export default {
   },
   template: `<div class="llct-tab" id="tab0">
     <div class="ayumu-cards-holder">
-      <span>
-        <LLCTCard v-for="(card, index) in this.$store.state.data.recommends.Cards" v-bind:key="'card_' + index" :index="index" :title="card.Title" :subtitle="card.SubTitle" :playlist="card.Playlist" :bg_url="idfy(card.BG)" :ext_url="card.ExtURL" :id="card.ID"></LLCTCard>
+      <span v-if="this.$store.state.data.recommends.Cards">
+        <LLCTCard v-for="(card, index) in this.$store.state.data.recommends.Cards" v-bind:key="'card_' + index + Math.random() + card" :data="card" :index="index" :title="card.Title" :subtitle="card.SubTitle" :bg_url="card.BG" :ext_url="card.ExtURL" :id="card.ID"></LLCTCard>
       </span>
-      <span v-if="!this.$store.state.data.recommends.Cards">
+      <span v-else>
         <LLCTCard v-for="(n, index) in 4" :static="true" v-bind:key="'card_skeleton' + index" :index="1" :skeleton="true" v-once></LLCTCard>
       </span>
     </div>
@@ -36,8 +36,8 @@ export default {
     </div>
     <div class="ayumu-music-cards">
       <transition-group v-if="this.$store.state.data.recommends.Songs" name="llct-card" appear @before-enter="beforeEnter" @after-enter="afterEnter" tag="span">
-        <LLCTMusicCard v-show="mode === 0" placeholder="round" v-for="(card, index) in this.$store.state.data.recommends.Songs" v-bind:key="'card' + Math.random() + card.ID" :title="card.Title" :artist="getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></LLCTMusicCard>
-        <LLCTMusicCard v-show="mode === 1" placeholder="round" v-for="(card, index) in this.$store.state.data.recentPlayed" v-bind:key="'card' + Math.random() + card.id" :title="card.title" :artist="getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></LLCTMusicCard>
+        <LLCTMusicCard v-show="mode === 0" placeholder="round" v-for="(card, index) in this.$store.state.data.recommends.Songs" v-bind:key="'card' + Math.random() + card" :data="card" :title="card.Title" :artist="card.ID && getArtist(card.ID, card.Artist)" :cover_url="getCoverURL(card.ID)" :id="card.ID"></LLCTMusicCard>
+        <LLCTMusicCard v-show="mode === 1" placeholder="round" v-for="(card, index) in this.$store.state.data.recentPlayed" v-bind:key="'card' + Math.random() + card" :data="card" :title="card.title" :artist="card.id && getArtist(card.id, card.artist)" :cover_url="getCoverURL(card.id)" :id="card.id"></LLCTMusicCard>
       </transition-group>
       <transition-group v-else name="llct-card">
         <LLCTMusicCard v-for="(n, index) in 12" v-bind:key="'m_card_skeleton' + index" :index="index" :skeleton="true" v-once></LLCTMusicCard>
@@ -46,6 +46,7 @@ export default {
   </div>
   `,
   props: ['current'],
+
   data () {
     return {
       mode: 0
@@ -73,12 +74,6 @@ export default {
 
     changeTab (id) {
       this.$root.changeTab(id)
-    },
-
-    idfy (str) {
-      return str.indexOf('LLCT.ID$') > -1
-        ? `${this.$llctDatas.base}/cover/${str.split('LLCT.ID$')[1]}`
-        : str
     },
 
     getCoverURL (id) {

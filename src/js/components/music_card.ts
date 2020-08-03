@@ -7,20 +7,19 @@ export default {
   components: {
     LLCTImage
   },
-  template: `<div class="llct-music-card" :key="title + '.' + (offline && grayOut)" :data-index="index" :class="{skeleton: skeleton, grayOut: offline && grayOut}" :title="offline && grayOut ? '다운로드하지 않은 콜표입니다.' : ''">
+  template: `<div class="llct-music-card" :key="cardData.title + '.' + (offline && grayOut)" :data-index="index" :class="{skeleton: skeleton, grayOut: offline && grayOut}" :title="offline && grayOut ? '다운로드하지 않은 콜표입니다.' : ''">
     <div class="info">
-      <LLCTImage :src="cover_url" :placeholder="placeholder" :skeleton="skeleton" :alt="title + ' 앨범 커버'"></LLCTImage>
+      <LLCTImage :src="this.$llctDatas.base + '/cover/75/' + cardData.id" :placeholder="placeholder" :skeleton="skeleton" :alt="cardData.title + ' 앨범 커버'"></LLCTImage>
       <div class="text">
-        <h3 v-if="!useAlt" :title="title" :class="{skeleton: skeleton}">{{title}}</h3>
-        <h3 v-else :title="alt">{{alt}}</h3>
-        <p :title="artist" :class="{skeleton: skeleton}">{{artist}}</p>
+        <h3 v-if="!useAlt" :title="cardData.title" :class="{skeleton: skeleton}">{{cardData && (translated() && cardData.tr ? cardData.tr : cardData.title)}}</h3>
+        <p :title="cardData.artist" :class="{skeleton: cardData.skeleton}">{{cardData.id && getArtist(cardData.id, cardData.artist)}}</p>
       </div class="text">
     </div>
     <div class="control" v-if="!skeleton">
-      <div class="button sub" v-on:click="addPlaylist(id)" v-if="!disablePlaylist">
+      <div class="button sub" v-on:click="addPlaylist(cardData.id)" v-if="!disablePlaylist">
         <i class="material-icons">playlist_add</i>
       </diV>
-      <div class="button" v-on:click="play(id)">
+      <div class="button" v-on:click="play(cardData.id)">
         <i class="material-icons">play_arrow</i>
       </div>
       <div class="button sub" v-if="removeButton" v-on:click="removeButton">
@@ -29,10 +28,7 @@ export default {
     </div>
   </div>`,
   props: [
-    'title',
-    'artist',
-    'cover_url',
-    'id',
+    'data',
     'placeholder',
     'index',
     'disablePlaylist',
@@ -54,7 +50,8 @@ export default {
   data () {
     return {
       grayOut: null,
-      oneMore: false
+      oneMoreTab: false,
+      cardData: {}
     }
   },
   computed: {
@@ -63,6 +60,10 @@ export default {
     }
   },
   methods: {
+    translated () {
+      return this.$llctDatas.useTranslatedTitle
+    },
+
     playAnyway (id) {
       this.$store.dispatch(
         'player/play',
@@ -84,12 +85,12 @@ export default {
       )
     },
     play (id) {
-      if (this.grayOut && !this.oneMore) {
-        if (!this.oneMore) {
-          this.oneMore = true
+      if (this.grayOut && !this.oneMoreTab) {
+        if (!this.oneMoreTab) {
+          this.oneMoreTab = true
 
           setTimeout(() => {
-            this.oneMore = false
+            this.oneMoreTab = false
           }, 500)
         }
 
@@ -106,7 +107,7 @@ export default {
         return
       }
 
-      this.oneMore = false
+      this.oneMoreTab = false
 
       this.playAnyway(id)
     },
@@ -115,7 +116,6 @@ export default {
       let buttons = []
       let leastOne = false
 
-      let song = this.$llctDatas.getSong(id)
       for (
         var i = 0;
         i < this.$store.state.data.playlistsHolder.length();
@@ -134,7 +134,7 @@ export default {
             type: 'button',
             default: listObj.title,
             callback: _v => {
-              this.$store.state.data.playlistsHolder.addSong(i, song)
+              this.$store.state.data.playlistsHolder.addSong(i, id)
             }
           })
         })(i)
@@ -161,11 +161,38 @@ export default {
         null,
         null
       )
+    },
+
+    getArtist (id, artist) {
+      return this.$store.state.data.getArtist(this.$store.state, id, artist)
+    },
+
+    setCardData () {
+      if (Object.keys(this.$store.state.data.lists).length === 0) {
+        this.cardData = 1000
+
+        return
+      }
+
+      if (typeof this.data === 'string') {
+        this.cardData =
+          this.$store.state.data.getSong(this.$store.state, this.data) || {}
+      } else if (typeof this.data === 'object') {
+        this.cardData = this.data
+      } else {
+        this.cardData = {}
+      }
     }
   },
 
   async mounted () {
     this.grayOut =
       !navigator.onLine && !(await this.$llctDatas.checkAvailable(this.id))
+
+    this.setCardData()
+
+    if (this.cardData === 1000) {
+      this.$llctDatas.$on('listsLoaded', this.setCardData)
+    }
   }
 }

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import Hammer from 'hammerjs'
 
 const findCard = elem => {
@@ -89,3 +90,12 @@ export class Slider {
     this.hammer.destroy()
   }
 }
+
+Vue.directive('slider', {
+  bind: el => {
+    console.log('slider')
+    new Slider(el, null)
+  },
+
+  unbind: () => {}
+})

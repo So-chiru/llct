@@ -14,7 +14,7 @@ const deepCopy = o => {
 }
 export class LLCTPlaylist {
   __pointer: number
-  lists: Array<Object>
+  lists: Array<LLCTMusic>
   title: String
   readOnly: Boolean
   repeat: Boolean
@@ -29,6 +29,10 @@ export class LLCTPlaylist {
 
   add (item) {
     this.lists.push(item)
+  }
+
+  replaceWith(list: Array<LLCTMusic>) {
+    this.lists = list
   }
 
   import (obj) {
@@ -81,7 +85,7 @@ export class LLCTPlaylist {
 }
 
 export class Holder {
-  lists: Array<LLCTMusic>
+  lists: Array<LLCTPlaylist>
 
   constructor () {
     this.lists = []
@@ -126,12 +130,12 @@ export class Holder {
     this.save()
   }
 
-  save () {
+  save (items: any | null) {
     let lis = []
 
-    let thisLen = this.length()
+    let thisLen = items ? items.length : this.length()
     for (var i = 0; i < thisLen; i++) {
-      let item = deepCopy(this.lists[i])
+      let item = deepCopy(items ? items[i] : this.lists[i])
 
       if (item.readOnly) continue
 
