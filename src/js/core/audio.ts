@@ -4,9 +4,9 @@ const TRANSITION_TIME = 0.2
 
 const eventBus = require('./events')
 
-const quint = x => 1 - Math.pow(1 - x, 3)
+const quint = (x: any) => 1 - Math.pow(1 - x, 3)
 
-const concatBuffer = (...bufs) => {
+const concatBuffer = (...bufs: Array<any>) => {
   let len = bufs.length
   let bytelen = bufs.reduce((p, c) => p.length + c.length)
 
@@ -64,7 +64,7 @@ class LLCTAudioSource {
     })
   }
 
-  load (url) {
+  load (url: string) {
     this.loaded = 0
     this.full = 0
 
@@ -134,20 +134,25 @@ export default class LLCTAudio {
   __lastTime: number
   __d: number
 
-  constructor (noMediaSession, noEffects, useNativePlayer) {
+  constructor (
+    noMediaSession: boolean,
+    noEffects: boolean,
+    useNativePlayer: boolean
+  ) {
     this.audio = new LLCTAudioSource()
     this.originVolume = 0.75
     this.originBassVolume = 0
     this.events = new eventBus()
     this.repeat = false
     this.paused = true
+    this.loading = false
     this.loaded = false
 
-    if (noEffects) {
-      this.disableEffects = true
-    }
+    this.disableEffects = noEffects
 
     this.useNative = useNativePlayer
+
+    this.savedBuffer = new ArrayBuffer(0)
 
     this.audioTime = 0
     this.playbackRate = 1
@@ -191,7 +196,7 @@ export default class LLCTAudio {
 
       this.context.decodeAudioData(
         data,
-        buffer => {
+        (buffer: ArrayBuffer) => {
           this.currentTime = 0
           this.loading = false
           this.loaded = true
@@ -278,10 +283,10 @@ export default class LLCTAudio {
     this.convolverSource = new LLCTAudioSource()
     this.convolverSource.load('/assets/llct-effects-1.mp3')
 
-    this.convolverSource.events.on('load', data => {
+    this.convolverSource.events.on('load', (data: ArrayBuffer) => {
       this.context.decodeAudioData(
         data,
-        buffer => {
+        (buffer: AudioBuffer) => {
           this.convolver.buffer = buffer
 
           if (this.source) {
@@ -322,7 +327,7 @@ export default class LLCTAudio {
 
     if (this.convolver) {
       this.convolver.disconnect()
-      this.convolver = null
+      delete this.convolver
     }
   }
 
@@ -335,7 +340,7 @@ export default class LLCTAudio {
 
     if (this.compressor) {
       this.compressor.disconnect()
-      this.compressor = null
+      delete this.compressor
     }
   }
 
@@ -437,7 +442,7 @@ export default class LLCTAudio {
     }
   }
 
-  createSource (buffer) {
+  createSource (buffer: AudioBuffer) {
     if (this.useNative) {
       throw new Error(
         'This feature is supported in the Audio API mode, not native player mode.'
@@ -469,7 +474,7 @@ export default class LLCTAudio {
     if (this.source) {
       this.source.stop()
       this.source.buffer = null
-      this.source = null
+      delete this.source
     }
   }
 
@@ -528,11 +533,11 @@ export default class LLCTAudio {
     }
   }
 
-  volumeDown (v) {
+  volumeDown (v: number) {
     this.volume = this.volume - v < 0 ? 0 : this.volume - v
   }
 
-  volumeUp (v) {
+  volumeUp (v: number) {
     this.volume = this.volume + v > 1 ? 1 : this.volume + v
   }
 
@@ -573,7 +578,7 @@ export default class LLCTAudio {
     this.repeat = !this.repeat
   }
 
-  setMetadata (title, artist, cover) {
+  setMetadata (title: string, artist: string, cover: string) {
     if (this.supportMedia) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: title,
@@ -583,7 +588,7 @@ export default class LLCTAudio {
     }
   }
 
-  play (skipFade?) {
+  play (skipFade?: boolean) {
     if (this.supportMedia) {
       navigator.mediaSession.playbackState = 'playing'
     }

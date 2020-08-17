@@ -19,11 +19,11 @@ export class LLCTPlaylist {
   readOnly: Boolean
   repeat: Boolean
 
-  constructor (title, readOnly) {
-    this.__pointer = null
+  constructor (title: string, readOnly: boolean) {
+    this.__pointer = -1
     this.lists = []
-    this.title = title || null
-    this.readOnly = readOnly || false
+    this.title = title
+    this.readOnly = readOnly
     this.repeat = Boolean(localStorage.getItem('LLCT.Audio.RepeatPlaylist'))
   }
 
@@ -31,7 +31,7 @@ export class LLCTPlaylist {
     this.lists.push(item)
   }
 
-  replaceWith(list: Array<LLCTMusic>) {
+  replaceWith (list: Array<LLCTMusic>) {
     this.lists = list
   }
 
@@ -59,7 +59,7 @@ export class LLCTPlaylist {
   }
 
   next () {
-    if (this.__pointer != null) {
+    if (this.__pointer !== -1) {
       this.__pointer =
         this.__pointer + 1 == this.lists.length ? 0 : this.__pointer + 1
       return this.lists[this.__pointer]
@@ -70,7 +70,7 @@ export class LLCTPlaylist {
   }
 
   prev () {
-    if (this.__pointer != null) {
+    if (this.__pointer !== -1) {
       this.__pointer =
         this.__pointer - 1 < 0 ? this.lists.length - 1 : this.__pointer - 1
       return this.lists[this.__pointer]
@@ -91,7 +91,7 @@ export class Holder {
     this.lists = []
   }
 
-  add (item, skipSave) {
+  add (item, skipSave: boolean) {
     let pos = this.lists.push(item)
     if (!skipSave) this.save()
     return pos

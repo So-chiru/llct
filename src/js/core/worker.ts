@@ -1,7 +1,7 @@
 import * as Toast from '../components/toast'
 import settings from './settings'
 
-export let showNotification
+export let showNotification: Promise<void>
 
 declare global {
   interface Window {
@@ -11,11 +11,11 @@ declare global {
 }
 
 window.getSize = () => {
-  navigator.serviceWorker.controller.postMessage('getSizes')
+  navigator.serviceWorker.controller!.postMessage('getSizes')
 }
 
 window.clearCaches = () => {
-  navigator.serviceWorker.controller.postMessage('clearCaches')
+  navigator.serviceWorker.controller!.postMessage('clearCaches')
 }
 
 export const register = () => {

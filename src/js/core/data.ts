@@ -2,9 +2,9 @@ import Vue from 'vue'
 import { store } from '../store/index'
 
 let lastCacheCheck = 0
-let keysCache
+let keysCache: readonly Request[]
 
-const findInKeys = (keys, id) => {
+const findInKeys = (keys: readonly Request[], id: string) => {
   let keyLength = keys.length
   for (var i = 0; i < keyLength; i++) {
     if (keys[i].url.indexOf('/call/' + id) > -1) {
@@ -15,7 +15,7 @@ const findInKeys = (keys, id) => {
   return false
 }
 
-const checkHas = id =>
+const checkHas = (id: string) =>
   new Promise((resolve, reject) => {
     if (keysCache && keysCache.length) {
       resolve(findInKeys(keysCache, id))
@@ -51,7 +51,7 @@ import * as Playlist from './playlist'
 import settings from './settings'
 
 // from https://github.com/trekhleb/javascript-algorithms/blob/master/src/algorithms/string/longest-common-substring/longestCommonSubstring.js
-const LCS = (string1, string2) => {
+const LCS = (string1: string, string2: string) => {
   const s1 = [...string1]
   const s2 = [...string2]
 
@@ -105,7 +105,7 @@ const LCS = (string1, string2) => {
   return longestSubstring
 }
 
-const chosung = str => {
+const chosung = (str: string) => {
   let arr = str.split('')
 
   let iter = arr.length
@@ -126,7 +126,7 @@ const host =
     : 'https://api.lovelivec.kr'
 
 const dataFetch = {
-  karaoke: id =>
+  karaoke: (id: string) =>
     new Promise((resolve, reject) =>
       fetch(`${host}/call/${id}`)
         .then(v => {
@@ -271,7 +271,7 @@ export let $llctDatas = new Vue({
           let item = searchStr[searchIter]
           let index = item.indexOf(keyword)
 
-          let itemChosung = false
+          let itemChosung: boolean | string = false
 
           if (/[ㄱ-ㅎ]/.test(keyword)) {
             itemChosung = chosung(item)
@@ -309,10 +309,13 @@ export let $llctDatas = new Vue({
     },
 
     karaoke (id, useImg) {
-      let metadata = this.getSong(id)
+      let metadata: object = this.getSong(id)! // TODO : object -> LLCTMusic
 
       return {
-        lyricsType: metadata.ka && !useImg ? dataFetch.karaoke(id) : 'img',
+        lyricsType:
+          useImg || (typeof metadata.ka !== 'undefined' && metadata.ka === 0)
+            ? 'img'
+            : dataFetch.karaoke(id),
         color: {
           text: metadata.bladeColor,
           hex: metadata.bladeColorHEX
@@ -320,7 +323,7 @@ export let $llctDatas = new Vue({
       }
     },
 
-    async dataHandle (name, pm, afterCb) {
+    async dataHandle (name: string, pm: Promise<object>, afterCb: Function) {
       try {
         let data = await pm
         await this.$store.commit(`data/${name}`, data)

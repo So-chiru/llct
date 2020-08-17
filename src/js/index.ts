@@ -28,11 +28,11 @@ declare global {
 
 window.audioFlags = new URLSearchParams(window.location.search).get('flags')
 
-// declare module 'vue/types/vue' {
-//   interface Vue {
-//     $llctDatas: llctDatas
-//   }
-// }
+declare module 'vue/types/vue' {
+  interface Vue {
+    $llctDatas: Vue
+  }
+}
 
 const Data = require('./core/data')
 
@@ -88,7 +88,7 @@ const init = () => {
     }, 0)
   }
 
-  var audio = new LLCTAudio(false, null, settings.get('useNativeMode') || false)
+  var audio = new LLCTAudio(false, false, settings.get('useNativeMode') || false)
   window.audio = audio
   window.audio.useFadeInOut = settings.get('useFadeInOut') || false
 
