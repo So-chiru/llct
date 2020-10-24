@@ -804,7 +804,8 @@
         "츠시마 요시코 (CV. 코바야시 아이카)",
         "쿠로사와 다이아 (CV. 코미야 아리사)",
         "마츠우라 카난 (CV. 스와 나나카)",
-        "오하라 마리 (CV. 스즈키 아이나)"
+        "오하라 마리 (CV. 스즈키 아이나)",
+        "CYaZALEA☆Kiss"
       ]
     },
     "collection": [
@@ -2601,6 +2602,53 @@
         "artist": 7,
         "karaoke": true,
         "notPerformed": true
+      },
+
+      {
+        "id": "10104",
+        "title": "シャゼリア☆キッス☆ダダンダーン",
+        "translated": "샤제리아☆키스☆다단단",
+        "tags": ["샤제리아키스"],
+        "artist": 21,
+        "karaoke": 1,
+        "notPerformed": 1
+      },
+      {
+        "id": "10105",
+        "title": "Fantastic Departure!",
+        "tags": ["판타스틱데파쳐", "판타스틱디파처"],
+        "short_kr": "판디파",
+        "karaoke": 1,
+        "notPerformed": 1
+      },
+      {
+        "id": "10106",
+        "title": "Aqours Pirates Desire",
+        "tags": ["아쿠아피렛츠데자이어", "아쿠아파이렛츠데자이어", "디자이어"],
+        "short_kr": "파이렛츠",
+        "karaoke": 1,
+        "notPerformed": 1
+      },
+      {
+        "id": "10107",
+        "title": "Dazzling White Town",
+        "tags": ["데즐링화이트타운"],
+        "artist": 1,
+        "notPerformed": 1
+      },
+      {
+        "id": "10108",
+        "title": "Lonely Snow Planet",
+        "tags": ["론리스노우플래닛"],
+        "artist": 1,
+        "notPerformed": 1
+      },
+      {
+        "id": "10109",
+        "title": "After The Rain",
+        "tags": ["애프터더레인"],
+        "artist": 1,
+        "notPerformed": 1
       }
     ]
   },
@@ -2816,6 +2864,101 @@
         "center": null,
         "artist": 12,
         "karaoke": true
+      },
+      {
+        "id": "20027",
+        "title": "無敵級*ビリーバー",
+        "translated": "무적급*빌리버",
+        "artist": 2,
+        "tags": ["무적빌리", "무테키규비리바"],
+        "karaoke": true
+      },
+      {
+        "id": "20028",
+        "title": "未来ハーモニー",
+        "translated": "미래 하모니",
+        "tags": ["미라이하모니"],
+        "karaoke": true
+      },
+      {
+        "id": "20029",
+        "title": "Say Good-Bye 涙",
+        "translated": "Say Good-Bye 눈물",
+        "artist": 1,
+        "tags": ["세이굿바이나미다", "세굿바"]
+      },
+      {
+        "id": "20030",
+        "title": "Margaret",
+        "tags": ["마가렛"],
+        "artist": 2
+      },
+      {
+        "id": "20031",
+        "title": "やがてひとつの物語",
+        "translated": "이윽고 하나의 이야기",
+        "artist": 3,
+        "tags": ["야가테히토츠노모노가타리"]
+      },
+      {
+        "id": "20032",
+        "title": "Fire Bird",
+        "artist": 4,
+        "tags": ["파이어버드"]
+      },
+      {
+        "id": "20033",
+        "title": "楽しいの天才",
+        "translated": "즐거움의 천재",
+        "artist": 5,
+        "tags": ["타노시미노텐사이", "즐거움천재"]
+      },
+      {
+        "id": "20034",
+        "title": "Märchen Star",
+        "artist": 6,
+        "tags": ["메르헨스타", "마셴스타", "마췐스타"]
+      },
+      {
+        "id": "20035",
+        "title": "LIKE IT! LOVE IT!",
+        "artist": 7,
+        "tags": ["라이킷러브잇"]
+      },
+      {
+        "id": "20036",
+        "title": "哀温ノ詩",
+        "translated": "애온의 시",
+        "artist": 8,
+        "tags": ["아이온노우타"]
+      },
+      {
+        "id": "20037",
+        "title": "アナログハート",
+        "translated": "아날로그 하트",
+        "artist": 9,
+        "tags": ["아나로그하토"]
+      },
+      {
+        "id": "20038",
+        "title": "決意の光",
+        "translated": "결의의 빛",
+        "artist": 13,
+        "tags": ["결의빛"]
+      },
+      {
+        "id": "20039",
+        "title": "Just Believe!!",
+        "artist": 0,
+        "tags": ["저스트빌리브", "저스트빌립"],
+        "sk": "저스트"
+      },
+      {
+        "id": "20040",
+        "title": "TOKIMEKI Runners (10인 버전)",
+        "artist": 0,
+        "tags": ["토키메키러너즈", "토키메키라너즈", "10인"],
+        "sk": "토메런"
       }
     ]
   }
