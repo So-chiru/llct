@@ -224,7 +224,7 @@ $(document).ready(() => {
   if (urlQueryParams('id') !== 'undefined') {
     window.songID = urlQueryParams('id')
 
-    wavesurfer.load('./data/' + songID + '/audio.mp3')
+    wavesurfer.load('https://api.lovelivec.kr/audio/' + songID)
     wavesurfer.play()
   }
 
@@ -235,7 +235,7 @@ $(document).ready(() => {
   window.lastSaved = JSON.stringify(KaraokeInstance.karaokeData.timeline)
 
   $.ajax({
-    url: './data/' + window.songID + '/karaoke.json',
+    url: 'https://api.lovelivec.kr/call/' + window.songID + '?force_text=1',
     success: d => {
       if (typeof d !== 'object') {
         return logger.error(
