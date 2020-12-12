@@ -176,7 +176,7 @@ const dataFetch = {
       fetch(`${host}/recommend`)
         .then(v => {
           if (!v.ok) {
-            reject(`${v.status} ${v.statusText}`)
+            reject(new Error(`${v.status} ${v.statusText}`))
           }
 
           return v.json()
@@ -334,6 +334,8 @@ export let $llctDatas = new Vue({
           })
         }
       } catch (e) {
+        console.log(e)
+        
         Toast.show(
           'API 서버에 연결할 수 없습니다. ' + e.message,
           'warning',

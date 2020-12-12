@@ -106,7 +106,7 @@ export default class LLCTAudio {
   context: any
   loading: boolean
 
-  savedBuffer: Object
+  savedBuffer: Object | ArrayBuffer
   audioElement?: HTMLAudioElement
 
   fadeTo: number
@@ -222,7 +222,8 @@ export default class LLCTAudio {
           this.events.run('playable')
         },
 
-        e => 'Error with decoding audio data' + e.err
+        e =>
+          'Error with decoding audio data' + (typeof e === 'object' ? e.err : e)
       )
     })
 
@@ -597,7 +598,7 @@ export default class LLCTAudio {
       if (this.useNative) {
         this.context.play()
       } else {
-        this.createSource(null)
+        this.createSource(this.savedBuffer)
         this.source.start(this.context.currentTime, this.audioTime)
 
         if (this.audioElement) {
@@ -647,9 +648,11 @@ export default class LLCTAudio {
       if (this.useNative) {
         this.context.pause()
       } else {
-        this.source.stop(
-          this.context.currentTime + (this.useFadeInOut ? 0.3 : 0)
-        )
+        if (this.source) {
+          this.source.stop(
+            this.context.currentTime + (this.useFadeInOut ? 0.3 : 0)
+          )
+        }
 
         if (this.audioElement) {
           this.audioElement.pause()
