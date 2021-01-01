@@ -1,4 +1,4 @@
-const CACHE = 'llct-cache-v20201212-2245'
+const CACHE = 'llct-cache-v20210101-2117'
 const DYNAMIC_CACHE = 'llct-cache-dynamic-v20201216-2047'
 const CACHE_DURATION = 6 * 3600
 const CACHE_URL = [
@@ -118,7 +118,7 @@ self.addEventListener('fetch', ev => {
 
     return fetch(ev.request)
       .then(res => {
-        if (!res) {
+        if (ev.request.method !== 'GET') {
           return res
         }
 
@@ -137,12 +137,12 @@ self.addEventListener('fetch', ev => {
         })
 
         const finalResponse = res.clone()
+
         return res.blob().then(body => {
           caches.open(DYNAMIC_CACHE).then(cache => {
             if (cacheResCreated.status == 0) {
               return false
             }
-
             cache.put(ev.request, new Response(body, cacheResCreated))
           })
 
