@@ -9,7 +9,7 @@ export const send = (id: string) => {
   if (!id) {
     return
   }
-  
+
   let allowStatistics = settings.get('sendStatistics')
 
   playedList.push(id)
@@ -27,7 +27,7 @@ export const send = (id: string) => {
         return v.text()
       })
       .then(v => {
-        if (v) {
+        if (v && v.indexOf('ERROR') === -1 && v.indexOf('Unexpected') === -1) {
           got = v
         }
       })
