@@ -201,6 +201,15 @@ const llctSettingDefault: Array<SettingsObject> = [
     func: () => {
       window.clearCaches()
     }
+  },
+  {
+    title: '사용 통계 전송',
+    desc:
+      '어느 노래를 재생했는지, 얼마나 있었는지에 대한 정보를 콜표 통계 서버로 전송합니다. 데이터는 익명화 처리되며 콜표 사이트 개선 용도로 사용됩니다.',
+    id: 'sendStatistics',
+    category: 2,
+    type: 'checkbox',
+    default: true
   }
 ]
 

@@ -39,6 +39,8 @@ const Data = require('./core/data')
 import * as worker from './core/worker'
 import settings from './core/settings'
 
+import * as statistics from './core/statistics'
+
 Vue.use(Vuex)
 
 import './components/main/app'
@@ -88,7 +90,11 @@ const init = () => {
     }, 0)
   }
 
-  var audio = new LLCTAudio(false, false, settings.get('useNativeMode') || false)
+  var audio = new LLCTAudio(
+    false,
+    false,
+    settings.get('useNativeMode') || false
+  )
   window.audio = audio
   window.audio.useFadeInOut = settings.get('useFadeInOut') || false
 
@@ -111,6 +117,8 @@ const init = () => {
         moveTab: boolean,
         playlistIndex: number
       ) {
+        statistics.send(id)
+
         this.$store.dispatch('player/play', {
           id,
           noURLState,
