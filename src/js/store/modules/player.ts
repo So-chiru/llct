@@ -2,6 +2,8 @@ import { LLCTTabPointer } from './tab'
 import settings from '../../core/settings'
 import { Module } from 'vuex'
 
+import * as statistics from '../../core/statistics'
+
 interface PlayerPlayObject {
   state: number
   ing: boolean
@@ -130,6 +132,8 @@ export const playerModule: Module<PlayerModuleState, null> = {
       } else {
         throw new Error('args.id or args.obj is not defined.')
       }
+
+      statistics.send(song.id)
 
       commit('play', song)
 

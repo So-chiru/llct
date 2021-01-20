@@ -117,8 +117,6 @@ const init = () => {
         moveTab: boolean,
         playlistIndex: number
       ) {
-        statistics.send(id)
-
         this.$store.dispatch('player/play', {
           id,
           noURLState,
