@@ -2,13 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "strict": true,
-    "target": "es2016",
-    "jsx": "preserve",
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "baseUrl": "./",
     "esModuleInterop": true,
     "sourceMap": true
-  },
-  "exclude": [
-    "node_modules",
-    "**/node_modules/*"
-  ]
+  }
 }
