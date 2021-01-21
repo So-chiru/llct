@@ -158,6 +158,9 @@ export default {
 
     play () {
       if (!this.playable) {
+        this.phase = 'fetching'
+        this.loading = true
+
         this.$store.commit('player/playOnLoad', true)
 
         return false
@@ -419,8 +422,8 @@ export default {
 
       this.useNativeMode = settings.get('useNativeMode')
       this.usePlayer = settings.get('usePlayer')
-      this.phase = 'fetching'
-      this.loading = true
+
+      this.$llctEvents.$emit('karaokeUpdate')
 
       window.audio.events.on(
         'play',
