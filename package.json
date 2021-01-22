@@ -23,8 +23,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint-fix",
-      "pre-push": "yarn build"
+      "pre-commit": "yarn lint-fix"
     }
   },
   "devDependencies": {
