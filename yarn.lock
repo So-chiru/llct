@@ -2139,6 +2139,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"concat-stream@npm:^1.4.7":
+  version: 1.6.2
+  resolution: "concat-stream@npm:1.6.2"
+  dependencies:
+    buffer-from: ^1.0.0
+    inherits: ^2.0.3
+    readable-stream: ^2.2.2
+    typedarray: ^0.0.6
+  checksum: 7a97b7a7d0938e36800bdb6f5caf938bac8c523a6ec15df1f2ac41d3785541be30a6671c9f4c0d1ac9609e6ab29dcab8f54d1c84035e3e3b7b24f9336da68ab0
+  languageName: node
+  linkType: hard
+
 "connect-history-api-fallback@npm:^1.6.0":
   version: 1.6.0
   resolution: "connect-history-api-fallback@npm:1.6.0"
@@ -2242,6 +2254,17 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 51f10036f5f1de781be98f4738d58b50c6d44f4f471069b8ab075b21605893ba1548654880f7310a29a732d6fc7cd481da6026169b9f0831cab0148a62fb397a
+  languageName: node
+  linkType: hard
+
+"cross-spawn@npm:^5.0.1":
+  version: 5.1.0
+  resolution: "cross-spawn@npm:5.1.0"
+  dependencies:
+    lru-cache: ^4.0.1
+    shebang-command: ^1.2.0
+    which: ^1.2.9
+  checksum: 96018c42a94a2f69e27c11688db638c343109e4eda5cc6586a83a1d2f102ef2ef4d184919593036748d386ddb67cc3e66658fefec85a4659958cde792f1a9ddc
   languageName: node
   linkType: hard
 
@@ -5595,6 +5618,7 @@ fsevents@~2.3.1:
     file-loader: ^6.2.0
     html-webpack-plugin: ^4.5.1
     mini-css-extract-plugin: ^1.3.4
+    pre-commit: ^1.2.2
     prettier: ^2.2.1
     prettier-config-standard: ^1.0.1
     prettier-standard: ^16.4.1
@@ -5778,7 +5802,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^4.1.5":
+"lru-cache@npm:^4.0.1, lru-cache@npm:^4.1.5":
   version: 4.1.5
   resolution: "lru-cache@npm:4.1.5"
   dependencies:
@@ -6613,6 +6637,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"os-shim@npm:^0.1.2":
+  version: 0.1.3
+  resolution: "os-shim@npm:0.1.3"
+  checksum: 47bee41866f6b8d758aec783297075c16f383c6f1cc8d2566aa0398948d9a8ffaa02642462482e3b3f38e1f8a5a628dafccf2dc81e8860eb8fcbaec0b20cf20d
+  languageName: node
+  linkType: hard
+
 "os-tmpdir@npm:~1.0.2":
   version: 1.0.2
   resolution: "os-tmpdir@npm:1.0.2"
@@ -7177,6 +7208,17 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"pre-commit@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "pre-commit@npm:1.2.2"
+  dependencies:
+    cross-spawn: ^5.0.1
+    spawn-sync: ^1.0.15
+    which: 1.2.x
+  checksum: 5e6964c5c46b43242bc05d3199013eccd65e03bdfc0e5c07fe546120894dbac253dabb5a40ab43cbc8ac1eeaa85438ede59565987442029e0166b8f8756f18d0
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -7606,7 +7648,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^2.0.1, readable-stream@npm:^2.0.2, readable-stream@npm:^2.0.6":
+"readable-stream@npm:^2.0.1, readable-stream@npm:^2.0.2, readable-stream@npm:^2.0.6, readable-stream@npm:^2.2.2":
   version: 2.3.7
   resolution: "readable-stream@npm:2.3.7"
   dependencies:
@@ -8531,6 +8573,16 @@ resolve@1.15.1:
   languageName: node
   linkType: hard
 
+"spawn-sync@npm:^1.0.15":
+  version: 1.0.15
+  resolution: "spawn-sync@npm:1.0.15"
+  dependencies:
+    concat-stream: ^1.4.7
+    os-shim: ^0.1.2
+  checksum: c31c84dd8b676d9aa87522572da4b6fa9ea9fcf97b8d29bc82be1eba7126836ccfd298831c7577b1866a3698567908b7de34f387b44b52dea972d28683045b64
+  languageName: node
+  linkType: hard
+
 "spdx-correct@npm:^3.0.0":
   version: 3.1.1
   resolution: "spdx-correct@npm:3.1.1"
@@ -9255,6 +9307,13 @@ resolve@1.15.1:
   languageName: node
   linkType: hard
 
+"typedarray@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "typedarray@npm:0.0.6"
+  checksum: c9ef0176aaf32593514c31e5c6edc1db970847aff6e1f0a0570a6ac0cc996335792f394c2fcec59cc76691d22a01888ea073a2f3c6930cfcf7c519addf4e2ad7
+  languageName: node
+  linkType: hard
+
 "typesafe-actions@npm:^5.1.0":
   version: 5.1.0
   resolution: "typesafe-actions@npm:5.1.0"
@@ -9794,6 +9853,17 @@ typescript@^4.1.3:
   version: 2.0.0
   resolution: "which-module@npm:2.0.0"
   checksum: 3d2107ab18c3c2a0ffa4f1a2a0a8862d0bb3fd5c72b10df9cbd75a15b496533bf4c4dc6fa65cefba6fdb8af7935ffb939ef4c8f2eb7835b03d1b93680e9101e9
+  languageName: node
+  linkType: hard
+
+"which@npm:1.2.x":
+  version: 1.2.14
+  resolution: "which@npm:1.2.14"
+  dependencies:
+    isexe: ^2.0.0
+  bin:
+    which: ./bin/which
+  checksum: 32063e46eb99731effb76b8f3ea85c31d69e41d3a25e16f9d8de8f376200183c4617c34a15f2151ae32e7e3f0baee229c1e3691246876687e713c25e80eaf786
   languageName: node
   linkType: hard
 
