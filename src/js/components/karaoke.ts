@@ -1,6 +1,10 @@
 import settings from '../core/settings'
 import LLCTAudio from '../core/audio'
 
+import smoothscroll from 'smoothscroll-polyfill';
+
+smoothscroll.polyfill();
+
 const KARA_WORD_SELECTOR = 'span.karaoke-word'
 const KARA_LINE_SELECTOR = '.karaoke-line'
 const P_ACTIVE = 'p[data-active="1"] '
@@ -443,21 +447,10 @@ export default {
     scrollSong (el) {
       if (this.lastScroll + 3000 > Date.now()) return true
 
-      let thisBound = this.$el.getBoundingClientRect().height
-      let offset = el.parentNode.offsetTop
-
-      this.scrollTop(
-        offset - (thisBound - (window.screen.height - thisBound) / 2) / 2
-      )
-    },
-
-    scrollToElem (el) {
-      let thisBound = this.$el.getBoundingClientRect().height
-      let offset = el.parentNode.parentNode.offsetTop
-
-      this.scrollTop(
-        offset - (thisBound - (window.screen.height - thisBound) / 2) / 2
-      )
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
     },
 
     jump (ev) {
