@@ -5,7 +5,6 @@
   },
   "extends": [
     "eslint:recommended",
-    "prettier-standard/eslint-file-base",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
@@ -31,16 +30,6 @@
     "camelcase": 2,
     "comma-dangle": "off",
     "semi": ["error", "never"],
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto",
-        "semi": false,
-        "useTab": false,
-        "singleQuote": true,
-        "jsxSingleQuote": true,
-        "trailingComma": "none"
-      }
-    ]
+    "react/react-in-jsx-scope": "off"
   }
 }
