@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = (_, argv) => {
-  let devMode = argv.mode === 'development'
+  const devMode = argv.mode === 'development'
 
   const options = {
     entry: path.resolve('src', 'index.tsx'),
@@ -22,7 +22,7 @@ module.exports = (_, argv) => {
     module: {
       rules: [
         {
-          test: /\.tsx$/,
+          test: /\.(ts|tsx)$/,
           use: {
             loader: 'ts-loader',
             options: {
@@ -74,7 +74,8 @@ module.exports = (_, argv) => {
     options.devServer = {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
-      port: 8080
+      port: 8080,
+      historyApiFallback: true
     }
   }
 

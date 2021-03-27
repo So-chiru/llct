@@ -4,6 +4,9 @@
     "strict": true,
     "target": "esnext",
     "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "baseUrl": "./",
     "esModuleInterop": true,
     "sourceMap": true
