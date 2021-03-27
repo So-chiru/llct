@@ -30,6 +30,7 @@
     "camelcase": 2,
     "comma-dangle": "off",
     "semi": ["error", "never"],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
   }
 }
