@@ -1,5 +1,4 @@
 interface ThemeReducerAction {
-  id: string
   type: string
   data: boolean
 }
@@ -10,7 +9,6 @@ interface ThemeReducerAction {
  */
 export const updateTheme = (useDarkMode: boolean): ThemeReducerAction => {
   return {
-    id: 'THEME',
     type: 'UPDATE_THEME',
     data: useDarkMode
   }
@@ -24,10 +22,6 @@ const ThemeReducer = (
   state = LLCTThemeDefault,
   action: ThemeReducerAction
 ): typeof LLCTThemeDefault => {
-  if (action.id !== 'THEME') {
-    return state
-  }
-
   switch (action.type) {
     case 'UPDATE_THEME':
       return {

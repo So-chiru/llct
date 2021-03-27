@@ -1,9 +1,13 @@
-import React from 'react'
+import { useRef } from 'react'
 
-const WavesComponent: React.FC = (...args) => {
-  console.log(args)
+const WavesComponent = () => {
+  const waveCanvas = useRef(null)
 
-  return <div className='waves'></div>
+  return (
+    <div className='waves'>
+      <canvas ref={waveCanvas}></canvas>
+    </div>
+  )
 }
 
 export default WavesComponent
