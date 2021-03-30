@@ -6,7 +6,10 @@ import { RootState } from '../../store/index'
 
 const HomeContainer = () => {
   // state를 가져오는 react-redux 함수: useSelector
-  const props = useSelector((state: RootState) => state.songs)
+  const songs = useSelector((state: RootState) => state.songs)
+
+  const currentTab = useSelector((state: RootState) => state.ui.currentTab)
+  const tabs = useSelector((state: RootState) => state.ui.tabs)
 
   // dispatch를 사용할 수 있게 해주는 함수: useDispatch
   const dispatch = useDispatch()
@@ -16,11 +19,18 @@ const HomeContainer = () => {
     dispatch({ type: 'LLCT_DATA_FETCH_REQUEST' })
   }
 
-  if (!props || !props.load) {
+  if (!songs || !songs.load) {
     fetchAPI()
   }
 
-  return <Home refresh={fetchAPI} songs={props}></Home>
+  return (
+    <Home
+      refresh={fetchAPI}
+      tabs={tabs}
+      currentTab={currentTab}
+      songs={songs}
+    ></Home>
+  )
 }
 
 export default HomeContainer

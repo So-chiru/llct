@@ -1,4 +1,5 @@
-@import "../../transitions.scss";
+@import '../../transitions.scss';
+@import './tabs.scss';
 
 .llct-icon {
   position: fixed;
@@ -10,11 +11,21 @@
   z-index: 100;
 
   user-select: none;
-  transition: 0.23s transform $easeOutExpo;
+
+  transform: perspective(100px) rotateY(30deg) translateX(-10px);
 
   &:hover {
     transform: scale(1.1);
   }
 
+  opacity: 0;
+
   cursor: pointer;
+
+  &.enter {
+    transition: 1s transform $easeOutExpo 0.21s,
+      0.23s opacity $easeOutExpo 0.17s;
+    transform: perspective(100px) rotateY(0deg);
+    opacity: 1;
+  }
 }
