@@ -8,7 +8,12 @@ interface WavesComponentState {
 }
 
 const getProperWindowSize = (width: number, height: number) => {
-  width = Math.min(1000, Math.max(300, width / 2))
+  if (width < 600) {
+    width = width / 1.2
+  } else {
+    width = Math.min(1000, Math.max(300, width / 2))
+  }
+
   height = Math.min(600, Math.max(200, height / 2.5))
 
   return [width, height]

@@ -8,14 +8,19 @@ interface WaveVertex {
 const easeOutExpo = (x: number) => {
   return x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
 }
-
 export default class Wave {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D
 
   size: number
 
+  /**
+   * 파도의 저항. 0으로 갈수록 빨라집니다.
+   */
+  resistance: number
+
   raf?: number
+  scaleToRaf?: number
 
   vertexes: WaveVertex[]
   scale: number
@@ -35,12 +40,16 @@ export default class Wave {
 
     this.size = 100
 
+    this.resistance = 1
+
     this.vertexes = []
     this.init()
 
     this.scale = 0
 
     this.resize(width, height)
+
+    this.scaleTo(3000, 1)
   }
 
   init () {
@@ -85,16 +94,46 @@ export default class Wave {
     }
   }
 
+  scaleTo (duration: number, to: number, started?: number, toDown?: boolean) {
+    if (this.scaleToRaf) {
+      cancelAnimationFrame(this.scaleToRaf)
+    }
+
+    // 바로 시작하는 경우 부자연스러우니 + 200밀리초 딜레이를 주고 시작
+    if (!started) {
+      started = performance.now() + 200
+    }
+
+    if (typeof toDown === 'undefined') {
+      toDown = this.scale - to > 0
+    }
+
+    // TODO : from 구현하기 (현재는 0, 1에서 시작함)
+
+    let value = easeOutExpo((performance.now() - started) / duration)
+
+    if (toDown) {
+      value = 1 - value
+    }
+
+    if (Math.abs(to - value) < 0.001) {
+      this.scale = to
+
+      return
+    }
+
+    this.scale = value
+
+    this.scaleToRaf = requestAnimationFrame(() =>
+      this.scaleTo.bind(this)(duration, to, started, toDown)
+    )
+  }
+
   render () {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-    if (this.scale !== 1) {
-      this.scale = Math.min(1, this.scale + 0.03)
-    }
-
-    const sin = Math.sin(Date.now() / 1000)
-    const cos = Math.cos(Date.now() / 1000)
-    const cosAbs = (Math.cos(Date.now() / 1000) + 1) / 2
+    const cos = Math.cos(Date.now() / (1000 * this.resistance))
+    const cosAbs = (cos + 1) / 2
 
     const sw = easeOutExpo(this.scale) * this.canvas.width
     const sh = easeOutExpo(this.scale) * this.canvas.height
@@ -106,38 +145,37 @@ export default class Wave {
     // const dots: number[][] = []
 
     for (let i = 0; i < this.vertexes.length; ++i) {
+      if (!this.vertexes[i + 1]) {
+        continue
+      }
+
       const x = sw * this.vertexes[i].x
       const y = sh * this.vertexes[i].y
 
-      if (this.vertexes[i + 1]) {
-        const targetX = sw * this.vertexes[i + 1].x
-        const targetY = sh * this.vertexes[i + 1].y + cos * 40
+      const targetX = sw * this.vertexes[i + 1].x
+      const targetY = sh * this.vertexes[i + 1].y + cos * 40
 
-        const middleX = (x + targetX) / 2
-        const middleY = (y + targetY) / 2
+      const middleX = (x + targetX) / 2
+      const middleY = (y + targetY) / 2
 
-        const firstPoint = [x + cosAbs * 20, y]
-        const secondPoint = [middleX - cos * 20, middleY + cos * 30]
+      const firstPoint = [x + cosAbs * 20, y]
+      const secondPoint = [middleX - cos * 20, middleY + cos * 30]
 
-        this.context.bezierCurveTo(
-          firstPoint[0],
-          firstPoint[1],
-          secondPoint[0],
-          secondPoint[1],
-          targetX - 50,
-          targetY
-        )
+      this.context.bezierCurveTo(
+        firstPoint[0],
+        firstPoint[1],
+        secondPoint[0],
+        secondPoint[1],
+        targetX - 50,
+        targetY
+      )
 
-        // dots.push([targetX - 20, targetY, ...firstPoint, ...secondPoint])
-      }
-
-      this.context.lineWidth = Math.max(10, 40 * cos)
-      this.context.strokeStyle = '#fff'
-      this.context.stroke()
+      // dots.push([targetX - 20, targetY, ...firstPoint, ...secondPoint])
     }
 
     this.context.lineTo(this.canvas.width, -40)
 
+    this.context.lineWidth = Math.max(10, cos * 40)
     this.context.strokeStyle = '#fff'
     this.context.stroke()
 
