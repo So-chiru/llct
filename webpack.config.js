@@ -11,7 +11,10 @@ module.exports = (_, argv) => {
   const options = {
     entry: path.resolve('src', 'index.tsx'),
     resolve: {
-      extensions: ['.tsx', '.ts', '.js']
+      extensions: ['.tsx', '.ts', '.js'],
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      }
     },
     output: {
       filename: '[name].[hash].js',

@@ -1,9 +1,13 @@
+import DashboardTab from '@/tabs/dashboard'
+
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 
-import WavesComponent from '../waves/component'
+import '@/styles/components/home/home.scss'
 
-import '../../styles/components/home/home.scss'
+const Pages: Record<string, JSX.Element> = {
+  dashboard: <DashboardTab></DashboardTab>
+}
 
 interface TabProps {
   tab: LLCTTab
@@ -12,12 +16,12 @@ interface TabListProps {
   currentTab: number
   tabs: LLCTTab[]
 }
-interface HomeProps extends TabListProps {
-  refresh: () => void
-  songs: LLCTSongDataV1
-}
 
 const TabComponent = ({ tab }: TabProps) => {
+  if (tab.page && Pages[tab.page]) {
+    return Pages[tab.page]
+  }
+
   return <div className='llct-tab'>{tab.name}</div>
 }
 
@@ -48,7 +52,7 @@ const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
   )
 }
 
-const HomeComponent = ({ refresh, tabs, currentTab }: HomeProps) => {
+const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
   const icon = useRef<HTMLImageElement>(null)
 
   if (icon.current && !icon.current.classList.contains('enter')) {
@@ -63,12 +67,10 @@ const HomeComponent = ({ refresh, tabs, currentTab }: HomeProps) => {
 
   return (
     <div className='llct-app'>
-      <div onClick={() => refresh()}>목록 새로고침</div>
       <img ref={icon} className='llct-icon' src='/images/logo/Icon.svg'></img>
-      <WavesComponent></WavesComponent>
       {tabs.map((tab, idx) => {
         if (idx === currentTab) {
-          return <TabComponent tab={tab}></TabComponent>
+          return <TabComponent key={idx} tab={tab}></TabComponent>
         }
       })}
       <TabListComponent currentTab={currentTab} tabs={tabs}></TabListComponent>

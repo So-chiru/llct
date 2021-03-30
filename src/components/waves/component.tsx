@@ -8,13 +8,11 @@ interface WavesComponentState {
 }
 
 const getProperWindowSize = (width: number, height: number) => {
-  if (width < 600) {
-    width = width / 1.2
-  } else {
-    width = Math.min(1000, Math.max(300, width / 2))
+  if (width > 800) {
+    width = Math.min(1000, Math.max(300, width / 1.5))
   }
 
-  height = Math.min(600, Math.max(200, height / 2.5))
+  height = Math.min(600, Math.max(150, height / 3))
 
   return [width, height]
 }
@@ -24,32 +22,34 @@ const WavesComponent = () => {
 
   const [state, setState] = useState({} as WavesComponentState)
 
-  if (waveCanvas.current && !state.wave) {
-    const properSize = getProperWindowSize(
-      window.innerWidth,
-      window.innerHeight
-    )
-
-    const wave = new Wave(waveCanvas.current, properSize[0], properSize[1])
-
-    window.addEventListener('resize', () => {
+  requestAnimationFrame(() => {
+    if (waveCanvas.current && !state.wave) {
       const properSize = getProperWindowSize(
         window.innerWidth,
         window.innerHeight
       )
 
-      wave.resize(properSize[0], properSize[1])
-    })
+      const wave = new Wave(waveCanvas.current, properSize[0], properSize[1])
 
-    setState(prevState => {
-      return {
-        ...prevState,
-        wave
-      }
-    })
+      window.addEventListener('resize', () => {
+        const properSize = getProperWindowSize(
+          window.innerWidth,
+          window.innerHeight
+        )
 
-    wave.start()
-  }
+        wave.resize(properSize[0], properSize[1])
+      })
+
+      setState(prevState => {
+        return {
+          ...prevState,
+          wave
+        }
+      })
+
+      wave.start()
+    }
+  })
 
   return (
     <div className='waves'>

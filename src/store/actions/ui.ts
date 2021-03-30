@@ -26,16 +26,24 @@ export const updateTab = (tabNumber: number): UIReducerAction => {
 
 const Tabs: LLCTTab[] = [
   {
-    name: '대시보드'
+    name: '대시보드',
+    page: 'dashboard'
   },
   {
-    name: '모든 곡'
+    name: '모든 곡',
+    page: 'songs'
   },
   {
-    name: '플레이리스트'
+    name: '플레이리스트',
+    page: 'playlists'
   },
   {
-    name: '최근 재생'
+    name: '최근 재생 목록',
+    page: 'recent'
+  },
+  {
+    name: '설정',
+    page: 'settings'
   }
 ]
 

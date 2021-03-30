@@ -2,7 +2,7 @@ import Home from './component'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { RootState } from '../../store/index'
+import { RootState } from '@/store/index'
 
 const HomeContainer = () => {
   // state를 가져오는 react-redux 함수: useSelector
@@ -23,14 +23,7 @@ const HomeContainer = () => {
     fetchAPI()
   }
 
-  return (
-    <Home
-      refresh={fetchAPI}
-      tabs={tabs}
-      currentTab={currentTab}
-      songs={songs}
-    ></Home>
-  )
+  return <Home tabs={tabs} currentTab={currentTab}></Home>
 }
 
 export default HomeContainer
