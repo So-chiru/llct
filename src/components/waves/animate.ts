@@ -175,7 +175,7 @@ export default class Wave {
 
     this.context.lineTo(this.canvas.width, -40)
 
-    this.context.lineWidth = Math.max(10, cos * 40)
+    this.context.lineWidth = 3 + cosAbs * 30
     this.context.strokeStyle = '#fff'
     this.context.stroke()
 
