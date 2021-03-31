@@ -1,0 +1,98 @@
+$transition: 0.5s transform cubic-bezier(0.19, 1, 0.22, 1) 0.23s,
+  opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0.23s;
+
+$transitionNoDelay: 0.5s transform cubic-bezier(0.19, 1, 0.22, 1),
+  opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+
+.llct-animate {
+  &-appear {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: $transition;
+  }
+
+  &-appear-active {
+    opacity: 1;
+    transform: translateX(0px);
+    transition: $transition;
+  }
+
+  &-appear-done {
+    opacity: 1;
+    transform: translateX(0px);
+    transition: $transition;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: $transition;
+  }
+}
+
+.llct-tab-animate {
+  &-appear {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: $transition;
+  }
+
+  &-appear-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: $transition;
+  }
+
+  &-appear-done {
+    opacity: 1;
+    transform: scale(1);
+    transition: $transition;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: scale(1);
+    transition: $transition;
+  }
+}
+
+.llct-tab-animate-nodelay {
+  &-appear {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: $transitionNoDelay;
+  }
+
+  &-appear-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: $transitionNoDelay;
+  }
+
+  &-appear-done {
+    opacity: 1;
+    transform: scale(1);
+    transition: $transitionNoDelay;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: scale(1);
+    transition: $transitionNoDelay;
+  }
+}
