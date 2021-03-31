@@ -59,6 +59,9 @@ const ThemeReducer = (
 ): typeof LLCTThemeDefault => {
   switch (action.type) {
     case 'UPDATE_THEME':
+      document.documentElement.classList[
+        (action.data as boolean) ? 'add' : 'remove'
+      ]('llct-dark')
       return Object.assign(
         {},
         {

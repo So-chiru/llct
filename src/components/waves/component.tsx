@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Wave from './animate'
 
 import '../../styles/components/waves/wave.scss'
+import { RootState } from '@/store'
 
 interface WavesComponentState {
   wave?: Wave
@@ -21,6 +23,7 @@ const WavesComponent = () => {
   const waveCanvas = useRef<HTMLCanvasElement>(null)
 
   const [state, setState] = useState({} as WavesComponentState)
+  const darkTheme = useSelector((state: RootState) => state.ui.useDarkMode)
 
   requestAnimationFrame(() => {
     if (waveCanvas.current && !state.wave) {
@@ -48,6 +51,10 @@ const WavesComponent = () => {
       })
 
       wave.start()
+    }
+
+    if (state.wave) {
+      state.wave.updateTheme(darkTheme)
     }
   })
 

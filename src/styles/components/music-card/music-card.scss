@@ -3,6 +3,17 @@
 
 $min-card: 170px;
 
+.llct-dark .music-card {
+  background: $dark-semi-accent;
+
+  .content {
+    img,
+    &::before {
+      background: darken($dark-semi-accent, 5);
+    }
+  }
+}
+
 .music-card {
   position: relative;
   min-width: $min-card;

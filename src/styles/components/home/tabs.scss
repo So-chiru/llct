@@ -61,6 +61,20 @@
   }
 }
 
+.llct-dark .llct-tab-button {
+  color: $dark-semi-accent;
+
+  &[data-current='false'] {
+    &:hover {
+      color: lighten($dark-accent, 10);
+    }
+  }
+
+  &::before {
+    background: $dark-semi-accent;
+  }
+}
+
 .llct-tab-button {
   position: relative;
   font-weight: bold;

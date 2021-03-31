@@ -25,6 +25,8 @@ export default class Wave {
   vertexes: WaveVertex[]
   scale: number
 
+  backgroundColor: string
+
   constructor (element: HTMLCanvasElement, width: number, height: number) {
     this.canvas = element
 
@@ -37,7 +39,6 @@ export default class Wave {
     }
 
     this.context = context
-
     this.size = 100
 
     this.resistance = 1
@@ -46,10 +47,17 @@ export default class Wave {
     this.init()
 
     this.scale = 0
-
     this.resize(width, height)
 
+    this.backgroundColor = colors.backgroundSemiAccent
+
     this.scaleTo(3000, 1)
+  }
+
+  updateTheme (darkTheme: boolean) {
+    this.backgroundColor = darkTheme
+      ? colors.darkBackgroundSemiAccent
+      : colors.backgroundSemiAccent
   }
 
   init () {
@@ -176,10 +184,10 @@ export default class Wave {
     this.context.lineTo(this.canvas.width, -40)
 
     this.context.lineWidth = 3 + cosAbs * 30
-    this.context.strokeStyle = '#fff'
+    this.context.strokeStyle = '#ffffff77'
     this.context.stroke()
 
-    this.context.fillStyle = colors.backgroundSemiAccent
+    this.context.fillStyle = this.backgroundColor
     this.context.fill()
 
     // dots.forEach(v => {
