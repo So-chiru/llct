@@ -100,6 +100,7 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
             <CSSTransition
               in
               appear={true}
+              key={idx}
               addEndListener={(node, done) => {
                 node.addEventListener(
                   'transitionend',
@@ -112,7 +113,7 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
               }}
               classNames={`llct-tab-animate${firstAnimate ? '' : '-nodelay'}`}
             >
-              <TabComponent key={idx} tab={tab}></TabComponent>
+              <TabComponent tab={tab}></TabComponent>
             </CSSTransition>
           )
         }

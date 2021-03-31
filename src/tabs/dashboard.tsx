@@ -8,10 +8,9 @@ const DashboardTab = () => {
   return (
     <div className='llct-tab'>
       <div className='card-lists'>
-        <MusicCard id='00001'></MusicCard>
-        <MusicCard id='00001'></MusicCard>
-        <MusicCard id='00001'></MusicCard>
-        <MusicCard id='00001'></MusicCard>
+        {[...new Array(32)].map((v, i) => {
+          return <MusicCard key={i} id='00001'></MusicCard>
+        })}
       </div>
     </div>
   )
