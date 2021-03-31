@@ -25,7 +25,7 @@ const TabComponent = ({ tab }: TabProps) => {
     return Pages[tab.page]
   }
 
-  return <div className='llct-tab'>{tab.name}</div>
+  return <div className='llct-tab'>{tab.name} 페이지의 내용은 없습니다.</div>
 }
 
 const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
