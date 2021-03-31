@@ -46,8 +46,6 @@ const generateRandomCard = (): MusicMetadata => {
 const MusicCardContainer = ({ id, music }: MusicCardContainerProps) => {
   const data = useSelector((state: RootState) => state.songs)
 
-  console.log(data)
-
   let selectedMetadata: MusicMetadata
 
   if (music) {

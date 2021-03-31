@@ -47,8 +47,8 @@
   }
 
   @media screen and (max-width: $wave-narrow) {
+    position: absolute;
     display: flex;
-
     max-width: 90%;
   }
 

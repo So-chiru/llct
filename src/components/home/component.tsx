@@ -93,6 +93,8 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
 
   const [firstAnimate, setFirstAnimate] = useState(true)
 
+  // TODO : TabListComponent 마우스로 드래그 했을 때 스크롤될 수 있게 TouchHandler 클래스 구현
+
   return (
     <div className='llct-app'>
       <img ref={icon} className='llct-icon' src='/images/logo/Icon.svg'></img>
@@ -120,6 +122,7 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
           )
         }
       })}
+
       <TabListComponent currentTab={currentTab} tabs={tabs}></TabListComponent>
     </div>
   )

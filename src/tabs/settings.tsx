@@ -19,14 +19,16 @@ const SettingsTab = () => {
 
   return (
     <div className='llct-tab'>
-      <div className='llct-settings-row'>
-        <label htmlFor='use-dark-theme'>다크 테마 사용: </label>
-        <input
-          type='checkbox'
-          id='use-dark-theme'
-          checked={darkTheme}
-          onClick={updateThemeButton}
-        />
+      <div className='llct-settings'>
+        <div className='llct-settings-row'>
+          <label htmlFor='use-dark-theme'>다크 테마 사용: </label>
+          <input
+            type='checkbox'
+            id='use-dark-theme'
+            checked={darkTheme}
+            onClick={updateThemeButton}
+          />
+        </div>
       </div>
     </div>
   )
