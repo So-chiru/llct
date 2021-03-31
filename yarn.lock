@@ -487,6 +487,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-lazyload@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@types/react-lazyload@npm:3.1.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: 477d28d7715331799aa61a28de4aa82ceed5ce2694a2bda4d4ce865ca5eb09267b8bd1609bf64fd5b1b6df37f8c64c95433d3b1c2909ba0888834007e692190d
+  languageName: node
+  linkType: hard
+
 "@types/react-redux@npm:^7.1.15":
   version: 7.1.15
   resolution: "@types/react-redux@npm:7.1.15"
@@ -4912,6 +4921,7 @@ fsevents@~2.3.1:
     "@types/node": ^14.14.22
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
+    "@types/react-lazyload": ^3.1.0
     "@types/react-redux": ^7.1.15
     "@types/react-router-dom": ^5.1.7
     "@types/react-transition-group": ^4.4.1
@@ -4932,10 +4942,12 @@ fsevents@~2.3.1:
     html-webpack-plugin: ^4.5.1
     husky: ^4.3.8
     mini-css-extract-plugin: ^1.3.4
+    prop-types: ^15.7.2
     react: ^17.0.1
     react-dom: ^17.0.1
     react-hot-loader: ^4.13.0
     react-is: ^17.0.1
+    react-lazyload: ^3.2.0
     react-redux: ^7.2.2
     react-router-dom: ^5.2.0
     react-transition-group: ^4.4.1
@@ -6511,6 +6523,16 @@ fsevents@~2.3.1:
   version: 17.0.1
   resolution: "react-is@npm:17.0.1"
   checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
+  languageName: node
+  linkType: hard
+
+"react-lazyload@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-lazyload@npm:3.2.0"
+  peerDependencies:
+    react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 1fd6bace18c629c3342bcd1a11d525012ac3c79cf454dd183b33357a3aea076962f4759ba75a5266be3857c3284c6d5968ab577a2d924f041487ef57a9535a56
   languageName: node
   linkType: hard
 

@@ -1,5 +1,6 @@
 import '@/styles/components/music-card/music-card.scss'
 import { useState } from 'react'
+import LazyLoad from 'react-lazyload'
 
 interface MusicCardProps {
   music: MusicMetadata
@@ -29,11 +30,13 @@ const MusicCardComponent = ({ music, skeleton }: MusicCardProps) => {
         <span className='artist'>{music.artist}</span>
       </div>
       <div className='content' data-state={loadState}>
-        <img
-          src={music.image}
-          onLoad={loadHandler}
-          onError={loadErrorHandler}
-        ></img>
+        <LazyLoad height={100}>
+          <img
+            src={music.image}
+            onLoad={loadHandler}
+            onError={loadErrorHandler}
+          ></img>
+        </LazyLoad>
         <span className='title'>{music.title}</span>
       </div>
     </div>
