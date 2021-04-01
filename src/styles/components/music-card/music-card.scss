@@ -66,6 +66,13 @@ $min-card: 170px;
         margin-top: auto;
       }
 
+      .lazyload-wrapper {
+        position: absolute;
+        display: flex;
+        right: 0;
+        bottom: 0;
+      }
+
       &::before {
         right: 0;
         bottom: 0;
