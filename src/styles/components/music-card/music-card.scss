@@ -4,7 +4,7 @@
 $min-card: 170px;
 
 .llct-dark .music-card {
-  background: $dark-semi-accent;
+  background: darken($dark-semi-accent, 10);
 
   .content {
     img,

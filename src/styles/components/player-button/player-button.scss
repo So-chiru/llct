@@ -1,0 +1,23 @@
+@import '../../colors.scss';
+
+.llct-dark .llct-player-button {
+  background: $dark-semi-accent;
+
+  box-shadow: 0px 0px 16px $dark-background;
+}
+
+.llct-player-button {
+  position: fixed;
+  display: flex;
+  right: 5vw;
+  bottom: 5vh;
+
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  background: $semi-accent;
+
+  box-shadow: 0px 0px 16px $background;
+}

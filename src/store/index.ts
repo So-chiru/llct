@@ -4,6 +4,7 @@ import { all } from 'redux-saga/effects'
 
 import UIReducer from './actions/ui'
 import SongsReducer from './actions/songs'
+import PlayingReducer from './actions/playing'
 
 import { fetchAPIDataSaga } from './sagas'
 
@@ -12,6 +13,7 @@ const sagaMiddleware = createSagaMiddleware()
 // 최상위 Reducer. 하위 Reducer들을 여기다 집어 넣습니다.
 const reducers = combineReducers({
   songs: SongsReducer,
+  playing: PlayingReducer,
   ui: UIReducer
 })
 

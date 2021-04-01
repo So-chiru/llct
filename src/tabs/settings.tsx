@@ -25,7 +25,7 @@ const SettingsTab = () => {
           <input
             type='checkbox'
             id='use-dark-theme'
-            checked={darkTheme}
+            defaultChecked={darkTheme}
             onClick={updateThemeButton}
           />
         </div>

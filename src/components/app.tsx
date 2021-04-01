@@ -10,6 +10,7 @@ import { RootState } from '@/store/index'
 
 import WavesContainer from './waves/container'
 import HomeContainer from './home/container'
+import PlayerButtonContainer from './player-button/container'
 
 const App = () => {
   const useDark = useSelector((state: RootState) => state.ui.useDarkMode)
@@ -19,6 +20,7 @@ const App = () => {
       <GlobalStyles></GlobalStyles>
       <WavesContainer></WavesContainer>
       <HomeContainer></HomeContainer>
+      <PlayerButtonContainer></PlayerButtonContainer>
       <Switch>
         <Route path='/settings'></Route>
         <Route path='/player'></Route>

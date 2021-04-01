@@ -47,21 +47,29 @@ const Tabs: LLCTTab[] = [
   }
 ]
 
+const addThemeClassToHTML = (bool: boolean) => {
+  document.documentElement.classList[bool ? 'add' : 'remove']('llct-dark')
+}
+
 const LLCTThemeDefault = {
-  useDarkMode: false,
+  useDarkMode: localStorage.getItem('@llct/ui.useDarkMode') === 'true' || false,
   currentTab: 0,
   tabs: Tabs
 }
 
-const ThemeReducer = (
+addThemeClassToHTML(LLCTThemeDefault.useDarkMode)
+
+const UIReducer = (
   state = LLCTThemeDefault,
   action: UIReducerAction
 ): typeof LLCTThemeDefault => {
   switch (action.type) {
     case 'UPDATE_THEME':
-      document.documentElement.classList[
-        (action.data as boolean) ? 'add' : 'remove'
-      ]('llct-dark')
+      addThemeClassToHTML(action.data as boolean)
+
+      // TODO : 설정 저장을 한 곳에서 관리하도록 만들기
+      localStorage.setItem('@llct/ui.useDarkMode', action.data as string)
+
       return Object.assign(
         {},
         {
@@ -82,4 +90,4 @@ const ThemeReducer = (
   }
 }
 
-export default ThemeReducer
+export default UIReducer
