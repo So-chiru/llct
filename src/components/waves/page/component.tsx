@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Wave from './animate'
+import PageWave from './animate'
 
-import '../../styles/components/waves/wave.scss'
+import '@/styles/components/waves/wave.scss'
 import { RootState } from '@/store'
 
-interface WavesComponentState {
-  wave?: Wave
+interface PageWavesComponentState {
+  wave?: PageWave
 }
 
 const getProperWindowSize = (width: number, height: number) => {
@@ -22,7 +22,7 @@ const getProperWindowSize = (width: number, height: number) => {
 const WavesComponent = () => {
   const waveCanvas = useRef<HTMLCanvasElement>(null)
 
-  const [state, setState] = useState({} as WavesComponentState)
+  const [state, setState] = useState({} as PageWavesComponentState)
   const darkTheme = useSelector((state: RootState) => state.ui.useDarkMode)
 
   requestAnimationFrame(() => {
@@ -32,7 +32,11 @@ const WavesComponent = () => {
         window.innerHeight
       )
 
-      const wave = new Wave(waveCanvas.current, properSize[0], properSize[1])
+      const wave = new PageWave(
+        waveCanvas.current,
+        properSize[0],
+        properSize[1]
+      )
 
       window.addEventListener('resize', () => {
         const properSize = getProperWindowSize(

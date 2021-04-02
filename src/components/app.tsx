@@ -8,7 +8,7 @@ import { GlobalStyles } from '@/styles/global'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/index'
 
-import WavesContainer from './waves/container'
+import WavesContainer from './waves/page/container'
 import HomeContainer from './home/container'
 import PlayerButtonContainer from './player-button/container'
 

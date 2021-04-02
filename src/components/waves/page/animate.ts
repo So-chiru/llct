@@ -1,4 +1,4 @@
-import * as colors from '../../styles/colors'
+import * as colors from '@/styles/colors'
 
 interface WaveVertex {
   x: number
