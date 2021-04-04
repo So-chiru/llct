@@ -129,11 +129,11 @@ $min-card: 170px;
     margin: 15px;
 
     color: $accent;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: normal;
 
     @media screen and (max-width: $wave-narrow) {
-      font-size: 20px;
+      font-size: 18px;
       margin: 12px;
     }
   }

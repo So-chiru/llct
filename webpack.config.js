@@ -1,9 +1,12 @@
+require('dotenv').config()
+
 const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { DefinePlugin } = require('webpack')
 
 module.exports = (_, argv) => {
   const devMode = argv.mode === 'development'
@@ -47,6 +50,9 @@ module.exports = (_, argv) => {
       ]
     },
     plugins: [
+      new DefinePlugin({
+        'process.env.API_SERVER': JSON.stringify(process.env.API_SERVER)
+      }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './public/index.html',

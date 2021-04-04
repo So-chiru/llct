@@ -35,7 +35,7 @@ const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
 
   const tabUpdateHandler = (id: number) => {
     dispatch({
-      type: 'UPDATE_TAB',
+      type: '@llct/tab/update',
       data: id
     })
   }

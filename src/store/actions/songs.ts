@@ -15,16 +15,16 @@ const SongsReducer = (
   action: SongsReducerAction
 ): typeof SongsDefault => {
   switch (action.type) {
-    case 'LLCT_DATA_FETCH_REQUEST':
+    case '@llct/api_lists/request':
       return Object.assign({}, state, {
         load: true
       })
-    case 'LLCT_DATA_FETCH_SUCCEED':
+    case '@llct/api_lists/success':
       return Object.assign({}, state, {
         load: true,
         items: action.data
       })
-    case 'LLCT_DATA_FETCH_FAILED':
+    case '@llct/api_lists/failed':
       return Object.assign({}, state, {
         load: true,
         error: action.error

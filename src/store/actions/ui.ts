@@ -9,7 +9,7 @@ interface UIReducerAction {
  */
 export const updateTheme = (useDarkMode: boolean): UIReducerAction => {
   return {
-    type: 'UPDATE_THEME',
+    type: '@llct/theme/update',
     data: useDarkMode
   }
 }
@@ -19,7 +19,7 @@ export const updateTheme = (useDarkMode: boolean): UIReducerAction => {
  */
 export const updateTab = (tabNumber: number): UIReducerAction => {
   return {
-    type: 'UPDATE_TAB',
+    type: '@llct/tab/update',
     data: tabNumber
   }
 }
@@ -64,8 +64,8 @@ const UIReducer = (
   action: UIReducerAction
 ): typeof LLCTThemeDefault => {
   switch (action.type) {
-    case 'UPDATE_THEME':
-      addThemeClassToHTML(action.data as boolean)
+    case '@llct/theme/update':
+      addThemeClassToHTML (action.data as boolean)
 
       // TODO : 설정 저장을 한 곳에서 관리하도록 만들기
       localStorage.setItem('@llct/ui.useDarkMode', action.data as string)
@@ -77,7 +77,7 @@ const UIReducer = (
           useDarkMode: action.data as boolean
         }
       )
-    case 'UPDATE_TAB':
+    case '@llct/tab/update':
       return Object.assign(
         {},
         {

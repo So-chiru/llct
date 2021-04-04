@@ -52,7 +52,7 @@ class PlayerWave {
   render () {
     this.clear()
 
-    const sin = Math.sin((Date.now() / 1000))
+    const sin = Math.sin(Date.now() / 1000)
     const cos = Math.cos(Date.now() / 1000)
 
     const points = [
@@ -76,8 +76,6 @@ class PlayerWave {
           (points[i - 1][0] + points[i][0]) / 2,
           (points[i - 1][1] + points[i][1]) / 2
         )
-
-        // this.context.lineTo(points[i + 1][0], points[i + 1][1])
       } else {
         this.context.lineTo(points[i][0], points[i][1])
       }
