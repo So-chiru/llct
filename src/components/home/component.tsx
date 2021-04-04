@@ -1,5 +1,6 @@
 import DashboardTab from '@/tabs/dashboard'
 import SettingsTab from '@/tabs/settings'
+import SongsTab from '@/tabs/songs'
 
 import { CSSTransition } from 'react-transition-group'
 
@@ -11,7 +12,8 @@ import '@/styles/animate.scss'
 
 const Pages: Record<string, JSX.Element> = {
   dashboard: <DashboardTab></DashboardTab>,
-  settings: <SettingsTab></SettingsTab>
+  settings: <SettingsTab></SettingsTab>,
+  songs: <SongsTab></SongsTab>
 }
 
 interface TabProps {

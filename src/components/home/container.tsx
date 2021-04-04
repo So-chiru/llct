@@ -23,6 +23,8 @@ const HomeContainer = () => {
     fetchAPI()
   }
 
+  console.log(songs)
+
   return <Home tabs={tabs} currentTab={currentTab}></Home>
 }
 

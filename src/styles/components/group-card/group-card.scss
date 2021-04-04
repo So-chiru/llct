@@ -1,0 +1,32 @@
+@import '../../colors.scss';
+
+.group-card {
+  display: flex;
+  min-width: 200px;
+  min-height: 50px;
+  border-radius: 16px;
+  padding: 3px 20px;
+
+  background-color: var(--group-color-light, $semi-accent);
+  color: var(--group-color, $accent);
+  border: 1px solid var(--group-color, $accent);
+  cursor: pointer;
+  font-weight: bold;
+
+  transition: background 0.23s cubic-bezier(0.19, 1, 0.22, 1),
+    color 0.23s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.23s cubic-bezier(0.19, 1, 0.22, 1);
+
+  .text {
+    margin: auto;
+  }
+
+  &[data-active='false']:hover {
+    transform: scale(0.95);
+  }
+
+  &[data-active='true'] {
+    background-color: var(--group-color, darken($semi-accent, 10));
+    color: var(--group-color-light, $accent);
+  }
+}

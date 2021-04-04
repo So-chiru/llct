@@ -1,4 +1,9 @@
-const SongsDefault = {
+interface SongsTypes {
+  load: boolean
+  items: LLCTSongDataV2
+}
+
+const SongsDefault: SongsTypes = {
   load: false,
   items: {}
 }
@@ -13,7 +18,7 @@ interface SongsReducerAction {
 const SongsReducer = (
   state = SongsDefault,
   action: SongsReducerAction
-): typeof SongsDefault => {
+): SongsTypes => {
   switch (action.type) {
     case '@llct/api_lists/request':
       return Object.assign({}, state, {

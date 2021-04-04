@@ -6,9 +6,9 @@
   left: 20vw;
   top: 30vh;
 
-  @media screen and (max-width: $wave-narrow) {
-    display: flex;
+  display: block;
 
+  @media screen and (max-width: $wave-narrow) {
     left: 2vw;
     top: 40vh;
     width: 95%;
