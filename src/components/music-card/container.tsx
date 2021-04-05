@@ -5,57 +5,34 @@ import { useSelector } from 'react-redux'
 
 import MusicCardComponent from './component'
 
+import * as songs from '@/utils/songs'
 interface MusicCardContainerProps {
   id?: string
   music?: MusicMetadata
+  skeleton?: boolean
 }
 
-const explaner = [
-  '화난',
-  '무심한',
-  '시크한',
-  '재미 없는',
-  '아픈',
-  '심심한',
-  '열중하는',
-  '잔잔한',
-  '신난',
-  '기분 좋은',
-  '시큼한',
-  '무지한',
-  '생각 없는'
-]
-const namer = ['누군가', '사과', '바나나', '교수', '조교', '친구']
-
-const generateRandomText = (): string => {
-  return `${explaner[~~(Math.random() * explaner.length)]} ${
-    namer[~~(Math.random() * namer.length)]
-  }`
-}
-
-const generateRandomCard = (): MusicMetadata => {
-  const random = Math.random() * 1000000
-
-  return {
-    title: generateRandomText(),
-    artist: '아티스트',
-    image: `https://picsum.photos/seed/${random}/200`
+const MusicCardContainer = ({
+  id,
+  music,
+  skeleton
+}: MusicCardContainerProps) => {
+  if (skeleton) {
+    return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
-}
 
-const MusicCardContainer = ({ id, music }: MusicCardContainerProps) => {
   const data = useSelector((state: RootState) => state.songs)
 
-  let selectedMetadata: MusicMetadata
+  let selectedMetadata: MusicMetadata | null = null
 
   if (music) {
     selectedMetadata = music
-  } else if (id) {
-    // TODO : ID 값으로 노래 찾기
-    selectedMetadata = generateRandomCard()
+  } else if (data.items && id) {
+    selectedMetadata = songs.searchById(id, data.items)
+  }
 
-  } else {
-    selectedMetadata = generateRandomCard()
+  if (!selectedMetadata) {
+    return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
 
   return <MusicCardComponent music={selectedMetadata}></MusicCardComponent>

@@ -18,6 +18,6 @@ interface LLCTSongDataV2 {
 interface MusicMetadata {
   title: string
   'title.ko'?: string
-  artist: string | ArtistGroup
+  artist: string | number | ArtistGroup
   image: string
 }

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { lighten } from '@/styles/colors'
 import '@/styles/components/group-card/group-card.scss'
 

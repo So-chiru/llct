@@ -12,7 +12,7 @@ const SongsTab = () => {
   const songs = useSelector((state: RootState) => state.songs)
   const [active, setActive] = useState<number>(1)
 
-  if (!songs.items.groups || !songs.items.songs) {
+  if (!songs.items || !songs.items.groups || !songs.items.songs) {
     return <div className='llct-tab'></div>
   }
 

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import LazyLoad from 'react-lazyload'
 
 interface MusicCardProps {
-  music: MusicMetadata
+  music?: MusicMetadata
   skeleton?: boolean
 }
 
@@ -24,7 +24,9 @@ const MusicCardComponent = ({ music, skeleton }: MusicCardProps) => {
     setLoadState(ImageLoadState.Failed)
   }
 
-  return (
+  return skeleton || !music ? (
+    <div className='music-card' data-skeleton={true}></div>
+  ) : (
     <div className='music-card' data-skeleton={skeleton}>
       <div className='background-content'>
         <span className='artist'>{music.artist}</span>

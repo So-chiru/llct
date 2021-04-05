@@ -1,11 +1,11 @@
 interface SongsTypes {
   load: boolean
-  items: LLCTSongDataV2
+  items: null | LLCTSongDataV2
 }
 
 const SongsDefault: SongsTypes = {
   load: false,
-  items: {}
+  items: null
 }
 
 interface SongsReducerAction {
