@@ -20,7 +20,13 @@ const DashboardTab = () => {
               )
             })
           : [...new Array(12)].map((v, i) => {
-              return <MusicCard key={`card:${i}`} id='10001'></MusicCard>
+              return (
+                <MusicCard
+                  key={`card:${i}`}
+                  group={0}
+                  index={i + 1}
+                ></MusicCard>
+              )
             })}
       </div>
     </div>

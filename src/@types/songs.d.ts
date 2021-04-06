@@ -15,9 +15,13 @@ interface LLCTSongDataV2 {
   songs?: MusicMetadata[][]
 }
 
+interface MusicExtraMetadata {
+  released?: number
+}
 interface MusicMetadata {
   title: string
   'title.ko'?: string
   artist: string | number | ArtistGroup
   image: string
+  metadata?: MusicExtraMetadata
 }

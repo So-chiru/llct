@@ -39,8 +39,10 @@ const SongsTab = () => {
         {...(songs.items.songs[active] || []).map((value, index) => {
           return (
             <MusicCardContainer
-              key={`sonngs:${index}`}
+              key={`songs:${index}`}
               music={value}
+              group={active}
+              index={index + 1}
             ></MusicCardContainer>
           )
         })}
