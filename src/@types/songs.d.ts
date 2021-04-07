@@ -21,7 +21,7 @@ interface MusicExtraMetadata {
 interface MusicMetadata {
   title: string
   'title.ko'?: string
-  artist: string | number | ArtistGroup
+  artist: string | number | number[] | ArtistGroup
   image: string
   metadata?: MusicExtraMetadata
 }

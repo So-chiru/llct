@@ -8,6 +8,12 @@ export const makeParsable = (
     return obj
   }
 
+  if (typeof obj.artist === 'object') {
+    obj.artist = (obj.artist as number[])
+      .map((v: number) => store.groups && store.groups[group].artists[v])
+      .join(', ')
+  }
+
   // obj.artist가 숫자인 경우 store.groups 에서 그룹을 가져와 아티스트 이름 적용
   if (typeof obj.artist === 'number') {
     obj.artist = store.groups[group].artists[obj.artist]

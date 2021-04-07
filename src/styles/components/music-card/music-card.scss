@@ -37,9 +37,13 @@ $min-card: 170px;
     .artist {
       margin: auto;
       font-weight: bold;
-      font-size: 48px;
+      font-size: 38px;
       letter-spacing: -2px;
       opacity: 0.2;
+      
+      max-width: 90%;
+      max-height: 90%;
+      overflow: hidden;
     }
   }
 

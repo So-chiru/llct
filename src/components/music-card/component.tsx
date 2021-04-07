@@ -1,5 +1,5 @@
 import '@/styles/components/music-card/music-card.scss'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import LazyLoad from 'react-lazyload'
 
 import * as songs from '@/utils/songs'
@@ -15,6 +15,10 @@ enum ImageLoadState {
   Loading,
   Loaded,
   Failed
+}
+
+const textSizeCalculation = (x: number) => {
+  return Math.max(18, Math.floor(Math.cos(x / 5) * 28))
 }
 
 const MusicCardComponent = ({
@@ -34,12 +38,23 @@ const MusicCardComponent = ({
     setLoadState(ImageLoadState.Failed)
   }
 
+  const artistRef = useRef<HTMLSpanElement>(null)
+
+  if (artistRef.current && artistRef.current.innerText.length > 10) {
+    artistRef.current.style.fontSize =
+      textSizeCalculation(
+        Math.max(0, artistRef.current.innerText.length) / 28
+      ) + 'px'
+  }
+
   return skeleton || !music ? (
     <div className='music-card' data-skeleton={true}></div>
   ) : (
     <div className='music-card' data-skeleton={skeleton} onClick={onClick}>
       <div className='background-content'>
-        <span className='artist'>{music.artist}</span>
+        <span className='artist' ref={artistRef}>
+          {music.artist}
+        </span>
       </div>
       <div className='content' data-state={loadState}>
         <LazyLoad height={100}>
