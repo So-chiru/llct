@@ -107,11 +107,11 @@ const MusicCardComponent = ({
     cardRef.current.onmousemove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
     cardRef.current.onmouseleave = () =>
-      cardRef.current && cardRef.current.style.removeProperty('transform')
+      requestAnimationFrame(() => cardRef.current && cardRef.current.style.removeProperty('transform'))
     cardRef.current.ontouchmove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
     cardRef.current.ontouchend = () =>
-      cardRef.current && cardRef.current.style.removeProperty('transform')
+      requestAnimationFrame(() => cardRef.current && cardRef.current.style.removeProperty('transform'))
   }
 
   return skeleton || !music ? (
