@@ -8,10 +8,23 @@
 
 .llct-player-button {
   position: fixed;
-  display: flex;
   right: 5vw;
   bottom: 5vh;
   cursor: pointer;
+  display: flex;
+
+  transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
+    0.3s transform cubic-bezier(0.19, 1, 0.22, 1);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(20px);
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0px);
+  }
 
   width: 100px;
   height: 100px;

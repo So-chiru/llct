@@ -1,0 +1,52 @@
+@import '../../colors.scss';
+
+.llct-player-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.22);
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+}
+
+.llct-player {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 80vw;
+  display: block;
+  z-index: 1000;
+  
+  border-radius: 16px 0px 0px 16px;
+
+  transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
+    0.6s transform cubic-bezier(0.19, 1, 0.22, 1);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(100vw);
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+
+    transform: translateX(0px);
+  }
+
+  .contents {
+    display: flex;
+  }
+
+  background: linear-gradient(to right bottom, $accent, $dark-background);
+}

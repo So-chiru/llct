@@ -24,6 +24,18 @@ export const updateTab = (tabNumber: number): UIReducerAction => {
   }
 }
 
+/**
+ * 플레이어를 표시할지 말지에 대한 여부를 지정합니다.
+ *
+ * @param show 표시할지에 대한 여부
+ */
+export const showPlayer = (show: boolean): UIReducerAction => {
+  return {
+    type: '@llct/player/show',
+    data: show
+  }
+}
+
 const Tabs: LLCTTab[] = [
   {
     name: '대시보드',
@@ -54,7 +66,10 @@ const addThemeClassToHTML = (bool: boolean) => {
 const LLCTThemeDefault = {
   useDarkMode: localStorage.getItem('@llct/ui.useDarkMode') === 'true' || false,
   currentTab: 0,
-  tabs: Tabs
+  tabs: Tabs,
+  player: {
+    show: false
+  }
 }
 
 addThemeClassToHTML(LLCTThemeDefault.useDarkMode)
@@ -65,26 +80,25 @@ const UIReducer = (
 ): typeof LLCTThemeDefault => {
   switch (action.type) {
     case '@llct/theme/update':
-      addThemeClassToHTML (action.data as boolean)
+      addThemeClassToHTML(action.data as boolean)
 
       // TODO : 설정 저장을 한 곳에서 관리하도록 만들기
       localStorage.setItem('@llct/ui.useDarkMode', action.data as string)
 
-      return Object.assign(
-        {},
-        {
-          ...state,
-          useDarkMode: action.data as boolean
-        }
-      )
+      return Object.assign(state, {
+        useDarkMode: action.data as boolean
+      })
     case '@llct/tab/update':
-      return Object.assign(
-        {},
-        {
-          ...state,
-          currentTab: action.data as number
+      return Object.assign(state, {
+        currentTab: action.data as number
+      })
+    case '@llct/player/show':
+      return Object.assign(state, {
+        player: {
+          ...state.player,
+          show: action.data
         }
-      )
+      })
     default:
       return state
   }

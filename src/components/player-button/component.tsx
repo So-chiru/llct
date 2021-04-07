@@ -2,18 +2,29 @@ import '@/styles/components/player-button/player-button.scss'
 
 import MusicNote from '@material-ui/icons/MusicNote'
 
-import { MusicPlayingState } from '@/@types/state'
+import { MusicPlayerState } from '@/@types/state'
 
 import PlayerWaveContainer from '@/components/waves/player/container'
 
 interface PlayerButtonProps {
   music: MusicMetadata
-  state: MusicPlayingState
+  state: MusicPlayerState
+  show: boolean
+  onClick: () => void
 }
 
-const PlayerButtonComponent = ({ music, state }: PlayerButtonProps) => {
+const PlayerButtonComponent = ({
+  music,
+  state,
+  show,
+  onClick
+}: PlayerButtonProps) => {
   return (
-    <div className='llct-player-button' data-state={state}>
+    <div
+      className={'llct-player-button' + (show ? ' show' : '')}
+      data-state={state}
+      onClick={onClick}
+    >
       <PlayerWaveContainer></PlayerWaveContainer>
       <img className='background' src={music.image}></img>
       <div className='layer'>

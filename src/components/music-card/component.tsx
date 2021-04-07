@@ -8,6 +8,7 @@ interface MusicCardProps {
   group?: number
   index?: number
   skeleton?: boolean
+  onClick?: () => void
 }
 
 enum ImageLoadState {
@@ -20,7 +21,8 @@ const MusicCardComponent = ({
   music,
   skeleton,
   group,
-  index
+  index,
+  onClick
 }: MusicCardProps) => {
   const [loadState, setLoadState] = useState(ImageLoadState.Loading)
 
@@ -35,7 +37,7 @@ const MusicCardComponent = ({
   return skeleton || !music ? (
     <div className='music-card' data-skeleton={true}></div>
   ) : (
-    <div className='music-card' data-skeleton={skeleton}>
+    <div className='music-card' data-skeleton={skeleton} onClick={onClick}>
       <div className='background-content'>
         <span className='artist'>{music.artist}</span>
       </div>

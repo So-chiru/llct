@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import MusicCardComponent from './component'
 
 import * as songs from '@/utils/songs'
+import { useHistory } from 'react-router-dom'
 interface MusicCardContainerProps {
   id?: string
   music?: MusicMetadata
@@ -26,6 +27,7 @@ const MusicCardContainer = ({
   }
 
   const data = useSelector((state: RootState) => state.songs)
+  const history = useHistory()
 
   let selectedMetadata: MusicMetadata | null = null
 
@@ -54,11 +56,18 @@ const MusicCardContainer = ({
     return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
 
+  const clickHandler = () => {
+    const playId = id || `${group}${index}`
+
+    history.push(`/play/${playId}`)
+  }
+
   return (
     <MusicCardComponent
       music={selectedMetadata}
       group={group}
       index={index}
+      onClick={clickHandler}
     ></MusicCardComponent>
   )
 }
