@@ -1,5 +1,5 @@
 import { RootState } from '@/store'
-import { showPlayer } from '@/store/actions/ui'
+import { showPlayer } from '@/store/ui/actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 import PlayerComponent from './component'

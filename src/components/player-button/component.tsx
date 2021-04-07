@@ -21,12 +21,12 @@ const PlayerButtonComponent = ({
 }: PlayerButtonProps) => {
   return (
     <div
-      className={'llct-player-button' + (show ? ' show' : '')}
+      className={'llct-player-button' + (music && show ? ' show' : '')}
       data-state={state}
       onClick={onClick}
     >
       <PlayerWaveContainer></PlayerWaveContainer>
-      <img className='background' src={music.image}></img>
+      <img className='background' src={music && music.image}></img>
       <div className='layer'>
         <MusicNote></MusicNote>
       </div>

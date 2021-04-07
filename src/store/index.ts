@@ -2,9 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 
-import UIReducer from './actions/ui'
-import SongsReducer from './actions/songs'
-import PlayingReducer from './actions/playing'
+import UIReducer from './ui/reducer'
+import SongsReducer from './songs/reducer'
+import PlayingReducer from './player/reducer'
 
 import { fetchAPIDataSaga } from './sagas'
 

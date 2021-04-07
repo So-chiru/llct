@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { updateTheme } from '@/store/actions/ui'
+import { updateTheme } from '@/store/ui/actions'
 
 import '@/styles/tabs/settings.scss'
 import { RootState } from '@/store'

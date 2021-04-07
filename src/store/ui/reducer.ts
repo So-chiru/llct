@@ -1,41 +1,3 @@
-interface UIReducerAction {
-  type: string
-  data: unknown
-}
-
-/**
- * 테마를 업데이트합니다.
- * @param useDarkMode 다크모드 사용 여부
- */
-export const updateTheme = (useDarkMode: boolean): UIReducerAction => {
-  return {
-    type: '@llct/theme/update',
-    data: useDarkMode
-  }
-}
-
-/**
- * 현재 탭을 변경합니다.
- */
-export const updateTab = (tabNumber: number): UIReducerAction => {
-  return {
-    type: '@llct/tab/update',
-    data: tabNumber
-  }
-}
-
-/**
- * 플레이어를 표시할지 말지에 대한 여부를 지정합니다.
- *
- * @param show 표시할지에 대한 여부
- */
-export const showPlayer = (show: boolean): UIReducerAction => {
-  return {
-    type: '@llct/player/show',
-    data: show
-  }
-}
-
 const Tabs: LLCTTab[] = [
   {
     name: '대시보드',
@@ -63,7 +25,7 @@ const addThemeClassToHTML = (bool: boolean) => {
   document.documentElement.classList[bool ? 'add' : 'remove']('llct-dark')
 }
 
-const LLCTThemeDefault = {
+const UIDefault = {
   useDarkMode: localStorage.getItem('@llct/ui.useDarkMode') === 'true' || false,
   currentTab: 0,
   tabs: Tabs,
@@ -72,12 +34,12 @@ const LLCTThemeDefault = {
   }
 }
 
-addThemeClassToHTML(LLCTThemeDefault.useDarkMode)
+addThemeClassToHTML(UIDefault.useDarkMode)
 
 const UIReducer = (
-  state = LLCTThemeDefault,
+  state = UIDefault,
   action: UIReducerAction
-): typeof LLCTThemeDefault => {
+): typeof UIDefault => {
   switch (action.type) {
     case '@llct/theme/update':
       addThemeClassToHTML(action.data as boolean)
@@ -97,6 +59,13 @@ const UIReducer = (
         player: {
           ...state.player,
           show: action.data
+        }
+      })
+    case '@llct/player/playNow':
+      return Object.assign(state, {
+        player: {
+          ...state.player,
+          show: true
         }
       })
     default:

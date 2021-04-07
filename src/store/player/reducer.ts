@@ -1,6 +1,6 @@
 import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 
-interface PlayingRootData {
+interface PlayerRootData {
   pointer: number
   queue: MusicMetadata[]
   state: {
@@ -9,7 +9,7 @@ interface PlayingRootData {
   }
 }
 
-const PlayingDefault: PlayingRootData = {
+const PlayerDefault: PlayerRootData = {
   pointer: -1,
   queue: [],
   state: {
@@ -17,19 +17,21 @@ const PlayingDefault: PlayingRootData = {
     load: PlayerLoadState.Empty
   }
 }
-interface PlayingReducerAction {
-  id: string
-  type: string
-  data?: unknown
-  pointer?: number
-  error?: unknown
-}
 
-const PlayingReducer = (
-  state = PlayingDefault,
-  action: PlayingReducerAction
-): typeof PlayingDefault => {
+const PlayerReducer = (
+  state = PlayerDefault,
+  action: PlayerReducerAction
+): typeof PlayerDefault => {
   switch (action.type) {
+    case '@llct/player/addToQueue':
+      return Object.assign({}, state, {
+        queue: [...state.queue, action.data]
+      })
+    case '@llct/player/playNow':
+      return Object.assign({}, state, {
+        queue: [...state.queue, action.data],
+        pointer: state.queue.length
+      })
     case '@llct/player/play':
       return Object.assign({}, state, {
         pointer:
@@ -44,4 +46,4 @@ const PlayingReducer = (
   }
 }
 
-export default PlayingReducer
+export default PlayerReducer

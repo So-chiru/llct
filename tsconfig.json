@@ -5,7 +5,7 @@
     "target": "esnext",
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
     },
     "baseUrl": "./",
     "esModuleInterop": true,

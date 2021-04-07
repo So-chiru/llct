@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PlayerButtonComponent from './component'
 
 import { MusicPlayerState } from '@/@types/state'
-import { showPlayer } from '@/store/actions/ui'
+import { showPlayer } from '@/store/ui/actions'
 
 const PlayerButtonContainer = () => {
   const dispatch = useDispatch()
@@ -16,20 +16,16 @@ const PlayerButtonContainer = () => {
 
   // TODO : change hardcoded music argument to playing data
 
-  console.log(show)
-
   const clickHandler = () => {
     dispatch(showPlayer(true))
   }
 
+  console.log(playing)
+
   return (
     <PlayerButtonComponent
       show={!show}
-      music={{
-        title: 'testMusic',
-        artist: '아티스트',
-        image: `https://picsum.photos/seed/${Math.random() * 10000}/200`
-      }}
+      music={playing.queue[playing.pointer]}
       state={MusicPlayerState.Playing}
       onClick={clickHandler}
     ></PlayerButtonComponent>

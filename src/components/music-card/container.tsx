@@ -1,18 +1,54 @@
 import { RootState } from '@/store'
 import React from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import MusicCardComponent from './component'
 
 import * as songs from '@/utils/songs'
 import { useHistory } from 'react-router-dom'
+
+import * as player from '@/store/player/actions'
 interface MusicCardContainerProps {
   id?: string
   music?: MusicMetadata
   index?: number
   group?: number
   skeleton?: boolean
+}
+
+// TODO : songs 모듈로 리펙토링 : search(id)
+const getMusicFromStore = (
+  store: RootState['songs']['items'],
+  music?: MusicMetadata,
+  id?: string,
+  group?: number,
+  index?: number
+): MusicMetadata | null => {
+  let result = null
+
+  if (music) {
+    result = music
+
+    if (typeof index !== 'undefined' && typeof group !== 'undefined') {
+      result = songs.makeParsable(music, store, group, index)
+    }
+  } else if (store && id) {
+    result = songs.searchById(id, store)
+  } else if (
+    store &&
+    typeof index !== 'undefined' &&
+    typeof group !== 'undefined'
+  ) {
+    result = songs.makeParsable(
+      songs.searchById(`${group}${index}`, store),
+      store,
+      group,
+      index
+    )
+  }
+
+  return result
 }
 
 const MusicCardContainer = ({
@@ -22,42 +58,36 @@ const MusicCardContainer = ({
   group,
   skeleton
 }: MusicCardContainerProps) => {
+  const data = useSelector((state: RootState) => state.songs)
+  const history = useHistory()
+  const dispatch = useDispatch()
+
   if (skeleton) {
     return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
 
-  const data = useSelector((state: RootState) => state.songs)
-  const history = useHistory()
-
-  let selectedMetadata: MusicMetadata | null = null
-
-  if (music) {
-    selectedMetadata = music
-
-    if (typeof index !== 'undefined' && typeof group !== 'undefined') {
-      selectedMetadata = songs.makeParsable(music, data.items, group, index)
-    }
-  } else if (data.items && id) {
-    selectedMetadata = songs.searchById(id, data.items)
-  } else if (
-    data.items &&
-    typeof index !== 'undefined' &&
-    typeof group !== 'undefined'
-  ) {
-    selectedMetadata = songs.makeParsable(
-      songs.searchById(`${group}${index}`, data.items),
-      data.items,
-      group,
-      index
-    )
-  }
+  const selectedMetadata = getMusicFromStore(
+    data.items,
+    music,
+    id,
+    group,
+    index
+  )
 
   if (!selectedMetadata) {
     return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
 
   const clickHandler = () => {
+    if (!data.items) {
+      return
+    }
+
     const playId = id || `${group}${index}`
+
+    const musicObject = songs.searchById(playId, data.items)
+
+    dispatch(player.playNow(musicObject))
 
     history.push(`/play/${playId}`)
   }
