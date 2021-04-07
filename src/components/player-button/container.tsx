@@ -20,8 +20,6 @@ const PlayerButtonContainer = () => {
     dispatch(showPlayer(true))
   }
 
-  console.log(playing)
-
   return (
     <PlayerButtonComponent
       show={!show}

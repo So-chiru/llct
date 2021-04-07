@@ -93,16 +93,18 @@ export default class Wave {
   }
 
   start () {
+    if (this.raf) {
+      return
+    }
+
     this.render()
   }
 
   stop () {
     if (this.raf) {
       cancelAnimationFrame(this.raf)
-    }
 
-    if (this.scaleToRaf) {
-      cancelAnimationFrame(this.scaleToRaf)
+      this.raf = 0
     }
   }
 

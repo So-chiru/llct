@@ -5,8 +5,8 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 999;
 
   opacity: 0;
@@ -24,17 +24,10 @@
   position: fixed;
   right: 0;
   top: 0;
-  height: 100vh;
-  width: 80vw;
+  height: 100%;
+  width: 80%;
   display: block;
   z-index: 1000;
-
-  @media screen and (max-width: $wave-narrow) {
-    width: 100vw;
-    border-radius: 0px;
-
-    transform: translateY(90vh);
-  }
 
   border-radius: 16px 0px 0px 16px;
 
@@ -52,9 +45,138 @@
     transform: translateX(0);
   }
 
+  @media screen and (max-width: $desktop) {
+    width: 100%;
+    border-radius: 0px;
+
+    transform: translateY(90vh);
+  }
+
+  .close {
+    position: fixed;
+
+    @media screen and (max-width: $desktop) {
+      width: 100%;
+      height: 8vh;
+      left: 0;
+      top: 0;
+      display: flex;
+
+      & > * {
+        margin: auto;
+      }
+    }
+
+    @media screen and (min-width: $desktop) {
+      left: 5%;
+      top: 5%;
+    }
+  }
+
   .contents {
+    display: flex;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+  }
+
+  .dashboard {
+    position: fixed;
+    margin-top: 5%;
+
+    @media screen and (max-width: $desktop) {
+      width: 85%;
+      margin-left: 2.5%;
+    }
+
+    @media screen and (min-width: $desktop) {
+      width: 480px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p {
+      margin: 0;
+    }
+  }
+
+  .metadata {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      'texts texts image'
+      'texts texts image'
+      'controls controls image';
+    letter-spacing: -1px;
+  }
+
+  .controls,
+  .image {
     display: flex;
   }
 
-  background: linear-gradient(to right bottom, $dark-semi-accent, $dark-background);
+  .texts {
+    grid-area: texts;
+    margin-top: auto;
+    margin-bottom: 5px;
+    max-width: 95%;
+
+    .title {
+      font-size: 24px;
+      letter-spacing: -1px;
+
+      @media screen and (max-width: $mobile) {
+        font-size: 22px;
+      }
+    }
+
+    .artist {
+      font-size: 18px;
+      letter-spacing: -2px;
+      font-weight: normal;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  .controls {
+    grid-area: controls;
+    margin-top: 5px;
+    margin-bottom: auto;
+  }
+  .image {
+    grid-area: image;
+
+    img {
+      width: 180px;
+      height: 180px;
+
+      @media screen and (max-width: $tablet) {
+        width: 150px;
+        height: 150px;
+      }
+
+      @media screen and (max-width: $mobile) {
+        width: 120px;
+        height: 120px;
+      }
+
+      border-radius: 8px;
+
+      box-shadow: 0px 0px 64px rgba(0, 0, 0, 0.22);
+
+      margin: auto;
+    }
+  }
+
+  background: linear-gradient(
+    to right bottom,
+    $dark-semi-accent,
+    $dark-background
+  );
 }

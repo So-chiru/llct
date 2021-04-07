@@ -89,7 +89,7 @@ const MusicCardContainer = ({
 
     dispatch(player.playNow(musicObject))
 
-    history.push(`/play/${playId}`)
+    history.push(`/play/${playId}`, musicObject)
   }
 
   return (

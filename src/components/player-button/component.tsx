@@ -25,7 +25,7 @@ const PlayerButtonComponent = ({
       data-state={state}
       onClick={onClick}
     >
-      <PlayerWaveContainer></PlayerWaveContainer>
+      <PlayerWaveContainer show={show}></PlayerWaveContainer>
       <img className='background' src={music && music.image}></img>
       <div className='layer'>
         <MusicNote></MusicNote>

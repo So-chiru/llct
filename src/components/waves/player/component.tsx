@@ -4,13 +4,14 @@ import PlayerWave from './animate'
 
 interface PlayerWaveProps {
   progress: number
+  show?: boolean
 }
 
 interface PlayerWaveStates {
   wave?: PlayerWave
 }
 
-const PlayerWaveComponent = ({ progress }: PlayerWaveProps) => {
+const PlayerWaveComponent = ({ progress, show }: PlayerWaveProps) => {
   const [state, setState] = useState<PlayerWaveStates>({} as PlayerWaveStates)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -23,11 +24,20 @@ const PlayerWaveComponent = ({ progress }: PlayerWaveProps) => {
         wave
       }))
 
-      wave.start()
+      if (show) {
+        wave.start()
+      }
     }
 
     if (state.wave) {
       state.wave.updateProgress(progress)
+
+      // 플레이어 버튼이 표시된 경우 파도 시작
+      if (show) {
+        state.wave.start()
+      } else {
+        state.wave.stop()
+      }
     }
   })
 

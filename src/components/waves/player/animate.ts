@@ -36,12 +36,18 @@ class PlayerWave {
   }
 
   start () {
+    if (this.raf) {
+      return
+    }
+
     this.render()
   }
 
   stop () {
     if (this.raf) {
       cancelAnimationFrame(this.raf)
+
+      this.raf = 0
     }
   }
 
