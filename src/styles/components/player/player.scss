@@ -27,7 +27,7 @@
   width: 80vw;
   display: block;
   z-index: 1000;
-  
+
   border-radius: 16px 0px 0px 16px;
 
   transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
@@ -35,13 +35,13 @@
 
   opacity: 0;
   pointer-events: none;
-  transform: translateX(100vw);
+  transform: translateX(90vw);
 
   &.show {
     opacity: 1;
     pointer-events: auto;
 
-    transform: translateX(0px);
+    transform: translateX(0);
   }
 
   .contents {
