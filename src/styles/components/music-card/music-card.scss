@@ -6,6 +6,10 @@ $min-card: 170px;
 .llct-dark .music-card {
   background: darken($dark-semi-accent, 10);
 
+  &:hover {
+    background: lighten($dark-semi-accent, 2);
+  }
+
   .content {
     img,
     &::before {
@@ -21,6 +25,9 @@ $min-card: 170px;
   background: $semi-accent;
   border-radius: 16px;
   display: flex;
+  cursor: pointer;
+  transition: 0.2s background cubic-bezier(0.19, 1, 0.22, 1);
+  transform: perspective(2000px);
 
   @media screen and (max-width: $wave-narrow) {
     min-width: $min-card;
@@ -40,7 +47,7 @@ $min-card: 170px;
       font-size: 38px;
       letter-spacing: -2px;
       opacity: 0.2;
-      
+
       max-width: 90%;
       max-height: 90%;
       overflow: hidden;

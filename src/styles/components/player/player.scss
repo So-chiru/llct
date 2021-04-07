@@ -1,3 +1,4 @@
+@import '../../positions.scss';
 @import '../../colors.scss';
 
 .llct-player-background {
@@ -28,6 +29,13 @@
   display: block;
   z-index: 1000;
 
+  @media screen and (max-width: $wave-narrow) {
+    width: 100vw;
+    border-radius: 0px;
+
+    transform: translateY(90vh);
+  }
+
   border-radius: 16px 0px 0px 16px;
 
   transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
@@ -48,5 +56,5 @@
     display: flex;
   }
 
-  background: linear-gradient(to right bottom, $accent, $dark-background);
+  background: linear-gradient(to right bottom, $dark-semi-accent, $dark-background);
 }
