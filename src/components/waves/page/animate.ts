@@ -100,6 +100,10 @@ export default class Wave {
     if (this.raf) {
       cancelAnimationFrame(this.raf)
     }
+
+    if (this.scaleToRaf) {
+      cancelAnimationFrame(this.scaleToRaf)
+    }
   }
 
   scaleTo (duration: number, to: number, started?: number, toDown?: boolean) {
@@ -160,14 +164,15 @@ export default class Wave {
       const x = sw * this.vertexes[i].x
       const y = sh * this.vertexes[i].y
 
-      const targetX = sw * this.vertexes[i + 1].x
-      const targetY = sh * this.vertexes[i + 1].y + cos * 40
+      const cosa = cos * 25
+      const targetX = sw * this.vertexes[i + 1].x + cosa
+      const targetY = sh * this.vertexes[i + 1].y + cosa
 
       const middleX = (x + targetX) / 2
       const middleY = (y + targetY) / 2
 
       const firstPoint = [x + cosAbs * 20, y]
-      const secondPoint = [middleX - cos * 20, middleY + cos * 30]
+      const secondPoint = [middleX + 10 * cosAbs, middleY + cosa]
 
       this.context.bezierCurveTo(
         firstPoint[0],
