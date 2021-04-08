@@ -83,6 +83,7 @@ const PlayerComponent = ({
               </div>
               <div className='image'>
                 <img
+                  alt={`${music?.title || '노래'} 앨범 커버`}
                   src={typeof music !== 'undefined' ? music.image : ''}
                 ></img>
               </div>

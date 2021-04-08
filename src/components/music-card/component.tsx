@@ -125,7 +125,8 @@ const MusicCardComponent = ({
       </div>
       <div className='content' data-state={loadState}>
         <LazyLoad height={100}>
-          <img
+            <img
+              alt={`${music.title || '노래'} 앨범 커버`}
             src={(music.image || songs.coverImageURL(group, index)) + '?s=150'}
             onLoad={loadHandler}
             onError={loadErrorHandler}

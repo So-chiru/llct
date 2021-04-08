@@ -13,6 +13,10 @@ interface PlayerRouterState {
   id?: string
 }
 
+const toggleScrollbar = (on: boolean) => {
+  document.documentElement.style.overflow = on ? 'unset' : 'hidden'
+}
+
 const PlayerContainer = () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -67,6 +71,8 @@ const PlayerContainer = () => {
   const closePlayer = () => {
     dispatch(showPlayer(false))
   }
+
+  toggleScrollbar(!show)
 
   return (
     <PlayerComponent

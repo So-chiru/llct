@@ -7,5 +7,6 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeInterface }>`
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
+    text-rendering: optimizeLegibility;
   }
 `
