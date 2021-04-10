@@ -32,8 +32,6 @@ const tiltCardElement = (
     return
   }
 
-  ev.preventDefault()
-
   requestAnimationFrame(() => {
     let x = 0
     if (ev instanceof MouseEvent && ev.pageX) {
@@ -107,11 +105,17 @@ const MusicCardComponent = ({
     cardRef.current.onmousemove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
     cardRef.current.onmouseleave = () =>
-      requestAnimationFrame(() => cardRef.current && cardRef.current.style.removeProperty('transform'))
+      requestAnimationFrame(
+        () =>
+          cardRef.current && cardRef.current.style.removeProperty('transform')
+      )
     cardRef.current.ontouchmove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
     cardRef.current.ontouchend = () =>
-      requestAnimationFrame(() => cardRef.current && cardRef.current.style.removeProperty('transform'))
+      requestAnimationFrame(
+        () =>
+          cardRef.current && cardRef.current.style.removeProperty('transform')
+      )
   }
 
   return skeleton || !music ? (
@@ -125,8 +129,8 @@ const MusicCardComponent = ({
       </div>
       <div className='content' data-state={loadState}>
         <LazyLoad height={100}>
-            <img
-              alt={`${music.title || '노래'} 앨범 커버`}
+          <img
+            alt={`${music.title || '노래'} 앨범 커버`}
             src={(music.image || songs.coverImageURL(group, index)) + '?s=150'}
             onLoad={loadHandler}
             onError={loadErrorHandler}
