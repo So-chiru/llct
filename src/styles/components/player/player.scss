@@ -108,7 +108,7 @@
     }
   }
 
-  .metadata {
+  .metadata-zone {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -131,32 +131,47 @@
     margin-bottom: 5px;
     max-width: 95%;
 
-    .title {
-      font-size: 24px;
-      letter-spacing: -1px;
-
-      @media screen and (max-width: $mobile) {
-        font-size: 22px;
-      }
-    }
-
+    .title,
     .artist {
-      font-size: 18px;
-      letter-spacing: -2px;
-      font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+
+    .title {
+      font-size: 20px;
+      letter-spacing: -1px;
+    }
+
+    .artist {
+      font-size: 16px;
+      font-weight: normal;
+      opacity: 0.8;
     }
   }
   .controls {
     grid-area: controls;
     margin-top: 5px;
     margin-bottom: auto;
+    margin-left: -16px;
 
     & > svg {
       width: 32px;
       height: 32px;
+      padding: 8px;
+      border-radius: 50%;
+
+      margin-right: 5px;
+      cursor: pointer;
+      transition: 0.23s background cubic-bezier(0.19, 1, 0.22, 1);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.22);
+      }
+
+      &:last-child {
+        margin-right: unset;
+      }
     }
   }
   .image {
@@ -182,6 +197,10 @@
 
       margin: auto;
     }
+  }
+
+  .progress-zone {
+    margin-top: 5vh;
   }
 
   background: linear-gradient(

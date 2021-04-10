@@ -8,25 +8,36 @@ import {
   MdPause,
   MdPlayArrow
 } from 'react-icons/md'
-import { MusicPlayerState } from '@/@types/state'
+import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
+
+import ProgressBarComponent from '@/components/progress-bar/component'
+
+interface PlayerComponentPropsState {
+  playState?: MusicPlayerState
+  loadState?: PlayerLoadState
+  progress?: number
+}
 
 interface PlayerComponentProps {
   show: boolean
-  playState: MusicPlayerState
+  state: PlayerComponentPropsState
   music?: MusicMetadata
+  controller?: PlayerController
   clickOut: () => void
 }
 
 const PlayerComponent = ({
   music,
-  playState,
+  state,
   show,
+  controller,
   clickOut
 }: PlayerComponentProps) => {
   const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
   const [initial, setInitial] = useState<boolean>(true)
 
   if (initial) {
+    // positions.css : $desktop
     const media = window.matchMedia('screen and (max-width: 1240px)')
     media.addEventListener('change', ev => {
       setPlayerNarrow(ev.matches)
@@ -38,8 +49,6 @@ const PlayerComponent = ({
 
     setInitial(false)
   }
-
-  const play = () => {}
 
   return (
     <>
@@ -57,7 +66,7 @@ const PlayerComponent = ({
         </div>
         <div className='contents'>
           <div className='dashboard'>
-            <div className='metadata'>
+            <div className='metadata-zone'>
               <div className='texts'>
                 <h1 className='title' title={music?.title}>
                   {music?.title}
@@ -74,10 +83,10 @@ const PlayerComponent = ({
                 </h3>
               </div>
               <div className='controls'>
-                {playState === MusicPlayerState.Playing ? (
-                  <MdPause></MdPause>
+                {state.playState === MusicPlayerState.Playing ? (
+                  <MdPause onClick={() => controller?.pause()}></MdPause>
                 ) : (
-                  <MdPlayArrow></MdPlayArrow>
+                  <MdPlayArrow onClick={() => controller?.play()}></MdPlayArrow>
                 )}
                 <MdEqualizer></MdEqualizer>
               </div>
@@ -87,6 +96,18 @@ const PlayerComponent = ({
                   src={typeof music !== 'undefined' ? music.image : ''}
                 ></img>
               </div>
+            </div>
+            <div className='progress-zone'>
+              <ProgressBarComponent
+                thumb={true}
+                progress={controller?.progress()}
+                listen={
+                  state.playState === MusicPlayerState.Playing && show
+                    ? controller?.progress
+                    : undefined
+                }
+                seek={controller?.seek}
+              ></ProgressBarComponent>
             </div>
           </div>
           <div className='lyrics'></div>

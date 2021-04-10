@@ -4,9 +4,12 @@ import { showPlayer } from '@/store/ui/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
+import { MusicPlayerState } from '@/@types/state'
+
 import PlayerComponent from './component'
-import { playNow } from '@/store/player/actions'
+import { playNow, setPlayState } from '@/store/player/actions'
 import { searchById } from '@/utils/songs'
+import LLCTNativeAudio from '@/core/audio_stack/native'
 
 interface PlayerRouterState {
   closePlayer?: boolean
@@ -22,6 +25,8 @@ const PlayerContainer = () => {
   const history = useHistory()
   const [initial, setIntitial] = useState<boolean>(true)
   const [dataInitial, setDataIntitial] = useState<boolean>(true)
+
+  const [playerInstance, setPlayerInstance] = useState<LLCTAudioStack>()
 
   const playing = useSelector((state: RootState) => state.playing)
   const show = useSelector((state: RootState) => state.ui.player.show)
@@ -41,6 +46,16 @@ const PlayerContainer = () => {
     })
 
     setIntitial(false)
+  }
+
+  if (!playerInstance) {
+    // TODO : 오디오 스택을 설정에서 지정할 수 있게 하기
+    const instance = new LLCTNativeAudio()
+
+    // FIXME : 고정 URL
+    instance.load('http://api-local.lovelivec.kr/audio/11')
+
+    setPlayerInstance(instance)
   }
 
   if (dataInitial && data.items) {
@@ -74,11 +89,37 @@ const PlayerContainer = () => {
 
   toggleScrollbar(!show)
 
+  // 플레이어 컨트롤러 지정. 여기서 UI 동작을 수행했을 때 동작할 액션을 정의합니다.
+  const controller: PlayerController = {
+    play: () => {
+      playerInstance?.play()
+      dispatch(setPlayState(MusicPlayerState.Playing))
+    },
+    pause: () => {
+      playerInstance?.pause()
+      dispatch(setPlayState(MusicPlayerState.Paused))
+    },
+    progress: () => {
+      return playerInstance?.progress || 0
+    },
+    seek: (seekTo: number) => {
+      if (!playerInstance) {
+        return
+      }
+
+      playerInstance.progress = seekTo
+    }
+  }
+
   return (
     <PlayerComponent
       music={playing.queue[playing.pointer]}
-      playState={playing.state.player}
+      state={{
+        playState: playing.state.player,
+        progress: playerInstance?.progress
+      }}
       show={show}
+      controller={controller}
       clickOut={closePlayer}
     ></PlayerComponent>
   )

@@ -37,6 +37,13 @@ const PlayerReducer = (
         pointer:
           typeof action.pointer !== 'undefined' ? action.pointer : state.queue
       })
+    case '@llct/player/setState':
+      return Object.assign({}, state, {
+        state: {
+          ...state.state,
+          player: action.data
+        }
+      })
     case '@llct/player/add_queue':
       return Object.assign({}, state, {
         queue: [...state.queue].concat(action.data as MusicMetadata)

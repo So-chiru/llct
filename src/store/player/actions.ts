@@ -1,3 +1,5 @@
+import { MusicPlayerState } from '@/@types/state'
+
 export const addToQueue = (data: MusicMetadata) => {
   return {
     type: '@llct/player/addToQueue',
@@ -16,5 +18,12 @@ export const setPointer = (data: number) => {
   return {
     type: '@llct/player/setPointer',
     data
+  }
+}
+
+export const setPlayState = (number: MusicPlayerState) => {
+  return {
+    type: '@llct/player/setState',
+    data: number
   }
 }
