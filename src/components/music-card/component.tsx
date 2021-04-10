@@ -54,15 +54,15 @@ const tiltCardElement = (
 
   requestAnimationFrame(() => {
     let x = 0
-    if (ev instanceof MouseEvent && ev.pageX) {
-      x = (ev.pageX - elemXY[2]) / elemXY[0]
+    if (ev instanceof MouseEvent && typeof ev.offsetX !== 'undefined') {
+      x = ev.offsetX / elemXY[0]
     } else if (ev instanceof TouchEvent && ev.touches[0]) {
       x = (ev.touches[0].pageX - elemXY[2]) / elemXY[0]
     }
 
     let y = 0
-    if (ev instanceof MouseEvent && ev.pageX) {
-      y = (ev.pageX - elemXY[3]) / elemXY[1]
+    if (ev instanceof MouseEvent && typeof ev.offsetY !== 'undefined') {
+      y = ev.offsetY / elemXY[1]
     } else if (ev instanceof TouchEvent && ev.touches[0]) {
       y = (ev.touches[0].pageY - elemXY[3]) / elemXY[1]
     }

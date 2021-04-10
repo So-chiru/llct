@@ -32,8 +32,6 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
 
   set current (seek: number) {
     this.player.currentTime = seek
-
-    console.log(seek)
   }
 
   get duration () {
