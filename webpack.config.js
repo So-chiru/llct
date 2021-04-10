@@ -5,8 +5,12 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { DefinePlugin } = require('webpack')
+
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+
+const smp = new SpeedMeasurePlugin()
 
 module.exports = (_, argv) => {
   const devMode = argv.mode === 'development'
@@ -32,13 +36,15 @@ module.exports = (_, argv) => {
           use: {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, './tsconfig.json')
+              configFile: path.resolve(__dirname, './tsconfig.json'),
+              transpileOnly: true,
+              experimentalWatchApi: true
             }
           }
         },
         {
           test: /\.(sa|sc|c)ss$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'fast-sass-loader']
         },
         {
           test: /\.(ico|png|jpg|jpeg|json)?$/,
@@ -53,20 +59,20 @@ module.exports = (_, argv) => {
       new DefinePlugin({
         'process.env.API_SERVER': JSON.stringify(process.env.API_SERVER)
       }),
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        template: './public/index.html',
-        filename: 'index.html'
-      }),
-      new MiniCssExtractPlugin({
-        filename: '[name].[hash].css'
-      }),
+      // new CleanWebpackPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           {
             from: 'public'
           }
         ]
+      }),
+      new MiniCssExtractPlugin({
+        filename: '[name].[hash].css'
+      }),
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
+        filename: 'index.html'
       })
     ],
     optimization: {
@@ -86,6 +92,8 @@ module.exports = (_, argv) => {
       port: 8080,
       historyApiFallback: true
     }
+
+    return smp.wrap(options)
   }
 
   return options

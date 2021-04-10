@@ -71,6 +71,11 @@
       left: 5%;
       top: 5%;
     }
+
+    & > svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .contents {
@@ -148,6 +153,11 @@
     grid-area: controls;
     margin-top: 5px;
     margin-bottom: auto;
+
+    & > svg {
+      width: 32px;
+      height: 32px;
+    }
   }
   .image {
     grid-area: image;

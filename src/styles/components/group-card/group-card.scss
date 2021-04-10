@@ -1,11 +1,22 @@
 @import '../../colors.scss';
+@import '../../positions.scss';
+
+.llct-dark .group-card {
+  background-color: var(--group-color-dark, $semi-accent);
+
+  &[data-active='true'] {
+    background-color: var(--group-color, darken($semi-accent, 10));
+    color: white;
+  }
+
+  border: 1px solid var(--group-color-dark-border, $accent);
+}
 
 .group-card {
   display: flex;
-  min-width: 200px;
-  min-height: 50px;
   border-radius: 16px;
-  padding: 3px 20px;
+  padding: 8px 32px;
+  white-space: nowrap;
 
   background-color: var(--group-color-light, $semi-accent);
   color: var(--group-color, $accent);
@@ -19,6 +30,7 @@
 
   .text {
     margin: auto;
+    text-align: center;
   }
 
   &[data-active='false']:hover {
@@ -27,6 +39,10 @@
 
   &[data-active='true'] {
     background-color: var(--group-color, darken($semi-accent, 10));
-    color: var(--group-color-light, $accent);
+    color: white;
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: $mobile-text-size;
   }
 }

@@ -1,7 +1,6 @@
 import '@/styles/components/player-button/player-button.scss'
 
-import MusicNote from '@material-ui/icons/MusicNote'
-
+import { MdMusicNote } from 'react-icons/md'
 import { MusicPlayerState } from '@/@types/state'
 
 import PlayerWaveContainer from '@/components/waves/player/container'
@@ -28,7 +27,7 @@ const PlayerButtonComponent = ({
       <PlayerWaveContainer show={show}></PlayerWaveContainer>
       <img className='background' src={music && music.image}></img>
       <div className='layer'>
-        <MusicNote></MusicNote>
+        <MdMusicNote></MdMusicNote>
       </div>
     </div>
   )

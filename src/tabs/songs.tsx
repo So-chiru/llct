@@ -7,6 +7,7 @@ import '@/styles/tabs/songs.scss'
 import { RootState } from '@/store'
 import GroupCardComponent from '@/components/group-card/component'
 import MusicCardContainer from '@/components/music-card/container'
+import EmptyComponent from '@/components/empty/component'
 
 const SongsTab = () => {
   const songs = useSelector((state: RootState) => state.songs)
@@ -35,6 +36,12 @@ const SongsTab = () => {
           )
         })}
       </div>
+      {!songs.items.songs[active].length ? (
+        <EmptyComponent
+          text='텅 비었어요...'
+          height='30vh'
+        ></EmptyComponent>
+      ) : null}
       <div className='songs-list-wrapper'>
         {...(songs.items.songs[active] || []).map((value, index) => {
           return (

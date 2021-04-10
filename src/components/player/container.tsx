@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { RootState } from '@/store'
 import { showPlayer } from '@/store/ui/actions'
 import { useDispatch, useSelector } from 'react-redux'

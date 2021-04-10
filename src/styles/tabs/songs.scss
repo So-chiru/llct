@@ -4,11 +4,14 @@
   display: flex;
   margin-bottom: 20px;
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
 }
 
 .songs-list-wrapper {
   display: grid;
-  margin-left: 3vw;
   gap: 10px;
   position: relative;
 
@@ -25,11 +28,10 @@
   }
 
   @media screen and (max-width: $wave-narrow) {
-    width: 95%;
+    width: 100%;
   }
 
   @media screen and (min-width: $wave-narrow) {
-    margin-left: unset;
   }
 
   @media screen and (min-width: $desktop) {

@@ -109,6 +109,14 @@ $min-card: 170px;
       transition: 0.3s opacity cubic-bezier(0.19, 1, 0.22, 1);
     }
 
+    @media screen and (max-width: $mobile) {
+      img,
+      &::before {
+        width: 75px;
+        height: 75px;
+      }
+    }
+
     &[data-state='0'],
     &[data-state='2'] {
       &::before {
@@ -124,7 +132,6 @@ $min-card: 170px;
 
     .title {
       letter-spacing: -1px;
-      line-height: 28px;
       margin: 10px auto auto 5px;
 
       @media screen and (max-width: $wave-narrow) {
@@ -146,6 +153,10 @@ $min-card: 170px;
     @media screen and (max-width: $wave-narrow) {
       font-size: 18px;
       margin: 12px;
+    }
+
+    @media screen and (max-width: $mobile) {
+      font-size: 16px;
     }
   }
 }

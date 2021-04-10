@@ -2,6 +2,8 @@ import DashboardTab from '@/tabs/dashboard'
 import SettingsTab from '@/tabs/settings'
 import SongsTab from '@/tabs/songs'
 
+import EmptyComponent from '@/components/empty/component'
+
 import { CSSTransition } from 'react-transition-group'
 
 import React, { useRef, useState } from 'react'
@@ -29,7 +31,14 @@ const TabComponent = ({ tab }: TabProps) => {
     return Pages[tab.page]
   }
 
-  return <div className='llct-tab'>{tab.name} 페이지의 내용은 없습니다.</div>
+  return (
+    <div className='llct-tab'>
+      <EmptyComponent
+        text={tab.name + ' 페이지는 텅 비었어요...'}
+        height='30vh'
+      ></EmptyComponent>
+    </div>
+  )
 }
 
 const TabListComponent = ({ currentTab, tabs }: TabListProps) => {

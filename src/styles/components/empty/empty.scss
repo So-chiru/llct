@@ -1,0 +1,38 @@
+@import "../../positions.scss";
+
+@keyframes head-anime {
+  0%,
+  100% {
+    transform: rotateZ(-10deg);
+  }
+
+  50% {
+    transform: rotateZ(10deg);
+  }
+}
+
+.llct-empty-placeholder {
+  display: flex;
+  width: 100%;
+  min-width: 100px;
+
+  .empty-wrapper {
+    margin: auto;
+    display: grid;
+  }
+
+  p {
+    margin: auto;
+    font-size: 46px;
+    letter-spacing: -2px;
+    font-weight: bold;
+    opacity: 0.3;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 24px;
+    }
+
+    text-align: center;
+    white-space: break-spaces;
+  }
+}

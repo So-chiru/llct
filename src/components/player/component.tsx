@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
 import '@/styles/components/player/player.scss'
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import {
-  Equalizer,
-  KeyboardArrowLeft,
-  Pause,
-  PlayArrow
-} from '@material-ui/icons'
+  MdKeyboardArrowDown,
+  MdKeyboardArrowLeft,
+  MdEqualizer,
+  MdPause,
+  MdPlayArrow
+} from 'react-icons/md'
 import { MusicPlayerState } from '@/@types/state'
 
 interface PlayerComponentProps {
@@ -50,9 +50,9 @@ const PlayerComponent = ({
       <div className={'llct-player' + (show ? ' show' : '')}>
         <div className='close'>
           {playerNarrow ? (
-            <KeyboardArrowDownIcon onClick={clickOut}></KeyboardArrowDownIcon>
+            <MdKeyboardArrowDown onClick={clickOut}></MdKeyboardArrowDown>
           ) : (
-            <KeyboardArrowLeft onClick={clickOut}></KeyboardArrowLeft>
+            <MdKeyboardArrowLeft onClick={clickOut}></MdKeyboardArrowLeft>
           )}
         </div>
         <div className='contents'>
@@ -75,11 +75,11 @@ const PlayerComponent = ({
               </div>
               <div className='controls'>
                 {playState === MusicPlayerState.Playing ? (
-                  <Pause></Pause>
+                  <MdPause></MdPause>
                 ) : (
-                  <PlayArrow></PlayArrow>
+                  <MdPlayArrow></MdPlayArrow>
                 )}
-                <Equalizer></Equalizer>
+                <MdEqualizer></MdEqualizer>
               </div>
               <div className='image'>
                 <img

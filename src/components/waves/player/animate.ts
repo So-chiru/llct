@@ -32,7 +32,7 @@ class PlayerWave {
   updateProgress (progress: number) {
     // TODO : ease
 
-    this.progress = progress
+    this.progress = 1 - progress
   }
 
   start () {
@@ -87,7 +87,7 @@ class PlayerWave {
       }
     }
 
-    this.context.lineTo(100, 50)
+    this.context.lineTo(100, points[points.length - 1][1])
     this.context.lineTo(100, 100)
     this.context.lineTo(0, 100)
 
