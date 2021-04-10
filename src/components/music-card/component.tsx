@@ -23,6 +23,26 @@ const textSizeCalculation = (x: number) => {
   return Math.max(18, Math.floor(Math.cos(x / 5) * 28))
 }
 
+const tiltCardEnter = (ref: HTMLDivElement | null) => {
+  if (!ref) {
+    return
+  }
+
+  ref.classList.add('no-transition')
+}
+
+const tiltCardLeave = (ref: HTMLDivElement | null) => {
+  if (!ref) {
+    return
+  }
+
+  ref.classList.remove('no-transition')
+
+  requestAnimationFrame(() => {
+    ref.style.removeProperty('transform')
+  })
+}
+
 const tiltCardElement = (
   ref: HTMLDivElement | null,
   ev: MouseEvent | TouchEvent,
@@ -102,20 +122,15 @@ const MusicCardComponent = ({
      * 호출 스택 줄이기 위해 React에서 제공하는 onMouseMove, Leave 대신 직접 이벤트를 부착하여 사용
      */
     cardRef.current.onclick = onClick || emptyFunction
+    cardRef.current.onmouseenter = () => tiltCardEnter(cardRef.current)
     cardRef.current.onmousemove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
-    cardRef.current.onmouseleave = () =>
-      requestAnimationFrame(
-        () =>
-          cardRef.current && cardRef.current.style.removeProperty('transform')
-      )
+    cardRef.current.onmouseleave = () => tiltCardLeave(cardRef.current)
+
+    cardRef.current.ontouchstart = () => tiltCardEnter(cardRef.current)
     cardRef.current.ontouchmove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
-    cardRef.current.ontouchend = () =>
-      requestAnimationFrame(
-        () =>
-          cardRef.current && cardRef.current.style.removeProperty('transform')
-      )
+    cardRef.current.ontouchend = () => tiltCardLeave(cardRef.current)
   }
 
   return skeleton || !music ? (
