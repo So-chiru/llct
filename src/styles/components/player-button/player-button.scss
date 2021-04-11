@@ -80,7 +80,7 @@
     }
   }
 
-  &[data-state='PLAYING'] {
+  &[data-state='0'] {
     .layer {
       opacity: 0;
     }

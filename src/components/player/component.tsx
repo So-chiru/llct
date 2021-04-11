@@ -101,6 +101,7 @@ const PlayerComponent = ({
             <div className='progress-zone'>
               <ProgressBarComponent
                 thumb={true}
+                key={music?.title}
                 progress={state.progress}
                 duration={state.duration}
                 listen={

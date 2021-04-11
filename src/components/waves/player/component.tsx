@@ -1,3 +1,4 @@
+import { MusicPlayerState } from '@/@types/state'
 import { useState, useRef } from 'react'
 
 import PlayerWave from './animate'
@@ -5,13 +6,18 @@ import PlayerWave from './animate'
 interface PlayerWaveProps {
   progress: number
   show?: boolean
+  state: MusicPlayerState
 }
 
 interface PlayerWaveStates {
   wave?: PlayerWave
 }
 
-const PlayerWaveComponent = ({ progress, show }: PlayerWaveProps) => {
+const PlayerWaveComponent = ({
+  progress,
+  show,
+  state: playerState
+}: PlayerWaveProps) => {
   const [state, setState] = useState<PlayerWaveStates>({} as PlayerWaveStates)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -38,6 +44,8 @@ const PlayerWaveComponent = ({ progress, show }: PlayerWaveProps) => {
       } else {
         state.wave.stop()
       }
+
+      state.wave.state = playerState
     }
   })
 

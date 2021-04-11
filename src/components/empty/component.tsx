@@ -1,7 +1,5 @@
 import '@/styles/components/empty/empty.scss'
 
-import { MdHourglassEmpty } from 'react-icons/md'
-
 interface EmptyComponentProps {
   text: string
   height?: string

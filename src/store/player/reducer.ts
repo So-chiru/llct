@@ -2,7 +2,8 @@ import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 
 interface PlayerRootData {
   pointer: number
-  queue: MusicMetadata[]
+  queue: MusicMetadataWithID[]
+  instance?: LLCTAudioStack
   state: {
     player: MusicPlayerState
     load: PlayerLoadState
@@ -37,6 +38,10 @@ const PlayerReducer = (
         pointer:
           typeof action.pointer !== 'undefined' ? action.pointer : state.queue
       })
+    case '@llct/player/setInstance':
+      return Object.assign({}, state, {
+        instance: action.data
+      })
     case '@llct/player/setState':
       return Object.assign({}, state, {
         state: {
@@ -46,7 +51,7 @@ const PlayerReducer = (
       })
     case '@llct/player/add_queue':
       return Object.assign({}, state, {
-        queue: [...state.queue].concat(action.data as MusicMetadata)
+        queue: [...state.queue].concat(action.data as MusicMetadataWithID)
       })
     default:
       return state

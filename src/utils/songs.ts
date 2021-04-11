@@ -35,7 +35,7 @@ export const makeParsable = (
 export const searchById = (
   id: string,
   store: LLCTSongDataV2
-): MusicMetadata => {
+): MusicMetadataWithID => {
   if (id.length < 2) {
     throw new TypeError('id length should greater than 1 letter.')
   }
@@ -51,7 +51,17 @@ export const searchById = (
     throw new Error("Id's group field is not valid.")
   }
 
-  return makeParsable(store.songs[group][songId - 1], store, group, songId)
+  const parsable = makeParsable(
+    store.songs[group][songId - 1],
+    store,
+    group,
+    songId
+  )
+
+  return {
+    ...parsable,
+    id
+  }
 }
 
 export const coverImageURL = (group?: number, index?: number) => {
@@ -60,4 +70,8 @@ export const coverImageURL = (group?: number, index?: number) => {
   }
 
   return `${process.env.API_SERVER}/cover/${group}${index}`
+}
+
+export const audioURL = (id: string) => {
+  return `${process.env.API_SERVER}/audio/${id}`
 }

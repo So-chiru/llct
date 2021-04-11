@@ -1,7 +1,9 @@
+import { MusicPlayerState } from '@/@types/state'
+
 class PlayerWave {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D
-  state: 'playing' | 'paused'
+  state: MusicPlayerState
   progress: number
 
   width: number
@@ -19,7 +21,7 @@ class PlayerWave {
     }
 
     this.context = context
-    this.state = 'paused'
+    this.state = MusicPlayerState.Paused
     this.progress = 0
 
     this.width = width
@@ -61,10 +63,20 @@ class PlayerWave {
     const sin = Math.sin(Date.now() / 1000)
     const cos = Math.cos(Date.now() / 1000)
 
+    let waveTo = 0
+
+    if (this.state === MusicPlayerState.Playing) {
+      waveTo = 12
+    } else if (this.state === MusicPlayerState.Paused) {
+      waveTo = 3
+    } else {
+      waveTo = 0
+    }
+
     const points = [
       [0, this.canvas.height * this.progress],
-      [33, this.canvas.height * this.progress + 12 * sin],
-      [66, this.canvas.height * this.progress + 12 * cos],
+      [33, this.canvas.height * this.progress + waveTo * sin],
+      [66, this.canvas.height * this.progress + waveTo * cos],
       [100, this.canvas.height * this.progress]
     ]
 

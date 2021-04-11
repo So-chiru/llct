@@ -25,3 +25,7 @@ interface MusicMetadata {
   image: string
   metadata?: MusicExtraMetadata
 }
+
+interface MusicMetadataWithID extends MusicMetadata {
+  id: string
+}
