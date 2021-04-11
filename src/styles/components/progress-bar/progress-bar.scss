@@ -54,6 +54,7 @@ $thumb-size: 16px;
     background: $dark-accent;
 
     transform: translateX(var(--translate, 0));
+    pointer-events: none;
   }
 
   .progress {

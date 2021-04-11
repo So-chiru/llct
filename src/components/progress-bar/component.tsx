@@ -1,5 +1,5 @@
 import '@/styles/components/progress-bar/progress-bar.scss'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 interface ProgressBarComponentProps {
   thumb?: boolean
@@ -9,11 +9,8 @@ interface ProgressBarComponentProps {
   seek?: (seekTo: number) => void
 }
 
-const timeSerialize = (num: number): string => {
-  const min = Math.floor(num / 60)
-  const sec = Math.round(num % 60)
-  return `${min < 10 ? '0' + min : min}:${sec < 10 ? '0' + sec : sec}`
-}
+const timeSerialize = (num: number): string =>
+  new Date(num * 1000).toISOString().substr(14, 5)
 
 const ProgressBarComponent = ({
   thumb,
@@ -27,21 +24,41 @@ const ProgressBarComponent = ({
   const [amf, setAmf] = useState<number>()
   const [listenerProgress, setListenerProgress] = useState<number>()
 
+  const seekWrapper = (seekTo: number) => {
+    if (seek) {
+      seek(seekTo)
+    }
+
+    setListenerProgress(seekTo)
+  }
+
   const clickHandler = (ev: MouseEvent) => {
     if (!progressRef.current || !seek) {
       return
     }
 
-    seek(ev.offsetX / progressRef.current.getBoundingClientRect().width)
+    seekWrapper(ev.offsetX / progressRef.current.getBoundingClientRect().width)
   }
+
+  const [seekControl, setSeekControl] = useState<number>(-1)
 
   if (progressRef.current) {
     if (typeof progressRect === 'undefined') {
+      let pointerDown = false
+      let internalRect = progressRef.current.getBoundingClientRect()
+
       const update = () => {
         updateProgressRect(true)
 
         requestAnimationFrame(() => {
-          const rect = progressRef.current?.getBoundingClientRect()
+          if (!progressRef.current) {
+            return
+          }
+
+          const rect = progressRef.current.getBoundingClientRect()
+
+          internalRect = rect
+
           updateProgressRect(rect)
         })
       }
@@ -53,6 +70,83 @@ const ProgressBarComponent = ({
           'click',
           clickHandler
         )
+
+        const dragHandler = (ev: MouseEvent) => {
+          ev.preventDefault()
+
+          if (!progressRef.current || !seek) {
+            return
+          }
+
+          if (ev.type === 'mousemove' && pointerDown) {
+            setSeekControl(ev.offsetX / internalRect.width)
+          } else if (ev.type === 'mousedown') {
+            pointerDown = true
+          } else if (
+            ev.type === 'mouseup' ||
+            (ev.type === 'mouseleave' && pointerDown)
+          ) {
+            pointerDown = false
+
+            if (seekControl > -1) {
+              seekWrapper(seekControl)
+            }
+
+            setSeekControl(-1)
+          }
+        }
+
+        let lastTouchPosition = -1
+        const touchHandler = (ev: TouchEvent) => {
+          ev.preventDefault()
+
+          if (!progressRef.current || !seek) {
+            return
+          }
+
+          if (ev.type === 'touchmove' && pointerDown) {
+            const pos =
+              (ev.touches[0].pageX - internalRect.x) / internalRect.width
+            setSeekControl(pos)
+
+            lastTouchPosition = pos
+          } else if (ev.type === 'touchstart') {
+            const pos =
+              (ev.touches[0].pageX - internalRect.x) / internalRect.width
+            setSeekControl(pos)
+
+            lastTouchPosition = pos
+
+            pointerDown = true
+          } else if (
+            ev.type === 'touchend' ||
+            (ev.type === 'touchcancel' && pointerDown)
+          ) {
+            pointerDown = false
+
+            if (lastTouchPosition > -1) {
+              seekWrapper(lastTouchPosition)
+            }
+
+            setSeekControl(-1)
+          }
+        }
+        ;['mousedown', 'mousemove', 'mouseup', 'mouseleave'].map(field => {
+          if (progressRef.current && progressRef.current.parentElement) {
+            progressRef.current.parentElement.addEventListener(
+              field,
+              dragHandler as () => void
+            )
+          }
+        })
+        ;['touchstart', 'touchmove', 'touchend', 'touchcancel'].map(field => {
+          if (progressRef.current && progressRef.current.parentElement) {
+            progressRef.current.parentElement.addEventListener(
+              field,
+              touchHandler as () => void
+            )
+          }
+        })
       }
 
       update()
@@ -65,7 +159,10 @@ const ProgressBarComponent = ({
           return
         }
 
-        setListenerProgress(listen())
+        if (seekControl < 0) {
+          setListenerProgress(listen())
+        }
+
         setAmf((setTimeout(update, 100) as unknown) as number)
       }
 
@@ -76,11 +173,14 @@ const ProgressBarComponent = ({
     }
   }
 
+  const chosenProgress =
+    seekControl < 0 ? listenerProgress || progress || 0 : seekControl
+
   return (
     <div className='llct-progress-bar-wrapper'>
       <div className='progress-bar-text-wrapper'>
         <div className='progress-bar-current'>
-          {timeSerialize((duration || 1) * (listenerProgress || progress || 0))}
+          {timeSerialize((duration || 1) * chosenProgress)}
         </div>
         <div className='progress-bar-duration'>
           {timeSerialize(duration || 1)}
@@ -90,9 +190,7 @@ const ProgressBarComponent = ({
       <div
         className='llct-progress-bar'
         style={{
-          ['--progress' as string]: (listenerProgress || progress || 0).toFixed(
-            2
-          )
+          ['--progress' as string]: chosenProgress.toFixed(2)
         }}
         ref={progressRef}
       >
@@ -103,7 +201,7 @@ const ProgressBarComponent = ({
               ['--translate' as string]:
                 (
                   ((progressRect instanceof DOMRect && progressRect?.width) ||
-                    100) * (listenerProgress || progress || 0)
+                    100) * chosenProgress
                 ).toFixed(1) + 'px'
             }}
           ></div>
