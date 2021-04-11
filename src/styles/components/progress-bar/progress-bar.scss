@@ -2,6 +2,39 @@
 
 $thumb-size: 16px;
 
+.llct-progress-bar-wrapper {
+  cursor: grab;
+}
+
+.llct-progress-bar-wrapper:active {
+  cursor: grabbing;
+}
+
+.llct-progress-bar-wrapper:hover {
+  .progress-bar-text-wrapper {
+    opacity: 1;
+  }
+}
+
+.progress-bar-text-wrapper {
+  position: relative;
+  display: flex;
+  height: 30px;
+  opacity: 0.6;
+  transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1);
+
+  pointer-events: none;
+}
+
+.progress-bar-current,
+.progress-bar-duration {
+  position: absolute;
+}
+
+.progress-bar-duration {
+  right: 0;
+}
+
 .llct-progress-bar {
   position: relative;
   min-width: 100px;

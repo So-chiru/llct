@@ -4,13 +4,21 @@ import { useRef, useState } from 'react'
 interface ProgressBarComponentProps {
   thumb?: boolean
   progress?: number
+  duration?: number
   listen?: () => number
   seek?: (seekTo: number) => void
+}
+
+const timeSerialize = (num: number): string => {
+  const min = Math.floor(num / 60)
+  const sec = Math.round(num % 60)
+  return `${min < 10 ? '0' + min : min}:${sec < 10 ? '0' + sec : sec}`
 }
 
 const ProgressBarComponent = ({
   thumb,
   progress,
+  duration,
   listen,
   seek
 }: ProgressBarComponentProps) => {
@@ -39,7 +47,13 @@ const ProgressBarComponent = ({
       }
 
       window.addEventListener('resize', update)
-      progressRef.current.addEventListener('click', clickHandler)
+
+      if (progressRef.current.parentElement) {
+        progressRef.current.parentElement.addEventListener(
+          'click',
+          clickHandler
+        )
+      }
 
       update()
     }
@@ -63,26 +77,39 @@ const ProgressBarComponent = ({
   }
 
   return (
-    <div
-      className='llct-progress-bar'
-      style={{
-        ['--progress' as string]: listenerProgress || progress?.toFixed(1)
-      }}
-      ref={progressRef}
-    >
-      {thumb && (
-        <div
-          className='thumb'
-          style={{
-            ['--translate' as string]:
-              ((progressRect instanceof DOMRect && progressRect?.width) ||
-                100) *
-                (listenerProgress || progress || 0) +
-              'px'
-          }}
-        ></div>
-      )}
-      <div className='progress'></div>
+    <div className='llct-progress-bar-wrapper'>
+      <div className='progress-bar-text-wrapper'>
+        <div className='progress-bar-current'>
+          {timeSerialize((duration || 1) * (listenerProgress || progress || 0))}
+        </div>
+        <div className='progress-bar-duration'>
+          {timeSerialize(duration || 1)}
+        </div>
+      </div>
+
+      <div
+        className='llct-progress-bar'
+        style={{
+          ['--progress' as string]: (listenerProgress || progress || 0).toFixed(
+            2
+          )
+        }}
+        ref={progressRef}
+      >
+        {thumb && (
+          <div
+            className='thumb'
+            style={{
+              ['--translate' as string]:
+                (
+                  ((progressRect instanceof DOMRect && progressRect?.width) ||
+                    100) * (listenerProgress || progress || 0)
+                ).toFixed(1) + 'px'
+            }}
+          ></div>
+        )}
+        <div className='progress'></div>
+      </div>
     </div>
   )
 }

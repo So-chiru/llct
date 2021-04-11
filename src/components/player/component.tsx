@@ -16,6 +16,7 @@ interface PlayerComponentPropsState {
   playState?: MusicPlayerState
   loadState?: PlayerLoadState
   progress?: number
+  duration?: number
 }
 
 interface PlayerComponentProps {
@@ -100,7 +101,8 @@ const PlayerComponent = ({
             <div className='progress-zone'>
               <ProgressBarComponent
                 thumb={true}
-                progress={controller?.progress()}
+                progress={state.progress}
+                duration={state.duration}
                 listen={
                   state.playState === MusicPlayerState.Playing && show
                     ? controller?.progress

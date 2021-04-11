@@ -116,7 +116,8 @@ const PlayerContainer = () => {
       music={playing.queue[playing.pointer]}
       state={{
         playState: playing.state.player,
-        progress: playerInstance?.progress
+        progress: playerInstance?.progress,
+        duration: playerInstance?.duration
       }}
       show={show}
       controller={controller}
