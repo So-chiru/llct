@@ -9,24 +9,22 @@ interface CallContainerProps {
   current: () => number
   update: boolean
   id: string
+  lastSeek: number
 }
 
 interface LineComponentProps {
   line: LLCTCallLine
   index: number
   time: number
+  timeline: LLCTCall | null
 }
 
-const LineComponent = ({ line, index, time }: LineComponentProps) => {
+const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
   const activeLine = line.start < time && line.end > time
 
-  return (
-    <p
-      className='llct-call-line'
-      key={`call-line:${index}:${activeLine}`}
-      data-active={activeLine}
-    >
-      {...line.words.map((word, i) => {
+  const words = useMemo(
+    () =>
+      line.words.map((word, i) => {
         const timeLessThanEnd = time < word.end
         const active = activeLine && time > word.start && timeLessThanEnd
 
@@ -41,12 +39,33 @@ const LineComponent = ({ line, index, time }: LineComponentProps) => {
             {word.text.length ? word.text : <br></br>}
           </span>
         )
-      })}
+      }),
+    [
+      timeline,
+      activeLine,
+      line.words.filter(
+        word => activeLine && time > word.start && time < word.end
+      ).length
+    ]
+  )
+
+  return (
+    <p
+      className='llct-call-line'
+      key={`call-line:${index}:${activeLine}`}
+      data-active={activeLine}
+    >
+      {...words}
     </p>
   )
 }
 
-const CallContainer = ({ update, current, id }: CallContainerProps) => {
+const CallContainer = ({
+  update,
+  lastSeek,
+  current,
+  id
+}: CallContainerProps) => {
   const call = useSelector((state: RootState) => state.call)
   const dispatch = useDispatch()
 
@@ -70,23 +89,21 @@ const CallContainer = ({ update, current, id }: CallContainerProps) => {
     dispatch(callData.load(id))
   }
 
-  // TODO : LoaderComponent로 대체
-  if (!call.data) {
-    return <p>Loading</p>
-  }
-
   return (
     <div className='llct-call'>
-      {...call.data.timeline.map((v, i) => {
-        return (
-          <LineComponent
-            key={`line:${i}`}
-            index={i}
-            line={v}
-            time={current()}
-          ></LineComponent>
-        )
-      })}
+      {...call.data
+        ? call.data.timeline.map((v, i) => {
+            return (
+              <LineComponent
+                timeline={call.data}
+                key={`line:${i}${update}${lastSeek}`}
+                index={i}
+                line={v}
+                time={current()}
+              ></LineComponent>
+            )
+          })
+        : []}
     </div>
   )
 }

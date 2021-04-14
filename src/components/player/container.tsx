@@ -26,6 +26,7 @@ const PlayerContainer = () => {
   const history = useHistory()
 
   const [eqVisible, setEQVisible] = useState<boolean>(false)
+  const [lastSeek, setLastSeek] = useState<number>(0)
 
   const playing = useSelector((state: RootState) => state.playing)
   const songs = useSelector((state: RootState) => state.songs.items)
@@ -138,6 +139,7 @@ const PlayerContainer = () => {
       }
 
       playing.instance.progress = seekTo
+      setLastSeek(Date.now())
     },
 
     prev: () => {
@@ -171,7 +173,8 @@ const PlayerContainer = () => {
       instance={playing.instance}
       state={{
         playState: playing.state.player,
-        loadState: playing.state.load
+        loadState: playing.state.load,
+        lastSeek
       }}
       showEQ={eqVisible}
       controller={controller}

@@ -24,6 +24,7 @@ import { RootState } from '@/store/index'
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
   loadState?: PlayerLoadState
+  lastSeek: number
 }
 
 interface PlayerComponentProps {
@@ -150,6 +151,7 @@ const PlayerComponent = ({
                 state.playState === MusicPlayerState.Playing && showPlayer
               }
               current={() => instance.timecode}
+              lastSeek={state.lastSeek}
               id={music.id}
             ></CallContainer>
           </div>
