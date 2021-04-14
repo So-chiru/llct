@@ -4,7 +4,7 @@ import '@/styles/components/call/call.scss'
 
 interface CallContainerProps {
   data: LLCTCall
-  listen?: () => number
+  listen: () => number | number
 }
 
 interface LineComponentProps {
@@ -40,13 +40,13 @@ const LineComponent = ({ line, time }: LineComponentProps) => {
 const CallContainer = ({ data, listen }: CallContainerProps) => {
   const [amf, setAmf] = useState<number>(0)
 
-  if (listen && amf == 0) {
+  if (typeof listen === 'function' && amf == 0) {
     const update = () => {
       setAmf((requestAnimationFrame(update) as unknown) as number)
     }
 
     update()
-  } else if (!listen && amf) {
+  } else if (typeof listen !== 'function' && amf) {
     cancelAnimationFrame(amf)
 
     if (amf != 0) {
@@ -61,7 +61,7 @@ const CallContainer = ({ data, listen }: CallContainerProps) => {
           <LineComponent
             key={`line:${i}`}
             line={v}
-            time={(listen && listen()) || 0}
+            time={typeof listen === 'function' ? listen() : listen}
           ></LineComponent>
         )
       })}

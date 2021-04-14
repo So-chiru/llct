@@ -35,12 +35,16 @@ $thumb-size: 16px;
   right: 0;
 }
 
+.llct-dark .llct-progress-bar {
+  background: $dark-semi-accent;
+}
+
 .llct-progress-bar {
   position: relative;
   min-width: 100px;
   min-height: 4px;
 
-  background: $dark-semi-accent;
+  background: $semi-accent;
 
   .thumb {
     position: absolute;

@@ -147,7 +147,7 @@ const PlayerComponent = ({
                 listen={
                   state.playState === MusicPlayerState.Playing && show
                     ? controller?.timecode
-                    : undefined
+                    : state.progress
                 }
               ></CallContainer>
             ) : (

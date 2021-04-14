@@ -32,6 +32,22 @@
   }
 }
 
+.llct-dark .llct-player {
+  background: linear-gradient(
+    to right bottom,
+    $dark-semi-accent,
+    $dark-background
+  );
+
+  .controls {
+    & > svg {
+      &:hover {
+        background: rgba(0, 0, 0, 0.22);
+      }
+    }
+  }
+}
+
 .llct-player {
   position: fixed;
   right: 0;
@@ -248,7 +264,7 @@
       transition: 0.23s background cubic-bezier(0.19, 1, 0.22, 1);
 
       &:hover {
-        background: rgba(0, 0, 0, 0.22);
+        background: rgba(0, 0, 0, 0.08);
       }
 
       &:last-child {
@@ -285,9 +301,5 @@
     }
   }
 
-  background: linear-gradient(
-    to right bottom,
-    $dark-semi-accent,
-    $dark-background
-  );
+  background: linear-gradient(to right bottom, $semi-accent, $background);
 }

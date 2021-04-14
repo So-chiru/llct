@@ -16,19 +16,75 @@
   color: #8d9194;
 }
 
+$color-normal: #666b6b;
+$color-normal-dark: #bcc0c2;
+$color-call: #28c335;
+$color-comment: #499797;
+$color-sing-along: #0a8bf5;
+$color-sing-along-dark: lighten(#0a8bf5, 10);
+
+.llct-call-word[data-type='0'] {
+  color: $color-normal;
+
+  &[data-passed='true'] {
+    color: lighten($color-normal, 20);
+  }
+}
+
+.llct-dark .llct-call-word[data-type='0'] {
+  color: $color-normal-dark;
+
+  &[data-passed='true'] {
+    color: darken($color-normal-dark, 30);
+  }
+}
+
 .llct-call-word[data-type='1'] {
-  opacity: 1;
-  color: rgb(59, 170, 59);
+  color: $color-call;
+
+  &[data-passed='true'] {
+    color: lighten($color-call, 20);
+  }
+}
+
+.llct-dark .llct-call-word[data-type='1'] {
+  color: $color-call;
+
+  &[data-passed='true'] {
+    color: darken($color-call, 20);
+  }
 }
 
 .llct-call-word[data-type='2'] {
-  opacity: 1;
-  color: rgb(104, 108, 110);
+  color: $color-comment;
+
+  &[data-passed='true'] {
+    color: lighten($color-comment, 20);
+  }
+}
+
+.llct-dark .llct-call-word[data-type='2'] {
+  color: $color-comment;
+
+  &[data-passed='true'] {
+    color: darken($color-comment, 20);
+  }
 }
 
 .llct-call-word[data-type='3'] {
-  opacity: 1;
-  color: rgb(26, 192, 243);
+  color: $color-sing-along;
+
+  &[data-passed='true'] {
+    color: lighten($color-sing-along, 20);
+  }
+}
+
+.llct-dark .llct-call-word[data-type='3'] {
+  color: $color-sing-along;
+
+  &[data-passed='true'] {
+    color: darken($color-sing-along, 10);
+  }
 }
 
 .llct-call-word[data-passed='true'] {
@@ -36,6 +92,12 @@
 }
 
 .llct-call-word[data-active='true'] {
+  opacity: 1;
+  color: white;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12);
+}
+
+.llct-dark .llct-call-word[data-active='true'] {
   opacity: 1;
   color: white;
 }

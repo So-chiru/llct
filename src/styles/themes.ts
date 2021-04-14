@@ -8,7 +8,7 @@ export interface ThemeInterface {
 
 export const light: ThemeInterface = {
   background: colors.background,
-  text: colors.accent,
+  text: colors.accentStrong,
   subtext: colors.backgroundSemiAccent
 }
 
