@@ -15,6 +15,7 @@ import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 import ProgressBarComponent from '@/components/progress-bar/component'
 import UpNextComponent from './upnext/container'
 import EqualizerComponent from './equalizer/container'
+import CallContainer from '../call/container'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
@@ -28,6 +29,7 @@ interface PlayerComponentProps {
   show: boolean
   showEQ: boolean
   state: PlayerComponentPropsState
+  callData?: LLCTCall | null
   music?: MusicMetadata
   controller?: PlayerController
   clickOut: () => void
@@ -38,6 +40,7 @@ const PlayerComponent = ({
   state,
   show,
   showEQ,
+  callData,
   controller,
   clickOut
 }: PlayerComponentProps) => {
@@ -137,7 +140,20 @@ const PlayerComponent = ({
               <UpNextComponent></UpNextComponent>
             </div>
           </div>
-          <div className='lyrics'></div>
+          <div className='lyrics'>
+            {callData ? (
+              <CallContainer
+                data={callData}
+                listen={
+                  state.playState === MusicPlayerState.Playing && show
+                    ? controller?.timecode
+                    : undefined
+                }
+              ></CallContainer>
+            ) : (
+              <div className='no-call'>콜 데이터가 없습니다.</div>
+            )}
+          </div>
         </div>
       </div>
     </>

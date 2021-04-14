@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { RootState } from '@/store'
 import { showPlayer } from '@/store/ui/actions'
+import * as callData from '@/store/call/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -36,6 +37,7 @@ const PlayerContainer = () => {
   const playing = useSelector((state: RootState) => state.playing)
   const show = useSelector((state: RootState) => state.ui.player.show)
   const data = useSelector((state: RootState) => state.songs)
+  const call = useSelector((state: RootState) => state.call)
 
   if (initial) {
     history.listen(listener => {
@@ -98,6 +100,13 @@ const PlayerContainer = () => {
     playing.instance.src !== audioURL(playing.queue[playing.pointer]?.id || '')
   ) {
     playing.instance.load(audioURL(playing.queue[playing.pointer]?.id || ''))
+  }
+
+  if (
+    playing.queue[playing.pointer] &&
+    call.id !== playing.queue[playing.pointer]?.id
+  ) {
+    dispatch(callData.load(playing.queue[playing.pointer].id))
   }
 
   if (dataInitial && data.items) {
@@ -174,6 +183,14 @@ const PlayerContainer = () => {
 
     toggleEQ: () => {
       setEQVisible(!eqVisible)
+    },
+
+    timecode: () => {
+      if (playing.instance) {
+        return playing.instance.timecode()
+      }
+
+      return 0
     }
   }
 
@@ -189,6 +206,7 @@ const PlayerContainer = () => {
       }}
       show={show}
       showEQ={eqVisible}
+      callData={call.data}
       controller={controller}
       clickOut={closePlayer}
     ></PlayerComponent>

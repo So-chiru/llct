@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux'
 import { call, put, takeEvery } from 'redux-saga/effects'
 
 import * as apis from '../api'
@@ -12,6 +13,17 @@ function * fetchAPIData () {
   }
 }
 
+function * fetchCallData ({ id }: AnyAction) {
+  try {
+    const data = yield call(apis.fetchCallData, id)
+
+    yield put({ type: '@llct/api_call/success', data: data })
+  } catch (e) {
+    yield put({ type: '@llct/api_call/failed', message: e.message })
+  }
+}
+
 export function * fetchAPIDataSaga () {
   yield takeEvery('@llct/api_lists/request', fetchAPIData)
+  yield takeEvery('@llct/api_call/request', fetchCallData)
 }

@@ -1,0 +1,41 @@
+.llct-call {
+  position: relative;
+}
+
+.llct-call-line {
+  display: table;
+  margin: 0;
+}
+
+.llct-call-word {
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-weight: bold;
+  transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
+    0.23s color cubic-bezier(0.19, 1, 0.22, 1);
+  color: #8d9194;
+}
+
+.llct-call-word[data-type='1'] {
+  opacity: 1;
+  color: rgb(59, 170, 59);
+}
+
+.llct-call-word[data-type='2'] {
+  opacity: 1;
+  color: rgb(104, 108, 110);
+}
+
+.llct-call-word[data-type='3'] {
+  opacity: 1;
+  color: rgb(26, 192, 243);
+}
+
+.llct-call-word[data-passed='true'] {
+  opacity: 0.5;
+}
+
+.llct-call-word[data-active='true'] {
+  opacity: 1;
+  color: white;
+}

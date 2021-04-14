@@ -38,14 +38,14 @@ const PlayerWaveComponent = ({
     if (state.wave) {
       state.wave.updateProgress(progress)
 
+      state.wave.state = playerState
+
       // 플레이어 버튼이 표시된 경우 파도 시작
-      if (show) {
+      if (show && !state.wave.started) {
         state.wave.start()
-      } else {
+      } else if (state.wave.started) {
         state.wave.stop()
       }
-
-      state.wave.state = playerState
     }
   })
 

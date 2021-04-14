@@ -37,6 +37,10 @@ class PlayerWave {
     this.progress = 1 - progress
   }
 
+  get started () {
+    return this.raf !== 0
+  }
+
   start () {
     if (this.raf) {
       return

@@ -11,3 +11,7 @@ export const fetchAPI = async () => {
       return p.data
     })
 }
+
+export const fetchCallData = async (id: string): Promise<LLCTCall> => {
+  return fetch(`${process.env.API_SERVER}/call/${id}`).then(makeItJSON)
+}

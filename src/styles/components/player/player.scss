@@ -92,19 +92,33 @@
 
   .contents {
     display: flex;
-    position: absolute;
+    position: relative;
     top: 5%;
     left: 5%;
+
+    flex-direction: column;
+
+    @media screen and (max-width: $desktop) {
+      height: 90vh;
+      overflow-y: auto;
+    }
+
+    @media screen and (min-width: $desktop) {
+      flex-direction: row;
+    }
   }
 
-  .dashboard {
-    position: fixed;
-    margin-top: 5%;
-
+  .dashboard,
+  .lyrics {
     @media screen and (max-width: $desktop) {
       width: 85%;
       margin-left: 2.5%;
     }
+  }
+
+  .dashboard {
+    position: relative;
+    margin-top: 5%;
 
     @media screen and (min-width: $desktop) {
       width: 480px;
@@ -117,6 +131,30 @@
     h5,
     p {
       margin: 0;
+    }
+
+    flex: 4;
+  }
+
+  .lyrics {
+    position: relative;
+
+    @media screen and (max-width: $desktop) {
+      margin-top: 6vh;
+    }
+
+    @media screen and (min-width: $desktop) {
+      margin-left: 5%;
+      width: 60%;
+      height: 90vh;
+
+      overflow: auto;
+      flex: 5;
+      margin-right: 8vw;
+    }
+
+    .no-call {
+      height: 80vh;
     }
   }
 
