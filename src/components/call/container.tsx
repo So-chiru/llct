@@ -1,22 +1,31 @@
 import { useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/call/call.scss'
+import { RootState } from '@/store'
+import * as callData from '@/store/call/actions'
 
 interface CallContainerProps {
-  data: LLCTCall
-  listen: () => number | number
+  current: () => number
+  update: boolean
+  id: string
 }
 
 interface LineComponentProps {
   line: LLCTCallLine
+  index: number
   time: number
 }
 
-const LineComponent = ({ line, time }: LineComponentProps) => {
+const LineComponent = ({ line, index, time }: LineComponentProps) => {
   const activeLine = line.start < time && line.end > time
 
   return (
-    <p className='llct-call-line' data-active={activeLine}>
+    <p
+      className='llct-call-line'
+      key={`call-line:${index}:${activeLine}`}
+      data-active={activeLine}
+    >
       {...line.words.map((word, i) => {
         const timeLessThanEnd = time < word.end
         const active = activeLine && time > word.start && timeLessThanEnd
@@ -37,16 +46,19 @@ const LineComponent = ({ line, time }: LineComponentProps) => {
   )
 }
 
-const CallContainer = ({ data, listen }: CallContainerProps) => {
+const CallContainer = ({ update, current, id }: CallContainerProps) => {
+  const call = useSelector((state: RootState) => state.call)
+  const dispatch = useDispatch()
+
   const [amf, setAmf] = useState<number>(0)
 
-  if (typeof listen === 'function' && amf == 0) {
+  if (update && amf == 0) {
     const update = () => {
       setAmf((requestAnimationFrame(update) as unknown) as number)
     }
 
     update()
-  } else if (typeof listen !== 'function' && amf) {
+  } else if (!update && amf) {
     cancelAnimationFrame(amf)
 
     if (amf != 0) {
@@ -54,14 +66,24 @@ const CallContainer = ({ data, listen }: CallContainerProps) => {
     }
   }
 
+  if (call.id !== id && id) {
+    dispatch(callData.load(id))
+  }
+
+  // TODO : LoaderComponent로 대체
+  if (!call.data) {
+    return <p>Loading</p>
+  }
+
   return (
     <div className='llct-call'>
-      {...data.timeline.map((v, i) => {
+      {...call.data.timeline.map((v, i) => {
         return (
           <LineComponent
             key={`line:${i}`}
+            index={i}
             line={v}
-            time={typeof listen === 'function' ? listen() : listen}
+            time={current()}
           ></LineComponent>
         )
       })}

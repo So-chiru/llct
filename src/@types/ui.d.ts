@@ -7,3 +7,7 @@ interface UIReducerAction {
   type: string
   data: unknown
 }
+
+interface LLCTPlayerRelatedComponentProps {
+  showPlayer: boolean
+}

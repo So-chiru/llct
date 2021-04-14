@@ -11,8 +11,6 @@ interface PlayerController {
   play: () => void
   pause: () => void
   prev: () => void
-  progress: () => number
-  timecode: () => number
   next: () => void
   seek: (seekTo: number) => void
   toggleEQ: () => void

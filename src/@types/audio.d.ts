@@ -11,8 +11,7 @@ interface LLCTAudioStack {
   current: number
   duration: number
   progress: number
-
-  timecode: () => number
+  timecode: number
 
   /**
    * 오디오 스택이 음향 효과를 지원하는지에 대한 여부.

@@ -5,39 +5,43 @@ import { useDispatch, useSelector } from 'react-redux'
 import PlayerButtonComponent from './component'
 
 import { MusicPlayerState } from '@/@types/state'
-import { showPlayer } from '@/store/ui/actions'
+import * as ui from '@/store/ui/actions'
 
 const PlayerButtonContainer = () => {
   const dispatch = useDispatch()
 
   const playing = useSelector((state: RootState) => state.playing)
-  const show = useSelector((state: RootState) => state.ui.player.show)
+  const showPlayer = useSelector((state: RootState) => state.ui.player.show)
 
   const [amf, setAmf] = useState<number>()
   const [listenerProgress, setListenerProgress] = useState<number>()
 
   const clickHandler = () => {
-    dispatch(showPlayer(true))
+    dispatch(ui.showPlayer(true))
   }
 
-  if (playing.state.player === MusicPlayerState.Playing && !show && !amf) {
+  if (
+    playing.state.player === MusicPlayerState.Playing &&
+    !showPlayer &&
+    !amf
+  ) {
     const update = () => {
       setListenerProgress(playing.instance?.progress)
-      setAmf((setTimeout(update, 100) as unknown) as number)
     }
 
+    setAmf((setInterval(update, 100) as unknown) as number)
     update()
   } else if (
-    (playing.state.player !== MusicPlayerState.Playing || show) &&
+    (playing.state.player !== MusicPlayerState.Playing || showPlayer) &&
     amf
   ) {
-    clearTimeout(amf)
+    clearInterval(amf)
     setAmf(0)
   }
 
   return (
     <PlayerButtonComponent
-      show={!show}
+      show={!showPlayer}
       music={playing.queue[playing.pointer]}
       progress={listenerProgress || playing.instance?.progress || 0}
       state={playing.state.player}

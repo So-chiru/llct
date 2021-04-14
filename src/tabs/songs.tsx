@@ -37,16 +37,13 @@ const SongsTab = () => {
         })}
       </div>
       {!songs.items.songs[active].length ? (
-        <EmptyComponent
-          text='텅 비었어요...'
-          height='30vh'
-        ></EmptyComponent>
+        <EmptyComponent text='텅 비었어요...' height='30vh'></EmptyComponent>
       ) : null}
       <div className='songs-list-wrapper'>
         {...(songs.items.songs[active] || []).map((value, index) => {
           return (
             <MusicCardContainer
-              key={`songs:${index}`}
+              key={`songs:${active}:${index}`}
               music={value}
               group={active}
               index={index + 1}

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { RootState } from '@/store'
-import { showPlayer } from '@/store/ui/actions'
-import * as callData from '@/store/call/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -23,53 +21,72 @@ interface PlayerRouterState {
   id?: string
 }
 
-const toggleScrollbar = (on: boolean) => {
-  document.documentElement.style.overflow = on ? 'unset' : 'hidden'
-}
-
 const PlayerContainer = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const [initial, setIntitial] = useState<boolean>(true)
-  const [dataInitial, setDataIntitial] = useState<boolean>(true)
+
   const [eqVisible, setEQVisible] = useState<boolean>(false)
 
   const playing = useSelector((state: RootState) => state.playing)
-  const show = useSelector((state: RootState) => state.ui.player.show)
-  const data = useSelector((state: RootState) => state.songs)
-  const call = useSelector((state: RootState) => state.call)
+  const songs = useSelector((state: RootState) => state.songs.items)
 
-  if (initial) {
-    history.listen(listener => {
+  useEffect(() => {
+    if (!songs) {
+      return
+    }
+
+    // 플레이어가 최초로 로딩되었고, URL에 /play/ 가 있는 경우
+    if (history.location.pathname.indexOf('/play/') > -1) {
+      const split = history.location.pathname.split('/')
+
+      let id = split[split.length - 1]
+
       if (
-        listener.pathname.indexOf('/play') === -1 ||
-        (listener.state === 'object' &&
-          (listener.state as PlayerRouterState).closePlayer)
+        history.location.state &&
+        (history.location.state as PlayerRouterState).id
       ) {
-        dispatch(showPlayer(false))
+        id =
+          (history.location.state as PlayerRouterState).id ||
+          split[split.length - 1]
       }
 
-      // TODO : 플레이어에서 실행
-    })
-
-    setIntitial(false)
-  }
+      requestAnimationFrame(() => {
+        dispatch(play(searchById(id, songs as LLCTSongDataV2)))
+      })
+    }
+  }, [songs])
 
   if (!playing.instance) {
+    // history.listen(listener => {
+    //   if (
+    //     listener.pathname.indexOf('/play') === -1 ||
+    //     (listener.state === 'object' &&
+    //       (listener.state as PlayerRouterState).closePlayer)
+    //   ) {
+    //     closePlayer()
+    //   }
+
+    //   // TODO : 플레이어에서 실행
+    // })
+
     // TODO : 오디오 스택을 설정에서 지정할 수 있게 하기
     const instance = new LLCTNativeAudio()
 
-    if (playing.pointer && playing.queue[playing.pointer]) {
+    if (
+      playing.pointer !== -1 &&
+      playing.queue[playing.pointer] &&
+      playing.queue[playing.pointer].id
+    ) {
       instance.load(audioURL(playing.queue[playing.pointer].id))
     }
 
-    instance.events.on('play', () => {
+    instance.events.on('play', () =>
       dispatch(setPlayState(MusicPlayerState.Playing))
-    })
+    )
 
-    instance.events.on('pause', () => {
+    instance.events.on('pause', () =>
       dispatch(setPlayState(MusicPlayerState.Paused))
-    })
+    )
 
     instance.events.on('end', () => {
       // TODO : 재생이 끝났을 경우 다음 곡 재생하거나 반복하는 이벤트 처리
@@ -96,49 +113,14 @@ const PlayerContainer = () => {
     })
 
     dispatch(setInstance(instance))
+
+    return null
   } else if (
-    playing.instance.src !== audioURL(playing.queue[playing.pointer]?.id || '')
+    playing.pointer !== -1 &&
+    playing.instance.src !== audioURL(playing.queue[playing.pointer]?.id)
   ) {
-    playing.instance.load(audioURL(playing.queue[playing.pointer]?.id || ''))
+    playing.instance.load(audioURL(playing.queue[playing.pointer]?.id))
   }
-
-  if (
-    playing.queue[playing.pointer] &&
-    call.id !== playing.queue[playing.pointer]?.id
-  ) {
-    dispatch(callData.load(playing.queue[playing.pointer].id))
-  }
-
-  if (dataInitial && data.items) {
-    if (history.location.pathname.indexOf('/play/') > -1) {
-      const split = history.location.pathname.split('/')
-
-      let id = split[split.length - 1]
-
-      if (
-        history.location.state &&
-        (history.location.state as PlayerRouterState).id
-      ) {
-        id =
-          (history.location.state as PlayerRouterState).id ||
-          split[split.length - 1]
-      }
-
-      requestAnimationFrame(() => {
-        if (data.items) {
-          dispatch(play(searchById(id, data.items)))
-        }
-      })
-    }
-
-    setDataIntitial(false)
-  }
-
-  const closePlayer = () => {
-    dispatch(showPlayer(false))
-  }
-
-  toggleScrollbar(!show)
 
   // 플레이어 컨트롤러 지정. 여기서 UI 동작을 수행했을 때 동작할 액션을 정의합니다.
   const controller: PlayerController = {
@@ -149,9 +131,6 @@ const PlayerContainer = () => {
     pause: () => {
       playing.instance?.pause()
       dispatch(setPlayState(MusicPlayerState.Paused))
-    },
-    progress: () => {
-      return playing.instance?.progress || 0
     },
     seek: (seekTo: number) => {
       if (!playing.instance) {
@@ -183,32 +162,19 @@ const PlayerContainer = () => {
 
     toggleEQ: () => {
       setEQVisible(!eqVisible)
-    },
-
-    timecode: () => {
-      if (playing.instance) {
-        return playing.instance.timecode()
-      }
-
-      return 0
     }
   }
 
   return (
     <PlayerComponent
       music={playing.queue[playing.pointer]}
+      instance={playing.instance}
       state={{
         playState: playing.state.player,
-        loadState: playing.state.load,
-        progress: playing.instance?.progress,
-        duration: playing.instance?.duration,
-        supportEffects: playing.instance?.supportEffects
+        loadState: playing.state.load
       }}
-      show={show}
       showEQ={eqVisible}
-      callData={call.data}
       controller={controller}
-      clickOut={closePlayer}
     ></PlayerComponent>
   )
 }

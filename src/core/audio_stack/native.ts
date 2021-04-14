@@ -76,8 +76,8 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
     this.current = this.duration * seek
   }
 
-  timecode () {
-    return Math.floor(this.current * 100)
+  get timecode () {
+    return ~~(this.current * 100)
   }
 
   get volume () {

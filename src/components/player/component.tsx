@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/player/player.scss'
 import {
@@ -16,38 +17,47 @@ import ProgressBarComponent from '@/components/progress-bar/component'
 import UpNextComponent from './upnext/container'
 import EqualizerComponent from './equalizer/container'
 import CallContainer from '../call/container'
+import * as ui from '@/store/ui/actions'
+
+import { RootState } from '@/store/index'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
   loadState?: PlayerLoadState
-  progress?: number
-  duration?: number
-  supportEffects?: boolean
 }
 
 interface PlayerComponentProps {
-  show: boolean
   showEQ: boolean
   state: PlayerComponentPropsState
-  callData?: LLCTCall | null
-  music?: MusicMetadata
-  controller?: PlayerController
-  clickOut: () => void
+  music: MusicMetadataWithID
+  instance: LLCTAudioStack
+  controller: PlayerController
+}
+
+const toggleScrollbar = (on: boolean) => {
+  document.documentElement.style.overflow = on ? 'unset' : 'hidden'
 }
 
 const PlayerComponent = ({
-  music,
+  music = {
+    id: '',
+    title: 'Loading',
+    artist: 'Loading',
+    image: ''
+  },
   state,
-  show,
+  instance,
   showEQ,
-  callData,
-  controller,
-  clickOut
+  controller
 }: PlayerComponentProps) => {
-  const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
-  const [initial, setInitial] = useState<boolean>(true)
+  const dispatch = useDispatch()
 
-  if (initial) {
+  const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
+  const showPlayer = useSelector((state: RootState) => state.ui.player.show)
+
+  toggleScrollbar(!showPlayer)
+
+  useEffect(() => {
     // positions.css : $desktop
     const media = window.matchMedia('screen and (max-width: 1240px)')
     media.addEventListener('change', ev => {
@@ -57,81 +67,75 @@ const PlayerComponent = ({
     if (playerNarrow !== media.matches) {
       setPlayerNarrow(media.matches)
     }
+  }, [])
 
-    setInitial(false)
+  const closePlayer = () => {
+    dispatch(ui.showPlayer(false))
   }
+
+  const showString = showPlayer ? ' show' : ''
 
   return (
     <>
       <div
-        className={'llct-player-background' + (show ? ' show' : '')}
-        onClick={clickOut}
+        className={'llct-player-background' + showString}
+        onClick={closePlayer}
       ></div>
-      <div className={'llct-player' + (show ? ' show' : '')}>
+      <div className={'llct-player' + showString}>
         <div className='close'>
           {playerNarrow ? (
-            <MdKeyboardArrowDown onClick={clickOut}></MdKeyboardArrowDown>
+            <MdKeyboardArrowDown onClick={closePlayer}></MdKeyboardArrowDown>
           ) : (
-            <MdKeyboardArrowLeft onClick={clickOut}></MdKeyboardArrowLeft>
+            <MdKeyboardArrowLeft onClick={closePlayer}></MdKeyboardArrowLeft>
           )}
         </div>
         <div className='contents'>
           <div className='dashboard'>
             <div className='dashboard-column metadata-zone'>
               <div className='texts'>
-                <h1 className='title' title={music?.title}>
-                  {music?.title}
+                <h1 className='title' title={music.title}>
+                  {music.title}
                 </h1>
-                <h3
-                  className='artist'
-                  title={
-                    typeof music?.artist === 'string'
-                      ? music?.artist
-                      : String(music?.artist)
-                  }
-                >
-                  {music?.artist}
+                <h3 className='artist' title={music.artist as string}>
+                  {music.artist}
                 </h3>
               </div>
               <div className='controls'>
                 {state.playState === MusicPlayerState.Playing ? (
-                  <MdPause onClick={() => controller?.pause()}></MdPause>
+                  <MdPause onClick={() => controller.pause()}></MdPause>
                 ) : (
-                  <MdPlayArrow onClick={() => controller?.play()}></MdPlayArrow>
+                  <MdPlayArrow onClick={() => controller.play()}></MdPlayArrow>
                 )}
                 <MdSkipPrevious
-                  onClick={() => controller?.prev()}
+                  onClick={() => controller.prev()}
                 ></MdSkipPrevious>
                 <MdSkipNext onClick={() => controller?.next()}></MdSkipNext>
                 <MdEqualizer
-                  onClick={() => controller?.toggleEQ()}
+                  onClick={() => controller.toggleEQ()}
                 ></MdEqualizer>
               </div>
               <div className='image'>
                 <img
-                  alt={`${music?.title || '노래'} 앨범 커버`}
+                  alt={`${music.title} 앨범 커버`}
                   src={typeof music !== 'undefined' ? music.image : ''}
                 ></img>
               </div>
             </div>
             <div className='dashboard-column progress-zone'>
               <ProgressBarComponent
-                thumb={true}
-                progress={state.progress}
-                duration={state.duration}
-                listen={
-                  state.playState === MusicPlayerState.Playing && show
-                    ? controller?.progress
-                    : undefined
+                progress={() => instance.progress}
+                duration={instance.duration || 1}
+                update={
+                  state.playState === MusicPlayerState.Playing && showPlayer
                 }
-                seek={controller?.seek}
+                seek={controller.seek}
               ></ProgressBarComponent>
             </div>
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>EQ</h1>
                 <EqualizerComponent
-                  supportEffects={state.supportEffects || false}
+                  supportEffects={instance.supportEffects}
                 ></EqualizerComponent>
               </div>
             )}
@@ -141,18 +145,13 @@ const PlayerComponent = ({
             </div>
           </div>
           <div className='lyrics'>
-            {callData ? (
-              <CallContainer
-                data={callData}
-                listen={
-                  state.playState === MusicPlayerState.Playing && show
-                    ? controller?.timecode
-                    : state.progress
-                }
-              ></CallContainer>
-            ) : (
-              <div className='no-call'>콜 데이터가 없습니다.</div>
-            )}
+            <CallContainer
+              update={
+                state.playState === MusicPlayerState.Playing && showPlayer
+              }
+              current={() => instance.timecode}
+              id={music.id}
+            ></CallContainer>
           </div>
         </div>
       </div>
