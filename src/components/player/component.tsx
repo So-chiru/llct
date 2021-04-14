@@ -6,21 +6,27 @@ import {
   MdKeyboardArrowLeft,
   MdEqualizer,
   MdPause,
-  MdPlayArrow
+  MdPlayArrow,
+  MdSkipPrevious,
+  MdSkipNext
 } from 'react-icons/md'
 import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 
 import ProgressBarComponent from '@/components/progress-bar/component'
+import UpNextComponent from './upnext/container'
+import EqualizerComponent from './equalizer/container'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
   loadState?: PlayerLoadState
   progress?: number
   duration?: number
+  supportEffects?: boolean
 }
 
 interface PlayerComponentProps {
   show: boolean
+  showEQ: boolean
   state: PlayerComponentPropsState
   music?: MusicMetadata
   controller?: PlayerController
@@ -31,6 +37,7 @@ const PlayerComponent = ({
   music,
   state,
   show,
+  showEQ,
   controller,
   clickOut
 }: PlayerComponentProps) => {
@@ -67,7 +74,7 @@ const PlayerComponent = ({
         </div>
         <div className='contents'>
           <div className='dashboard'>
-            <div className='metadata-zone'>
+            <div className='dashboard-column metadata-zone'>
               <div className='texts'>
                 <h1 className='title' title={music?.title}>
                   {music?.title}
@@ -89,7 +96,13 @@ const PlayerComponent = ({
                 ) : (
                   <MdPlayArrow onClick={() => controller?.play()}></MdPlayArrow>
                 )}
-                <MdEqualizer></MdEqualizer>
+                <MdSkipPrevious
+                  onClick={() => controller?.prev()}
+                ></MdSkipPrevious>
+                <MdSkipNext onClick={() => controller?.next()}></MdSkipNext>
+                <MdEqualizer
+                  onClick={() => controller?.toggleEQ()}
+                ></MdEqualizer>
               </div>
               <div className='image'>
                 <img
@@ -98,10 +111,9 @@ const PlayerComponent = ({
                 ></img>
               </div>
             </div>
-            <div className='progress-zone'>
+            <div className='dashboard-column progress-zone'>
               <ProgressBarComponent
                 thumb={true}
-                key={music?.title}
                 progress={state.progress}
                 duration={state.duration}
                 listen={
@@ -111,6 +123,18 @@ const PlayerComponent = ({
                 }
                 seek={controller?.seek}
               ></ProgressBarComponent>
+            </div>
+            {showEQ && (
+              <div className='dashboard-column equalizer-zone'>
+                <h1 className='column-title'>EQ</h1>
+                <EqualizerComponent
+                  supportEffects={state.supportEffects || false}
+                ></EqualizerComponent>
+              </div>
+            )}
+            <div className='dashboard-column upnext-zone'>
+              <h1 className='column-title'>재생 대기열</h1>
+              <UpNextComponent></UpNextComponent>
             </div>
           </div>
           <div className='lyrics'></div>

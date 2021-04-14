@@ -61,13 +61,15 @@ const UIReducer = (
           show: action.data
         }
       })
-    case '@llct/player/playNow':
-      return Object.assign(state, {
-        player: {
-          ...state.player,
-          show: true
-        }
-      })
+    case '@llct/player/play':
+      return action.data
+        ? Object.assign(state, {
+            player: {
+              ...state.player,
+              show: true
+            }
+          })
+        : state
     default:
       return state
   }

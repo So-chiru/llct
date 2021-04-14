@@ -5,8 +5,9 @@ export enum MusicPlayerState {
 }
 
 export enum PlayerLoadState {
-  Empty,
+  NotLoaded,
   Started,
+  LoadedMetadata,
   Buffering,
   Done,
   Error

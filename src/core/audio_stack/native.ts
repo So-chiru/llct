@@ -27,6 +27,14 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
     this.player.addEventListener('ended', () => {
       this.events.runAll('end')
     })
+
+    this.player.addEventListener('loadedmetadata', () => {
+      this.events.runAll('metadata')
+    })
+
+    this.player.addEventListener('load', () => {
+      this.events.runAll('load')
+    })
   }
 
   play () {

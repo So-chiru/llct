@@ -22,4 +22,6 @@ interface LLCTAudioStackEventMap {
   play: () => void
   pause: () => void
   end: () => void
+  metadata: () => void
+  load: () => void
 }

@@ -58,6 +58,7 @@ const MusicCardContainer = ({
   group,
   skeleton
 }: MusicCardContainerProps) => {
+  const instance = useSelector((state: RootState) => state.playing.instance)
   const data = useSelector((state: RootState) => state.songs)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -87,7 +88,11 @@ const MusicCardContainer = ({
 
     const musicObject = songs.searchById(playId, data.items)
 
-    dispatch(player.playNow(musicObject))
+    dispatch(player.play(musicObject))
+
+    if (instance) {
+      instance.play()
+    }
 
     history.push(`/play/${playId}`, musicObject)
   }

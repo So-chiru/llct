@@ -1,0 +1,67 @@
+@import '../../positions.scss';
+
+.llct-upnext {
+  display: block;
+
+  max-height: 450px;
+  overflow: auto;
+
+  @media screen and (min-width: $wave-narrow) {
+    max-height: 40vh;
+  }
+
+  .upnext-music {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: unset;
+    }
+  }
+}
+
+.upnext-music {
+  display: flex;
+
+  border-radius: 16px;
+
+  &[data-current='true'] {
+    background-color: rgba(0, 140, 255, 0.12);
+  }
+
+  &:not([data-current='true']) {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  .cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+  }
+
+  .info {
+    display: grid;
+    margin-left: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    letter-spacing: -1px;
+
+    .music-title,
+    .music-artist {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .music-title {
+      font-size: 16px;
+    }
+
+    .music-artist {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+}

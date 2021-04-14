@@ -122,14 +122,14 @@ $min-card: 170px;
       }
     }
 
-    &[data-state='0'],
-    &[data-state='2'] {
+    &[data-state='0'] {
       &::before {
         opacity: 1;
       }
     }
 
-    &[data-state='1'] {
+    &[data-state='1'],
+    &[data-state='2'] {
       &::before {
         opacity: 0;
       }
