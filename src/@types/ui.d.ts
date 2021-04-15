@@ -11,3 +11,7 @@ interface UIReducerAction {
 interface LLCTPlayerRelatedComponentProps {
   showPlayer: boolean
 }
+
+interface LLCTTabProps {
+  show: boolean
+}

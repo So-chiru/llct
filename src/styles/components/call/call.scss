@@ -11,23 +11,40 @@
   font-size: 18px;
   letter-spacing: -1px;
   font-weight: bold;
-  transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
-    0.23s color cubic-bezier(0.19, 1, 0.22, 1);
+
+  transition-property: opacity, color;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-duration: 0.3s;
   color: #8d9194;
+
+  &[data-passed='true'] {
+    transition-duration: 0.3s !important;
+  }
 }
 
 $color-normal: #666b6b;
-$color-normal-dark: #bcc0c2;
+$color-normal-active: #3c4949;
+$color-normal-dark: #d6e9f3;
+$color-normal-dark-active: #33b4f7;
 $color-call: #28c335;
 $color-comment: #499797;
 $color-sing-along: #0a8bf5;
 $color-sing-along-dark: lighten(#0a8bf5, 10);
 
+$color-passed: white;
+
 .llct-call-word[data-type='0'] {
   color: $color-normal;
+  text-shadow: 0px 0px 4px var(--text-color, unset);
 
   &[data-passed='true'] {
     color: lighten($color-normal, 20);
+    text-shadow: 0px 0px 2px var(--text-color, unset);
+  }
+
+  &[data-active='true'] {
+    color: var(--text-color, $color-normal-active);
+    text-shadow: unset;
   }
 }
 
@@ -36,6 +53,11 @@ $color-sing-along-dark: lighten(#0a8bf5, 10);
 
   &[data-passed='true'] {
     color: darken($color-normal-dark, 30);
+  }
+
+  &[data-active='true'] {
+    color: var(--text-color, $color-normal-dark-active);
+    text-shadow: unset;
   }
 }
 
@@ -93,11 +115,11 @@ $color-sing-along-dark: lighten(#0a8bf5, 10);
 
 .llct-call-word[data-active='true'] {
   opacity: 1;
-  color: white;
+  color: $color-passed;
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12);
 }
 
 .llct-dark .llct-call-word[data-active='true'] {
   opacity: 1;
-  color: white;
+  color: $color-passed;
 }

@@ -11,34 +11,33 @@ import { useDispatch } from 'react-redux'
 
 import '@/styles/components/home/home.scss'
 import '@/styles/animate.scss'
-
-const Pages: Record<string, JSX.Element> = {
-  dashboard: <DashboardTab></DashboardTab>,
-  settings: <SettingsTab></SettingsTab>,
-  songs: <SongsTab></SongsTab>
-}
-
 interface TabProps {
   tab: LLCTTab
+  show: boolean
 }
 interface TabListProps {
   currentTab: number
   tabs: LLCTTab[]
 }
 
-const TabComponent = ({ tab }: TabProps) => {
-  if (tab.page && Pages[tab.page]) {
-    return Pages[tab.page]
+const TabComponent = ({ tab, show }: TabProps) => {
+  switch (tab.page) {
+    case 'dashboard':
+      return <DashboardTab show={show}></DashboardTab>
+    case 'settings':
+      return <SettingsTab show={show}></SettingsTab>
+    case 'songs':
+      return <SongsTab show={show}></SongsTab>
+    default:
+      return (
+        <div className={`llct-tab${show ? ' show' : ''}`}>
+          <EmptyComponent
+            text={tab.name + ' 페이지는 텅 비었어요...'}
+            height='30vh'
+          ></EmptyComponent>
+        </div>
+      )
   }
-
-  return (
-    <div className='llct-tab'>
-      <EmptyComponent
-        text={tab.name + ' 페이지는 텅 비었어요...'}
-        height='30vh'
-      ></EmptyComponent>
-    </div>
-  )
 }
 
 const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
@@ -110,28 +109,26 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
     <div className='llct-app'>
       <img ref={icon} className='llct-icon' src='/images/logo/Icon.svg'></img>
       {tabs.map((tab, idx) => {
-        if (idx === currentTab) {
-          return (
-            <CSSTransition
-              in
-              appear={true}
-              key={idx}
-              addEndListener={(node, done) => {
-                node.addEventListener(
-                  'transitionend',
-                  () => {
-                    setFirstAnimate(false)
-                    done()
-                  },
-                  false
-                )
-              }}
-              classNames={`llct-tab-animate${firstAnimate ? '' : '-nodelay'}`}
-            >
-              <TabComponent tab={tab}></TabComponent>
-            </CSSTransition>
-          )
-        }
+        return (
+          <CSSTransition
+            in
+            appear={true}
+            key={idx}
+            addEndListener={(node, done) => {
+              node.addEventListener(
+                'transitionend',
+                () => {
+                  setFirstAnimate(false)
+                  done()
+                },
+                false
+              )
+            }}
+            classNames={`llct-tab-animate${firstAnimate ? '' : '-nodelay'}`}
+          >
+            <TabComponent tab={tab} show={idx === currentTab}></TabComponent>
+          </CSSTransition>
+        )
       })}
 
       <TabListComponent currentTab={currentTab} tabs={tabs}></TabListComponent>

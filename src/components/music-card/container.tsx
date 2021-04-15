@@ -1,5 +1,5 @@
 import { RootState } from '@/store'
-import React from 'react'
+import React, { memo } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,6 +13,7 @@ interface MusicCardContainerProps {
   id?: string
   music?: MusicMetadata
   index?: number
+  ref?: () => unknown
   group?: number
   skeleton?: boolean
 }
@@ -107,4 +108,4 @@ const MusicCardContainer = ({
   )
 }
 
-export default MusicCardContainer
+export default memo(MusicCardContainer)

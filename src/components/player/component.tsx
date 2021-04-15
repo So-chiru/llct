@@ -39,6 +39,9 @@ const toggleScrollbar = (on: boolean) => {
   document.documentElement.style.overflow = on ? 'unset' : 'hidden'
 }
 
+const UpNext = <UpNextComponent></UpNextComponent>
+const Equalizer = <EqualizerComponent></EqualizerComponent>
+
 const PlayerComponent = ({
   music = {
     id: '',
@@ -135,14 +138,12 @@ const PlayerComponent = ({
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>EQ</h1>
-                <EqualizerComponent
-                  supportEffects={instance.supportEffects}
-                ></EqualizerComponent>
+                {Equalizer}
               </div>
             )}
             <div className='dashboard-column upnext-zone'>
               <h1 className='column-title'>재생 대기열</h1>
-              <UpNextComponent></UpNextComponent>
+              {UpNext}
             </div>
           </div>
           <div className='lyrics'>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/call/call.scss'
@@ -19,6 +19,10 @@ interface LineComponentProps {
   timeline: LLCTCall | null
 }
 
+const calcuatePronounceTime = (start: number, end: number): number => {
+  return (end - start) / 100
+}
+
 const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
   const activeLine = line.start < time && line.end > time
 
@@ -35,6 +39,17 @@ const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
             data-active={active}
             data-passed={!timeLessThanEnd}
             data-type={word.type}
+            style={{
+              ['--text-color' as string]: word.color,
+              color: ((word.color &&
+                word.type !== 0 &&
+                word.color) as unknown) as string,
+              transitionDuration:
+                calcuatePronounceTime(
+                  word.start,
+                  line.words[i + 1] ? line.words[i + 1].start : word.end
+                ) + 's'
+            }}
           >
             {word.text.length ? word.text : <br></br>}
           </span>
@@ -73,21 +88,23 @@ const CallContainer = ({
 
   if (update && amf == 0) {
     const update = () => {
-      setAmf((requestAnimationFrame(update) as unknown) as number)
+      setAmf((setTimeout(update, 50) as unknown) as number)
     }
 
     update()
   } else if (!update && amf) {
-    cancelAnimationFrame(amf)
+    clearTimeout(amf)
 
     if (amf != 0) {
       setAmf(0)
     }
   }
 
-  if (call.id !== id && id) {
-    dispatch(callData.load(id))
-  }
+  useEffect(() => {
+    if (call.id !== id && id) {
+      dispatch(callData.load(id))
+    }
+  }, [call.id, id])
 
   return (
     <div className='llct-call'>

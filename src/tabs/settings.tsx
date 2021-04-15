@@ -6,7 +6,7 @@ import { updateTheme } from '@/store/ui/actions'
 import '@/styles/tabs/settings.scss'
 import { RootState } from '@/store'
 
-const SettingsTab = () => {
+const SettingsTab = ({ show }: LLCTTabProps) => {
   const dispatch = useDispatch()
 
   const darkTheme = useSelector((state: RootState) => state.ui.useDarkMode)
@@ -18,7 +18,7 @@ const SettingsTab = () => {
   }
 
   return (
-    <div className='llct-tab'>
+    <div className={`llct-tab${show ? ' show' : ''}`}>
       <div className='llct-settings'>
         <div className='llct-settings-row'>
           <label htmlFor='use-dark-theme'>다크 테마 사용: </label>

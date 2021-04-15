@@ -6,12 +6,12 @@ import '@/styles/tabs/dashboard.scss'
 import MusicCard from '@/components/music-card/container'
 import { RootState } from '@/store'
 
-const DashboardTab = () => {
+const DashboardTab = ({ show }: LLCTTabProps) => {
   const data = useSelector((state: RootState) => state.songs)
 
   // TODO : API_SERVER/updates 에서 추천 목록 가져오기
   return (
-    <div className='llct-tab'>
+    <div className={`llct-tab${show ? ' show' : ''}`}>
       <div className='card-lists'>
         {!data
           ? [...new Array(12)].map((v, i) => {

@@ -8,7 +8,11 @@
   left: 8vw;
   top: 30vh;
 
-  display: block;
+  display: none;
+
+  &.show {
+    display: block;
+  }
 
   @media screen and (max-width: $wave-narrow) {
     left: 0;

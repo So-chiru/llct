@@ -10,7 +10,6 @@ declare enum LLCTCallWordType {
   Comment,
   SingAlong
 }
-
 interface LLCTCallWord {
   text: string
   type?: LLCTCallWordType

@@ -5055,6 +5055,7 @@ fsevents@~2.3.1:
     react-dom: ^17.0.1
     react-hot-loader: ^4.13.0
     react-icons: ^4.2.0
+    react-infinite-scroll-hook: ^4.0.1
     react-is: ^17.0.1
     react-lazyload: ^3.2.0
     react-redux: ^7.2.2
@@ -6629,6 +6630,26 @@ fsevents@~2.3.1:
   peerDependencies:
     react: "*"
   checksum: 0052e25c6aacab93da3328ab856e4971214dce082de4bce857801802903366c7a8f9f490fe02ecd4ce181512b7b55cac12d6273c3c8dccc0e3b71b30dfd28256
+  languageName: node
+  linkType: hard
+
+"react-infinite-scroll-hook@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "react-infinite-scroll-hook@npm:4.0.1"
+  dependencies:
+    react-intersection-observer-hook: ^2.0.3
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: c17e9fbfb0cbd191e9d5e33b491b1f64fe20e8133046ffdf0197782e9cd326a8796618195da961961bdf963329a71f061dc120e82d24e3f79babbb6488db6b99
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer-hook@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "react-intersection-observer-hook@npm:2.0.3"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 9b061d0a05213984bdabf5221973af7ce1a7ac6c86afc09090d6441f8723c9429d5ed77cdc1cc11b2e37fa054a2548f1f525b7244d79b6eefd75f29aaa5b7a91
   languageName: node
   linkType: hard
 

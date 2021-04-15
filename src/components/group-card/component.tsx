@@ -1,6 +1,6 @@
 import { lighten, darken } from '@/styles/colors'
 import '@/styles/components/group-card/group-card.scss'
-import { useMemo } from 'react'
+import { useMemo, memo } from 'react'
 
 interface GroupCardProps {
   group: MusicGroupMetadata
@@ -40,4 +40,4 @@ const GroupCardComponent = ({
   )
 }
 
-export default GroupCardComponent
+export default memo(GroupCardComponent)

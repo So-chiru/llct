@@ -6,6 +6,7 @@ import * as songs from '@/utils/songs'
 interface MusicCardProps {
   music?: MusicMetadata
   group?: number
+  ref?: unknown
   index?: number
   skeleton?: boolean
   onClick?: () => void
@@ -134,7 +135,7 @@ const MusicCardComponent = ({
   }
 
   return skeleton || !music ? (
-    <div className='music-card' data-skeleton={true}></div>
+    <div className='music-card' data-skeleton={true} ref={cardRef}></div>
   ) : (
     <div className='music-card' data-skeleton={skeleton} ref={cardRef}>
       <div className='background-content'>
