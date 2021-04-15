@@ -41,14 +41,13 @@ const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
             data-type={word.type}
             style={{
               ['--text-color' as string]: word.color,
-              color: ((word.color &&
-                word.type !== 0 &&
-                word.color) as unknown) as string,
               transitionDuration:
-                calcuatePronounceTime(
-                  word.start,
-                  line.words[i + 1] ? line.words[i + 1].start : word.end
-                ) + 's'
+                (i !== line.words.length &&
+                  calcuatePronounceTime(
+                    word.start,
+                    line.words[i + 1] ? line.words[i + 1].start : word.end
+                  ) + 's') ||
+                'unset'
             }}
           >
             {word.text.length ? word.text : <br></br>}

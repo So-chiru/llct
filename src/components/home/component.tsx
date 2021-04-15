@@ -95,19 +95,11 @@ const addClassOnLoad = (element: HTMLElement, style: string) => {
 }
 
 const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
-  const icon = useRef<HTMLImageElement>(null)
-
-  if (icon.current) {
-    addClassOnLoad(icon.current, 'enter')
-  }
-
-  const [firstAnimate, setFirstAnimate] = useState(true)
-
   // TODO : TabListComponent 마우스로 드래그 했을 때 스크롤될 수 있게 TouchHandler 클래스 구현
 
   return (
     <div className='llct-app'>
-      <img ref={icon} className='llct-icon' src='/images/logo/Icon.svg'></img>
+      <img className='llct-icon' src='/images/logo/Icon.svg'></img>
       {tabs.map((tab, idx) => {
         return (
           <CSSTransition
@@ -118,13 +110,12 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
               node.addEventListener(
                 'transitionend',
                 () => {
-                  setFirstAnimate(false)
                   done()
                 },
                 false
               )
             }}
-            classNames={`llct-tab-animate${firstAnimate ? '' : '-nodelay'}`}
+            classNames={`llct-tab-animate`}
           >
             <TabComponent tab={tab} show={idx === currentTab}></TabComponent>
           </CSSTransition>

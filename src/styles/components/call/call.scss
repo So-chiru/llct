@@ -23,27 +23,44 @@
 }
 
 $color-normal: #666b6b;
-$color-normal-active: #3c4949;
 $color-normal-dark: #d6e9f3;
-$color-normal-dark-active: #33b4f7;
 $color-call: #28c335;
 $color-comment: #499797;
+$color-comment-active: white;
 $color-sing-along: #0a8bf5;
 $color-sing-along-dark: lighten(#0a8bf5, 10);
 
+$color-active: #33b4f7;
 $color-passed: white;
 
-.llct-call-word[data-type='0'] {
-  color: $color-normal;
+.llct-call-word[data-type] {
   text-shadow: 0px 0px 4px var(--text-color, unset);
 
   &[data-passed='true'] {
     color: lighten($color-normal, 20);
-    text-shadow: 0px 0px 2px var(--text-color, unset);
+    text-shadow: 0px 0px 1px var(--text-color, unset);
   }
 
   &[data-active='true'] {
-    color: var(--text-color, $color-normal-active);
+    color: var(--text-color, $color-active);
+  }
+}
+
+.llct-dark .llct-call-word[data-type] {
+  &[data-active='true'] {
+    color: var(--text-color, $color-active);
+  }
+}
+
+.llct-call-word[data-type='0'] {
+  color: $color-normal;
+
+  &[data-passed='true'] {
+    color: lighten($color-normal, 20);
+  }
+
+  &[data-active='true'] {
+    color: var(--text-color, $color-active);
     text-shadow: unset;
   }
 }
@@ -54,11 +71,6 @@ $color-passed: white;
   &[data-passed='true'] {
     color: darken($color-normal-dark, 30);
   }
-
-  &[data-active='true'] {
-    color: var(--text-color, $color-normal-dark-active);
-    text-shadow: unset;
-  }
 }
 
 .llct-call-word[data-type='1'] {
@@ -66,6 +78,11 @@ $color-passed: white;
 
   &[data-passed='true'] {
     color: lighten($color-call, 20);
+  }
+
+  &[data-active='true'] {
+    color: white;
+    text-shadow: 0px 0px 4px $color-call;
   }
 }
 
@@ -75,13 +92,24 @@ $color-passed: white;
   &[data-passed='true'] {
     color: darken($color-call, 20);
   }
+
+  &[data-active='true'] {
+    color: white;
+    text-shadow: 0px 0px 4px $color-call;
+  }
 }
 
 .llct-call-word[data-type='2'] {
-  color: $color-comment;
+  color: var(--text-color, $color-comment);
+  text-shadow: unset;
 
   &[data-passed='true'] {
     color: lighten($color-comment, 20);
+  }
+
+  &[data-active='true'] {
+    color: $color-comment-active;
+    text-shadow: 0px 0px 4px var(--text-color, $color-comment);
   }
 }
 
@@ -91,6 +119,11 @@ $color-passed: white;
   &[data-passed='true'] {
     color: darken($color-comment, 20);
   }
+
+  &[data-active='true'] {
+    color: $color-comment-active;
+    text-shadow: 0px 0px 4px var(--text-color, $color-comment);
+  }
 }
 
 .llct-call-word[data-type='3'] {
@@ -99,6 +132,11 @@ $color-passed: white;
   &[data-passed='true'] {
     color: lighten($color-sing-along, 20);
   }
+
+  &[data-active='true'] {
+    color: white;
+    text-shadow: 0px 0px 4px var(--text-color, $color-sing-along);
+  }
 }
 
 .llct-dark .llct-call-word[data-type='3'] {
@@ -106,6 +144,11 @@ $color-passed: white;
 
   &[data-passed='true'] {
     color: darken($color-sing-along, 10);
+  }
+
+  &[data-active='true'] {
+    color: white;
+    text-shadow: 0px 0px 4px var(--text-color, $color-sing-along);
   }
 }
 
@@ -117,9 +160,4 @@ $color-passed: white;
   opacity: 1;
   color: $color-passed;
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12);
-}
-
-.llct-dark .llct-call-word[data-active='true'] {
-  opacity: 1;
-  color: $color-passed;
 }

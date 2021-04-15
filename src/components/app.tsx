@@ -12,6 +12,7 @@ import WavesContainer from './waves/page/container'
 import HomeContainer from './home/container'
 import PlayerButtonContainer from './player-button/container'
 import PlayerContainer from './player/container'
+import DataLoderContainer from './data-loader/container'
 
 const App = () => {
   const useDark = useSelector((state: RootState) => state.ui.useDarkMode)
@@ -20,6 +21,7 @@ const App = () => {
     <ThemeProvider theme={useDark ? dark : light}>
       <GlobalStyles></GlobalStyles>
       <WavesContainer></WavesContainer>
+      <DataLoderContainer></DataLoderContainer>
       <HomeContainer></HomeContainer>
       <PlayerButtonContainer></PlayerButtonContainer>
       <PlayerContainer></PlayerContainer>
