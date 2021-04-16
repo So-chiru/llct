@@ -1,0 +1,134 @@
+import '@/styles/components/slider/slider.scss'
+
+import { useEffect, useRef, useState } from 'react'
+
+interface SliderComponentProps {
+  onChange?: (seek: number) => void
+  onSeek?: (seek: number) => void
+  format?: (current: number) => string
+  step?: number
+  max: number
+  defaults?: number
+}
+
+const SliderComponent = ({
+  onChange,
+  onSeek,
+  format,
+  step,
+  max,
+  defaults
+}: SliderComponentProps) => {
+  const [current, setCurrent] = useState<number>(0)
+  const lastValue = useRef<number>(-1)
+
+  const wrapper = useRef<HTMLDivElement>(null)
+
+  let pointerDown = false
+
+  useEffect(() => {
+    if (!pointerDown && typeof defaults !== 'undefined') {
+      setCurrent(defaults)
+    }
+  }, [defaults])
+
+  const [localRect, setLocalRect] = useState<DOMRect>()
+  let rect: DOMRect | null = null
+
+  const updateRect = () => {
+    if (wrapper.current) {
+      rect = wrapper.current.getBoundingClientRect()
+      setLocalRect(rect)
+    }
+  }
+
+  const seek = (value: number) => {
+    let normalizedValue = Math.max(0, Math.min(value, 1))
+
+    if (step) {
+      normalizedValue = Math.round(normalizedValue / step) * step
+    }
+
+    setCurrent(normalizedValue)
+    lastValue.current = normalizedValue
+
+    if (onSeek) {
+      onSeek(normalizedValue)
+    }
+  }
+
+  const change = () => {
+    if (lastValue.current === -1) {
+      return
+    }
+
+    if (onChange) {
+      onChange(lastValue.current)
+    }
+
+    lastValue.current = -1
+  }
+
+  const mouseHandler = (ev: MouseEvent) => {
+    if (ev.type === 'mousedown') {
+      pointerDown = true
+
+      updateRect()
+      seek(ev.offsetX / rect!.width)
+    } else if (ev.type === 'mouseup') {
+      pointerDown = false
+      change()
+    } else if (ev.type === 'mouseleave' && pointerDown) {
+      pointerDown = false
+      change()
+    } else if (ev.type === 'mousemove' && pointerDown) {
+      seek(ev.offsetX / rect!.width)
+    }
+  }
+
+  useEffect(() => {
+    if (!wrapper.current) {
+      return
+    }
+
+    updateRect()
+
+    wrapper.current.addEventListener('mousedown', mouseHandler)
+    wrapper.current.addEventListener('mouseup', mouseHandler)
+    wrapper.current.addEventListener('mouseleave', mouseHandler)
+    wrapper.current.addEventListener('mousemove', mouseHandler)
+  }, [wrapper.current])
+
+  const displayValue = lastValue.current > -1 ? lastValue.current : current
+
+  return (
+    <div className='llct-slider-wrapper' ref={wrapper}>
+      <div className='llct-slider-text'>
+        <span className='text-current'>
+          {format ? format(displayValue * max) : displayValue * max}
+        </span>
+        <span className='text-max'>{format ? format(max) : max}</span>
+      </div>
+      <div className='llct-slider'>
+        <div
+          className='thumb'
+          style={{
+            ['--translate' as string]:
+              (
+                ((localRect && (localRect as DOMRect).width) || 100) *
+                displayValue
+              ).toFixed(1) + 'px'
+          }}
+        ></div>
+        <div
+          className='running-track'
+          style={{
+            ['--progress' as string]: displayValue
+          }}
+        ></div>
+      </div>
+    </div>
+  )
+}
+
+export default SliderComponent

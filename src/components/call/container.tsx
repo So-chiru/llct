@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import '@/styles/components/call/call.scss'
 import { RootState } from '@/store'
 import * as callData from '@/store/call/actions'
+import LoaderComponent from '../loader/component'
+import EmptyComponent from '../empty/component'
 
 interface CallContainerProps {
   current: () => number
@@ -19,8 +21,41 @@ interface LineComponentProps {
   timeline: LLCTCall | null
 }
 
+interface WordComponentProps {
+  active: boolean
+  passed: boolean
+  text: string
+  type?: number
+  color?: string
+  durationTime: () => string
+}
+
 const calcuatePronounceTime = (start: number, end: number): number => {
   return (end - start) / 100
+}
+
+const WordComponent = ({
+  active,
+  passed,
+  text,
+  type,
+  durationTime,
+  color
+}: WordComponentProps) => {
+  return (
+    <span
+      className='llct-call-word'
+      data-active={active}
+      data-passed={passed}
+      data-type={type}
+      style={{
+        ['--text-color' as string]: color,
+        transitionDuration: durationTime()
+      }}
+    >
+      {text || <br></br>}
+    </span>
+  )
 }
 
 const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
@@ -32,26 +67,26 @@ const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
         const timeLessThanEnd = time < word.end
         const active = activeLine && time > word.start && timeLessThanEnd
 
+        const durationTime = () => {
+          return (
+            (i !== line.words.length &&
+              calcuatePronounceTime(
+                word.start,
+                line.words[i + 1] ? line.words[i + 1].start : word.end
+              ) + 's') ||
+            'unset'
+          )
+        }
+
         return (
-          <span
-            className='llct-call-word'
-            key={`word:${i}`}
-            data-active={active}
-            data-passed={!timeLessThanEnd}
-            data-type={word.type}
-            style={{
-              ['--text-color' as string]: word.color,
-              transitionDuration:
-                (i !== line.words.length &&
-                  calcuatePronounceTime(
-                    word.start,
-                    line.words[i + 1] ? line.words[i + 1].start : word.end
-                  ) + 's') ||
-                'unset'
-            }}
-          >
-            {word.text.length ? word.text : <br></br>}
-          </span>
+          <WordComponent
+            key={i}
+            active={active}
+            passed={!timeLessThanEnd}
+            text={word.text}
+            type={word.type}
+            durationTime={durationTime}
+          ></WordComponent>
         )
       }),
     [
@@ -87,7 +122,7 @@ const CallContainer = ({
 
   if (update && amf == 0) {
     const update = () => {
-      setAmf((setTimeout(update, 50) as unknown) as number)
+      setAmf((setTimeout(update, 20) as unknown) as number)
     }
 
     update()
@@ -119,7 +154,18 @@ const CallContainer = ({
               ></LineComponent>
             )
           })
-        : []}
+        : [
+            <div className='llct-loader-wrapper' key='load'>
+              {call.error ? (
+                <EmptyComponent
+                  key='load-error'
+                  text='콜표를 불러올 수 없어요.'
+                ></EmptyComponent>
+              ) : (
+                <LoaderComponent></LoaderComponent>
+              )}
+            </div>
+          ]}
     </div>
   )
 }

@@ -9,7 +9,7 @@ function * fetchAPIData () {
 
     yield put({ type: '@llct/api_lists/success', data: data })
   } catch (e) {
-    yield put({ type: '@llct/api_lists/failed', message: e.message })
+    yield put({ type: '@llct/api_lists/failed', error: e.message })
   }
 }
 
@@ -19,7 +19,7 @@ function * fetchCallData ({ id }: AnyAction) {
 
     yield put({ type: '@llct/api_call/success', data: data })
   } catch (e) {
-    yield put({ type: '@llct/api_call/failed', message: e.message })
+    yield put({ type: '@llct/api_call/failed', error: e.message })
   }
 }
 

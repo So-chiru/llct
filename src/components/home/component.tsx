@@ -6,7 +6,7 @@ import EmptyComponent from '@/components/empty/component'
 
 import { CSSTransition } from 'react-transition-group'
 
-import React, { useRef, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 
 import '@/styles/components/home/home.scss'
@@ -82,18 +82,6 @@ const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
   )
 }
 
-const addClassOnLoad = (element: HTMLElement, style: string) => {
-  if (!element.classList.contains(style)) {
-    requestAnimationFrame(() => {
-      if (!element) {
-        return
-      }
-
-      element.classList.add(style)
-    })
-  }
-}
-
 const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
   // TODO : TabListComponent 마우스로 드래그 했을 때 스크롤될 수 있게 TouchHandler 클래스 구현
 
@@ -101,24 +89,15 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
     <div className='llct-app'>
       <img className='llct-icon' src='/images/logo/Icon.svg'></img>
       {tabs.map((tab, idx) => {
-        return (
-          <CSSTransition
-            in
-            appear={true}
-            key={idx}
-            addEndListener={(node, done) => {
-              node.addEventListener(
-                'transitionend',
-                () => {
-                  done()
-                },
-                false
-              )
-            }}
-            classNames={`llct-tab-animate`}
-          >
-            <TabComponent tab={tab} show={idx === currentTab}></TabComponent>
-          </CSSTransition>
+        return useMemo(
+          () => (
+            <TabComponent
+              key={idx}
+              tab={tab}
+              show={idx === currentTab}
+            ></TabComponent>
+          ),
+          [idx === currentTab]
         )
       })}
 

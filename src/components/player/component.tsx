@@ -13,13 +13,14 @@ import {
 } from 'react-icons/md'
 import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 
-import ProgressBarComponent from '@/components/progress-bar/component'
+import ProgressBarComponent from '@/components/progress-bar/container'
 import UpNextComponent from './upnext/container'
 import EqualizerComponent from './equalizer/container'
 import CallContainer from '../call/container'
 import * as ui from '@/store/ui/actions'
 
 import { RootState } from '@/store/index'
+import SliderComponent from '../slider/component'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
@@ -137,8 +138,17 @@ const PlayerComponent = ({
             </div>
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
-                <h1 className='column-title'>EQ</h1>
+                <h1 className='column-title'>음향 효과</h1>
                 {Equalizer}
+                <SliderComponent
+                  onSeek={(seek: number) => {
+                    instance.volume = seek
+                  }}
+                  format={(num: number) => Math.floor(num) + '%'}
+                  defaults={instance.volume}
+                  step={0.05}
+                  max={100}
+                ></SliderComponent>
               </div>
             )}
             <div className='dashboard-column upnext-zone'>

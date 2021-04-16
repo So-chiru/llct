@@ -2,6 +2,7 @@ interface CallTypes {
   load: boolean
   id?: string
   data: null | LLCTCall
+  error?: Error
 }
 
 const CallDefault: CallTypes = {
@@ -24,7 +25,8 @@ const SongsReducer = (
     case '@llct/api_call/request':
       return Object.assign({}, state, {
         load: false,
-        id: action.id
+        id: action.id,
+        data: null
       })
     case '@llct/api_call/success':
       return Object.assign({}, state, {
@@ -34,7 +36,8 @@ const SongsReducer = (
     case '@llct/api_call/failed':
       return Object.assign({}, state, {
         load: true,
-        error: action.error
+        error: action.error,
+        data: null
       })
     default:
       return state
