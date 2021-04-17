@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/player/player.scss'
@@ -60,7 +60,9 @@ const PlayerComponent = ({
   const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
 
-  toggleScrollbar(!showPlayer)
+  requestAnimationFrame(() => {
+    toggleScrollbar(!showPlayer)
+  })
 
   useEffect(() => {
     // positions.css : $desktop
@@ -97,14 +99,19 @@ const PlayerComponent = ({
         <div className='contents'>
           <div className='dashboard'>
             <div className='dashboard-column metadata-zone'>
-              <div className='texts'>
-                <h1 className='title' title={music.title}>
-                  {music.title}
-                </h1>
-                <h3 className='artist' title={music.artist as string}>
-                  {music.artist}
-                </h3>
-              </div>
+              {useMemo(
+                () => (
+                  <div className='texts'>
+                    <h1 className='title' title={music.title}>
+                      {music.title}
+                    </h1>
+                    <h3 className='artist' title={music.artist as string}>
+                      {music.artist}
+                    </h3>
+                  </div>
+                ),
+                [music]
+              )}
               <div className='controls'>
                 {state.playState === MusicPlayerState.Playing ? (
                   <MdPause onClick={() => controller.pause()}></MdPause>
@@ -130,7 +137,7 @@ const PlayerComponent = ({
               {instance && (
                 <ProgressBarComponent
                   progress={() => instance.progress}
-                  duration={instance.duration || 1}
+                  duration={instance.duration}
                   update={
                     state.playState === MusicPlayerState.Playing && showPlayer
                   }
@@ -161,15 +168,18 @@ const PlayerComponent = ({
             </div>
           </div>
           <div className='lyrics'>
-            {instance && (
-              <CallContainer
-                update={
-                  state.playState === MusicPlayerState.Playing && showPlayer
-                }
-                current={() => instance.timecode}
-                lastSeek={state.lastSeek}
-                id={music.id}
-              ></CallContainer>
+            {useMemo(
+              () => (
+                <CallContainer
+                  update={
+                    state.playState === MusicPlayerState.Playing && showPlayer
+                  }
+                  current={() => (!instance ? 0 : instance.timecode)}
+                  lastSeek={state.lastSeek}
+                  id={music.id}
+                ></CallContainer>
+              ),
+              [music.id, instance, state.playState, state.lastSeek]
             )}
           </div>
         </div>

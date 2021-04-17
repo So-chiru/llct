@@ -1,10 +1,8 @@
 import { RootState } from '@/store'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import PlayerButtonComponent from './component'
 
-import { MusicPlayerState } from '@/@types/state'
 import * as ui from '@/store/ui/actions'
 
 const PlayerButtonContainer = () => {

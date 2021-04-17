@@ -86,6 +86,14 @@ const SliderComponent = ({
     }
   }
 
+  const resizeHandler = () => {
+    updateRect()
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler)
+  }, [])
+
   useEffect(() => {
     if (!wrapper.current) {
       return
