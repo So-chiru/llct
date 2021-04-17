@@ -137,7 +137,8 @@
     margin-top: 5%;
 
     @media screen and (min-width: $desktop) {
-      width: 480px;
+      min-width: 480px;
+      max-width: 600px;
     }
 
     h1,

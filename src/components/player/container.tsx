@@ -3,18 +3,11 @@ import { RootState } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
+import { MusicPlayerState } from '@/@types/state'
 
 import PlayerComponent from './component'
-import {
-  play,
-  skip,
-  setPlayState,
-  setLoadState,
-  setInstance
-} from '@/store/player/actions'
+import { play, skip, setPlayState } from '@/store/player/actions'
 import { searchById, audioURL } from '@/utils/songs'
-import LLCTNativeAudio from '@/core/audio_stack/native'
 
 interface PlayerRouterState {
   closePlayer?: boolean
@@ -57,67 +50,9 @@ const PlayerContainer = () => {
     }
   }, [songs])
 
-  if (!playing.instance) {
-    // history.listen(listener => {
-    //   if (
-    //     listener.pathname.indexOf('/play') === -1 ||
-    //     (listener.state === 'object' &&
-    //       (listener.state as PlayerRouterState).closePlayer)
-    //   ) {
-    //     closePlayer()
-    //   }
-
-    //   // TODO : 플레이어에서 실행
-    // })
-
-    // TODO : 오디오 스택을 설정에서 지정할 수 있게 하기
-    const instance = new LLCTNativeAudio()
-
-    if (
-      playing.pointer !== -1 &&
-      playing.queue[playing.pointer] &&
-      playing.queue[playing.pointer].id
-    ) {
-      instance.load(audioURL(playing.queue[playing.pointer].id))
-    }
-
-    instance.events.on('play', () =>
-      dispatch(setPlayState(MusicPlayerState.Playing))
-    )
-
-    instance.events.on('pause', () =>
-      dispatch(setPlayState(MusicPlayerState.Paused))
-    )
-
-    instance.events.on('end', () => {
-      // TODO : 재생이 끝났을 경우 다음 곡 재생하거나 반복하는 이벤트 처리
-      // 현재는 playing이 기본 state에서 안바뀜
-
-      // if (
-      //   playing.pointer !== -1 &&
-      //   playing.pointer < playing.queue.length - 1
-      // ) {
-      //   dispatch(play(null, ++playing.pointer))
-
-      //   return
-      // }
-
-      dispatch(setPlayState(MusicPlayerState.Stopped))
-    })
-
-    instance.events.on('metadata', () => {
-      dispatch(setLoadState(PlayerLoadState.LoadedMetadata))
-    })
-
-    instance.events.on('load', () => {
-      dispatch(setLoadState(PlayerLoadState.Done))
-    })
-
-    dispatch(setInstance(instance))
-
-    return null
-  } else if (
+  if (
     playing.pointer !== -1 &&
+    playing.instance &&
     playing.instance.src !== audioURL(playing.queue[playing.pointer]?.id)
   ) {
     playing.instance.load(audioURL(playing.queue[playing.pointer]?.id))

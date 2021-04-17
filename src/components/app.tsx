@@ -13,6 +13,7 @@ import HomeContainer from './home/container'
 import PlayerButtonContainer from './player-button/container'
 import PlayerContainer from './player/container'
 import DataLoderContainer from './data-loader/container'
+import PlayerInstanceContainer from './player/instance/container'
 
 const App = () => {
   const useDark = useSelector((state: RootState) => state.ui.useDarkMode)
@@ -25,6 +26,7 @@ const App = () => {
       <HomeContainer></HomeContainer>
       <PlayerButtonContainer></PlayerButtonContainer>
       <PlayerContainer></PlayerContainer>
+      <PlayerInstanceContainer></PlayerInstanceContainer>
       <Switch>
         <Route path='/settings'></Route>
         <Route path='/play/:id' exact></Route>

@@ -1,25 +1,56 @@
 import { MusicPlayerState } from '@/@types/state'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 import PlayerWave from './animate'
 
 interface PlayerWaveProps {
-  progress: number
+  progress?: number
   show?: boolean
   state: MusicPlayerState
+  listener?: () => number
 }
 
 interface PlayerWaveStates {
   wave?: PlayerWave
 }
 
+const UPDATE_RATE = 250
+
 const PlayerWaveComponent = ({
   progress,
   show,
+  listener,
   state: playerState
 }: PlayerWaveProps) => {
   const [state, setState] = useState<PlayerWaveStates>({} as PlayerWaveStates)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  const listenerRaf = useRef<number>(0)
+  useEffect(() => {
+    if (
+      listener &&
+      !listenerRaf.current &&
+      show &&
+      playerState === MusicPlayerState.Playing
+    ) {
+      const update = () => {
+        if (state.wave) {
+          state.wave.updateProgress(listener())
+        }
+      }
+
+      update()
+      listenerRaf.current = (setInterval(
+        update,
+        UPDATE_RATE
+      ) as unknown) as number
+    }
+
+    if (!show && listenerRaf.current) {
+      clearInterval(listenerRaf.current)
+      listenerRaf.current = 0
+    }
+  }, [listener, show])
 
   requestAnimationFrame(() => {
     if (canvasRef.current && !state.wave) {
@@ -36,7 +67,7 @@ const PlayerWaveComponent = ({
     }
 
     if (state.wave) {
-      state.wave.updateProgress(progress)
+      state.wave.updateProgress(progress || 0)
 
       state.wave.state = playerState
 

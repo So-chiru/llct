@@ -9,9 +9,15 @@ interface PlayerButtonProps {
   music: MusicMetadata
   state: MusicPlayerState
   show: boolean
-  progress: number
+  progress: () => number
   onClick: () => void
 }
+
+const BGLayer = (
+  <div className='layer'>
+    <MdMusicNote></MdMusicNote>
+  </div>
+)
 
 const PlayerButtonComponent = ({
   music,
@@ -29,12 +35,10 @@ const PlayerButtonComponent = ({
       <PlayerWaveContainer
         show={show}
         state={state}
-        progress={progress}
+        progressListener={progress}
       ></PlayerWaveContainer>
       <img className='background' src={music && music.image}></img>
-      <div className='layer'>
-        <MdMusicNote></MdMusicNote>
-      </div>
+      {BGLayer}
     </div>
   )
 }

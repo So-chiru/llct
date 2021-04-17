@@ -32,7 +32,7 @@ interface PlayerComponentProps {
   showEQ: boolean
   state: PlayerComponentPropsState
   music: MusicMetadataWithID
-  instance: LLCTAudioStack
+  instance?: LLCTAudioStack
   controller: PlayerController
 }
 
@@ -127,28 +127,32 @@ const PlayerComponent = ({
               </div>
             </div>
             <div className='dashboard-column progress-zone'>
-              <ProgressBarComponent
-                progress={() => instance.progress}
-                duration={instance.duration || 1}
-                update={
-                  state.playState === MusicPlayerState.Playing && showPlayer
-                }
-                seek={controller.seek}
-              ></ProgressBarComponent>
+              {instance && (
+                <ProgressBarComponent
+                  progress={() => instance.progress}
+                  duration={instance.duration || 1}
+                  update={
+                    state.playState === MusicPlayerState.Playing && showPlayer
+                  }
+                  seek={controller.seek}
+                ></ProgressBarComponent>
+              )}
             </div>
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>음향 효과</h1>
                 {Equalizer}
-                <SliderComponent
-                  onSeek={(seek: number) => {
-                    instance.volume = seek
-                  }}
-                  format={(num: number) => Math.floor(num) + '%'}
-                  defaults={instance.volume}
-                  step={0.05}
-                  max={100}
-                ></SliderComponent>
+                {instance && (
+                  <SliderComponent
+                    onSeek={(seek: number) => {
+                      instance.volume = seek
+                    }}
+                    format={(num: number) => Math.floor(num) + '%'}
+                    defaults={instance.volume}
+                    step={0.05}
+                    max={100}
+                  ></SliderComponent>
+                )}
               </div>
             )}
             <div className='dashboard-column upnext-zone'>
@@ -157,14 +161,16 @@ const PlayerComponent = ({
             </div>
           </div>
           <div className='lyrics'>
-            <CallContainer
-              update={
-                state.playState === MusicPlayerState.Playing && showPlayer
-              }
-              current={() => instance.timecode}
-              lastSeek={state.lastSeek}
-              id={music.id}
-            ></CallContainer>
+            {instance && (
+              <CallContainer
+                update={
+                  state.playState === MusicPlayerState.Playing && showPlayer
+                }
+                current={() => instance.timecode}
+                lastSeek={state.lastSeek}
+                id={music.id}
+              ></CallContainer>
+            )}
           </div>
         </div>
       </div>
