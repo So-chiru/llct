@@ -6,6 +6,7 @@ interface ProgressBarComponentProps {
   progress: () => number
   duration: number
   update: boolean
+  color: SliderColor
   seek: (seekTo: number) => void
 }
 
@@ -17,6 +18,7 @@ const ProgressBarComponent = ({
   progress,
   duration,
   update,
+  color,
   seek
 }: ProgressBarComponentProps) => {
   const [seekProgress, setSeekProgress] = useState<number>()
@@ -39,6 +41,7 @@ const ProgressBarComponent = ({
     <SliderComponent
       max={duration}
       onChange={seek}
+      color={color}
       format={timeSerialize}
       defaults={seekProgress}
     ></SliderComponent>

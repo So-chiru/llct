@@ -48,7 +48,8 @@ $thumb-size: 16px;
   top: 28px;
   margin-bottom: 14px;
 
-  background: $semi-accent;
+  background: var(--slider-background-color, $semi-accent);
+
   border-radius: 3px;
 
   .thumb,
@@ -63,7 +64,7 @@ $thumb-size: 16px;
     top: $thumb-size / -2;
     left: $thumb-size / -2;
 
-    background: $accent;
+    background: var(--slider-thumb-color, $accent);
 
     transform: translateX(var(--translate, 0));
     border-radius: 50%;
@@ -71,7 +72,7 @@ $thumb-size: 16px;
   }
 
   .running-track {
-    background: $accent;
+    background: var(--slider-track-color, $accent);
 
     transform: scaleX(var(--progress, 0));
     transform-origin: left;
@@ -82,9 +83,13 @@ $thumb-size: 16px;
 }
 
 .llct-dark .llct-slider {
-  background: $dark-semi-accent;
+  background: var(--slider-background-color-dark, $dark-semi-accent);
 
   .thumb {
-    background: $dark-accent;
+    background: var(--slider-thumb-color-dark, $dark-accent);
+  }
+
+  .running-track {
+    background: var(--slider-track-color-dark, $accent);
   }
 }

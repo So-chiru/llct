@@ -35,9 +35,11 @@
 .llct-dark .llct-player {
   background: linear-gradient(
     to right bottom,
-    $dark-semi-accent,
-    $dark-background
+    var(--album-color-dark, $dark-semi-accent),
+    var(--album-color-second-dark, $dark-background)
   );
+
+  color: var(--album-color-text-dark, $accent);
 
   .controls {
     & > svg {
@@ -60,7 +62,11 @@
   border-radius: 16px 0px 0px 16px;
 
   transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
-    0.6s transform cubic-bezier(0.19, 1, 0.22, 1);
+    0.6s transform cubic-bezier(0.19, 1, 0.22, 1),
+    0.4s background cubic-bezier(0.19, 1, 0.22, 1),
+    0.4s color cubic-bezier(0.19, 1, 0.22, 1);
+
+  color: var(--album-color-text, $accent);
 
   opacity: 0;
   pointer-events: none;
@@ -213,10 +219,14 @@
     .no-eq-support {
       letter-spacing: -1px;
     }
-  }
 
-  .equalizer-zone + .upnext-zone {
-    margin-top: 3vh;
+    .equalizer-lack {
+      margin-bottom: 3vh;
+
+      &:last-child {
+        margin-bottom: unset;
+      }
+    }
   }
 
   .controls,
@@ -302,5 +312,9 @@
     }
   }
 
-  background: linear-gradient(to right bottom, $semi-accent, $background);
+  background: linear-gradient(
+    to right bottom,
+    var(--album-color, $semi-accent),
+    var(--album-color-second, $background)
+  );
 }

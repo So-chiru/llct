@@ -3,12 +3,13 @@
 .llct-upnext {
   display: block;
 
-  max-height: 450px;
+  max-height: 300px;
   overflow: auto;
 
   @media screen and (min-width: $wave-narrow) {
     max-height: 40vh;
   }
+
 
   .upnext-music {
     margin-bottom: 15px;

@@ -4,6 +4,7 @@ interface PlayerRootData {
   pointer: number
   queue: MusicMetadataWithID[]
   instance?: LLCTAudioStack
+  color: LLCTColor | null
   state: {
     player: MusicPlayerState
     load: PlayerLoadState
@@ -13,6 +14,7 @@ interface PlayerRootData {
 const PlayerDefault: PlayerRootData = {
   pointer: -1,
   queue: [],
+  color: null,
   state: {
     player: MusicPlayerState.Stopped,
     load: PlayerLoadState.NotLoaded
@@ -75,6 +77,10 @@ const PlayerReducer = (
     case '@llct/player/setInstance':
       return Object.assign({}, state, {
         instance: action.data
+      })
+    case '@llct/player/setColor':
+      return Object.assign({}, state, {
+        color: action.data
       })
     case '@llct/player/setState':
       return Object.assign({}, state, {

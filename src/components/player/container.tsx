@@ -6,8 +6,10 @@ import { useHistory } from 'react-router-dom'
 import { MusicPlayerState } from '@/@types/state'
 
 import PlayerComponent from './component'
-import { play, skip, setPlayState } from '@/store/player/actions'
+import { play, skip, setPlayState, setAlbumColor } from '@/store/player/actions'
 import { searchById, audioURL } from '@/utils/songs'
+
+import * as api from '@/api'
 
 interface PlayerRouterState {
   closePlayer?: boolean
@@ -23,6 +25,17 @@ const PlayerContainer = () => {
 
   const playing = useSelector((state: RootState) => state.playing)
   const songs = useSelector((state: RootState) => state.songs.items)
+
+  useEffect(() => {
+    if (!playing.queue[playing.pointer]) {
+      dispatch(setAlbumColor(null))
+      return
+    }
+
+    api.fetchColorData(playing.queue[playing.pointer].id).then(v => {
+      dispatch(setAlbumColor(v))
+    })
+  }, [playing.queue[playing.pointer]])
 
   useEffect(() => {
     if (!songs) {
@@ -105,6 +118,7 @@ const PlayerContainer = () => {
   return (
     <PlayerComponent
       music={playing.queue[playing.pointer]}
+      color={playing.color}
       instance={playing.instance}
       state={{
         playState: playing.state.player,

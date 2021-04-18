@@ -21,6 +21,7 @@ import * as ui from '@/store/ui/actions'
 
 import { RootState } from '@/store/index'
 import SliderComponent from '../slider/component'
+import { RGBtoHex } from '@/styles/colors'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
@@ -34,6 +35,7 @@ interface PlayerComponentProps {
   music: MusicMetadataWithID
   instance?: LLCTAudioStack
   controller: PlayerController
+  color: LLCTColor | null
 }
 
 const toggleScrollbar = (on: boolean) => {
@@ -50,6 +52,7 @@ const PlayerComponent = ({
     artist: 'Loading',
     image: ''
   },
+  color,
   state,
   instance,
   showEQ,
@@ -82,13 +85,32 @@ const PlayerComponent = ({
 
   const showString = showPlayer ? ' show' : ''
 
+  const sliderColor = {
+    background: color && color.main,
+    track: color && color.text,
+    thumb: color && color.text,
+    backgroundDark: color && color.mainDark,
+    trackDark: color && color.textDark,
+    thumbDark: color && color.textDark
+  }
+
   return (
     <>
       <div
         className={'llct-player-background' + showString}
         onClick={closePlayer}
       ></div>
-      <div className={'llct-player' + showString}>
+      <div
+        className={'llct-player' + showString}
+        style={{
+          ['--album-color' as string]: color && color.main,
+          ['--album-color-second' as string]: color && color.sub,
+          ['--album-color-text' as string]: color && color.text,
+          ['--album-color-dark' as string]: color && color.mainDark,
+          ['--album-color-second-dark' as string]: color && color.subDark,
+          ['--album-color-text-dark' as string]: color && color.textDark
+        }}
+      >
         <div className='close'>
           {playerNarrow ? (
             <MdKeyboardArrowDown onClick={closePlayer}></MdKeyboardArrowDown>
@@ -138,6 +160,7 @@ const PlayerComponent = ({
                 <ProgressBarComponent
                   progress={() => instance.progress}
                   duration={instance.duration}
+                  color={sliderColor}
                   update={
                     state.playState === MusicPlayerState.Playing && showPlayer
                   }
@@ -148,18 +171,22 @@ const PlayerComponent = ({
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>음향 효과</h1>
-                {Equalizer}
-                {instance && (
-                  <SliderComponent
-                    onSeek={(seek: number) => {
-                      instance.volume = seek
-                    }}
-                    format={(num: number) => Math.floor(num) + '%'}
-                    defaults={instance.volume}
-                    step={0.05}
-                    max={100}
-                  ></SliderComponent>
-                )}
+                <div className='equalizer-lack'>{Equalizer}</div>
+                <div className='equalizer-lack'>
+                  <h3>볼륨</h3>
+                  {instance && (
+                    <SliderComponent
+                      onSeek={(seek: number) => {
+                        instance.volume = seek
+                      }}
+                      color={sliderColor}
+                      format={(num: number) => Math.floor(num) + '%'}
+                      defaults={instance.volume}
+                      step={0.05}
+                      max={100}
+                    ></SliderComponent>
+                  )}
+                </div>
               </div>
             )}
             <div className='dashboard-column upnext-zone'>

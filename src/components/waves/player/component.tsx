@@ -6,6 +6,7 @@ import PlayerWave from './animate'
 interface PlayerWaveProps {
   progress?: number
   show?: boolean
+  color?: string
   state: MusicPlayerState
   listener?: () => number
 }
@@ -19,6 +20,7 @@ const UPDATE_RATE = 250
 const PlayerWaveComponent = ({
   progress,
   show,
+  color,
   listener,
   state: playerState
 }: PlayerWaveProps) => {
@@ -76,6 +78,10 @@ const PlayerWaveComponent = ({
         state.wave.start()
       } else if (state.wave.started) {
         state.wave.stop()
+      }
+
+      if (color) {
+        state.wave.color = color
       }
     }
   })

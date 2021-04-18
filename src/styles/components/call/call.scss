@@ -35,42 +35,47 @@ $color-active: #33b4f7;
 $color-passed: white;
 
 .llct-call-word[data-type] {
-  text-shadow: 0px 0px 4px var(--text-color, unset);
+  // text-shadow: 0px 0px 4px var(--album-color-text, unset);
 
   &[data-passed='true'] {
     color: lighten($color-normal, 20);
-    text-shadow: 0px 0px 1px var(--text-color, unset);
+    // text-shadow: 0px 0px 1px var(--album-color-text, unset);
   }
 
   &[data-active='true'] {
-    color: var(--text-color, $color-active);
+    color: var(--album-color-text, $color-active);
   }
 }
 
 .llct-dark .llct-call-word[data-type] {
   &[data-active='true'] {
-    color: var(--text-color, $color-active);
+    color: var(--album-color-text, $color-active);
   }
 }
 
 .llct-call-word[data-type='0'] {
-  color: $color-normal;
+  color: var(--album-color-text, $color-normal);
 
   &[data-passed='true'] {
     color: lighten($color-normal, 20);
   }
 
   &[data-active='true'] {
-    color: var(--text-color, $color-active);
-    text-shadow: unset;
+    color: white;
+    text-shadow: 0px 0px 6px var(--album-color, $color-active);
   }
 }
 
 .llct-dark .llct-call-word[data-type='0'] {
-  color: $color-normal-dark;
+  color: var(--album-color-text-dark, $color-normal-dark);
 
   &[data-passed='true'] {
     color: darken($color-normal-dark, 30);
+  }
+
+  &[data-active='true'] {
+    color: $color-active;
+    text-shadow: unset;
   }
 }
 
@@ -101,7 +106,7 @@ $color-passed: white;
 }
 
 .llct-call-word[data-type='2'] {
-  color: var(--text-color, $color-comment);
+  color: $color-comment;
   text-shadow: unset;
 
   &[data-passed='true'] {
@@ -110,7 +115,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: $color-comment-active;
-    text-shadow: 0px 0px 4px var(--text-color, $color-comment);
+    text-shadow: 0px 0px 4px var(--album-color-text, $color-comment);
   }
 }
 
@@ -123,7 +128,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: $color-comment-active;
-    text-shadow: 0px 0px 4px var(--text-color, $color-comment);
+    text-shadow: 0px 0px 4px var(--album-color-text, $color-comment);
   }
 }
 
@@ -136,7 +141,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: white;
-    text-shadow: 0px 0px 4px var(--text-color, $color-sing-along);
+    text-shadow: 0px 0px 4px var(--album-color-text, $color-sing-along);
   }
 }
 
@@ -149,7 +154,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: white;
-    text-shadow: 0px 0px 4px var(--text-color, $color-sing-along);
+    text-shadow: 0px 0px 4px var(--album-color-text, $color-sing-along);
   }
 }
 

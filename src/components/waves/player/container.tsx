@@ -4,6 +4,7 @@ import PlayerWaveComponent from './component'
 interface PlayerWaveContainerProps {
   show?: boolean
   state: MusicPlayerState
+  color?: string
   progress?: number
   progressListener: () => number
 }
@@ -11,6 +12,7 @@ interface PlayerWaveContainerProps {
 const PlayerWaveContainer = ({
   show,
   state,
+  color,
   progressListener,
   progress
 }: PlayerWaveContainerProps) => {
@@ -18,6 +20,7 @@ const PlayerWaveContainer = ({
     <PlayerWaveComponent
       progress={progress}
       listener={progressListener}
+      color={color}
       show={show}
       state={state}
     ></PlayerWaveComponent>

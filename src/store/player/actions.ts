@@ -45,3 +45,10 @@ export const setInstance = (data: LLCTAudioStack) => {
     data
   }
 }
+
+export const setAlbumColor = (data: LLCTColor | null) => {
+  return {
+    type: '@llct/player/setColor',
+    data
+  }
+}

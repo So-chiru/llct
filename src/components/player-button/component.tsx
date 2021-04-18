@@ -9,6 +9,7 @@ interface PlayerButtonProps {
   music: MusicMetadata
   state: MusicPlayerState
   show: boolean
+  color?: LLCTColor
   progress: () => number
   onClick: () => void
 }
@@ -23,6 +24,7 @@ const PlayerButtonComponent = ({
   music,
   state,
   show,
+  color,
   progress,
   onClick
 }: PlayerButtonProps) => {
@@ -35,6 +37,7 @@ const PlayerButtonComponent = ({
       <PlayerWaveContainer
         show={show}
         state={state}
+        color={color && color.sub}
         progressListener={progress}
       ></PlayerWaveContainer>
       <img className='background' src={music && music.image}></img>

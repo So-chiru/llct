@@ -9,6 +9,7 @@ interface SliderComponentProps {
   step?: number
   max: number
   defaults?: number
+  color?: SliderColor
 }
 
 const SliderComponent = ({
@@ -17,7 +18,8 @@ const SliderComponent = ({
   format,
   step,
   max,
-  defaults
+  defaults,
+  color
 }: SliderComponentProps) => {
   const [current, setCurrent] = useState<number>(0)
   const lastValue = useRef<number>(-1)
@@ -110,7 +112,19 @@ const SliderComponent = ({
   const displayValue = lastValue.current > -1 ? lastValue.current : current
 
   return (
-    <div className='llct-slider-wrapper' ref={wrapper}>
+    <div
+      className='llct-slider-wrapper'
+      ref={wrapper}
+      style={{
+        ['--slider-background-color' as string]: color && color.background,
+        ['--slider-thumb-color' as string]: color && color.thumb,
+        ['--slider-track-color' as string]: color && color.track,
+        ['--slider-background-color-dark' as string]:
+          color && color.backgroundDark,
+        ['--slider-thumb-color-dark' as string]: color && color.thumbDark,
+        ['--slider-track-color-dark' as string]: color && color.trackDark
+      }}
+    >
       <div className='llct-slider-text'>
         <span className='text-current'>
           {format ? format(displayValue * max) : displayValue * max}

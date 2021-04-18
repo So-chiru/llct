@@ -10,6 +10,7 @@ const PlayerButtonContainer = () => {
 
   const playing = useSelector((state: RootState) => state.playing)
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
+  const color = useSelector((state: RootState) => state.playing.color)
 
   const clickHandler = () => {
     dispatch(ui.showPlayer(true))
@@ -23,6 +24,7 @@ const PlayerButtonContainer = () => {
     <PlayerButtonComponent
       show={!showPlayer}
       music={playing.queue[playing.pointer]}
+      color={color || undefined}
       progress={progressListener}
       state={playing.state.player}
       onClick={clickHandler}

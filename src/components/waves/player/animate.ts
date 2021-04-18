@@ -9,6 +9,8 @@ class PlayerWave {
   width: number
   height: number
 
+  color: string
+
   raf?: number
 
   constructor (canvas: HTMLCanvasElement, width: number, height: number) {
@@ -29,6 +31,8 @@ class PlayerWave {
 
     this.canvas.width = width
     this.canvas.height = height
+
+    this.color = '#ffffff'
   }
 
   updateProgress (progress: number) {
@@ -85,7 +89,7 @@ class PlayerWave {
     ]
 
     this.context.beginPath()
-    this.context.fillStyle = '#ffffff'
+    this.context.fillStyle = this.color
 
     this.context.moveTo(0, 100)
     this.context.lineTo(points[0][0], points[0][1])
