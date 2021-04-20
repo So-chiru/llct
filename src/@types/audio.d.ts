@@ -13,6 +13,8 @@ interface LLCTAudioStack {
   progress: number
   timecode: number
 
+  updateMetadata?: (title: string, artist: string, cover: string) => void
+
   /**
    * 오디오 스택이 음향 효과를 지원하는지에 대한 여부.
    */
@@ -30,4 +32,6 @@ interface LLCTAudioStackEventMap {
   end: () => void
   metadata: () => void
   load: () => void
+  requestPreviousTrack: () => void
+  requestNextTrack: () => void
 }

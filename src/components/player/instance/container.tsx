@@ -58,9 +58,41 @@ const PlayerInstanceContainer = () => {
         dispatch(player.setLoadState(PlayerLoadState.Done))
       })
 
+      instance.events.on('requestPreviousTrack', () => {
+        dispatch(player.skip(-1))
+
+        requestAnimationFrame(() => {
+          instance.play()
+        })
+      })
+
+      instance.events.on('requestNextTrack', () => {
+        dispatch(player.skip(1))
+
+        requestAnimationFrame(() => {
+          instance.play()
+        })
+      })
+
       dispatch(player.setInstance(instance))
     }
   }, [instance])
+
+  const playing = useSelector((state: RootState) => state.playing)
+
+  useEffect(() => {
+    if (!instance || !instance.updateMetadata) {
+      return
+    }
+
+    const play = playing.queue[playing.pointer]
+
+    if (!play) {
+      return
+    }
+
+    instance.updateMetadata(play.title, play.artist as string, play.image)
+  }, [instance, playing.pointer])
 
   return null
 }
