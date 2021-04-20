@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -15,11 +15,51 @@ import PlayerContainer from './player/container'
 import DataLoderContainer from './data-loader/container'
 import PlayerInstanceContainer from './player/instance/container'
 
+import {
+  checkSystemDark,
+  toggleDarkMode,
+  useDarkMode,
+  onModeUpdate
+} from '@/utils/darkmode'
+
 const App = () => {
-  const useDark = useSelector((state: RootState) => state.ui.useDarkMode)
+  const [_, refresh] = useState<number>(0)
+
+  const useDark = useSelector(
+    (state: RootState) => state.settings.useDarkMode.value
+  )
+
+  const useSystemMatchDarkMode = useSelector(
+    (state: RootState) => state.settings.matchSystemAppearance.value
+  )
+
+  const darkMode = checkSystemDark(useDark, useSystemMatchDarkMode)
+
+  const colorUpdate = () => {
+    requestAnimationFrame(() => {
+      if (
+        (useSystemMatchDarkMode && useDarkMode()) ||
+        (!useSystemMatchDarkMode && useDark)
+      ) {
+        toggleDarkMode(true)
+        return
+      }
+
+      toggleDarkMode(false)
+    })
+  }
+
+  useEffect(colorUpdate, [useDark, useSystemMatchDarkMode])
+
+  useEffect(() => {
+    onModeUpdate(() => {
+      colorUpdate()
+      refresh(Math.random())
+    })
+  }, [])
 
   return (
-    <ThemeProvider theme={useDark ? dark : light}>
+    <ThemeProvider theme={darkMode ? dark : light}>
       <GlobalStyles></GlobalStyles>
       <WavesContainer></WavesContainer>
       <DataLoderContainer></DataLoderContainer>

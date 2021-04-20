@@ -1,3 +1,24 @@
-.llct-settings {
-  margin-left: 3vw;
+.llct-settings-row {
+  display: flex;
+  margin-bottom: 3vh;
+
+  .controls {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.settings-title {
+  display: block;
+  font-size: 20px;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.settings-desc {
+  display: block;
+  font-size: 16px;
+  letter-spacing: -1px;
+  opacity: 0.8;
 }

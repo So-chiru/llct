@@ -5,6 +5,8 @@ import PageWave from './animate'
 import '@/styles/components/waves/wave.scss'
 import { RootState } from '@/store'
 
+import { checkSystemDark } from '@/utils/darkmode'
+
 interface PageWavesComponentState {
   wave?: PageWave
 }
@@ -27,7 +29,16 @@ const WavesComponent = () => {
   const waveCanvas = useRef<HTMLCanvasElement>(null)
 
   const [state, setState] = useState({} as PageWavesComponentState)
-  const darkTheme = useSelector((state: RootState) => state.ui.useDarkMode)
+  const darkTheme = useSelector(
+    (state: RootState) => state.settings.useDarkMode.value
+  )
+
+  const useSystemMatchDarkMode = useSelector(
+    (state: RootState) => state.settings.matchSystemAppearance.value
+  )
+
+  const darkMode = checkSystemDark(darkTheme, useSystemMatchDarkMode)
+
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
 
   requestAnimationFrame(() => {
@@ -63,7 +74,7 @@ const WavesComponent = () => {
     }
 
     if (state.wave) {
-      state.wave.updateTheme(darkTheme)
+      state.wave.updateTheme(darkMode)
 
       // 플레이어가 표시된 경우 페이지 상단 파도 멈춤
       if (showPlayer) {

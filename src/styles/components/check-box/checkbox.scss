@@ -1,0 +1,65 @@
+@import '../../colors.scss';
+
+$checkbox-width: 48px;
+$checkbox-height: $checkbox-width / 2;
+
+.llct-dark .llct-checkbox {
+  &.disabled {
+    background: darken($dark-semi-accent, 5);
+
+    .thumb {
+      background: darken($accent, 20);
+    }
+  }
+
+  .thumb {
+    background: $accent;
+  }
+
+  background: $dark-semi-accent;
+}
+
+.llct-checkbox {
+  position: relative;
+  cursor: pointer;
+
+  & > input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  &.disabled {
+    background: lighten($semi-accent, 5);
+
+    .thumb {
+      background: lighten($accent, 20);
+    }
+  }
+
+  .thumb {
+    position: absolute;
+    width: ($checkbox-width / 2) - 2px;
+    height: $checkbox-height - 2px;
+    transform: translateX(0px);
+    margin-left: 1px;
+    margin-top: 1px;
+    border-radius: 50%;
+
+    background: $accent;
+
+    transition: 0.3s transform cubic-bezier(0.19, 1, 0.22, 1);
+
+    pointer-events: none;
+  }
+
+  & > input:checked + .thumb {
+    transform: translateX($checkbox-width / 2);
+  }
+
+  width: $checkbox-width;
+  height: $checkbox-height;
+  background: $semi-accent;
+  border-radius: 18px;
+}

@@ -6,6 +6,7 @@ import UIReducer from './ui/reducer'
 import SongsReducer from './songs/reducer'
 import CallReducer from './call/reducer'
 import PlayingReducer from './player/reducer'
+import SettingsReducer from './settings/reducer'
 
 import { fetchAPIDataSaga } from './sagas'
 
@@ -16,7 +17,8 @@ const reducers = combineReducers({
   call: CallReducer,
   songs: SongsReducer,
   playing: PlayingReducer,
-  ui: UIReducer
+  ui: UIReducer,
+  settings: SettingsReducer
 })
 
 // 하위 컴포넌트에서 최상위 Reducer에서 추론된 타입을 이용할 수 있도록 RootState 변수를 지정합니다.

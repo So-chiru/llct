@@ -1,15 +1,4 @@
 /**
- * 테마를 업데이트합니다.
- * @param useDarkMode 다크모드 사용 여부
- */
-export const updateTheme = (useDarkMode: boolean): UIReducerAction => {
-  return {
-    type: '@llct/theme/update',
-    data: useDarkMode
-  }
-}
-
-/**
  * 현재 탭을 변경합니다.
  */
 export const updateTab = (tabNumber: number): UIReducerAction => {

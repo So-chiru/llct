@@ -3,6 +3,32 @@ interface LLCTTab {
   page?: string
 }
 
+interface Settings {
+  useDarkMode: boolean
+  usePlayerColor: boolean
+  matchSystemAppearance: boolean
+}
+
+interface LLCTSetting<T> {
+  name: string
+  description: string
+  default: T
+  value: T
+  enable?: (
+    state: Record<keyof Settings, LLCTSetting<Settings[keyof Settings]>>
+  ) => boolean
+  disabled?: boolean
+  type: 'checkbox' | 'text' | 'no-control'
+  onChange?: (value: T) => void
+  onInitial?: (value: T) => void
+}
+
+interface SettingsReducerAction {
+  type: string
+  data: Settings[keyof Settings]
+  name: keyof Settings
+}
+
 interface UIReducerAction {
   type: string
   data: unknown

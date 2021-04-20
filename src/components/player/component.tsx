@@ -21,7 +21,6 @@ import * as ui from '@/store/ui/actions'
 
 import { RootState } from '@/store/index'
 import SliderComponent from '../slider/component'
-import { RGBtoHex } from '@/styles/colors'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState
@@ -62,6 +61,9 @@ const PlayerComponent = ({
 
   const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
+  const usePlayerColor = useSelector(
+    (state: RootState) => state.settings.usePlayerColor.value
+  )
 
   requestAnimationFrame(() => {
     toggleScrollbar(!showPlayer)
@@ -102,14 +104,17 @@ const PlayerComponent = ({
       ></div>
       <div
         className={'llct-player' + showString}
-        style={{
-          ['--album-color' as string]: color && color.main,
-          ['--album-color-second' as string]: color && color.sub,
-          ['--album-color-text' as string]: color && color.text,
-          ['--album-color-dark' as string]: color && color.mainDark,
-          ['--album-color-second-dark' as string]: color && color.subDark,
-          ['--album-color-text-dark' as string]: color && color.textDark
-        }}
+        style={
+          (usePlayerColor && {
+            ['--album-color' as string]: color && color.main,
+            ['--album-color-second' as string]: color && color.sub,
+            ['--album-color-text' as string]: color && color.text,
+            ['--album-color-dark' as string]: color && color.mainDark,
+            ['--album-color-second-dark' as string]: color && color.subDark,
+            ['--album-color-text-dark' as string]: color && color.textDark
+          }) ||
+          undefined
+        }
       >
         <div className='close'>
           {playerNarrow ? (
@@ -160,7 +165,7 @@ const PlayerComponent = ({
                 <ProgressBarComponent
                   progress={() => instance.progress}
                   duration={instance.duration}
-                  color={sliderColor}
+                  color={(usePlayerColor && sliderColor) || undefined}
                   update={
                     state.playState === MusicPlayerState.Playing && showPlayer
                   }
@@ -179,7 +184,7 @@ const PlayerComponent = ({
                       onSeek={(seek: number) => {
                         instance.volume = seek
                       }}
-                      color={sliderColor}
+                      color={(usePlayerColor && sliderColor) || undefined}
                       format={(num: number) => Math.floor(num) + '%'}
                       defaults={instance.volume}
                       step={0.05}

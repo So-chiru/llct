@@ -6,7 +6,7 @@ interface ProgressBarComponentProps {
   progress: () => number
   duration: number
   update: boolean
-  color: SliderColor
+  color?: SliderColor
   seek: (seekTo: number) => void
 }
 

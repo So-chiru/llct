@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 
 import '@/styles/components/home/home.scss'
 import '@/styles/animate.scss'
+
 interface TabProps {
   tab: LLCTTab
   show: boolean
