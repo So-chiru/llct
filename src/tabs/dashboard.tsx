@@ -5,6 +5,7 @@ import '@/styles/tabs/dashboard.scss'
 
 import MusicCard from '@/components/music-card/container'
 import { RootState } from '@/store'
+import EmptyComponent from '@/components/empty/component'
 
 const DashboardTab = ({ show }: LLCTTabProps) => {
   const data = useSelector((state: RootState) => state.songs)
@@ -12,6 +13,11 @@ const DashboardTab = ({ show }: LLCTTabProps) => {
   // TODO : API_SERVER/updates 에서 추천 목록 가져오기
   return (
     <div className={`llct-tab${show ? ' show' : ''}`} aria-hidden={!show}>
+      {
+        data && data.error && (
+          <EmptyComponent text={`${data.error}`} height='30vh'></EmptyComponent>
+        )
+      }
       <div className='card-lists'>
         {!data
           ? [...new Array(12)].map((v, i) => {

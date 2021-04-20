@@ -1,6 +1,7 @@
 interface SongsTypes {
   load: boolean
   items: null | LLCTSongDataV2
+  error?: Error
 }
 
 const SongsDefault: SongsTypes = {

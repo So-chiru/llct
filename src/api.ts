@@ -1,9 +1,18 @@
-import { RGBtoHex } from './styles/colors'
-
 const makeItJSON = (result: Response) => result.json()
 
 export const fetchAPI = async () => {
   return fetch(`${process.env.API_SERVER}/lists`)
+    .then(v => {
+      if (v.status === 404) {
+        throw new Error('노래 목록이 없어요.')
+      }
+
+      if (v.status > 500) {
+        throw new Error('서버 오류로 노래 목록을 불러올 수 없어요.')
+      }
+
+      return v
+    })
     .then(makeItJSON)
     .then(p => {
       if (!p.result || p.result === 'error') {
