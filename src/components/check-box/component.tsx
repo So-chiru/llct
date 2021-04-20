@@ -5,7 +5,6 @@ interface CheckboxComponentProps {
   onChange: (checked: boolean) => void
   checked: boolean
   disabled?: boolean
-  name?: string
   ariaIndex?: number
 }
 
@@ -14,7 +13,6 @@ const CheckboxComponent = ({
   onChange,
   checked,
   disabled,
-  name,
   ariaIndex
 }: CheckboxComponentProps) => {
   const clickHandlerWrapper = (

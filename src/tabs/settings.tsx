@@ -58,7 +58,6 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
                 checked={item.value as boolean}
                 disabled={() => item.enable && !item.enable(settings)}
                 onChange={(checked: boolean) => clickInputHandler(checked, id)}
-                name={item.name}
                 ariaIndex={500 + (i + 2)}
               ></CheckboxContainer>
             )

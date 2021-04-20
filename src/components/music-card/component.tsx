@@ -12,6 +12,7 @@ interface MusicCardProps {
   index?: number
   skeleton?: boolean
   onClick?: () => void
+  onContext?: (ev: MouseEvent) => void
 }
 
 enum ImageLoadState {
@@ -95,7 +96,8 @@ const MusicCardComponent = ({
   skeleton,
   group,
   index,
-  onClick
+  onClick,
+  onContext
 }: MusicCardProps) => {
   const [loadState, setLoadState] = useState(ImageLoadState.Loading)
 
@@ -141,6 +143,7 @@ const MusicCardComponent = ({
      * 호출 스택 줄이기 위해 React에서 제공하는 onMouseMove, Leave 대신 직접 이벤트를 부착하여 사용
      */
     cardRef.current.onclick = onClick || emptyFunction
+    cardRef.current.oncontextmenu = onContext || emptyFunction
     cardRef.current.onkeypress = onKeyPress || emptyFunction
     cardRef.current.onmouseenter = () => tiltCardEnter(cardRef.current)
     cardRef.current.onmousemove = ev =>

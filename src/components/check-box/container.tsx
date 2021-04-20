@@ -5,7 +5,6 @@ interface CheckboxContainerProps {
   onChange: (checked: boolean) => void
   checked: boolean
   disabled?: boolean | (() => boolean | undefined)
-  name?: string
   ariaIndex?: number
 }
 
@@ -14,7 +13,6 @@ const CheckboxContainer = ({
   onChange,
   checked,
   disabled,
-  name,
   ariaIndex
 }: CheckboxContainerProps) => {
   if (typeof disabled === 'function') {
@@ -27,7 +25,6 @@ const CheckboxContainer = ({
       onChange={onChange}
       checked={checked}
       disabled={disabled}
-      name={name}
       ariaIndex={ariaIndex}
     ></CheckboxComponent>
   )

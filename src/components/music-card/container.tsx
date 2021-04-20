@@ -101,12 +101,27 @@ const MusicCardContainer = ({
     history.push(`/play/${playId}`, musicObject)
   }
 
+  const contextHandler = (ev: MouseEvent) => {
+    if (!data.items) {
+      return
+    }
+
+    const playId = id || `${group}${index}`
+
+    const musicObject = songs.searchById(playId, data.items)
+
+    dispatch(player.addToQueue(musicObject))
+
+    ev.preventDefault()
+  }
+
   return (
     <MusicCardComponent
       music={selectedMetadata}
       group={group}
       index={index}
       onClick={clickHandler}
+      onContext={contextHandler}
     ></MusicCardComponent>
   )
 }
