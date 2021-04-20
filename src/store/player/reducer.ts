@@ -47,17 +47,17 @@ const structPlayQueue = (
     object.queue = [...object.queue, action.data] as MusicMetadataWithID[]
   }
 
-  if (typeof action.pointer !== 'undefined') {
-    object.pointer = action.pointer
-  } else {
-    object.pointer = object.queue.length - 1
-  }
-
   if (typeof action.skip !== 'undefined') {
     object.pointer = Math.min(
       object.queue.length - 1,
       Math.max(0, object.pointer + action.skip)
     )
+  } else {
+    if (typeof action.pointer !== 'undefined') {
+      object.pointer = action.pointer
+    } else {
+      object.pointer = object.queue.length - 1
+    }
   }
 
   return object
