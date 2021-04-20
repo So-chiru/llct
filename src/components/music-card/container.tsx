@@ -8,6 +8,8 @@ import MusicCardComponent from './component'
 import * as songs from '@/utils/songs'
 import { useHistory } from 'react-router-dom'
 
+import recents from '@/store/recents/actions'
+
 import * as player from '@/store/player/actions'
 interface MusicCardContainerProps {
   id?: string
@@ -90,6 +92,7 @@ const MusicCardContainer = ({
     const musicObject = songs.searchById(playId, data.items)
 
     dispatch(player.play(musicObject))
+    dispatch(recents.addPlayed(musicObject.id))
 
     if (instance) {
       instance.play()

@@ -21,7 +21,7 @@ export const get = <T>(scope: string, defaults?: T) => {
   const data = localStorage.getItem(`${NAME_SPACE}${scope}`)
 
   if (data !== null && data.indexOf('$O') === 0) {
-    return JSON.stringify(data.slice(2))
+    return JSON.parse(data.slice(2))
   } else if (data !== null && data.indexOf('$B') === 0) {
     return data.slice(2) === 'true'
   } else if (data !== null && data.indexOf('$N') === 0) {
@@ -33,4 +33,9 @@ export const get = <T>(scope: string, defaults?: T) => {
   }
 
   return data
+}
+
+export default {
+  set,
+  get
 }

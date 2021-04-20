@@ -4,6 +4,7 @@ import { all } from 'redux-saga/effects'
 
 import UIReducer from './ui/reducer'
 import SongsReducer from './songs/reducer'
+import RecentPlayedReducer from './recents/reducer'
 import CallReducer from './call/reducer'
 import PlayingReducer from './player/reducer'
 import SettingsReducer from './settings/reducer'
@@ -16,6 +17,7 @@ const sagaMiddleware = createSagaMiddleware()
 const reducers = combineReducers({
   call: CallReducer,
   songs: SongsReducer,
+  recents: RecentPlayedReducer,
   playing: PlayingReducer,
   ui: UIReducer,
   settings: SettingsReducer

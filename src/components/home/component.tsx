@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 
 import '@/styles/components/home/home.scss'
 import '@/styles/animate.scss'
+import RecentPlayedTab from '@/tabs/recents'
 
 interface TabProps {
   tab: LLCTTab
@@ -27,6 +28,8 @@ const TabComponent = ({ tab, show }: TabProps) => {
       return <DashboardTab show={show}></DashboardTab>
     case 'settings':
       return <SettingsTab show={show}></SettingsTab>
+    case 'recent':
+      return <RecentPlayedTab show={show}></RecentPlayedTab>
     case 'songs':
       return <SongsTab show={show}></SongsTab>
     default:
