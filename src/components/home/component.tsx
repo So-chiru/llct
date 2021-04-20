@@ -31,7 +31,7 @@ const TabComponent = ({ tab, show }: TabProps) => {
       return <SongsTab show={show}></SongsTab>
     default:
       return (
-        <div className={`llct-tab${show ? ' show' : ''}`}>
+        <div className={`llct-tab${show ? ' show' : ''}`} aria-hidden={!show}>
           <EmptyComponent
             text={tab.name + ' 페이지는 텅 비었어요...'}
             height='30vh'
@@ -70,10 +70,17 @@ const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
         {tabs.map((tab, idx) => (
           <div
             className='llct-tab-button'
+            role='button'
+            tabIndex={10 + idx}
             key={idx}
             title={tab.name}
+            aria-label={tab.name + ' 탭으로 가기'}
             data-current={currentTab === idx}
             onClick={() => tabUpdateHandler(idx)}
+            onKeyPress={ev =>
+              (ev.code === 'Enter' || ev.code === 'Space') &&
+              tabUpdateHandler(idx)
+            }
           >
             {tab.name}
           </div>
@@ -88,7 +95,11 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
 
   return (
     <div className='llct-app'>
-      <img className='llct-icon' src='/images/logo/Icon.svg'></img>
+      <img
+        aria-label={'LLCT 로고'}
+        className='llct-icon'
+        src='/images/logo/Icon.svg'
+      ></img>
       {tabs.map((tab, idx) => {
         return useMemo(
           () => (

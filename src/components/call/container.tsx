@@ -12,6 +12,7 @@ interface CallContainerProps {
   update: boolean
   id: string
   lastSeek: number
+  seek?: (time: number) => void
 }
 
 interface LineComponentProps {
@@ -19,14 +20,17 @@ interface LineComponentProps {
   index: number
   time: number
   timeline: LLCTCall | null
+  seek?: (time: number) => void
 }
 
 interface WordComponentProps {
+  start: number
   active: boolean
   passed: boolean
   text: string
   type?: number
   color?: string
+  onClick?: (time: number) => void
   durationTime: () => string
 }
 
@@ -35,12 +39,14 @@ const calcuatePronounceTime = (start: number, end: number): number => {
 }
 
 const WordComponent = ({
+  start,
   active,
   passed,
   text,
   type,
   durationTime,
-  color
+  color,
+  onClick
 }: WordComponentProps) => {
   return (
     <span
@@ -48,6 +54,7 @@ const WordComponent = ({
       data-active={active}
       data-passed={passed}
       data-type={type}
+      onClick={() => onClick && onClick(start)}
       style={{
         ['--text-color' as string]: color,
         transitionDuration: durationTime()
@@ -58,7 +65,13 @@ const WordComponent = ({
   )
 }
 
-const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
+const LineComponent = ({
+  timeline,
+  line,
+  index,
+  time,
+  seek
+}: LineComponentProps) => {
   const activeLine = line.start < time && line.end > time
 
   const words = useMemo(
@@ -78,12 +91,20 @@ const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
           )
         }
 
+        const onClick = (time: number) => {
+          if (seek) {
+            seek(time)
+          }
+        }
+
         return (
           <WordComponent
             key={i}
             active={active}
             passed={!timeLessThanEnd}
             text={word.text}
+            onClick={onClick}
+            start={word.start}
             type={word.type}
             durationTime={durationTime}
           ></WordComponent>
@@ -112,6 +133,7 @@ const LineComponent = ({ timeline, line, index, time }: LineComponentProps) => {
 const CallContainer = ({
   update,
   lastSeek,
+  seek,
   current,
   id
 }: CallContainerProps) => {
@@ -150,6 +172,7 @@ const CallContainer = ({
                 key={`line:${i}${update}${lastSeek}`}
                 index={i}
                 line={v}
+                seek={seek}
                 time={current()}
               ></LineComponent>
             )

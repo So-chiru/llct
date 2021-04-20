@@ -115,12 +115,24 @@ const PlayerComponent = ({
           }) ||
           undefined
         }
+        aria-hidden={!showPlayer}
       >
-        <div className='close'>
+        <div
+          className='close'
+          role='button'
+          aria-label='플레이어 닫기'
+          onKeyPress={ev => ev.code === 'Enter' && closePlayer()}
+        >
           {playerNarrow ? (
-            <MdKeyboardArrowDown onClick={closePlayer}></MdKeyboardArrowDown>
+            <MdKeyboardArrowDown
+              id='player-close'
+              onClick={closePlayer}
+            ></MdKeyboardArrowDown>
           ) : (
-            <MdKeyboardArrowLeft onClick={closePlayer}></MdKeyboardArrowLeft>
+            <MdKeyboardArrowLeft
+              id='player-close'
+              onClick={closePlayer}
+            ></MdKeyboardArrowLeft>
           )}
         </div>
         <div className='contents'>
@@ -129,10 +141,19 @@ const PlayerComponent = ({
               {useMemo(
                 () => (
                   <div className='texts'>
-                    <h1 className='title' title={music.title}>
+                    <h1
+                      className='title'
+                      title={music.title}
+                      aria-label={music.title}
+                      tabIndex={300}
+                    >
                       {music.title}
                     </h1>
-                    <h3 className='artist' title={music.artist as string}>
+                    <h3
+                      className='artist'
+                      title={music.artist as string}
+                      tabIndex={301}
+                    >
                       {music.artist}
                     </h3>
                   </div>
@@ -141,16 +162,37 @@ const PlayerComponent = ({
               )}
               <div className='controls'>
                 {state.playState === MusicPlayerState.Playing ? (
-                  <MdPause onClick={() => controller.pause()}></MdPause>
+                  <MdPause
+                    tabIndex={302}
+                    onClick={() => controller.pause()}
+                    aria-label={'일시 정지'}
+                    role='button'
+                  ></MdPause>
                 ) : (
-                  <MdPlayArrow onClick={() => controller.play()}></MdPlayArrow>
+                  <MdPlayArrow
+                    tabIndex={302}
+                    onClick={() => controller.play()}
+                    aria-label={'재생'}
+                    role='button'
+                  ></MdPlayArrow>
                 )}
                 <MdSkipPrevious
+                  tabIndex={302}
                   onClick={() => controller.prev()}
+                  aria-label={'이전 곡으로 넘어가기'}
+                  role='button'
                 ></MdSkipPrevious>
-                <MdSkipNext onClick={() => controller?.next()}></MdSkipNext>
+                <MdSkipNext
+                  tabIndex={302}
+                  onClick={() => controller?.next()}
+                  aria-label={'다음 곡으로 넘어가기'}
+                  role='button'
+                ></MdSkipNext>
                 <MdEqualizer
+                  tabIndex={302}
                   onClick={() => controller.toggleEQ()}
+                  aria-label={'오디오 효과 보기'}
+                  role='button'
                 ></MdEqualizer>
               </div>
               <div className='image'>
@@ -170,6 +212,7 @@ const PlayerComponent = ({
                     state.playState === MusicPlayerState.Playing && showPlayer
                   }
                   seek={controller.seek}
+                  tabIndex={400}
                 ></ProgressBarComponent>
               )}
             </div>
@@ -208,6 +251,9 @@ const PlayerComponent = ({
                   }
                   current={() => (!instance ? 0 : instance.timecode)}
                   lastSeek={state.lastSeek}
+                  seek={(time: number) =>
+                    instance && controller.seek(time / 100 / instance.duration)
+                  }
                   id={music.id}
                 ></CallContainer>
               ),

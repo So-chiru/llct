@@ -1,6 +1,30 @@
+@import '../colors.scss';
+
 .llct-settings-row {
   display: flex;
   margin-bottom: 3vh;
+
+  .info {
+    letter-spacing: -1px;
+
+    .link {
+      color: $accent;
+      cursor: pointer;
+
+      border-bottom: 1px dashed $accent;
+    }
+
+    h1,
+    p {
+      margin: 0;
+    }
+  }
+
+  .logo {
+    span {
+      font-size: 16px;
+    }
+  }
 
   .controls {
     margin-left: auto;

@@ -84,7 +84,11 @@ const SongsTab = ({ show }: LLCTTabProps) => {
   }
 
   return (
-    <div className={`llct-tab${show ? ' show' : ''}`} ref={rootRef}>
+    <div
+      className={`llct-tab${show ? ' show' : ''}`}
+      ref={rootRef}
+      aria-hidden={!show}
+    >
       <div className='songs-groups-wrapper'>
         {...songs.items.groups.map((value, index) => {
           return (

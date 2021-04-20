@@ -11,7 +11,7 @@ const DashboardTab = ({ show }: LLCTTabProps) => {
 
   // TODO : API_SERVER/updates 에서 추천 목록 가져오기
   return (
-    <div className={`llct-tab${show ? ' show' : ''}`}>
+    <div className={`llct-tab${show ? ' show' : ''}`} aria-hidden={!show}>
       <div className='card-lists'>
         {!data
           ? [...new Array(12)].map((v, i) => {

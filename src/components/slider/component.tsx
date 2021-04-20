@@ -10,6 +10,7 @@ interface SliderComponentProps {
   max: number
   defaults?: number
   color?: SliderColor
+  tabIndex?: number
 }
 
 const SliderComponent = ({
@@ -19,7 +20,8 @@ const SliderComponent = ({
   step,
   max,
   defaults,
-  color
+  color,
+  tabIndex
 }: SliderComponentProps) => {
   const [current, setCurrent] = useState<number>(0)
   const lastValue = useRef<number>(-1)
@@ -124,6 +126,11 @@ const SliderComponent = ({
         ['--slider-thumb-color-dark' as string]: color && color.thumbDark,
         ['--slider-track-color-dark' as string]: color && color.trackDark
       }}
+      tabIndex={tabIndex}
+      role="slider"
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-orientation='horizontal'
     >
       <div className='llct-slider-text'>
         <span className='text-current'>
@@ -134,6 +141,7 @@ const SliderComponent = ({
       <div className='llct-slider'>
         <div
           className='thumb'
+          aria-label={`현재 ${displayValue} 값임. (전체의 ${((displayValue / max) * 100).toFixed(2)}%)`}
           style={{
             ['--translate' as string]:
               (

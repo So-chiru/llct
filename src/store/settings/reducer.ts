@@ -30,8 +30,8 @@ const SettingsDefault: Record<
     name: '다크모드 - 시스템 설정에 따르기',
     description: '시스템 설정에 따라 화면을 어둡게 할 지 결정해요.',
     type: 'checkbox',
-    default: false,
-    value: false
+    default: true,
+    value: true
   },
   usePlayerColor: {
     name: '플레이어 색상 사용',

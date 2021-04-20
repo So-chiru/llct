@@ -103,6 +103,12 @@ const MusicCardComponent = ({
     setLoadState(ImageLoadState.Failed)
   }
 
+  const onKeyPress = (ev: KeyboardEvent) => {
+    if (ev.code === 'Enter' && onClick) {
+      onClick()
+    }
+  }
+
   const artistRef = useRef<HTMLSpanElement>(null)
 
   if (artistRef.current && artistRef.current.innerText.length > 10) {
@@ -123,6 +129,7 @@ const MusicCardComponent = ({
      * 호출 스택 줄이기 위해 React에서 제공하는 onMouseMove, Leave 대신 직접 이벤트를 부착하여 사용
      */
     cardRef.current.onclick = onClick || emptyFunction
+    cardRef.current.onkeypress = onKeyPress || emptyFunction
     cardRef.current.onmouseenter = () => tiltCardEnter(cardRef.current)
     cardRef.current.onmousemove = ev =>
       tiltCardElement(cardRef.current, ev, cardWidth)
@@ -137,7 +144,14 @@ const MusicCardComponent = ({
   return skeleton || !music ? (
     <div className='music-card' data-skeleton={true} ref={cardRef}></div>
   ) : (
-    <div className='music-card' data-skeleton={skeleton} ref={cardRef}>
+    <div
+      className='music-card'
+      data-skeleton={skeleton}
+      ref={cardRef}
+      role='button'
+      tabIndex={1000}
+      aria-label={music.artist + ' 의 ' + music.title + ' 곡 카드.'}
+    >
       <div className='background-content'>
         <span className='artist' ref={artistRef}>
           {music.artist}

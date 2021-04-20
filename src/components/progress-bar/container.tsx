@@ -8,6 +8,7 @@ interface ProgressBarComponentProps {
   update: boolean
   color?: SliderColor
   seek: (seekTo: number) => void
+  tabIndex?: number
 }
 
 const timeSerialize = (num: number): string => {
@@ -19,7 +20,8 @@ const ProgressBarComponent = ({
   duration,
   update,
   color,
-  seek
+  seek,
+  tabIndex
 }: ProgressBarComponentProps) => {
   const [seekProgress, setSeekProgress] = useState<number>()
   const [amf, setAmf] = useState<number>()
@@ -44,6 +46,7 @@ const ProgressBarComponent = ({
       color={color}
       format={timeSerialize}
       defaults={seekProgress}
+      tabIndex={tabIndex}
     ></SliderComponent>
   )
 }

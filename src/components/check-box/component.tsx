@@ -5,16 +5,20 @@ interface CheckboxComponentProps {
   onChange: (checked: boolean) => void
   checked: boolean
   disabled?: boolean
+  name?: string
+  ariaIndex?: number
 }
 
 const CheckboxComponent = ({
   id,
   onChange,
   checked,
-  disabled
+  disabled,
+  name,
+  ariaIndex
 }: CheckboxComponentProps) => {
   const clickHandlerWrapper = (
-    ev: React.MouseEvent<HTMLInputElement, MouseEvent>
+    ev: React.MouseEvent<HTMLInputElement, MouseEvent> | React.KeyboardEvent
   ) => {
     if (onChange && !disabled) {
       onChange((ev.target as HTMLInputElement).checked)
@@ -22,15 +26,25 @@ const CheckboxComponent = ({
   }
 
   return (
-    <div className={`llct-checkbox${disabled ? ' disabled' : ''}`}>
+    <div
+      className={`llct-checkbox${disabled ? ' disabled' : ''}`}
+      role='checkbox'
+      tabIndex={ariaIndex}
+      aria-checked={checked}
+      aria-controls={id}
+    >
       <input
         type='checkbox'
         defaultChecked={checked}
         id={id}
         disabled={disabled}
         onClick={clickHandlerWrapper}
+        onKeyPress={ev =>
+          (ev.code === 'Enter' || ev.code === 'Space') &&
+          clickHandlerWrapper(ev)
+        }
       ></input>
-      <div className='thumb'></div>
+      <div className='thumb' aria-hidden='true'></div>
     </div>
   )
 }
