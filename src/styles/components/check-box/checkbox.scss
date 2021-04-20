@@ -22,6 +22,7 @@ $checkbox-height: $checkbox-width / 2;
 .llct-checkbox {
   position: relative;
   cursor: pointer;
+  outline: none;
 
   & > input {
     position: absolute;
