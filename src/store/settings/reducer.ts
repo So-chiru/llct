@@ -40,6 +40,21 @@ const SettingsDefault: Record<
     type: 'checkbox',
     default: false,
     value: false
+  },
+  useTranslatedTitle: {
+    name: '번역 제목 사용',
+    description: '가능하면 원어 제목 대신에 번역 제목을 사용해요.',
+    type: 'checkbox',
+    default: false,
+    value: false
+  },
+  useAlbumCover: {
+    name: '앨범 커버 사용',
+    description:
+      '노래 카드와 플레이어에서 앨범 커버를 사용해요. 이 옵션이 꺼져 있으면 데이터가 절약돼요.',
+    type: 'checkbox',
+    default: true,
+    value: true
   }
 }
 ;(() => {

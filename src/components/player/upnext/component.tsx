@@ -5,7 +5,9 @@ interface UpNextComponentProps {
   click: (current: boolean, index: number) => void
 }
 
+import { RootState } from '@/store'
 import '@/styles/components/player/upnext.scss'
+import { useSelector } from 'react-redux'
 
 const UpNextComponent = ({
   music,
@@ -13,6 +15,13 @@ const UpNextComponent = ({
   click,
   index
 }: UpNextComponentProps) => {
+  const useTranslatedTitle = useSelector(
+    (state: RootState) => state.settings.useTranslatedTitle.value
+  )
+
+  const availableTitleText =
+    useTranslatedTitle && music['title.ko'] ? music['title.ko'] : music.title
+
   return (
     <div
       className='upnext-music'
@@ -22,13 +31,8 @@ const UpNextComponent = ({
     >
       <img className='cover' src={music.image + '?s=75'}></img>
       <div className='info'>
-        <p
-          className='music-title'
-          title={
-            music.title + (music['title.ko'] ? ` (${music['title.ko']})` : '')
-          }
-        >
-          {index + 1}. {music.title}
+        <p className='music-title' title={availableTitleText}>
+          {index + 1}. {availableTitleText}
         </p>
         <span className='music-artist' title={music.artist as string}>
           {music.artist}

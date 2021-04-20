@@ -5,8 +5,10 @@ interface LLCTTab {
 
 interface Settings {
   useDarkMode: boolean
+  useTranslatedTitle: boolean
   usePlayerColor: boolean
   matchSystemAppearance: boolean
+  useAlbumCover: boolean
 }
 
 interface LLCTSetting<T> {

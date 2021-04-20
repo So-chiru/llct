@@ -3,6 +3,8 @@ import { useState, useRef } from 'react'
 import LazyLoad from 'react-lazyload'
 
 import * as songs from '@/utils/songs'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 interface MusicCardProps {
   music?: MusicMetadata
   group?: number
@@ -17,6 +19,8 @@ enum ImageLoadState {
   Loaded,
   Failed
 }
+
+import { emptyCover } from '@/utils/cover'
 
 const emptyFunction = () => {}
 
@@ -95,6 +99,14 @@ const MusicCardComponent = ({
 }: MusicCardProps) => {
   const [loadState, setLoadState] = useState(ImageLoadState.Loading)
 
+  const useTranslatedTitle = useSelector(
+    (state: RootState) => state.settings.useTranslatedTitle.value
+  )
+
+  const useAlbumCover = useSelector(
+    (state: RootState) => state.settings.useAlbumCover.value
+  )
+
   const loadHandler = () => {
     setLoadState(ImageLoadState.Loaded)
   }
@@ -141,16 +153,21 @@ const MusicCardComponent = ({
     cardRef.current.ontouchend = () => tiltCardLeave(cardRef.current)
   }
 
-  return skeleton || !music ? (
-    <div className='music-card' data-skeleton={true} ref={cardRef}></div>
-  ) : (
+  if (skeleton || !music) {
+    return <div className='music-card' data-skeleton={true} ref={cardRef}></div>
+  }
+
+  const availableTitleText =
+    useTranslatedTitle && music['title.ko'] ? music['title.ko'] : music.title
+
+  return (
     <div
       className='music-card'
       data-skeleton={skeleton}
       ref={cardRef}
       role='button'
       tabIndex={1000}
-      aria-label={music.artist + ' 의 ' + music.title + ' 곡 카드.'}
+      aria-label={music.artist + ' 의 ' + availableTitleText + ' 곡 카드.'}
     >
       <div className='background-content'>
         <span className='artist' ref={artistRef}>
@@ -160,13 +177,18 @@ const MusicCardComponent = ({
       <div className='content' data-state={loadState}>
         <LazyLoad height={100}>
           <img
-            alt={`${music.title || '노래'} 앨범 커버`}
-            src={(music.image || songs.coverImageURL(group, index)) + '?s=150'}
+            alt={`${availableTitleText || '노래'} 앨범 커버`}
+            src={
+              (useAlbumCover &&
+                (music.image || songs.coverImageURL(group, index)) +
+                  '?s=150') ||
+              emptyCover
+            }
             onLoad={loadHandler}
             onError={loadErrorHandler}
           ></img>
         </LazyLoad>
-        <span className='title'>{music.title}</span>
+        <span className='title'>{availableTitleText}</span>
       </div>
     </div>
   )

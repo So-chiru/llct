@@ -41,6 +41,8 @@ const toggleScrollbar = (on: boolean) => {
   document.documentElement.style.overflow = on ? 'unset' : 'hidden'
 }
 
+import { emptyCover } from '@/utils/cover'
+
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
 
@@ -63,6 +65,14 @@ const PlayerComponent = ({
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
   const usePlayerColor = useSelector(
     (state: RootState) => state.settings.usePlayerColor.value
+  )
+
+  const useTranslatedTitle = useSelector(
+    (state: RootState) => state.settings.useTranslatedTitle.value
+  )
+
+  const useAlbumCover = useSelector(
+    (state: RootState) => state.settings.useAlbumCover.value
   )
 
   requestAnimationFrame(() => {
@@ -95,6 +105,9 @@ const PlayerComponent = ({
     trackDark: color && color.textDark,
     thumbDark: color && color.textDark
   }
+
+  const availableTitleText =
+    useTranslatedTitle && music['title.ko'] ? music['title.ko'] : music.title
 
   return (
     <>
@@ -143,11 +156,11 @@ const PlayerComponent = ({
                   <div className='texts'>
                     <h1
                       className='title'
-                      title={music.title}
-                      aria-label={music.title}
+                      title={availableTitleText}
+                      aria-label={availableTitleText}
                       tabIndex={300}
                     >
-                      {music.title}
+                      {availableTitleText}
                     </h1>
                     <h3
                       className='artist'
@@ -198,7 +211,13 @@ const PlayerComponent = ({
               <div className='image'>
                 <img
                   alt={`${music.title} 앨범 커버`}
-                  src={typeof music !== 'undefined' ? music.image : ''}
+                  src={
+                    useAlbumCover
+                      ? typeof music !== 'undefined'
+                        ? music.image
+                        : ''
+                      : emptyCover
+                  }
                 ></img>
               </div>
             </div>

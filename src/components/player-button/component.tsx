@@ -1,9 +1,14 @@
 import '@/styles/components/player-button/player-button.scss'
 
+import { useSelector } from 'react-redux'
+
 import { MdMusicNote } from 'react-icons/md'
 import { MusicPlayerState } from '@/@types/state'
 
 import PlayerWaveContainer from '@/components/waves/player/container'
+
+import { RootState } from '@/store/index'
+import { emptyCover } from '@/utils/cover'
 
 interface PlayerButtonProps {
   music: MusicMetadata
@@ -28,6 +33,10 @@ const PlayerButtonComponent = ({
   progress,
   onClick
 }: PlayerButtonProps) => {
+  const useAlbumCover = useSelector(
+    (state: RootState) => state.settings.useAlbumCover.value
+  )
+
   return (
     <div
       className={'llct-player-button' + (music && show ? ' show' : '')}
@@ -40,7 +49,10 @@ const PlayerButtonComponent = ({
         color={color && color.sub}
         progressListener={progress}
       ></PlayerWaveContainer>
-      <img className='background' src={music && music.image}></img>
+      <img
+        className='background'
+        src={useAlbumCover ? music && music.image : emptyCover}
+      ></img>
       {BGLayer}
     </div>
   )
