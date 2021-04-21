@@ -1,12 +1,18 @@
-node_modules
-dist
-public
-*.log
+# OS
 .DS_Store
-.gitignore
-audio.mp3
-audio.bak.mp3
-desktop.ini
 
-calls
-.*-cache*
+# Yarn
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+node_modules
+
+# Logs
+*.log
+
+# Build
+dist
+.env

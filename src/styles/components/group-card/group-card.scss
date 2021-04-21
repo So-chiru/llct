@@ -1,0 +1,49 @@
+@import '../../colors.scss';
+@import '../../positions.scss';
+
+.llct-dark .group-card {
+  background-color: var(--group-color-dark, $semi-accent);
+
+  &[data-active='true'] {
+    background-color: var(--group-color, darken($semi-accent, 10));
+    color: white;
+  }
+
+  border: 1px solid var(--group-color-dark-border, $accent);
+}
+
+.group-card {
+  display: flex;
+  border-radius: 16px;
+  padding: 8px 32px;
+  white-space: nowrap;
+  outline: none;
+
+  background-color: var(--group-color-light, $semi-accent);
+  color: var(--group-color, $accent);
+  border: 1px solid var(--group-color, $accent);
+  cursor: pointer;
+  font-weight: bold;
+
+  transition: background 0.23s cubic-bezier(0.19, 1, 0.22, 1),
+    color 0.23s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.23s cubic-bezier(0.19, 1, 0.22, 1);
+
+  .text {
+    margin: auto;
+    text-align: center;
+  }
+
+  &[data-active='false']:hover {
+    transform: scale(0.95);
+  }
+
+  &[data-active='true'] {
+    background-color: var(--group-color, darken($semi-accent, 10));
+    color: white;
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: $mobile-text-size;
+  }
+}

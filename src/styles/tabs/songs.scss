@@ -1,0 +1,48 @@
+@import '../positions.scss';
+
+.songs-groups-wrapper {
+  display: flex;
+  margin-bottom: 20px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+}
+
+.songs-list-wrapper {
+  display: grid;
+  gap: 10px;
+  position: relative;
+
+  @media screen and (max-width: $mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: $wave-narrow) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: $wave-narrow) {
+  }
+
+  @media screen and (min-width: $desktop) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.group-card {
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: unset;
+  }
+}

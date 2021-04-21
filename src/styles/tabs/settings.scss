@@ -1,0 +1,57 @@
+@import '../colors.scss';
+@import '../positions.scss';
+
+.llct-settings {
+  @media screen and (max-width: $wave-narrow) {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+.llct-settings-row {
+  display: flex;
+  margin-bottom: 3vh;
+  outline: none;
+
+  .info {
+    letter-spacing: -1px;
+
+    .link {
+      color: $accent;
+      cursor: pointer;
+
+      border-bottom: 1px dashed $accent;
+    }
+
+    h1,
+    p {
+      margin: 0;
+    }
+  }
+
+  .logo {
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .controls {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.settings-title {
+  display: block;
+  font-size: 20px;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.settings-desc {
+  display: block;
+  font-size: 14px;
+  letter-spacing: -1px;
+  opacity: 0.8;
+}

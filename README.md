@@ -1,157 +1,22 @@
-# LLCT
+# llct-next
 
-LoveLive Call Table
+next generation of llct
 
-[![withLove](https://forthebadge.com/images/badges/built-with-love.svg)](https://sochiru.pw) [![js](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com) [![js](https://forthebadge.com/images/badges/made-with-pug.svg)](https://www.pugjs.org) [![forthebadge](https://forthebadge.com/images/badges/designed-in-ms-paint.svg)](https://forthebadge.com)
+## development
 
-## 사이트
+```sh
+git clone https://github.com/So-chiru/LLCT
 
-[Now](https://now.sh)에서 호스팅 중인 [사이트가 있습니다!](https://lovelivec.kr)
+yarn # 의존성 다운로드
 
-## 디자인
-
-[이 Figma](https://www.figma.com/file/y2XT4hDU090ISuXt9ZtcGB/LLCT-Love-Live-Call-Table?node-id=0%3A1) 링크에서 디자인 컨셉을 확인하실 수 있습니다.
-
-## 주의 사항
-
-본 사이트의 콜은 언제나 정해진 기준이 아닌, 보편적으로 사용되는 콜이나 개인의 의견을 정리한 사이트입니다. 본 사이트의 내용은 명확하지 않을 수 있으며, 언제든지 커뮤니티의 의견을 반영하여 내용이 업데이트 될 수 있습니다.
-
-## 로컬 머신에서 돌려보기
-
-본 프로젝트는 로컬 서버에서 돌릴 수도 있습니다. 아래 방법을 사용하여 오프라인에서 돌려보세요.
-
-### 리포지터리 다운로드
-
-아래 방법으로 리포지터리를 clone 하거나 직접 파일을 다운로드하여 압축을 푸세요.
-
-```bash
-$ git clone https://github.com/So-chiru/LLCT.git
-$ cd LLCT
+yarn dev # 개발 서버 실행 (http://localhost:8080)
+yarn build # production용 빌드
 ```
 
-### 의존성 라이브러리 다운로드
+## contribute
 
-Yarn 패키지 매니저를 사용하여 다운로드할 수 있습니다. yarn이 없으면 yarn을 설치하세요.
+모든 종류의 기여를 환영합니다. 자유롭게 이슈나 Pull Request 남겨주세요.
 
-```bash
-$ yarn
-```
-
-### 실행
-
-그 후에는 LLCT 폴더 내에서 `webpack` 이나 `webpack-dev-server` 명령을 실행하여 빌드할 수 있습니다. 빌드 프로그램이 깔려 있지 않아 오류가 뜬다면 명령어 `yarn global add webpack-cli` 혹은 `yarn global add webpack-dev-server`를 사용하여 설치하세요. 
-
-```bash
-$ webpack-dev-server
-```
-
-그후 http://127.0.0.1:8080 으로 접속하시면 됩니다.
-
-## 가사 싱크 기여
-
-`https://api.lovelivec.kr/lists` 에서 Ctrl+F로 기여할 곡의 ID를 찾고 `https://old.lovelivec.kr/editor.html?id=(곡 ID)`으로 에디터를 열 수 있습니다.
-
-### 대략적인 수정 방법
-
-1. 수정하려는 곡의 에디터로 들어가신 후에 보이는 metadata 창에서 기본적인 설정을 해 주세요.
-2. 오른쪽 위의 timeline 버튼을 눌러 timeline 창으로 들어갑니다.
-3. 가사를 작성한 후 내장 에디터에서 제공하는 가사 띄어쓰기를 진행 후에 최종적으로 띄어쓰기를 다듬어 주세요. (가사 작성 참고)
-4. 가사를 전부 작성하였으면 작성 완료 버튼을 누릅니다.
-5. 각 가사의 싱크를 단축키나 텍스트를 수정하여 맞춰주고, 콜의 종류도 지정합니다.
-6. 과정을 저장하려면 좌측 상단의 다운로드 버튼을 누르고 다시 불러올 때는 업로드 버튼을 클릭합니다.
-7. 전부 작성하신 후에는 다운로드 버튼을 눌러 다운로드 한 파일을 압축하여 이슈로 남겨주세요.
-
-### 메타데이터 작성하기
-
-보정 값, 재생 시간을 건드려 좀 더 편한 싱크 작성이 가능합니다.
-
-### 가사 작성
-
-띄어쓰기에 유의하세요. 띄어쓰기 1개와 2개의 기능이 다릅니다.
-
-```plain
-공백 2개 : 띄어 쓰기
-공백 1개 : 단어 싱크 구분
-```
-
-예시
-
-```plain
-v : 띄어 쓰기
-| : 음절 구분
-혼v키v오vv부v츠v케v앗v테 -> 혼|키|오|v|부|츠|케|앗|테 (각 음절과 띄어쓰기가 구분됨)
-혼v키v오v부v츠v케v앗v테 -> 혼|키|오|부|츠|케|앗|테 (각 음절만 구분됨)
-혼키오부츠케앗테 -> |혼키오부츠케앗테| (모든 단어가 한 음절로 구분됨)
-```
-
-**텍스트 편집기로 작성시 주의: 하나의 줄에 단어가 줄거나 늘게 되면 그 뒤에 있던 시간 싱크가 0으로 덮어 써지고, 여러 줄을 수정하게되면 줄이 서로 꼬이는 버그가 발생할 수 있습니다.**
-
-위 상황을 피하기 위해서 텍스트 편집기에서는 충분히 작업 하신 후 싱크를 맞춰주세요. 속성 값을 수정하는 것은 싱크에 영향을 미치지 않습니다.
-
-텍스트 편집기에서 작업을 마친후에 수정이 필요하시면 렌더링 페이지의 음절에 오른쪽 클릭을 통해 삭제 / 편집 / 뒤에 단어 추가 등의 작업을 할 수 있습니다.
-
-상세 가이드는 [여기](https://github.com/So-chiru/LLCT/issues/128)에서 확인하실 수 있습니다.
-
-### 속성, 싱크 단축키, 팁
-
-속성의 의미들은 다음과 같습니다.
-
-|        속성        |    이름     |                      설명                      |    종류 (Type)    |
-| :----------------: | :---------: | :--------------------------------------------: | :---------------: |
-|     ruby_text      | 루비 텍스트 |  루비 텍스트를 설정합니다. (위에 나오는 글씨)  |      String       |
-|     start_time     |  시작 시간  | 글자가 현재 싱크로 표시되기 시작할 시간입니다. | Timecode (Number) |
-|     text_color     | 텍스트 색상 |      글자의 그림자에 표시 될 색상입니다.       |   Hex (String)    |
-|      end_time      |  종료 시간  |    글자가 현재 싱크에서 해제될 시간입니다.     | Timecode (Number) |
-| pronunciation_time |  발음 시간  |     발음이 지속되는 시간입니다. (초 단위)      |      Number       |
-|        type        |    종류     |               글자의 종류입니다.               |      Number       |
-|    repeat_time     | 반복할 시간 |     글자의 반복 딜레이 시간입니다. (선택적)      | Timecode (Number) |
-
-기본적으로 단어 선택은 마우스로 단어를 클릭하여 선택할 수 있습니다.
-
-```plain
-S : 선택된 단어들의 시작 지점을 현재 재생 위치 포인터가 가리키는 지점으로 설정
-W : 선택된 단어들의 끝 지점을 현재 재생 위치 포인터가 가리키는 지점으로 설정
-P : 선택된 단어들의 발음 끝 지점을 현재 재생 위치 포인터가 가리키는 지점으로 설정 (현재 구현 안됨)
-(위 3개 키) x 2 (옵션 선택시) : 기능은 각 키와 같으나 수행 후 선택된 모든 단어를 선택 해제함
-Alt + (위 3개 키) : 기능은 각 키와 같으나 수행 후 가장 먼저 선택된 단어를 선택 해제함
-Shift + (위 3개 키) : 기능은 각 키와 같으나 수행 후 선택된 모든 단어를 선택 해제함
-[ : S + Alt 기능 (시작 지점 설정 후 선택 해제)
-] : W + Alt 기능 (종료 지점 설정 후 선택 해제)
-
-Delete : 선택된 단어를 삭제
-
-Space : 노래 일시 정지 / 재생
-좌측 방향키 : 0.3초 전으로
-우측 방향키 : 0.3초 후로
-PageUp : 30초 전으로
-PageDown: 30초 후로
-Home : 노래의 처음으로
-End : 노래의 끝으로
-```
-
-각 음절 종류 (속성 : type)는 다음과 같습니다. 종류를 구분해야 콜표 읽기가 한결 수월해집니다.
-
-```plain
-1: 가사 (ex. 키보오데 잇파이노)
-2: 콜 (ex. 우-하이!, 세-노 하이 하이)
-3: 주석 (ex. verse 끝날때 까지 지속)
-4: 가사 + 콜 (ex. .. 우미노게이토 'Welcome!' )
-```
-
-색상을 지정할 수 있으나, 일반적으로 멤버의 색상을 표기하는 일은 피해주시고, 꼭 필요한 부분 (프로젝트 등) 에만 사용해주시면 감사하겠습니다.
-
-### 저장, 불러오기
-
-왼쪽 위 상단바에 있는 다운로드, 업로드 버튼을 이용해 다운로드를 하거나 불러올 수 있습니다.
-
-## 오류 보고
-
-Issues에 재현 과정과 오류 내용을 알려주세요. 아니면 직접 개발에 참여할 수도 있습니다.
-
-## 개발 참여
-
-오탈자 수정, 자막 싱크 추가, 기능 추가 등 모든 종류의 수정을 환영합니다. 개발에 참여하고 싶으시면 이슈나 Pull Request를 남겨주세요.
-
-## 라이센스
+## license
 
 MIT License. [여기에서 사용된 라이브러리, 전문을 읽을 수 있습니다.](https://github.com/So-chiru/LLCT/blob/master/LICENSE)

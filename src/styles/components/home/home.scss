@@ -1,0 +1,37 @@
+@import '../../transitions.scss';
+@import './tabs.scss';
+
+@keyframes llct-icon-animation {
+  0% {
+    opacity: 0;
+    transform: perspective(100px) rotateY(30deg) translateX(-10px);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: perspective(100px) rotateY(0deg);
+  }
+}
+
+.llct-icon {
+  position: absolute;
+  left: 5vw;
+  top: 4vh;
+
+  width: 56px;
+  height: 56px;
+  z-index: 100;
+
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  cursor: pointer;
+
+  animation: llct-icon-animation 1s $easeOutExpo;
+}
