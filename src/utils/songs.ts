@@ -75,3 +75,33 @@ export const coverImageURL = (group?: number, index?: number) => {
 export const audioURL = (id: string) => {
   return `${process.env.API_SERVER}/audio/${id}`
 }
+
+export const randomSongs = (store: LLCTSongDataV2, counts = 1) => {
+  if (!store.songs) {
+    return
+  }
+
+  const results: string[] = []
+  const songs = ((store.songs as unknown) as MusicMetadataWithID[][])
+    .map((group, groupIndex) => {
+      return group.map((song, songIndex) => {
+        song.id = `${groupIndex}${songIndex + 1}`
+
+        return song
+      })
+    })
+    .flat(1)
+
+  for (let i = 0; i < counts; i++) {
+    const item = songs[Math.floor(Math.random() * songs.length)].id
+
+    if (counts < songs.length && results.filter(v => v === item).length) {
+      i--
+      continue
+    }
+
+    results.push(item)
+  }
+
+  return results
+}

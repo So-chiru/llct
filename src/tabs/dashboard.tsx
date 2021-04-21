@@ -6,6 +6,7 @@ import '@/styles/tabs/dashboard.scss'
 import MusicCard from '@/components/music-card/container'
 import { RootState } from '@/store'
 import EmptyComponent from '@/components/empty/component'
+import { randomSongs } from '@/utils/songs'
 
 const DashboardTab = ({ show }: LLCTTabProps) => {
   const data = useSelector((state: RootState) => state.songs)
@@ -13,26 +14,18 @@ const DashboardTab = ({ show }: LLCTTabProps) => {
   // TODO : API_SERVER/updates 에서 추천 목록 가져오기
   return (
     <div className={`llct-tab${show ? ' show' : ''}`} aria-hidden={!show}>
-      {
-        data && data.error && (
-          <EmptyComponent text={`${data.error}`} height='30vh'></EmptyComponent>
-        )
-      }
+      {data && data.error && (
+        <EmptyComponent text={`${data.error}`} height='30vh'></EmptyComponent>
+      )}
       <div className='card-lists'>
-        {!data
+        {!data || !data.items
           ? [...new Array(12)].map((v, i) => {
               return (
                 <MusicCard key={`template:${i}`} skeleton={true}></MusicCard>
               )
             })
-          : [...new Array(12)].map((v, i) => {
-              return (
-                <MusicCard
-                  key={`card:${i}`}
-                  group={0}
-                  index={i + 1}
-                ></MusicCard>
-              )
+          : randomSongs(data.items, 12)?.map((v, i) => {
+              return <MusicCard key={`template:${i}`} id={v}></MusicCard>
             })}
       </div>
     </div>

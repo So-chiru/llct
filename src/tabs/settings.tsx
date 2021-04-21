@@ -42,17 +42,16 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
               LLCT <span>LoveLive Call Table</span>
             </h1>
             <p>
-              Open source project with{' '}
-              <MdFavorite aria-label={'love'}></MdFavorite> by LLCT
-              Contributors,{' '}
               <span
                 className='link'
                 role='button'
                 aria-label={'Github 프로젝트 링크'}
                 onClick={() => openPage('https://github.com/So-chiru/llct')}
               >
-                Github
-              </span>
+                Open source project
+              </span>{' '}
+              by LLCT Contributors. The copyright of each work belongs to
+              it&apos;s creator.
             </p>
           </div>
         </div>
