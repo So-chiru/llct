@@ -74,11 +74,19 @@ const PlayerContainer = () => {
   // 플레이어 컨트롤러 지정. 여기서 UI 동작을 수행했을 때 동작할 액션을 정의합니다.
   const controller: PlayerController = {
     play: () => {
-      playing.instance?.play()
+      if (!playing.instance) {
+        return
+      }
+
+      playing.instance.play()
       dispatch(setPlayState(MusicPlayerState.Playing))
     },
     pause: () => {
-      playing.instance?.pause()
+      if (!playing.instance) {
+        return
+      }
+
+      playing.instance.pause()
       dispatch(setPlayState(MusicPlayerState.Paused))
     },
     seek: (seekTo: number) => {

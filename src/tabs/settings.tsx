@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/tabs/settings.scss'
 import { RootState } from '@/store'
-import CheckboxContainer from '@/components/check-box/container'
+import CheckboxContainer from '@/components/controls/check-box/container'
+import ListsDropdownContainer from '@/components/controls/lists-dropdown/container'
 
 import { MdFavorite } from 'react-icons/md'
 
@@ -17,6 +18,14 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
       type: '@llct/settings/update',
       name,
       data: checked
+    })
+  }
+
+  const changeHandler = (value: string, name: string) => {
+    dispatch({
+      type: '@llct/settings/update',
+      name,
+      data: value
     })
   }
 
@@ -60,6 +69,17 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
                 onChange={(checked: boolean) => clickInputHandler(checked, id)}
                 ariaIndex={500 + (i + 2)}
               ></CheckboxContainer>
+            )
+          } else if (item.type === 'lists' && item.lists) {
+            controls = (
+              <ListsDropdownContainer
+                id={id}
+                value={item.value as string}
+                disabled={() => item.enable && !item.enable(settings)}
+                onChange={(value: string) => changeHandler(value, id)}
+                items={item.lists}
+                ariaIndex={500 + (i + 2)}
+              ></ListsDropdownContainer>
             )
           }
 

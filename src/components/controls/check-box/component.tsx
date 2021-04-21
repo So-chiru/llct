@@ -1,4 +1,4 @@
-import '@/styles/components/check-box/checkbox.scss'
+import '@/styles/components/controls/check-box/checkbox.scss'
 
 interface CheckboxComponentProps {
   id: string

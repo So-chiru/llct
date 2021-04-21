@@ -9,6 +9,17 @@ interface Settings {
   usePlayerColor: boolean
   matchSystemAppearance: boolean
   useAlbumCover: boolean
+  audioStack: 'native' | 'advanced'
+}
+
+interface SettingsLists {
+  name: string
+  id: string
+}
+
+interface ListsDropboxItems {
+  name: string
+  id: string
 }
 
 interface LLCTSetting<T> {
@@ -20,7 +31,8 @@ interface LLCTSetting<T> {
     state: Record<keyof Settings, LLCTSetting<Settings[keyof Settings]>>
   ) => boolean
   disabled?: boolean
-  type: 'checkbox' | 'text' | 'no-control'
+  type: 'checkbox' | 'lists' | 'text' | 'no-control'
+  lists?: SettingsLists[]
   onChange?: (value: T) => void
   onInitial?: (value: T) => void
 }

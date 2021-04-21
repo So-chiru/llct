@@ -33,7 +33,7 @@ const App = () => {
     (state: RootState) => state.settings.matchSystemAppearance.value
   )
 
-  const darkMode = checkSystemDark(useDark, useSystemMatchDarkMode)
+  const darkMode = checkSystemDark(useDark as boolean, useSystemMatchDarkMode as boolean)
 
   const colorUpdate = () => {
     requestAnimationFrame(() => {

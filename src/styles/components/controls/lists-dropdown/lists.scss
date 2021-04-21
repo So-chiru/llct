@@ -1,0 +1,38 @@
+@import '../../../colors.scss';
+
+.llct-dark .llct-lists-dropdown {
+  select {
+    background: darken($dark-semi-accent, 10);
+    color: $dark-accent;
+
+    &:hover {
+      background: darken($dark-semi-accent, 7);
+    }
+
+    &:focus {
+      background: darken($dark-semi-accent, 5);
+    }
+  }
+}
+
+.llct-lists-dropdown {
+  select {
+    min-width: 150px;
+    min-height: 30px;
+    padding: 8px 20px;
+    border: 0;
+    border-radius: 16px;
+
+    background: $semi-accent;
+    color: $accent-strong;
+    outline: none;
+
+    &:hover {
+      background: lighten($semi-accent, 3);
+    }
+
+    &:focus {
+      background: lighten($semi-accent, 5);
+    }
+  }
+}

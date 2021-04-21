@@ -197,7 +197,7 @@ const PlayerComponent = ({
                 ></MdSkipPrevious>
                 <MdSkipNext
                   tabIndex={302}
-                  onClick={() => controller?.next()}
+                  onClick={() => controller.next()}
                   aria-label={'다음 곡으로 넘어가기'}
                   role='button'
                 ></MdSkipNext>

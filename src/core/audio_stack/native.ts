@@ -7,6 +7,7 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
 
   supportEffects = false
   events = new eventBus<LLCTAudioStackEventMap>()
+  type = "native"
 
   constructor () {
     this.player = new Audio()

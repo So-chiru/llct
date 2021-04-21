@@ -1,4 +1,12 @@
 @import '../colors.scss';
+@import '../positions.scss';
+
+.llct-settings {
+  @media screen and (max-width: $wave-narrow) {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
 
 .llct-settings-row {
   display: flex;

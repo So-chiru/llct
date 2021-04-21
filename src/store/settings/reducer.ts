@@ -19,7 +19,7 @@ const SettingsDefault: Record<
     onInitial: value => {
       document.documentElement.classList.add('no-transition')
 
-      toggleDarkMode(value)
+      toggleDarkMode(value as boolean)
 
       requestAnimationFrame(() => {
         document.documentElement.classList.remove('no-transition')
@@ -55,6 +55,23 @@ const SettingsDefault: Record<
     type: 'checkbox',
     default: true,
     value: true
+  },
+  audioStack: {
+    name: '오디오 스택',
+    description: '오디오를 재생할 때 사용할 구현 방식이에요. 현재 Advanced 옵션은 불안정하니 Native 옵션 사용을 추천해요.',
+    type: 'lists',
+    default: 'native',
+    lists: [
+      {
+        name: 'Native',
+        id: 'native'
+      },
+      {
+        name: 'Advanced',
+        id: 'advanced'
+      }
+    ],
+    value: 'native'
   }
 }
 ;(() => {

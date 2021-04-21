@@ -5,14 +5,21 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import * as player from '@/store/player/actions'
 import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
+import LLCTAdvancedAudio from '@/core/audio_stack/advanced'
 
 const PlayerInstanceContainer = () => {
   const dispatch = useDispatch()
   const instance = useSelector((state: RootState) => state.playing.instance)
+  const audioStack = useSelector(
+    (state: RootState) => state.settings.audioStack.value
+  )
 
   useEffect(() => {
     if (!instance) {
-      const instance = new LLCTNativeAudio()
+      const instance =
+        audioStack === 'native'
+          ? new LLCTNativeAudio()
+          : new LLCTAdvancedAudio()
 
       // history.listen(listener => {
       //   if (
@@ -77,6 +84,24 @@ const PlayerInstanceContainer = () => {
       dispatch(player.setInstance(instance))
     }
   }, [instance])
+
+  useEffect(() => {
+    if (instance && instance.type !== audioStack) {
+      instance.stop()
+
+      let inst
+
+      if (audioStack === 'native') {
+        inst = new LLCTNativeAudio()
+      } else if (audioStack === 'advanced') {
+        inst = new LLCTAdvancedAudio()
+      } else {
+        throw new Error('??? why audioStack is not defined??????')
+      }
+
+      dispatch(player.setInstance(inst))
+    }
+  }, [audioStack])
 
   const playing = useSelector((state: RootState) => state.playing)
 

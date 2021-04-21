@@ -28,7 +28,7 @@ export const get = <T>(scope: string, defaults?: T) => {
     return Number(data.slice(2))
   }
 
-  if (data === null || typeof defaults !== 'undefined') {
+  if (data === null && typeof defaults !== 'undefined') {
     return defaults
   }
 

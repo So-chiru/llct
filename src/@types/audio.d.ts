@@ -5,6 +5,7 @@ interface LLCTAudioStack {
 
   src?: string
   load: (src: string) => void
+  type: string
 
   volume: number
 
@@ -31,6 +32,7 @@ interface LLCTAudioStackEventMap {
   pause: () => void
   end: () => void
   metadata: () => void
+  error: (err: Error) => void
   load: () => void
   requestPreviousTrack: () => void
   requestNextTrack: () => void
