@@ -13,6 +13,7 @@ interface LLCTAudioStack {
   duration: number
   progress: number
   timecode: number
+  speed: number
 
   updateMetadata?: (title: string, artist: string, cover: string) => void
 

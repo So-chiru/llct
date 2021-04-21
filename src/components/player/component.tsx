@@ -254,6 +254,21 @@ const PlayerComponent = ({
                     ></SliderComponent>
                   )}
                 </div>
+                <div className='equalizer-lack'>
+                  <h3>재생 속도</h3>
+                  {instance && (
+                    <SliderComponent
+                      onSeek={(seek: number) => {
+                        instance.speed = seek * 2
+                      }}
+                      color={(usePlayerColor && sliderColor) || undefined}
+                      format={(num: number) => num.toFixed(2) + 'x'}
+                      defaults={instance.speed / 2}
+                      step={0.05}
+                      max={2}
+                    ></SliderComponent>
+                  )}
+                </div>
               </div>
             )}
             <div className='dashboard-column upnext-zone'>

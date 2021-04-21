@@ -8,6 +8,10 @@ interface SliderComponentProps {
   format?: (current: number) => string
   step?: number
   max: number
+
+  /**
+   * 0-1 까지의 기본 값. (슬라이더 기준)
+   */
   defaults?: number
   color?: SliderColor
   tabIndex?: number

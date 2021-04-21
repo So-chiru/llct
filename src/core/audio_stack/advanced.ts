@@ -46,6 +46,8 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
       )
     }
 
+    window.alert('Advanced 오디오 스택은 현재 불안정하며 기능이 지원되지 않을 수 있습니다.')
+
     this.plugins = []
 
     this.source = this.context.createBufferSource()
@@ -111,6 +113,12 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
   set progress (seek: number) {
     this.current = this.duration * seek
   }
+
+  get speed () {
+    return 1
+  }
+
+  set speed (num: number) {}
 
   get current () {
     if (this.context.state === 'running') {

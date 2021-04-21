@@ -7,7 +7,7 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
 
   supportEffects = false
   events = new eventBus<LLCTAudioStackEventMap>()
-  type = "native"
+  type = 'native'
 
   constructor () {
     this.player = new Audio()
@@ -106,6 +106,14 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
 
   stop () {
     return this.player.load()
+  }
+
+  get speed () {
+    return this.player.playbackRate
+  }
+
+  set speed (num: number) {
+    this.player.playbackRate = num
   }
 
   load (src: string) {
