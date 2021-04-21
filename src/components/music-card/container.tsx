@@ -20,40 +20,6 @@ interface MusicCardContainerProps {
   skeleton?: boolean
 }
 
-// TODO : songs 모듈로 리펙토링 : search(id)
-const getMusicFromStore = (
-  store: RootState['songs']['items'],
-  music?: MusicMetadata,
-  id?: string,
-  group?: number,
-  index?: number
-): MusicMetadata | null => {
-  let result = null
-
-  if (music) {
-    result = music
-
-    if (typeof index !== 'undefined' && typeof group !== 'undefined') {
-      result = songs.makeParsable(music, store, group, index)
-    }
-  } else if (store && id) {
-    result = songs.searchById(id, store)
-  } else if (
-    store &&
-    typeof index !== 'undefined' &&
-    typeof group !== 'undefined'
-  ) {
-    result = songs.makeParsable(
-      songs.searchById(`${group}${index}`, store),
-      store,
-      group,
-      index
-    )
-  }
-
-  return result
-}
-
 const MusicCardContainer = ({
   id,
   music,
@@ -66,11 +32,11 @@ const MusicCardContainer = ({
   const history = useHistory()
   const dispatch = useDispatch()
 
-  if (skeleton) {
+  if (skeleton || !data.items) {
     return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
 
-  const selectedMetadata = getMusicFromStore(
+  const selectedMetadata = songs.searchFromGivenArguments(
     data.items,
     music,
     id,

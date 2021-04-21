@@ -105,3 +105,36 @@ export const randomSongs = (store: LLCTSongDataV2, counts = 1) => {
 
   return results
 }
+
+export const searchFromGivenArguments = (
+  store: LLCTSongDataV2,
+  music?: MusicMetadata,
+  id?: string,
+  group?: number,
+  index?: number
+): MusicMetadata | null => {
+  let result = null
+
+  if (music) {
+    result = music
+
+    if (typeof index !== 'undefined' && typeof group !== 'undefined') {
+      result = makeParsable(music, store, group, index)
+    }
+  } else if (store && id) {
+    result = searchById(id, store)
+  } else if (
+    store &&
+    typeof index !== 'undefined' &&
+    typeof group !== 'undefined'
+  ) {
+    result = makeParsable(
+      searchById(`${group}${index}`, store),
+      store,
+      group,
+      index
+    )
+  }
+
+  return result
+}
