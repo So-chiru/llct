@@ -1,3 +1,4 @@
+@import '../../positions.scss';
 $cover-animation-image-size: 55px;
 
 @keyframes cover-animation {
@@ -22,6 +23,10 @@ $cover-animation-image-size: 55px;
   pointer-events: none;
   opacity: 0;
   width: 100px;
+
+  @media screen and (max-width: $mobile) {
+    width: 80px;
+  }
 
   img {
     border-radius: #{$cover-animation-image-size / 6};

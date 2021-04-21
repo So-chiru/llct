@@ -26,7 +26,7 @@ import { emptyCover } from '@/utils/cover'
 const emptyFunction = () => {}
 
 const textSizeCalculation = (x: number) => {
-  return Math.max(18, Math.floor(Math.cos(x / 5) * 28))
+  return Math.max(18, Math.floor(Math.cos(x / 6) * 28))
 }
 
 const tiltCardEnter = (ref: HTMLDivElement | null) => {

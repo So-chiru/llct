@@ -1,4 +1,4 @@
-@import "../../positions.scss";
+@import '../../positions.scss';
 
 @keyframes head-anime {
   0%,
@@ -30,6 +30,7 @@
 
     @media screen and (max-width: $mobile) {
       font-size: 24px;
+      letter-spacing: -2px;
     }
 
     text-align: center;

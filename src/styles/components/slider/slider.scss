@@ -1,6 +1,7 @@
+@import '../../positions.scss';
 @import '../../colors.scss';
 
-$thumb-size: 16px;
+$thumb-size: 14px;
 
 .llct-slider-wrapper {
   user-select: none;
@@ -29,6 +30,10 @@ $thumb-size: 16px;
     position: absolute;
   }
 
+  @media screen and (max-width: $mobile) {
+    font-size: 12px;
+  }
+
   .text-current {
     left: 0;
   }
@@ -47,6 +52,10 @@ $thumb-size: 16px;
   min-width: 100px;
   top: 28px;
   margin-bottom: 14px;
+
+  @media screen and (max-width: $mobile) {
+    top: 24px;
+  }
 
   background: var(--slider-background-color, $semi-accent);
 
