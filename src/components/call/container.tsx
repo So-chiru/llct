@@ -130,6 +130,25 @@ const LineComponent = ({
   )
 }
 
+interface CallEditorComponentProps {
+  id: string
+}
+
+const CallEditorComponent = ({ id }: CallEditorComponentProps) => {
+  const openButton = () => {
+    window.open(`https://editor.lovelivec.kr/?id=${id}`, 'about:blank')
+  }
+
+  return (
+    <div className='llct-open-editor-wrapper'>
+      <p>이 곡의 콜표 작업을 도와주세요!</p>
+      <div className='button' onClick={openButton}>
+        에디터 열기 (외부 사이트)
+      </div>
+    </div>
+  )
+}
+
 const CallContainer = ({
   update,
   lastSeek,
@@ -182,8 +201,12 @@ const CallContainer = ({
               {call.error ? (
                 <EmptyComponent
                   key='load-error'
-                  text='콜표를 불러올 수 없어요.'
-                ></EmptyComponent>
+                  text={call.error || '콜표를 불러올 수 없어요'}
+                >
+                  {call.error === '콜표가 없어요.' && call.id && (
+                    <CallEditorComponent id={call.id}></CallEditorComponent>
+                  )}
+                </EmptyComponent>
               ) : (
                 <LoaderComponent></LoaderComponent>
               )}

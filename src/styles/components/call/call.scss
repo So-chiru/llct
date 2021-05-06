@@ -1,4 +1,5 @@
 @import '../../positions.scss';
+@import '../../colors.scss';
 
 .llct-call {
   position: relative;
@@ -172,4 +173,45 @@ $color-passed: white;
   opacity: 1;
   color: $color-passed;
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12);
+}
+
+.llct-open-editor-wrapper {
+  display: block;
+  margin-top: 20px;
+
+  p {
+    font-size: 20px;
+    letter-spacing: -2px;
+    opacity: 0.6;
+
+    margin-bottom: 10px;
+  }
+
+  .button {
+    padding: 5px 20px;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+    border-radius: 16.6px;
+    color: $accent-strong;
+    border: 1px solid $accent-strong;
+    background-color: $background;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($background, 10);
+    }
+  }
+}
+
+.llct-dark .llct-open-editor-wrapper {
+  .button {
+    color: $dark-accent-strong;
+    border: 1px solid $dark-accent-strong;
+    background-color: $dark-background;
+
+    &:hover {
+      background-color: lighten($dark-background, 10);
+    }
+  }
 }

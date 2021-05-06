@@ -2,7 +2,7 @@ interface CallTypes {
   load: boolean
   id?: string
   data: null | LLCTCall
-  error?: Error
+  error?: string
 }
 
 const CallDefault: CallTypes = {

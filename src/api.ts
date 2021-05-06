@@ -37,6 +37,13 @@ export const fetchCallData = async (id: string): Promise<LLCTCall> => {
       return v
     })
     .then(makeItJSON)
+    .catch(e => {
+      if (e.message === 'Failed to fetch') {
+        throw new Error('연결 오류로 콜표를 불러올 수 없어요.')
+      }
+
+      throw e
+    })
 }
 
 export const fetchColorData = async (id: string): Promise<LLCTColor> => {
