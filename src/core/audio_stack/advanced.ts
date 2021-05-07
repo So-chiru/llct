@@ -34,7 +34,7 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
   volume = 1
 
   constructor () {
-    this.context = new (AudioContext || window.webkitAudioContext)()
+    this.context = new (window.AudioContext || window.webkitAudioContext)()
 
     if (!this.context) {
       alert(
