@@ -5,7 +5,9 @@ next generation of llct, what is llct? don't ask.
 ## related projects
 
 [llct](https://github.com/So-chiru/llct) - Frontend
+
 [llct-editor](https://github.com/So-chiru/llct-editor) - Editor Frontend
+
 [llct-server](https://github.com/So-chiru/llct-server) - API Backend
 
 ## development
