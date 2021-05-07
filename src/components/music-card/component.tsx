@@ -77,7 +77,7 @@ const tiltCardElement = (
       y = 1
     }
 
-    ref.style.transform = `perspective(2000px) scale(0.98) rotateX(${(
+    ref.style.transform = `scale(0.98) rotateX(${(
       29 *
       (0.5 - y)
     ).toFixed(1)}deg) rotateY(${(2 * x).toFixed(1)}deg) rotateZ(${(

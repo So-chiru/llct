@@ -36,7 +36,10 @@ $mobile-album-cover-size: 75px;
   cursor: pointer;
   transition: 0.2s background cubic-bezier(0.19, 1, 0.22, 1),
     0.4s transform cubic-bezier(0.19, 1, 0.22, 1);
-  transform: perspective(2000px);
+  -webkit-perspective: 2000px;
+  perspective: 2000px;
+  transform-style: flat;
+
   outline: none;
 
   &.no-transition {

@@ -35,6 +35,14 @@ const PlayerContainer = () => {
     api.fetchColorData(playing.queue[playing.pointer].id).then(v => {
       dispatch(setAlbumColor(v))
     })
+
+    document.title = `${playing.queue[playing.pointer].title} - ${
+      playing.queue[playing.pointer].artist
+    }`
+
+    return () => {
+      document.title = 'LLCT'
+    }
   }, [playing.queue[playing.pointer]])
 
   useEffect(() => {

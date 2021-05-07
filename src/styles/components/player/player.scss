@@ -58,6 +58,7 @@
   width: 80%;
   display: block;
   z-index: 1000;
+  isolation: isolate;
 
   border-radius: 16px 0px 0px 16px;
 
