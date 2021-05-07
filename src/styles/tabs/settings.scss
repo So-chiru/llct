@@ -12,6 +12,11 @@
   }
 }
 
+.llct-dark .llct-settings-row .info .link {
+  color: $dark-accent;
+  border-bottom: 1px dashed $dark-accent;
+}
+
 .llct-settings-row {
   display: flex;
   margin-bottom: 3vh;

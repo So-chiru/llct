@@ -3,17 +3,22 @@
 
 $min-card: 170px;
 
+$default-background: $semi-accent;
+$dark-default-background: darken($dark-semi-accent, 10);
+
 .llct-dark .music-card {
-  background: darken($dark-semi-accent, 10);
+  background: $dark-default-background;
 
   &:hover {
-    background: lighten($dark-semi-accent, 2);
+    background: lighten($dark-default-background, 8);
   }
 
   .content {
+    color: $dark-accent;
+
     img,
     &::before {
-      background: darken($dark-semi-accent, 5);
+      background: lighten($dark-default-background, 5);
     }
   }
 }
@@ -86,7 +91,7 @@ $mobile-album-cover-size: 75px;
     &::before {
       width: $album-cover-size;
       height: $album-cover-size;
-      background: darken($semi-accent, 5);
+      background: darken($default-background, 5);
     }
 
     img {

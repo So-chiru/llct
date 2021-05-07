@@ -14,6 +14,6 @@ export const light: ThemeInterface = {
 
 export const dark: ThemeInterface = {
   background: colors.darkBackground,
-  text: colors.accent,
+  text: colors.darkAccent,
   subtext: colors.darkBackgroundSemiAccent
 }

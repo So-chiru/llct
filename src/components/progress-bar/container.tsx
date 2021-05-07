@@ -1,4 +1,3 @@
-import '@/styles/components/progress-bar/progress-bar.scss'
 import { useState } from 'react'
 import SliderComponent from '../slider/component'
 

@@ -8,12 +8,12 @@ $checkbox-height: $checkbox-width / 2;
     background: darken($dark-semi-accent, 5);
 
     .thumb {
-      background: darken($accent, 20);
+      background: darken($dark-accent, 20);
     }
   }
 
   .thumb {
-    background: $accent;
+    background: $dark-accent;
   }
 
   background: $dark-semi-accent;

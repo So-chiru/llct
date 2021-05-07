@@ -39,7 +39,7 @@
     var(--album-color-second-dark, $dark-background)
   );
 
-  color: var(--album-color-text-dark, $accent);
+  color: var(--album-color-text-dark, $dark-accent);
 
   .controls {
     & > svg {
@@ -194,9 +194,11 @@
     margin-top: 3vh;
 
     .column-title {
-      font-size: 24px;
+      font-size: 20px;
       letter-spacing: -2px;
       margin-bottom: 1vh;
+      font-weight: bold;
+      opacity: 0.8;
 
       @media screen and (max-width: $mobile) {
         font-size: 20px;

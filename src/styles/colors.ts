@@ -1,11 +1,12 @@
 export const background = '#eff5fd'
 export const backgroundSemiAccent = '#bfe0f2'
 
-export const accent = '#35a9ea'
-export const accentStrong = '#118fea'
+export const accent = '#128bf4'
+export const darkAccent = '#16ABF4'
+export const accentStrong = '#0877f7'
 
-export const darkBackground = '#142A44'
-export const darkBackgroundSemiAccent = '#1B5575'
+export const darkBackground = '#0b1929'
+export const darkBackgroundSemiAccent = '#0f4163'
 
 export const RGBtoHSL = (
   r: number,

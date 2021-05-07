@@ -84,12 +84,16 @@
 }
 
 .llct-dark .llct-tab-button {
-  color: $dark-semi-accent;
+  color: darken($dark-accent, 30);
 
   &[data-current='false'] {
     &:hover {
-      color: lighten($dark-accent, 10);
+      color: lighten($dark-semi-accent, 20);
     }
+  }
+
+  &[data-current='true'] {
+    color: $dark-accent;
   }
 
   &::before {

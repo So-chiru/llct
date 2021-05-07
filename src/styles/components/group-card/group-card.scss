@@ -9,7 +9,8 @@
     color: white;
   }
 
-  border: 1px solid var(--group-color-dark-border, $accent);
+  color: var(--group-color, $dark-accent);
+  border: 1px solid var(--group-color-dark-border, $dark-accent);
 }
 
 .group-card {
