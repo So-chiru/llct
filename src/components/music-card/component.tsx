@@ -25,10 +25,6 @@ import { emptyCover } from '@/utils/cover'
 
 const emptyFunction = () => {}
 
-const textSizeCalculation = (x: number) => {
-  return Math.max(18, Math.floor(Math.cos(x / 6) * 28))
-}
-
 const tiltCardEnter = (ref: HTMLDivElement | null) => {
   if (!ref) {
     return
@@ -123,15 +119,6 @@ const MusicCardComponent = ({
     }
   }
 
-  const artistRef = useRef<HTMLSpanElement>(null)
-
-  if (artistRef.current && artistRef.current.innerText.length > 10) {
-    artistRef.current.style.fontSize =
-      textSizeCalculation(
-        Math.max(0, artistRef.current.innerText.length) / 28
-      ) + 'px'
-  }
-
   const cardRef = useRef<HTMLDivElement>(null)
   let cardWidth = [500, 300]
 
@@ -172,11 +159,6 @@ const MusicCardComponent = ({
       tabIndex={1000}
       aria-label={music.artist + ' 의 ' + availableTitleText + ' 곡 카드.'}
     >
-      <div className='background-content'>
-        <span className='artist' ref={artistRef}>
-          {music.artist}
-        </span>
-      </div>
       <div className='content' data-state={loadState}>
         <LazyLoad height={100}>
           <img
@@ -191,7 +173,10 @@ const MusicCardComponent = ({
             onError={loadErrorHandler}
           ></img>
         </LazyLoad>
-        <span className='title'>{availableTitleText}</span>
+        <div className='metadata'>
+          <p className='title'>{availableTitleText}</p>
+          <p className='artist'>{music.artist}</p>
+        </div>
       </div>
     </div>
   )
