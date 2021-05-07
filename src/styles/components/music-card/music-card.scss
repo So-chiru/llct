@@ -172,6 +172,7 @@ $mobile-album-cover-size: 75px;
         overflow: hidden;
         margin: 0;
         margin-top: -3px;
+        opacity: 0.8;
 
         @media screen and (min-width: $wave-narrow) {
           margin: 0px 5px auto auto;
