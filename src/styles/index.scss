@@ -9,6 +9,8 @@ body {
 
   transition: 0.3s color cubic-bezier(0.19, 1, 0.22, 1),
     0.3s background cubic-bezier(0.19, 1, 0.22, 1);
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 .no-transition {

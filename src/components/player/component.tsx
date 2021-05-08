@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/player/player.scss'
@@ -42,6 +42,7 @@ const toggleScrollbar = (on: boolean) => {
 }
 
 import { emptyCover } from '@/utils/cover'
+import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
 
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
@@ -63,6 +64,7 @@ const PlayerComponent = ({
 
   const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
+  const [touchHandler, setTouchHandler] = useState<TouchSlider>()
   const usePlayerColor = useSelector(
     (state: RootState) => state.settings.usePlayerColor.value
   )
@@ -74,6 +76,9 @@ const PlayerComponent = ({
   const useAlbumCover = useSelector(
     (state: RootState) => state.settings.useAlbumCover.value
   )
+
+  const player = useRef<HTMLDivElement>(null)
+  const closeButton = useRef<HTMLDivElement>(null)
 
   requestAnimationFrame(() => {
     toggleScrollbar(!showPlayer)
@@ -90,6 +95,54 @@ const PlayerComponent = ({
       setPlayerNarrow(media.matches)
     }
   }, [])
+
+  useEffect(() => {
+    if (!closeButton.current || !player.current) {
+      return
+    }
+
+    let slider: TouchSlider
+
+    if (!touchHandler) {
+      slider = new TouchSlider(closeButton.current, {
+        direction: TouchDirection.Vertical
+      })
+
+      slider.events.on('start', () => {
+        player.current!.classList.add('player-handle-touch')
+      })
+
+      slider.events.on('move', (px: number) => {
+        requestAnimationFrame(() => {
+          player.current!.setAttribute(
+            'style',
+            `--player-pull: ${Math.max(-50, px)}px`
+          )
+        })
+      })
+
+      slider.events.on('end', (thresholdOver: boolean) => {
+        player.current!.classList.remove('player-handle-touch')
+
+        requestAnimationFrame(() => {
+          player.current!.removeAttribute('style')
+        })
+
+        if (thresholdOver) {
+          closePlayer()
+        }
+      })
+
+      setTouchHandler(slider)
+      return
+    }
+
+    return () => {
+      if (slider) {
+        slider.destroy()
+      }
+    }
+  }, [closeButton.current, player.current])
 
   const closePlayer = () => {
     dispatch(ui.showPlayer(false))
@@ -128,6 +181,7 @@ const PlayerComponent = ({
           }) ||
           undefined
         }
+        ref={player}
         aria-hidden={!showPlayer}
       >
         <div
@@ -135,6 +189,7 @@ const PlayerComponent = ({
           role='button'
           aria-label='플레이어 닫기'
           onKeyPress={ev => ev.code === 'Enter' && closePlayer()}
+          ref={closeButton}
         >
           {playerNarrow ? (
             <MdKeyboardArrowDown

@@ -54,7 +54,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  height: 100%;
+  height: 130%;
   width: 80%;
   display: block;
   z-index: 1000;
@@ -67,6 +67,11 @@
     0.4s background cubic-bezier(0.19, 1, 0.22, 1),
     0.4s color cubic-bezier(0.19, 1, 0.22, 1);
 
+  &.player-handle-touch {
+    transition: unset;
+    border-radius: 16px;
+  }
+
   color: var(--album-color-text, $accent);
 
   opacity: 0;
@@ -78,17 +83,27 @@
     pointer-events: all;
 
     transform: translateX(0);
+
+    @media screen and (max-width: $desktop) {
+      transform: translateY(var(--player-pull, 0));
+    }
   }
 
   @media screen and (max-width: $desktop) {
     width: 100%;
     border-radius: 0px;
 
-    transform: translateY(90vh);
+    transform: translateY(var(--player-pull, 90vh));
   }
 
   .close {
     position: fixed;
+    cursor: grab;
+    z-index: 10000;
+
+    &:active {
+      cursor: grabbing;
+    }
 
     @media screen and (max-width: $desktop) {
       width: 100%;
