@@ -8,9 +8,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
-const smp = new SpeedMeasurePlugin()
+// const smp = new SpeedMeasurePlugin()
 
 module.exports = (_, argv) => {
   const devMode = argv.mode === 'development'
@@ -56,19 +56,20 @@ module.exports = (_, argv) => {
       ]
     },
     plugins: [
+      // new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: '[name].[hash].css',
+        ignoreOrder: true
+      }),
       new DefinePlugin({
         'process.env.API_SERVER': JSON.stringify(process.env.API_SERVER)
       }),
-      // new CleanWebpackPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           {
             from: 'public'
           }
         ]
-      }),
-      new MiniCssExtractPlugin({
-        filename: '[name].[hash].css'
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
@@ -93,7 +94,7 @@ module.exports = (_, argv) => {
       historyApiFallback: true
     }
 
-    return smp.wrap(options)
+    // return smp.wrap(options)
   }
 
   return options

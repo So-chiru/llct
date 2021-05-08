@@ -11,8 +11,6 @@ const PlayerAlbumCoverAnimationComponent = () => {
 
   const item = queue.length ? queue[queue.length - 1] : undefined
 
-  console.log(queue)
-
   useEffect(() => {
     if (!ref.current) {
       return
