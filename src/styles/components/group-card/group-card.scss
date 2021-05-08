@@ -33,6 +33,7 @@
   .text {
     margin: auto;
     text-align: center;
+    letter-spacing: -1px;
   }
 
   &[data-active='false']:hover {
@@ -45,6 +46,7 @@
   }
 
   @media screen and (max-width: $mobile) {
+    padding: 6px 26px;
     font-size: $mobile-text-size;
   }
 }

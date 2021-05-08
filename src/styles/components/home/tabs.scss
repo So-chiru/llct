@@ -70,16 +70,12 @@
   @media screen and (max-width: $wave-narrow) {
     position: absolute;
     display: flex;
-    max-width: 95%;
+    max-width: 90%;
   }
 
   .llct-tab-button {
     margin-right: 15px;
     outline: none;
-
-    &:last-child {
-      margin-right: unset;
-    }
   }
 }
 
@@ -108,7 +104,7 @@
   white-space: nowrap;
 
   @media screen and (max-width: $mobile) {
-    font-size: $mobile-header-size;
+    font-size: $mobile-tab-header-size;
   }
 
   letter-spacing: -2px;

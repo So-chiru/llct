@@ -2,7 +2,7 @@
 
 .songs-groups-wrapper {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 1vh;
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -14,7 +14,7 @@
   display: grid;
   gap: 10px;
   position: relative;
-  -webkit-transform: translate3d(0,0,0); 
+  -webkit-transform: translate3d(0, 0, 0);
 
   @media screen and (max-width: $mobile) {
     grid-template-columns: repeat(2, 1fr);
@@ -41,7 +41,7 @@
 }
 
 .group-card {
-  margin-right: 10px;
+  margin-right: 5px;
 
   &:last-child {
     margin-right: unset;
