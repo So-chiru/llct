@@ -119,6 +119,7 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
   load (src: string) {
     this.player.src = src
     this.player.load()
+    this.progress = 0
 
     this.src = src
   }
@@ -140,7 +141,7 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
   }
 
   set progress (seek: number) {
-    this.current = this.duration * seek
+    this.current = (this.duration || 1) * seek
   }
 
   get timecode () {

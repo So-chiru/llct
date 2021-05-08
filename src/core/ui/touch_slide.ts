@@ -67,7 +67,7 @@ export default class TouchSlider {
   }
 
   addGlobalEventListener () {
-    window.addEventListener('resize', this.resizeHandler)
+    window.addEventListener('resize', this.resizeHandler.bind(this))
   }
 
   updateThreshold () {

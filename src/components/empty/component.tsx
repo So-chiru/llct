@@ -3,7 +3,7 @@ import '@/styles/components/empty/empty.scss'
 interface EmptyComponentProps {
   text: string
   height?: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const EmptyComponent = ({ text, height, children }: EmptyComponentProps) => {

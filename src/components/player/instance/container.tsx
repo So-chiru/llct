@@ -13,77 +13,75 @@ const PlayerInstanceContainer = () => {
   const audioStack = useSelector(
     (state: RootState) => state.settings.audioStack.value
   )
+  const playing = useSelector((state: RootState) => state.playing)
 
   useEffect(() => {
-    if (!instance) {
-      const instance =
-        audioStack === 'native'
-          ? new LLCTNativeAudio()
-          : new LLCTAdvancedAudio()
+    if (instance) {
+      instance.events.on(
+        'end',
+        () => {
+          if (
+            playing.pointer !== -1 &&
+            playing.pointer < playing.queue.length - 1
+          ) {
+            dispatch(player.play(null, ++playing.pointer))
 
-      // history.listen(listener => {
-      //   if (
-      //     listener.pathname.indexOf('/play') === -1 ||
-      //     (listener.state === 'object' &&
-      //       (listener.state as PlayerRouterState).closePlayer)
-      //   ) {
-      //     closePlayer()
-      //   }
+            requestAnimationFrame(() => {
+              instance.play()
+            })
 
-      //   // TODO : 플레이어에서 실행
-      // })
+            return
+          }
 
-      instance.events.on('play', () =>
-        dispatch(player.setPlayState(MusicPlayerState.Playing))
+          dispatch(player.setPlayState(MusicPlayerState.Stopped))
+        },
+        'end'
       )
 
-      instance.events.on('pause', () =>
-        dispatch(player.setPlayState(MusicPlayerState.Paused))
-      )
-
-      instance.events.on('end', () => {
-        // TODO : 재생이 끝났을 경우 다음 곡 재생하거나 반복하는 이벤트 처리
-        // 현재는 playing이 기본 state에서 안바뀜
-
-        // if (
-        //   playing.pointer !== -1 &&
-        //   playing.pointer < playing.queue.length - 1
-        // ) {
-        //   dispatch(play(null, ++playing.pointer))
-
-        //   return
-        // }
-
-        dispatch(player.setPlayState(MusicPlayerState.Stopped))
-      })
-
-      instance.events.on('metadata', () => {
-        dispatch(player.setLoadState(PlayerLoadState.LoadedMetadata))
-      })
-
-      instance.events.on('load', () => {
-        dispatch(player.setLoadState(PlayerLoadState.Done))
-      })
-
-      instance.events.on('requestPreviousTrack', () => {
-        dispatch(player.skip(-1))
-
-        requestAnimationFrame(() => {
-          instance.play()
-        })
-      })
-
-      instance.events.on('requestNextTrack', () => {
-        dispatch(player.skip(1))
-
-        requestAnimationFrame(() => {
-          instance.play()
-        })
-      })
-
-      dispatch(player.setInstance(instance))
+      return
     }
-  }, [instance])
+
+    const localInstance =
+      audioStack === 'native' ? new LLCTNativeAudio() : new LLCTAdvancedAudio()
+
+    localInstance.events.on('play', () =>
+      dispatch(player.setPlayState(MusicPlayerState.Playing))
+    )
+
+    localInstance.events.on('pause', () =>
+      dispatch(player.setPlayState(MusicPlayerState.Paused))
+    )
+
+    localInstance.events.on('metadata', () => {
+      dispatch(player.setLoadState(PlayerLoadState.LoadedMetadata))
+    })
+
+    localInstance.events.on('load', () => {
+      dispatch(player.setLoadState(PlayerLoadState.Done))
+    })
+
+    localInstance.events.on('requestPreviousTrack', () => {
+      dispatch(player.skip(-1))
+
+      requestAnimationFrame(() => {
+        localInstance.play()
+      })
+    })
+
+    localInstance.events.on('requestNextTrack', () => {
+      dispatch(player.skip(1))
+
+      requestAnimationFrame(() => {
+        localInstance.play()
+      })
+    })
+
+    dispatch(player.setInstance(localInstance))
+
+    return () => {
+      // ;(instance || localInstance).events.off('end', 'end')
+    }
+  }, [instance, playing])
 
   useEffect(() => {
     if (instance && instance.type !== audioStack) {
@@ -102,8 +100,6 @@ const PlayerInstanceContainer = () => {
       dispatch(player.setInstance(inst))
     }
   }, [audioStack])
-
-  const playing = useSelector((state: RootState) => state.playing)
 
   useEffect(() => {
     if (!instance || !instance.updateMetadata) {

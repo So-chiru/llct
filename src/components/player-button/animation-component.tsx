@@ -9,6 +9,10 @@ const PlayerAlbumCoverAnimationComponent = () => {
   const queue = useSelector((state: RootState) => state.playing.queue)
   const [lastCounts, setLastCounts] = useState<number>(0)
 
+  const item = queue.length ? queue[queue.length - 1] : undefined
+
+  console.log(queue)
+
   useEffect(() => {
     if (!ref.current) {
       return
@@ -31,8 +35,6 @@ const PlayerAlbumCoverAnimationComponent = () => {
       setLastCounts(queue.length)
     }
   }, [queue, lastCounts])
-
-  const item = queue.length ? queue[queue.length - 1] : undefined
 
   return (
     <div
