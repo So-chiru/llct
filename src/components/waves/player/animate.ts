@@ -68,8 +68,8 @@ class PlayerWave {
   render () {
     this.clear()
 
-    const sin = Math.sin(Date.now() / 1000)
-    const cos = Math.cos(Date.now() / 1000)
+    const sin = Math.sin(Date.now() / 1000) * 0.75
+    const cos = Math.cos(Date.now() / 1000) * 0.75
 
     let waveTo = 0
 

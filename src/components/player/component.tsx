@@ -326,7 +326,7 @@ const PlayerComponent = ({
                 </div>
               </div>
             )}
-            <div className='dashboard-column upnext-zone'>
+            <div className='dashboard-column upnext-zone' data-show={showEQ}>
               <h1 className='column-title'>재생 대기열</h1>
               {UpNext}
             </div>

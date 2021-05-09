@@ -6,8 +6,6 @@ import { RootState } from '@/store'
 import CheckboxContainer from '@/components/controls/check-box/container'
 import ListsDropdownContainer from '@/components/controls/lists-dropdown/container'
 
-import { MdFavorite } from 'react-icons/md'
-
 const SettingsTab = ({ show }: LLCTTabProps) => {
   const dispatch = useDispatch()
 
