@@ -1,6 +1,8 @@
 @import '../../positions.scss';
 @import '../../colors.scss';
 
+@use "sass:math";
+
 $thumb-size: 14px;
 
 .llct-slider-wrapper {
@@ -70,8 +72,8 @@ $thumb-size: 14px;
   .thumb {
     width: $thumb-size;
     height: $thumb-size;
-    top: $thumb-size / -2;
-    left: $thumb-size / -2;
+    top: math.div($thumb-size, -2);
+    left: math.div($thumb-size, -2);
 
     background: var(--slider-thumb-color, $accent);
 

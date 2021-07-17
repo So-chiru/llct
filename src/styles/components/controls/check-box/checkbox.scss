@@ -1,7 +1,9 @@
 @import '../../../colors.scss';
 
+@use "sass:math";
+
 $checkbox-width: 48px;
-$checkbox-height: $checkbox-width / 2;
+$checkbox-height: math.div($checkbox-width, 2);
 
 .llct-dark .llct-checkbox {
   &.disabled {
@@ -41,7 +43,7 @@ $checkbox-height: $checkbox-width / 2;
 
   .thumb {
     position: absolute;
-    width: ($checkbox-width / 2) - 2px;
+    width: math.div($checkbox-width, 2) - 2px;
     height: $checkbox-height - 2px;
     transform: translateX(0px);
     margin-left: 1px;
@@ -56,7 +58,7 @@ $checkbox-height: $checkbox-width / 2;
   }
 
   & > input:checked + .thumb {
-    transform: translateX($checkbox-width / 2);
+    transform: translateX(math.div($checkbox-width, 2));
   }
 
   width: $checkbox-width;

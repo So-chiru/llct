@@ -1,6 +1,8 @@
 @import '../../positions.scss';
 @import '../../colors.scss';
 
+@use "sass:math";
+
 $min-card: 170px;
 
 $default-background: $semi-accent;
@@ -191,7 +193,7 @@ $mobile-album-cover-size: 75px;
         @media screen and (max-width: $wave-narrow) {
           margin: 0px auto auto 5px;
           max-width: calc(
-            100% - #{$album-cover-size + ($album-cover-size / 8)}
+            100% - #{$album-cover-size + math.div($album-cover-size, 8)}
           );
           max-height: $artist-line-height * 6;
           line-clamp: 6;

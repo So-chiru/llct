@@ -72,7 +72,7 @@ module.exports = (_, argv) => {
         ]
       }),
       new HtmlWebpackPlugin({
-        template: './public/index.html',
+        template: './src/views/index.html',
         filename: 'index.html'
       })
     ],

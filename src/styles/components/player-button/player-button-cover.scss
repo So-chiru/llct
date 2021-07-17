@@ -1,6 +1,8 @@
 @import '../../positions.scss';
 $cover-animation-image-size: 55px;
 
+@use "sass:math";
+
 @keyframes cover-animation {
   0% {
     transform: translateY(0px) rotate(0deg);
@@ -29,7 +31,7 @@ $cover-animation-image-size: 55px;
   }
 
   img {
-    border-radius: #{$cover-animation-image-size / 6};
+    border-radius: math.div($cover-animation-image-size, 6);
     width: $cover-animation-image-size;
     height: $cover-animation-image-size;
     margin: auto;
