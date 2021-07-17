@@ -77,14 +77,24 @@ const tiltCardElement = (
       y = 1
     }
 
-    ref.style.transform = `scale(0.98) rotateX(${(
-      29 *
-      (0.5 - y)
-    ).toFixed(1)}deg) rotateY(${(2 * x).toFixed(1)}deg) rotateZ(${(
-      -5 *
-      (0.5 - x)
-    ).toFixed(1)}deg)`
+    ref.style.transform = `scale(0.98) rotateX(${(29 * (0.5 - y)).toFixed(
+      1
+    )}deg) rotateY(${(2 * x).toFixed(1)}deg) rotateZ(${(-5 * (0.5 - x)).toFixed(
+      1
+    )}deg)`
   })
+}
+
+const useSettings = () => {
+  const useTranslatedTitle = useSelector(
+    (state: RootState) => state.settings.useTranslatedTitle.value
+  )
+
+  const useAlbumCover = useSelector(
+    (state: RootState) => state.settings.useAlbumCover.value
+  )
+
+  return [useTranslatedTitle, useAlbumCover]
 }
 
 const MusicCardComponent = ({
@@ -97,21 +107,7 @@ const MusicCardComponent = ({
 }: MusicCardProps) => {
   const [loadState, setLoadState] = useState(ImageLoadState.Loading)
 
-  const useTranslatedTitle = useSelector(
-    (state: RootState) => state.settings.useTranslatedTitle.value
-  )
-
-  const useAlbumCover = useSelector(
-    (state: RootState) => state.settings.useAlbumCover.value
-  )
-
-  const loadHandler = () => {
-    setLoadState(ImageLoadState.Loaded)
-  }
-
-  const loadErrorHandler = () => {
-    setLoadState(ImageLoadState.Failed)
-  }
+  const [translatedTitle, albumCover] = useSettings()
 
   const onKeyPress = (ev: KeyboardEvent) => {
     if (ev.code === 'Enter' && onClick) {
@@ -148,7 +144,7 @@ const MusicCardComponent = ({
   }
 
   const availableTitleText =
-    useTranslatedTitle && music['title.ko'] ? music['title.ko'] : music.title
+    translatedTitle && music['title.ko'] ? music['title.ko'] : music.title
 
   return (
     <div
@@ -164,13 +160,13 @@ const MusicCardComponent = ({
           <img
             alt={`${availableTitleText || '노래'} 앨범 커버`}
             src={
-              (useAlbumCover &&
+              (albumCover &&
                 (music.image || songs.coverImageURL(group, index)) +
                   '?s=150') ||
               emptyCover
             }
-            onLoad={loadHandler}
-            onError={loadErrorHandler}
+            onLoad={() => setLoadState(ImageLoadState.Loaded)}
+            onError={() => setLoadState(ImageLoadState.Failed)}
           ></img>
         </LazyLoad>
         <div className='metadata'>

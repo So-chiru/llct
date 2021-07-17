@@ -59,9 +59,99 @@ const toggleScrollbar = (on: boolean) => {
 
 import { emptyCover } from '@/utils/cover'
 import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
+import { concatClass } from '@/utils/react'
 
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
+
+const usePlayerSettings = () => {
+  const usePlayerColor = useSelector(
+    (state: RootState) => state.settings.usePlayerColor.value
+  )
+
+  const useTranslatedTitle = useSelector(
+    (state: RootState) => state.settings.useTranslatedTitle.value
+  )
+
+  const useAlbumCover = useSelector(
+    (state: RootState) => state.settings.useAlbumCover.value
+  )
+
+  return [usePlayerColor, useTranslatedTitle, useAlbumCover]
+}
+
+const useNarrowPlayer = () => {
+  const [narrow, setNarrow] = useState<boolean>(false)
+
+  useEffect(() => {
+    // positions.css : $desktop
+    const media = window.matchMedia('screen and (max-width: 1240px)')
+    media.addEventListener('change', ev => {
+      setNarrow(ev.matches)
+    })
+
+    if (narrow !== media.matches) {
+      setNarrow(media.matches)
+    }
+  }, [])
+
+  return narrow
+}
+
+const useTouchSlider = (
+  target: HTMLElement,
+  player: HTMLElement,
+  over: () => void
+) => {
+  const [touchHandler, setTouchHandler] = useState<TouchSlider>()
+
+  useEffect(() => {
+    if (!target || !player) {
+      return
+    }
+
+    let slider: TouchSlider
+
+    if (!touchHandler) {
+      slider = new TouchSlider(target, {
+        direction: TouchDirection.Vertical
+      })
+
+      slider.events.on('start', () => {
+        player.classList.add('player-handle-touch')
+      })
+
+      slider.events.on('move', (px: number) => {
+        requestAnimationFrame(() => {
+          player.setAttribute('style', `--player-pull: ${Math.max(-50, px)}px`)
+        })
+      })
+
+      slider.events.on('end', (thresholdOver: boolean) => {
+        player.classList.remove('player-handle-touch')
+
+        requestAnimationFrame(() => {
+          player.removeAttribute('style')
+        })
+
+        if (thresholdOver) {
+          over()
+        }
+      })
+
+      setTouchHandler(slider)
+      return
+    }
+
+    return () => {
+      if (slider) {
+        slider.destroy()
+      }
+    }
+  }, [target, player])
+
+  return undefined
+}
 
 const PlayerComponent = ({
   music = {
@@ -78,93 +168,30 @@ const PlayerComponent = ({
 }: PlayerComponentProps) => {
   const dispatch = useDispatch()
 
-  const [playerNarrow, setPlayerNarrow] = useState<boolean>(false)
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
-  const [touchHandler, setTouchHandler] = useState<TouchSlider>()
-  const usePlayerColor = useSelector(
-    (state: RootState) => state.settings.usePlayerColor.value
-  )
-
-  const useTranslatedTitle = useSelector(
-    (state: RootState) => state.settings.useTranslatedTitle.value
-  )
-
-  const useAlbumCover = useSelector(
-    (state: RootState) => state.settings.useAlbumCover.value
-  )
-
-  const player = useRef<HTMLDivElement>(null)
-  const closeButton = useRef<HTMLDivElement>(null)
-
-  requestAnimationFrame(() => {
-    toggleScrollbar(!showPlayer)
-  })
-
-  useEffect(() => {
-    // positions.css : $desktop
-    const media = window.matchMedia('screen and (max-width: 1240px)')
-    media.addEventListener('change', ev => {
-      setPlayerNarrow(ev.matches)
-    })
-
-    if (playerNarrow !== media.matches) {
-      setPlayerNarrow(media.matches)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!closeButton.current || !player.current) {
-      return
-    }
-
-    let slider: TouchSlider
-
-    if (!touchHandler) {
-      slider = new TouchSlider(closeButton.current, {
-        direction: TouchDirection.Vertical
-      })
-
-      slider.events.on('start', () => {
-        player.current!.classList.add('player-handle-touch')
-      })
-
-      slider.events.on('move', (px: number) => {
-        requestAnimationFrame(() => {
-          player.current!.setAttribute(
-            'style',
-            `--player-pull: ${Math.max(-50, px)}px`
-          )
-        })
-      })
-
-      slider.events.on('end', (thresholdOver: boolean) => {
-        player.current!.classList.remove('player-handle-touch')
-
-        requestAnimationFrame(() => {
-          player.current!.removeAttribute('style')
-        })
-
-        if (thresholdOver) {
-          closePlayer()
-        }
-      })
-
-      setTouchHandler(slider)
-      return
-    }
-
-    return () => {
-      if (slider) {
-        slider.destroy()
-      }
-    }
-  }, [closeButton.current, player.current])
 
   const closePlayer = () => {
     dispatch(ui.showPlayer(false))
   }
 
-  const showString = showPlayer ? ' show' : ''
+  const player = useRef<HTMLDivElement>(null)
+  const closeArea = useRef<HTMLDivElement>(null)
+
+  const [
+    usePlayerColor,
+    useTranslatedTitle,
+    useAlbumCover
+  ] = usePlayerSettings()
+
+  const narrowPlayer = useNarrowPlayer()
+
+  useTouchSlider(closeArea.current!, player.current!, () => {
+    closePlayer()
+  })
+
+  requestAnimationFrame(() => {
+    toggleScrollbar(!showPlayer)
+  })
 
   const sliderColor = {
     background: color && color.main,
@@ -181,11 +208,11 @@ const PlayerComponent = ({
   return (
     <>
       <div
-        className={'llct-player-background' + showString}
+        className={concatClass('llct-player-background', showPlayer && 'show')}
         onClick={closePlayer}
       ></div>
       <div
-        className={'llct-player' + showString}
+        className={concatClass('llct-player', showPlayer && 'show')}
         style={
           (usePlayerColor && {
             ['--album-color' as string]: color && color.main,
@@ -201,13 +228,13 @@ const PlayerComponent = ({
         aria-hidden={!showPlayer}
       >
         <div
-          className='close'
+          className='close-area'
           role='button'
           aria-label='플레이어 닫기'
           onKeyPress={ev => ev.code === 'Enter' && closePlayer()}
-          ref={closeButton}
+          ref={closeArea}
         >
-          {playerNarrow ? (
+          {narrowPlayer ? (
             <MdKeyboardArrowDown
               id='player-close'
               onClick={closePlayer}

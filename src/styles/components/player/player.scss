@@ -98,7 +98,7 @@
     transform: translateY(var(--player-pull, 90vh));
   }
 
-  .close {
+  .close-area {
     position: fixed;
     cursor: grab;
     z-index: 10000;

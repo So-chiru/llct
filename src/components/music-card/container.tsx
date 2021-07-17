@@ -1,5 +1,5 @@
 import { RootState } from '@/store'
-import React, { memo } from 'react'
+import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -92,4 +92,4 @@ const MusicCardContainer = ({
   )
 }
 
-export default memo(MusicCardContainer)
+export default MusicCardContainer
