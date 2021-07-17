@@ -87,7 +87,7 @@ const PlayerWaveComponent = ({
   })
 
   return (
-    <div className='llct-player-wave'>
+    <div className='llct-player-wave' data-show={show}>
       <canvas ref={canvasRef} width='100' height='100'></canvas>
     </div>
   )
