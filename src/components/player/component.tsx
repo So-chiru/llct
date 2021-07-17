@@ -37,8 +37,24 @@ interface PlayerComponentProps {
   color: LLCTColor | null
 }
 
+let lastScrollY = 0
+
 const toggleScrollbar = (on: boolean) => {
   document.documentElement.style.overflow = on ? 'unset' : 'hidden'
+
+  if (!on) {
+    lastScrollY = window.scrollY
+  }
+
+  document.documentElement.style.position = on ? 'unset' : 'fixed'
+
+  if (on && lastScrollY) {
+    window.scrollTo({
+      top: lastScrollY
+    })
+
+    lastScrollY = 0
+  }
 }
 
 import { emptyCover } from '@/utils/cover'

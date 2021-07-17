@@ -85,7 +85,7 @@ const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
               tabUpdateHandler(idx)
             }
           >
-            {tab.name}
+            <span className='text'>{tab.name}</span>
           </div>
         ))}
       </div>

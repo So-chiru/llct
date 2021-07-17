@@ -33,11 +33,13 @@
 }
 
 .llct-dark .llct-player {
-  background: linear-gradient(
-    to right bottom,
-    var(--album-color-dark, $dark-semi-accent),
-    var(--album-color-second-dark, $dark-background)
-  );
+  // background: linear-gradient(
+  //   to right bottom,
+  //   var(--album-color-dark, $dark-semi-accent),
+  //   var(--album-color-second-dark, $dark-background)
+  // );
+
+  background: var(--album-color-second-dark, $dark-background);
 
   color: var(--album-color-text-dark, $dark-accent);
 

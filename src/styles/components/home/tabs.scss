@@ -93,8 +93,10 @@
     color: $dark-accent;
   }
 
-  &::before {
-    background: $dark-semi-accent;
+  .text {
+    &::before {
+      background: $dark-semi-accent;
+    }
   }
 }
 
@@ -114,21 +116,25 @@
 
   transition: 0.23s color cubic-bezier(0.19, 1, 0.22, 1);
 
-  &::before {
-    position: absolute;
-    content: ' ';
-    left: 0;
-    top: 40%;
-    width: 100%;
-    height: 60%;
-    background-color: $semi-accent;
-    transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
-      0.23s transform cubic-bezier(0.19, 1, 0.22, 1);
+  .text {
+    position: relative;
 
-    transform: scaleX(0);
-    opacity: 0;
+    &::before {
+      position: absolute;
+      content: ' ';
+      left: 0;
+      top: 40%;
+      width: 100%;
+      height: 60%;
+      background-color: $semi-accent;
+      transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
+        0.23s transform cubic-bezier(0.19, 1, 0.22, 1);
 
-    z-index: -1;
+      transform: scaleX(0);
+      opacity: 0;
+
+      z-index: -1;
+    }
   }
 
   &[data-current='false'] {
@@ -141,9 +147,11 @@
   &[data-current='true'] {
     color: $accent;
 
-    &::before {
-      opacity: 1;
-      transform: scaleX(1);
+    .text {
+      &::before {
+        opacity: 1;
+        transform: scaleX(1);
+      }
     }
   }
 }
