@@ -22,7 +22,7 @@ import {
   onModeUpdate
 } from '@/utils/darkmode'
 
-const App = () => {
+const useColorScheme = () => {
   const [_, refresh] = useState<number>(0)
 
   const useDark = useSelector(
@@ -33,7 +33,10 @@ const App = () => {
     (state: RootState) => state.settings.matchSystemAppearance.value
   )
 
-  const darkMode = checkSystemDark(useDark as boolean, useSystemMatchDarkMode as boolean)
+  const darkMode = checkSystemDark(
+    useDark as boolean,
+    useSystemMatchDarkMode as boolean
+  )
 
   const colorUpdate = () => {
     requestAnimationFrame(() => {
@@ -57,6 +60,12 @@ const App = () => {
       refresh(Math.random())
     })
   }, [])
+
+  return [darkMode, _]
+}
+
+const App = () => {
+  const [darkMode] = useColorScheme()
 
   return (
     <ThemeProvider theme={darkMode ? dark : light}>
