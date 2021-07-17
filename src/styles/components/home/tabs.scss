@@ -45,7 +45,8 @@
 
 .llct-tab-list {
   position: fixed;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 
   &::-webkit-scrollbar {
     width: 1px;
