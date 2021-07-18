@@ -1,3 +1,5 @@
+import { groupColors } from '@/styles/colors'
+
 export const makeParsable = (
   obj: MusicMetadata,
   store: LLCTSongDataV2 | null,
@@ -17,6 +19,10 @@ export const makeParsable = (
   // obj.artist가 숫자인 경우 store.groups 에서 그룹을 가져와 아티스트 이름 적용
   if (typeof obj.artist === 'number') {
     obj.artist = store.groups[group].artists[obj.artist]
+  }
+
+  if (!obj.color) {
+    obj.color = groupColors[group]
   }
 
   // 저장된 데이터에 image 필드가 없을 경우 추가함
@@ -78,7 +84,7 @@ export const audioURL = (id: string) => {
 
 export const randomSongs = (store: LLCTSongDataV2, counts = 1) => {
   if (!store.songs) {
-    return
+    return []
   }
 
   const results: string[] = []

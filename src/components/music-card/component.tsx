@@ -22,6 +22,7 @@ enum ImageLoadState {
 }
 
 import { emptyCover } from '@/utils/cover'
+import { darken } from '@/styles/colors'
 
 const emptyFunction = () => {}
 
@@ -153,6 +154,13 @@ const MusicCardComponent = ({
       ref={cardRef}
       role='button'
       tabIndex={1000}
+      style={
+        music.color && {
+          ['--primary' as string]: music.color.primary,
+          ['--primary-dark' as string]: darken(music.color.primary, 0.8),
+          ['--alternative' as string]: music.color.alternative
+        }
+      }
       aria-label={music.artist + ' 의 ' + availableTitleText + ' 곡 카드.'}
     >
       <div className='content' data-state={loadState}>

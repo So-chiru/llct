@@ -24,7 +24,7 @@ const DashboardTab = ({ show }: LLCTTabProps) => {
                 <MusicCard key={`template:${i}`} skeleton={true}></MusicCard>
               )
             })
-          : randomSongs(data.items, 12)?.map((v, i) => {
+          : randomSongs(data.items, 12).map((v, i) => {
               return <MusicCard key={`template:${i}`} id={v}></MusicCard>
             })}
       </div>

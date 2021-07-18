@@ -102,15 +102,14 @@ const HomeComponent = ({ tabs, currentTab }: TabListProps) => {
         src='/images/logo/Icon.svg'
       ></img>
       {tabs.map((tab, idx) => {
-        return useMemo(
-          () => (
+        return (
+          idx === currentTab && (
             <TabComponent
               key={idx}
               tab={tab}
               show={idx === currentTab}
             ></TabComponent>
-          ),
-          [idx === currentTab]
+          )
         )
       })}
 

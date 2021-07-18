@@ -10,6 +10,7 @@ import MusicCardContainer from '@/components/music-card/container'
 import EmptyComponent from '@/components/empty/component'
 
 import useInfiniteScroll from 'react-infinite-scroll-hook'
+import { concatClass } from '@/utils/react'
 
 const DEFAULT_VIEW_SIZE = 6
 
@@ -80,12 +81,12 @@ const SongsTab = ({ show }: LLCTTabProps) => {
   })
 
   if (!songs.items || !songs.items.groups || !songs.items.songs) {
-    return <div className={`llct-tab${show ? ' show' : ''}`}></div>
+    return <div className={concatClass('llct-tab', show && 'show')}></div>
   }
 
   return (
     <div
-      className={`llct-tab${show ? ' show' : ''}`}
+      className={concatClass('llct-tab', show && 'show')}
       ref={rootRef}
       aria-hidden={!show}
     >

@@ -21,6 +21,10 @@ interface MusicMetadata {
   title: string
   'title.ko'?: string
   artist: string | number | number[] | ArtistGroup
+  color?: {
+    primary: string
+    alternative: string
+  }
   image: string
   metadata?: MusicExtraMetadata
 }

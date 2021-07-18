@@ -8,6 +8,25 @@ export const accentStrong = '#0877f7'
 export const darkBackground = '#0b1929'
 export const darkBackgroundSemiAccent = '#0f4163'
 
+export const groupColors = [
+  {
+    primary: '#CC0076',
+    alternative: '#FFE4F4'
+  },
+  {
+    primary: '#006EAC',
+    alternative: '#DBF2FF'
+  },
+  {
+    primary: '#966A03',
+    alternative: '#FFF8E8'
+  },
+  {
+    primary: '#8C4794',
+    alternative: '#FDEAFF'
+  }
+]
+
 export const RGBtoHSL = (
   r: number,
   g: number,
@@ -115,7 +134,7 @@ export const darken = (hex: string, amount: number): string => {
   let rgb = HexParse(hex)
   const hsl = RGBtoHSL(rgb[0], rgb[1], rgb[2])
 
-  hsl[2] = Math.max(0.2, hsl[2] - amount)
+  hsl[2] = Math.max(0.15, hsl[2] - amount)
 
   rgb = HSLtoRGB(hsl[0], hsl[1], hsl[2])
 
