@@ -70,23 +70,23 @@ export default class Wave {
     this.mobileVertexes = [
       {
         x: 0,
-        y: 0.6
+        y: 0.7
       },
       {
-        x: 0.35,
-        y: 0.5
+        x: 0.38,
+        y: 0.55
       },
       {
-        x: 0.65,
+        x: 0.68,
         y: 0.35
       },
       {
-        x: 0.88,
+        x: 0.94,
         y: 0.2
       },
       {
-        x: 1.1,
-        y: 0
+        x: 1.3,
+        y: 0.1
       }
     ]
     this.init()
@@ -173,7 +173,7 @@ export default class Wave {
     const sh = easeOutExpo(this.scale) * this.canvas.height
 
     const vertexes =
-      window.innerWidth < 800 ? this.mobileVertexes : this.vertexes
+      window.innerWidth <= 800 ? this.mobileVertexes : this.vertexes
 
     this.context.beginPath()
     this.context.moveTo(0, 0)
