@@ -23,6 +23,7 @@ export default class Wave {
   scaleToRaf?: number
 
   vertexes: WaveVertex[]
+  mobileVertexes: WaveVertex[]
   scale: number
 
   backgroundColor: string
@@ -43,7 +44,51 @@ export default class Wave {
 
     this.resistance = 1
 
-    this.vertexes = []
+    this.vertexes = [
+      {
+        x: 0,
+        y: 0.7
+      },
+      {
+        x: 0.3,
+        y: 0.6
+      },
+      {
+        x: 0.55,
+        y: 0.4
+      },
+      {
+        x: 0.8,
+        y: 0.2
+      },
+      {
+        x: 0.99,
+        y: 0
+      }
+    ]
+
+    this.mobileVertexes = [
+      {
+        x: 0,
+        y: 0.6
+      },
+      {
+        x: 0.35,
+        y: 0.5
+      },
+      {
+        x: 0.65,
+        y: 0.35
+      },
+      {
+        x: 0.88,
+        y: 0.2
+      },
+      {
+        x: 1.1,
+        y: 0
+      }
+    ]
     this.init()
 
     this.scale = 0
@@ -60,32 +105,7 @@ export default class Wave {
       : colors.backgroundSemiAccent
   }
 
-  init () {
-    this.vertexes.push({
-      x: 0,
-      y: 0.7
-    })
-
-    this.vertexes.push({
-      x: 0.3,
-      y: 0.6
-    })
-
-    this.vertexes.push({
-      x: 0.55,
-      y: 0.4
-    })
-
-    this.vertexes.push({
-      x: 0.8,
-      y: 0.2
-    })
-
-    this.vertexes.push({
-      x: 0.99,
-      y: 0
-    })
-  }
+  init () {}
 
   resize (width: number, height: number) {
     this.canvas.width = width
@@ -152,23 +172,26 @@ export default class Wave {
     const sw = easeOutExpo(this.scale) * this.canvas.width
     const sh = easeOutExpo(this.scale) * this.canvas.height
 
+    const vertexes =
+      window.innerWidth < 800 ? this.mobileVertexes : this.vertexes
+
     this.context.beginPath()
     this.context.moveTo(0, 0)
-    this.context.lineTo(0, sh * this.vertexes[0].y)
+    this.context.lineTo(0, sh * vertexes[0].y)
 
     // const dots: number[][] = []
 
-    for (let i = 0; i < this.vertexes.length; ++i) {
-      if (!this.vertexes[i + 1]) {
+    for (let i = 0; i < vertexes.length; ++i) {
+      if (!vertexes[i + 1]) {
         continue
       }
 
-      const x = sw * this.vertexes[i].x
-      const y = sh * this.vertexes[i].y
+      const x = sw * vertexes[i].x
+      const y = sh * vertexes[i].y
 
       const cosa = cos * 25
-      const targetX = sw * this.vertexes[i + 1].x + cosa
-      const targetY = sh * this.vertexes[i + 1].y + cosa
+      const targetX = sw * vertexes[i + 1].x + cosa
+      const targetY = sh * vertexes[i + 1].y + cosa
 
       const middleX = (x + targetX) / 2
       const middleY = (y + targetY) / 2
