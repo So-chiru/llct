@@ -134,7 +134,7 @@ export const darken = (hex: string, amount: number): string => {
   let rgb = HexParse(hex)
   const hsl = RGBtoHSL(rgb[0], rgb[1], rgb[2])
 
-  hsl[2] = Math.max(0.15, hsl[2] - amount)
+  hsl[2] = Math.max(0.13, hsl[2] - amount)
 
   rgb = HSLtoRGB(hsl[0], hsl[1], hsl[2])
 
