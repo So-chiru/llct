@@ -2,10 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "strict": true,
-    "target": "esnext",
-    "jsx": "react-jsx",
+    "target": "ESNext",
+    "lib": ["esnext", "DOM", "webworker"],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     },
     "baseUrl": "./",
     "esModuleInterop": true,

@@ -64,8 +64,19 @@ const useColorScheme = () => {
   return [darkMode, _]
 }
 
+const useServiceWorker = () => {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+      })
+    }
+  }, [])
+}
+
 const App = () => {
   const [darkMode] = useColorScheme()
+  useServiceWorker()
 
   return (
     <ThemeProvider theme={darkMode ? dark : light}>

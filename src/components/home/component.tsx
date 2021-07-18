@@ -6,7 +6,7 @@ import EmptyComponent from '@/components/empty/component'
 
 import { CSSTransition } from 'react-transition-group'
 
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import '@/styles/components/home/home.scss'

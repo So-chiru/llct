@@ -5,7 +5,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
@@ -16,17 +16,18 @@ module.exports = (_, argv) => {
   const devMode = argv.mode === 'development'
 
   const options = {
-    entry: path.resolve('src', 'index.tsx'),
+    entry: { 'service-worker': path.resolve('worker_src', 'worker.ts') },
     resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions: ['.ts', '.js'],
       alias: {
-        '@': path.resolve(__dirname, 'src')
+        '@': path.resolve(__dirname, 'src'),
+        '@worker': path.resolve(__dirname, 'worker_src')
       }
     },
     output: {
-      filename: '[name].[hash].js',
-      chunkFilename: '[name].[chunkhash].js',
-      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].js',
+      chunkFilename: '[name]-chunk.js',
+      path: path.resolve(__dirname, 'public'),
       publicPath: '/'
     },
     module: {
@@ -36,44 +37,17 @@ module.exports = (_, argv) => {
           use: {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, './src/tsconfig.json'),
+              configFile: path.resolve(__dirname, './worker_src/tsconfig.json'),
               transpileOnly: true,
               experimentalWatchApi: true
             }
-          }
-        },
-        {
-          test: /\.(sa|sc|c)ss$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'fast-sass-loader']
-        },
-        {
-          test: /\.(ico|png|jpg|jpeg|json)?$/,
-          loader: 'file-loader',
-          options: {
-            name: '[hash].[ext]'
           }
         }
       ]
     },
     plugins: [
-      new CleanWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: '[name].[hash].css',
-        ignoreOrder: true
-      }),
       new DefinePlugin({
         'process.env.API_SERVER': JSON.stringify(process.env.API_SERVER)
-      }),
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: 'public'
-          }
-        ]
-      }),
-      new HtmlWebpackPlugin({
-        template: './src/views/index.html',
-        filename: 'index.html'
       })
     ],
     optimization: {
@@ -90,7 +64,7 @@ module.exports = (_, argv) => {
     options.devServer = {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
-      port: 8080,
+      port: 18080,
       writeToDisk: true,
       historyApiFallback: true
     }
