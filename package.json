@@ -26,9 +26,11 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "yarn build-worker && webpack --mode production",
+    "build-worker": "webpack --config webpack-worker.config.js --mode production",
     "lint": "eslint -c .eslintrc.json './src/**/*.{ts,tsx,js,jsx}'",
     "lint-fix": "eslint --fix -c .eslintrc.json './src/**/*.{ts,tsx,js,jsx}'",
+    "dev-worker": "webpack --watch --config webpack-worker.config.js --mode development",
     "dev": "webpack serve --mode development",
     "prepare": "husky install",
     "postinstall": "husky install",

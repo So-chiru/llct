@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "strict": true,
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "baseUrl": "./src/",
+    "esModuleInterop": true,
+    "sourceMap": true
+  }
+}

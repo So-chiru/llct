@@ -32,6 +32,7 @@
     "no-use-before-define": "off",
     "camelcase": 2,
     "comma-dangle": "off",
+    "no-var": "off",
     "semi": ["error", "never"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off"
