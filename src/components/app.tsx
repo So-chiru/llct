@@ -67,8 +67,17 @@ const useColorScheme = () => {
 const useServiceWorker = () => {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+      window.addEventListener('load', async () => {
+        const registration = await navigator.serviceWorker.register(
+          '/service-worker.js',
+          {
+            scope: '/'
+          }
+        )
+
+        registration.addEventListener('updatefound', () => {
+          // TODO : 업데이트가 있을 경우 알림 표시
+        })
       })
     }
   }, [])
@@ -87,10 +96,6 @@ const App = () => {
       <PlayerButtonContainer></PlayerButtonContainer>
       <PlayerContainer></PlayerContainer>
       <PlayerInstanceContainer></PlayerInstanceContainer>
-      <Switch>
-        <Route path='/settings'></Route>
-        <Route path='/play/:id' exact></Route>
-      </Switch>
     </ThemeProvider>
   )
 }

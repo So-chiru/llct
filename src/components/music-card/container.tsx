@@ -64,7 +64,7 @@ const MusicCardContainer = ({
       instance.play()
     }
 
-    history.push(`/play/${playId}`, musicObject)
+    history.push(`/?id=${playId}`, musicObject)
   }
 
   const contextHandler = (ev: MouseEvent) => {
