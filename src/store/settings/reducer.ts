@@ -58,7 +58,8 @@ const SettingsDefault: Record<
   },
   audioStack: {
     name: '오디오 스택',
-    description: '오디오를 재생할 때 사용할 구현 방식이에요. 현재 Advanced 옵션은 불안정하니 Native 옵션 사용을 추천해요.',
+    description:
+      '오디오를 재생할 때 사용할 구현 방식이에요. 현재 Advanced 옵션은 불안정하니 Native 옵션 사용을 추천해요.',
     type: 'lists',
     default: 'native',
     lists: [
@@ -72,6 +73,17 @@ const SettingsDefault: Record<
       }
     ],
     value: 'native'
+  },
+  useServiceWorker: {
+    name: '서비스 워커 사용',
+    description:
+      '브라우저가 지원하는 경우 오프라인 상태에서도 다운받은 콜표를 볼 수 있도록 해주는 서비스 워커 기능을 사용해요.',
+    type: 'checkbox',
+    enable: () => {
+      return 'serviceWorker' in navigator
+    },
+    default: true,
+    value: true
   }
 }
 ;(() => {

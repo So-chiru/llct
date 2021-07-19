@@ -10,6 +10,7 @@ interface Settings {
   matchSystemAppearance: boolean
   useAlbumCover: boolean
   audioStack: 'native' | 'advanced'
+  useServiceWorker: boolean
 }
 
 interface SettingsLists {

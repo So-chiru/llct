@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { light, dark } from '@/styles/themes'
 import { GlobalStyles } from '@/styles/global'
@@ -65,22 +64,48 @@ const useColorScheme = () => {
 }
 
 const useServiceWorker = () => {
+  const useServiceWorker = useSelector(
+    (state: RootState) => state.settings.useServiceWorker.value
+  )
+
+  const [registration, setRegistration] = useState<ServiceWorkerRegistration>()
+
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
-        const registration = await navigator.serviceWorker.register(
-          '/service-worker.js',
-          {
-            scope: '/'
-          }
-        )
+      if (!registration && useServiceWorker) {
+        const register = async () => {
+          const registration = await navigator.serviceWorker.register(
+            '/service-worker.js',
+            {
+              scope: '/'
+            }
+          )
 
-        registration.addEventListener('updatefound', () => {
-          // TODO : 업데이트가 있을 경우 알림 표시
-        })
-      })
+          registration.addEventListener('updatefound', () => {
+            // TODO : 업데이트가 있을 경우 알림 표시
+          })
+
+          setRegistration(registration)
+        }
+
+        if (document.readyState === 'loading') {
+          window.addEventListener('load', register)
+        } else {
+          register()
+        }
+
+        return
+      }
+
+      if (registration && !useServiceWorker) {
+        (async () => {
+          await registration.unregister()
+
+          setRegistration(undefined)
+        })()
+      }
     }
-  }, [])
+  }, [registration, useServiceWorker])
 }
 
 const App = () => {
