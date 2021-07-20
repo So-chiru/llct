@@ -140,11 +140,13 @@ export const cacheHandler = async (
 
     return data
   } catch (e) {
-    if (typeof e === 'string') {
-      const parsed = JSON.parse(e)
+    if (typeof e.message === 'string') {
+      const parsed = JSON.parse(e.message)
 
       if (!parsed.code) {
-        return new Response(e)
+        return new Response(e, {
+          status: 404
+        })
       }
 
       return new Response(parsed.text, {
@@ -152,6 +154,9 @@ export const cacheHandler = async (
       })
     }
 
-    return new Response(e)
+    return new Response(e, {
+      status: 500,
+      statusText: e.message
+    })
   }
 }
