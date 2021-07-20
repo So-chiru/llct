@@ -8,6 +8,7 @@ interface Settings {
   useTranslatedTitle: boolean
   usePlayerColor: boolean
   matchSystemAppearance: boolean
+  useLyrics: boolean
   useAlbumCover: boolean
   audioStack: 'native' | 'advanced'
   useServiceWorker: boolean

@@ -20,6 +20,7 @@ interface LineComponentProps {
   index: number
   time: number
   timeline: LLCTCall | null
+  showLyrics?: boolean
   seek?: (time: number) => void
 }
 
@@ -70,7 +71,8 @@ const LineComponent = ({
   line,
   index,
   time,
-  seek
+  seek,
+  showLyrics
 }: LineComponentProps) => {
   const activeLine = line.start < time && line.end > time
 
@@ -126,6 +128,7 @@ const LineComponent = ({
       data-active={activeLine}
     >
       {...words}
+      {showLyrics && line.text && <p className='line-lyrics'>{line.text}</p>}
     </p>
   )
 }
@@ -157,6 +160,7 @@ const CallContainer = ({
   id
 }: CallContainerProps) => {
   const call = useSelector((state: RootState) => state.call)
+  const useLyrics = useSelector((state: RootState) => state.settings.useLyrics.value)
   const dispatch = useDispatch()
 
   const [amf, setAmf] = useState<number>(0)
@@ -193,6 +197,7 @@ const CallContainer = ({
                 line={v}
                 seek={seek}
                 time={current()}
+                showLyrics={useLyrics as boolean}
               ></LineComponent>
             )
           })

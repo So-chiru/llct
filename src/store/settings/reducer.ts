@@ -41,6 +41,13 @@ const SettingsDefault: Record<
     default: false,
     value: false
   },
+  useLyrics: {
+    name: '가사 사용',
+    description: '가능하면 한국어 번역이 적힌 가사를 표시해요.',
+    type: 'checkbox',
+    default: true,
+    value: true
+  },
   useTranslatedTitle: {
     name: '번역 제목 사용',
     description: '가능하면 원어 제목 대신에 번역 제목을 사용해요.',

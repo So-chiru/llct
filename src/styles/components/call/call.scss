@@ -9,6 +9,18 @@
   display: table;
   margin: 0;
   line-height: 1.45;
+
+  .line-lyrics {
+    margin: 0px 0px 8px 0px;
+    color: white;
+    opacity: 0.4;
+  }
+
+  &[data-active='true'] {
+    .line-lyrics {
+      opacity: 0.8;
+    }
+  }
 }
 
 .llct-call-word {
