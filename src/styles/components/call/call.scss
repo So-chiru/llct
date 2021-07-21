@@ -5,14 +5,26 @@
   position: relative;
 }
 
+.llct-dark .llct-call-line {
+  .line-lyrics {
+    color: #fff;
+  }
+}
+
 .llct-call-line {
   display: table;
   margin: 0;
   line-height: 1.45;
 
   .line-lyrics {
+    display: block;
+
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-duration: 0.3s;
+
     margin: 0px 0px 8px 0px;
-    color: white;
+    color: #000;
     opacity: 0.4;
   }
 

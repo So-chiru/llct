@@ -12,7 +12,7 @@
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.cacheHandler = exports.apiPathMatch = exports.extensionMatch = exports.clearCaches = exports.addCaches = exports.DO_NOT_CACHE_URL = exports.STATIC_CACHE_URL = exports.DYNAMIC_CACHE = exports.STATIC_CACHE = void 0;
 const sw = self;
-exports.STATIC_CACHE = '@llct/cache/static/v3';
+exports.STATIC_CACHE = '@llct/cache/static/v4';
 exports.DYNAMIC_CACHE = '@llct/cache/dynamic/v1';
 exports.STATIC_CACHE_URL = [
     '/',

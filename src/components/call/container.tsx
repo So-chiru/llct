@@ -128,7 +128,9 @@ const LineComponent = ({
       data-active={activeLine}
     >
       {...words}
-      {showLyrics && line.text && <p className='line-lyrics'>{line.text}</p>}
+      {showLyrics && line.text && (
+        <span className='line-lyrics'>{line.text}</span>
+      )}
     </p>
   )
 }
@@ -160,7 +162,9 @@ const CallContainer = ({
   id
 }: CallContainerProps) => {
   const call = useSelector((state: RootState) => state.call)
-  const useLyrics = useSelector((state: RootState) => state.settings.useLyrics.value)
+  const useLyrics = useSelector(
+    (state: RootState) => state.settings.useLyrics.value
+  )
   const dispatch = useDispatch()
 
   const [amf, setAmf] = useState<number>(0)

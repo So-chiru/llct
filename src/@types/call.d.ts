@@ -2,6 +2,7 @@ interface LLCTCallLine {
   start: number
   end: number
   words: LLCTCallWord[]
+  text?: string
 }
 
 declare enum LLCTCallWordType {
