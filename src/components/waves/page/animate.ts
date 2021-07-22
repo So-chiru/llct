@@ -42,7 +42,7 @@ export default class Wave {
     this.context = context
     this.size = 100
 
-    this.resistance = 1
+    this.resistance = 1.3
 
     this.vertexes = [
       {
@@ -59,10 +59,10 @@ export default class Wave {
       },
       {
         x: 0.77,
-        y: 0.2
+        y: 0.23
       },
       {
-        x: 0.96,
+        x: 0.94,
         y: 0
       }
     ]
@@ -167,6 +167,7 @@ export default class Wave {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     const cos = Math.cos(Date.now() / (1000 * this.resistance))
+    const sin = Math.sin(Date.now() / (1000 * this.resistance))
     const cosAbs = (cos + 1) / 2
 
     const sw = easeOutExpo(this.scale) * this.canvas.width
@@ -186,29 +187,29 @@ export default class Wave {
         continue
       }
 
+      const tBaseX = cos * 28
+      const tBaseY = sin * 30
+
       const x = sw * vertexes[i].x
       const y = sh * vertexes[i].y
 
-      const cosa = cos * 25
-      const targetX = sw * vertexes[i + 1].x + cosa
-      const targetY = sh * vertexes[i + 1].y + cosa
+      const nextX = sw * vertexes[i + 1].x + tBaseX
+      const nextY = sh * vertexes[i + 1].y - tBaseY
 
-      const middleX = (x + targetX) / 2
-      const middleY = (y + targetY) / 2
+      const xGap = nextX - x
 
-      const firstPoint = [x + cosAbs * 50, y]
-      const secondPoint = [middleX + 10 * cosAbs, middleY + cosa]
+      const middleX = (x + nextX) / 2
+      const middleY = (y + nextY) / 2
 
-      this.context.bezierCurveTo(
-        secondPoint[0],
-        secondPoint[1],
-        firstPoint[0],
-        firstPoint[1],
-        targetX - 50,
-        targetY
-      )
+      const cp1x = middleX - xGap / 4
+      const cp1y = middleY + tBaseX
 
-      // dots.push([targetX - 50, targetY, ...firstPoint, ...secondPoint])
+      const cp2x = middleX + xGap / 4
+      const cp2y = middleY - tBaseY
+
+      this.context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, nextX, nextY)
+
+      // dots.push([x, y, cp1x, cp1y, cp2x, cp2y, nextX, nextY])
     }
 
     this.context.lineTo(this.canvas.width, -40)
@@ -224,10 +225,13 @@ export default class Wave {
     //   this.context.fillStyle = 'black'
     //   this.context.fillRect(v[0] - 2, v[1] - 2, 8, 8)
 
+    //   this.context.fillStyle = 'blue'
+    //   this.context.fillRect(v[6] - 2, v[7] - 2, 10, 10)
+
     //   this.context.fillStyle = 'red'
     //   this.context.fillRect(v[2], v[3], 5, 5)
 
-    //   this.context.fillStyle = 'blue'
+    //   this.context.fillStyle = 'red'
     //   this.context.fillRect(v[4], v[5], 5, 5)
     // })
 
