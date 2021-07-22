@@ -58,11 +58,11 @@ export default class Wave {
         y: 0.4
       },
       {
-        x: 0.8,
+        x: 0.77,
         y: 0.2
       },
       {
-        x: 0.99,
+        x: 0.96,
         y: 0
       }
     ]
@@ -196,19 +196,19 @@ export default class Wave {
       const middleX = (x + targetX) / 2
       const middleY = (y + targetY) / 2
 
-      const firstPoint = [x + cosAbs * 20, y]
+      const firstPoint = [x + cosAbs * 50, y]
       const secondPoint = [middleX + 10 * cosAbs, middleY + cosa]
 
       this.context.bezierCurveTo(
-        firstPoint[0],
-        firstPoint[1],
         secondPoint[0],
         secondPoint[1],
+        firstPoint[0],
+        firstPoint[1],
         targetX - 50,
         targetY
       )
 
-      // dots.push([targetX - 20, targetY, ...firstPoint, ...secondPoint])
+      // dots.push([targetX - 50, targetY, ...firstPoint, ...secondPoint])
     }
 
     this.context.lineTo(this.canvas.width, -40)
