@@ -29,6 +29,10 @@
     margin: 0px 0px 8px 0px;
     color: #000;
     opacity: 0.4;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 14px;
+    }
   }
 
   &[data-active='true'] {
