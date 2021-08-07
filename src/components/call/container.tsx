@@ -6,6 +6,7 @@ import { RootState } from '@/store'
 import * as callData from '@/store/call/actions'
 import LoaderComponent from '../loader/component'
 import EmptyComponent from '../empty/component'
+import ButtonComponent from '../controls/button/component'
 
 interface CallContainerProps {
   current: () => number
@@ -147,9 +148,9 @@ const CallEditorComponent = ({ id }: CallEditorComponentProps) => {
   return (
     <div className='llct-open-editor-wrapper'>
       <p>이 곡의 콜표 작업을 도와주세요!</p>
-      <div className='button' onClick={openButton}>
+      <ButtonComponent onClick={openButton}>
         에디터 열기 (외부 사이트)
-      </div>
+      </ButtonComponent>
     </div>
   )
 }

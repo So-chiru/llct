@@ -214,31 +214,7 @@ $color-passed: white;
     margin-bottom: 10px;
   }
 
-  .button {
-    padding: 5px 20px;
-    margin: auto;
-    color: #fff;
-    text-align: center;
-    border-radius: 16.6px;
-    color: $accent-strong;
-    border: 1px solid $accent-strong;
-    background-color: $background;
-    cursor: pointer;
-
-    &:hover {
-      background-color: darken($background, 10);
-    }
-  }
-}
-
-.llct-dark .llct-open-editor-wrapper {
-  .button {
-    color: $dark-accent-strong;
-    border: 1px solid $dark-accent-strong;
-    background-color: $dark-background;
-
-    &:hover {
-      background-color: lighten($dark-background, 10);
-    }
+  .llct-button {
+    margin-top: 16px;
   }
 }

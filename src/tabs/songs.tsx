@@ -81,7 +81,14 @@ const SongsTab = ({ show }: LLCTTabProps) => {
   })
 
   if (!songs.items || !songs.items.groups || !songs.items.songs) {
-    return <div className={concatClass('llct-tab', show && 'show')}></div>
+    return (
+      <div className={concatClass('llct-tab', show && 'show')}>
+        <EmptyComponent
+          text='서버에 연결할 수 없나 봐요.'
+          height='30vh'
+        ></EmptyComponent>
+      </div>
+    )
   }
 
   return (

@@ -1,0 +1,44 @@
+@import '../../colors.scss';
+
+.llct-button {
+  padding: 12px 42px;
+  border-radius: 32px;
+  background-color: $light-blue-accent;
+  color: white;
+
+  font-size: 16px;
+  letter-spacing: -2px;
+
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+
+  transition: 0.23s background, 0.23s box-shadow cubic-bezier(0.19, 1, 0.22, 1);
+
+  &:hover,
+  &:focus {
+    background-color: darken($light-blue-accent, 3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  &:active {
+    background-color: darken($light-blue-accent, 5);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+  text-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+}
+
+.llct-dark .llct-button {
+  background-color: $dark-light-blue-accent;
+
+  &:hover,
+  &:focus {
+    background-color: darken($dark-light-blue-accent, 3);
+  }
+
+  &:active {
+    background-color: darken($dark-light-blue-accent, 5);
+  }
+}
