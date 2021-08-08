@@ -7,6 +7,7 @@ import * as callData from '@/store/call/actions'
 import LoaderComponent from '../loader/component'
 import EmptyComponent from '../empty/component'
 import ButtonComponent from '../controls/button/component'
+import AutoScroller from '../scroller/scroll/container'
 
 interface CallContainerProps {
   current: () => number
@@ -166,6 +167,10 @@ const CallContainer = ({
   const useLyrics = useSelector(
     (state: RootState) => state.settings.useLyrics.value
   )
+  const autoScroll = useSelector(
+    (state: RootState) => state.settings.useAutoScroll.value
+  )
+
   const dispatch = useDispatch()
 
   const [amf, setAmf] = useState<number>(0)
@@ -191,7 +196,11 @@ const CallContainer = ({
   }, [call.id, id])
 
   return (
-    <div className='llct-call'>
+    <AutoScroller
+      use={update && (autoScroll as boolean)}
+      scrollToQuery='.llct-call-line[data-active="true"]'
+      className='llct-call'
+    >
       {...call.data
         ? call.data.timeline.map((v, i) => {
             return (
@@ -222,7 +231,7 @@ const CallContainer = ({
               )}
             </div>
           ]}
-    </div>
+    </AutoScroller>
   )
 }
 

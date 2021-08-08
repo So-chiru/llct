@@ -41,6 +41,13 @@ const SettingsDefault: Record<
     default: false,
     value: false
   },
+  useAutoScroll: {
+    name: '자동 스크롤 사용',
+    description: '현재 들리고 있는 가사 부분으로 자동으로 스크롤해요.',
+    type: 'checkbox',
+    default: true,
+    value: true
+  },
   useLyrics: {
     name: '가사 사용',
     description: '가능하면 한국어 번역이 적힌 가사를 표시해요.',
