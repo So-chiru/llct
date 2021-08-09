@@ -40,7 +40,6 @@
   // );
 
   background: var(--album-color-second-dark, $dark-background);
-
   color: var(--album-color-text-dark, $dark-accent);
 
   .controls {
@@ -220,7 +219,7 @@
       position: relative;
 
       .llct-slider-wrapper {
-        width: 100%;
+        width: 95%;
         margin-top: 8px;
         margin-bottom: auto;
       }
