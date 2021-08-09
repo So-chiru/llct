@@ -50,6 +50,15 @@
       }
     }
   }
+
+  .mini-player {
+    background: linear-gradient(
+      to bottom,
+      var(--album-color-second-dark, $dark-background),
+      var(--album-color-second-dark, $dark-background),
+      transparent
+    );
+  }
 }
 
 .llct-player {
@@ -145,6 +154,80 @@
 
     @media screen and (min-width: $desktop) {
       flex-direction: row;
+    }
+  }
+
+  .mini-player {
+    position: fixed;
+    width: 90%;
+    height: 85px;
+    background: #fff;
+    z-index: 100;
+
+    background: linear-gradient(
+      to bottom,
+      var(--album-color-second, $background),
+      var(--album-color-second, $background),
+      rgba(255, 255, 255, 0)
+    );
+
+    transition: 0.23s transform cubic-bezier(0.19, 1, 0.22, 1),
+      0.23s opacity cubic-bezier(0.19, 1, 0.22, 1);
+
+    transform: translateY(-35px);
+    opacity: 0;
+    pointer-events: none;
+
+    @media screen and (max-width: $desktop) {
+      &.visible {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+
+    display: flex;
+
+    .left,
+    .right {
+      height: 50%;
+      pointer-events: all;
+    }
+
+    .left {
+      flex: 2;
+      margin-top: 6px;
+      margin-right: 16px;
+
+      .controls {
+        margin-top: unset;
+        margin-left: unset;
+      }
+
+      svg {
+        width: 26px;
+        height: 26px;
+
+        @media screen and (max-width: $mobile) {
+          width: 24px;
+          heght: 24px;
+        }
+      }
+    }
+
+    .right {
+      flex: 8;
+      display: flex;
+      position: relative;
+
+      .llct-slider-wrapper {
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: auto;
+      }
+    }
+
+    .equalizer-button {
+      display: none;
     }
   }
 
@@ -319,6 +402,10 @@
     margin-bottom: auto;
     margin-left: -16px;
 
+    @media screen and (max-width: $mobile) {
+      margin-left: -12px;
+    }
+
     & > svg {
       width: 32px;
       height: 32px;
@@ -372,11 +459,7 @@
     }
   }
 
-  background: linear-gradient(
-    to right bottom,
-    var(--album-color, $semi-accent),
-    var(--album-color-second, $background)
-  );
+  background: var(--album-color-second, $background);
 
   .llct-call {
     .llct-call-line:last-child {

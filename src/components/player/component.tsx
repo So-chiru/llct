@@ -37,6 +37,8 @@ interface PlayerComponentProps {
   color: LLCTColor | null
 }
 
+const SHOW_MINI_PLAYER_AFTER = 230
+
 let lastScrollY = 0
 
 const toggleScrollbar = (on: boolean) => {
@@ -205,6 +207,99 @@ const PlayerComponent = ({
   const availableTitleText =
     useTranslatedTitle && music['title.ko'] ? music['title.ko'] : music.title
 
+  const titleInfo = useMemo(
+    () => (
+      <div className='texts'>
+        <h1
+          className='title'
+          title={availableTitleText}
+          aria-label={availableTitleText}
+          tabIndex={300}
+        >
+          {availableTitleText}
+        </h1>
+        <h3 className='artist' title={music.artist as string} tabIndex={301}>
+          {music.artist}
+        </h3>
+      </div>
+    ),
+    [music]
+  )
+
+  // TODO : hook으로 리펙토링
+  const [showMiniPlayer, setShowMiniPlayer] = useState<boolean>(false)
+  const playerContents = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (playerContents.current!.scrollTop > SHOW_MINI_PLAYER_AFTER) {
+        setShowMiniPlayer(true)
+      } else {
+        setShowMiniPlayer(false)
+      }
+    }
+
+    playerContents.current?.addEventListener('scroll', onScroll)
+
+    return () => {
+      playerContents.current?.removeEventListener('scroll', onScroll)
+    }
+  }, [playerContents])
+
+  const ProgressBar = instance && (
+    <ProgressBarComponent
+      progress={() => instance.progress}
+      duration={instance.duration}
+      color={(usePlayerColor && sliderColor) || undefined}
+      update={state.playState === MusicPlayerState.Playing && showPlayer}
+      seek={controller.seek}
+      tabIndex={400}
+    ></ProgressBarComponent>
+  )
+
+  const Controls = (
+    <div className='controls'>
+      {state.playState === MusicPlayerState.Playing ? (
+        <MdPause
+          tabIndex={302}
+          onClick={() => controller.pause()}
+          aria-label={'일시 정지'}
+          role='button'
+          className='pause-button'
+        ></MdPause>
+      ) : (
+        <MdPlayArrow
+          tabIndex={302}
+          onClick={() => controller.play()}
+          aria-label={'재생'}
+          role='button'
+          className='play-button'
+        ></MdPlayArrow>
+      )}
+      <MdSkipPrevious
+        tabIndex={302}
+        onClick={() => controller.prev()}
+        aria-label={'이전 곡으로 넘어가기'}
+        role='button'
+        className='skipprevious-button'
+      ></MdSkipPrevious>
+      <MdSkipNext
+        tabIndex={302}
+        onClick={() => controller.next()}
+        aria-label={'다음 곡으로 넘어가기'}
+        role='button'
+        className='skipnext-button'
+      ></MdSkipNext>
+      <MdEqualizer
+        tabIndex={302}
+        onClick={() => controller.toggleEQ()}
+        aria-label={'오디오 효과 보기'}
+        role='button'
+        className='equalizer-button'
+      ></MdEqualizer>
+    </div>
+  )
+
   return (
     <>
       <div
@@ -246,66 +341,17 @@ const PlayerComponent = ({
             ></MdKeyboardArrowLeft>
           )}
         </div>
-        <div className='contents'>
+        <div className='contents' ref={playerContents}>
+          <div
+            className={concatClass('mini-player', showMiniPlayer && 'visible')}
+          >
+            <div className='left'>{Controls}</div>
+            <div className='right'>{ProgressBar}</div>
+          </div>
           <div className='dashboard'>
             <div className='dashboard-column metadata-zone'>
-              {useMemo(
-                () => (
-                  <div className='texts'>
-                    <h1
-                      className='title'
-                      title={availableTitleText}
-                      aria-label={availableTitleText}
-                      tabIndex={300}
-                    >
-                      {availableTitleText}
-                    </h1>
-                    <h3
-                      className='artist'
-                      title={music.artist as string}
-                      tabIndex={301}
-                    >
-                      {music.artist}
-                    </h3>
-                  </div>
-                ),
-                [music]
-              )}
-              <div className='controls'>
-                {state.playState === MusicPlayerState.Playing ? (
-                  <MdPause
-                    tabIndex={302}
-                    onClick={() => controller.pause()}
-                    aria-label={'일시 정지'}
-                    role='button'
-                  ></MdPause>
-                ) : (
-                  <MdPlayArrow
-                    tabIndex={302}
-                    onClick={() => controller.play()}
-                    aria-label={'재생'}
-                    role='button'
-                  ></MdPlayArrow>
-                )}
-                <MdSkipPrevious
-                  tabIndex={302}
-                  onClick={() => controller.prev()}
-                  aria-label={'이전 곡으로 넘어가기'}
-                  role='button'
-                ></MdSkipPrevious>
-                <MdSkipNext
-                  tabIndex={302}
-                  onClick={() => controller.next()}
-                  aria-label={'다음 곡으로 넘어가기'}
-                  role='button'
-                ></MdSkipNext>
-                <MdEqualizer
-                  tabIndex={302}
-                  onClick={() => controller.toggleEQ()}
-                  aria-label={'오디오 효과 보기'}
-                  role='button'
-                ></MdEqualizer>
-              </div>
+              {titleInfo}
+              {Controls}
               <div className='image'>
                 <img
                   alt={`${music.title} 앨범 커버`}
@@ -319,20 +365,7 @@ const PlayerComponent = ({
                 ></img>
               </div>
             </div>
-            <div className='dashboard-column progress-zone'>
-              {instance && (
-                <ProgressBarComponent
-                  progress={() => instance.progress}
-                  duration={instance.duration}
-                  color={(usePlayerColor && sliderColor) || undefined}
-                  update={
-                    state.playState === MusicPlayerState.Playing && showPlayer
-                  }
-                  seek={controller.seek}
-                  tabIndex={400}
-                ></ProgressBarComponent>
-              )}
-            </div>
+            <div className='dashboard-column progress-zone'>{ProgressBar}</div>
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>음향 효과</h1>
