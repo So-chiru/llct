@@ -76,7 +76,7 @@ const LineComponent = ({
   seek,
   showLyrics
 }: LineComponentProps) => {
-  const activeLine = line.start < time && line.end > time
+  const activeLine = line.start > 0 && line.start < time && line.end > time
 
   const words = useMemo(
     () =>
@@ -166,10 +166,10 @@ const CallContainer = ({
   const call = useSelector((state: RootState) => state.call)
   const useLyrics = useSelector(
     (state: RootState) => state.settings.useLyrics.value
-  )
+  ) as boolean
   const autoScroll = useSelector(
     (state: RootState) => state.settings.useAutoScroll.value
-  )
+  ) as boolean
 
   const dispatch = useDispatch()
 
@@ -197,7 +197,7 @@ const CallContainer = ({
 
   return (
     <AutoScroller
-      use={update && (autoScroll as boolean)}
+      use={update && Date.now() > lastSeek + 100 && autoScroll}
       scrollToQuery='.llct-call-line[data-active="true"]'
       className='llct-call'
     >
@@ -211,7 +211,7 @@ const CallContainer = ({
                 line={v}
                 seek={seek}
                 time={current()}
-                showLyrics={useLyrics as boolean}
+                showLyrics={useLyrics}
               ></LineComponent>
             )
           })

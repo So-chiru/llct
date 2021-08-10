@@ -53,7 +53,7 @@ const PlayerContainer = () => {
     // 플레이어가 최초로 로딩되었고, URL에 /play/ 가 있는 경우
     const search = new URL('https://a' + history.location.search)
     if (search.searchParams.has('id')) {
-      let id = search.searchParams.get('id')
+      let id = search.searchParams.get('id')!
 
       if (
         history.location.state &&

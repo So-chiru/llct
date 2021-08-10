@@ -246,6 +246,27 @@ const PlayerComponent = ({
     }
   }, [playerContents])
 
+  // 플레이어 영역 클릭시 맨 위로 이동
+  const [lastGoTopButtonClick, setLastGoTopButtonClick] = useState<number>(0)
+
+  useEffect(() => {
+    const onClick = () => {
+      setLastGoTopButtonClick(Date.now() + 5000)
+      playerContents.current!.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+
+    closeArea.current?.addEventListener('click', onClick)
+    closeArea.current?.addEventListener('pointerup', onClick)
+
+    return () => {
+      closeArea.current?.removeEventListener('click', onClick)
+      closeArea.current?.addEventListener('pointerup', onClick)
+    }
+  }, [closeArea])
+
   const ProgressBar = instance && (
     <ProgressBarComponent
       progress={() => instance.progress}
@@ -414,15 +435,20 @@ const PlayerComponent = ({
                   update={
                     state.playState === MusicPlayerState.Playing && showPlayer
                   }
-                  current={() => (!instance ? 0 : instance.timecode)}
-                  lastSeek={state.lastSeek}
+                  current={() => instance?.timecode ?? 0}
+                  lastSeek={Math.max(state.lastSeek, lastGoTopButtonClick)}
                   seek={(time: number) =>
                     instance && controller.seek(time / 100 / instance.duration)
                   }
                   id={music.id}
                 ></CallContainer>
               ),
-              [music.id, instance, state.playState, state.lastSeek]
+              [
+                music.id,
+                instance,
+                state.playState,
+                Math.max(state.lastSeek, lastGoTopButtonClick)
+              ]
             )}
           </div>
         </div>

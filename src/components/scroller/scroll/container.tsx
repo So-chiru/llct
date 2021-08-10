@@ -27,16 +27,18 @@ export const AutoScroller = ({
       setLastUserWheel(Date.now())
     }
 
-    ref.current?.addEventListener('mousedown', handleWheel)
     ref.current?.addEventListener('touchstart', handleWheel)
     ref.current?.addEventListener('wheel', handleWheel)
 
     return () => {
-      ref.current?.removeEventListener('mousedown', handleWheel)
       ref.current?.removeEventListener('touchstart', handleWheel)
       ref.current?.removeEventListener('wheel', handleWheel)
     }
   }, [ref, use])
+
+  useEffect(() => {
+    setLastUserWheel(Date.now())
+  }, [use])
 
   useEffect(() => {
     if (!use) {
@@ -54,7 +56,7 @@ export const AutoScroller = ({
           })
         }
       }
-    }, 100)
+    }, 500)
 
     return () => {
       clearInterval(interval)
