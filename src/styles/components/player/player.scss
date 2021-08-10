@@ -55,7 +55,7 @@
       to bottom,
       var(--album-color-second-dark, $dark-background),
       var(--album-color-second-dark, $dark-background),
-      transparent
+      var(--album-color-second-dark, $dark-background-alpha-zero)
     );
   }
 }
@@ -167,7 +167,7 @@
       to bottom,
       var(--album-color-second, $background),
       var(--album-color-second, $background),
-      rgba(255, 255, 255, 0)
+      var(--album-color-second, $background-alpha-zero)
     );
 
     transition: 0.23s transform cubic-bezier(0.19, 1, 0.22, 1),
