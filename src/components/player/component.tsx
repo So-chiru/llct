@@ -20,7 +20,7 @@ import CallContainer from '../call/container'
 import * as ui from '@/store/ui/actions'
 
 import { RootState } from '@/store/index'
-import SliderComponent from '../slider/component'
+import SliderComponent from '../controls/slider/component'
 
 interface PlayerComponentPropsState {
   playState?: MusicPlayerState

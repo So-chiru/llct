@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SliderComponent from '../slider/component'
+import SliderComponent from '../controls/slider/component'
 
 interface ProgressBarComponentProps {
   progress: () => number
