@@ -12,9 +12,8 @@
 
 .songs-list-wrapper {
   display: grid;
-  gap: 10px;
+  gap: 16px;
   position: relative;
-  -webkit-transform: translate3d(0, 0, 0);
 
   @media screen and (max-width: $mobile) {
     grid-template-columns: repeat(2, 1fr);

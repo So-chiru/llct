@@ -2,6 +2,10 @@
 @import '../positions.scss';
 
 .llct-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+
   @media screen and (max-width: $wave-narrow) {
     padding-left: 5vw;
     padding-right: 5vw;
@@ -70,5 +74,6 @@
   display: block;
   font-size: 14px;
   letter-spacing: -1px;
+  margin-top: 4px;
   opacity: 0.8;
 }
