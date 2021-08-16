@@ -28,7 +28,8 @@
   }
 
   @media screen and (max-width: $wave-narrow) {
-    width: 100%;
+    width: 95%;
+    margin: auto;
   }
 
   @media screen and (min-width: $wave-narrow) {
