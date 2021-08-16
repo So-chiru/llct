@@ -1,0 +1,25 @@
+.tab-playlists {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+
+  .category {
+    .category-title {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: -2px;
+    }
+  }
+
+  .category-items {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .button-group {
+    display: flex;
+    margin: auto;
+    gap: 16px;
+  }
+}
