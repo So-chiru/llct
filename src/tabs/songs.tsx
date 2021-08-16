@@ -11,6 +11,8 @@ import EmptyComponent from '@/components/empty/component'
 
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { concatClass } from '@/utils/react'
+import TouchScroller from '@/components/controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 
 const DEFAULT_VIEW_SIZE = 6
 
@@ -97,19 +99,21 @@ const SongsTab = ({ show }: LLCTTabProps) => {
       ref={rootRef}
       aria-hidden={!show}
     >
-      <div className='songs-groups-wrapper'>
-        {...songs.items.groups.map((value, index) => {
-          return (
-            <GroupCardComponent
-              key={`group:${index}`}
-              index={index}
-              group={value}
-              active={active == index}
-              click={groupClick}
-            ></GroupCardComponent>
-          )
-        })}
-      </div>
+      <TouchScroller direction={TouchScrollerDirection.Horizonal}>
+        <div className='songs-groups-wrapper'>
+          {...songs.items.groups.map((value, index) => {
+            return (
+              <GroupCardComponent
+                key={`group:${index}`}
+                index={index}
+                group={value}
+                active={active == index}
+                click={groupClick}
+              ></GroupCardComponent>
+            )
+          })}
+        </div>
+      </TouchScroller>
       {!songs.items.songs[active].length ? (
         <EmptyComponent text='텅 비었어요...' height='30vh'></EmptyComponent>
       ) : null}

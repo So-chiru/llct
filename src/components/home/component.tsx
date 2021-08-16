@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux'
 import '@/styles/components/home/home.scss'
 import '@/styles/animate.scss'
 import RecentPlayedTab from '@/tabs/recents'
+import TouchScroller from '../controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 
 interface TabProps {
   tab: LLCTTab
@@ -69,26 +71,28 @@ const TabListComponent = ({ currentTab, tabs }: TabListProps) => {
       }}
       classNames='llct-animate'
     >
-      <div className='llct-tab-list'>
-        {tabs.map((tab, idx) => (
-          <div
-            className='llct-tab-button'
-            role='button'
-            tabIndex={10 + idx}
-            key={idx}
-            title={tab.name}
-            aria-label={tab.name + ' 탭으로 가기'}
-            data-current={currentTab === idx}
-            onClick={() => tabUpdateHandler(idx)}
-            onKeyPress={ev =>
-              (ev.code === 'Enter' || ev.code === 'Space') &&
-              tabUpdateHandler(idx)
-            }
-          >
-            <span className='text'>{tab.name}</span>
-          </div>
-        ))}
-      </div>
+      <TouchScroller direction={TouchScrollerDirection.Horizonal}>
+        <div className='llct-tab-list'>
+          {tabs.map((tab, idx) => (
+            <div
+              className='llct-tab-button'
+              role='button'
+              tabIndex={10 + idx}
+              key={idx}
+              title={tab.name}
+              aria-label={tab.name + ' 탭으로 가기'}
+              data-current={currentTab === idx}
+              onClick={() => tabUpdateHandler(idx)}
+              onKeyPress={ev =>
+                (ev.code === 'Enter' || ev.code === 'Space') &&
+                tabUpdateHandler(idx)
+              }
+            >
+              <span className='text'>{tab.name}</span>
+            </div>
+          ))}
+        </div>
+      </TouchScroller>
     </CSSTransition>
   )
 }
