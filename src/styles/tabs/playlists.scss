@@ -1,14 +1,22 @@
-.tab-playlists {
+@import '../positions.scss';
+
+.categories {
   display: flex;
   flex-direction: column;
-  gap: 42px;
+  gap: 64px;
 
   .category {
-    .category-title {
-      font-size: 18px;
-      font-weight: bold;
-      letter-spacing: -2px;
-    }
+    width: 95%;
+    margin: auto;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-title {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -1px;
   }
 
   .category-items {
@@ -21,5 +29,9 @@
     display: flex;
     margin: auto;
     gap: 16px;
+
+    @media screen and (max-width: $mobile) {
+      flex-direction: column;
+    }
   }
 }
