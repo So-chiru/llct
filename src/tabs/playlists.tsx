@@ -3,15 +3,29 @@ import React from 'react'
 import '@/styles/tabs/playlists.scss'
 import ButtonComponent from '@/components/controls/button/component'
 import EmptyComponent from '@/components/empty/component'
+import PlaylistCard from '@/components/playlists/playlist-card/container'
+import { songsByIdRange } from '@/utils/songs'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const buildPlaylistCategories = (): MusicPlaylistCategory[] => {
   // TODO : 외부 플레이리스트 카테고리 불러오기
+  const songs = useSelector((state: RootState) => state.songs).items
 
   return [
     {
       title: '내가 만든 플레이리스트',
       local: true,
-      items: []
+      items: [
+        {
+          title: '플레이리스트',
+          description: '테스트로 만드는 플레이리스트',
+          lastEdit: new Date().toISOString(),
+          items: songs
+            ? [...songsByIdRange(songs, '31', '33', '171', '169')]
+            : []
+        }
+      ]
     },
     {
       title: '사이트에서 제공하는 플레이리스트',
@@ -38,7 +52,7 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
           ></EmptyComponent>
         )}
         {item.items.map(v => (
-          <></>
+          <PlaylistCard key={v.title} item={v}></PlaylistCard>
         ))}
         {item.local && (
           <div className='button-group'>

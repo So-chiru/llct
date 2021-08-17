@@ -34,6 +34,15 @@ export const makeParsable = (
 }
 
 /**
+ * 주어진 ID를 파싱하여 [그룹, 노래 인덱스] 형식의 값을 반환합니다.
+ *
+ * @param id 파싱할 ID 문자열
+ */
+export const parseId = (id: string): [number, number] => {
+  return [Number(id[0]), Number(id.slice(1, id.length))]
+}
+
+/**
  * 주어진 store에서 해당하는 ID를 가진 MusicMetadata 객체를 찾아 적절히 처리한 후 반환합니다.
  * @param id 곡의 ID (최소 2자리)
  * @param store
@@ -50,8 +59,10 @@ export const searchById = (
     throw new Error('Store is not ready.')
   }
 
-  const group = Number(id[0])
-  const songId = Number(id.slice(1, id.length))
+  const parsedId = parseId(id)
+
+  const group = parsedId[0]
+  const songId = parsedId[1]
 
   if (!store.groups[group]) {
     throw new Error("Id's group field is not valid.")
@@ -124,6 +135,12 @@ export const searchFromGivenArguments = (
   if (music) {
     result = music
 
+    if (typeof id !== 'undefined') {
+      const parsedId = parseId(id)
+      group = parsedId[0]
+      index = parsedId[1]
+    }
+
     if (typeof index !== 'undefined' && typeof group !== 'undefined') {
       result = makeParsable(music, store, group, index)
     }
@@ -143,4 +160,14 @@ export const searchFromGivenArguments = (
   }
 
   return result
+}
+
+export const songsByIdRange = (store: LLCTSongDataV2, ...ids: string[]) => {
+  return ids.map(id => searchById(id, store))
+}
+
+export const songsDuration = (args: MusicMetadata[]): number => {
+  return (
+    args.map(v => v.metadata?.length).reduce((p, c) => (p ?? 0) + (c ?? 0)) || 0
+  )
 }

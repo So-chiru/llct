@@ -6,7 +6,7 @@ interface MusicPlaylistCategory {
 
 interface MusicPlaylist {
   title: string
-  description?: boolean
-  lastEdit: number
+  description?: string
+  lastEdit: string
   items: MusicMetadataWithID[]
 }
