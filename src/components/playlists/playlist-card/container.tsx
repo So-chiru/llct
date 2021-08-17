@@ -28,9 +28,18 @@ export const PlaylistCard = ({
   }
 
   const [folded, setFolded] = useState<boolean>(true)
+  const [editMode, setEditMode] = useState<boolean>(false)
 
   const onFoldStateChange = () => {
     setFolded(!folded)
+
+    if (!folded) {
+      setEditMode(false)
+    }
+  }
+
+  const onEditStateChange = () => {
+    setEditMode(!editMode)
   }
 
   if (!item) {
@@ -40,9 +49,11 @@ export const PlaylistCard = ({
   return (
     <PlaylistCardComponent
       item={item}
+      editMode={editMode}
       foldable={foldable}
       folded={folded}
       onFoldStateChange={onFoldStateChange}
+      onEditStateChange={onEditStateChange}
     ></PlaylistCardComponent>
   )
 }

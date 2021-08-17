@@ -9,8 +9,19 @@
       color: $dark-accent;
     }
 
+    input[type='text'] {
+      border-bottom: 1px solid $dark-accent;
+      color: $dark-accent;
+    }
+
     .description {
       color: #dadada;
+    }
+  }
+
+  .rich-summary {
+    .button {
+      fill: $dark-accent;
     }
   }
 }
@@ -54,6 +65,14 @@
     margin: auto;
     margin-left: 0;
 
+    input[type='text'] {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid $accent;
+      color: $accent;
+      letter-spacing: -1px;
+    }
+
     .title,
     .description {
       margin: 0;
@@ -86,7 +105,8 @@
     display: flex;
     gap: 32px;
 
-    .length {
+    .length,
+    .button {
       font-weight: bold;
       font-size: 14px;
       letter-spacing: -1px;
@@ -115,6 +135,11 @@
       }
     }
 
+    .button {
+      cursor: pointer;
+      fill: $accent;
+    }
+
     .llct-playlist-image-group {
       display: flex;
 
@@ -130,18 +155,17 @@
   .contents {
     visibility: hidden;
     opacity: 0;
-    max-height: 0;
-    transform: translateY(-50px);
+    height: 0;
+    transform: translateY(-10px);
 
-    transition: 0.13s max-height cubic-bezier(0.19, 1, 0.22, 1),
-      0.3s visibility cubic-bezier(0.19, 1, 0.22, 1),
+    transition: 0.3s visibility cubic-bezier(0.19, 1, 0.22, 1),
       0.3s opacity cubic-bezier(0.19, 1, 0.22, 1),
       0.4s transform cubic-bezier(0.19, 1, 0.22, 1);
 
     &.show {
       visibility: visible;
       opacity: 1;
-      max-height: 100000px;
+      height: auto;
       transform: translateY(0px);
     }
   }
