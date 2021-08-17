@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import UpNextComponent from './component'
 
 import { play } from '@/store/player/actions'
+import TouchScroller from '@/components/controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 
 const UpNextContainer = () => {
   const dispatch = useDispatch()
@@ -27,23 +29,25 @@ const UpNextContainer = () => {
   }
 
   return (
-    <div className='llct-upnext'>
-      {queue.length ? (
-        queue.map((value, index) => {
-          return (
-            <UpNextComponent
-              key={index + value.id}
-              music={value}
-              current={pointer === index}
-              index={index}
-              click={onClick}
-            ></UpNextComponent>
-          )
-        })
-      ) : (
-        <p className='queue-empty-text'>대기열에 있는 노래가 없습니다.</p>
-      )}
-    </div>
+    <TouchScroller direction={TouchScrollerDirection.Vertical}>
+      <div className='llct-upnext'>
+        {queue.length ? (
+          queue.map((value, index) => {
+            return (
+              <UpNextComponent
+                key={index + value.id}
+                music={value}
+                current={pointer === index}
+                index={index}
+                click={onClick}
+              ></UpNextComponent>
+            )
+          })
+        ) : (
+          <p className='queue-empty-text'>대기열에 있는 노래가 없습니다.</p>
+        )}
+      </div>
+    </TouchScroller>
   )
 }
 

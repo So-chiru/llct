@@ -145,6 +145,10 @@ export class TouchScroller {
       return
     }
 
+    if (ev.type === 'mouseout' && ev.target !== this.$) {
+      return
+    }
+
     if (ev.type === 'mousedown') {
       this.pressed = true
       this.pressData = {
@@ -154,7 +158,7 @@ export class TouchScroller {
       }
 
       return
-    } else if (ev.type === 'mouseup') {
+    } else if (ev.type === 'mouseup' || ev.type === 'mouseout') {
       this.pressed = false
       this.pressData = {
         ...this.pressData,
@@ -198,6 +202,7 @@ export class TouchScroller {
   attachEventListener () {
     this.$.addEventListener('mousedown', this.handleMouse.bind(this))
     this.$.addEventListener('mouseup', this.handleMouse.bind(this))
+    this.$.addEventListener('mouseout', this.handleMouse.bind(this))
 
     this.$.addEventListener('mousemove', this.handleMouse.bind(this))
   }
@@ -208,6 +213,7 @@ export class TouchScroller {
   dettachEventListener () {
     this.$.removeEventListener('mousedown', this.handleMouse)
     this.$.removeEventListener('mouseup', this.handleMouse)
+    this.$.removeEventListener('mouseout', this.handleMouse)
     this.$.removeEventListener('mousemove', this.handleMouse)
   }
 
