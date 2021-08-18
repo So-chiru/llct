@@ -11,25 +11,29 @@ import { RootState } from '@/store'
 const buildPlaylistCategories = (): MusicPlaylistCategory[] => {
   // TODO : 외부 플레이리스트 카테고리 불러오기
   const songs = useSelector((state: RootState) => state.songs).items
+  const playlists = useSelector((state: RootState) => state.playlists)
 
   return [
     {
       title: '내가 만든 플레이리스트',
       local: true,
-      items: [
-        {
-          title: '플레이리스트',
-          description: '테스트로 만드는 플레이리스트',
-          lastEdit: new Date().toISOString(),
-          items: songs
-            ? [...songsByIdRange(songs, '31', '33', '171', '169')]
-            : []
-        }
-      ]
+      items: ([
+        songs &&
+          playlists.localItems?.playlists?.map(v => ({
+            ...v,
+            items: [...songsByIdRange(songs, ...v.items)]
+          }))
+      ].filter(v => v !== undefined) as unknown) as MusicPlaylist[]
     },
     {
       title: '사이트에서 제공하는 플레이리스트',
-      items: []
+      items: ([
+        songs &&
+          playlists.remoteItems?.playlists?.map(v => ({
+            ...v,
+            items: [...songsByIdRange(songs, ...v.items)]
+          }))
+      ].filter(v => v !== undefined) as unknown) as MusicPlaylist[]
     }
   ]
 }

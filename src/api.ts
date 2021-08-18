@@ -46,6 +46,28 @@ export const fetchCallData = async (id: string): Promise<LLCTCall> => {
     })
 }
 
+export const fetchServerPlaylist = async (): Promise<LLCTPlaylistDataV1> => {
+  return fetch(`${process.env.API_SERVER}/playlists`)
+    .then(v => {
+      if (v.status === 404) {
+        throw new Error('플레이리스트가 없어요.')
+      }
+
+      if (v.status > 500) {
+        throw new Error('서버 오류로 플레이리스트를 불러올 수 없어요.')
+      }
+
+      return v
+    })
+    .then(makeItJSON)
+    .then(v => {
+      if (!v.result || v.result === 'error') {
+        throw new Error(v.data || '서버에서 오류를 반환하였습니다.')
+      }
+      return v.data
+    })
+}
+
 export const fetchColorData = async (id: string): Promise<LLCTColor> => {
   return fetch(`${process.env.API_SERVER}/color/${id}`)
     .then(v => {
