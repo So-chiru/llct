@@ -40,6 +40,10 @@
       opacity: 0.8;
     }
   }
+
+  &[data-next-line-has-lyrics='true'] {
+    margin-bottom: 8px;
+  }
 }
 
 .llct-call-word {

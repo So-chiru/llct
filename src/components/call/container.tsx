@@ -77,6 +77,7 @@ const LineComponent = ({
   showLyrics
 }: LineComponentProps) => {
   const activeLine = line.start > 0 && line.start < time && line.end > time
+  const nextLine = timeline?.timeline[index + 1]
 
   const words = useMemo(
     () =>
@@ -128,6 +129,9 @@ const LineComponent = ({
       className='llct-call-line'
       key={`call-line:${index}:${activeLine}`}
       data-active={activeLine}
+      data-next-line-has-lyrics={
+        (nextLine && typeof nextLine.text === 'string') || undefined
+      }
     >
       {...words}
       {showLyrics && line.text && (
