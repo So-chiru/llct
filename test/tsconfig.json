@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "strict": true,
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "types": ["mocha", "chai"],
+    "paths": {
+      "@/*": ["*"],
+      "@test/*": ["*"]
+    },
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "sourceMap": true
+  }
+}
