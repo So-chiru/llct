@@ -18,9 +18,17 @@ export const remove = (name: string): PlaylistsReducerAction => {
   }
 }
 
+export const load = (data: MusicPlaylistData) => {
+  return {
+    type: '@llct/playlists/load',
+    data
+  }
+}
+
 const playlistActions = {
   create,
-  remove
+  remove,
+  load
 }
 
 export default playlistActions

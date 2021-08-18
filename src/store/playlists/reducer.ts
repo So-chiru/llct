@@ -63,6 +63,27 @@ const PlaylistsReducer = (
 
         return items
       })
+    case '@llct/playlists/load':
+      return storageSaveWrapper(state, () => {
+        const data = action.data as MusicPlaylistData
+
+        const title = data.title
+        if (!playlistUtils.validateName(title)) {
+          return null
+        }
+
+        if (playlistUtils.checkExists(state.localItems, title)) {
+          return null
+        }
+
+        const items: LLCTPlaylistDataV1 = state.localItems || {
+          playlists: []
+        }
+
+        items.playlists.push(data)
+
+        return items
+      })
     case '@llct/playlists/remove':
       return storageSaveWrapper(state, () => {
         if (

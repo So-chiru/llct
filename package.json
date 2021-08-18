@@ -7,6 +7,7 @@
   "author": "So-chiru <unleash9224@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "buffer": "^6.0.3",
     "dotenv": "^10.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -30,7 +31,7 @@
     "build-worker": "webpack --config webpack-worker.config.js --mode production",
     "lint": "eslint -c .eslintrc.json './src/**/*.{ts,tsx,js,jsx}'",
     "lint-fix": "eslint --fix -c .eslintrc.json './src/**/*.{ts,tsx,js,jsx}'",
-    "test": "mocha -r ts-node/register './test/**/*.ts'",
+    "test": "TS_NODE_FILES=true mocha -r ts-node/register './test/**/*.ts'",
     "dev-worker": "webpack --watch --config webpack-worker.config.js --mode development",
     "dev": "webpack serve --mode development",
     "prepare": "husky install",

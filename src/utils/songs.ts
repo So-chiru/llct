@@ -50,7 +50,7 @@ export const parseId = (id: string): [number, number] => {
 export const searchById = (
   id: string,
   store: LLCTSongDataV2
-): MusicMetadataWithID => {
+): MusicMetadataWithID | null => {
   if (id.length < 2) {
     throw new TypeError('id length should greater than 1 letter.')
   }
@@ -65,7 +65,11 @@ export const searchById = (
   const songId = parsedId[1]
 
   if (!store.groups[group]) {
-    throw new Error("Id's group field is not valid.")
+    return null
+  }
+
+  if (!store.songs[group][songId - 1]) {
+    return null
   }
 
   const parsable = makeParsable(
@@ -151,12 +155,13 @@ export const searchFromGivenArguments = (
     typeof index !== 'undefined' &&
     typeof group !== 'undefined'
   ) {
-    result = makeParsable(
-      searchById(`${group}${index}`, store),
-      store,
-      group,
-      index
-    )
+    const foundItem = searchById(`${group}${index}`, store)
+
+    if (!foundItem) {
+      return null
+    }
+
+    result = makeParsable(foundItem, store, group, index)
   }
 
   return result
@@ -166,10 +171,10 @@ export const songsByIdRange = (store: LLCTSongDataV2, ...ids: string[]) => {
   return ids.map(id => searchById(id, store))
 }
 
-export const songsDuration = (args: MusicMetadata[]): number => {
+export const songsDuration = (args: (MusicMetadata | null)[]): number => {
   return (
     args
-      .map(v => v.metadata?.length)
+      .map(v => v && v.metadata?.length)
       .reduce((p, c) => (p ?? 0) + (c ?? 0), 0) || 0
   )
 }

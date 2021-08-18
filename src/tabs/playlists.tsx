@@ -4,7 +4,7 @@ import '@/styles/tabs/playlists.scss'
 import ButtonComponent from '@/components/controls/button/component'
 import EmptyComponent from '@/components/empty/component'
 import PlaylistCard from '@/components/playlists/playlist-card/container'
-import { songsByIdRange } from '@/utils/songs'
+import { searchById, songsByIdRange } from '@/utils/songs'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import playlistActions from '@/store/playlists/actions'
@@ -49,6 +49,7 @@ interface PlaylistCategoryProps {
 
 const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
   const dispatch = useDispatch()
+  const songsData = useSelector((state: RootState) => state.songs.items)
 
   const createPlaylist = () => {
     const name = prompt('플레이리스트 이름은 무엇으로 지을까요?')
@@ -75,7 +76,43 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
     dispatch(playlistActions.remove(name))
   }
 
-  const loadPlaylist = () => {}
+  const loadPlaylist = () => {
+    const str = prompt('추출한 플레이리스트 문자열을 입력하세요.')
+
+    if (!str) {
+      return
+    }
+
+    if (!songsData) {
+      alert('노래 목록이 불러와지지 않아 플레이리스트를 불러올 수 없습니다.')
+
+      return
+    }
+
+    try {
+      const imported = playlistUtils.importPlaylist(str.trim())
+      const validSongs = imported.items.filter(
+        id => searchById(id, songsData) !== null
+      )
+
+      if (validSongs.length !== imported.items.length) {
+        alert(
+          '플레이리스트에 있는 곡 중 잘못된 ID를 가진 노래가 ' +
+            (imported.items.length - validSongs.length) +
+            '개 있습니다. 이 곡들은 추가하지 않았습니다.'
+        )
+      }
+
+      dispatch(
+        playlistActions.load({
+          ...imported,
+          items: validSongs
+        })
+      )
+    } catch (e) {
+      alert('플레이리스트를 불러올 수 없습니다: ' + e.message)
+    }
+  }
 
   return (
     <div className='category'>
