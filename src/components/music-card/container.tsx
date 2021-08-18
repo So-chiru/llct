@@ -15,17 +15,23 @@ interface MusicCardContainerProps {
   id?: string
   music?: MusicMetadata
   index?: number
+  active?: boolean
   ref?: () => unknown
   group?: number
   skeleton?: boolean
+  onClick?: (id: string) => void
+  onContext?: (id: string) => void
 }
 
 const MusicCardContainer = ({
   id,
   music,
   index,
+  active,
   group,
-  skeleton
+  skeleton,
+  onClick,
+  onContext
 }: MusicCardContainerProps) => {
   const instance = useSelector((state: RootState) => state.playing.instance)
   const data = useSelector((state: RootState) => state.songs)
@@ -55,7 +61,16 @@ const MusicCardContainer = ({
 
     const playId = id || `${group}${index}`
 
+    if (onClick) {
+      onClick(playId)
+      return
+    }
+
     const musicObject = songs.searchById(playId, data.items)
+
+    if (!musicObject) {
+      return
+    }
 
     dispatch(player.play(musicObject))
     dispatch(recents.addPlayed(musicObject.id))
@@ -74,7 +89,15 @@ const MusicCardContainer = ({
 
     const playId = id || `${group}${index}`
 
+    if (onContext) {
+      onContext(playId)
+    }
+
     const musicObject = songs.searchById(playId, data.items)
+
+    if (!musicObject) {
+      return
+    }
 
     dispatch(player.addToQueue(musicObject))
 
@@ -85,6 +108,7 @@ const MusicCardContainer = ({
     <MusicCardComponent
       music={selectedMetadata}
       group={group}
+      active={active}
       index={index}
       onClick={clickHandler}
       onContext={contextHandler}

@@ -21,6 +21,20 @@ const Tabs: LLCTTab[] = [
   }
 ]
 
+/**
+ * 탭 중에 str을 가진 탭이 있으면 그 탭의 인덱스를 반환합니다.
+ * @param str 탭 ID
+ */
+export const findTabById = (str: string): number | null => {
+  for (let i = 0; i < Tabs.length; i++) {
+    if (Tabs[i].page === str) {
+      return i
+    }
+  }
+
+  return null
+}
+
 const UIDefault = {
   currentTab: 0,
   tabs: Tabs,

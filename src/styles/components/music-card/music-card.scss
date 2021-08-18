@@ -11,7 +11,8 @@ $dark-default-background: darken($dark-semi-accent, 10);
 .llct-dark .music-card {
   background: var(--primary-dark, $dark-default-background);
 
-  &:hover {
+  &:hover,
+  &[data-active='true'] {
     background: var(--primary, lighten($dark-default-background, 8));
   }
 
@@ -41,6 +42,15 @@ $mobile-album-cover-size: 75px;
   -webkit-perspective: 2000px;
   perspective: 2000px;
   transform-style: flat;
+
+  &[data-active='true'] {
+    background: var(--primary, $semi-accent);
+    color: var(--alternative, $light-blue-accent);
+
+    .content {
+      color: var(--alternative, $light-blue-accent);
+    }
+  }
 
   &::before {
     content: '';

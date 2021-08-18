@@ -7,8 +7,45 @@ import PlaylistCard from '@/components/playlists/playlist-card/container'
 import { searchById, songsByIdRange } from '@/utils/songs'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import playlistActions from '@/store/playlists/actions'
+import playlistActions, { addItem, setAddTo } from '@/store/playlists/actions'
 import playlistUtils from '@/utils/playlists'
+import { findTabById } from '@/store/ui/reducer'
+import { updateTab } from '@/store/ui/actions'
+import { clearSelectedItems, setSelectionMode } from '@/store/songs/actions'
+import { SongsSelectionMode } from '@/store/songs/reducer'
+import { useEffect } from 'react'
+
+const PlaylistDataContext = () => {
+  const dispatch = useDispatch()
+
+  const selectedItems = useSelector(
+    (state: RootState) => state.songs.selectedItems
+  )
+  const selectionMode = useSelector(
+    (state: RootState) => state.songs.selectionMode
+  )
+  const addTo = useSelector((state: RootState) => state.playlists.addTo)
+
+  useEffect(() => {
+    if (
+      selectedItems.length &&
+      selectionMode === SongsSelectionMode.Default &&
+      addTo
+    ) {
+      dispatch(
+        addItem({
+          name: addTo,
+          data: selectedItems
+        })
+      )
+
+      dispatch(setAddTo(undefined))
+      dispatch(clearSelectedItems())
+    }
+  }, [selectedItems, selectionMode])
+
+  return <></>
+}
 
 const buildPlaylistCategories = (): MusicPlaylistCategory[] => {
   const songs = useSelector((state: RootState) => state.songs).items
@@ -114,6 +151,14 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
     }
   }
 
+  const addPlaylistItem = (name: string) => {
+    dispatch(setAddTo(name))
+    dispatch(setSelectionMode(SongsSelectionMode.AddPlaylist))
+    dispatch(updateTab(findTabById('songs')!))
+  }
+
+  const removePlaylistItem = (name: string) => {}
+
   return (
     <div className='category'>
       <span className='category-title'>{item.title}</span>
@@ -131,6 +176,8 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
             key={v.title}
             item={v}
             onDelete={deletePlaylist}
+            onItemAdd={addPlaylistItem}
+            onItemRemove={removePlaylistItem}
           ></PlaylistCard>
         ))}
         {item.local && (
@@ -156,6 +203,7 @@ const PlaylistsTab = ({ show }: LLCTTabProps) => {
       className={`llct-tab${show ? ' show' : ''} tab-playlists`}
       aria-hidden={!show}
     >
+      <PlaylistDataContext></PlaylistDataContext>
       <div className='categories'>
         {categories.map((v, i) => (
           <PlaylistCategory

@@ -1,3 +1,4 @@
+import RoundyButtonComponent from '@/components/controls/roundy-button/component'
 import MusicCardContainer from '@/components/music-card/container'
 import '@/styles/components/playlists/playlist-card.scss'
 import playlistUtils from '@/utils/playlists'
@@ -14,6 +15,8 @@ interface PlaylistCardComponentProps {
   onEditStateChange?: () => void
   onDeleteClick?: () => void
   onValueChange?: (name: string, value: unknown) => void
+  onItemAddClick?: () => void
+  onItemRemoveClick?: () => void
 }
 
 interface PlaylistCardImageGroupProps {
@@ -38,6 +41,7 @@ const PlaylistCardImageGroup = ({ items }: PlaylistCardImageGroupProps) => {
 
 const validateClickEvent = (ev: React.MouseEvent<HTMLDivElement>) => {
   return (
+    (ev.target as HTMLElement).getAttribute('role') !== 'button' &&
     (ev.target as HTMLElement).tagName !== 'svg' &&
     (ev.target as HTMLElement).tagName !== 'path' &&
     (ev.target as HTMLElement).tagName !== 'INPUT'
@@ -80,6 +84,18 @@ const ExportIcon = (
   </svg>
 )
 
+const PlusIcon = (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 24 24'
+    width='24'
+    height='24'
+  >
+    <path fill='none' d='M0 0h24v24H0z' />
+    <path d='M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z' />
+  </svg>
+)
+
 const printExport = (item: MusicPlaylist) => {
   const str = playlistUtils.exportPlaylist(playlistUtils.idify(item))
 
@@ -106,7 +122,9 @@ export const PlaylistCardComponent = ({
   onFoldStateChange,
   onEditStateChange,
   onDeleteClick,
-  onValueChange
+  onValueChange,
+  onItemAddClick,
+  onItemRemoveClick
 }: PlaylistCardComponentProps) => {
   if (skeleton || !item) {
     return <div className='llct-playlist-card skeleton'></div>
@@ -189,6 +207,13 @@ export const PlaylistCardComponent = ({
               id={v.id}
             ></MusicCardContainer>
           ))}
+          <div className='empty-wrapper'>
+            <RoundyButtonComponent
+              onClick={() => onItemAddClick && onItemAddClick()}
+            >
+              {PlusIcon}
+            </RoundyButtonComponent>
+          </div>
         </div>
       </div>
     </div>

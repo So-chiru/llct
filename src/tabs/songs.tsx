@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/tabs/songs.scss'
 
@@ -13,6 +13,15 @@ import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { concatClass } from '@/utils/react'
 import TouchScroller from '@/components/controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
+import {
+  addSelectedItems,
+  removeSelectedItems,
+  setSelectionMode
+} from '@/store/songs/actions'
+import { SongsSelectionMode } from '@/store/songs/reducer'
+import ButtonComponent from '@/components/controls/button/component'
+import { updateTab } from '@/store/ui/actions'
+import { findTabById } from '@/store/ui/reducer'
 
 const DEFAULT_VIEW_SIZE = 6
 
@@ -36,6 +45,8 @@ const loadMore = (
 }
 
 const SongsTab = ({ show }: LLCTTabProps) => {
+  const dispatch = useDispatch()
+
   const songs = useSelector((state: RootState) => state.songs)
   const [active, setActive] = useState<number>(1)
 
@@ -82,6 +93,21 @@ const SongsTab = ({ show }: LLCTTabProps) => {
     rootMargin: '0px 0px 400px 0px'
   })
 
+  const selectSongs = (id: string) => {
+    if (songs.selectedItems.filter(v => v === id).length > 0) {
+      dispatch(removeSelectedItems(id))
+
+      return
+    }
+
+    dispatch(addSelectedItems(id))
+  }
+
+  const selectionDone = () => {
+    dispatch(setSelectionMode(SongsSelectionMode.Default))
+    dispatch(updateTab(findTabById('playlists')!))
+  }
+
   if (!songs.items || !songs.items.groups || !songs.items.songs) {
     return (
       <div className={concatClass('llct-tab', show && 'show')}>
@@ -99,6 +125,16 @@ const SongsTab = ({ show }: LLCTTabProps) => {
       ref={rootRef}
       aria-hidden={!show}
     >
+      {songs.selectionMode === SongsSelectionMode.AddPlaylist && (
+        <div className='songs-action-box'>
+          <h3>
+            {songs.selectedItems.length
+              ? `${songs.selectedItems.length}개가 선택 되었습니다.`
+              : `플레이리스트에 들어갈 곡을 선택하세요.`}
+          </h3>
+          <ButtonComponent onClick={selectionDone}>선택 완료</ButtonComponent>
+        </div>
+      )}
       <TouchScroller direction={TouchScrollerDirection.Horizonal}>
         <div className='songs-groups-wrapper'>
           {...songs.items.groups.map((value, index) => {
@@ -123,8 +159,13 @@ const SongsTab = ({ show }: LLCTTabProps) => {
             <MusicCardContainer
               key={`songs:${active}:${index}:${show}`}
               music={value}
+              active={
+                songs.selectedItems.filter(v => v === `${active}${index + 1}`)
+                  .length > 0
+              }
               group={active}
               index={index + 1}
+              onClick={songs.selectionMode === 1 ? selectSongs : undefined}
             ></MusicCardContainer>
           )
         })}

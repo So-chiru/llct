@@ -152,7 +152,7 @@
     }
   }
 
-  .contents {
+  & > .contents {
     visibility: hidden;
     opacity: 0;
     height: 0;

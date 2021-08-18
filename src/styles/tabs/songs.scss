@@ -1,3 +1,4 @@
+@import '../colors.scss';
 @import '../positions.scss';
 
 .songs-groups-wrapper {
@@ -37,6 +38,48 @@
 
   @media screen and (min-width: $desktop) {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.llct-dark .songs-action-box {
+  background: $dark-background;
+}
+
+.songs-action-box {
+  display: flex;
+
+  background: $background;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  h3 {
+    letter-spacing: -2px;
+    font-size: 24px;
+  }
+
+  .llct-button {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 16px;
+  }
+
+  margin-bottom: 30px;
+
+  @media screen and (max-width: $wave-narrow) {
+    flex-direction: column;
+    padding-bottom: 3vh;
+
+    h3 {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @media screen and (max-width: $mobile) {
+    h3 {
+      font-size: 20px;
+    }
   }
 }
 
