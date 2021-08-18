@@ -129,8 +129,9 @@ const LineComponent = ({
       className='llct-call-line'
       key={`call-line:${index}:${activeLine}`}
       data-active={activeLine}
-      data-next-line-has-lyrics={
-        (nextLine && typeof nextLine.text === 'string') || undefined
+      data-margin={
+        (!line.text && nextLine && typeof nextLine.text === 'string') ||
+        undefined
       }
     >
       {...words}
