@@ -102,7 +102,50 @@ const PlaylistsReducer = (
 
         return items
       })
+    case '@llct/playlists/addItem':
+      return storageSaveWrapper(state, () => {
+        const data = action.data as { name: string; id: string }
 
+        if (!playlistUtils.checkExists(state.localItems, data.name)) {
+          return null
+        }
+
+        const items: LLCTPlaylistDataV1 = state.localItems || {
+          playlists: []
+        }
+
+        for (let i = 0; i < items.playlists.length; i++) {
+          if (items.playlists[i].title === data.name) {
+            items.playlists[i].items.push(data.id)
+
+            return items
+          }
+        }
+
+        return null
+      })
+    case '@llct/playlists/removeItem':
+      return storageSaveWrapper(state, () => {
+        const data = action.data as { name: string; index: number }
+
+        if (!playlistUtils.checkExists(state.localItems, data.name)) {
+          return null
+        }
+
+        const items: LLCTPlaylistDataV1 = state.localItems || {
+          playlists: []
+        }
+
+        for (let i = 0; i < items.playlists.length; i++) {
+          if (items.playlists[i].title === data.name) {
+            items.playlists[i].items.splice(data.index, 1)
+
+            return items
+          }
+        }
+
+        return null
+      })
     case '@llct/playlists/api/request':
       return Object.assign({}, state, {
         remoteLoaded: true

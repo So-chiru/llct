@@ -25,10 +25,26 @@ export const load = (data: MusicPlaylistData) => {
   }
 }
 
+export const addItem = (data: { name: string; data: string }) => {
+  return {
+    type: '@llct/playlists/addItem',
+    data
+  }
+}
+
+export const removeItem = (data: { name: string; index: number }) => {
+  return {
+    type: '@llct/playlists/removeItem',
+    data
+  }
+}
+
 const playlistActions = {
   create,
   remove,
-  load
+  load,
+  addItem,
+  removeItem
 }
 
 export default playlistActions
