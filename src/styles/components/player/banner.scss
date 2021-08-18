@@ -1,0 +1,38 @@
+@import '../../colors.scss';
+@import '../../positions.scss';
+
+.llct-dark .llct-player-banner {
+  background: $dark-light-blue-accent;
+}
+
+.llct-player-banner {
+  position: relative;
+  min-height: 75px;
+
+  background: $light-blue-accent;
+
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  border-radius: 16px;
+
+  .contents {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    .title,
+    .description {
+      white-space: nowrap;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .description {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}

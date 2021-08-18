@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/player/player.scss'
@@ -62,6 +62,10 @@ const toggleScrollbar = (on: boolean) => {
 import { emptyCover } from '@/utils/cover'
 import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
 import { concatClass } from '@/utils/react'
+import PlayerBanner, { PlayerBannerComponent } from './banner/component'
+import TouchScroller from '../controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
+import PlayerBannerContainer from './banner/container'
 
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
@@ -153,6 +157,59 @@ const useTouchSlider = (
   }, [target, player])
 
   return undefined
+}
+
+const CallBanners = () => {
+  const call = useSelector((state: RootState) => state.call)
+
+  if (!call.load || !call.data || !call.data.metadata) {
+    return <></>
+  }
+
+  if (call.data.metadata.flags || call.data.metadata.blade) {
+    return (
+      <TouchScroller direction={TouchScrollerDirection.Horizonal}>
+        <div className='player-banner-wrapper'>
+          {
+            ([
+              typeof call.data.metadata.blade === 'object' && (
+                <PlayerBannerComponent
+                  key={'banner'}
+                  title={'블레이드 추천 색상'}
+                  color={call.data.metadata.blade.color}
+                  description={
+                    call.data.metadata.blade.text ?? '추천 색상 없음'
+                  }
+                ></PlayerBannerComponent>
+              ),
+              call.data.metadata.flags && [
+                ...Object.keys(call.data.metadata.flags).map(v => {
+                  if (
+                    call.data &&
+                    call.data.metadata.flags &&
+                    call.data.metadata.flags[
+                      v as keyof LLCTCallMetadata['flags']
+                    ]
+                  ) {
+                    return (
+                      <PlayerBannerContainer
+                        key={`banner-${v}`}
+                        id={v as keyof LLCTCallMetadata['flags']}
+                      ></PlayerBannerContainer>
+                    )
+                  }
+
+                  return <></>
+                })
+              ]
+            ] as unknown[]) as ReactNode
+          }
+        </div>
+      </TouchScroller>
+    )
+  }
+
+  return <></>
 }
 
 const PlayerComponent = ({
@@ -387,6 +444,9 @@ const PlayerComponent = ({
               </div>
             </div>
             <div className='dashboard-column progress-zone'>{ProgressBar}</div>
+            <div className='dashboard-column call-info-zone'>
+              <CallBanners></CallBanners>
+            </div>
             {showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>음향 효과</h1>
