@@ -168,6 +168,8 @@ export const songsByIdRange = (store: LLCTSongDataV2, ...ids: string[]) => {
 
 export const songsDuration = (args: MusicMetadata[]): number => {
   return (
-    args.map(v => v.metadata?.length).reduce((p, c) => (p ?? 0) + (c ?? 0)) || 0
+    args
+      .map(v => v.metadata?.length)
+      .reduce((p, c) => (p ?? 0) + (c ?? 0), 0) || 0
   )
 }

@@ -8,12 +8,14 @@ interface PlaylistCardProps {
   query?: string
   item?: MusicPlaylist
   foldable?: boolean
+  onDelete?: (name: string) => void
 }
 
 export const PlaylistCard = ({
   query,
   item,
-  foldable = true
+  foldable = true,
+  onDelete
 }: PlaylistCardProps) => {
   // TODO : 플레이리스트 찾는 로직 구현
 
@@ -54,6 +56,7 @@ export const PlaylistCard = ({
       folded={folded}
       onFoldStateChange={onFoldStateChange}
       onEditStateChange={onEditStateChange}
+      onDeleteClick={() => onDelete && onDelete(item.title)}
     ></PlaylistCardComponent>
   )
 }

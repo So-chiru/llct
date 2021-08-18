@@ -19,5 +19,5 @@ interface MusicPlaylistData extends MusicPlaylistBase {
 }
 
 interface LLCTPlaylistDataV1 {
-  playlists?: MusicPlaylistData[]
+  playlists: MusicPlaylistData[]
 }

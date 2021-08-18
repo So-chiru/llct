@@ -27,14 +27,14 @@ function * fetchPlaylistData ({ id }: AnyAction) {
   try {
     const data = yield call(apis.fetchServerPlaylist, id)
 
-    yield put({ type: '@llct/api_playlists/success', data: data })
+    yield put({ type: '@llct/playlists/api/success', data: data })
   } catch (e) {
-    yield put({ type: '@llct/api_playlists/failed', error: e.message })
+    yield put({ type: '@llct/playlists/api/failed', error: e.message })
   }
 }
 
 export function * fetchAPIDataSaga () {
   yield takeEvery('@llct/api_lists/request', fetchAPIData)
   yield takeEvery('@llct/api_call/request', fetchCallData)
-  yield takeEvery('@llct/api_playlists/request', fetchPlaylistData)
+  yield takeEvery('@llct/playlists/api/request', fetchPlaylistData)
 }

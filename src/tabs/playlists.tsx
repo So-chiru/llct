@@ -5,11 +5,12 @@ import ButtonComponent from '@/components/controls/button/component'
 import EmptyComponent from '@/components/empty/component'
 import PlaylistCard from '@/components/playlists/playlist-card/container'
 import { songsByIdRange } from '@/utils/songs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import playlistActions from '@/store/playlists/actions'
+import playlistUtils from '@/utils/playlists'
 
 const buildPlaylistCategories = (): MusicPlaylistCategory[] => {
-  // TODO : 외부 플레이리스트 카테고리 불러오기
   const songs = useSelector((state: RootState) => state.songs).items
   const playlists = useSelector((state: RootState) => state.playlists)
 
@@ -17,23 +18,27 @@ const buildPlaylistCategories = (): MusicPlaylistCategory[] => {
     {
       title: '내가 만든 플레이리스트',
       local: true,
-      items: ([
-        songs &&
-          playlists.localItems?.playlists?.map(v => ({
-            ...v,
-            items: [...songsByIdRange(songs, ...v.items)]
-          }))
-      ].filter(v => v !== undefined) as unknown) as MusicPlaylist[]
+      items:
+        ((playlists.localItems &&
+          songs &&
+          ([
+            ...playlists.localItems.playlists.map(v => ({
+              ...v,
+              items: [...songsByIdRange(songs, ...v.items)]
+            }))
+          ].filter(v => v !== undefined) as unknown)) as MusicPlaylist[]) || []
     },
     {
       title: '사이트에서 제공하는 플레이리스트',
-      items: ([
-        songs &&
-          playlists.remoteItems?.playlists?.map(v => ({
-            ...v,
-            items: [...songsByIdRange(songs, ...v.items)]
-          }))
-      ].filter(v => v !== undefined) as unknown) as MusicPlaylist[]
+      items:
+        ((playlists.remoteItems &&
+          songs &&
+          ([
+            ...playlists.remoteItems.playlists.map(v => ({
+              ...v,
+              items: [...songsByIdRange(songs, ...v.items)]
+            }))
+          ].filter(v => v !== undefined) as unknown)) as MusicPlaylist[]) || []
     }
   ]
 }
@@ -43,6 +48,35 @@ interface PlaylistCategoryProps {
 }
 
 const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
+  const dispatch = useDispatch()
+
+  const createPlaylist = () => {
+    const name = prompt('플레이리스트 이름은 무엇으로 지을까요?')
+
+    if (!name) {
+      return
+    }
+
+    if (!playlistUtils.validateName(name)) {
+      alert('플레이리스트 이름이 올바르지 않습니다. (1자 이상 64자 미만)')
+      return
+    }
+
+    dispatch(playlistActions.create(name))
+  }
+
+  const deletePlaylist = (name: string) => {
+    const proceed = confirm('정말로 플레이리스트를 삭제할까요?')
+
+    if (!proceed) {
+      return
+    }
+
+    dispatch(playlistActions.remove(name))
+  }
+
+  const loadPlaylist = () => {}
+
   return (
     <div className='category'>
       <span className='category-title'>{item.title}</span>
@@ -56,12 +90,20 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
           ></EmptyComponent>
         )}
         {item.items.map(v => (
-          <PlaylistCard key={v.title} item={v}></PlaylistCard>
+          <PlaylistCard
+            key={v.title}
+            item={v}
+            onDelete={deletePlaylist}
+          ></PlaylistCard>
         ))}
         {item.local && (
           <div className='button-group'>
-            <ButtonComponent>플레이리스트 불러오기</ButtonComponent>
-            <ButtonComponent>플레이리스트 만들기</ButtonComponent>
+            <ButtonComponent onClick={loadPlaylist}>
+              플레이리스트 불러오기
+            </ButtonComponent>
+            <ButtonComponent onClick={createPlaylist}>
+              플레이리스트 만들기
+            </ButtonComponent>
           </div>
         )}
       </div>
