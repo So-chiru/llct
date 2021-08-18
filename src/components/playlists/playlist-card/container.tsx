@@ -1,5 +1,4 @@
 import { RootState } from '@/store'
-import { songsByIdRange } from '@/utils/songs'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import PlaylistCardComponent from './component'
@@ -17,8 +16,6 @@ export const PlaylistCard = ({
   foldable = true,
   onDelete
 }: PlaylistCardProps) => {
-  // TODO : 플레이리스트 찾는 로직 구현
-
   const songs = useSelector((state: RootState) => state.songs).items
 
   if (!songs) {
