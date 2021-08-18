@@ -4,7 +4,7 @@ next generation of llct written in TypeScript. what is llct? don't ask.
 
 ## design
 
-[Figma link](https://www.figma.com/file/y2XT4hDU090ISuXt9ZtcGB/LLCT-Love-Live-Call-Table?node-id=604%3A7653)
+[Figma link](https://www.figma.com/file/y2XT4hDU090ISuXt9ZtcGB/LLCT---Love-Live-Call-Table?node-id=576%3A350)
 
 ## related projects
 
