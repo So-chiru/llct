@@ -131,17 +131,16 @@ export const PlaylistCardComponent = ({
   }
 
   return (
-    <div
-      className='llct-playlist-card'
-      onClick={ev =>
-        foldable &&
-        validateClickEvent(ev) &&
-        onFoldStateChange &&
-        onFoldStateChange()
-      }
-      data-folded={folded}
-    >
-      <div className='summary'>
+    <div className='llct-playlist-card' data-folded={folded}>
+      <div
+        className='summary'
+        onClick={ev =>
+          foldable &&
+          validateClickEvent(ev) &&
+          onFoldStateChange &&
+          onFoldStateChange()
+        }
+      >
         <div className='brief-summary'>
           <h3 className='title'>
             {editMode ? (
@@ -174,27 +173,31 @@ export const PlaylistCardComponent = ({
           <div className='section length'>
             <span>총 {(songsDuration(item.items) / 60).toFixed(1)}분</span>
           </div>
-          <div
-            className='section button'
-            onClick={() => onEditStateChange && onEditStateChange()}
-          >
-            <span>{EditIcon}</span>
-          </div>
-          <div
-            className='section button'
-            onClick={() => onDeleteClick && onDeleteClick()}
-          >
-            <span>{DeleteIcon}</span>
-          </div>
-          <div className='section button' onClick={() => printExport(item)}>
-            <span>{ExportIcon}</span>
-          </div>
-          {folded && (
+
+          {(folded && (
             <div className='section musics'>
               <PlaylistCardImageGroup
                 items={item.items}
               ></PlaylistCardImageGroup>
             </div>
+          )) || (
+            <>
+              <div
+                className='section button'
+                onClick={() => onEditStateChange && onEditStateChange()}
+              >
+                <span>{EditIcon}</span>
+              </div>
+              <div
+                className='section button'
+                onClick={() => onDeleteClick && onDeleteClick()}
+              >
+                <span>{DeleteIcon}</span>
+              </div>
+              <div className='section button' onClick={() => printExport(item)}>
+                <span>{ExportIcon}</span>
+              </div>
+            </>
           )}
         </div>
       </div>

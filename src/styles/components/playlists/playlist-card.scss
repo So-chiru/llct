@@ -4,6 +4,12 @@
 .llct-dark .llct-playlist-card {
   background: $dark-light-blue-accent;
 
+  .summary {
+    &:hover {
+      background: lighten($dark-light-blue-accent, 4);
+    }
+  }
+
   .brief-summary {
     .title {
       color: $dark-accent;
@@ -31,6 +37,10 @@
   background: $semi-accent;
   padding: 26px 36px;
 
+  @media screen and (max-width: $mobile) {
+    padding: 6px 16px;
+  }
+
   &.skelecton {
     height: 120px;
   }
@@ -43,6 +53,11 @@
 
     .summary {
       flex-direction: row;
+
+      @media screen and (max-width: $mobile) {
+        flex-direction: column;
+      }
+
       height: 64px;
     }
   }
@@ -51,6 +66,19 @@
     display: flex;
     gap: 16px;
     height: 64px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 16px;
+
+    &:hover {
+      background: lighten($semi-accent, 4);
+    }
+
+    transition: 0.23s background cubic-bezier(0.19, 1, 0.22, 1);
+
+    @media screen and (max-width: $mobile) {
+      padding: 26px 6px;
+    }
 
     @media screen and (max-width: $wave-narrow) {
       flex-direction: column;
@@ -171,4 +199,34 @@
   }
 
   border-radius: 16px;
+}
+
+.llct-playlist-card {
+  .contents {
+    .card-lists {
+      @media screen and (max-width: $tablet) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media screen and (max-width: $mobile) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      @media screen and (min-width: $tablet) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media screen and (max-width: $wave-narrow) {
+        width: 95%;
+        margin: auto;
+      }
+
+      @media screen and (min-width: $wave-narrow) {
+      }
+
+      @media screen and (min-width: $desktop) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
 }

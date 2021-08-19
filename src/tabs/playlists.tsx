@@ -89,6 +89,11 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
   const songsData = useSelector((state: RootState) => state.songs.items)
 
   const createPlaylist = () => {
+    if (!songsData) {
+      alert('노래 목록이 불어와지지 않아 플레이리스트를 만들 수 없습니다.')
+      return
+    }
+
     const name = prompt('플레이리스트 이름은 무엇으로 지을까요?')
 
     if (!name) {

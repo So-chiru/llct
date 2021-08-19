@@ -19,6 +19,11 @@
   .empty-wrapper {
     margin: auto;
     display: grid;
+
+    @media screen and (max-width: $mobile) {
+      max-width: 80%;
+      word-break: keep-all;
+    }
   }
 
   p {
