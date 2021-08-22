@@ -10,6 +10,7 @@ interface PlaylistCardProps {
   onDelete?: (name: string) => void
   onItemAdd?: (name: string) => void
   onItemRemove?: (name: string) => void
+  onItemMove?: (name: string, items: MusicMetadataWithID[]) => void
 }
 
 export const PlaylistCard = ({
@@ -18,7 +19,8 @@ export const PlaylistCard = ({
   foldable = true,
   onDelete,
   onItemAdd,
-  onItemRemove
+  onItemRemove,
+  onItemMove
 }: PlaylistCardProps) => {
   const songs = useSelector((state: RootState) => state.songs).items
 
@@ -60,6 +62,9 @@ export const PlaylistCard = ({
       onDeleteClick={() => onDelete && onDelete(item.title)}
       onItemAddClick={() => onItemAdd && onItemAdd(item.title)}
       onItemRemoveClick={() => onItemRemove && onItemRemove(item.title)}
+      onItemMove={(items: MusicMetadataWithID[]) =>
+        onItemMove && onItemMove(item.title, items)
+      }
     ></PlaylistCardComponent>
   )
 }

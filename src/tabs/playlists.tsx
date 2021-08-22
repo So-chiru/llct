@@ -7,7 +7,7 @@ import PlaylistCard from '@/components/playlists/playlist-card/container'
 import { searchById, songsByIdRange } from '@/utils/songs'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import playlistActions, { addItem, setAddTo } from '@/store/playlists/actions'
+import playlistActions from '@/store/playlists/actions'
 import playlistUtils from '@/utils/playlists'
 import { findTabById } from '@/store/ui/reducer'
 import { updateTab } from '@/store/ui/actions'
@@ -33,13 +33,13 @@ const PlaylistDataContext = () => {
       addTo
     ) {
       dispatch(
-        addItem({
+        playlistActions.addItem({
           name: addTo,
           data: selectedItems
         })
       )
 
-      dispatch(setAddTo(undefined))
+      dispatch(playlistActions.setAddTo(undefined))
       dispatch(clearSelectedItems())
     }
   }, [selectedItems, selectionMode])
@@ -157,12 +157,16 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
   }
 
   const addPlaylistItem = (name: string) => {
-    dispatch(setAddTo(name))
+    dispatch(playlistActions.setAddTo(name))
     dispatch(setSelectionMode(SongsSelectionMode.AddPlaylist))
     dispatch(updateTab(findTabById('songs')!))
   }
 
   const removePlaylistItem = (name: string) => {}
+
+  const movePlaylistItems = (name: string, items: MusicMetadataWithID[]) => {
+    dispatch(playlistActions.moveItems({ name, items }))
+  }
 
   return (
     <div className='category'>
@@ -183,6 +187,7 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
             onDelete={deletePlaylist}
             onItemAdd={addPlaylistItem}
             onItemRemove={removePlaylistItem}
+            onItemMove={movePlaylistItems}
           ></PlaylistCard>
         ))}
         {item.local && (

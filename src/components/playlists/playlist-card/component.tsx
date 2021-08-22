@@ -4,6 +4,16 @@ import '@/styles/components/playlists/playlist-card.scss'
 import playlistUtils from '@/utils/playlists'
 import { concatClass } from '@/utils/react'
 import { songsDuration } from '@/utils/songs'
+import { ReactNode } from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+
+import {
+  SortableContainer,
+  SortableElement,
+  SortStartHandler,
+  SortEndHandler
+} from 'react-sortable-hoc'
 
 interface PlaylistCardComponentProps {
   item?: MusicPlaylist
@@ -17,6 +27,7 @@ interface PlaylistCardComponentProps {
   onValueChange?: (name: string, value: unknown) => void
   onItemAddClick?: () => void
   onItemRemoveClick?: () => void
+  onItemMove?: (items: MusicMetadataWithID[]) => void
 }
 
 interface PlaylistCardImageGroupProps {
@@ -113,6 +124,108 @@ const printExport = (item: MusicPlaylist) => {
   )
 }
 
+const SortableItem = SortableElement(({ v }: { v: MusicMetadataWithID }) => (
+  <MusicCardContainer
+    key={`music-metadata-${v.id}`}
+    music={v}
+    id={v.id}
+  ></MusicCardContainer>
+))
+
+const SortableMusicCards = SortableContainer(
+  ({
+    items,
+    children
+  }: {
+    items: MusicMetadataWithID[]
+    children: ReactNode
+  }) => {
+    return (
+      <div className='card-lists'>
+        {items.map((value, index) => (
+          <SortableItem
+            key={`item-${value.id}-${index}`}
+            index={index}
+            v={value}
+          />
+        ))}
+        {children}
+      </div>
+    )
+  }
+)
+
+type arrayMoveTypes = <T>(array: T[], from: number, to: number) => T[]
+const arrayMove: arrayMoveTypes = (array, from, to) => {
+  array = array.slice()
+  array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0])
+
+  return array
+}
+
+const traversal = (
+  element: HTMLElement,
+  className: string
+): HTMLElement | null =>
+  element.classList.contains(className)
+    ? element
+    : element.parentElement
+    ? traversal(element.parentElement, className)
+    : null
+
+const SortableMusicLists = ({
+  items,
+  children,
+  onItemMove
+}: {
+  items: MusicMetadataWithID[]
+  children?: ReactNode
+  onItemMove?: (items: MusicMetadataWithID[]) => void
+}) => {
+  const [localMusic, setLocalMusic] = useState<MusicMetadataWithID[]>(items)
+
+  useEffect(() => {
+    setLocalMusic(items)
+  }, items)
+
+  const sortStart: SortStartHandler = (sort, event) => {
+    traversal(event.target as HTMLElement, 'card-lists')?.classList.add(
+      'sort-ongoing'
+    )
+  }
+
+  const sortEnd = (
+    {
+      oldIndex,
+      newIndex
+    }: {
+      oldIndex: number
+      newIndex: number
+    },
+    event: Parameters<SortEndHandler>[1]
+  ) => {
+    const newArray = arrayMove(localMusic, oldIndex, newIndex)
+
+    setLocalMusic(newArray)
+    onItemMove && onItemMove(newArray)
+
+    traversal(event.target as HTMLElement, 'card-lists')?.classList.remove(
+      'sort-ongoing'
+    )
+  }
+
+  return (
+    <SortableMusicCards
+      items={localMusic}
+      onSortStart={sortStart}
+      onSortEnd={sortEnd}
+      axis='xy'
+    >
+      {children}
+    </SortableMusicCards>
+  )
+}
+
 export const PlaylistCardComponent = ({
   item,
   skeleton = false,
@@ -124,14 +237,27 @@ export const PlaylistCardComponent = ({
   onDeleteClick,
   onValueChange,
   onItemAddClick,
-  onItemRemoveClick
+  onItemRemoveClick,
+  onItemMove
 }: PlaylistCardComponentProps) => {
   if (skeleton || !item) {
     return <div className='llct-playlist-card skeleton'></div>
   }
 
+  const plusComponent = (
+    <div className='empty-wrapper'>
+      <RoundyButtonComponent onClick={() => onItemAddClick && onItemAddClick()}>
+        {PlusIcon}
+      </RoundyButtonComponent>
+    </div>
+  )
+
   return (
-    <div className='llct-playlist-card' data-folded={folded}>
+    <div
+      className='llct-playlist-card'
+      data-folded={folded}
+      data-edit={editMode}
+    >
       <div
         className='summary'
         onClick={ev =>
@@ -202,22 +328,25 @@ export const PlaylistCardComponent = ({
         </div>
       </div>
       <div className={concatClass('contents', !folded && 'show')}>
-        <div className='card-lists'>
-          {item.items.map((v, i) => (
-            <MusicCardContainer
-              key={`${i}-${v.id}`}
-              music={v}
-              id={v.id}
-            ></MusicCardContainer>
-          ))}
-          <div className='empty-wrapper'>
-            <RoundyButtonComponent
-              onClick={() => onItemAddClick && onItemAddClick()}
-            >
-              {PlusIcon}
-            </RoundyButtonComponent>
+        {editMode ? (
+          <SortableMusicLists
+            items={item.items}
+            onItemMove={items => onItemMove && onItemMove(items)}
+          >
+            {plusComponent}
+          </SortableMusicLists>
+        ) : (
+          <div className='card-lists'>
+            {item.items.map((v, i) => (
+              <MusicCardContainer
+                key={`${i}-${v.id}`}
+                music={v}
+                id={v.id}
+              ></MusicCardContainer>
+            ))}
+            {plusComponent}
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

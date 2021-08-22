@@ -43,6 +43,7 @@ $mobile-album-cover-size: 75px;
   perspective: 2000px;
   transform-style: flat;
 
+  &:hover,
   &[data-active='true'] {
     background: var(--primary, $semi-accent);
     color: var(--alternative, $light-blue-accent);

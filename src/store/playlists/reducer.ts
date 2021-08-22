@@ -150,6 +150,31 @@ const PlaylistsReducer = (
 
         return null
       })
+    case '@llct/playlists/moveItems':
+      return storageSaveWrapper(state, () => {
+        const data = action.data as {
+          name: string
+          items: MusicMetadataWithID[]
+        }
+
+        if (!playlistUtils.checkExists(state.localItems, data.name)) {
+          return null
+        }
+
+        const items: LLCTPlaylistDataV1 = state.localItems || {
+          playlists: []
+        }
+
+        for (let i = 0; i < items.playlists.length; i++) {
+          if (items.playlists[i].title === data.name) {
+            items.playlists[i].items = data.items.map(v => v.id)
+
+            return items
+          }
+        }
+
+        return null
+      })
     case '@llct/playlists/addTo':
       return Object.assign({}, state, {
         addTo: action.data

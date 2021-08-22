@@ -1,6 +1,17 @@
 @import '../../colors.scss';
 @import '../../positions.scss';
 
+@keyframes jiggle {
+  0%,
+  100% {
+    transform: rotateZ(-1deg);
+  }
+
+  50% {
+    transform: rotateZ(1deg);
+  }
+}
+
 .llct-dark .llct-playlist-card {
   background: $dark-light-blue-accent;
 
@@ -59,6 +70,20 @@
       }
 
       height: 64px;
+    }
+
+    .contents {
+      max-height: unset;
+    }
+
+    transition: 0.23s all cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  &[data-edit='true'] {
+    .card-lists:not(.sort-ongoing) {
+      .music-card {
+        animation: jiggle 0.23s infinite;
+      }
     }
   }
 
@@ -184,6 +209,7 @@
     visibility: hidden;
     opacity: 0;
     height: 0;
+    max-height: 0;
     transform: translateY(-10px);
 
     transition: 0.3s visibility cubic-bezier(0.19, 1, 0.22, 1),
@@ -203,7 +229,14 @@
 
 .llct-playlist-card {
   .contents {
-    .card-lists {
+    .sortable-lists {
+      display: grid;
+      gap: 16px;
+      position: relative;
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+
+    .card-lists .sortable-lists {
       @media screen and (max-width: $tablet) {
         grid-template-columns: repeat(2, 1fr);
       }

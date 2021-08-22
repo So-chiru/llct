@@ -39,6 +39,16 @@ export const removeItem = (data: { name: string; index: number }) => {
   }
 }
 
+export const moveItems = (data: {
+  name: string
+  items: MusicMetadataWithID[]
+}) => {
+  return {
+    type: '@llct/playlists/moveItems',
+    data
+  }
+}
+
 export const setAddTo = (data: string | undefined) => {
   return {
     type: '@llct/playlists/addTo',
@@ -51,7 +61,9 @@ const playlistActions = {
   remove,
   load,
   addItem,
-  removeItem
+  removeItem,
+  moveItems,
+  setAddTo
 }
 
 export default playlistActions
