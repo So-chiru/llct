@@ -14,7 +14,7 @@ interface PlaylistCardProps {
     data: string
   ) => void
   onItemAdd?: (name: string) => void
-  onItemRemove?: (name: string) => void
+  onItemRemove?: (name: string, index: number) => void
   onItemMove?: (name: string, items: MusicMetadataWithID[]) => void
 }
 
@@ -70,7 +70,7 @@ export const PlaylistCard = ({
       }
       onDeleteClick={() => onDelete && onDelete(item.title)}
       onItemAddClick={() => onItemAdd && onItemAdd(item.title)}
-      onItemRemoveClick={() => onItemRemove && onItemRemove(item.title)}
+      onItemRemoveClick={index => onItemRemove && onItemRemove(item.title, index)}
       onItemMove={(items: MusicMetadataWithID[]) =>
         onItemMove && onItemMove(item.title, items)
       }

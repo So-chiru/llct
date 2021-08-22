@@ -32,13 +32,7 @@ const PlaylistDataContext = () => {
       selectionMode === SongsSelectionMode.Default &&
       addTo
     ) {
-      dispatch(
-        playlistActions.addItem({
-          name: addTo,
-          data: selectedItems
-        })
-      )
-
+      dispatch(playlistActions.addItem(addTo, selectedItems))
       dispatch(playlistActions.setAddTo(undefined))
       dispatch(clearSelectedItems())
     }
@@ -162,7 +156,15 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
     dispatch(updateTab(findTabById('songs')!))
   }
 
-  const removePlaylistItem = (name: string) => {}
+  const removePlaylistItem = (name: string, index: number) => {
+    const proceed = confirm('정말로 이 곡을 삭제할까요?')
+
+    if (!proceed) {
+      return
+    }
+
+    dispatch(playlistActions.removeItem(name, index))
+  }
 
   const movePlaylistItems = (name: string, items: MusicMetadataWithID[]) => {
     dispatch(playlistActions.moveItems(name, items))

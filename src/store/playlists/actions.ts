@@ -25,17 +25,23 @@ export const load = (data: MusicPlaylistData) => {
   }
 }
 
-export const addItem = (data: { name: string; data: string | string[] }) => {
+export const addItem = (name: string, data: string | string[]) => {
   return {
     type: '@llct/playlists/addItem',
-    data
+    data: {
+      name,
+      data
+    }
   }
 }
 
-export const removeItem = (data: { name: string; index: number }) => {
+export const removeItem = (name: string, index: number) => {
   return {
     type: '@llct/playlists/removeItem',
-    data
+    data: {
+      name,
+      index
+    }
   }
 }
 

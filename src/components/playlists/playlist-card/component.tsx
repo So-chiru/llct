@@ -26,7 +26,7 @@ interface PlaylistCardComponentProps {
   onDeleteClick?: () => void
   onValueChange?: (field: keyof MusicPlaylistBase, value: string) => void
   onItemAddClick?: () => void
-  onItemRemoveClick?: () => void
+  onItemRemoveClick?: (index: number) => void
   onItemMove?: (items: MusicMetadataWithID[]) => void
 }
 
@@ -124,21 +124,32 @@ const printExport = (item: MusicPlaylist) => {
   )
 }
 
-const SortableItem = SortableElement(({ v }: { v: MusicMetadataWithID }) => (
-  <MusicCardContainer
-    key={`music-metadata-${v.id}`}
-    music={v}
-    id={v.id}
-  ></MusicCardContainer>
-))
+const SortableItem = SortableElement(
+  ({
+    v,
+    onItemClick
+  }: {
+    v: MusicMetadataWithID
+    onItemClick?: (id: string) => void
+  }) => (
+    <MusicCardContainer
+      key={`music-metadata-${v.id}`}
+      music={v}
+      id={v.id}
+      onClick={onItemClick}
+    ></MusicCardContainer>
+  )
+)
 
 const SortableMusicCards = SortableContainer(
   ({
     items,
-    children
+    children,
+    onItemClick
   }: {
     items: MusicMetadataWithID[]
     children: ReactNode
+    onItemClick?: (index: number) => void
   }) => {
     return (
       <div className='card-lists'>
@@ -146,6 +157,7 @@ const SortableMusicCards = SortableContainer(
           <SortableItem
             key={`item-${value.id}-${index}`}
             index={index}
+            onItemClick={() => onItemClick && onItemClick(index)}
             v={value}
           />
         ))}
@@ -176,18 +188,14 @@ const traversal = (
 const SortableMusicLists = ({
   items,
   children,
-  onItemMove
+  onItemMove,
+  onItemClick
 }: {
   items: MusicMetadataWithID[]
   children?: ReactNode
   onItemMove?: (items: MusicMetadataWithID[]) => void
+  onItemClick?: (index: number) => void
 }) => {
-  const [localMusic, setLocalMusic] = useState<MusicMetadataWithID[]>(items)
-
-  useEffect(() => {
-    setLocalMusic(items)
-  }, items)
-
   const sortStart: SortStartHandler = (_, event) => {
     traversal(event.target as HTMLElement, 'card-lists')?.classList.add(
       'sort-ongoing'
@@ -204,10 +212,7 @@ const SortableMusicLists = ({
     },
     event: Parameters<SortEndHandler>[1]
   ) => {
-    const newArray = arrayMove(localMusic, oldIndex, newIndex)
-
-    setLocalMusic(newArray)
-    onItemMove && onItemMove(newArray)
+    onItemMove && onItemMove(arrayMove(items, oldIndex, newIndex))
 
     traversal(event.target as HTMLElement, 'card-lists')?.classList.remove(
       'sort-ongoing'
@@ -216,9 +221,11 @@ const SortableMusicLists = ({
 
   return (
     <SortableMusicCards
-      items={localMusic}
+      items={items}
       onSortStart={sortStart}
       onSortEnd={sortEnd}
+      pressDelay={150}
+      onItemClick={onItemClick}
       axis='xy'
     >
       {children}
@@ -361,6 +368,7 @@ export const PlaylistCardComponent = ({
         {editMode ? (
           <SortableMusicLists
             items={item.items}
+            onItemClick={item => onItemRemoveClick && onItemRemoveClick(item)}
             onItemMove={items => onItemMove && onItemMove(items)}
           >
             {plusComponent}
