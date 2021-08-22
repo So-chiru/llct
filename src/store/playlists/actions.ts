@@ -39,13 +39,28 @@ export const removeItem = (data: { name: string; index: number }) => {
   }
 }
 
-export const moveItems = (data: {
-  name: string
-  items: MusicMetadataWithID[]
-}) => {
+export const moveItems = (name: string, items: MusicMetadataWithID[]) => {
   return {
     type: '@llct/playlists/moveItems',
-    data
+    data: {
+      name,
+      items
+    }
+  }
+}
+
+export const changeMetadata = (
+  name: string,
+  field: keyof MusicPlaylistBase,
+  data: string
+) => {
+  return {
+    type: '@llct/playlists/changeMetadata',
+    data: {
+      name,
+      field,
+      data
+    }
   }
 }
 
@@ -63,6 +78,7 @@ const playlistActions = {
   addItem,
   removeItem,
   moveItems,
+  changeMetadata,
   setAddTo
 }
 

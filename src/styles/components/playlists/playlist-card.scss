@@ -19,6 +19,10 @@
     &:hover {
       background: lighten($dark-light-blue-accent, 4);
     }
+
+    &:active {
+      background: lighten($dark-light-blue-accent, 6);
+    }
   }
 
   .brief-summary {
@@ -49,7 +53,7 @@
   padding: 26px 36px;
 
   @media screen and (max-width: $mobile) {
-    padding: 6px 16px;
+    padding: 16px;
   }
 
   &.skelecton {
@@ -67,6 +71,7 @@
 
       @media screen and (max-width: $mobile) {
         flex-direction: column;
+        height: 100px;
       }
 
       height: 64px;
@@ -99,16 +104,20 @@
       background: lighten($semi-accent, 4);
     }
 
+    &:active {
+      background: lighten($semi-accent, 6);
+    }
+
     transition: 0.23s background cubic-bezier(0.19, 1, 0.22, 1);
 
     @media screen and (max-width: $mobile) {
+      flex-direction: column;
+
       padding: 26px 6px;
     }
 
     @media screen and (max-width: $wave-narrow) {
-      flex-direction: column;
-
-      height: 128px;
+      height: 100px;
     }
   }
 
@@ -124,12 +133,19 @@
       border-bottom: 1px solid $accent;
       color: $accent;
       letter-spacing: -1px;
+
+      @media screen and (max-width: $mobile) {
+        width: 100%;
+      }
+
+      max-width: 250px;
     }
 
     .title,
     .description {
       margin: 0;
       letter-spacing: -1px;
+      box-sizing: border-box;
     }
 
     .title {
@@ -153,8 +169,17 @@
     position: relative;
   }
 
+  @media screen and (max-width: $mobile) {
+    .brief-summary,
+    .rich-summary {
+      margin: auto;
+    }
+  }
+
   .rich-summary {
     margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     display: flex;
     gap: 32px;
 
@@ -171,11 +196,57 @@
       margin: auto;
     }
 
+    .button {
+      position: relative;
+      z-index: 100;
+
+      &:hover {
+        &::before {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      &:focus,
+      &:active {
+        &::before {
+          background: rgba(0, 0, 0, 0.12);
+        }
+      }
+
+      &::before {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        margin-top: -50%;
+        margin-left: -50%;
+        border-radius: 50%;
+        content: ' ';
+
+        opacity: 0;
+
+        pointer-events: none;
+        transform: scale(0);
+
+        transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
+          0.23s transform cubic-bezier(0.19, 1, 0.22, 1);
+
+        background: rgba(0, 0, 0, 0.08);
+        z-index: -1;
+      }
+    }
+
     .musics {
       img {
         width: 64px;
         height: 64px;
         border-radius: 50%;
+
+        @media screen and (max-width: $mobile) {
+          width: 48px;
+          height: 48px;
+          margin-left: -24px;
+        }
 
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         position: relative;

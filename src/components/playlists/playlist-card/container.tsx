@@ -8,6 +8,11 @@ interface PlaylistCardProps {
   item?: MusicPlaylist
   foldable?: boolean
   onDelete?: (name: string) => void
+  onValueChange?: (
+    name: string,
+    field: keyof MusicPlaylistBase,
+    data: string
+  ) => void
   onItemAdd?: (name: string) => void
   onItemRemove?: (name: string) => void
   onItemMove?: (name: string, items: MusicMetadataWithID[]) => void
@@ -18,6 +23,7 @@ export const PlaylistCard = ({
   item,
   foldable = true,
   onDelete,
+  onValueChange,
   onItemAdd,
   onItemRemove,
   onItemMove
@@ -59,6 +65,9 @@ export const PlaylistCard = ({
       folded={folded}
       onFoldStateChange={onFoldStateChange}
       onEditStateChange={onEditStateChange}
+      onValueChange={(field, value) =>
+        onValueChange && onValueChange(item.title, field, value)
+      }
       onDeleteClick={() => onDelete && onDelete(item.title)}
       onItemAddClick={() => onItemAdd && onItemAdd(item.title)}
       onItemRemoveClick={() => onItemRemove && onItemRemove(item.title)}

@@ -24,7 +24,7 @@ interface PlaylistCardComponentProps {
   onFoldStateChange?: () => void
   onEditStateChange?: () => void
   onDeleteClick?: () => void
-  onValueChange?: (name: string, value: unknown) => void
+  onValueChange?: (field: keyof MusicPlaylistBase, value: string) => void
   onItemAddClick?: () => void
   onItemRemoveClick?: () => void
   onItemMove?: (items: MusicMetadataWithID[]) => void
@@ -188,7 +188,7 @@ const SortableMusicLists = ({
     setLocalMusic(items)
   }, items)
 
-  const sortStart: SortStartHandler = (sort, event) => {
+  const sortStart: SortStartHandler = (_, event) => {
     traversal(event.target as HTMLElement, 'card-lists')?.classList.add(
       'sort-ongoing'
     )
@@ -223,6 +223,40 @@ const SortableMusicLists = ({
     >
       {children}
     </SortableMusicCards>
+  )
+}
+
+const InputData = ({
+  name,
+  value = '',
+  onChange
+}: {
+  name: keyof MusicPlaylistBase
+  value?: string
+  onChange?: (field: keyof MusicPlaylistBase, value: string) => void
+}) => {
+  const [state, setState] = useState(value)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange && onChange(name, state)
+    }, 300)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [state])
+
+  useEffect(() => {
+    setState(value)
+  }, [value])
+
+  return (
+    <input
+      type='text'
+      value={state}
+      onChange={ev => setState(ev.target.value)}
+    ></input>
   )
 }
 
@@ -270,26 +304,22 @@ export const PlaylistCardComponent = ({
         <div className='brief-summary'>
           <h3 className='title'>
             {editMode ? (
-              <input
-                type='text'
+              <InputData
+                name={'title'}
                 value={item.title}
-                onChange={ev =>
-                  onValueChange && onValueChange('title', ev.target.value)
-                }
-              ></input>
+                onChange={onValueChange}
+              ></InputData>
             ) : (
               item.title
             )}
           </h3>
           <span className='description'>
             {editMode ? (
-              <input
-                type='text'
+              <InputData
+                name={'description'}
                 value={item.description}
-                onChange={ev =>
-                  onValueChange && onValueChange('description', ev.target.value)
-                }
-              ></input>
+                onChange={onValueChange}
+              ></InputData>
             ) : (
               item.description
             )}

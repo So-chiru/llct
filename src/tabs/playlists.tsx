@@ -165,7 +165,15 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
   const removePlaylistItem = (name: string) => {}
 
   const movePlaylistItems = (name: string, items: MusicMetadataWithID[]) => {
-    dispatch(playlistActions.moveItems({ name, items }))
+    dispatch(playlistActions.moveItems(name, items))
+  }
+
+  const changePlaylistMetdata = (
+    name: string,
+    field: keyof MusicPlaylistBase,
+    data: string
+  ) => {
+    dispatch(playlistActions.changeMetadata(name, field, data))
   }
 
   return (
@@ -185,6 +193,7 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
             key={v.title}
             item={v}
             onDelete={deletePlaylist}
+            onValueChange={changePlaylistMetdata}
             onItemAdd={addPlaylistItem}
             onItemRemove={removePlaylistItem}
             onItemMove={movePlaylistItems}
