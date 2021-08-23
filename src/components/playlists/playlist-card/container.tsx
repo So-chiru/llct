@@ -16,6 +16,7 @@ interface PlaylistCardProps {
   onItemAdd?: (name: string) => void
   onItemRemove?: (name: string, index: number) => void
   onItemMove?: (name: string, items: MusicMetadataWithID[]) => void
+  onPlay?: (name: string) => void
 }
 
 export const PlaylistCard = ({
@@ -26,7 +27,8 @@ export const PlaylistCard = ({
   onValueChange,
   onItemAdd,
   onItemRemove,
-  onItemMove
+  onItemMove,
+  onPlay
 }: PlaylistCardProps) => {
   const songs = useSelector((state: RootState) => state.songs).items
 
@@ -70,10 +72,13 @@ export const PlaylistCard = ({
       }
       onDeleteClick={() => onDelete && onDelete(item.title)}
       onItemAddClick={() => onItemAdd && onItemAdd(item.title)}
-      onItemRemoveClick={index => onItemRemove && onItemRemove(item.title, index)}
+      onItemRemoveClick={index =>
+        onItemRemove && onItemRemove(item.title, index)
+      }
       onItemMove={(items: MusicMetadataWithID[]) =>
         onItemMove && onItemMove(item.title, items)
       }
+      onPlayClick={() => onPlay && onPlay(item.title)}
     ></PlaylistCardComponent>
   )
 }

@@ -183,6 +183,10 @@
     display: flex;
     gap: 32px;
 
+    @media screen and (max-width: $tablet) {
+      gap: 26px;
+    }
+
     .length,
     .button {
       font-weight: bold;
@@ -199,6 +203,16 @@
     .button {
       position: relative;
       z-index: 100;
+
+      .llct-roundy-button {
+        width: 64px;
+        height: 64px;
+
+        @media screen and (max-width: $mobile) {
+          width: 48px;
+          height: 48px;
+        }
+      }
 
       &:hover {
         &::before {
