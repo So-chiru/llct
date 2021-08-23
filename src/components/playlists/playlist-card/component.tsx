@@ -227,9 +227,11 @@ const SortableMusicLists = ({
   ) => {
     onItemMove && onItemMove(arrayMove(items, oldIndex, newIndex))
 
-    traversal(event.target as HTMLElement, 'card-lists')?.classList.remove(
-      'sort-ongoing'
-    )
+    requestAnimationFrame(() => {
+      traversal(event.target as HTMLElement, 'card-lists')?.classList.remove(
+        'sort-ongoing'
+      )
+    })
   }
 
   return (
@@ -237,7 +239,7 @@ const SortableMusicLists = ({
       items={items}
       onSortStart={sortStart}
       onSortEnd={sortEnd}
-      pressDelay={150}
+      pressDelay={100}
       onItemClick={onItemClick}
       axis='xy'
     >
