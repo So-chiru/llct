@@ -26,7 +26,11 @@ const PlayerButtonContainer = () => {
       <PlayerAlbumCoverAnimationComponent></PlayerAlbumCoverAnimationComponent>
       <PlayerButtonComponent
         show={!showPlayer}
-        music={playing.queue[playing.pointer]}
+        music={
+          playing.mode === 'queue'
+            ? playing.queue[playing.pointer]
+            : playing.playlist!.items[playing.playlistPointer]
+        }
         color={color || undefined}
         progress={progressListener}
         state={playing.state.player}

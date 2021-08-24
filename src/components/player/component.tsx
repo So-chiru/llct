@@ -62,7 +62,7 @@ const toggleScrollbar = (on: boolean) => {
 import { emptyCover } from '@/utils/cover'
 import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
 import { concatClass } from '@/utils/react'
-import PlayerBanner, { PlayerBannerComponent } from './banner/component'
+import { PlayerBannerComponent } from './banner/component'
 import TouchScroller from '../controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 import PlayerBannerContainer from './banner/container'
@@ -484,7 +484,6 @@ const PlayerComponent = ({
               </div>
             )}
             <div className='dashboard-column upnext-zone' data-show={showEQ}>
-              <h1 className='column-title'>재생 대기열</h1>
               {UpNext}
             </div>
           </div>

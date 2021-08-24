@@ -20,10 +20,19 @@ const PlayerInstanceContainer = () => {
       instance.events.on(
         'end',
         () => {
-          if (
-            playing.pointer !== -1 &&
-            playing.pointer < playing.queue.length - 1
-          ) {
+          const end = playing.pointer >= playing.queue.length - 1
+
+          if (playing.playlist && end) {
+            dispatch(player.playPlaylist(null, ++playing.playlistPointer))
+
+            requestAnimationFrame(() => {
+              instance.play()
+            })
+
+            return
+          }
+
+          if (playing.pointer !== -1 && !end) {
             dispatch(player.play(null, ++playing.pointer))
 
             requestAnimationFrame(() => {
@@ -69,6 +78,16 @@ const PlayerInstanceContainer = () => {
     })
 
     localInstance.events.on('requestNextTrack', () => {
+      if (
+        playing.mode === 'queue' &&
+        playing.pointer === playing.queue.length - 1 &&
+        playing.playlist
+      ) {
+        dispatch(player.playPlaylist(null, playing.playlistPointer))
+
+        return
+      }
+
       dispatch(player.skip(1))
 
       requestAnimationFrame(() => {
@@ -114,6 +133,20 @@ const PlayerInstanceContainer = () => {
 
     instance.updateMetadata(play.title, play.artist as string, play.image)
   }, [instance, playing.pointer])
+
+  useEffect(() => {
+    if (!instance || !instance.updateMetadata) {
+      return
+    }
+
+    const play = playing.playlist?.items[playing.playlistPointer]
+
+    if (!play) {
+      return
+    }
+
+    instance.updateMetadata(play.title, play.artist as string, play.image)
+  }, [instance, playing.playlist, playing.playlistPointer])
 
   return null
 }

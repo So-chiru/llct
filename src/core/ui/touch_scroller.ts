@@ -108,7 +108,7 @@ export class TouchScroller {
     }
 
     const average =
-      this.deltaData.reduce((p, c) => p + c) / this.deltaData.length
+      this.deltaData.reduce((p, c) => p + c, 0) / this.deltaData.length
 
     if (Math.abs(average) < DELTA_THRESHOLD) {
       return

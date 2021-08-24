@@ -20,8 +20,19 @@ export const play = (
 
 export const skip = (skip: number) => {
   return {
-    type: '@llct/player/play',
+    type: '@llct/player/both',
     skip
+  }
+}
+
+export const playPlaylist = (
+  data: MusicPlaylist | null,
+  pointer?: number | null
+) => {
+  return {
+    type: '@llct/player/playPlaylist',
+    data,
+    pointer
   }
 }
 
@@ -52,3 +63,9 @@ export const setAlbumColor = (data: LLCTColor | null) => {
     data
   }
 }
+
+const playerActions = {
+  playPlaylist
+}
+
+export default playerActions
