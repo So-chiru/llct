@@ -181,6 +181,10 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
   }
 
   const playPlaylist = (item: MusicPlaylist) => {
+    if (!item.items.length) {
+      return
+    }
+
     dispatch(playerActions.playPlaylist(item))
     dispatch(showPlayer(true))
 
