@@ -16,7 +16,7 @@ interface PlaylistCardProps {
   onItemAdd?: (name: string) => void
   onItemRemove?: (name: string, index: number) => void
   onItemMove?: (name: string, items: MusicMetadataWithID[]) => void
-  onPlay?: (name: string) => void
+  onPlay?: (item: MusicPlaylist) => void
 }
 
 export const PlaylistCard = ({
@@ -78,7 +78,7 @@ export const PlaylistCard = ({
       onItemMove={(items: MusicMetadataWithID[]) =>
         onItemMove && onItemMove(item.title, items)
       }
-      onPlayClick={() => onPlay && onPlay(item.title)}
+      onPlayClick={() => onPlay && onPlay(item)}
     ></PlaylistCardComponent>
   )
 }

@@ -10,10 +10,11 @@ import { RootState } from '@/store'
 import playlistActions from '@/store/playlists/actions'
 import playlistUtils from '@/utils/playlists'
 import { findTabById } from '@/store/ui/reducer'
-import { updateTab } from '@/store/ui/actions'
+import { showPlayer, updateTab } from '@/store/ui/actions'
 import { clearSelectedItems, setSelectionMode } from '@/store/songs/actions'
 import { SongsSelectionMode } from '@/store/songs/reducer'
 import { useEffect } from 'react'
+import playerActions from '@/store/player/actions'
 
 const PlaylistDataContext = () => {
   const dispatch = useDispatch()
@@ -81,6 +82,7 @@ interface PlaylistCategoryProps {
 const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
   const dispatch = useDispatch()
   const songsData = useSelector((state: RootState) => state.songs.items)
+  const instance = useSelector((state: RootState) => state.playing.instance)
 
   const createPlaylist = () => {
     if (!songsData) {
@@ -178,6 +180,17 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
     dispatch(playlistActions.changeMetadata(name, field, data))
   }
 
+  const playPlaylist = (item: MusicPlaylist) => {
+    dispatch(playerActions.playPlaylist(item))
+    dispatch(showPlayer(true))
+
+    requestAnimationFrame(() => {
+      if (instance) {
+        instance.play()
+      }
+    })
+  }
+
   return (
     <div className='category'>
       <span className='category-title'>{item.title}</span>
@@ -199,6 +212,7 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
             onItemAdd={addPlaylistItem}
             onItemRemove={removePlaylistItem}
             onItemMove={movePlaylistItems}
+            onPlay={playPlaylist}
           ></PlaylistCard>
         ))}
         {item.local && (

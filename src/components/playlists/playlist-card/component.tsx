@@ -376,14 +376,14 @@ export const PlaylistCardComponent = ({
               <div className='section button' onClick={() => printExport(item)}>
                 <span>{ExportIcon}</span>
               </div>
-              <div
-                className='section button'
-                onClick={() => onPlayClick && onPlayClick()}
-              >
-                <RoundyButtonComponent>{PlayIcon}</RoundyButtonComponent>
-              </div>
             </>
           )}
+          <div
+            className='section button'
+            onClick={() => onPlayClick && onPlayClick()}
+          >
+            <RoundyButtonComponent>{PlayIcon}</RoundyButtonComponent>
+          </div>
         </div>
       </div>
       <div className={concatClass('contents', !folded && 'show')}>

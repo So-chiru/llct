@@ -1,8 +1,9 @@
 interface UpNextComponentProps {
+  playlist?: boolean
   music: MusicMetadataWithID
   current: boolean
   index: number
-  click: (current: boolean, index: number) => void
+  click: (current: boolean, index: number, playlist?: boolean) => void
 }
 
 import { RootState } from '@/store'
@@ -10,6 +11,7 @@ import '@/styles/components/player/upnext.scss'
 import { useSelector } from 'react-redux'
 
 const UpNextComponent = ({
+  playlist,
   music,
   current,
   click,
@@ -26,7 +28,7 @@ const UpNextComponent = ({
     <div
       className='upnext-music'
       key={music.id}
-      onClick={() => click(current, index)}
+      onClick={() => click(current, index, playlist)}
       data-current={current}
     >
       <img className='cover' src={music.image + '?s=75'}></img>

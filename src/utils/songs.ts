@@ -1,4 +1,5 @@
 import { groupColors } from '@/styles/colors'
+import { SuffixTree } from './suffix_tree'
 
 export const makeParsable = (
   obj: MusicMetadata,
@@ -177,4 +178,12 @@ export const songsDuration = (args: (MusicMetadata | null)[]): number => {
       .map(v => v && v.metadata?.length)
       .reduce((p, c) => (p ?? 0) + (c ?? 0), 0) || 0
   )
+}
+
+export const checkSuffix = (a: string[], b: string[]) => {
+  const ida = a.join(' ')
+  const idb = b.join(' ')
+
+  const suffix = new SuffixTree(ida)
+  return suffix.hasSuffix(idb)
 }

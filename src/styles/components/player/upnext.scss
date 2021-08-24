@@ -10,6 +10,14 @@
     max-height: 40vh;
   }
 
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .upnext-section {
+    position: relative;
+  }
+
   .upnext-music {
     margin-bottom: 15px;
 
