@@ -1,5 +1,24 @@
 @import '../positions.scss';
 
+.dashboard-tab {
+  margin: auto;
+
+  .dashboard-section-title {
+    position: relative;
+    font-size: 24px;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 20px;
+    }
+
+    letter-spacing: -2px;
+  }
+
+  @media screen and (max-width: $wave-narrow) {
+    width: 95%;
+  }
+}
+
 .card-lists {
   display: grid;
   gap: 16px;
@@ -28,7 +47,6 @@
   }
 
   @media screen and (max-width: $wave-narrow) {
-    width: 95%;
     margin: auto;
   }
 
