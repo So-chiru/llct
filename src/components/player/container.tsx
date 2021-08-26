@@ -6,7 +6,13 @@ import { useHistory } from 'react-router-dom'
 import { MusicPlayerState } from '@/@types/state'
 
 import PlayerComponent from './component'
-import { play, skip, setPlayState, setAlbumColor } from '@/store/player/actions'
+import {
+  play,
+  skip,
+  setPlayState,
+  setAlbumColor,
+  playPlaylist
+} from '@/store/player/actions'
 import { searchById, audioURL } from '@/utils/songs'
 
 import * as api from '@/api'
@@ -27,23 +33,30 @@ const PlayerContainer = () => {
   const songs = useSelector((state: RootState) => state.songs.items)
 
   useEffect(() => {
-    if (!playing.queue[playing.pointer]) {
+    const data =
+      playing.mode === 'queue'
+        ? playing.queue[playing.pointer]
+        : playing.playlist?.items[playing.playlistPointer]
+
+    if (!data) {
       dispatch(setAlbumColor(null))
       return
     }
 
-    api.fetchColorData(playing.queue[playing.pointer].id).then(v => {
+    api.fetchColorData(data.id).then(v => {
       dispatch(setAlbumColor(v))
     })
 
-    document.title = `${playing.queue[playing.pointer].title} - ${
-      playing.queue[playing.pointer].artist
-    }`
+    document.title = `${data.title} - ${data.artist}`
 
     return () => {
       document.title = 'LLCT'
     }
-  }, [playing.queue[playing.pointer]])
+  }, [
+    playing.mode,
+    playing.queue[playing.pointer],
+    playing.playlist?.items[playing.playlistPointer]
+  ])
 
   useEffect(() => {
     if (!songs) {
@@ -69,11 +82,20 @@ const PlayerContainer = () => {
   }, [songs])
 
   if (
-    playing.pointer !== -1 &&
-    playing.instance &&
-    playing.instance.src !== audioURL(playing.queue[playing.pointer]?.id)
+    (playing.mode !== 'queue' || playing.pointer !== -1) &&
+    playing.instance
   ) {
-    playing.instance.load(audioURL(playing.queue[playing.pointer]?.id))
+    let data: MusicMetadataWithID
+
+    if (playing.mode === 'queue') {
+      data = playing.queue[playing.pointer]
+    } else {
+      data = playing.playlist!.items[playing.playlistPointer]
+    }
+
+    if (data && playing.instance.src !== audioURL(data.id)) {
+      playing.instance.load(audioURL(data.id))
+    }
   }
 
   // 플레이어 컨트롤러 지정. 여기서 UI 동작을 수행했을 때 동작할 액션을 정의합니다.
@@ -104,7 +126,15 @@ const PlayerContainer = () => {
     },
 
     prev: () => {
-      dispatch(skip(-1))
+      if (
+        playing.mode === 'playlist' &&
+        !playing.playlistPointer &&
+        playing.queue.length
+      ) {
+        dispatch(play(null, Math.max(0, playing.pointer)))
+      } else {
+        dispatch(skip(-1))
+      }
 
       requestAnimationFrame(() => {
         if (playing.state.player === MusicPlayerState.Playing) {
@@ -114,7 +144,15 @@ const PlayerContainer = () => {
     },
 
     next: () => {
-      dispatch(skip(1))
+      if (
+        playing.mode === 'queue' &&
+        playing.pointer === playing.queue.length - 1 &&
+        playing.playlist
+      ) {
+        dispatch(playPlaylist(null, Math.max(0, playing.playlistPointer)))
+      } else {
+        dispatch(skip(1))
+      }
 
       requestAnimationFrame(() => {
         if (playing.state.player === MusicPlayerState.Playing) {
@@ -130,7 +168,11 @@ const PlayerContainer = () => {
 
   return (
     <PlayerComponent
-      music={playing.queue[playing.pointer]}
+      music={
+        playing.mode === 'queue'
+          ? playing.queue[playing.pointer]
+          : playing.playlist!.items[playing.playlistPointer]
+      }
       color={playing.color}
       instance={playing.instance}
       state={{

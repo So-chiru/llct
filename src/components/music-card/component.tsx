@@ -9,6 +9,7 @@ interface MusicCardProps {
   music?: MusicMetadata
   group?: number
   ref?: unknown
+  active?: boolean
   index?: number
   skeleton?: boolean
   onClick?: () => void
@@ -101,6 +102,7 @@ const useSettings = () => {
 const MusicCardComponent = ({
   music,
   skeleton,
+  active,
   group,
   index,
   onClick,
@@ -151,6 +153,7 @@ const MusicCardComponent = ({
     <div
       className='music-card'
       data-skeleton={skeleton}
+      data-active={active}
       ref={cardRef}
       role='button'
       tabIndex={1000}

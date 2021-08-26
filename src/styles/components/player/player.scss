@@ -268,7 +268,7 @@
     position: relative;
 
     @media screen and (max-width: $desktop) {
-      margin-top: 6vh;
+      margin-top: 3vh;
     }
 
     @media screen and (min-width: $desktop) {
@@ -295,7 +295,7 @@
 
     .column-title {
       font-size: 20px;
-      letter-spacing: -2px;
+      letter-spacing: -1px;
       margin-bottom: 1vh;
       font-weight: bold;
       opacity: 0.8;
@@ -306,6 +306,37 @@
     }
 
     animation: dashboard-column-popup 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .call-info-zone {
+    margin-top: 4vh;
+    display: flex;
+
+    .player-banner-wrapper {
+      overflow-x: auto;
+      display: flex;
+      gap: 8px;
+      width: 100%;
+
+      @media screen and (max-width: $tablet) {
+        flex-direction: column;
+
+        .title,
+        .description {
+          white-space: normal;
+        }
+      }
+    }
+
+    .llct-player-banner {
+      flex: 1;
+    }
+
+    & + .upnext-zone,
+    & + .equalizer-zone,
+    & + .lyrics {
+      margin-top: 3vh;
+    }
   }
 
   .metadata-zone {

@@ -3,6 +3,9 @@ import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 interface PlayerRootData {
   pointer: number
   queue: MusicMetadataWithID[]
+  mode: 'queue' | 'playlist'
+  playlistPointer: number
+  playlist: MusicPlaylist | null
   instance?: LLCTAudioStack
   color: LLCTColor | null
   state: {
@@ -14,6 +17,9 @@ interface PlayerRootData {
 const PlayerDefault: PlayerRootData = {
   pointer: -1,
   queue: [],
+  mode: 'queue',
+  playlistPointer: -1,
+  playlist: null,
   color: null,
   state: {
     player: MusicPlayerState.Stopped,
@@ -23,11 +29,9 @@ const PlayerDefault: PlayerRootData = {
 
 const MAX_QUEUE_SIZE = 100
 
-const structPlayQueue = (
-  state = PlayerDefault,
-  action: PlayerReducerAction
-) => {
-  const object = {
+const structQueue = (state = PlayerDefault, action: PlayerReducerAction) => {
+  const object: Pick<PlayerRootData, 'queue' | 'pointer' | 'mode'> = {
+    mode: 'queue',
     queue: state.queue,
     pointer: state.pointer
   }
@@ -53,11 +57,41 @@ const structPlayQueue = (
       Math.max(0, object.pointer + action.skip)
     )
   } else {
-    if (typeof action.pointer !== 'undefined') {
-      object.pointer = action.pointer
-    } else {
-      object.pointer = object.queue.length - 1
-    }
+    object.pointer = action.pointer ?? object.queue.length - 1
+  }
+
+  return object
+}
+
+const structPlaylistQueue = (
+  state = PlayerDefault,
+  action: PlayerReducerAction
+) => {
+  const object: Pick<
+    PlayerRootData,
+    'playlist' | 'playlistPointer' | 'mode'
+  > = {
+    mode: 'playlist',
+    playlist: state.playlist,
+    playlistPointer: state.playlistPointer
+  }
+
+  if (action.data) {
+    object.playlist = action.data as MusicPlaylist
+  }
+
+  if (!object.playlist) {
+    return object
+  }
+
+  const skip = action.skip || 0
+  if (skip) {
+    object.playlistPointer = Math.min(
+      object.playlist.items.length - 1,
+      Math.max(0, object.playlistPointer + skip)
+    )
+  } else {
+    object.playlistPointer = action.pointer ?? 0
   }
 
   return object
@@ -73,7 +107,17 @@ const PlayerReducer = (
         queue: [...state.queue, action.data]
       })
     case '@llct/player/play':
-      return Object.assign({}, state, structPlayQueue(state, action))
+      return Object.assign({}, state, structQueue(state, action))
+    case '@llct/player/playPlaylist':
+      return Object.assign({}, state, structPlaylistQueue(state, action))
+    case '@llct/player/both':
+      return Object.assign(
+        {},
+        state,
+        state.mode === 'queue'
+          ? structQueue(state, action)
+          : structPlaylistQueue(state, action)
+      )
     case '@llct/player/setInstance':
       return Object.assign({}, state, {
         instance: action.data

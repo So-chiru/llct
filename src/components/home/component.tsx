@@ -14,6 +14,7 @@ import '@/styles/animate.scss'
 import RecentPlayedTab from '@/tabs/recents'
 import TouchScroller from '../controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
+import PlaylistsTab from '@/tabs/playlists'
 
 interface TabProps {
   tab: LLCTTab
@@ -34,6 +35,8 @@ const TabComponent = ({ tab, show }: TabProps) => {
       return <RecentPlayedTab show={show}></RecentPlayedTab>
     case 'songs':
       return <SongsTab show={show}></SongsTab>
+    case 'playlists':
+      return <PlaylistsTab show={show}></PlaylistsTab>
     default:
       return (
         <div className={`llct-tab${show ? ' show' : ''}`} aria-hidden={!show}>

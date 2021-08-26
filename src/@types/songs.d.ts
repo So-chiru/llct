@@ -13,9 +13,12 @@ interface LLCTSongDataV2 {
   groups?: MusicGroupMetadata[]
   songs?: MusicMetadata[][]
 }
-
 interface MusicExtraMetadata {
   released?: number
+  album?: string
+  length?: number
+  bpm?: number
+  composer?: string[]
 }
 interface MusicMetadata {
   title: string

@@ -1,4 +1,5 @@
 import { groupColors } from '@/styles/colors'
+import { SuffixTree } from './suffix_tree'
 
 export const makeParsable = (
   obj: MusicMetadata,
@@ -34,6 +35,15 @@ export const makeParsable = (
 }
 
 /**
+ * 주어진 ID를 파싱하여 [그룹, 노래 인덱스] 형식의 값을 반환합니다.
+ *
+ * @param id 파싱할 ID 문자열
+ */
+export const parseId = (id: string): [number, number] => {
+  return [Number(id[0]), Number(id.slice(1, id.length))]
+}
+
+/**
  * 주어진 store에서 해당하는 ID를 가진 MusicMetadata 객체를 찾아 적절히 처리한 후 반환합니다.
  * @param id 곡의 ID (최소 2자리)
  * @param store
@@ -41,7 +51,7 @@ export const makeParsable = (
 export const searchById = (
   id: string,
   store: LLCTSongDataV2
-): MusicMetadataWithID => {
+): MusicMetadataWithID | null => {
   if (id.length < 2) {
     throw new TypeError('id length should greater than 1 letter.')
   }
@@ -50,11 +60,17 @@ export const searchById = (
     throw new Error('Store is not ready.')
   }
 
-  const group = Number(id[0])
-  const songId = Number(id.slice(1, id.length))
+  const parsedId = parseId(id)
+
+  const group = parsedId[0]
+  const songId = parsedId[1]
 
   if (!store.groups[group]) {
-    throw new Error("Id's group field is not valid.")
+    return null
+  }
+
+  if (!store.songs[group][songId - 1]) {
+    return null
   }
 
   const parsable = makeParsable(
@@ -124,6 +140,12 @@ export const searchFromGivenArguments = (
   if (music) {
     result = music
 
+    if (typeof id !== 'undefined') {
+      const parsedId = parseId(id)
+      group = parsedId[0]
+      index = parsedId[1]
+    }
+
     if (typeof index !== 'undefined' && typeof group !== 'undefined') {
       result = makeParsable(music, store, group, index)
     }
@@ -134,13 +156,34 @@ export const searchFromGivenArguments = (
     typeof index !== 'undefined' &&
     typeof group !== 'undefined'
   ) {
-    result = makeParsable(
-      searchById(`${group}${index}`, store),
-      store,
-      group,
-      index
-    )
+    const foundItem = searchById(`${group}${index}`, store)
+
+    if (!foundItem) {
+      return null
+    }
+
+    result = makeParsable(foundItem, store, group, index)
   }
 
   return result
+}
+
+export const songsByIdRange = (store: LLCTSongDataV2, ...ids: string[]) => {
+  return ids.map(id => searchById(id, store))
+}
+
+export const songsDuration = (args: (MusicMetadata | null)[]): number => {
+  return (
+    args
+      .map(v => v && v.metadata?.length)
+      .reduce((p, c) => (p ?? 0) + (c ?? 0), 0) || 0
+  )
+}
+
+export const checkSuffix = (a: string[], b: string[]) => {
+  const ida = a.join(' ')
+  const idb = b.join(' ')
+
+  const suffix = new SuffixTree(ida)
+  return suffix.hasSuffix(idb)
 }

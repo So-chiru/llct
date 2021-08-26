@@ -1,0 +1,51 @@
+@import '../../colors.scss';
+
+.llct-roundy-button {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: $accent;
+  color: white;
+  fill: white;
+
+  font-size: 16px;
+  letter-spacing: -2px;
+
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+
+  .contents {
+    margin: auto;
+  }
+
+  transition: 0.23s background, 0.23s box-shadow cubic-bezier(0.19, 1, 0.22, 1);
+
+  &:hover,
+  &:focus {
+    background-color: darken($accent, 3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  &:active {
+    background-color: darken($accent, 5);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+  text-shadow: 0px 0px 16px rgba(0, 0, 0, 0.16);
+}
+
+.llct-dark .llct-roundy-button {
+  background-color: $dark-accent;
+  fill: white;
+
+  &:hover,
+  &:focus {
+    background-color: darken($dark-accent, 3);
+  }
+
+  &:active {
+    background-color: darken($dark-accent, 5);
+  }
+}
