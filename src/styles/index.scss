@@ -1,12 +1,19 @@
 @import './colors.scss';
 @import './normalize.scss';
 
+@font-face {
+  font-family: 'SBAggroM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans CJK KR', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
+  font-family: 'Spoqa Han Sans Neo', 'Noto Sans CJK KR', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
 
   transition: 0.3s color cubic-bezier(0.19, 1, 0.22, 1),
     0.3s background cubic-bezier(0.19, 1, 0.22, 1);
