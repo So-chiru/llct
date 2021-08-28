@@ -202,7 +202,7 @@ const PlaylistCategory = ({ item }: PlaylistCategoryProps) => {
         {!item.items.length && (
           <EmptyComponent
             text={`플레이리스트가 없어요.${
-              item.local ? ' 만들어 볼까요?' : ''
+              item.local ? ' 만들어볼까요?' : ''
             }`}
             height={'128px'}
           ></EmptyComponent>
