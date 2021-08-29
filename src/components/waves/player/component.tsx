@@ -7,6 +7,7 @@ interface PlayerWaveProps {
   progress?: number
   show?: boolean
   color?: string
+  seed?: number
   state: MusicPlayerState
   listener?: () => number
 }
@@ -25,6 +26,7 @@ const PlayerWaveComponent = ({
   state: playerState
 }: PlayerWaveProps) => {
   const [state, setState] = useState<PlayerWaveStates>({} as PlayerWaveStates)
+  const [seed, _] = useState<number>(Math.random() * 10000 - 5000)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const listenerRaf = useRef<number>(0)
@@ -56,7 +58,7 @@ const PlayerWaveComponent = ({
 
   requestAnimationFrame(() => {
     if (canvasRef.current && !state.wave) {
-      const wave = new PlayerWave(canvasRef.current, 100, 100)
+      const wave = new PlayerWave(canvasRef.current, 100, 100, seed)
 
       setState(prevState => ({
         ...prevState,
