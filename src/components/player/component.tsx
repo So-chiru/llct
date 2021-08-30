@@ -22,15 +22,10 @@ import * as ui from '@/store/ui/actions'
 import { RootState } from '@/store/index'
 import SliderComponent from '../controls/slider/component'
 
-interface PlayerComponentPropsState {
-  playState?: MusicPlayerState
-  loadState?: PlayerLoadState
-  lastSeek: number
-}
-
 interface PlayerComponentProps {
   showEQ: boolean
-  state: PlayerComponentPropsState
+  playState?: MusicPlayerState
+  lastSeek: number
   music: MusicMetadataWithID
   instance?: LLCTAudioStack
   controller: PlayerController
@@ -220,7 +215,8 @@ const PlayerComponent = ({
     image: ''
   },
   color,
-  state,
+  playState,
+  lastSeek,
   instance,
   showEQ,
   controller
@@ -283,6 +279,8 @@ const PlayerComponent = ({
     [music]
   )
 
+  console.log('player component render')
+
   // TODO : hook으로 리펙토링
   const [showMiniPlayer, setShowMiniPlayer] = useState<boolean>(false)
   const playerContents = useRef<HTMLDivElement>(null)
@@ -329,7 +327,7 @@ const PlayerComponent = ({
       progress={() => instance.progress}
       duration={instance.duration}
       color={(usePlayerColor && sliderColor) || undefined}
-      update={state.playState === MusicPlayerState.Playing && showPlayer}
+      update={playState === MusicPlayerState.Playing && showPlayer}
       seek={controller.seek}
       tabIndex={400}
     ></ProgressBarComponent>
@@ -337,7 +335,7 @@ const PlayerComponent = ({
 
   const Controls = (
     <div className='controls'>
-      {state.playState === MusicPlayerState.Playing ? (
+      {playState === MusicPlayerState.Playing ? (
         <MdPause
           tabIndex={302}
           onClick={() => controller.pause()}
@@ -491,11 +489,9 @@ const PlayerComponent = ({
             {useMemo(
               () => (
                 <CallContainer
-                  update={
-                    state.playState === MusicPlayerState.Playing && showPlayer
-                  }
+                  update={playState === MusicPlayerState.Playing && showPlayer}
                   current={() => instance?.timecode ?? 0}
-                  lastSeek={Math.max(state.lastSeek, lastGoTopButtonClick)}
+                  lastSeek={Math.max(lastSeek, lastGoTopButtonClick)}
                   seek={(time: number) =>
                     instance && controller.seek(time / 100 / instance.duration)
                   }
@@ -505,8 +501,8 @@ const PlayerComponent = ({
               [
                 music.id,
                 instance,
-                state.playState,
-                Math.max(state.lastSeek, lastGoTopButtonClick)
+                playState,
+                Math.max(lastSeek, lastGoTopButtonClick)
               ]
             )}
           </div>

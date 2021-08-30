@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/call/call.scss'
@@ -6,8 +6,10 @@ import { RootState } from '@/store'
 import * as callData from '@/store/call/actions'
 import LoaderComponent from '../loader/component'
 import EmptyComponent from '../empty/component'
-import ButtonComponent from '../controls/button/component'
 import AutoScroller from '../scroller/scroll/container'
+
+import { CallEditorComponent } from './editor-button'
+import { LineComponent } from './line'
 
 interface CallContainerProps {
   current: () => number
@@ -15,150 +17,6 @@ interface CallContainerProps {
   id: string
   lastSeek: number
   seek?: (time: number) => void
-}
-
-interface LineComponentProps {
-  line: LLCTCallLine
-  index: number
-  time: number
-  timeline: LLCTCall | null
-  showLyrics?: boolean
-  seek?: (time: number) => void
-}
-
-interface WordComponentProps {
-  start: number
-  active: boolean
-  passed: boolean
-  text: string
-  type?: number
-  color?: string
-  onClick?: (time: number) => void
-  durationTime: () => string
-}
-
-const calcuatePronounceTime = (start: number, end: number): number => {
-  return (end - start) / 100
-}
-
-const WordComponent = ({
-  start,
-  active,
-  passed,
-  text,
-  type,
-  durationTime,
-  color,
-  onClick
-}: WordComponentProps) => {
-  return (
-    <span
-      className='llct-call-word'
-      data-active={active}
-      data-passed={passed}
-      data-type={type}
-      onClick={() => onClick && onClick(start)}
-      style={{
-        ['--text-color' as string]: color,
-        transitionDuration: durationTime()
-      }}
-    >
-      {text || <br></br>}
-    </span>
-  )
-}
-
-const LineComponent = ({
-  timeline,
-  line,
-  index,
-  time,
-  seek,
-  showLyrics
-}: LineComponentProps) => {
-  const activeLine = line.start > 0 && line.start < time && line.end > time
-  const nextLine = timeline?.timeline[index + 1]
-
-  const words = useMemo(
-    () =>
-      line.words.map((word, i) => {
-        const timeLessThanEnd = time < word.end
-        const active = activeLine && time > word.start && timeLessThanEnd
-
-        const durationTime = () => {
-          return (
-            (i !== line.words.length &&
-              calcuatePronounceTime(
-                word.start,
-                line.words[i + 1] ? line.words[i + 1].start : word.end
-              ) + 's') ||
-            'unset'
-          )
-        }
-
-        const onClick = (time: number) => {
-          if (seek) {
-            seek(time)
-          }
-        }
-
-        return (
-          <WordComponent
-            key={i}
-            active={active}
-            passed={!timeLessThanEnd}
-            text={word.text}
-            onClick={onClick}
-            start={word.start}
-            type={word.type}
-            durationTime={durationTime}
-          ></WordComponent>
-        )
-      }),
-    [
-      timeline,
-      activeLine,
-      line.words.filter(
-        word => activeLine && time > word.start && time < word.end
-      ).length
-    ]
-  )
-
-  return (
-    <p
-      className='llct-call-line'
-      key={`call-line:${index}:${activeLine}`}
-      data-active={activeLine}
-      data-margin={
-        (!line.text && nextLine && typeof nextLine.text === 'string') ||
-        undefined
-      }
-    >
-      {...words}
-      {showLyrics && line.text && (
-        <span className='line-lyrics'>{line.text}</span>
-      )}
-    </p>
-  )
-}
-
-interface CallEditorComponentProps {
-  id: string
-}
-
-const CallEditorComponent = ({ id }: CallEditorComponentProps) => {
-  const openButton = () => {
-    window.open(`https://editor.lovelivec.kr/?id=${id}`, 'about:blank')
-  }
-
-  return (
-    <div className='llct-open-editor-wrapper'>
-      <p>이 곡의 콜표 작업을 도와주세요!</p>
-      <ButtonComponent onClick={openButton}>
-        에디터 열기 (외부 사이트)
-      </ButtonComponent>
-    </div>
-  )
 }
 
 const CallContainer = ({
@@ -178,22 +36,9 @@ const CallContainer = ({
 
   const dispatch = useDispatch()
 
-  const [amf, setAmf] = useState<number>(0)
+  console.log('update')
 
-  if (update && amf == 0) {
-    const update = () => {
-      setAmf((setTimeout(update, 20) as unknown) as number)
-    }
-
-    update()
-  } else if (!update && amf) {
-    clearTimeout(amf)
-
-    if (amf != 0) {
-      setAmf(0)
-    }
-  }
-
+  // 서버에서 콜 데이터를 로딩합니다.
   useEffect(() => {
     if (call.id !== id && id) {
       dispatch(callData.load(id))
@@ -210,12 +55,12 @@ const CallContainer = ({
         ? call.data.timeline.map((v, i) => {
             return (
               <LineComponent
-                timeline={call.data}
-                key={`line:${i}${update}${lastSeek}`}
+                key={`line:${i}`}
                 index={i}
                 line={v}
                 seek={seek}
-                time={current()}
+                syncAt={current}
+                useSync={update}
                 showLyrics={useLyrics}
               ></LineComponent>
             )
