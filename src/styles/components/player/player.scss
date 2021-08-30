@@ -67,7 +67,7 @@
   height: 130%;
   width: 80%;
   display: block;
-  z-index: 1000;
+  z-index: 20000;
   isolation: isolate;
 
   border-radius: 16px 0px 0px 16px;
@@ -75,12 +75,8 @@
   transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
     0.6s transform cubic-bezier(0.19, 1, 0.22, 1),
     0.4s background cubic-bezier(0.19, 1, 0.22, 1),
-    0.4s color cubic-bezier(0.19, 1, 0.22, 1);
-
-  &.player-handle-touch {
-    transition: unset;
-    border-radius: 16px;
-  }
+    0.4s color cubic-bezier(0.19, 1, 0.22, 1),
+    0.6s border-radius 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 
   color: var(--album-color-text, $accent);
 
@@ -91,12 +87,26 @@
   &.show {
     opacity: 1;
     pointer-events: all;
+    border-radius: 0px;
 
     transform: translateX(0);
 
     @media screen and (max-width: $desktop) {
       transform: translateY(var(--player-pull, 0));
     }
+  }
+
+  &.player-handle-touch {
+    transition: 0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 16px 0px 0px 16px;
+  }
+
+  &:not(.show) {
+    border-radius: 16px 0px 0px 16px;
+
+    transition: 0.45s opacity 0.05s cubic-bezier(0.19, 1, 0.22, 1),
+      0.9s transform cubic-bezier(0.19, 1, 0.22, 1),
+      0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   @media screen and (max-width: $desktop) {

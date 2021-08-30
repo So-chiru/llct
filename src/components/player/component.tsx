@@ -29,8 +29,6 @@ import { PlayerBannerComponent } from './banner/component'
 import TouchScroller from '../controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 import PlayerBannerContainer from './banner/container'
-import eventBus from '@/core/eventbus'
-import { PlayerRootEvents } from '@/store/player/events'
 import { LLCTAudioStack } from '@/@types/audio'
 
 interface PlayerComponentProps {
@@ -296,10 +294,12 @@ const PlayerComponent = ({
 
     playerContents.current?.addEventListener('scroll', onScroll)
 
+    onScroll()
+
     return () => {
       playerContents.current?.removeEventListener('scroll', onScroll)
     }
-  }, [playerContents])
+  }, [playerContents, showPlayer])
 
   // 플레이어 영역 클릭시 맨 위로 이동
   const [lastGoTopButtonClick, setLastGoTopButtonClick] = useState<number>(0)

@@ -25,6 +25,7 @@ $cover-animation-image-size: 55px;
   pointer-events: none;
   opacity: 0;
   width: 100px;
+  z-index: 9999;
 
   @media screen and (max-width: $mobile) {
     width: 80px;
