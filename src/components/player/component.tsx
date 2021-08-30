@@ -61,6 +61,8 @@ import { PlayerBannerComponent } from './banner/component'
 import TouchScroller from '../controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 import PlayerBannerContainer from './banner/container'
+import eventBus from '@/core/eventbus'
+import { PlayerRootEvents } from '@/store/player/events'
 
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
@@ -207,6 +209,18 @@ const CallBanners = () => {
   return <></>
 }
 
+const useStateReceiver = (events: eventBus<PlayerRootEvents>) => {
+  const [playState, setPlayState] = useState<MusicPlayerState>(
+    MusicPlayerState.Stopped
+  )
+  const [lastSeek, setLastSeek] = useState<number>(-1)
+
+  return {
+    playState,
+    lastSeek
+  }
+}
+
 const PlayerComponent = ({
   music = {
     id: '',
@@ -278,8 +292,6 @@ const PlayerComponent = ({
     ),
     [music]
   )
-
-  console.log('player component render')
 
   // TODO : hook으로 리펙토링
   const [showMiniPlayer, setShowMiniPlayer] = useState<boolean>(false)

@@ -1,5 +1,5 @@
-import { MusicPlayerState } from '@/@types/state'
+import { PlayerState } from './reducer'
 
 export interface PlayerRootEvents {
-  onStateChange: (state: MusicPlayerState) => void
+  onStateChange: (state: PlayerState) => void
 }
