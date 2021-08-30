@@ -18,6 +18,7 @@ interface TouchSliderEvents {
   start: () => void
   move: (px: number, threshold: number) => void
   end: (thresholdOver: boolean) => void
+  destroy: () => void
 }
 
 export default class TouchSlider {
@@ -47,10 +48,10 @@ export default class TouchSlider {
         ? TouchDirection.Horizontal
         : TouchDirection.Vertical
 
+    this.events = new eventBus()
+
     this.addTouchHandler()
     this.addMouseHandler()
-
-    this.events = new eventBus()
 
     this.addGlobalEventListener()
 
@@ -81,28 +82,49 @@ export default class TouchSlider {
   }
 
   addTouchHandler () {
-    this.elem.addEventListener('touchstart', this.touchHandler.bind(this))
-    this.elem.addEventListener('touchend', this.touchHandler.bind(this))
-    this.elem.addEventListener('touchmove', this.touchHandler.bind(this))
-    this.elem.addEventListener('touchcancel', this.touchHandler.bind(this))
+    const boundedHandler = this.touchHandler.bind(this)
+    this.elem.addEventListener('touchstart', boundedHandler)
+
+    this.events.on('destroy', () => {
+      this.elem.removeEventListener('touchstart', boundedHandler)
+    })
   }
 
   addMouseHandler () {
-    this.elem.addEventListener('mousedown', this.mouseHandler.bind(this))
-    this.elem.addEventListener('mousemove', this.mouseHandler.bind(this))
-    this.elem.addEventListener('mouseleave', this.mouseHandler.bind(this))
-    this.elem.addEventListener('mouseup', this.mouseHandler.bind(this))
+    const boundedHandler = this.mouseHandler.bind(this)
+    this.elem.addEventListener('mousedown', boundedHandler)
+
+    this.events.on('destroy', () => {
+      this.elem.removeEventListener('mousedown', boundedHandler)
+    })
   }
 
   touchHandler (ev: TouchEvent) {
-    if (ev.type === 'touchstart') {
-      this.touchStarted =
-        ev.touches[0][
-          this.direction === TouchDirection.Vertical ? 'screenY' : 'screenX'
-        ]
+    if (ev.type !== 'touchstart') {
+      return
+    }
 
-      this.events.runAll('start')
-    } else if (ev.type === 'touchmove' && this.touchStarted !== -1) {
+    this.touchStarted =
+      ev.touches[0][
+        this.direction === TouchDirection.Vertical ? 'screenY' : 'screenX'
+      ]
+
+    this.events.runAll('start')
+
+    const boundedHandler = this.globalTouchHandler.bind(this)
+    window.addEventListener('touchmove', boundedHandler)
+    window.addEventListener('touchend', boundedHandler)
+
+    this.events.on('end', () => {
+      window.removeEventListener('touchmove', boundedHandler)
+      window.removeEventListener('touchend', boundedHandler)
+    })
+  }
+
+  globalTouchHandler (ev: TouchEvent) {
+    console.log(ev)
+
+    if (ev.type === 'touchmove' && this.touchStarted !== -1) {
       this.touchLast =
         ev.touches[0][
           this.direction === TouchDirection.Vertical ? 'screenY' : 'screenX'
@@ -117,17 +139,32 @@ export default class TouchSlider {
   }
 
   mouseHandler (ev: MouseEvent) {
-    if (ev.type === 'mousedown') {
-      this.mouseStarted =
-        ev[this.direction === TouchDirection.Vertical ? 'screenY' : 'screenX']
+    if (ev.type !== 'mousedown') {
+      return
+    }
 
-      this.events.runAll('start')
-    } else if (ev.type === 'mousemove' && this.mouseStarted !== -1) {
+    this.mouseStarted =
+      ev[this.direction === TouchDirection.Vertical ? 'screenY' : 'screenX']
+
+    this.events.runAll('start')
+
+    const boundedHandler = this.globalMouseHandler.bind(this)
+    window.addEventListener('mousemove', boundedHandler)
+    window.addEventListener('mouseup', boundedHandler)
+
+    this.events.on('end', () => {
+      window.removeEventListener('mousemove', boundedHandler)
+      window.removeEventListener('mouseup', boundedHandler)
+    })
+  }
+
+  globalMouseHandler (ev: MouseEvent) {
+    if (ev.type === 'mousemove' && this.mouseStarted !== -1) {
       this.mouseLast =
         ev[this.direction === TouchDirection.Vertical ? 'screenY' : 'screenX'] -
         this.mouseStarted
       this.events.runAll('move', this.mouseLast, this.threshold)
-    } else if (ev.type === 'mouseup' || ev.type === 'mouseleave') {
+    } else if (ev.type === 'mouseup') {
       this.mouseStarted = -1
       this.events.runAll('end', this.mouseLast > this.threshold)
       this.mouseLast = 0
@@ -135,14 +172,8 @@ export default class TouchSlider {
   }
 
   destroy () {
-    this.elem.removeEventListener('touchstart', this.touchHandler)
-    this.elem.removeEventListener('touchend', this.touchHandler)
-    this.elem.removeEventListener('touchmove', this.touchHandler)
-    this.elem.removeEventListener('touchcancel', this.touchHandler)
-    this.elem.removeEventListener('mousedown', this.mouseHandler)
-    this.elem.removeEventListener('mouseleave', this.mouseHandler)
-    this.elem.removeEventListener('mouseup', this.mouseHandler)
-    this.elem.removeEventListener('mousemove', this.mouseHandler)
+    this.events.runAll('end', false)
+    this.events.runAll('destroy')
 
     window.removeEventListener('resize', this.resizeHandler)
   }
