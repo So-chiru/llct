@@ -116,7 +116,7 @@ $color-passed: white;
   }
 
   &[data-active='true'] {
-    color: $color-active;
+    color: var(--album-color-text-dark, $color-active);
     text-shadow: unset;
   }
 }
