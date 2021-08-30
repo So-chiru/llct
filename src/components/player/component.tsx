@@ -2,15 +2,6 @@ import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/player/player.scss'
-import {
-  MdKeyboardArrowDown,
-  MdKeyboardArrowLeft,
-  MdEqualizer,
-  MdPause,
-  MdPlayArrow,
-  MdSkipPrevious,
-  MdSkipNext
-} from 'react-icons/md'
 import { MusicPlayerState } from '@/@types/state'
 
 import ProgressBarComponent from '@/components/progress-bar/container'
@@ -30,6 +21,15 @@ import TouchScroller from '../controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 import PlayerBannerContainer from './banner/container'
 import { LLCTAudioStack } from '@/@types/audio'
+import {
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  EqualizerIcon,
+  PauseIcon,
+  PlayIcon,
+  SkipBackIcon,
+  SkipNextIcon
+} from '../icons/component'
 
 interface PlayerComponentProps {
   showEQ: boolean
@@ -336,43 +336,43 @@ const PlayerComponent = ({
   const Controls = (
     <div className='controls'>
       {playState === MusicPlayerState.Playing ? (
-        <MdPause
+        <PauseIcon
           tabIndex={302}
           onClick={() => controller.pause()}
           aria-label={'일시 정지'}
           role='button'
           className='pause-button'
-        ></MdPause>
+        ></PauseIcon>
       ) : (
-        <MdPlayArrow
+        <PlayIcon
           tabIndex={302}
           onClick={() => controller.play()}
           aria-label={'재생'}
           role='button'
           className='play-button'
-        ></MdPlayArrow>
+        ></PlayIcon>
       )}
-      <MdSkipPrevious
+      <SkipBackIcon
         tabIndex={302}
         onClick={() => controller.prev()}
         aria-label={'이전 곡으로 넘어가기'}
         role='button'
         className='skipprevious-button'
-      ></MdSkipPrevious>
-      <MdSkipNext
+      ></SkipBackIcon>
+      <SkipNextIcon
         tabIndex={302}
         onClick={() => controller.next()}
         aria-label={'다음 곡으로 넘어가기'}
         role='button'
         className='skipnext-button'
-      ></MdSkipNext>
-      <MdEqualizer
+      ></SkipNextIcon>
+      <EqualizerIcon
         tabIndex={302}
         onClick={() => controller.toggleEQ()}
         aria-label={'오디오 효과 보기'}
         role='button'
         className='equalizer-button'
-      ></MdEqualizer>
+      ></EqualizerIcon>
     </div>
   )
 
@@ -406,15 +406,15 @@ const PlayerComponent = ({
           ref={closeArea}
         >
           {narrowPlayer ? (
-            <MdKeyboardArrowDown
+            <ArrowDownIcon
               id='player-close'
               onClick={closePlayer}
-            ></MdKeyboardArrowDown>
+            ></ArrowDownIcon>
           ) : (
-            <MdKeyboardArrowLeft
+            <ArrowLeftIcon
               id='player-close'
               onClick={closePlayer}
-            ></MdKeyboardArrowLeft>
+            ></ArrowLeftIcon>
           )}
         </div>
         <div className='contents' ref={playerContents}>

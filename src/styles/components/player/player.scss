@@ -42,6 +42,10 @@
   background: var(--album-color-second-dark, $dark-background);
   color: var(--album-color-text-dark, $dark-accent);
 
+  svg {
+    fill: var(--album-color-text-dark, $dark-accent);
+  }
+
   .controls {
     & > svg {
       &:hover {
@@ -79,6 +83,10 @@
     0.6s border-radius 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 
   color: var(--album-color-text, $accent);
+
+  svg {
+    fill: var(--album-color-text, $accent);
+  }
 
   opacity: 0;
   pointer-events: none;
@@ -384,6 +392,18 @@
 
     .no-eq-support {
       letter-spacing: -1px;
+
+      & > span {
+        display: flex;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 3px;
+      }
     }
 
     .equalizer-lack {
@@ -440,15 +460,15 @@
     grid-area: controls;
     margin-top: 5px;
     margin-bottom: auto;
-    margin-left: -16px;
+    margin-left: -12px;
 
     @media screen and (max-width: $mobile) {
       margin-left: -12px;
     }
 
     & > svg {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       padding: 8px;
       border-radius: 50%;
 

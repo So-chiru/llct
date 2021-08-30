@@ -5483,7 +5483,6 @@ fsevents@~2.3.2:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-hot-loader: ^4.13.0
-    react-icons: ^4.2.0
     react-infinite-scroll-hook: ^4.0.1
     react-is: ^17.0.2
     react-lazyload: ^3.2.0
@@ -7142,15 +7141,6 @@ fsevents@~2.3.2:
     "@types/react":
       optional: true
   checksum: f1df03e93206b379b605f3da983f700d5c8a16e3ebedf25ca1311067f4dc95cf968206af44d0b734a5505619958f2da5efe9df4bf749ed6a4989e1f6ea5d2915
-  languageName: node
-  linkType: hard
-
-"react-icons@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "react-icons@npm:4.2.0"
-  peerDependencies:
-    react: "*"
-  checksum: 0052e25c6aacab93da3328ab856e4971214dce082de4bce857801802903366c7a8f9f490fe02ecd4ce181512b7b55cac12d6273c3c8dccc0e3b71b30dfd28256
   languageName: node
   linkType: hard
 

@@ -94,14 +94,15 @@
     display: flex;
     transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1);
     color: white;
+    fill: white;
 
     & > * {
       margin: auto;
     }
 
     svg {
-      width: 42px;
-      height: 42px;
+      width: 36px;
+      height: 36px;
     }
   }
 
