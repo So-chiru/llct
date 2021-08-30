@@ -47,7 +47,7 @@ const PlayerButtonComponent = ({
         show={show}
         state={state}
         color={color && color.main}
-        progressListener={progress}
+        progress={progress}
       ></PlayerWaveContainer>
       <img
         className='background'

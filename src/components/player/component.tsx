@@ -502,6 +502,7 @@ const PlayerComponent = ({
                 music.id,
                 instance,
                 playState,
+                showPlayer,
                 Math.max(lastSeek, lastGoTopButtonClick)
               ]
             )}
