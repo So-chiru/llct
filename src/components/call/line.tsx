@@ -9,9 +9,10 @@ const calcuatePronounceTime = (start: number, end: number): number => {
 export interface LineComponentProps {
   line: LLCTCallLine
   index: number
-  syncAt: () => number
+  time?: number
   showLyrics?: boolean
   useSync?: boolean
+  lastSeek?: number
   seek?: (time: number) => void
 }
 
@@ -19,13 +20,11 @@ export const LineComponent = ({
   line,
   index,
   seek,
-  syncAt,
+  time = 0,
   useSync,
+  lastSeek,
   showLyrics
 }: LineComponentProps) => {
-  console.log('line render')
-
-  const time = syncAt()
   const { activeLine } = useCallRenderer(useSync ?? false, line, time)
 
   const words = useMemo(
@@ -54,7 +53,7 @@ export const LineComponent = ({
         return (
           <WordComponent
             key={i}
-            active={active}
+            active={active ?? false}
             passed={!timeLessThanEnd}
             text={word.text}
             onClick={onClick}
@@ -66,6 +65,7 @@ export const LineComponent = ({
       }),
     [
       activeLine,
+      lastSeek,
       line.words.filter(
         word => activeLine && time > word.start && time < word.end
       ).length

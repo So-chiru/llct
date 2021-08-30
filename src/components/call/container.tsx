@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/call/call.scss'
@@ -10,7 +10,30 @@ import AutoScroller from '../scroller/scroll/container'
 
 import { CallEditorComponent } from './editor-button'
 import { LineComponent } from './line'
+import { useTick } from './renderer'
 
+const TickContainer = ({
+  start = false,
+  children,
+  time
+}: {
+  start?: boolean
+  children: ReactNode
+  time: () => number
+}) => {
+  useTick(start)
+
+  const childrenWithProps = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        time: time()
+      })
+    }
+    return child
+  })
+
+  return <>{childrenWithProps}</>
+}
 interface CallContainerProps {
   current: () => number
   update: boolean
@@ -36,8 +59,6 @@ const CallContainer = ({
 
   const dispatch = useDispatch()
 
-  console.log('update')
-
   // 서버에서 콜 데이터를 로딩합니다.
   useEffect(() => {
     if (call.id !== id && id) {
@@ -47,40 +68,44 @@ const CallContainer = ({
 
   return (
     <AutoScroller
-      use={update && Date.now() > lastSeek + 100 && autoScroll}
+      use={update && autoScroll}
       scrollToQuery='.llct-call-line[data-active="true"]'
       className='llct-call'
     >
-      {...call.data
-        ? call.data.timeline.map((v, i) => {
+      {call.data ? (
+        <TickContainer start={update} time={current}>
+          {...call.data.timeline.map((v, i) => {
             return (
               <LineComponent
                 key={`line:${i}`}
                 index={i}
                 line={v}
                 seek={seek}
-                syncAt={current}
                 useSync={update}
+                lastSeek={lastSeek}
                 showLyrics={useLyrics}
               ></LineComponent>
             )
-          })
-        : [
-            <div className='llct-loader-wrapper' key='load'>
-              {call.error ? (
-                <EmptyComponent
-                  key='load-error'
-                  text={call.error || '콜표를 불러올 수 없어요'}
-                >
-                  {call.error === '콜표가 없어요.' && call.id && (
-                    <CallEditorComponent id={call.id}></CallEditorComponent>
-                  )}
-                </EmptyComponent>
-              ) : (
-                <LoaderComponent></LoaderComponent>
-              )}
-            </div>
-          ]}
+          })}
+        </TickContainer>
+      ) : (
+        [
+          <div className='llct-loader-wrapper' key='load'>
+            {call.error ? (
+              <EmptyComponent
+                key='load-error'
+                text={call.error || '콜표를 불러올 수 없어요'}
+              >
+                {call.error === '콜표가 없어요.' && call.id && (
+                  <CallEditorComponent id={call.id}></CallEditorComponent>
+                )}
+              </EmptyComponent>
+            ) : (
+              <LoaderComponent></LoaderComponent>
+            )}
+          </div>
+        ]
+      )}
     </AutoScroller>
   )
 }

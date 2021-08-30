@@ -11,7 +11,7 @@ import {
   MdSkipPrevious,
   MdSkipNext
 } from 'react-icons/md'
-import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
+import { MusicPlayerState } from '@/@types/state'
 
 import ProgressBarComponent from '@/components/progress-bar/container'
 import UpNextComponent from './upnext/container'
@@ -21,6 +21,17 @@ import * as ui from '@/store/ui/actions'
 
 import { RootState } from '@/store/index'
 import SliderComponent from '../controls/slider/component'
+
+import { emptyCover } from '@/utils/cover'
+import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
+import { concatClass } from '@/utils/react'
+import { PlayerBannerComponent } from './banner/component'
+import TouchScroller from '../controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
+import PlayerBannerContainer from './banner/container'
+import eventBus from '@/core/eventbus'
+import { PlayerRootEvents } from '@/store/player/events'
+import { LLCTAudioStack } from '@/@types/audio'
 
 interface PlayerComponentProps {
   showEQ: boolean
@@ -53,17 +64,6 @@ const toggleScrollbar = (on: boolean) => {
     lastScrollY = 0
   }
 }
-
-import { emptyCover } from '@/utils/cover'
-import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
-import { concatClass } from '@/utils/react'
-import { PlayerBannerComponent } from './banner/component'
-import TouchScroller from '../controls/touchScroller/container'
-import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
-import PlayerBannerContainer from './banner/container'
-import eventBus from '@/core/eventbus'
-import { PlayerRootEvents } from '@/store/player/events'
-
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
 
@@ -207,18 +207,6 @@ const CallBanners = () => {
   }
 
   return <></>
-}
-
-const useStateReceiver = (events: eventBus<PlayerRootEvents>) => {
-  const [playState, setPlayState] = useState<MusicPlayerState>(
-    MusicPlayerState.Stopped
-  )
-  const [lastSeek, setLastSeek] = useState<number>(-1)
-
-  return {
-    playState,
-    lastSeek
-  }
 }
 
 const PlayerComponent = ({
