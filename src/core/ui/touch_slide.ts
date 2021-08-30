@@ -122,8 +122,6 @@ export default class TouchSlider {
   }
 
   globalTouchHandler (ev: TouchEvent) {
-    console.log(ev)
-
     if (ev.type === 'touchmove' && this.touchStarted !== -1) {
       this.touchLast =
         ev.touches[0][
