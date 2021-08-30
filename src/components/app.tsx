@@ -7,9 +7,9 @@ import { GlobalStyles } from '@/styles/global'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/index'
 
-import WavesContainer from './waves/page/container'
+import PageWaves from './waves/page/container'
 import HomeContainer from './home/container'
-import PlayerButtonContainer from './player-button/container'
+import PlayerButton from './player-button/container'
 import PlayerContainer from './player/container'
 import DataLoderContainer from './data-loader/container'
 import PlayerInstanceContainer from './player/instance/container'
@@ -115,10 +115,10 @@ const App = () => {
   return (
     <ThemeProvider theme={darkMode ? dark : light}>
       <GlobalStyles></GlobalStyles>
-      <WavesContainer></WavesContainer>
+      <PageWaves></PageWaves>
+      <PlayerButton></PlayerButton>
       <DataLoderContainer></DataLoderContainer>
       <HomeContainer></HomeContainer>
-      <PlayerButtonContainer></PlayerButtonContainer>
       <PlayerContainer></PlayerContainer>
       <PlayerInstanceContainer></PlayerInstanceContainer>
     </ThemeProvider>
