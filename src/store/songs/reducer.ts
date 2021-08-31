@@ -8,7 +8,7 @@ export const enum SongsSelectionMode {
 interface SongsTypes {
   load: boolean
   items: null | LLCTSongDataV2
-  error?: Error
+  error?: string
   selectionMode: SongsSelectionMode
   selectedItems: string[]
 }

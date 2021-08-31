@@ -19,7 +19,7 @@ class PlayerWave {
     canvas: HTMLCanvasElement,
     width: number,
     height: number,
-    seed: number
+    seed?: number
   ) {
     this.canvas = canvas
 
@@ -33,7 +33,7 @@ class PlayerWave {
     this.state = MusicPlayerState.Paused
     this.progress = 0
 
-    this.seed = seed
+    this.seed = seed ?? Math.random() * 10000 - 5000
 
     this.width = width
     this.height = width
@@ -45,8 +45,6 @@ class PlayerWave {
   }
 
   updateProgress (progress: number) {
-    // TODO : ease
-
     this.progress = 1 - progress
   }
 

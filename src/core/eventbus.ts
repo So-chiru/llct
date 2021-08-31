@@ -4,18 +4,27 @@ const createUUID = (): string => {
   return v4()
 }
 
-export default class eventBus<T> implements LLCTEventBus<T> {
+interface IEventBus<T extends Record<keyof T, (...args: any[]) => unknown>> {
+  on: <K extends keyof T>(event: K, callback: T[K], id?: string) => string
+  off: <K extends keyof T>(event: K, uuid: string) => void
+  run: <K extends keyof T>(
+    event: K,
+    id: string,
+    ...args: Parameters<T[K]>
+  ) => void
+  runAll: <K extends keyof T>(event: K, ...args: Parameters<T[K]>) => void
+}
+
+export default class eventBus<
+  T extends Record<keyof T, (...args: any[]) => unknown>
+> implements IEventBus<T> {
   lists: Map<keyof T, Map<string, (...args: any[]) => void>>
 
   constructor () {
     this.lists = new Map()
   }
 
-  on<K extends keyof T> (
-    event: K,
-    callback: T[K] & ((...args: any[]) => void),
-    id?: string
-  ): string {
+  on<K extends keyof T> (event: K, callback: T[K], id?: string): string {
     if (!this.lists.has(event)) {
       this.lists.set(event, new Map())
     }
@@ -41,7 +50,7 @@ export default class eventBus<T> implements LLCTEventBus<T> {
     return this.lists.get(event)!.delete(uuid)
   }
 
-  run<K extends keyof T> (event: K, id: string, ...args: any[]) {
+  run<K extends keyof T> (event: K, id: string, ...args: Parameters<T[K]>) {
     if (!this.lists.has(event)) {
       return
     }
@@ -55,7 +64,7 @@ export default class eventBus<T> implements LLCTEventBus<T> {
     }
   }
 
-  runAll<K extends keyof T> (event: K, ...args: any[]) {
+  runAll<K extends keyof T> (event: K, ...args: Parameters<T[K]>) {
     if (!this.lists.has(event)) {
       return
     }

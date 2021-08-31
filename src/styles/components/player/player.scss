@@ -42,6 +42,10 @@
   background: var(--album-color-second-dark, $dark-background);
   color: var(--album-color-text-dark, $dark-accent);
 
+  svg {
+    fill: var(--album-color-text-dark, $dark-accent);
+  }
+
   .controls {
     & > svg {
       &:hover {
@@ -67,7 +71,7 @@
   height: 130%;
   width: 80%;
   display: block;
-  z-index: 1000;
+  z-index: 20000;
   isolation: isolate;
 
   border-radius: 16px 0px 0px 16px;
@@ -75,14 +79,14 @@
   transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
     0.6s transform cubic-bezier(0.19, 1, 0.22, 1),
     0.4s background cubic-bezier(0.19, 1, 0.22, 1),
-    0.4s color cubic-bezier(0.19, 1, 0.22, 1);
-
-  &.player-handle-touch {
-    transition: unset;
-    border-radius: 16px;
-  }
+    0.4s color cubic-bezier(0.19, 1, 0.22, 1),
+    0.6s border-radius 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 
   color: var(--album-color-text, $accent);
+
+  svg {
+    fill: var(--album-color-text, $accent);
+  }
 
   opacity: 0;
   pointer-events: none;
@@ -91,12 +95,26 @@
   &.show {
     opacity: 1;
     pointer-events: all;
+    border-radius: 0px;
 
     transform: translateX(0);
 
     @media screen and (max-width: $desktop) {
       transform: translateY(var(--player-pull, 0));
     }
+  }
+
+  &.player-handle-touch {
+    transition: 0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 16px 0px 0px 16px;
+  }
+
+  &:not(.show) {
+    border-radius: 16px 0px 0px 16px;
+
+    transition: 0.45s opacity 0.05s cubic-bezier(0.19, 1, 0.22, 1),
+      0.9s transform cubic-bezier(0.19, 1, 0.22, 1),
+      0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   @media screen and (max-width: $desktop) {
@@ -374,6 +392,18 @@
 
     .no-eq-support {
       letter-spacing: -1px;
+
+      & > span {
+        display: flex;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 3px;
+      }
     }
 
     .equalizer-lack {
@@ -430,15 +460,15 @@
     grid-area: controls;
     margin-top: 5px;
     margin-bottom: auto;
-    margin-left: -16px;
+    margin-left: -12px;
 
     @media screen and (max-width: $mobile) {
       margin-left: -12px;
     }
 
     & > svg {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       padding: 8px;
       border-radius: 50%;
 

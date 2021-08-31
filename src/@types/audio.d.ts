@@ -1,3 +1,5 @@
+import eventBus from "@/core/eventbus"
+
 interface LLCTAudioStack {
   play: () => void
   pause: () => void
@@ -25,7 +27,7 @@ interface LLCTAudioStack {
   /**
    * 플레이어 이벤트들을 수행하는 eventBus
    */
-  events: LLCTEventBus<LLCTAudioStackEventMap>
+  events: eventBus<LLCTAudioStackEventMap>
 }
 
 interface LLCTAudioStackEventMap {
