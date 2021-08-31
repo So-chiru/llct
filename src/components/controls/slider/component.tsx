@@ -134,7 +134,7 @@ const SliderComponent = ({
       seek(
         (Math.min(
           window.innerWidth - rect!.left,
-          Math.max(rect!.left, ev.screenX)
+          Math.max(rect!.left, ev.pageX)
         ) -
           rect!.left) /
           rect!.width
