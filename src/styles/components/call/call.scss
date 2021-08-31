@@ -116,7 +116,7 @@ $color-passed: white;
   }
 
   &[data-active='true'] {
-    color: $color-active;
+    color: var(--album-color-text-dark, $color-active);
     text-shadow: unset;
   }
 }
@@ -216,7 +216,7 @@ $color-passed: white;
 
   p {
     font-size: 20px;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
     opacity: 0.6;
 
     margin-bottom: 10px;

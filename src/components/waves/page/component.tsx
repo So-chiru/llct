@@ -1,15 +1,8 @@
 import { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import PageWave from './animate'
 
 import '@/styles/components/waves/wave.scss'
-import { RootState } from '@/store'
-
-import { checkSystemDark } from '@/utils/darkmode'
-
-interface PageWavesComponentState {
-  wave?: PageWave
-}
+import { useEffect } from 'react'
 
 const getProperWindowSize = (width: number, height: number) => {
   if (width > 800) {
@@ -25,64 +18,51 @@ const getProperWindowSize = (width: number, height: number) => {
   return [width, height]
 }
 
-const WavesComponent = () => {
+const WavesComponent = ({ dark, show }: { dark: boolean; show: boolean }) => {
   const waveCanvas = useRef<HTMLCanvasElement>(null)
+  const [wave, setWave] = useState<PageWave>()
 
-  const [state, setState] = useState({} as PageWavesComponentState)
-  const darkTheme = useSelector(
-    (state: RootState) => state.settings.useDarkMode.value
-  )
+  useEffect(() => {
+    if (wave || !waveCanvas.current) {
+      return
+    }
 
-  const useSystemMatchDarkMode = useSelector(
-    (state: RootState) => state.settings.matchSystemAppearance.value
-  )
+    const properSize = getProperWindowSize(
+      window.innerWidth,
+      window.innerHeight
+    )
 
-  const darkMode = checkSystemDark(darkTheme, useSystemMatchDarkMode)
+    const localWave = new PageWave(
+      waveCanvas.current,
+      properSize[0],
+      properSize[1]
+    )
 
-  const showPlayer = useSelector((state: RootState) => state.ui.player.show)
-
-  requestAnimationFrame(() => {
-    if (waveCanvas.current && !state.wave) {
+    window.addEventListener('resize', () => {
       const properSize = getProperWindowSize(
         window.innerWidth,
         window.innerHeight
       )
 
-      const wave = new PageWave(
-        waveCanvas.current,
-        properSize[0],
-        properSize[1]
-      )
+      localWave.resize(properSize[0], properSize[1])
+    })
 
-      window.addEventListener('resize', () => {
-        const properSize = getProperWindowSize(
-          window.innerWidth,
-          window.innerHeight
-        )
+    setWave(localWave)
+  }, [waveCanvas.current, wave])
 
-        wave.resize(properSize[0], properSize[1])
-      })
-
-      setState(prevState => {
-        return {
-          ...prevState,
-          wave
-        }
-      })
-
-      wave.start()
+  requestAnimationFrame(() => {
+    if (!wave) {
+      return
     }
 
-    if (state.wave) {
-      state.wave.updateTheme(darkMode)
+    wave.updateTheme(dark)
 
-      // 플레이어가 표시된 경우 페이지 상단 파도 멈춤
-      if (showPlayer) {
-        state.wave.stop()
-      } else {
-        state.wave.start()
-      }
+    if (!show) {
+      wave.stop()
+      return
     }
+
+    wave.start()
   })
 
   return (

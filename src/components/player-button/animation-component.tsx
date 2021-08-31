@@ -1,5 +1,6 @@
 import { RootState } from '@/store'
 import '@/styles/components/player-button/player-button-cover.scss'
+import { useLayoutEffect } from 'react'
 
 import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
@@ -21,7 +22,7 @@ const PlayerAlbumCoverAnimationComponent = () => {
     })
   }, [ref.current])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (queue.length > lastCounts && ref.current) {
       if (ref.current.classList.contains('show')) {
         ref.current.classList.remove('show')

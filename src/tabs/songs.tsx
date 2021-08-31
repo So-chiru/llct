@@ -112,7 +112,7 @@ const SongsTab = ({ show }: LLCTTabProps) => {
     return (
       <div className={concatClass('llct-tab', show && 'show')}>
         <EmptyComponent
-          text='서버에 연결할 수 없나 봐요.'
+          text={songs.error ?? '노래를 불러올 수 없어요.'}
           height='30vh'
         ></EmptyComponent>
       </div>

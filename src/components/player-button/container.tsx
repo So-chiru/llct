@@ -6,7 +6,7 @@ import PlayerAlbumCoverAnimationComponent from './animation-component'
 
 import * as ui from '@/store/ui/actions'
 
-const PlayerButtonContainer = () => {
+const PlayerButton = () => {
   const dispatch = useDispatch()
 
   const playing = useSelector((state: RootState) => state.playing)
@@ -40,4 +40,4 @@ const PlayerButtonContainer = () => {
   )
 }
 
-export default PlayerButtonContainer
+export default PlayerButton

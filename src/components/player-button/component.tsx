@@ -2,13 +2,13 @@ import '@/styles/components/player-button/player-button.scss'
 
 import { useSelector } from 'react-redux'
 
-import { MdMusicNote } from 'react-icons/md'
 import { MusicPlayerState } from '@/@types/state'
 
 import PlayerWaveContainer from '@/components/waves/player/container'
 
 import { RootState } from '@/store/index'
 import { emptyCover } from '@/utils/cover'
+import { MusicNoteIcon } from '../icons/component'
 
 interface PlayerButtonProps {
   music: MusicMetadata
@@ -21,7 +21,7 @@ interface PlayerButtonProps {
 
 const BGLayer = (
   <div className='layer'>
-    <MdMusicNote></MdMusicNote>
+    <MusicNoteIcon></MusicNoteIcon>
   </div>
 )
 
@@ -46,8 +46,8 @@ const PlayerButtonComponent = ({
       <PlayerWaveContainer
         show={show}
         state={state}
-        color={color && color.sub}
-        progressListener={progress}
+        color={color && color.main}
+        progress={progress}
       ></PlayerWaveContainer>
       <img
         className='background'

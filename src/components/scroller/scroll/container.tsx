@@ -45,15 +45,19 @@ export const AutoScroller = ({
       return
     }
 
+    let lastScrolledElement: Element | null = null
+
     const interval = setInterval(() => {
       if (lastUserWheel + scrollAfter < Date.now()) {
         const all = ref.current?.querySelectorAll(scrollToQuery)
 
-        if (all && all.length) {
+        if (all && all.length && all[all.length - 1] !== lastScrolledElement) {
           all[all.length - 1].scrollIntoView({
             block: 'center',
             behavior: 'smooth'
           })
+
+          lastScrolledElement = all[all.length - 1]
         }
       }
     }, 500)
