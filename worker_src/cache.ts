@@ -1,6 +1,6 @@
 const sw = (self as unknown) as ServiceWorkerGlobalScope
 
-export const STATIC_CACHE = '@llct/cache/static/v15'
+export const STATIC_CACHE = '@llct/cache/static/v17'
 export const DYNAMIC_CACHE = '@llct/cache/dynamic/v1'
 
 type CacheStorageKey = typeof STATIC_CACHE | typeof DYNAMIC_CACHE
@@ -73,10 +73,20 @@ const cachingAPIPath: [RegExp, LLCTCacheOption][] = [
 export const addCaches = (scope: CacheStorageKey) =>
   caches.open(scope).then(cache => cache.addAll(STATIC_CACHE_URL))
 
-export const clearCaches = (scope: CacheStorageKey) =>
+export const getCaches = () => caches.keys()
+
+export const freshCaches = async () =>
+  (await getCaches())
+    .filter(v => v !== STATIC_CACHE && v !== DYNAMIC_CACHE)
+    .map(v => deleteCaches(v))
+
+export const clearCaches = (scope: CacheStorageKey | string) =>
   caches
     .open(scope)
     .then(async cache => (await cache.keys()).map(v => cache.delete(v)))
+
+export const deleteCaches = (scope: CacheStorageKey | string) =>
+  caches.delete(scope)
 
 export const extensionMatch = (url: string) => {
   for (const v of cachingExtensionsPath) {
@@ -117,7 +127,7 @@ export const cacheHandler = async (
 
     const exists = await storage.match(localReq)
 
-    if (exists) {
+    if (exists && exists.ok && exists.status === 200) {
       return exists
     }
   }
@@ -140,7 +150,7 @@ export const cacheHandler = async (
 
     return data
   } catch (e) {
-    if (typeof e.message === 'string') {
+    if (typeof e.message === 'string' && e.message[0] === '{') {
       const parsed = JSON.parse(e.message)
 
       if (!parsed.code) {
@@ -155,7 +165,7 @@ export const cacheHandler = async (
     }
 
     return new Response(e, {
-      status: 500,
+      status: 530,
       statusText: e.message
     })
   }
