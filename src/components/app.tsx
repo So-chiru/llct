@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import { ThemeProvider } from 'styled-components'
-import { light, dark } from '@/styles/themes'
-import { GlobalStyles } from '@/styles/global'
-
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/index'
 
@@ -22,7 +18,7 @@ import {
 } from '@/utils/darkmode'
 
 const useColorScheme = () => {
-  const [_, refresh] = useState<number>(0)
+  const [, refresh] = useState<number>(0)
 
   const useDark = useSelector(
     (state: RootState) => state.settings.useDarkMode.value
@@ -60,7 +56,9 @@ const useColorScheme = () => {
     })
   }, [])
 
-  return [darkMode, _]
+  useEffect(() => {}, [darkMode])
+
+  return darkMode
 }
 
 const useServiceWorker = () => {
@@ -109,19 +107,18 @@ const useServiceWorker = () => {
 }
 
 const App = () => {
-  const [darkMode] = useColorScheme()
+  const darkMode = useColorScheme()
   useServiceWorker()
 
   return (
-    <ThemeProvider theme={darkMode ? dark : light}>
-      <GlobalStyles></GlobalStyles>
+    <>
       <PageWaves></PageWaves>
       <PlayerButton></PlayerButton>
       <DataLoderContainer></DataLoderContainer>
       <HomeContainer></HomeContainer>
       <PlayerContainer></PlayerContainer>
       <PlayerInstanceContainer></PlayerInstanceContainer>
-    </ThemeProvider>
+    </>
   )
 }
 
