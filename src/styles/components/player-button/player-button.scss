@@ -13,6 +13,7 @@
   bottom: 5vh;
   cursor: pointer;
   display: flex;
+  z-index: 10000;
 
   transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1),
     0.6s transform cubic-bezier(0.19, 1, 0.22, 1);
@@ -93,14 +94,15 @@
     display: flex;
     transition: 0.23s opacity cubic-bezier(0.19, 1, 0.22, 1);
     color: white;
+    fill: white;
 
     & > * {
       margin: auto;
     }
 
     svg {
-      width: 42px;
-      height: 42px;
+      width: 36px;
+      height: 36px;
     }
   }
 

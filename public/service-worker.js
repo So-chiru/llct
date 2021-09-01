@@ -10,9 +10,9 @@
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.cacheHandler = exports.apiPathMatch = exports.extensionMatch = exports.clearCaches = exports.addCaches = exports.DO_NOT_CACHE_URL = exports.STATIC_CACHE_URL = exports.DYNAMIC_CACHE = exports.STATIC_CACHE = void 0;
+exports.cacheHandler = exports.apiPathMatch = exports.extensionMatch = exports.deleteCaches = exports.clearCaches = exports.freshCaches = exports.getCaches = exports.addCaches = exports.DO_NOT_CACHE_URL = exports.STATIC_CACHE_URL = exports.DYNAMIC_CACHE = exports.STATIC_CACHE = void 0;
 const sw = self;
-exports.STATIC_CACHE = '@llct/cache/static/v6';
+exports.STATIC_CACHE = '@llct/cache/static/v17';
 exports.DYNAMIC_CACHE = '@llct/cache/dynamic/v1';
 exports.STATIC_CACHE_URL = [
     '/',
@@ -71,10 +71,18 @@ const cachingAPIPath = [
 ];
 const addCaches = (scope) => caches.open(scope).then(cache => cache.addAll(exports.STATIC_CACHE_URL));
 exports.addCaches = addCaches;
+const getCaches = () => caches.keys();
+exports.getCaches = getCaches;
+const freshCaches = async () => (await exports.getCaches())
+    .filter(v => v !== exports.STATIC_CACHE && v !== exports.DYNAMIC_CACHE)
+    .map(v => exports.deleteCaches(v));
+exports.freshCaches = freshCaches;
 const clearCaches = (scope) => caches
     .open(scope)
     .then(async (cache) => (await cache.keys()).map(v => cache.delete(v)));
 exports.clearCaches = clearCaches;
+const deleteCaches = (scope) => caches.delete(scope);
+exports.deleteCaches = deleteCaches;
 const extensionMatch = (url) => {
     for (const v of cachingExtensionsPath) {
         if (new RegExp(v[0], 'g').test(url)) {
@@ -102,7 +110,7 @@ const cacheHandler = async (scope, req, cacheOption) => {
             localReq = new Request('/');
         }
         const exists = await storage.match(localReq);
-        if (exists) {
+        if (exists && exists.ok && exists.status === 200) {
             return exists;
         }
     }
@@ -120,7 +128,7 @@ const cacheHandler = async (scope, req, cacheOption) => {
         return data;
     }
     catch (e) {
-        if (typeof e.message === 'string') {
+        if (typeof e.message === 'string' && e.message[0] === '{') {
             const parsed = JSON.parse(e.message);
             if (!parsed.code) {
                 return new Response(e, {
@@ -132,7 +140,7 @@ const cacheHandler = async (scope, req, cacheOption) => {
             });
         }
         return new Response(e, {
-            status: 500,
+            status: 530,
             statusText: e.message
         });
     }
@@ -173,11 +181,11 @@ const sw = self;
 const llctCache = __importStar(__webpack_require__(/*! ./cache */ "./worker_src/cache.ts"));
 sw.addEventListener('install', ev => {
     sw.skipWaiting();
-    llctCache.clearCaches(llctCache.STATIC_CACHE);
-    llctCache.clearCaches(llctCache.DYNAMIC_CACHE);
     ev.waitUntil(llctCache.addCaches(llctCache.STATIC_CACHE));
 });
-sw.addEventListener('activate', () => { });
+sw.addEventListener('activate', () => {
+    llctCache.freshCaches();
+});
 sw.addEventListener('fetch', ev => {
     if (!('caches' in self)) {
         return ev;

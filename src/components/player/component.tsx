@@ -2,16 +2,7 @@ import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import '@/styles/components/player/player.scss'
-import {
-  MdKeyboardArrowDown,
-  MdKeyboardArrowLeft,
-  MdEqualizer,
-  MdPause,
-  MdPlayArrow,
-  MdSkipPrevious,
-  MdSkipNext
-} from 'react-icons/md'
-import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
+import { MusicPlayerState } from '@/@types/state'
 
 import ProgressBarComponent from '@/components/progress-bar/container'
 import UpNextComponent from './upnext/container'
@@ -22,15 +13,28 @@ import * as ui from '@/store/ui/actions'
 import { RootState } from '@/store/index'
 import SliderComponent from '../controls/slider/component'
 
-interface PlayerComponentPropsState {
-  playState?: MusicPlayerState
-  loadState?: PlayerLoadState
-  lastSeek: number
-}
+import { emptyCover } from '@/utils/cover'
+import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
+import { concatClass } from '@/utils/react'
+import { PlayerBannerComponent } from './banner/component'
+import TouchScroller from '../controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
+import PlayerBannerContainer from './banner/container'
+import { LLCTAudioStack } from '@/@types/audio'
+import {
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  EqualizerIcon,
+  PauseIcon,
+  PlayIcon,
+  SkipBackIcon,
+  SkipNextIcon
+} from '../icons/component'
 
 interface PlayerComponentProps {
   showEQ: boolean
-  state: PlayerComponentPropsState
+  playState?: MusicPlayerState
+  lastSeek: number
   music: MusicMetadataWithID
   instance?: LLCTAudioStack
   controller: PlayerController
@@ -58,15 +62,6 @@ const toggleScrollbar = (on: boolean) => {
     lastScrollY = 0
   }
 }
-
-import { emptyCover } from '@/utils/cover'
-import TouchSlider, { TouchDirection } from '@/core/ui/touch_slide'
-import { concatClass } from '@/utils/react'
-import { PlayerBannerComponent } from './banner/component'
-import TouchScroller from '../controls/touchScroller/container'
-import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
-import PlayerBannerContainer from './banner/container'
-
 const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
 
@@ -220,7 +215,8 @@ const PlayerComponent = ({
     image: ''
   },
   color,
-  state,
+  playState,
+  lastSeek,
   instance,
   showEQ,
   controller
@@ -298,10 +294,12 @@ const PlayerComponent = ({
 
     playerContents.current?.addEventListener('scroll', onScroll)
 
+    onScroll()
+
     return () => {
       playerContents.current?.removeEventListener('scroll', onScroll)
     }
-  }, [playerContents])
+  }, [playerContents, showPlayer])
 
   // 플레이어 영역 클릭시 맨 위로 이동
   const [lastGoTopButtonClick, setLastGoTopButtonClick] = useState<number>(0)
@@ -329,7 +327,7 @@ const PlayerComponent = ({
       progress={() => instance.progress}
       duration={instance.duration}
       color={(usePlayerColor && sliderColor) || undefined}
-      update={state.playState === MusicPlayerState.Playing && showPlayer}
+      update={playState === MusicPlayerState.Playing && showPlayer}
       seek={controller.seek}
       tabIndex={400}
     ></ProgressBarComponent>
@@ -337,44 +335,44 @@ const PlayerComponent = ({
 
   const Controls = (
     <div className='controls'>
-      {state.playState === MusicPlayerState.Playing ? (
-        <MdPause
+      {playState === MusicPlayerState.Playing ? (
+        <PauseIcon
           tabIndex={302}
           onClick={() => controller.pause()}
           aria-label={'일시 정지'}
           role='button'
           className='pause-button'
-        ></MdPause>
+        ></PauseIcon>
       ) : (
-        <MdPlayArrow
+        <PlayIcon
           tabIndex={302}
           onClick={() => controller.play()}
           aria-label={'재생'}
           role='button'
           className='play-button'
-        ></MdPlayArrow>
+        ></PlayIcon>
       )}
-      <MdSkipPrevious
+      <SkipBackIcon
         tabIndex={302}
         onClick={() => controller.prev()}
         aria-label={'이전 곡으로 넘어가기'}
         role='button'
         className='skipprevious-button'
-      ></MdSkipPrevious>
-      <MdSkipNext
+      ></SkipBackIcon>
+      <SkipNextIcon
         tabIndex={302}
         onClick={() => controller.next()}
         aria-label={'다음 곡으로 넘어가기'}
         role='button'
         className='skipnext-button'
-      ></MdSkipNext>
-      <MdEqualizer
+      ></SkipNextIcon>
+      <EqualizerIcon
         tabIndex={302}
         onClick={() => controller.toggleEQ()}
         aria-label={'오디오 효과 보기'}
         role='button'
         className='equalizer-button'
-      ></MdEqualizer>
+      ></EqualizerIcon>
     </div>
   )
 
@@ -408,15 +406,15 @@ const PlayerComponent = ({
           ref={closeArea}
         >
           {narrowPlayer ? (
-            <MdKeyboardArrowDown
+            <ArrowDownIcon
               id='player-close'
               onClick={closePlayer}
-            ></MdKeyboardArrowDown>
+            ></ArrowDownIcon>
           ) : (
-            <MdKeyboardArrowLeft
+            <ArrowLeftIcon
               id='player-close'
               onClick={closePlayer}
-            ></MdKeyboardArrowLeft>
+            ></ArrowLeftIcon>
           )}
         </div>
         <div className='contents' ref={playerContents}>
@@ -491,11 +489,9 @@ const PlayerComponent = ({
             {useMemo(
               () => (
                 <CallContainer
-                  update={
-                    state.playState === MusicPlayerState.Playing && showPlayer
-                  }
+                  update={playState === MusicPlayerState.Playing && showPlayer}
                   current={() => instance?.timecode ?? 0}
-                  lastSeek={Math.max(state.lastSeek, lastGoTopButtonClick)}
+                  lastSeek={Math.max(lastSeek, lastGoTopButtonClick)}
                   seek={(time: number) =>
                     instance && controller.seek(time / 100 / instance.duration)
                   }
@@ -505,8 +501,9 @@ const PlayerComponent = ({
               [
                 music.id,
                 instance,
-                state.playState,
-                Math.max(state.lastSeek, lastGoTopButtonClick)
+                playState,
+                showPlayer,
+                Math.max(lastSeek, lastGoTopButtonClick)
               ]
             )}
           </div>
