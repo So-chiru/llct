@@ -28,7 +28,7 @@ import {
   PauseIcon,
   PlayIcon,
   SkipBackIcon,
-  SkipNextIcon
+  SkipNextIcon,
 } from '../icons/component'
 
 interface PlayerComponentProps {
@@ -56,7 +56,7 @@ const toggleScrollbar = (on: boolean) => {
 
   if (on && lastScrollY) {
     window.scrollTo({
-      top: lastScrollY
+      top: lastScrollY,
     })
 
     lastScrollY = 0
@@ -102,6 +102,7 @@ const useNarrowPlayer = () => {
 const useTouchSlider = (
   target: HTMLElement,
   player: HTMLElement,
+  background: HTMLElement,
   over: () => void
 ) => {
   const [touchHandler, setTouchHandler] = useState<TouchSlider>()
@@ -115,24 +116,32 @@ const useTouchSlider = (
 
     if (!touchHandler) {
       slider = new TouchSlider(target, {
-        direction: TouchDirection.Vertical
+        direction: TouchDirection.Vertical,
       })
 
       slider.events.on('start', () => {
         player.classList.add('player-handle-touch')
+        background.classList.add('player-handle-touch')
       })
 
       slider.events.on('move', (px: number) => {
         requestAnimationFrame(() => {
           player.setAttribute('style', `--player-pull: ${Math.max(-50, px)}px`)
+          background.setAttribute(
+            'style',
+            `--opacity: ${1 -
+              Math.pow(1 - Math.max(0, 1 - px / window.innerHeight), 3)}`
+          )
         })
       })
 
       slider.events.on('end', (thresholdOver: boolean) => {
         player.classList.remove('player-handle-touch')
+        background.classList.remove('player-handle-touch')
 
         requestAnimationFrame(() => {
           player.removeAttribute('style')
+          background.removeAttribute('style')
         })
 
         if (thresholdOver) {
@@ -195,8 +204,8 @@ const CallBanners = () => {
                   }
 
                   return <></>
-                })
-              ]
+                }),
+              ],
             ] as unknown[]) as ReactNode
           }
         </div>
@@ -212,14 +221,14 @@ const PlayerComponent = ({
     id: '',
     title: 'Loading',
     artist: 'Loading',
-    image: ''
+    image: '',
   },
   color,
   playState,
   lastSeek,
   instance,
   showEQ,
-  controller
+  controller,
 }: PlayerComponentProps) => {
   const dispatch = useDispatch()
 
@@ -230,19 +239,25 @@ const PlayerComponent = ({
   }
 
   const player = useRef<HTMLDivElement>(null)
+  const background = useRef<HTMLDivElement>(null)
   const closeArea = useRef<HTMLDivElement>(null)
 
   const [
     usePlayerColor,
     useTranslatedTitle,
-    useAlbumCover
+    useAlbumCover,
   ] = usePlayerSettings()
 
   const narrowPlayer = useNarrowPlayer()
 
-  useTouchSlider(closeArea.current!, player.current!, () => {
-    closePlayer()
-  })
+  useTouchSlider(
+    closeArea.current!,
+    player.current!,
+    background.current!,
+    () => {
+      closePlayer()
+    }
+  )
 
   requestAnimationFrame(() => {
     toggleScrollbar(!showPlayer)
@@ -254,7 +269,7 @@ const PlayerComponent = ({
     thumb: color && color.text,
     backgroundDark: color && color.mainDark,
     trackDark: color && color.textDark,
-    thumbDark: color && color.textDark
+    thumbDark: color && color.textDark,
   }
 
   const availableTitleText =
@@ -309,7 +324,7 @@ const PlayerComponent = ({
       setLastGoTopButtonClick(Date.now() + 5000)
       playerContents.current!.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
 
@@ -380,6 +395,7 @@ const PlayerComponent = ({
     <>
       <div
         className={concatClass('llct-player-background', showPlayer && 'show')}
+        ref={background}
         onClick={closePlayer}
       ></div>
       <div
@@ -391,7 +407,7 @@ const PlayerComponent = ({
             ['--album-color-text' as string]: color && color.text,
             ['--album-color-dark' as string]: color && color.mainDark,
             ['--album-color-second-dark' as string]: color && color.subDark,
-            ['--album-color-text-dark' as string]: color && color.textDark
+            ['--album-color-text-dark' as string]: color && color.textDark,
           }) ||
           undefined
         }
@@ -503,7 +519,7 @@ const PlayerComponent = ({
                 instance,
                 playState,
                 showPlayer,
-                Math.max(lastSeek, lastGoTopButtonClick)
+                Math.max(lastSeek, lastGoTopButtonClick),
               ]
             )}
           </div>

@@ -11,12 +11,20 @@
 
   opacity: 0;
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.42);
+
+  transition: 0.45s opacity cubic-bezier(0.215, 0.61, 0.355, 1);
 
   &.show {
     opacity: 1;
     pointer-events: all;
     cursor: pointer;
+
+    &.player-handle-touch {
+      transition: unset;
+    }
+
+    opacity: var(--opacity, 1);
   }
 }
 
