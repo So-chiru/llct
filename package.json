@@ -54,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "@yarnpkg/pnpify": "^3.0.1-rc.2",
+    "@yarnpkg/sdks": "^2.4.2-rc.2",
     "chai": "^4.3.4",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^9.0.1",
@@ -82,5 +83,6 @@
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.1.0"
-  }
+  },
+  "packageManager": "yarn@3.0.2"
 }
