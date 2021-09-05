@@ -337,6 +337,22 @@ const PlayerComponent = ({
     }
   }, [closeArea])
 
+  const [lastPageVisibilityChange, setLastPageVisibilityChange] = useState<
+    number
+  >(0)
+
+  useEffect(() => {
+    const onUpdate = () => {
+      setLastPageVisibilityChange(Date.now())
+    }
+
+    document.addEventListener('visibilitychange', onUpdate)
+
+    return () => {
+      document.removeEventListener('visibilitychange', onUpdate)
+    }
+  }, [])
+
   const ProgressBar = instance && (
     <ProgressBarComponent
       progress={() => instance.progress}
@@ -507,7 +523,11 @@ const PlayerComponent = ({
                 <CallContainer
                   update={playState === MusicPlayerState.Playing && showPlayer}
                   current={() => instance?.timecode ?? 0}
-                  lastSeek={Math.max(lastSeek, lastGoTopButtonClick)}
+                  lastSeek={Math.max(
+                    lastSeek,
+                    lastGoTopButtonClick,
+                    lastPageVisibilityChange
+                  )}
                   seek={(time: number) =>
                     instance && controller.seek(time / 100 / instance.duration)
                   }
@@ -519,7 +539,11 @@ const PlayerComponent = ({
                 instance,
                 playState,
                 showPlayer,
-                Math.max(lastSeek, lastGoTopButtonClick),
+                Math.max(
+                  lastSeek,
+                  lastGoTopButtonClick,
+                  lastPageVisibilityChange
+                ),
               ]
             )}
           </div>
