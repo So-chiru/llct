@@ -62,7 +62,7 @@ const SliderComponent = ({
   max,
   defaults,
   color,
-  tabIndex
+  tabIndex,
 }: SliderComponentProps) => {
   const [current, setCurrent] = useState<number>(0)
   const lastValue = useRef<number>(-1)
@@ -139,12 +139,42 @@ const SliderComponent = ({
           rect!.left) /
           rect!.width
       )
+
+      ev.preventDefault()
+    }
+  }
+
+  const touchHandler = (ev: TouchEvent) => {
+    if (ev.type === 'touchstart') {
+      pointerDown = true
+      updateRect()
+
+      seek(Math.min(rect!.width, ev.touches[0].pageX - rect!.x) / rect!.width)
+
+      window.addEventListener('touchend', globalTouchHandler)
+      window.addEventListener('touchmove', globalTouchHandler)
+
+      ev.preventDefault()
+    }
+  }
+
+  const globalTouchHandler = (ev: TouchEvent) => {
+    if (ev.type === 'touchend') {
+      pointerDown = false
+      change()
+
+      destroyGlobalMouseHandler()
+    } else if (ev.type === 'touchmove' && pointerDown) {
+      seek(Math.min(rect!.width, ev.touches[0].pageX - rect!.x) / rect!.width)
     }
   }
 
   const destroyGlobalMouseHandler = () => {
     window.removeEventListener('mouseup', globalMouseHandler)
     window.removeEventListener('mousemove', globalMouseHandler)
+
+    window.removeEventListener('touchend', globalTouchHandler)
+    window.removeEventListener('touchmove', globalTouchHandler)
   }
 
   useEffect(() => {
@@ -155,9 +185,12 @@ const SliderComponent = ({
     if (!rect) updateRect()
 
     wrapper.current.addEventListener('mousedown', mouseHandler)
+    wrapper.current.addEventListener('touchstart', touchHandler)
 
     return () => {
       wrapper.current?.removeEventListener('mousedown', mouseHandler)
+      wrapper.current?.removeEventListener('touchstart', touchHandler)
+      globalTouchHandler
       destroyGlobalMouseHandler()
     }
   }, [wrapper.current, rect])
@@ -195,7 +228,7 @@ const SliderComponent = ({
         ['--slider-background-color-dark' as string]:
           color && color.backgroundDark,
         ['--slider-thumb-color-dark' as string]: color && color.thumbDark,
-        ['--slider-track-color-dark' as string]: color && color.trackDark
+        ['--slider-track-color-dark' as string]: color && color.trackDark,
       }}
       tabIndex={tabIndex}
       role='slider'
@@ -217,13 +250,13 @@ const SliderComponent = ({
             100
           ).toFixed(2)}%)`}
           style={{
-            ['--translate' as string]: getThumbPosition(displayValue) + 'px'
+            ['--translate' as string]: getThumbPosition(displayValue) + 'px',
           }}
         ></div>
         <div
           className='running-track'
           style={{
-            ['--progress' as string]: displayValue
+            ['--progress' as string]: displayValue,
           }}
         ></div>
       </div>
