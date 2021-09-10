@@ -76,11 +76,15 @@
   position: fixed;
   right: 0;
   top: 0;
-  height: 130%;
   width: 80%;
   display: block;
   z-index: 20000;
   isolation: isolate;
+  height: 100%;
+
+  @media screen and (max-width: $desktop) {
+    height: 130%;
+  }
 
   border-radius: 16px 0px 0px 16px;
 
@@ -103,11 +107,11 @@
   &.show {
     opacity: 1;
     pointer-events: all;
-    border-radius: 0px;
 
     transform: translateX(0);
 
     @media screen and (max-width: $desktop) {
+      border-radius: 0px;
       transform: translateY(var(--player-pull, 0));
     }
   }
@@ -115,10 +119,18 @@
   &.player-handle-touch {
     transition: 0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
     border-radius: 16px 0px 0px 16px;
+
+    @media screen and (max-width: $desktop) {
+      border-radius: 16px 16px 0px 0px;
+    }
   }
 
   &:not(.show) {
     border-radius: 16px 0px 0px 16px;
+
+    @media screen and (max-width: $desktop) {
+      border-radius: 16px 16px 0px 0px;
+    }
 
     transition: 0.45s opacity 0.05s cubic-bezier(0.19, 1, 0.22, 1),
       0.9s transform cubic-bezier(0.19, 1, 0.22, 1),
@@ -273,6 +285,7 @@
     @media screen and (min-width: $desktop) {
       min-width: 480px;
       max-width: 600px;
+      margin-top: 8%;
     }
 
     @media screen and (max-width: $mobile) {
