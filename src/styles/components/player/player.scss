@@ -202,11 +202,13 @@
     transform: translateY(-35px);
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
 
     @media screen and (max-width: $desktop) {
       &.visible {
         transform: translateY(0px);
         opacity: 1;
+        visibility: visible;
       }
     }
 
