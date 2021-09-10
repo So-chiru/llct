@@ -28,9 +28,12 @@ export const useCallRenderer = (
     return {}
   }
 
-  const activeLine = line.start > 0 && line.start < time && line.end > time
+  const activeLine =
+    (line.words.length > 1 || line.start > 0) &&
+    line.start < time &&
+    line.end > time
 
   return {
-    activeLine
+    activeLine,
   }
 }
