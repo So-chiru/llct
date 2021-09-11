@@ -61,7 +61,7 @@
       to bottom,
       var(--color-background-dark, $dark-background),
       var(--color-background-dark, $dark-background),
-      var(--color-background-dark, $dark-background-alpha-zero)
+      var(--color-background-dark-alpha-zero, $dark-background-alpha-zero)
     );
   }
 }
@@ -199,7 +199,7 @@
       to bottom,
       var(--color-background, $background),
       var(--color-background, $background),
-      var(--color-background, $background-alpha-zero)
+      var(--color-background-alpha-zero, $background-alpha-zero)
     );
 
     transition: 0.23s transform cubic-bezier(0.19, 1, 0.22, 1),

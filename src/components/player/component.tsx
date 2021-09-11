@@ -76,8 +76,8 @@ const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
 
 const usePlayerSettings = () => {
-  const usePlayerColor = useSelector(
-    (state: RootState) => state.settings.usePlayerColor.value
+  const usePlayerColorScheme = useSelector(
+    (state: RootState) => state.settings.usePlayerColorScheme.value
   )
 
   const useTranslatedTitle = useSelector(
@@ -88,7 +88,7 @@ const usePlayerSettings = () => {
     (state: RootState) => state.settings.useAlbumCover.value
   )
 
-  return [usePlayerColor, useTranslatedTitle, useAlbumCover]
+  return [usePlayerColorScheme, useTranslatedTitle, useAlbumCover]
 }
 
 const useNarrowPlayer = () => {
@@ -260,7 +260,7 @@ const PlayerComponent = ({
   const closeArea = useRef<HTMLDivElement>(null)
 
   const [
-    usePlayerColor,
+    usePlayerColorScheme,
     useTranslatedTitle,
     useAlbumCover,
   ] = usePlayerSettings()
@@ -302,11 +302,16 @@ const PlayerComponent = ({
     ['--color-background' as string]: backgroundColor,
     ['--color-background-shade' as string]:
       backgroundColor && darken(backgroundColor, 0.04),
+    ['--color-background-alpha-zero' as string]:
+      backgroundColor && backgroundColor + '00',
+
     ['--color-text' as string]: textColor,
     ['--color-text-shade' as string]: textColor && lighten(textColor, 0.3),
     ['--color-background-dark' as string]: backgroundDarkColor,
     ['--color-background-dark-shade' as string]:
       backgroundDarkColor && lighten(backgroundDarkColor, 0.04),
+    ['--color-background-dark-alpha-zero' as string]:
+      backgroundDarkColor && backgroundDarkColor + '00',
     ['--color-text-dark' as string]: textDarkColor,
     ['--color-text-dark-active' as string]:
       textDarkColor && lighten(textDarkColor, 0.3),
@@ -354,7 +359,7 @@ const PlayerComponent = ({
     onScroll()
 
     requestAnimationFrame(() => {
-      if (showPlayer && color) {
+      if (showPlayer && usePlayerColorScheme && color) {
         updateMetaTheme(
           darkMode
             ? (backgroundDarkColor as string)
@@ -370,7 +375,7 @@ const PlayerComponent = ({
     return () => {
       playerContents.current?.removeEventListener('scroll', onScroll)
     }
-  }, [darkMode, color, playerContents, showPlayer])
+  }, [darkMode, color, usePlayerColorScheme, playerContents, showPlayer])
 
   // 플레이어 영역 클릭시 맨 위로 이동
   const [lastGoTopButtonClick, setLastGoTopButtonClick] = useState<number>(0)
@@ -413,7 +418,7 @@ const PlayerComponent = ({
     <ProgressBarComponent
       progress={() => instance.progress}
       duration={instance.duration}
-      color={(usePlayerColor && sliderColor) || undefined}
+      color={(usePlayerColorScheme && sliderColor) || undefined}
       update={playState === MusicPlayerState.Playing && showPlayer}
       seek={controller.seek}
       tabIndex={400}
@@ -472,7 +477,7 @@ const PlayerComponent = ({
       ></div>
       <div
         className={concatClass('llct-player', showPlayer && 'show')}
-        style={(usePlayerColor && colorStyle) || undefined}
+        style={(usePlayerColorScheme && colorStyle) || undefined}
         ref={player}
         aria-hidden={!showPlayer}
       >
@@ -534,7 +539,7 @@ const PlayerComponent = ({
                       onSeek={(seek: number) => {
                         instance.volume = seek
                       }}
-                      color={(usePlayerColor && sliderColor) || undefined}
+                      color={(usePlayerColorScheme && sliderColor) || undefined}
                       format={(num: number) => Math.floor(num) + '%'}
                       defaults={instance.volume}
                       step={0.05}
@@ -549,7 +554,7 @@ const PlayerComponent = ({
                       onSeek={(seek: number) => {
                         instance.speed = seek * 2
                       }}
-                      color={(usePlayerColor && sliderColor) || undefined}
+                      color={(usePlayerColorScheme && sliderColor) || undefined}
                       format={(num: number) => num.toFixed(2) + 'x'}
                       defaults={instance.speed / 2}
                       step={0.05}
