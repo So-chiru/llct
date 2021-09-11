@@ -6,7 +6,7 @@ interface LLCTTab {
 interface Settings {
   useDarkMode: boolean
   useTranslatedTitle: boolean
-  usePlayerColor: boolean
+  usePlayerColorScheme: boolean
   matchSystemAppearance: boolean
   useAutoScroll: boolean
   useLyrics: boolean

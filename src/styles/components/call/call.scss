@@ -51,7 +51,7 @@
   letter-spacing: -1px;
   font-weight: bold;
 
-  transition-property: opacity, color;
+  transition-property: opacity, color, box-shadow;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   transition-duration: 0.3s;
   color: #8d9194;
@@ -77,26 +77,26 @@ $color-active: #33b4f7;
 $color-passed: white;
 
 .llct-call-word[data-type] {
-  // text-shadow: 0px 0px 4px var(--album-color-text, unset);
+  // text-shadow: 0px 0px 4px var(--color-text, unset);
 
   &[data-passed='true'] {
     color: lighten($color-normal, 20);
-    // text-shadow: 0px 0px 1px var(--album-color-text, unset);
+    // text-shadow: 0px 0px 1px var(--color-text, unset);
   }
 
   &[data-active='true'] {
-    color: var(--album-color-text, $color-active);
+    color: var(--color-text, $color-active);
   }
 }
 
 .llct-dark .llct-call-word[data-type] {
   &[data-active='true'] {
-    color: var(--album-color-text, $color-active);
+    color: var(--color-text, $color-active);
   }
 }
 
 .llct-call-word[data-type='0'] {
-  color: var(--album-color-text, $color-normal);
+  color: var(--color-text, $color-normal);
 
   &[data-passed='true'] {
     color: lighten($color-normal, 20);
@@ -104,19 +104,19 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: white;
-    text-shadow: 0px 0px 6px var(--album-color, $color-active);
+    text-shadow: 0px 0px 6px var(--color-text, $color-active);
   }
 }
 
 .llct-dark .llct-call-word[data-type='0'] {
-  color: var(--album-color-text-dark, $color-normal-dark);
+  color: var(--color-text-dark, $color-normal-dark);
 
   &[data-passed='true'] {
-    color: darken($color-normal-dark, 30);
+    color: var(--color-text-dark-shade, darken($color-normal-dark, 30));
   }
 
   &[data-active='true'] {
-    color: var(--album-color-text-dark, $color-active);
+    color: var(--color-text-dark-active, $color-active);
     text-shadow: unset;
   }
 }
@@ -157,7 +157,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: $color-comment-active;
-    text-shadow: 0px 0px 4px var(--album-color-text, $color-comment);
+    text-shadow: 0px 0px 4px var(--color-text, $color-comment);
   }
 }
 
@@ -170,7 +170,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: $color-comment-active;
-    text-shadow: 0px 0px 4px var(--album-color-text, $color-comment);
+    text-shadow: 0px 0px 4px var(--color-text, $color-comment);
   }
 }
 
@@ -183,7 +183,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: white;
-    text-shadow: 0px 0px 4px var(--album-color-text, $color-sing-along);
+    text-shadow: 0px 0px 4px var(--color-text, $color-sing-along);
   }
 }
 
@@ -196,7 +196,7 @@ $color-passed: white;
 
   &[data-active='true'] {
     color: white;
-    text-shadow: 0px 0px 4px var(--album-color-text, $color-sing-along);
+    text-shadow: 0px 0px 4px var(--color-text, $color-sing-along);
   }
 }
 
@@ -224,5 +224,6 @@ $color-passed: white;
 
   .llct-button {
     margin-top: 16px;
+    color: inherit;
   }
 }

@@ -33,13 +33,13 @@ const SettingsDefault: Record<
     default: true,
     value: true
   },
-  usePlayerColor: {
+  usePlayerColorScheme: {
     name: '플레이어 색상 사용',
     description:
       '플레이어의 배경 색상을 앨범 이미지의 색상에 맞춰 바꿀지를 결정해요.',
     type: 'checkbox',
-    default: false,
-    value: false
+    default: true,
+    value: true
   },
   useAutoScroll: {
     name: '자동 스크롤 사용',

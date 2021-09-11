@@ -30,6 +30,18 @@ import {
   SkipBackIcon,
   SkipNextIcon,
 } from '../icons/component'
+import {
+  background as globalBackgroundColor,
+  backgroundSemiAccent,
+  darkBackground,
+  darkBackgroundSemiAccent,
+  darken,
+  lighten,
+} from '@/styles/colors'
+import {
+  useDarkMode as checkUseDarkMode,
+  updateMetaTheme,
+} from '@/utils/darkmode'
 
 interface PlayerComponentProps {
   showEQ: boolean
@@ -38,7 +50,7 @@ interface PlayerComponentProps {
   music: MusicMetadataWithID
   instance?: LLCTAudioStack
   controller: PlayerController
-  color: LLCTColor | null
+  color: LLCTColorV2 | null
 }
 
 const SHOW_MINI_PLAYER_AFTER = 230
@@ -66,8 +78,8 @@ const UpNext = <UpNextComponent></UpNextComponent>
 const Equalizer = <EqualizerComponent></EqualizerComponent>
 
 const usePlayerSettings = () => {
-  const usePlayerColor = useSelector(
-    (state: RootState) => state.settings.usePlayerColor.value
+  const usePlayerColorScheme = useSelector(
+    (state: RootState) => state.settings.usePlayerColorScheme.value
   )
 
   const useTranslatedTitle = useSelector(
@@ -78,7 +90,7 @@ const usePlayerSettings = () => {
     (state: RootState) => state.settings.useAlbumCover.value
   )
 
-  return [usePlayerColor, useTranslatedTitle, useAlbumCover]
+  return [usePlayerColorScheme, useTranslatedTitle, useAlbumCover]
 }
 
 const useNarrowPlayer = () => {
@@ -126,11 +138,10 @@ const useTouchSlider = (
 
       slider.events.on('move', (px: number) => {
         requestAnimationFrame(() => {
-          player.setAttribute('style', `--player-pull: ${Math.max(-50, px)}px`)
-          background.setAttribute(
-            'style',
-            `--opacity: ${1 -
-              Math.pow(1 - Math.max(0, 1 - px / window.innerHeight), 3)}`
+          player.style.setProperty('--player-pull', `${Math.max(-50, px)}px`)
+          background.style.setProperty(
+            '--opacity',
+            `${1 - Math.pow(1 - Math.max(0, 1 - px / window.innerHeight), 3)}`
           )
         })
       })
@@ -140,8 +151,8 @@ const useTouchSlider = (
         background.classList.remove('player-handle-touch')
 
         requestAnimationFrame(() => {
-          player.removeAttribute('style')
-          background.removeAttribute('style')
+          player.style.removeProperty('--player-pull')
+          background.style.removeProperty('--opacity')
         })
 
         if (thresholdOver) {
@@ -233,6 +244,14 @@ const PlayerComponent = ({
   const dispatch = useDispatch()
 
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
+  const useDarkMode = useSelector(
+    (state: RootState) => state.settings.useDarkMode
+  ).value
+  const autoTheme = useSelector(
+    (state: RootState) => state.settings.matchSystemAppearance
+  ).value
+
+  const darkMode = useDarkMode || (autoTheme && checkUseDarkMode())
 
   const closePlayer = () => {
     dispatch(ui.showPlayer(false))
@@ -243,7 +262,7 @@ const PlayerComponent = ({
   const closeArea = useRef<HTMLDivElement>(null)
 
   const [
-    usePlayerColor,
+    usePlayerColorScheme,
     useTranslatedTitle,
     useAlbumCover,
   ] = usePlayerSettings()
@@ -263,13 +282,43 @@ const PlayerComponent = ({
     toggleScrollbar(!showPlayer)
   })
 
+  const backgroundColor =
+    color && color.primaryLight && lighten(color.primaryLight, 0.2)
+  const backgroundDarkColor =
+    color && color.primaryDark && darken(color.primaryDark, 0.3)
+
+  const textColor =
+    color && color.secondaryDark && darken(color.secondaryDark, 0.2)
+  const textDarkColor = color && color.primary && lighten(color.primary, 0.2)
+
   const sliderColor = {
-    background: color && color.main,
-    track: color && color.text,
-    thumb: color && color.text,
-    backgroundDark: color && color.mainDark,
-    trackDark: color && color.textDark,
-    thumbDark: color && color.textDark,
+    background: textColor && lighten(textColor, 0.4),
+    track: textColor,
+    thumb: textColor,
+    backgroundDark: textDarkColor && darken(textDarkColor, 0.4),
+    trackDark: textDarkColor,
+    thumbDark: textDarkColor,
+  }
+
+  const colorStyle = {
+    ['--color-background' as string]: backgroundColor,
+    ['--color-background-shade' as string]:
+      backgroundColor && darken(backgroundColor, 0.04),
+    ['--color-background-alpha-zero' as string]:
+      backgroundColor && backgroundColor + '00',
+
+    ['--color-text' as string]: textColor,
+    ['--color-text-shade' as string]: textColor && lighten(textColor, 0.3),
+    ['--color-background-dark' as string]: backgroundDarkColor,
+    ['--color-background-dark-shade' as string]:
+      backgroundDarkColor && lighten(backgroundDarkColor, 0.04),
+    ['--color-background-dark-alpha-zero' as string]:
+      backgroundDarkColor && backgroundDarkColor + '00',
+    ['--color-text-dark' as string]: textDarkColor,
+    ['--color-text-dark-active' as string]:
+      textDarkColor && lighten(textDarkColor, 0.3),
+    ['--color-text-dark-shade' as string]:
+      textDarkColor && darken(textDarkColor, 0.3),
   }
 
   const availableTitleText =
@@ -311,10 +360,28 @@ const PlayerComponent = ({
 
     onScroll()
 
+    requestAnimationFrame(() => {
+      if (showPlayer) {
+        updateMetaTheme(
+          usePlayerColorScheme && color
+            ? darkMode
+              ? (backgroundDarkColor as string)
+              : (backgroundColor as string)
+            : darkMode
+            ? darkBackground
+            : globalBackgroundColor
+        )
+      } else {
+        updateMetaTheme(
+          darkMode ? darkBackgroundSemiAccent : backgroundSemiAccent
+        )
+      }
+    })
+
     return () => {
       playerContents.current?.removeEventListener('scroll', onScroll)
     }
-  }, [playerContents, showPlayer])
+  }, [darkMode, color, usePlayerColorScheme, playerContents, showPlayer])
 
   // 플레이어 영역 클릭시 맨 위로 이동
   const [lastGoTopButtonClick, setLastGoTopButtonClick] = useState<number>(0)
@@ -357,7 +424,7 @@ const PlayerComponent = ({
     <ProgressBarComponent
       progress={() => instance.progress}
       duration={instance.duration}
-      color={(usePlayerColor && sliderColor) || undefined}
+      color={(usePlayerColorScheme && sliderColor) || undefined}
       update={playState === MusicPlayerState.Playing && showPlayer}
       seek={controller.seek}
       tabIndex={400}
@@ -416,17 +483,7 @@ const PlayerComponent = ({
       ></div>
       <div
         className={concatClass('llct-player', showPlayer && 'show')}
-        style={
-          (usePlayerColor && {
-            ['--album-color' as string]: color && color.main,
-            ['--album-color-second' as string]: color && color.sub,
-            ['--album-color-text' as string]: color && color.text,
-            ['--album-color-dark' as string]: color && color.mainDark,
-            ['--album-color-second-dark' as string]: color && color.subDark,
-            ['--album-color-text-dark' as string]: color && color.textDark,
-          }) ||
-          undefined
-        }
+        style={(usePlayerColorScheme && colorStyle) || undefined}
         ref={player}
         aria-hidden={!showPlayer}
       >
@@ -488,7 +545,7 @@ const PlayerComponent = ({
                       onSeek={(seek: number) => {
                         instance.volume = seek
                       }}
-                      color={(usePlayerColor && sliderColor) || undefined}
+                      color={(usePlayerColorScheme && sliderColor) || undefined}
                       format={(num: number) => Math.floor(num) + '%'}
                       defaults={instance.volume}
                       step={0.05}
@@ -503,7 +560,7 @@ const PlayerComponent = ({
                       onSeek={(seek: number) => {
                         instance.speed = seek * 2
                       }}
-                      color={(usePlayerColor && sliderColor) || undefined}
+                      color={(usePlayerColorScheme && sliderColor) || undefined}
                       format={(num: number) => num.toFixed(2) + 'x'}
                       defaults={instance.speed / 2}
                       step={0.05}
