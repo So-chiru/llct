@@ -301,6 +301,12 @@
 
   .lyrics {
     position: relative;
+    display: flex;
+
+    .llct-call {
+      margin: auto;
+      width: 100%;
+    }
 
     @media screen and (max-width: $desktop) {
       margin-top: 3vh;
