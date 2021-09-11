@@ -365,11 +365,11 @@ const PlayerComponent = ({
         updateMetaTheme(
           usePlayerColorScheme && color
             ? darkMode
-              ? darkBackground
-              : globalBackgroundColor
+              ? (backgroundDarkColor as string)
+              : (backgroundColor as string)
             : darkMode
-            ? (backgroundDarkColor as string)
-            : (backgroundColor as string)
+            ? darkBackground
+            : globalBackgroundColor
         )
       } else {
         updateMetaTheme(
