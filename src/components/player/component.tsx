@@ -36,7 +36,10 @@ import {
   darken,
   lighten,
 } from '@/styles/colors'
-import { updateMetaTheme } from '@/utils/darkmode'
+import {
+  useDarkMode as checkUseDarkMode,
+  updateMetaTheme,
+} from '@/utils/darkmode'
 
 interface PlayerComponentProps {
   showEQ: boolean
@@ -239,8 +242,14 @@ const PlayerComponent = ({
   const dispatch = useDispatch()
 
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
-  const darkMode = useSelector((state: RootState) => state.settings.useDarkMode)
-    .value
+  const useDarkMode = useSelector(
+    (state: RootState) => state.settings.useDarkMode
+  ).value
+  const autoTheme = useSelector(
+    (state: RootState) => state.settings.matchSystemAppearance
+  ).value
+
+  const darkMode = useDarkMode || (autoTheme && checkUseDarkMode())
 
   const closePlayer = () => {
     dispatch(ui.showPlayer(false))
