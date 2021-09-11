@@ -30,7 +30,13 @@ import {
   SkipBackIcon,
   SkipNextIcon,
 } from '../icons/component'
-import { darken, lighten } from '@/styles/colors'
+import {
+  backgroundSemiAccent,
+  darkBackgroundSemiAccent,
+  darken,
+  lighten,
+} from '@/styles/colors'
+import { updateMetaTheme } from '@/utils/darkmode'
 
 interface PlayerComponentProps {
   showEQ: boolean
@@ -234,6 +240,8 @@ const PlayerComponent = ({
   const dispatch = useDispatch()
 
   const showPlayer = useSelector((state: RootState) => state.ui.player.show)
+  const darkMode = useSelector((state: RootState) => state.settings.useDarkMode)
+    .value
 
   const closePlayer = () => {
     dispatch(ui.showPlayer(false))
@@ -334,10 +342,24 @@ const PlayerComponent = ({
 
     onScroll()
 
+    requestAnimationFrame(() => {
+      if (showPlayer && color) {
+        updateMetaTheme(
+          darkMode
+            ? (backgroundDarkColor as string)
+            : (backgroundColor as string)
+        )
+      } else {
+        updateMetaTheme(
+          darkMode ? darkBackgroundSemiAccent : backgroundSemiAccent
+        )
+      }
+    })
+
     return () => {
       playerContents.current?.removeEventListener('scroll', onScroll)
     }
-  }, [playerContents, showPlayer])
+  }, [darkMode, color, playerContents, showPlayer])
 
   // 플레이어 영역 클릭시 맨 위로 이동
   const [lastGoTopButtonClick, setLastGoTopButtonClick] = useState<number>(0)

@@ -16,6 +16,14 @@ export const checkSystemDark = (active: boolean, system: boolean): boolean => {
   return system ? useDarkMode() : active
 }
 
+export const updateMetaTheme = (value: string) => {
+  const metaTheme = document.querySelector('meta[name="theme-color"]')
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', value)
+  }
+}
+
 /**
  * 인자 값에 따라서 <html>의 클래스를 지정합니다.
  * @param value
@@ -23,14 +31,7 @@ export const checkSystemDark = (active: boolean, system: boolean): boolean => {
 export const toggleDarkMode = (value: boolean) => {
   document.documentElement.classList[value ? 'add' : 'remove']('llct-dark')
 
-  const metaTheme = document.querySelector('meta[name="theme-color"]')
-
-  if (metaTheme) {
-    metaTheme.setAttribute(
-      'content',
-      value ? darkBackgroundSemiAccent : backgroundSemiAccent
-    )
-  }
+  updateMetaTheme(value ? darkBackgroundSemiAccent : backgroundSemiAccent)
 }
 
 export const onModeUpdate = (cb: () => void) => {
