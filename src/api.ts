@@ -94,7 +94,7 @@ export const fetchServerPlaylist = async (): Promise<LLCTPlaylistDataV1> => {
     })
 }
 
-export const fetchColorData = async (id: string): Promise<LLCTColor> => {
+export const fetchColorData = async (id: string): Promise<LLCTColorV2> => {
   return fetch(`${process.env.API_SERVER}/color/${id}`)
     .then(v => {
       if (v.status === 404) {

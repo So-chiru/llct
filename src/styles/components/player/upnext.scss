@@ -27,13 +27,25 @@
   }
 }
 
+.llct-dark .upnext-music {
+  &[data-current='true'] {
+    background-color: var(--color-background-dark-shade, rgba(0, 140, 255, 0.12));
+  }
+
+  &:not([data-current='true']) {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
 .upnext-music {
   display: flex;
 
   border-radius: 16px;
 
   &[data-current='true'] {
-    background-color: rgba(0, 140, 255, 0.12);
+    background-color: var(--color-background-shade, rgba(0, 140, 255, 0.12));
   }
 
   &:not([data-current='true']) {

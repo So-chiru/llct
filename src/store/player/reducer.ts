@@ -16,7 +16,7 @@ interface PlayerRootData {
   playlist: MusicPlaylist | null
   instance?: LLCTAudioStack
   events: eventBus<PlayerRootEvents>
-  color: LLCTColor | null
+  color: LLCTColorV2 | null
   state: PlayerState
 }
 

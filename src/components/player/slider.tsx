@@ -18,7 +18,7 @@ export const useTouchSlider = (
 
     if (!touchHandler) {
       slider = new TouchSlider(target, {
-        direction: TouchDirection.Vertical
+        direction: TouchDirection.Vertical,
       })
 
       slider.events.on('start', () => {
@@ -27,7 +27,7 @@ export const useTouchSlider = (
 
       slider.events.on('move', (px: number) => {
         requestAnimationFrame(() => {
-          player.setAttribute('style', `--player-pull: ${Math.max(-50, px)}px`)
+          player.style.setProperty('--player-pull', `${Math.max(-50, px)}px`)
         })
       })
 
@@ -35,7 +35,7 @@ export const useTouchSlider = (
         player.classList.remove('player-handle-touch')
 
         requestAnimationFrame(() => {
-          player.removeAttribute('style')
+          player.style.removeProperty('--player-pull')
         })
 
         if (thresholdOver) {

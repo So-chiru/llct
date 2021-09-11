@@ -41,17 +41,11 @@
 }
 
 .llct-dark .llct-player {
-  // background: linear-gradient(
-  //   to right bottom,
-  //   var(--album-color-dark, $dark-semi-accent),
-  //   var(--album-color-second-dark, $dark-background)
-  // );
-
-  background: var(--album-color-second-dark, $dark-background);
-  color: var(--album-color-text-dark, $dark-accent);
+  background: var(--color-background-dark, $dark-background);
+  color: var(--color-text-dark, $dark-accent);
 
   svg {
-    fill: var(--album-color-text-dark, $dark-accent);
+    fill: var(--color-text-dark, $dark-accent);
   }
 
   .controls {
@@ -65,9 +59,9 @@
   .mini-player {
     background: linear-gradient(
       to bottom,
-      var(--album-color-second-dark, $dark-background),
-      var(--album-color-second-dark, $dark-background),
-      var(--album-color-second-dark, $dark-background-alpha-zero)
+      var(--color-background-dark, $dark-background),
+      var(--color-background-dark, $dark-background),
+      var(--color-background-dark, $dark-background-alpha-zero)
     );
   }
 }
@@ -94,10 +88,10 @@
     0.4s color cubic-bezier(0.19, 1, 0.22, 1),
     0.6s border-radius 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 
-  color: var(--album-color-text, $accent);
+  color: var(--color-text, $accent);
 
   svg {
-    fill: var(--album-color-text, $accent);
+    fill: var(--color-text, $accent);
   }
 
   opacity: 0;
@@ -203,9 +197,9 @@
 
     background: linear-gradient(
       to bottom,
-      var(--album-color-second, $background),
-      var(--album-color-second, $background),
-      var(--album-color-second, $background-alpha-zero)
+      var(--color-background, $background),
+      var(--color-background, $background),
+      var(--color-background, $background-alpha-zero)
     );
 
     transition: 0.23s transform cubic-bezier(0.19, 1, 0.22, 1),
@@ -542,7 +536,7 @@
     }
   }
 
-  background: var(--album-color-second, $background);
+  background: var(--color-background, $background);
 
   .llct-call {
     .llct-call-line:last-child {
