@@ -133,11 +133,10 @@ const useTouchSlider = (
 
       slider.events.on('move', (px: number) => {
         requestAnimationFrame(() => {
-          player.setAttribute('style', `--player-pull: ${Math.max(-50, px)}px`)
-          background.setAttribute(
-            'style',
-            `--opacity: ${1 -
-              Math.pow(1 - Math.max(0, 1 - px / window.innerHeight), 3)}`
+          player.style.setProperty('--player-pull', `${Math.max(-50, px)}px`)
+          background.style.setProperty(
+            '--opacity',
+            `${1 - Math.pow(1 - Math.max(0, 1 - px / window.innerHeight), 3)}`
           )
         })
       })
@@ -147,8 +146,8 @@ const useTouchSlider = (
         background.classList.remove('player-handle-touch')
 
         requestAnimationFrame(() => {
-          player.removeAttribute('style')
-          background.removeAttribute('style')
+          player.style.removeProperty('--player-pull')
+          background.style.removeProperty('--opacity')
         })
 
         if (thresholdOver) {

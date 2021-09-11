@@ -95,7 +95,12 @@ export const fetchServerPlaylist = async (): Promise<LLCTPlaylistDataV1> => {
 }
 
 export const fetchColorData = async (id: string): Promise<LLCTColorV2> => {
-  return fetch(`${process.env.API_SERVER}/color/${id}`)
+  const headers = new Headers()
+  headers.set('LLCT-Api-Version', '2')
+
+  return fetch(`${process.env.API_SERVER}/color/${id}`, {
+    headers,
+  })
     .then(v => {
       if (v.status === 404) {
         throw new Error('곡 색상 정보가 없어요.')
