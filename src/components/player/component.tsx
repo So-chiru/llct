@@ -31,7 +31,9 @@ import {
   SkipNextIcon,
 } from '../icons/component'
 import {
+  background as globalBackgroundColor,
   backgroundSemiAccent,
+  darkBackground,
   darkBackgroundSemiAccent,
   darken,
   lighten,
@@ -359,9 +361,13 @@ const PlayerComponent = ({
     onScroll()
 
     requestAnimationFrame(() => {
-      if (showPlayer && usePlayerColorScheme && color) {
+      if (showPlayer) {
         updateMetaTheme(
-          darkMode
+          usePlayerColorScheme && color
+            ? darkMode
+              ? darkBackground
+              : globalBackgroundColor
+            : darkMode
             ? (backgroundDarkColor as string)
             : (backgroundColor as string)
         )
