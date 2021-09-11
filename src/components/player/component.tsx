@@ -272,11 +272,14 @@ const PlayerComponent = ({
     toggleScrollbar(!showPlayer)
   })
 
-  const backgroundColor = color && lighten(color?.primaryLight, 0.2)
-  const backgroundDarkColor = color && darken(color.primaryDark, 0.3)
+  const backgroundColor =
+    color && color.primaryLight && lighten(color.primaryLight, 0.2)
+  const backgroundDarkColor =
+    color && color.primaryDark && darken(color.primaryDark, 0.3)
 
-  const textColor = color && darken(color?.secondaryDark, 0.2)
-  const textDarkColor = color && lighten(color.primary, 0.2)
+  const textColor =
+    color && color.secondaryDark && darken(color.secondaryDark, 0.2)
+  const textDarkColor = color && color.primary && lighten(color.primary, 0.2)
 
   const sliderColor = {
     background: textColor && lighten(textColor, 0.4),
