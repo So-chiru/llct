@@ -287,8 +287,7 @@ const PlayerComponent = ({
   const backgroundDarkColor =
     color && color.primaryDark && darken(color.primaryDark, 0.3)
 
-  const textColor =
-    color && color.secondaryDark && darken(color.secondaryDark, 0.2)
+  const textColor = color && color.secondaryDark
   const textDarkColor = color && color.primary && lighten(color.primary, 0.2)
 
   const sliderColor = {
