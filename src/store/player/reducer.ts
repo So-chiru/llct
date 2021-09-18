@@ -1,4 +1,12 @@
+import { LLCTAudioStack } from '@/@types/audio'
 import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
+import eventBus from '@/core/eventbus'
+import { PlayerRootEvents } from './events'
+
+export interface PlayerState {
+  player: MusicPlayerState
+  load: PlayerLoadState
+}
 
 interface PlayerRootData {
   pointer: number
@@ -7,11 +15,9 @@ interface PlayerRootData {
   playlistPointer: number
   playlist: MusicPlaylist | null
   instance?: LLCTAudioStack
-  color: LLCTColor | null
-  state: {
-    player: MusicPlayerState
-    load: PlayerLoadState
-  }
+  events: eventBus<PlayerRootEvents>
+  color: LLCTColorV2 | null
+  state: PlayerState
 }
 
 const PlayerDefault: PlayerRootData = {
@@ -20,6 +26,7 @@ const PlayerDefault: PlayerRootData = {
   mode: 'queue',
   playlistPointer: -1,
   playlist: null,
+  events: new eventBus<PlayerRootEvents>(),
   color: null,
   state: {
     player: MusicPlayerState.Stopped,
@@ -127,12 +134,18 @@ const PlayerReducer = (
         color: action.data
       })
     case '@llct/player/setState':
-      return Object.assign({}, state, {
-        state: {
-          ...state.state,
-          player: action.data
-        }
-      })
+      return (() => {
+        const data = Object.assign({}, state, {
+          state: {
+            ...state.state,
+            player: action.data
+          }
+        })
+
+        state.events.runAll('onStateChange', data.state)
+
+        return data
+      })()
     case '@llct/player/setLoadState':
       return Object.assign({}, state, {
         state: {

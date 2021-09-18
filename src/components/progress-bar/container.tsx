@@ -25,7 +25,7 @@ const ProgressBarComponent = ({
   const [seekProgress, setSeekProgress] = useState<number>()
   const [amf, setAmf] = useState<number>()
 
-  /// 100ms 마다 업데이트하는 건 좀 그렇지 않은가?
+  // FIXME: 100ms 마다 업데이트하는 건 좀 그렇지 않은가?
   if (update && !amf) {
     const updateProgress = () => {
       setSeekProgress(progress())

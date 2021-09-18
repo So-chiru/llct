@@ -9,11 +9,18 @@ class PlayerWave {
   width: number
   height: number
 
+  seed: number
+
   color: string
 
   raf?: number
 
-  constructor (canvas: HTMLCanvasElement, width: number, height: number) {
+  constructor (
+    canvas: HTMLCanvasElement,
+    width: number,
+    height: number,
+    seed?: number
+  ) {
     this.canvas = canvas
 
     const context = canvas.getContext('2d')
@@ -26,18 +33,18 @@ class PlayerWave {
     this.state = MusicPlayerState.Paused
     this.progress = 0
 
+    this.seed = seed ?? Math.random() * 10000 - 5000
+
     this.width = width
-    this.height = height
+    this.height = width
 
-    this.canvas.width = width
-    this.canvas.height = height
+    this.canvas.width = width * 2
+    this.canvas.height = height * 2
 
-    this.color = '#ffffff'
+    this.color = '#ffffffDD'
   }
 
   updateProgress (progress: number) {
-    // TODO : ease
-
     this.progress = 1 - progress
   }
 
@@ -68,38 +75,42 @@ class PlayerWave {
   render () {
     this.clear()
 
-    const sin = Math.sin(Date.now() / 1000) * 0.75
-    const cos = Math.cos(Date.now() / 1000) * 0.75
+    const t = Date.now() / 2000
+    const sin = Math.sin((t + this.seed) * Math.PI)
+    const cos = Math.cos((t + this.seed) * Math.PI)
 
     let waveTo = 0
 
     if (this.state === MusicPlayerState.Playing) {
-      waveTo = 12
+      waveTo = 9
     } else if (this.state === MusicPlayerState.Paused) {
       waveTo = 3
     } else {
       waveTo = 0
     }
 
+    const zeroOffset = waveTo * ((this.seed < 0 ? sin : cos) * 0.75)
+    const halfOffset = waveTo * ((this.seed < 0 ? cos : sin) * 0.75)
+
     const points = [
-      [0, this.canvas.height * this.progress],
-      [33, this.canvas.height * this.progress + waveTo * sin],
-      [66, this.canvas.height * this.progress + waveTo * cos],
-      [100, this.canvas.height * this.progress]
+      [0, this.progress * this.canvas.height + zeroOffset],
+      [0.3333, this.progress * this.canvas.height + zeroOffset],
+      [0.6666, this.progress * this.canvas.height + halfOffset],
+      [1, this.progress * this.canvas.height + halfOffset]
     ]
 
     this.context.beginPath()
-    this.context.fillStyle = this.color
+    this.context.fillStyle = this.color + 'DD'
 
-    this.context.moveTo(0, 100)
+    this.context.moveTo(0, this.canvas.height)
     this.context.lineTo(points[0][0], points[0][1])
 
     for (let i = 0; i < points.length; i++) {
       if (points[i - 1]) {
         this.context.quadraticCurveTo(
-          points[i - 1][0],
+          points[i - 1][0] * this.canvas.width,
           points[i - 1][1],
-          (points[i - 1][0] + points[i][0]) / 2,
+          ((points[i - 1][0] + points[i][0]) / 2) * this.canvas.width,
           (points[i - 1][1] + points[i][1]) / 2
         )
       } else {
@@ -107,9 +118,9 @@ class PlayerWave {
       }
     }
 
-    this.context.lineTo(100, points[points.length - 1][1])
-    this.context.lineTo(100, 100)
-    this.context.lineTo(0, 100)
+    this.context.lineTo(this.canvas.width, points[points.length - 1][1])
+    this.context.lineTo(this.canvas.width, this.canvas.height)
+    this.context.lineTo(0, this.canvas.height)
 
     this.context.fill()
     this.context.closePath()

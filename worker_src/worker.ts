@@ -5,13 +5,12 @@ import * as llctCache from './cache'
 sw.addEventListener('install', ev => {
   sw.skipWaiting()
 
-  llctCache.clearCaches(llctCache.STATIC_CACHE)
-  llctCache.clearCaches(llctCache.DYNAMIC_CACHE)
-
   ev.waitUntil(llctCache.addCaches(llctCache.STATIC_CACHE))
 })
 
-sw.addEventListener('activate', () => {})
+sw.addEventListener('activate', () => {
+  llctCache.freshCaches()
+})
 
 sw.addEventListener('fetch', ev => {
   if (!('caches' in self)) {

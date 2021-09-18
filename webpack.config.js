@@ -93,10 +93,8 @@ module.exports = (_, argv) => {
   if (devMode) {
     options.devtool = 'source-map'
     options.devServer = {
-      contentBase: path.join(__dirname, 'dist'),
       compress: true,
       port: 8080,
-      writeToDisk: true,
       historyApiFallback: true
     }
 

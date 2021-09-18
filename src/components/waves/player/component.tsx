@@ -4,15 +4,10 @@ import { useState, useRef, useEffect } from 'react'
 import PlayerWave from './animate'
 
 interface PlayerWaveProps {
-  progress?: number
+  progress: () => number
   show?: boolean
   color?: string
   state: MusicPlayerState
-  listener?: () => number
-}
-
-interface PlayerWaveStates {
-  wave?: PlayerWave
 }
 
 const UPDATE_RATE = 250
@@ -21,70 +16,51 @@ const PlayerWaveComponent = ({
   progress,
   show,
   color,
-  listener,
   state: playerState
 }: PlayerWaveProps) => {
-  const [state, setState] = useState<PlayerWaveStates>({} as PlayerWaveStates)
+  const [wave, setWave] = useState<PlayerWave>()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const listenerRaf = useRef<number>(0)
   useEffect(() => {
-    if (
-      listener &&
-      !listenerRaf.current &&
-      show &&
-      playerState === MusicPlayerState.Playing
-    ) {
+    if (!show) {
+      return
+    }
+
+    if (show && playerState === MusicPlayerState.Playing) {
       const update = () => {
-        if (state.wave) {
-          state.wave.updateProgress(listener())
+        if (wave) {
+          wave.updateProgress(progress())
         }
       }
-
       update()
-      listenerRaf.current = (setInterval(
-        update,
-        UPDATE_RATE
-      ) as unknown) as number
-    }
 
-    if (!show && listenerRaf.current) {
-      clearInterval(listenerRaf.current)
-      listenerRaf.current = 0
-    }
-  }, [listener, show])
-
-  requestAnimationFrame(() => {
-    if (canvasRef.current && !state.wave) {
-      const wave = new PlayerWave(canvasRef.current, 100, 100)
-
-      setState(prevState => ({
-        ...prevState,
-        wave
-      }))
-
-      if (show) {
-        wave.start()
+      const interval = setInterval(update, UPDATE_RATE)
+      return () => {
+        clearInterval(interval)
       }
     }
+  }, [progress, show, wave])
 
-    if (state.wave) {
-      state.wave.updateProgress(progress || 0)
+  if (canvasRef.current && !wave) {
+    setWave(new PlayerWave(canvasRef.current, 100, 100))
+  }
 
-      state.wave.state = playerState
-
-      // 플레이어 버튼이 표시된 경우 파도 시작
-      if (show && !state.wave.started) {
-        state.wave.start()
-      } else if (state.wave.started) {
-        state.wave.stop()
-      }
-
-      if (color) {
-        state.wave.color = color
-      }
+  if (wave) {
+    wave.updateProgress(progress() ?? 0)
+    wave.state = playerState
+    if (color) {
+      wave.color = color
     }
-  })
+
+    requestAnimationFrame(() => {
+      if (!show) {
+        wave.stop()
+        return
+      }
+
+      wave.start()
+    })
+  }
 
   return (
     <div className='llct-player-wave' data-show={show}>

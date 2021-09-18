@@ -6,3 +6,12 @@ interface LLCTColor {
   subDark: string
   textDark: string
 }
+
+interface LLCTColorV2 {
+  primary: string
+  primaryLight: string
+  primaryDark: string
+  secondary: string
+  secondaryLight: string
+  secondaryDark: string
+}

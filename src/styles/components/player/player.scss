@@ -11,12 +11,20 @@
 
   opacity: 0;
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.42);
+
+  transition: 0.45s opacity cubic-bezier(0.215, 0.61, 0.355, 1);
 
   &.show {
     opacity: 1;
     pointer-events: all;
     cursor: pointer;
+
+    &.player-handle-touch {
+      transition: unset;
+    }
+
+    opacity: var(--opacity, 1);
   }
 }
 
@@ -33,14 +41,12 @@
 }
 
 .llct-dark .llct-player {
-  // background: linear-gradient(
-  //   to right bottom,
-  //   var(--album-color-dark, $dark-semi-accent),
-  //   var(--album-color-second-dark, $dark-background)
-  // );
+  background: var(--color-background-dark, $dark-background);
+  color: var(--color-text-dark, $dark-accent);
 
-  background: var(--album-color-second-dark, $dark-background);
-  color: var(--album-color-text-dark, $dark-accent);
+  svg {
+    fill: var(--color-text-dark, $dark-accent);
+  }
 
   .controls {
     & > svg {
@@ -53,9 +59,9 @@
   .mini-player {
     background: linear-gradient(
       to bottom,
-      var(--album-color-second-dark, $dark-background),
-      var(--album-color-second-dark, $dark-background),
-      var(--album-color-second-dark, $dark-background-alpha-zero)
+      var(--color-background-dark, $dark-background),
+      var(--color-background-dark, $dark-background),
+      var(--color-background-dark-alpha-zero, $dark-background-alpha-zero)
     );
   }
 }
@@ -64,25 +70,29 @@
   position: fixed;
   right: 0;
   top: 0;
-  height: 130%;
   width: 80%;
   display: block;
-  z-index: 1000;
+  z-index: 20000;
   isolation: isolate;
+  height: 100%;
+
+  @media screen and (max-width: $desktop) {
+    height: 130%;
+  }
 
   border-radius: 16px 0px 0px 16px;
 
   transition: 0.45s opacity cubic-bezier(0.19, 1, 0.22, 1),
     0.6s transform cubic-bezier(0.19, 1, 0.22, 1),
     0.4s background cubic-bezier(0.19, 1, 0.22, 1),
-    0.4s color cubic-bezier(0.19, 1, 0.22, 1);
+    0.4s color cubic-bezier(0.19, 1, 0.22, 1),
+    0.6s border-radius 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 
-  &.player-handle-touch {
-    transition: unset;
-    border-radius: 16px;
+  color: var(--color-text, $accent);
+
+  svg {
+    fill: var(--color-text, $accent);
   }
-
-  color: var(--album-color-text, $accent);
 
   opacity: 0;
   pointer-events: none;
@@ -95,8 +105,30 @@
     transform: translateX(0);
 
     @media screen and (max-width: $desktop) {
+      border-radius: 0px;
       transform: translateY(var(--player-pull, 0));
     }
+  }
+
+  &.player-handle-touch {
+    transition: 0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 16px 0px 0px 16px;
+
+    @media screen and (max-width: $desktop) {
+      border-radius: 16px 16px 0px 0px;
+    }
+  }
+
+  &:not(.show) {
+    border-radius: 16px 0px 0px 16px;
+
+    @media screen and (max-width: $desktop) {
+      border-radius: 16px 16px 0px 0px;
+    }
+
+    transition: 0.45s opacity 0.05s cubic-bezier(0.19, 1, 0.22, 1),
+      0.9s transform cubic-bezier(0.19, 1, 0.22, 1),
+      0.6s border-radius cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   @media screen and (max-width: $desktop) {
@@ -165,9 +197,9 @@
 
     background: linear-gradient(
       to bottom,
-      var(--album-color-second, $background),
-      var(--album-color-second, $background),
-      var(--album-color-second, $background-alpha-zero)
+      var(--color-background, $background),
+      var(--color-background, $background),
+      var(--color-background-alpha-zero, $background-alpha-zero)
     );
 
     transition: 0.23s transform cubic-bezier(0.19, 1, 0.22, 1),
@@ -176,11 +208,13 @@
     transform: translateY(-35px);
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
 
     @media screen and (max-width: $desktop) {
       &.visible {
         transform: translateY(0px);
         opacity: 1;
+        visibility: visible;
       }
     }
 
@@ -245,6 +279,7 @@
     @media screen and (min-width: $desktop) {
       min-width: 480px;
       max-width: 600px;
+      margin-top: 8%;
     }
 
     @media screen and (max-width: $mobile) {
@@ -266,6 +301,12 @@
 
   .lyrics {
     position: relative;
+    display: flex;
+
+    .llct-call {
+      margin: auto;
+      width: 100%;
+    }
 
     @media screen and (max-width: $desktop) {
       margin-top: 3vh;
@@ -374,6 +415,18 @@
 
     .no-eq-support {
       letter-spacing: -1px;
+
+      & > span {
+        display: flex;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 3px;
+      }
     }
 
     .equalizer-lack {
@@ -430,15 +483,15 @@
     grid-area: controls;
     margin-top: 5px;
     margin-bottom: auto;
-    margin-left: -16px;
+    margin-left: -12px;
 
     @media screen and (max-width: $mobile) {
       margin-left: -12px;
     }
 
     & > svg {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       padding: 8px;
       border-radius: 50%;
 
@@ -489,7 +542,7 @@
     }
   }
 
-  background: var(--album-color-second, $background);
+  background: var(--color-background, $background);
 
   .llct-call {
     .llct-call-line:last-child {

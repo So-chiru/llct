@@ -22,6 +22,7 @@ interface PlayerRouterState {
   id?: string
 }
 
+// 모두 리펙토링
 const PlayerContainer = () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -175,11 +176,8 @@ const PlayerContainer = () => {
       }
       color={playing.color}
       instance={playing.instance}
-      state={{
-        playState: playing.state.player,
-        loadState: playing.state.load,
-        lastSeek
-      }}
+      lastSeek={lastSeek}
+      playState={playing.state.player}
       showEQ={eqVisible}
       controller={controller}
     ></PlayerComponent>

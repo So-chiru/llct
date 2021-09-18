@@ -3,11 +3,11 @@
 .llct-button {
   padding: 12px 42px;
   border-radius: 32px;
-  background-color: $light-blue-accent;
+  background-color: var(--color-background-shade, $light-blue-accent);
   color: white;
 
   font-size: 16px;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
 
   display: flex;
   cursor: pointer;
@@ -35,7 +35,7 @@
 }
 
 .llct-dark .llct-button {
-  background-color: $dark-light-blue-accent;
+  background-color: var(--color-background-dark-shade, $dark-light-blue-accent);
 
   &:hover,
   &:focus {
