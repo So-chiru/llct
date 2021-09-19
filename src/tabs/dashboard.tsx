@@ -11,7 +11,8 @@ import { randomSongs } from '@/utils/songs'
 const DashboardTab = ({ show }: LLCTTabProps) => {
   const data = useSelector((state: RootState) => state.songs)
 
-  // TODO : API_SERVER/updates 에서 추천 목록 가져오기
+  console.log(data)
+
   return (
     <div className={`llct-tab${show ? ' show' : ''}`} aria-hidden={!show}>
       {data && data.error && (
