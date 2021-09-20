@@ -1,6 +1,6 @@
 const sw = (self as unknown) as ServiceWorkerGlobalScope
 
-export const STATIC_CACHE = '@llct/cache/static/v20'
+export const STATIC_CACHE = '@llct/cache/static/v21'
 export const DYNAMIC_CACHE = '@llct/cache/dynamic/v2'
 
 type CacheStorageKey = typeof STATIC_CACHE | typeof DYNAMIC_CACHE
