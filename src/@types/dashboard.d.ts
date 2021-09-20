@@ -26,6 +26,12 @@ interface DashboardLinkComponent {
   link: string
 }
 
+interface DashboardLivePlaylist {
+  template?: 'actual' | 'predict'
+  title?: string
+  description?: string
+  musics: string[]
+}
 interface DashboardLiveComponent {
   title?: string
   image: string
@@ -34,6 +40,7 @@ interface DashboardLiveComponent {
   url?: string
   location?: string
   characters: string[]
+  playlists: DashboardLivePlaylist[]
 }
 
 interface DashboardBirthday extends DashboardBase {

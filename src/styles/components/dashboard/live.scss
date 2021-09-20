@@ -3,21 +3,18 @@
 
 .dashboard-component.live {
   display: grid;
+  gap: 16px;
 
-  @media screen and (max-width: $tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media screen and (min-width: $tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: $wave-narrow) {
     grid-template-columns: repeat(1, 1fr);
   }
 
   @media screen and (min-width: $desktop) {
     grid-template-columns: repeat(3, 1fr);
+
+    .live-playlist-component {
+      grid-area: 1 / 2 / 2 / 4;
+    }
   }
 }
 
@@ -73,4 +70,10 @@
       letter-spacing: -2px;
     }
   }
+}
+
+.live-playlist-component {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

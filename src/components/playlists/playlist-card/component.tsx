@@ -12,13 +12,14 @@ import {
   SortableContainer,
   SortableElement,
   SortStartHandler,
-  SortEndHandler
+  SortEndHandler,
 } from 'react-sortable-hoc'
 
 interface PlaylistCardComponentProps {
   item?: MusicPlaylist
   skeleton?: boolean
   editMode?: boolean
+  editable?: boolean
   foldable?: boolean
   folded?: boolean
   onFoldStateChange?: () => void
@@ -125,7 +126,7 @@ const printExport = (item: MusicPlaylist) => {
 
   if ('share' in navigator) {
     navigator.share({
-      text: str
+      text: str,
     })
 
     return
@@ -140,7 +141,7 @@ const printExport = (item: MusicPlaylist) => {
 const SortableItem = SortableElement(
   ({
     v,
-    onItemClick
+    onItemClick,
   }: {
     v: MusicMetadataWithID
     onItemClick?: (id: string) => void
@@ -158,7 +159,7 @@ const SortableMusicCards = SortableContainer(
   ({
     items,
     children,
-    onItemClick
+    onItemClick,
   }: {
     items: MusicMetadataWithID[]
     children: ReactNode
@@ -202,7 +203,7 @@ const SortableMusicLists = ({
   items,
   children,
   onItemMove,
-  onItemClick
+  onItemClick,
 }: {
   items: MusicMetadataWithID[]
   children?: ReactNode
@@ -218,7 +219,7 @@ const SortableMusicLists = ({
   const sortEnd = (
     {
       oldIndex,
-      newIndex
+      newIndex,
     }: {
       oldIndex: number
       newIndex: number
@@ -251,7 +252,7 @@ const SortableMusicLists = ({
 const InputData = ({
   name,
   value = '',
-  onChange
+  onChange,
 }: {
   name: keyof MusicPlaylistBase
   value?: string
@@ -286,6 +287,7 @@ export const PlaylistCardComponent = ({
   item,
   skeleton = false,
   editMode = false,
+  editable = true,
   folded = true,
   foldable = true,
   onFoldStateChange,
@@ -295,7 +297,7 @@ export const PlaylistCardComponent = ({
   onItemAddClick,
   onItemRemoveClick,
   onItemMove,
-  onPlayClick
+  onPlayClick,
 }: PlaylistCardComponentProps) => {
   if (skeleton || !item) {
     return <div className='llct-playlist-card skeleton'></div>
@@ -359,31 +361,39 @@ export const PlaylistCardComponent = ({
                 items={item.items}
               ></PlaylistCardImageGroup>
             </div>
-          )) || (
-            <>
-              <div
-                className='section button'
-                onClick={() => onEditStateChange && onEditStateChange()}
-              >
-                <span>{EditIcon}</span>
-              </div>
-              <div
-                className='section button'
-                onClick={() => onDeleteClick && onDeleteClick()}
-              >
-                <span>{DeleteIcon}</span>
-              </div>
-              <div className='section button' onClick={() => printExport(item)}>
-                <span>{ExportIcon}</span>
-              </div>
-            </>
-          )}
-          <div
-            className='section button'
-            onClick={() => onPlayClick && onPlayClick()}
-          >
-            <RoundyButtonComponent>{PlayIcon}</RoundyButtonComponent>
-          </div>
+          )) ||
+            (editable && (
+              <>
+                {
+                  <div
+                    className='section button'
+                    onClick={() => onEditStateChange && onEditStateChange()}
+                  >
+                    <span>{EditIcon}</span>
+                  </div>
+                }
+                <div
+                  className='section button'
+                  onClick={() => onDeleteClick && onDeleteClick()}
+                >
+                  <span>{DeleteIcon}</span>
+                </div>
+                <div
+                  className='section button'
+                  onClick={() => printExport(item)}
+                >
+                  <span>{ExportIcon}</span>
+                </div>
+              </>
+            ))}
+          {
+            <div
+              className='section button'
+              onClick={() => onPlayClick && onPlayClick()}
+            >
+              <RoundyButtonComponent>{PlayIcon}</RoundyButtonComponent>
+            </div>
+          }
         </div>
       </div>
       <div className={concatClass('contents', !folded && 'show')}>
@@ -393,7 +403,7 @@ export const PlaylistCardComponent = ({
             onItemClick={item => onItemRemoveClick && onItemRemoveClick(item)}
             onItemMove={items => onItemMove && onItemMove(items)}
           >
-            {plusComponent}
+            {editable && plusComponent}
           </SortableMusicLists>
         ) : (
           <div className='card-lists'>
@@ -404,7 +414,7 @@ export const PlaylistCardComponent = ({
                 id={v.id}
               ></MusicCardContainer>
             ))}
-            {plusComponent}
+            {editable && plusComponent}
           </div>
         )}
       </div>

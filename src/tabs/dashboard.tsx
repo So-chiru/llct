@@ -24,11 +24,17 @@ const DashboardMusicSet = ({ data }: { data: DashboardMusicComponent[] }) => {
   )
 }
 
-const DashboardComponent = ({ data }: { data: LLCTDashboard }) => {
+const DashboardComponent = ({
+  data,
+  songs,
+}: {
+  data: LLCTDashboard
+  songs: LLCTSongDataV2 | null
+}) => {
   let component = <></>
 
   if (data.type === 'live') {
-    component = <DashboardLive data={data.live}></DashboardLive>
+    component = <DashboardLive data={data.live} songs={songs}></DashboardLive>
   } else if (data.type === 'musicset') {
     component = <DashboardMusicSet data={data.musicset}></DashboardMusicSet>
   } else if (data.type === 'birthday') {
@@ -61,6 +67,7 @@ const DashboardTab = ({ show }: LLCTTabProps) => {
               <DashboardComponent
                 key={`dashboard-${i}`}
                 data={v}
+                songs={data.items}
               ></DashboardComponent>
             ))}
             <p className='data-copyright'>

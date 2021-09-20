@@ -7,6 +7,7 @@ interface PlaylistCardProps {
   query?: string
   item?: MusicPlaylist
   foldable?: boolean
+  editable?: boolean
   onDelete?: (name: string) => void
   onValueChange?: (
     name: string,
@@ -23,22 +24,23 @@ export const PlaylistCard = ({
   query,
   item,
   foldable = true,
+  editable = true,
   onDelete,
   onValueChange,
   onItemAdd,
   onItemRemove,
   onItemMove,
-  onPlay
+  onPlay,
 }: PlaylistCardProps) => {
-  const songs = useSelector((state: RootState) => state.songs).items
+  // const songs = useSelector((state: RootState) => state.songs).items
 
-  if (!songs) {
-    return <></>
-  }
+  // if (!songs) {
+  //   return <></>
+  // }
 
-  if (!item && query) {
-    // TODO : 플레이리스트 찾기
-  }
+  // if (!item && query) {
+  //   // TODO : 플레이리스트 찾기
+  // }
 
   const [folded, setFolded] = useState<boolean>(true)
   const [editMode, setEditMode] = useState<boolean>(false)
@@ -64,6 +66,7 @@ export const PlaylistCard = ({
       item={item}
       editMode={editMode}
       foldable={foldable}
+      editable={editable}
       folded={folded}
       onFoldStateChange={onFoldStateChange}
       onEditStateChange={onEditStateChange}
