@@ -3,10 +3,15 @@ interface LLCTNotice {
   description: string
 }
 
+interface DashboardBase {
+  type: string
+  title?: string
+}
+
 interface DashboardBirthdayComponent {
   name: string
   color: string
-  date?: string
+  date: string
   musics: string[]
 }
 
@@ -31,37 +36,37 @@ interface DashboardLiveComponent {
   characters: string[]
 }
 
-interface DashboardBirthday {
+interface DashboardBirthday extends DashboardBase {
   type: 'birthday'
   birthday: DashboardBirthdayComponent
 }
 
-interface DashboardMusic {
+interface DashboardMusic extends DashboardBase {
   type: 'music'
   music: DashboardMusicComponent
 }
 
-interface DashboardLink {
+interface DashboardLink extends DashboardBase {
   type: 'link'
   link: DashboardLinkComponent
 }
 
-interface DashboardLive {
+interface DashboardLive extends DashboardBase {
   type: 'live'
   live: DashboardLiveComponent
 }
 
-interface DashboardMusicSet {
+interface DashboardMusicSet extends DashboardBase {
   type: 'musicset'
-  musicset: string[]
+  musicset: DashboardMusicComponent[]
 }
 
-interface DashboardLinkSet {
+interface DashboardLinkSet extends DashboardBase {
   type: 'linkset'
   linkset: DashboardLinkComponent[]
 }
 
-interface DashboardCustomSet {
+interface DashboardCustomSet extends DashboardBase {
   type: 'customset'
   linkset: unknown[]
 }

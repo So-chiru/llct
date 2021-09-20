@@ -117,6 +117,7 @@ export const fetchUpdates = async (): Promise<LLCTUpdate> => {
       if (!v.result || v.result === 'error') {
         throw new Error(v.data || '서버에서 오류를 반환하였습니다.')
       }
+      
       return v.data
     })
     .catch(e => {

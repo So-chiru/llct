@@ -8,9 +8,11 @@ import RecentPlayedReducer from './recents/reducer'
 import CallReducer from './call/reducer'
 import PlayingReducer from './player/reducer'
 import SettingsReducer from './settings/reducer'
+import PlaylistsReducer from './playlists/reducer'
+import UpdatesReducer from './updates/reducer'
 
 import { fetchAPIDataSaga } from './sagas'
-import PlaylistsReducer from './playlists/reducer'
+
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -22,7 +24,8 @@ const reducers = combineReducers({
   recents: RecentPlayedReducer,
   playing: PlayingReducer,
   ui: UIReducer,
-  settings: SettingsReducer
+  updates: UpdatesReducer,
+  settings: SettingsReducer,
 })
 
 // 하위 컴포넌트에서 최상위 Reducer에서 추론된 타입을 이용할 수 있도록 RootState 변수를 지정합니다.
