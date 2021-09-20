@@ -94,6 +94,41 @@ export const fetchServerPlaylist = async (): Promise<LLCTPlaylistDataV1> => {
     })
 }
 
+
+export const fetchUpdates = async (): Promise<LLCTUpdate> => {
+  return fetch(`${process.env.API_SERVER}/updates`)
+    .then(v => {
+      if (v.status === 404) {
+        throw new Error('업데이트 목록이 없어요.')
+      }
+
+      if (v.status === 530) {
+        throw new Error('연결할 수 없어요. 인터넷 연결을 확인해보세요.')
+      }
+
+      if (v.status >= 500) {
+        throw new Error('서버 오류로 업데이트 목록을 불러올 수 없어요.')
+      }
+
+      return v
+    })
+    .then(makeItJSON)
+    .then(v => {
+      if (!v.result || v.result === 'error') {
+        throw new Error(v.data || '서버에서 오류를 반환하였습니다.')
+      }
+      
+      return v.data
+    })
+    .catch(e => {
+      if (e.message === 'Failed to fetch') {
+        throw new Error('연결 오류로 업데이트 목록을 불러올 수 없어요.')
+      }
+
+      throw e
+    })
+}
+
 export const fetchColorData = async (id: string): Promise<LLCTColorV2> => {
   const headers = new Headers()
   headers.set('LLCT-Api-Version', '2')
