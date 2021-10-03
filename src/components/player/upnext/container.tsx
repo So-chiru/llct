@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import UpNextComponent from './component'
 
 import { play, playPlaylist } from '@/store/player/actions'
+import TouchScroller from '@/components/controls/touchScroller/container'
+import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 
 const UpNextContainer = () => {
   const dispatch = useDispatch()
@@ -39,49 +41,51 @@ const UpNextContainer = () => {
   }
 
   return (
-    <div className='llct-upnext'>
-      {queue.length ? (
-        <div className='upnext-section'>
-          <h1 className='column-title'>재생 대기열</h1>
-          <div className='playlist-item-collection'>
-            {queue.map((value, index) => {
-              return (
-                <UpNextComponent
-                  key={index + value.id}
-                  music={value}
-                  current={mode === 'queue' && pointer === index}
-                  index={index}
-                  click={onClick}
-                ></UpNextComponent>
-              )
-            })}
+    <TouchScroller direction={TouchScrollerDirection.Vertical}>
+      <div className='llct-upnext'>
+        {queue.length ? (
+          <div className='upnext-section'>
+            <h1 className='column-title'>재생 대기열</h1>
+            <div className='playlist-item-collection'>
+              {queue.map((value, index) => {
+                return (
+                  <UpNextComponent
+                    key={index + value.id}
+                    music={value}
+                    current={mode === 'queue' && pointer === index}
+                    index={index}
+                    click={onClick}
+                  ></UpNextComponent>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      ) : (
-        <p className='queue-empty-text'>대기열에 있는 노래가 없습니다.</p>
-      )}
-      {playlistQueue && (
-        <div className='upnext-section'>
-          <h1 key='playlist-column-header' className='column-title'>
-            {playlistQueue.title}
-          </h1>
-          <div className='playlist-item-collection'>
-            {playlistQueue.items.map((value, index) => {
-              return (
-                <UpNextComponent
-                  playlist={true}
-                  key={index + value.id}
-                  music={value}
-                  current={mode === 'playlist' && playlistPointer === index}
-                  index={index}
-                  click={onClick}
-                ></UpNextComponent>
-              )
-            })}
+        ) : (
+          <p className='queue-empty-text'>대기열에 있는 노래가 없습니다.</p>
+        )}
+        {playlistQueue && (
+          <div className='upnext-section'>
+            <h1 key='playlist-column-header' className='column-title'>
+              {playlistQueue.title}
+            </h1>
+            <div className='playlist-item-collection'>
+              {playlistQueue.items.map((value, index) => {
+                return (
+                  <UpNextComponent
+                    playlist={true}
+                    key={index + value.id}
+                    music={value}
+                    current={mode === 'playlist' && playlistPointer === index}
+                    index={index}
+                    click={onClick}
+                  ></UpNextComponent>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </TouchScroller>
   )
 }
 
