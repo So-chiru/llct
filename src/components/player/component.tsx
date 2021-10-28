@@ -506,16 +506,21 @@ const PlayerComponent = ({
           )}
         </div>
         <div className='contents' ref={playerContents}>
-          <div
-            className={concatClass('mini-player', showMiniPlayer && 'visible')}
-          >
-            <div className='left'>{Controls}</div>
-            <div className='right'>{ProgressBar}</div>
-          </div>
+          {process.env.NO_AUDIO_MODE !== 'true' && (
+            <div
+              className={concatClass(
+                'mini-player',
+                showMiniPlayer && 'visible'
+              )}
+            >
+              <div className='left'>{Controls}</div>
+              <div className='right'>{ProgressBar}</div>
+            </div>
+          )}
           <div className='dashboard'>
             <div className='dashboard-column metadata-zone'>
               {titleInfo}
-              {Controls}
+              {process.env.NO_AUDIO_MODE !== 'true' && Controls}
               <div className='image'>
                 <img
                   alt={`${music.title} 앨범 커버`}
@@ -529,11 +534,13 @@ const PlayerComponent = ({
                 ></img>
               </div>
             </div>
-            <div className='dashboard-column progress-zone'>{ProgressBar}</div>
+            <div className='dashboard-column progress-zone'>
+              {process.env.NO_AUDIO_MODE !== 'true' && ProgressBar}
+            </div>
             <div className='dashboard-column call-info-zone'>
               <CallBanners></CallBanners>
             </div>
-            {showEQ && (
+            {process.env.NO_AUDIO_MODE !== 'true' && showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>음향 효과</h1>
                 <div className='equalizer-lack'>{Equalizer}</div>

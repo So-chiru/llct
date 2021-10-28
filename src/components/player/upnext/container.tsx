@@ -42,7 +42,7 @@ const UpNextContainer = () => {
     <div className='llct-upnext'>
       {queue.length ? (
         <div className='upnext-section'>
-          <h1 className='column-title'>재생 대기열</h1>
+          <h1 className='column-title'>대기열</h1>
           <div className='playlist-item-collection'>
             {queue.map((value, index) => {
               return (
@@ -58,7 +58,7 @@ const UpNextContainer = () => {
           </div>
         </div>
       ) : (
-        <p className='queue-empty-text'>대기열에 있는 노래가 없습니다.</p>
+        <p className='queue-empty-text'>대기열에 있는 곡이 없습니다.</p>
       )}
       {playlistQueue && (
         <div className='upnext-section'>

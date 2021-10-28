@@ -30,6 +30,7 @@ interface LLCTSetting<T> {
   description: string
   default: T
   value: T
+  hidden?: boolean
   enable?: (
     state: Record<keyof Settings, LLCTSetting<Settings[keyof Settings]>>
   ) => boolean

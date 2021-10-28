@@ -57,6 +57,10 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
           let controls = <div></div>
           const item = settings[id as keyof Settings]
 
+          if (item.hidden) {
+            return
+          }
+
           if (item.type === 'checkbox') {
             controls = (
               <CheckboxContainer

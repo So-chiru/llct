@@ -116,7 +116,11 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
     this.player.playbackRate = num
   }
 
-  load (src: string) {
+  load(src: string) {
+    if (process.env.NO_AUDIO_MODE === 'true') {
+      return
+    }
+
     this.player.src = src
     this.player.load()
     this.progress = 0

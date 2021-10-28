@@ -31,7 +31,7 @@ const MusicCardContainer = ({
   group,
   skeleton,
   onClick,
-  onContext
+  onContext,
 }: MusicCardContainerProps) => {
   const instance = useSelector((state: RootState) => state.playing.instance)
   const data = useSelector((state: RootState) => state.songs)
@@ -75,7 +75,7 @@ const MusicCardContainer = ({
     dispatch(player.play(musicObject))
     dispatch(recents.addPlayed(musicObject.id))
 
-    if (instance) {
+    if (process.env.NO_AUDIO_MODE !== 'true' && instance) {
       instance.play()
     }
 
