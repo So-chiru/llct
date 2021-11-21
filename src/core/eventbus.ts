@@ -13,6 +13,7 @@ interface IEventBus<T extends Record<keyof T, (...args: any[]) => unknown>> {
     ...args: Parameters<T[K]>
   ) => void
   runAll: <K extends keyof T>(event: K, ...args: Parameters<T[K]>) => void
+  destroy: () => void
 }
 
 export default class eventBus<
@@ -22,6 +23,10 @@ export default class eventBus<
 
   constructor () {
     this.lists = new Map()
+  }
+
+  destroy () {
+    this.lists.clear()
   }
 
   on<K extends keyof T> (event: K, callback: T[K], id?: string): string {
