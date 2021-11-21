@@ -18,6 +18,7 @@ interface PlayerRootData {
   events: eventBus<PlayerRootEvents>
   color: LLCTColorV2 | null
   state: PlayerState
+  audioAvailable: boolean
 }
 
 const PlayerDefault: PlayerRootData = {
@@ -30,8 +31,9 @@ const PlayerDefault: PlayerRootData = {
   color: null,
   state: {
     player: MusicPlayerState.Stopped,
-    load: PlayerLoadState.NotLoaded
-  }
+    load: PlayerLoadState.NotLoaded,
+  },
+  audioAvailable: process.env.NO_AUDIO_MODE !== 'true',
 }
 
 const MAX_QUEUE_SIZE = 100
@@ -40,7 +42,7 @@ const structQueue = (state = PlayerDefault, action: PlayerReducerAction) => {
   const object: Pick<PlayerRootData, 'queue' | 'pointer' | 'mode'> = {
     mode: 'queue',
     queue: state.queue,
-    pointer: state.pointer
+    pointer: state.pointer,
   }
 
   // 정해진 크기 보다 큐가 크면 큐 앞 부분을 자름
@@ -80,7 +82,7 @@ const structPlaylistQueue = (
   > = {
     mode: 'playlist',
     playlist: state.playlist,
-    playlistPointer: state.playlistPointer
+    playlistPointer: state.playlistPointer,
   }
 
   if (action.data) {
@@ -111,7 +113,11 @@ const PlayerReducer = (
   switch (action.type) {
     case '@llct/player/addToQueue':
       return Object.assign({}, state, {
-        queue: [...state.queue, action.data]
+        queue: [...state.queue, action.data],
+      })
+    case '@llct/player/setAudioAvailable':
+      return Object.assign({}, state, {
+        audioAvailable: action.data,
       })
     case '@llct/player/play':
       return Object.assign({}, state, structQueue(state, action))
@@ -127,19 +133,19 @@ const PlayerReducer = (
       )
     case '@llct/player/setInstance':
       return Object.assign({}, state, {
-        instance: action.data
+        instance: action.data,
       })
     case '@llct/player/setColor':
       return Object.assign({}, state, {
-        color: action.data
+        color: action.data,
       })
     case '@llct/player/setState':
       return (() => {
         const data = Object.assign({}, state, {
           state: {
             ...state.state,
-            player: action.data
-          }
+            player: action.data,
+          },
         })
 
         state.events.runAll('onStateChange', data.state)
@@ -150,8 +156,8 @@ const PlayerReducer = (
       return Object.assign({}, state, {
         state: {
           ...state.state,
-          load: action.data
-        }
+          load: action.data,
+        },
       })
     default:
       return state

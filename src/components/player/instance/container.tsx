@@ -6,10 +6,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as player from '@/store/player/actions'
 import { MusicPlayerState, PlayerLoadState } from '@/@types/state'
 import LLCTAdvancedAudio from '@/core/audio_stack/advanced'
+import LLCTSpotifyAudio from '@/core/audio_stack/spotify'
 
 const PlayerInstanceContainer = () => {
   const dispatch = useDispatch()
   const instance = useSelector((state: RootState) => state.playing.instance)
+  const useSpotify = useSelector((state: RootState) => state.spotify.use)
+  const spotifySession = useSelector(
+    (state: RootState) => state.spotify.session
+  )
+  const audioAvailable = useSelector(
+    (state: RootState) => state.playing.audioAvailable
+  )
   const audioStack = useSelector(
     (state: RootState) => state.settings.audioStack.value
   )
@@ -50,8 +58,11 @@ const PlayerInstanceContainer = () => {
       return
     }
 
-    const localInstance =
-      audioStack === 'native' ? new LLCTNativeAudio() : new LLCTAdvancedAudio()
+    const localInstance = useSpotify
+      ? new LLCTSpotifyAudio(spotifySession)
+      : audioStack === 'native'
+      ? new LLCTNativeAudio()
+      : new LLCTAdvancedAudio()
 
     localInstance.events.on('play', () =>
       dispatch(player.setPlayState(MusicPlayerState.Playing))
@@ -108,7 +119,9 @@ const PlayerInstanceContainer = () => {
 
       let inst
 
-      if (audioStack === 'native') {
+      if (useSpotify) {
+        inst = new LLCTSpotifyAudio(spotifySession)
+      } else if (audioStack === 'native') {
         inst = new LLCTNativeAudio()
       } else if (audioStack === 'advanced') {
         inst = new LLCTAdvancedAudio()
@@ -118,7 +131,7 @@ const PlayerInstanceContainer = () => {
 
       dispatch(player.setInstance(inst))
     }
-  }, [audioStack])
+  }, [audioStack, audioAvailable, useSpotify])
 
   useEffect(() => {
     if (!instance || !instance.updateMetadata) {

@@ -11,7 +11,7 @@ import {
   skip,
   setPlayState,
   setAlbumColor,
-  playPlaylist
+  playPlaylist,
 } from '@/store/player/actions'
 import { searchById, audioURL } from '@/utils/songs'
 
@@ -32,6 +32,7 @@ const PlayerContainer = () => {
 
   const playing = useSelector((state: RootState) => state.playing)
   const songs = useSelector((state: RootState) => state.songs.items)
+  const spotify = useSelector((state: RootState) => state.spotify.use)
 
   useEffect(() => {
     const data =
@@ -56,7 +57,7 @@ const PlayerContainer = () => {
   }, [
     playing.mode,
     playing.queue[playing.pointer],
-    playing.playlist?.items[playing.playlistPointer]
+    playing.playlist?.items[playing.playlistPointer],
   ])
 
   useEffect(() => {
@@ -94,8 +95,18 @@ const PlayerContainer = () => {
       data = playing.playlist!.items[playing.playlistPointer]
     }
 
-    if (data && playing.instance.src !== audioURL(data.id)) {
-      playing.instance.load(audioURL(data.id))
+    if (data) {
+      if (spotify) {
+        if (!data.metadata?.streaming || !data.metadata?.streaming.spotify) {
+          alert(
+            'Spotify에 음원이 없거나 사이트에 링크가 등록되지 않아 재생할 수 없습니다.'
+          )
+        } else if (playing.instance.src !== data.metadata?.streaming.spotify) {
+          playing.instance.load(data.metadata?.streaming.spotify)
+        }
+      } else if (playing.instance.src !== audioURL(data.id)) {
+        playing.instance.load(audioURL(data.id))
+      }
     }
   }
 
@@ -164,7 +175,7 @@ const PlayerContainer = () => {
 
     toggleEQ: () => {
       setEQVisible(!eqVisible)
-    }
+    },
   }
 
   return (

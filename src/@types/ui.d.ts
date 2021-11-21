@@ -8,6 +8,7 @@ interface Settings {
   useTranslatedTitle: boolean
   usePlayerColorScheme: boolean
   matchSystemAppearance: boolean
+  integrateSpotify: void
   useAutoScroll: boolean
   useLyrics: boolean
   useAlbumCover: boolean
@@ -35,7 +36,8 @@ interface LLCTSetting<T> {
     state: Record<keyof Settings, LLCTSetting<Settings[keyof Settings]>>
   ) => boolean
   disabled?: boolean
-  type: 'checkbox' | 'lists' | 'text' | 'no-control'
+  type: 'checkbox' | 'lists' | 'text' | 'no-control' | 'button'
+  buttonText?: string
   lists?: SettingsLists[]
   onChange?: (value: T) => void
   onInitial?: (value: T) => void

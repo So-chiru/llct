@@ -531,6 +531,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/spotify-web-playback-sdk@npm:^0.1.12":
+  version: 0.1.12
+  resolution: "@types/spotify-web-playback-sdk@npm:0.1.12"
+  checksum: 3fb294921db60865f32419ea22c1d3d37115f62be3cf359a8c63bcfce46cec4a844568b8212103d77f0aa5e1dae1ba76ada094e78521c042ac1ec1707c614fb1
+  languageName: node
+  linkType: hard
+
 "@types/styled-components@npm:^5.1.13":
   version: 5.1.13
   resolution: "@types/styled-components@npm:5.1.13"
@@ -4458,6 +4465,7 @@ fsevents@~2.3.2:
     "@types/react-redux": ^7.1.18
     "@types/react-router-dom": ^5.1.8
     "@types/react-transition-group": ^4.4.2
+    "@types/spotify-web-playback-sdk": ^0.1.12
     "@types/styled-components": ^5.1.13
     "@types/uuid": ^8.3.1
     "@types/wicg-mediasession": ^1.1.2

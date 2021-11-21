@@ -13,13 +13,19 @@ interface LLCTSongDataV2 {
   groups?: MusicGroupMetadata[]
   songs?: MusicMetadata[][]
 }
+
+interface SongStreamingProvider {
+  spotify?: string
+}
 interface MusicExtraMetadata {
   released?: number
   album?: string
   length?: number
   bpm?: number
   composer?: string[]
+  streaming?: SongStreamingProvider
 }
+
 interface MusicMetadata {
   title: string
   'title.ko'?: string

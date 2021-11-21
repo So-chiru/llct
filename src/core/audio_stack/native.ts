@@ -1,5 +1,8 @@
 import eventBus from '@/core/eventbus'
 
+import { LLCTAudioStack } from '@/@types/audio'
+import { LLCTAudioStackEventMap } from '@/@types/audio'
+
 export default class LLCTNativeAudio implements LLCTAudioStack {
   player: HTMLAudioElement
   src?: string
@@ -9,6 +12,8 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
   events = new eventBus<LLCTAudioStackEventMap>()
   type = 'native'
 
+  external = false
+
   constructor () {
     this.player = new Audio()
     this.volumeStore = 1
@@ -16,6 +21,8 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
     this.handlerInit()
     this.mediaStateInit()
   }
+
+  destroy () {}
 
   handlerInit () {
     this.player.addEventListener('play', () => {
@@ -92,7 +99,7 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
       title: title,
       artist: artist,
       album: 'LLCT',
-      artwork: [{ src: cover }]
+      artwork: [{ src: cover }],
     })
   }
 
@@ -116,7 +123,7 @@ export default class LLCTNativeAudio implements LLCTAudioStack {
     this.player.playbackRate = num
   }
 
-  load(src: string) {
+  load (src: string) {
     if (process.env.NO_AUDIO_MODE === 'true') {
       return
     }

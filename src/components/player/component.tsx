@@ -20,7 +20,7 @@ import { PlayerBannerComponent } from './banner/component'
 import TouchScroller from '../controls/touchScroller/container'
 import { TouchScrollerDirection } from '@/core/ui/touch_scroller'
 import PlayerBannerContainer from './banner/container'
-import { LLCTAudioStack } from '@/@types/audio'
+import { LLCTAudioStack, LLCTExternalMetadata } from '@/@types/audio'
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
@@ -29,6 +29,7 @@ import {
   PlayIcon,
   SkipBackIcon,
   SkipNextIcon,
+  WarningIcon,
 } from '../icons/component'
 import {
   background as globalBackgroundColor,
@@ -250,12 +251,20 @@ const PlayerComponent = ({
   const autoTheme = useSelector(
     (state: RootState) => state.settings.matchSystemAppearance
   ).value
+  const audioAvailable = useSelector(
+    (state: RootState) => state.playing.audioAvailable
+  )
 
   const darkMode = useDarkMode || (autoTheme && checkUseDarkMode())
 
   const closePlayer = () => {
     dispatch(ui.showPlayer(false))
   }
+
+  const [siteSong, setSiteSong] = useState<boolean>(true)
+  const [siteMetadata, setSiteMetadata] = useState<
+    LLCTExternalMetadata | undefined
+  >(undefined)
 
   const player = useRef<HTMLDivElement>(null)
   const background = useRef<HTMLDivElement>(null)
@@ -326,20 +335,42 @@ const PlayerComponent = ({
   const titleInfo = useMemo(
     () => (
       <div className='texts'>
-        <h1
-          className='title'
-          title={availableTitleText}
-          aria-label={availableTitleText}
-          tabIndex={300}
-        >
-          {availableTitleText}
-        </h1>
-        <h3 className='artist' title={music.artist as string} tabIndex={301}>
-          {music.artist}
-        </h3>
+        {!siteSong && siteMetadata ? (
+          <>
+            <h1
+              className='title'
+              title={siteMetadata.title}
+              aria-label={siteMetadata.title}
+              tabIndex={300}
+            >
+              {siteMetadata.title}
+            </h1>
+            <h3 className='artist' title={siteMetadata.artist} tabIndex={301}>
+              {siteMetadata.artist}
+            </h3>{' '}
+          </>
+        ) : (
+          <>
+            <h1
+              className='title'
+              title={availableTitleText}
+              aria-label={availableTitleText}
+              tabIndex={300}
+            >
+              {availableTitleText}
+            </h1>
+            <h3
+              className='artist'
+              title={music.artist as string}
+              tabIndex={301}
+            >
+              {music.artist}
+            </h3>
+          </>
+        )}
       </div>
     ),
-    [music]
+    [music, siteSong, siteMetadata]
   )
 
   // TODO : hook으로 리펙토링
@@ -418,6 +449,25 @@ const PlayerComponent = ({
       document.removeEventListener('visibilitychange', onUpdate)
     }
   }, [])
+
+  useEffect(() => {
+    if (!instance) {
+      return
+    }
+
+    const uuid = instance.events.on('siteSongUpdate', siteSong => {
+      setSiteSong(siteSong)
+    })
+
+    const uuid2 = instance.events.on('siteMetadataUpdate', metadata => {
+      setSiteMetadata(metadata)
+    })
+
+    return () => {
+      instance.events.off('siteSongUpdate', uuid)
+      instance.events.off('siteMetadataUpdate', uuid2)
+    }
+  }, [instance])
 
   const ProgressBar = instance && (
     <ProgressBarComponent
@@ -506,7 +556,7 @@ const PlayerComponent = ({
           )}
         </div>
         <div className='contents' ref={playerContents}>
-          {process.env.NO_AUDIO_MODE !== 'true' && (
+          {audioAvailable && (
             <div
               className={concatClass(
                 'mini-player',
@@ -520,12 +570,14 @@ const PlayerComponent = ({
           <div className='dashboard'>
             <div className='dashboard-column metadata-zone'>
               {titleInfo}
-              {process.env.NO_AUDIO_MODE !== 'true' && Controls}
+              {audioAvailable && Controls}
               <div className='image'>
                 <img
                   alt={`${music.title} 앨범 커버`}
                   src={
-                    useAlbumCover
+                    !siteSong && siteMetadata
+                      ? siteMetadata.image || emptyCover
+                      : useAlbumCover
                       ? typeof music !== 'undefined'
                         ? music.image
                         : ''
@@ -535,12 +587,12 @@ const PlayerComponent = ({
               </div>
             </div>
             <div className='dashboard-column progress-zone'>
-              {process.env.NO_AUDIO_MODE !== 'true' && ProgressBar}
+              {audioAvailable && ProgressBar}
             </div>
             <div className='dashboard-column call-info-zone'>
               <CallBanners></CallBanners>
             </div>
-            {process.env.NO_AUDIO_MODE !== 'true' && showEQ && (
+            {audioAvailable && showEQ && (
               <div className='dashboard-column equalizer-zone'>
                 <h1 className='column-title'>음향 효과</h1>
                 <div className='equalizer-lack'>{Equalizer}</div>
@@ -561,7 +613,7 @@ const PlayerComponent = ({
                 </div>
                 <div className='equalizer-lack'>
                   <h3>재생 속도</h3>
-                  {instance && (
+                  {instance && typeof instance.speed !== 'undefined' ? (
                     <SliderComponent
                       onSeek={(seek: number) => {
                         instance.speed = seek * 2
@@ -572,6 +624,13 @@ const PlayerComponent = ({
                       step={0.05}
                       max={2}
                     ></SliderComponent>
+                  ) : (
+                    <div className='no-eq-support'>
+                      <span>
+                        <WarningIcon></WarningIcon>
+                        현재 선택된 오디오 스택은 재생 속도를 지원하지 않습니다.
+                      </span>
+                    </div>
                   )}
                 </div>
               </div>
@@ -584,7 +643,12 @@ const PlayerComponent = ({
             {useMemo(
               () => (
                 <CallContainer
-                  update={playState === MusicPlayerState.Playing && showPlayer}
+                  update={
+                    playState === MusicPlayerState.Playing &&
+                    showPlayer &&
+                    siteSong
+                  }
+                  siteSong={siteSong}
                   current={() => instance?.timecode ?? 0}
                   lastSeek={Math.max(
                     lastSeek,
@@ -600,6 +664,7 @@ const PlayerComponent = ({
               [
                 music.id,
                 instance,
+                siteSong,
                 playState,
                 showPlayer,
                 Math.max(

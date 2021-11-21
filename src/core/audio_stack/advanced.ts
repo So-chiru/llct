@@ -1,5 +1,8 @@
 import eventBus from '@/core/eventbus'
 
+import { LLCTAudioStack } from '@/@types/audio'
+import { LLCTAudioStackEventMap } from '@/@types/audio'
+
 const loadURLAsBuffer = (src: string) => {
   return fetch(src).then(res => {
     return res.arrayBuffer()
@@ -25,6 +28,8 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
   source: AudioBufferSourceNode
   gain: GainNode
   plugins: AudioNode[]
+
+  external = false
 
   loadedData?: AudioBuffer
 
@@ -59,6 +64,8 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
 
     this.gain.connect(this.context.destination)
   }
+
+  destroy () {}
 
   play () {
     if (!this.loadedData) {
@@ -100,7 +107,7 @@ export default class LLCTAdvancedAudio implements LLCTAudioStack {
 
       this.events.runAll('load')
     } catch (e) {
-      this.events.runAll('error', e)
+      this.events.runAll('error', e as Error)
     }
   }
 

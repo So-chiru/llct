@@ -33,6 +33,17 @@ const SettingsDefault: Record<
     default: true,
     value: true,
   },
+  integrateSpotify: {
+    name: 'Spotify 연동',
+    description: 'Spotify에서 음원을 재생하고 가사를 LLCT에서 표시합니다.',
+    type: 'button',
+    buttonText: '연결 / 해제',
+    default: false,
+    value: false,
+    onChange: () => {
+      window.dispatchEvent(new CustomEvent('toggleSpotify'))
+    },
+  },
   usePlayerColorScheme: {
     name: '콜표 색상 사용',
     description:

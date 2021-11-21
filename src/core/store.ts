@@ -35,7 +35,10 @@ export const get = <T>(scope: string, defaults?: T) => {
   return data
 }
 
+export const remove = (scope: string) => localStorage.removeItem(scope)
+
 export default {
   set,
-  get
+  get,
+  remove,
 }

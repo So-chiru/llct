@@ -5,6 +5,7 @@ import '@/styles/tabs/settings.scss'
 import { RootState } from '@/store'
 import CheckboxContainer from '@/components/controls/check-box/container'
 import ListsDropdownContainer from '@/components/controls/lists-dropdown/container'
+import ButtonComponent from '@/components/controls/button/component'
 
 const SettingsTab = ({ show }: LLCTTabProps) => {
   const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
     dispatch({
       type: '@llct/settings/update',
       name,
-      data: checked
+      data: checked,
     })
   }
 
@@ -23,7 +24,7 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
     dispatch({
       type: '@llct/settings/update',
       name,
-      data: value
+      data: value,
     })
   }
 
@@ -70,6 +71,12 @@ const SettingsTab = ({ show }: LLCTTabProps) => {
                 onChange={(checked: boolean) => clickInputHandler(checked, id)}
                 ariaIndex={500 + (i + 2)}
               ></CheckboxContainer>
+            )
+          } else if (item.type === 'button') {
+            controls = (
+              <ButtonComponent onClick={item.onChange}>
+                {item.buttonText}
+              </ButtonComponent>
             )
           } else if (item.type === 'lists' && item.lists) {
             controls = (

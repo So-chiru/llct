@@ -10,9 +10,9 @@ import PlayingReducer from './player/reducer'
 import SettingsReducer from './settings/reducer'
 import PlaylistsReducer from './playlists/reducer'
 import UpdatesReducer from './updates/reducer'
+import SpotifyReducer from './spotify'
 
 import { fetchAPIDataSaga } from './sagas'
-
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -25,6 +25,7 @@ const reducers = combineReducers({
   playing: PlayingReducer,
   ui: UIReducer,
   updates: UpdatesReducer,
+  spotify: SpotifyReducer,
   settings: SettingsReducer,
 })
 

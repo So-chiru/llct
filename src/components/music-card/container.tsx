@@ -38,6 +38,10 @@ const MusicCardContainer = ({
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const audioAvailable = useSelector(
+    (state: RootState) => state.playing.audioAvailable
+  )
+
   if (skeleton || !data.items) {
     return <MusicCardComponent skeleton={true}></MusicCardComponent>
   }
@@ -75,7 +79,7 @@ const MusicCardContainer = ({
     dispatch(player.play(musicObject))
     dispatch(recents.addPlayed(musicObject.id))
 
-    if (process.env.NO_AUDIO_MODE !== 'true' && instance) {
+    if (audioAvailable && instance) {
       instance.play()
     }
 

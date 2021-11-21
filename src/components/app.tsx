@@ -14,8 +14,9 @@ import {
   checkSystemDark,
   toggleDarkMode,
   useDarkMode,
-  onModeUpdate
+  onModeUpdate,
 } from '@/utils/darkmode'
+import SpotifyIntegrationContainer from './integration/container'
 
 const useColorScheme = () => {
   const [, refresh] = useState<number>(0)
@@ -75,7 +76,7 @@ const useServiceWorker = () => {
           const registration = await navigator.serviceWorker.register(
             '/service-worker.js',
             {
-              scope: '/'
+              scope: '/',
             }
           )
 
@@ -115,6 +116,7 @@ const App = () => {
       <PageWaves></PageWaves>
       <PlayerButton></PlayerButton>
       <DataLoderContainer></DataLoderContainer>
+      <SpotifyIntegrationContainer></SpotifyIntegrationContainer>
       <HomeContainer></HomeContainer>
       <PlayerContainer></PlayerContainer>
       <PlayerInstanceContainer></PlayerInstanceContainer>

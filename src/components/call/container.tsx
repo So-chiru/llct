@@ -15,7 +15,7 @@ import { useTick } from './renderer'
 const TickContainer = ({
   start = false,
   children,
-  time
+  time,
 }: {
   start?: boolean
   children: ReactNode
@@ -26,7 +26,7 @@ const TickContainer = ({
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
       return React.cloneElement(child, {
-        time: time()
+        time: time(),
       })
     }
     return child
@@ -40,6 +40,7 @@ interface CallContainerProps {
   id: string
   lastSeek: number
   seek?: (time: number) => void
+  siteSong?: boolean
 }
 
 const CallContainer = ({
@@ -47,7 +48,8 @@ const CallContainer = ({
   lastSeek,
   seek,
   current,
-  id
+  id,
+  siteSong,
 }: CallContainerProps) => {
   const call = useSelector((state: RootState) => state.call)
   const useLyrics = useSelector(
@@ -72,7 +74,17 @@ const CallContainer = ({
       scrollToQuery='.llct-call-line[data-active="true"]'
       className='llct-call'
     >
-      {call.data ? (
+      {!siteSong ? (
+        [
+          <div className='llct-loader-wrapper' key='load'>
+            <EmptyComponent key='load-error' text='사이트 곡이 아님'>
+              <div className='llct-open-editor-wrapper'>
+                <p>지금 재생 중인 곡은 사이트에서 지원하는 곡이 아닙니다.</p>
+              </div>
+            </EmptyComponent>
+          </div>,
+        ]
+      ) : call.data ? (
         <TickContainer start={update} time={current}>
           {...call.data.timeline.map((v, i) => {
             return (
@@ -103,7 +115,7 @@ const CallContainer = ({
             ) : (
               <LoaderComponent></LoaderComponent>
             )}
-          </div>
+          </div>,
         ]
       )}
     </AutoScroller>

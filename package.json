@@ -7,6 +7,7 @@
   "author": "So-chiru <unleash9224@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/spotify-web-playback-sdk": "^0.1.12",
     "buffer": "^6.0.3",
     "dotenv": "^10.0.0",
     "prop-types": "^15.7.2",
